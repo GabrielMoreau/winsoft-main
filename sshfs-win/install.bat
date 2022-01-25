@@ -7,7 +7,7 @@ SET WinfspVersion=1.10.22006
 SET SshfsVersion=3.5.20357
 SET ManagerVersion=1.3.1
 SET SiriKaliVersion=1.4.8
-SET PkgVersion=8
+SET PkgVersion=9
 
 SET pwrsh=%WINDIR%\System32\WindowsPowerShell\V1.0\powershell.exe
 IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET pwrsh=%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe
