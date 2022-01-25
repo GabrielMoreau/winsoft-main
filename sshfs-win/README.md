@@ -2,6 +2,9 @@
 
 The script `sshfs-win-connect.ps1` simplfy the connexion for non advanced users.
 
+You need a parameter file like [conf.sample.yml](conf.sample.yml) (without sample in the name) in the `winsoft-conf` folder.
+See the main [README.md](../README.md) file about the global configuration folder.
+
 * `winfsp` - https://github.com/billziss-gh/winfsp.
   Il s'agit de la partie driver bas niveau jouant le rôle de Fuse.
 * `sshfs-win` - https://github.com/billziss-gh/sshfs-win.
