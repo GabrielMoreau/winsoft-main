@@ -9,22 +9,27 @@ REM
 
 REM General parameter
 SET softversion=3.57.0
-SET softpatch=3
+SET softpatch=4
 SET softexe=FileZilla_%softversion%_win64-setup.exe
 SET softname=FileZilla Client
 SET regkey=FileZilla Client
 
 
 REM Uninstall previous version
-IF EXIST "C:\Program Files\FileZilla FTP Client\uninstall.exe" (
+IF EXIST "%ProgramFiles%\FileZilla FTP Client\uninstall.exe" (
   "C:\Program Files\FileZilla FTP Client\uninstall.exe" /S
+  "%ProgramFiles%\FileZilla FTP Client\uninstall.exe" /S
+  ping 127.0.0.1 -n 31 > nul
 ) 
-ping 127.0.0.1 -n 31 > nul
 
 
 REM Silent install
 "%softexe%" /user=all /S
 ping 127.0.0.1 -n 31 > nul
+
+
+REM Disable welcome and check update
+COPY /A /Y "fzdefaults.xml" "%ProgramFiles%\FileZilla FTP Client\fzdefaults.xml"
 
 
 REM Better reg uninstall key
