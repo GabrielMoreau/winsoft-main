@@ -5,8 +5,8 @@ REM Hide the Window
 
 
 REM General parameter
-SET softexe=npp.8.3.Installer.x64.exe
 SET softversion=8.3
+SET softexe=npp.%softversion%.Installer.x64.exe
 SET softpatch=1
 SET softname=Notepad++
 SET regkey=Notepad++

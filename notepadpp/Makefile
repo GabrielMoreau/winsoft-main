@@ -1,6 +1,7 @@
+
 SOFT:=NotepadPP
-VERSION:=8.3
-PATCH:=1
+VERSION:=$(shell grep '^SET softversion' install.bat | cut -f 2 -d '=')
+PATCH:=$(shell grep '^SET softpatch' install.bat | cut -f 2 -d '=')
 
 EXE:=npp.$(VERSION).Installer.x64.exe
 
@@ -15,21 +16,15 @@ clean:
 wget: $(EXE)
 
 $(EXE):
-	wget "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.3/npp.8.3.Installer.x64.exe"
+	wget "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v$(VERSION)/npp.$(VERSION).Installer.x64.exe"
 
-%.zip: Makefile tmp/install.bat tmp/cmdow.exe $(EXE)
+%.zip: Makefile install.bat tmp/cmdow.exe $(EXE)
 	rm -f $@
 	zip -r $@ \
-			$(EXE)
-	cd tmp; zip -r ../$@ install.bat cmdow.exe
+		install.bat \
+		$(EXE)
+	cd tmp; zip -r ../$@ cmdow.exe
 	chmod ugo+rw $@
-
-tmp/install.bat: install.bat
-	mkdir -p tmp
-	perl -p -e ' \
-		s/^(SET\ssoftexe=)[^=]+\.exe/$${1}$(EXE)/; \
-		s/^(SET\ssoftversion=)\d[\.\d]+/$${1}$(VERSION)/; \
-		s/^(SET\ssoftpatch=)\d+/$${1}$(PATCH)/;' install.bat > tmp/install.bat
 
 tmp/cmdow.exe:
 	mkdir -p tmp
