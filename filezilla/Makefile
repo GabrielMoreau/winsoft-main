@@ -1,8 +1,9 @@
-SOFT:=FileZilla
-VERSION:=3.57.0
-PATCH:=1
 
-MSI:=FileZilla_$(VERSION)_win64-setup.exe
+SOFT:=FileZilla
+VERSION:=$(shell grep '^SET softversion' install.bat | cut -f 2 -d '=')
+PATCH:=$(shell grep '^SET softpatch' install.bat | cut -f 2 -d '=')
+
+EXE:=FileZilla_$(VERSION)_win64-setup.exe
 
 
 .PHONY: all ocs clean wget
@@ -10,26 +11,20 @@ MSI:=FileZilla_$(VERSION)_win64-setup.exe
 all: $(SOFT)-$(VERSION)-$(PATCH).zip ocs
 
 clean:
-	rm -rf $(SOFT)-$(VERSION)-$(PATCH).zip $(MSI) tmp
+	rm -rf $(SOFT)-$(VERSION)-$(PATCH).zip $(EXE) tmp
 
-wget: $(MSI)
+wget: $(EXE)
 
-$(MSI):
+$(EXE):
 	wget "https://dl1.cdn.filezilla-project.org/client/FileZilla_$(VERSION)_win64-setup.exe"
 
-%.zip: Makefile tmp/install.bat tmp/cmdow.exe $(MSI)
+%.zip: Makefile install.bat tmp/cmdow.exe $(EXE)
 	rm -f $@
 	zip -r $@ \
-			$(MSI)
-	cd tmp; zip -r ../$@ install.bat cmdow.exe
+		install.bat \
+		$(EXE)
+	cd tmp; zip -r ../$@ cmdow.exe
 	chmod ugo+rw $@
-
-tmp/install.bat: install.bat
-	mkdir -p tmp
-	perl -p -e ' \
-		s/^(SET\ssoftmsi=)[^=]+\.exe/$${1}$(MSI)/; \
-		s/^(SET\ssoftversion=)\d[\.\d]+/$${1}$(VERSION)/; \
-		s/^(SET\ssoftpatch=)\d+/$${1}$(PATCH)/;' install.bat > tmp/install.bat
 
 tmp/cmdow.exe:
 	mkdir -p tmp

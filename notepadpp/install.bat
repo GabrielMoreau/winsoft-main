@@ -3,20 +3,34 @@
 REM Hide the Window
 "cmdow.exe" @ /hid
 
+REM
+REM   Notepad++
+REM
 
 REM General parameter
 SET softversion=8.3
 SET softexe=npp.%softversion%.Installer.x64.exe
-SET softpatch=1
+SET softpatch=3
 SET softname=Notepad++
 SET regkey=Notepad++
 
 
+REM Uninstall previous version
+IF EXIST "C:\Program Files\Notepad++\uninstall.exe" (
+  "C:\Program Files\Notepad++\uninstall.exe" /S
+) 
+ping 127.0.0.1 -n 31 > nul
+
+
 REM Silent install
 "%softexe%" /S
+ping 127.0.0.1 -n 31 > nul
 
 
 REM Disable auto update
+IF EXIST "C:\Program Files\Notepad++\updater_disable" (
+  RMDIR /S "C:\Program Files\Notepad++\updater_disable"
+) 
 RENAME "C:\Program Files\Notepad++\updater" "updater_disable"
 
 
