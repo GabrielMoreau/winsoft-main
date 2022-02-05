@@ -1,7 +1,7 @@
-@ECHO OFF
+REM @ECHO OFF
 
 REM Hide the Window
-"cmdow.exe" @ /hid
+REM "cmdow.exe" @ /hid
 
 REM
 REM   Filezilla
@@ -9,7 +9,7 @@ REM
 
 REM General parameter
 SET softversion=3.57.0
-SET softpatch=4
+SET softpatch=5
 SET softexe=FileZilla_%softversion%_win64-setup.exe
 SET softname=FileZilla Client
 SET regkey=FileZilla Client
@@ -19,8 +19,11 @@ REM Uninstall previous version
 IF EXIST "%ProgramFiles%\FileZilla FTP Client\uninstall.exe" (
   "C:\Program Files\FileZilla FTP Client\uninstall.exe" /S
   "%ProgramFiles%\FileZilla FTP Client\uninstall.exe" /S
-  ping 127.0.0.1 -n 31 > nul
+  ping 127.0.0.1 -n 15 > nul
 ) 
+IF EXIST "%ProgramFiles%\FileZilla FTP Client" (
+  RMDIR /S "%ProgramFiles%\FileZilla FTP Client"
+)
 
 
 REM Silent install
@@ -42,5 +45,5 @@ REM Better reg uninstall key
 >> tmp_install.reg ECHO.
 regedit.exe /S "tmp_install.reg"
 
-
+PAUSE
 EXIT
