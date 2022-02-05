@@ -9,33 +9,41 @@ REM
 
 REM General parameter
 SET softversion=3.57.0
-SET softpatch=5
+SET softpatch=6
 SET softexe=FileZilla_%softversion%_win64-setup.exe
 SET softname=FileZilla Client
 SET regkey=FileZilla Client
+SET logdir=%ProgramData%\OCS Inventoty NG\Agent\Logs
 
+IF NOT EXIST "%logdir%" (
+  MKDIR "%logdir%"
+)
+CALL :INSTALL > "%logdir%\%softname%.txt"
+EXIT /B
 
-REM Uninstall previous version
+:INSTALL
+
+ECHO Uninstall previous version if exist
 IF EXIST "%ProgramFiles%\FileZilla FTP Client\uninstall.exe" (
   "C:\Program Files\FileZilla FTP Client\uninstall.exe" /S
   "%ProgramFiles%\FileZilla FTP Client\uninstall.exe" /S
-  ping 127.0.0.1 -n 15 > nul
+  ping 127.0.0.1 -n 15
 ) 
 IF EXIST "%ProgramFiles%\FileZilla FTP Client" (
   RMDIR /S "%ProgramFiles%\FileZilla FTP Client"
 )
 
 
-REM Silent install
+ECHO Silent install
 "%softexe%" /user=all /S
-ping 127.0.0.1 -n 31 > nul
+ping 127.0.0.1 -n 31
 
 
-REM Disable welcome and check update
+ECHO Disable welcome and check update
 COPY /A /Y "fzdefaults.xml" "%ProgramFiles%\FileZilla FTP Client\fzdefaults.xml"
 
 
-REM Better reg uninstall key
+ECHO Better reg uninstall key
  > tmp_install.reg ECHO Windows Registry Editor Version 5.00
 >> tmp_install.reg ECHO.
 >> tmp_install.reg ECHO [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\%regkey%]
@@ -44,6 +52,3 @@ REM Better reg uninstall key
 >> tmp_install.reg ECHO "DisplayName"="%softname% (%softversion% OCS)"
 >> tmp_install.reg ECHO.
 regedit.exe /S "tmp_install.reg"
-
-PAUSE
-EXIT
