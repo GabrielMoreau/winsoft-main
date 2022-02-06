@@ -1,31 +1,42 @@
 
+#
+# FileZilla
+#
+
+URL:=$(shell wget -q 'https://filezilla-project.org/download.php?show_all=1' -O - | sed -e 's/"/\n/g;' | grep '^https://' | grep -- '_win64-setup.exe' | head -1)
+
 SOFT:=FileZilla
-VERSION:=$(shell grep '^SET softversion' install.bat | cut -f 2 -d '=')
-PATCH:=$(shell grep '^SET softpatch' install.bat | cut -f 2 -d '=')
+VERSION:=$(shell echo "$(URL)" | cut -f 2 -d '_')
+PATCH:=8
 
 EXE:=FileZilla_$(VERSION)_win64-setup.exe
 
-
 .PHONY: all ocs clean wget
+.ONESHELL:
 
 all: $(SOFT)-$(VERSION)-$(PATCH).zip ocs
 
 clean:
 	rm -rf $(SOFT)-$(VERSION)-$(PATCH).zip $(EXE) tmp
 
-wget: $(EXE)
+wget: tmp/$(EXE)
 
-$(EXE):
-	wget "https://dl1.cdn.filezilla-project.org/client/FileZilla_$(VERSION)_win64-setup.exe"
+tmp/$(EXE):
+	@mkdir -p tmp
+	@wget "$(URL)" -O tmp/$(EXE)
+	@file tmp/$(EXE) | grep 'PE32 executable'
 
-%.zip: Makefile install.bat fzdefaults.xml tmp/cmdow.exe $(EXE)
-	rm -f $@
-	zip -r $@ \
-		install.bat \
-		fzdefaults.xml \
-		$(EXE)
-	cd tmp; zip -r ../$@ cmdow.exe
-	chmod ugo+rw $@
+tmp/install.bat: install.bat Makefile
+	@perl -p -e ' \
+		s/^(SET\ssoftversion=)\d[\.\d]+\w?/$${1}$(VERSION)/; \
+		s/^(SET\ssoftpatch=)\d+/$${1}$(PATCH)/;' install.bat > $@
+
+%.zip: Makefile tmp/install.bat fzdefaults.xml tmp/cmdow.exe tmp/$(EXE)
+	@rm -f $@
+	@zip -r $@ \
+		fzdefaults.xml
+	@(cd tmp; zip -r ../$@ install.bat cmdow.exe $(EXE))
+	@chmod ugo+rw $@
 
 tmp/cmdow.exe:
 	mkdir -p tmp

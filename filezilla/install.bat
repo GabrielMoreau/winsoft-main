@@ -7,36 +7,38 @@ REM
 REM   Filezilla
 REM
 
-REM General parameter
-SET softversion=3.57.0
-SET softpatch=6
-SET softexe=FileZilla_%softversion%_win64-setup.exe
+REM Name
 SET softname=FileZilla Client
-SET regkey=FileZilla Client
-SET logdir=%ProgramData%\OCS Inventoty NG\Agent\Logs
 
+SET logdir=%ProgramData%\OCS Inventory NG\Agent\DeployLog
 IF NOT EXIST "%logdir%" (
   MKDIR "%logdir%"
 )
-CALL :INSTALL > "%logdir%\%softname%.txt"
+CALL :INSTALL 1> "%logdir%\%softname%.txt" 2>&1
 EXIT /B
 
 :INSTALL
 
+REM Version parameter
+SET softversion=3.55.0
+SET softpatch=7
+SET softexe=FileZilla_%softversion%_win64-setup.exe
+SET regkey=FileZilla Client
+
 ECHO Uninstall previous version if exist
 IF EXIST "%ProgramFiles%\FileZilla FTP Client\uninstall.exe" (
-  "C:\Program Files\FileZilla FTP Client\uninstall.exe" /S
   "%ProgramFiles%\FileZilla FTP Client\uninstall.exe" /S
-  ping 127.0.0.1 -n 15
-) 
-IF EXIST "%ProgramFiles%\FileZilla FTP Client" (
-  RMDIR /S "%ProgramFiles%\FileZilla FTP Client"
+  "%ProgramFiles%\FileZilla FTP Client\uninstall.exe" /S
+REM  ping 127.0.0.1 -n 15
 )
+REM IF EXIST "%ProgramFiles%\FileZilla FTP Client" (
+REM   RMDIR /S "%ProgramFiles%\FileZilla FTP Client"
+REM )
 
 
 ECHO Silent install
 "%softexe%" /user=all /S
-ping 127.0.0.1 -n 31
+REM ping 127.0.0.1 -n 31
 
 
 ECHO Disable welcome and check update
