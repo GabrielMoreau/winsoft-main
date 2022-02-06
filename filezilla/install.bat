@@ -19,7 +19,7 @@ EXIT /B
 
 :INSTALL
 
-REM Version parameter
+REM Version parameter (auto update by Makefile)
 SET softversion=3.55.0
 SET softpatch=7
 SET softexe=FileZilla_%softversion%_win64-setup.exe
@@ -29,28 +29,25 @@ ECHO Uninstall previous version if exist
 IF EXIST "%ProgramFiles%\FileZilla FTP Client\uninstall.exe" (
   "%ProgramFiles%\FileZilla FTP Client\uninstall.exe" /S
   "%ProgramFiles%\FileZilla FTP Client\uninstall.exe" /S
-REM  ping 127.0.0.1 -n 15
 )
-REM IF EXIST "%ProgramFiles%\FileZilla FTP Client" (
-REM   RMDIR /S "%ProgramFiles%\FileZilla FTP Client"
-REM )
 
 
 ECHO Silent install
 "%softexe%" /user=all /S
-REM ping 127.0.0.1 -n 31
 
 
 ECHO Disable welcome and check update
 COPY /A /Y "fzdefaults.xml" "%ProgramFiles%\FileZilla FTP Client\fzdefaults.xml"
 
-
-ECHO Better reg uninstall key
- > tmp_install.reg ECHO Windows Registry Editor Version 5.00
->> tmp_install.reg ECHO.
->> tmp_install.reg ECHO [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\%regkey%]
->> tmp_install.reg ECHO "DisplayVersion"="%softversion%"
->> tmp_install.reg ECHO "Comments"="Package OCS v%softpatch% (%DATE:~-4%/%DATE:~-7,-5%/%DATE:~-10,-8%)"
->> tmp_install.reg ECHO "DisplayName"="%softname% (%softversion% OCS)"
->> tmp_install.reg ECHO.
-regedit.exe /S "tmp_install.reg"
+reg query "HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\%regkey%"
+IF %ERRORLEVEL% EQU 0 (
+  ECHO Better reg uninstall key
+   > tmp_install.reg ECHO Windows Registry Editor Version 5.00
+  >> tmp_install.reg ECHO.
+  >> tmp_install.reg ECHO [HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\%regkey%]
+  >> tmp_install.reg ECHO "DisplayVersion"="%softversion%"
+  >> tmp_install.reg ECHO "Comments"="Package OCS v%softpatch% (%DATE:~-4%/%DATE:~-7,-5%/%DATE:~-10,-8%)"
+  >> tmp_install.reg ECHO "DisplayName"="%softname% (%softversion% OCS)"
+  >> tmp_install.reg ECHO.
+  regedit.exe /S "tmp_install.reg"
+)

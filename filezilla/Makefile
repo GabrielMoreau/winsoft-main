@@ -7,7 +7,7 @@ URL:=$(shell wget -q 'https://filezilla-project.org/download.php?show_all=1' -O 
 
 SOFT:=FileZilla
 VERSION:=$(shell echo "$(URL)" | cut -f 2 -d '_')
-PATCH:=8
+PATCH:=9
 
 EXE:=FileZilla_$(VERSION)_win64-setup.exe
 
