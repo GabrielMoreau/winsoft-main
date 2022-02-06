@@ -1,30 +1,41 @@
 
+#
+# Notepad++
+#
+
 SOFT:=NotepadPP
-VERSION:=$(shell grep '^SET softversion' install.bat | cut -f 2 -d '=')
-PATCH:=$(shell grep '^SET softpatch' install.bat | cut -f 2 -d '=')
+VERSION:=$(shell wget -q 'https://notepad-plus-plus.org/' -O - | grep '/downloads/v' | cut -f 3 -d '/' | cut -f 2 -d 'v')
+PATCH:=5
 
 EXE:=npp.$(VERSION).Installer.x64.exe
 
 
 .PHONY: all ocs clean wget
+.ONESHELL:
 
 all: $(SOFT)-$(VERSION)-$(PATCH).zip ocs
 
 clean:
-	rm -rf $(SOFT)-$(VERSION)-$(PATCH).zip $(EXE) tmp
+	rm -rf $(SOFT)-$(VERSION)-$(PATCH).zip tmp/$(EXE) tmp
 
 wget: $(EXE)
 
-$(EXE):
-	wget "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v$(VERSION)/npp.$(VERSION).Installer.x64.exe"
+tmp/$(EXE):
+	@mkdir tmp
+	@cd tmp
+	@wget -q "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v$(VERSION)/npp.$(VERSION).Installer.x64.exe"
+	@file $(EXE) | grep 'PE32 executable'
 
-%.zip: Makefile install.bat tmp/cmdow.exe $(EXE)
-	rm -f $@
-	zip -r $@ \
-		install.bat \
-		$(EXE)
-	cd tmp; zip -r ../$@ cmdow.exe
-	chmod ugo+rw $@
+tmp/install.bat: install.bat Makefile
+	@mkdir tmp
+	@perl -p -e ' \
+		s/^(SET\ssoftversion=)\d[\.\d]+\w?/$${1}$(VERSION)/; \
+		s/^(SET\ssoftpatch=)\d+/$${1}$(PATCH)/;' install.bat > $@
+
+%.zip: Makefile tmp/install.bat tmp/cmdow.exe tmp/$(EXE)
+	@rm -f $@
+	@(cd tmp; zip -r ../$@ cmdow.exe install.bat $(EXE))
+	@chmod ugo+rw $@
 
 tmp/cmdow.exe:
 	mkdir -p tmp

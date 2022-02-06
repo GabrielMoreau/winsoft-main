@@ -27,6 +27,7 @@ tmp/$(EXE):
 	@file tmp/$(EXE) | grep 'PE32 executable'
 
 tmp/install.bat: install.bat Makefile
+	@mkdir -p tmp
 	@perl -p -e ' \
 		s/^(SET\ssoftversion=)\d[\.\d]+\w?/$${1}$(VERSION)/; \
 		s/^(SET\ssoftpatch=)\d+/$${1}$(PATCH)/;' install.bat > $@

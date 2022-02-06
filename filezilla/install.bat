@@ -47,7 +47,7 @@ IF %ERRORLEVEL% EQU 0 (
   >> tmp_install.reg ECHO [HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\%regkey%]
   >> tmp_install.reg ECHO "DisplayVersion"="%softversion%"
   >> tmp_install.reg ECHO "Comments"="Package OCS v%softpatch% (%DATE:~-4%/%DATE:~-7,-5%/%DATE:~-10,-8%)"
-  >> tmp_install.reg ECHO "DisplayName"="%softname% (%softversion% OCS)"
+  >> tmp_install.reg ECHO "DisplayName"="%softname% (%softversion% OCS/%softpatch%)"
   >> tmp_install.reg ECHO.
   regedit.exe /S "tmp_install.reg"
 )
