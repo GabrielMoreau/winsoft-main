@@ -26,7 +26,7 @@ SET softexec=windirstat%softversion%_setup.exe
 
 
 REM Silent install
-"%softexe%" /S
+"%softexec%" /S
 
 
 REM Better reg uninstall key

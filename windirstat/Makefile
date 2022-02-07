@@ -5,7 +5,7 @@
 
 SOFT:=WinDirStat
 VERSION:=$(shell wget -q 'https://windirstat.net/download.html' -O - | sed 's/"/\n/g;' | grep 'Latest version:' | cut -f 3 -d ' ' |cut -f 1 -d '<')
-PATCH:=2
+PATCH:=3
 
 EXE:=windirstat$(VERSION)_setup.exe
 
