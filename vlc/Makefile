@@ -25,6 +25,7 @@ tmp/$(EXE):
 	@cd tmp
 	@wget -q "https://get.videolan.org/vlc/$(VERSION)/win64/vlc-$(VERSION)-win64.exe"
 	@file $(EXE) | grep 'PE32 executable'
+	@grep -q "^$$(sha256sum $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)"
 
 tmp/install.bat: install.bat Makefile
 	@mkdir tmp

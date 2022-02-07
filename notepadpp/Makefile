@@ -25,6 +25,7 @@ tmp/$(EXE):
 	@cd tmp
 	@wget -q "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v$(VERSION)/npp.$(VERSION).Installer.x64.exe"
 	@file $(EXE) | grep 'PE32 executable'
+	@grep -q "^$$(sha256sum $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)"
 
 tmp/install.bat: install.bat Makefile
 	@mkdir tmp
