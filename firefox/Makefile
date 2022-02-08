@@ -28,7 +28,7 @@ tmp/$(EXE):
 	@mkdir -p tmp
 	@cd tmp
 	@wget -q "https://download.mozilla.org/?product=firefox-esr-msi-latest-ssl&os=win64&lang=fr" -O $(EXE)
-	@file $(EXE) | grep -q "Subject: Mozilla Firefox $(VERSION)esr" || echo "Error: bad msi installer $(EXE)"
+	@file $(EXE) | grep -q "Subject: Mozilla Firefox $(VERSION)esr" || echo "Error: bad format for binary $(EXE)"
 	@grep -q "^$$(sha256sum $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)"
 
 tmp/install.bat: install.bat Makefile
