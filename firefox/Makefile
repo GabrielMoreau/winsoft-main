@@ -9,11 +9,15 @@ PATCH:=1
 
 EXE:=Firefox_Setup_$(VERSION)esr.msi
 
+IT_TEAM:=IT Support
+
 
 .PHONY: all ocs clean wget
 .ONESHELL:
 
 all: $(SOFT)-$(VERSION)-$(PATCH).zip ocs
+
+sinclude ../common/global.mk
 
 clean:
 	rm -rf $(SOFT)-$(VERSION)-$(PATCH).zip tmp
@@ -52,7 +56,7 @@ ocs:
 	@echo "Cancel:  no"
 	@echo "Report:  yes"
 	@echo ""
-	@echo "Service Informatique du LEGI"
+	@echo "$(IT_TEAM)"
 	@echo " --- "
 	@echo "Install and update: $(SOFT)"
 	@echo ""

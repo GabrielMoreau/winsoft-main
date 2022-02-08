@@ -9,13 +9,22 @@ PkgVersion:=$(shell grep '^SET PkgVersion' install.bat | cut -f 2 -d '=')
 ServerSFTP:=$(shell grep -h '^ServerSFTP' conf.yml ../../winsoft-conf/sshfs-win/conf.yml 2>/dev/null | cut -f 2 -d ':' | sed -e 's/[[:space:]]//g;' | head -1)
 NetworkDrive:=$(shell grep -h '^NetworkDrive' conf.yml  ../../winsoft-conf/sshfs-win/conf.yml 2>/dev/null | cut -f 2 -d ':' | sed -e 's/[[:space:]]//g;' | head -1)
 
+SOFT:=SSHFS-Win-Manage
+VERSION:=$(SshfsVersion)
+PATCH:=$(PkgVersion)
+
+IT_TEAM:=IT Support
+
+
 .PHONY: all clean wget version ocs
 
-all: sshfswin-$(SshfsVersion)-$(PkgVersion).zip
+all: $(SOFT)-$(VERSION)-$(PATCH).zip ocs
 
-sshfswin-$(SshfsVersion)-$(PkgVersion).zip: ../../winsoft-conf/sshfs-win/conf.yml install.bat install.ps1 tmp/sshfs-win-connect.ps1 sshfs-win.ico tmp/cmdow.exe README.md winfsp-$(WinfspVersion).msi sshfs-win-$(SshfsVersion)-x64.msi
-	zip -r sshfswin-$(SshfsVersion)-$(PkgVersion).zip install.bat install.ps1 sshfs-win.ico README.md winfsp-$(WinfspVersion).msi sshfs-win-$(SshfsVersion)-x64.msi
-	cd tmp; zip -r ../sshfswin-$(SshfsVersion)-$(PkgVersion).zip sshfs-win-connect.ps1 cmdow.exe
+sinclude ../common/global.mk
+
+$(SOFT)-$(VERSION)-$(PATCH).zip: ../../winsoft-conf/sshfs-win/conf.yml install.bat install.ps1 tmp/sshfs-win-connect.ps1 sshfs-win.ico tmp/cmdow.exe README.md winfsp-$(WinfspVersion).msi sshfs-win-$(SshfsVersion)-x64.msi
+	zip -r $@ install.bat install.ps1 sshfs-win.ico README.md winfsp-$(WinfspVersion).msi sshfs-win-$(SshfsVersion)-x64.msi
+	cd tmp; zip -r ../$@ sshfs-win-connect.ps1 cmdow.exe
 
 clean:
 	rm -rf tmp sshfswin*.zip winfsp-*.msi sshfs-win-*-x64.msi sshfs-win-manager-setup-v*.exe SiriKali-*.setup.exe
@@ -47,6 +56,14 @@ version:
 
 ocs:
 	@echo ""
-	@echo "Name:    SSHFS Win Manage $(SshfsVersion)-$(PkgVersion)"
+	@echo "Name:    $(SOFT)-$(VERSION)-$(PATCH)"
 	@echo "Launch:  install.bat"
-	@echo "Message: no"
+	@echo "Message: yes"
+	@echo "Delay:   5"
+	@echo "Cancel:  no"
+	@echo "Report:  yes"
+	@echo ""
+	@echo "$(IT_TEAM)"
+	@echo " --- "
+	@echo "Install and update: $(SOFT)"
+	@echo ""
