@@ -17,39 +17,41 @@ IT_TEAM:=IT Support
 
 
 .PHONY: all clean wget version ocs
+.ONESHELL:
 
 all: $(SOFT)-$(VERSION)-$(PATCH).zip ocs
 
 sinclude ../common/global.mk
 
 $(SOFT)-$(VERSION)-$(PATCH).zip: ../../winsoft-conf/sshfs-win/conf.yml install.bat install.ps1 tmp/sshfs-win-connect.ps1 sshfs-win.ico tmp/cmdow.exe README.md winfsp-$(WinfspVersion).msi sshfs-win-$(SshfsVersion)-x64.msi
-	zip -r $@ install.bat install.ps1 sshfs-win.ico README.md winfsp-$(WinfspVersion).msi sshfs-win-$(SshfsVersion)-x64.msi
-	cd tmp; zip -r ../$@ sshfs-win-connect.ps1 cmdow.exe
+	@zip -r $@ install.bat install.ps1 sshfs-win.ico README.md winfsp-$(WinfspVersion).msi sshfs-win-$(SshfsVersion)-x64.msi
+	@cd tmp
+	@zip -r ../$@ sshfs-win-connect.ps1 cmdow.exe
 
 clean:
-	rm -rf tmp sshfswin*.zip winfsp-*.msi sshfs-win-*-x64.msi sshfs-win-manager-setup-v*.exe SiriKali-*.setup.exe
+	@rm -rf tmp sshfswin*.zip winfsp-*.msi sshfs-win-*-x64.msi sshfs-win-manager-setup-v*.exe SiriKali-*.setup.exe
 
 wget: winfsp-$(WinfspVersion).msi sshfs-win-$(SshfsVersion)-x64.msi sshfs-win-manager-setup-v$(ManagerVersion).exe SiriKali-$(SiriKaliVersion).setup.exe
 
 winfsp-$(WinfspVersion).msi:
-	wget https://github.com/billziss-gh/winfsp/releases/download/v$(WinfspMajorVersion)/winfsp-$(WinfspVersion).msi
+	@wget https://github.com/billziss-gh/winfsp/releases/download/v$(WinfspMajorVersion)/winfsp-$(WinfspVersion).msi
 
 sshfs-win-$(SshfsVersion)-x64.msi:
-	wget https://github.com/billziss-gh/sshfs-win/releases/download/v$(SshfsVersion)/sshfs-win-$(SshfsVersion)-x64.msi
+	@wget https://github.com/billziss-gh/sshfs-win/releases/download/v$(SshfsVersion)/sshfs-win-$(SshfsVersion)-x64.msi
 
 sshfs-win-manager-setup-v$(ManagerVersion).exe:
-	wget https://github.com/evsar3/sshfs-win-manager/releases/download/v$(ManagerVersion)/sshfs-win-manager-setup-v$(ManagerVersion).exe
+	@wget https://github.com/evsar3/sshfs-win-manager/releases/download/v$(ManagerVersion)/sshfs-win-manager-setup-v$(ManagerVersion).exe
 
 SiriKali-$(SiriKaliVersion).setup.exe:
-	wget https://github.com/mhogomchungu/sirikali/releases/download/$(SiriKaliVersion)/SiriKali-$(SiriKaliVersion).setup.exe
+	@wget https://github.com/mhogomchungu/sirikali/releases/download/$(SiriKaliVersion)/SiriKali-$(SiriKaliVersion).setup.exe
 
 tmp/sshfs-win-connect.ps1: sshfs-win-connect.ps1 ../../winsoft-conf/sshfs-win/conf.yml
-	mkdir -p tmp
-	sed -e 's/__SERVER_SFTP__/$(ServerSFTP)/g; s/__NetworkDrive__/$(NetworkDrive)/g;' sshfs-win-connect.ps1 > tmp/sshfs-win-connect.ps1
+	@mkdir -p tmp
+	@sed -e 's/__SERVER_SFTP__/$(ServerSFTP)/g; s/__NetworkDrive__/$(NetworkDrive)/g;' sshfs-win-connect.ps1 > tmp/sshfs-win-connect.ps1
 
 tmp/cmdow.exe:
-	mkdir -p tmp
-	cp ../common/cmdow.exe tmp/
+	@mkdir -p tmp
+	@cp ../common/cmdow.exe tmp/
 
 version:
 	@echo $(WinfspVersion) $(WinfspMajorVersion) $(SshfsVersion) $(ManagerVersion) $(SiriKaliVersion) $(PkgVersion)
