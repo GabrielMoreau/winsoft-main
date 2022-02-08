@@ -53,5 +53,5 @@ ocs:
 	@echo ""
 	@echo "Service Informatique du LEGI"
 	@echo " --- "
-	@echo "Installation et mise jour de $(SOFT)"
+	@echo "Install and update: $(SOFT)"
 	@echo ""
