@@ -1,4 +1,4 @@
-# WinSoft-Main - main files for package build
+# WinSoft-Main - Main files for package build
 
 Each folder (except common) contains a software (or a coherent set of software) useful for users.
 In each folder, there is a `Makefile` that will allow to build the OCS Inventory package.

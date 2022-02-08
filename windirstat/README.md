@@ -1,4 +1,4 @@
-# WinDirStat - disk usage statistics viewer and cleanup tool for various versions of Microsoft Windows.
+# WinDirStat - Disk usage viewer and cleanup tool
 
 WinDirStat is a free and open-source graphical disk usage analyzer for Microsoft Windows.
 
