@@ -9,11 +9,14 @@ PATCH:=1
 
 EXE:=putty-64bit-$(VERSION)-installer.msi
 
+IT_TEAM:=IT Support
 
 .PHONY: all ocs clean wget
 .ONESHELL:
 
 all: $(SOFT)-$(VERSION)-$(PATCH).zip ocs
+
+sinclude ../common/global.mk
 
 clean:
 	rm -rf $(SOFT)-$(VERSION)-$(PATCH).zip tmp
@@ -21,14 +24,14 @@ clean:
 wget: $(EXE)
 
 tmp/$(EXE):
-	@mkdir tmp
+	@mkdir -p tmp
 	@cd tmp
 	@wget -q "https://the.earth.li/~sgtatham/putty/latest/w64/putty-64bit-$(VERSION)-installer.msi"
 	@file $(EXE) | grep 'Little Endian, Os: Windows, Version 5.0, MSI Installer'
 	@grep -q "^$$(sha256sum $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)"
 
 tmp/install.bat: install.bat Makefile
-	@mkdir tmp
+	@mkdir -p tmp
 	@perl -p -e ' \
 		s/^(SET\ssoftversion=)\d[\.\d]+\w?/$${1}$(VERSION)/; \
 		s/^(SET\ssoftpatch=)\d+/$${1}$(PATCH)/;' install.bat > $@
@@ -51,7 +54,7 @@ ocs:
 	@echo "Cancel:  no"
 	@echo "Report:  yes"
 	@echo ""
-	@echo "Service Informatique du LEGI"
+	@echo "$(IT_TEAM)"
 	@echo " --- "
 	@echo "Installation et mise jour de $(SOFT)"
 	@echo ""
