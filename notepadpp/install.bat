@@ -42,7 +42,7 @@ REM Silent install
 
 REM Disable auto update
 IF EXIST "%ProgramFiles%\Notepad++\updater_disable" (
-  RMDIR /S "%ProgramFiles%\Notepad++\updater_disable"
+  RMDIR /S /Q "%ProgramFiles%\Notepad++\updater_disable"
 )
 IF EXIST "%ProgramFiles%\Notepad++\updater" (
   RENAME "C:\%ProgramFiles%\Notepad++\updater" "updater_disable"
