@@ -3,14 +3,8 @@
 # Firefox
 #
 
-<<<<<<< HEAD
-SOFT:=Firefox
-#VERSION:=$(shell wget -q 'https://www.mozilla.org/fr/firefox/organizations/notes/' -O - | sed 's/\s/\n/g;' | grep 'data-esr-versions' | cut -f 2 -d '"')
-VERSION:=$(shell curl -s -L "https://www.mozilla.org/fr/firefox/organizations/notes/"  | sed -e 's/[[:space:]]/\n/g;' |  grep 'data-esr-versions' | cut -f 2 -d '"')
-=======
 SOFT:=FirefoxESR
-VERSION:=$(shell wget -q 'https://www.mozilla.org/fr/firefox/organizations/notes/' -O - | sed 's/\s/\n/g;' | grep 'data-esr-versions' | cut -f 2 -d '"')
->>>>>>> 4f8f82f62eef6ec19689c4d977cf85489d5d97b4
+VERSION:=$(shell curl -s -L "https://www.mozilla.org/fr/firefox/organizations/notes/"  | sed -e 's/[[:space:]]/\n/g;' |  grep 'data-esr-versions' | cut -f 2 -d '"')
 PATCH:=1
 
 EXE:=Firefox_Setup_$(VERSION)esr.msi
