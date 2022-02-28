@@ -29,7 +29,7 @@ tmp/$(EXE):
 	@cd tmp
 	@wget -q "https://the.earth.li/~sgtatham/putty/latest/w64/putty-64bit-$(VERSION)-installer.msi"
 	@file $(EXE) | grep -q 'Little Endian, Os: Windows, Version 5.0, MSI Installer' || echo "Error: bad format for binary $(EXE)"
-	@grep -q "^$$(sha256sum $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)"
+	@grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)"
 
 tmp/install.bat: install.bat Makefile
 	@mkdir -p tmp

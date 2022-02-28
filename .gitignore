@@ -2,3 +2,5 @@ tmp
 *.old
 *.bak
 .DS_Store
+.AppleDouble
+._*

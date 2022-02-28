@@ -31,7 +31,7 @@ tmp/$(EXE):
 	@cd tmp
 	@wget "$(URL)" -O $(EXE)
 	@file $(EXE) | grep -q 'PE32 executable' || echo "Error: bad format for binary $(EXE)"
-	@grep -q "^$$(sha256sum $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)"
+	@grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)"
 
 tmp/install.bat: install.bat Makefile
 	@mkdir -p tmp
