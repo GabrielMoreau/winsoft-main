@@ -4,7 +4,7 @@
 #
 
 SOFT:=VLC
-VERSION:=$(shell wget -q 'https://www.videolan.org/vlc/download-windows.html' -O - | sed 's/"/\n/g;' | grep -- -win64.exe | head -1 | cut -f 5 -d '/')
+VERSION:=$(shell wget -q 'https://www.videolan.org/vlc/download-windows.html' -O - | sed -e 's/"/\n/g;' | grep -- -win64.exe | head -1 | cut -f 5 -d '/')
 PATCH:=1
 
 EXE:=vlc-$(VERSION)-win64.exe
@@ -26,10 +26,11 @@ wget: $(EXE)
 
 tmp/$(EXE):
 	@mkdir tmp
-	@cd tmp
-	@wget -q "https://get.videolan.org/vlc/$(VERSION)/win64/vlc-$(VERSION)-win64.exe"
-	@file $(EXE) | grep -q 'PE32 executable' || echo "Error: bad format for binary $(EXE)"
-	@grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)"
+	@(cd tmp ; \
+		wget -q "https://get.videolan.org/vlc/$(VERSION)/win64/vlc-$(VERSION)-win64.exe" ; \
+		file $(EXE) | grep -q 'PE32 executable' || echo "Error: bad format for binary $(EXE)" ; \
+		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
+		)
 
 tmp/install.bat: install.bat Makefile
 	@mkdir tmp

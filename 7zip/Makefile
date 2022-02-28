@@ -4,8 +4,8 @@
 #
 
 SOFT:=7-Zip
-VERSION:=$(shell wget -q 'https://www.7-zip.org/' -O - | sed 's/>/\n/g;' | grep 'Download 7-Zip' | cut -f 3 -d ' ')
-VERSIONSHORT:=$(shell echo $(VERSION) | sed s'/\.//g;')
+VERSION:=$(shell wget -q 'https://www.7-zip.org/' -O - | sed -e 's/>/\n/g;' | grep 'Download 7-Zip' | cut -f 3 -d ' ')
+VERSIONSHORT:=$(shell echo $(VERSION) | sed -e 's/\.//g;')
 PATCH:=1
 
 EXE:=7z$(VERSIONSHORT)-x64.msi
@@ -14,7 +14,6 @@ IT_TEAM:=IT Support
 
 
 .PHONY: all ocs clean wget
-.ONESHELL:
 
 all: $(SOFT)-$(VERSION)-$(PATCH).zip ocs
 
@@ -27,10 +26,11 @@ wget: $(EXE)
 
 tmp/$(EXE):
 	@mkdir tmp
-	@cd tmp
-	@wget -q "https://www.7-zip.org/a/$(EXE)"
-	@file $(EXE) | grep -q 'Composite Document File V2 Document, Little Endian' || echo "Error: bad format for binary $(EXE)"
-	@grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)"
+	@(cd tmp ; \
+		wget -q "https://www.7-zip.org/a/$(EXE)" ; \
+		file $(EXE) | grep -q 'Composite Document File V2 Document, Little Endian' || echo "Error: bad format for binary $(EXE)" ; \
+		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
+		)
 
 tmp/install.bat: install.bat Makefile
 	@mkdir tmp
