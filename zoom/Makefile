@@ -4,7 +4,8 @@
 #
 
 SOFT:=Zoom
-VERSION:=$(shell file tmp/ZoomInstallerFull.msi 2> /dev/null | sed 's/, /\n/g;' | grep '^Comments:' | cut -f 2 -d ' ')
+INSTALLER:=ZoomInstallerFull.msi
+VERSION:=$(shell file tmp/$(INSTALLER) 2> /dev/null | sed -e 's/,[[:space:]]/\n/g;' | grep '^Comments:' | cut -f 2 -d ' ')
 PATCH:=1
 
 ZSSOHOST:=$(shell grep -h '^ZSSOHOST' conf.yml ../../winsoft-conf/zoom/conf.yml 2>/dev/null | cut -f 2 -d ':' | sed -e 's/[[:space:]]//g;' | head -1)
@@ -15,12 +16,11 @@ IT_TEAM:=IT Support
 
 
 .PHONY: all next ocs clean
-.ONESHELL:
 
 all:
 	@mkdir -p tmp
-	@[ -e "tmp/ZoomInstallerFull.msi" ] && rm -f "tmp/ZoomInstallerFull.msi"
-	@(cd tmp; wget --timestamping 'https://zoom.us/client/latest/ZoomInstallerFull.msi')
+	@rm -f "tmp/$(INSTALLER)"
+	@(cd tmp; curl -s -o $(INSTALLER) -L "https://zoom.us/client/latest/$(INSTALLER)")
 	@make next
 
 sinclude ../common/global.mk
@@ -32,10 +32,11 @@ clean:
 
 tmp/$(EXE):
 	@mkdir -p tmp
-	@cd tmp
-	@cmp ZoomInstallerFull.msi $(EXE) > /dev/null 2>&1 || cp -f ZoomInstallerFull.msi $(EXE)
-	@file $(EXE) | grep -q "Subject: Zoom Meetings" || echo "Error: bad format for binary $(EXE)"
-	@grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)"
+	@(cd tmp ; \
+		cmp $(INSTALLER) $(EXE) > /dev/null 2>&1 || cp -f $(INSTALLER) $(EXE) ; \
+		file $(EXE) | grep -q "Subject: Zoom Meetings" || echo "Error: bad format for binary $(EXE)" ; \
+		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
+		)
 
 tmp/install.bat: install.bat Makefile
 	@mkdir -p tmp
