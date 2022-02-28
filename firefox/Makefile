@@ -3,7 +3,7 @@
 # Firefox
 #
 
-SOFT:=Firefox
+SOFT:=FirefoxESR
 VERSION:=$(shell wget -q 'https://www.mozilla.org/fr/firefox/organizations/notes/' -O - | sed 's/\s/\n/g;' | grep 'data-esr-versions' | cut -f 2 -d '"')
 PATCH:=1
 
