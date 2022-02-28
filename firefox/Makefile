@@ -4,7 +4,7 @@
 #
 
 SOFT:=FirefoxESR
-VERSION:=$(shell curl -s -L 'https://www.mozilla.org/fr/firefox/organizations/notes/' | sed -e 's/[[:space:]]/\n/g;' |  grep 'data-esr-versions' | cut -f 2 -d '"')
+VERSION:=$(shell curl -s -L 'https://www.mozilla.org/fr/firefox/organizations/notes/' | sed -e 's/[[:space:]]/\n/g;' | grep 'data-esr-versions' | cut -f 2 -d '"')
 PATCH:=1
 
 EXE:=Firefox_Setup_$(VERSION)esr.msi

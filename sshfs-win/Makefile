@@ -7,7 +7,7 @@ SiriKaliVersion:=$(shell grep '^SET SiriKaliVersion' install.bat | cut -f 2 -d '
 PkgVersion:=$(shell grep '^SET PkgVersion' install.bat | cut -f 2 -d '=')
 
 ServerSFTP:=$(shell grep -h '^ServerSFTP' conf.yml ../../winsoft-conf/sshfs-win/conf.yml 2>/dev/null | cut -f 2 -d ':' | sed -e 's/[[:space:]]//g;' | head -1)
-NetworkDrive:=$(shell grep -h '^NetworkDrive' conf.yml  ../../winsoft-conf/sshfs-win/conf.yml 2>/dev/null | cut -f 2 -d ':' | sed -e 's/[[:space:]]//g;' | head -1)
+NetworkDrive:=$(shell grep -h '^NetworkDrive' conf.yml ../../winsoft-conf/sshfs-win/conf.yml 2>/dev/null | cut -f 2 -d ':' | sed -e 's/[[:space:]]//g;' | head -1)
 
 SOFT:=SSHFS-Win-Manage
 VERSION:=$(SshfsVersion)
