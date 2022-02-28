@@ -1,13 +1,13 @@
 
 #
-# Notepad++
+# Firefox
 #
 
-SOFT:=NotepadPP
-VERSION:=$(shell wget -q 'https://notepad-plus-plus.org/' -O - | grep '/downloads/v' | cut -f 3 -d '/' | cut -f 2 -d 'v')
-PATCH:=6
+SOFT:=Thunderbird
+VERSION:=$(shell wget -q 'https://www.thunderbird.net/en-US/thunderbird/all/' -O - | sed 's/\s/\n/g;' | grep 'data-thunderbird-version' | cut -f 2 -d '"')
+PATCH:=1
 
-EXE:=npp.$(VERSION).Installer.x64.exe
+EXE:=Thunderbird_Setup_$(VERSION).msi
 
 IT_TEAM:=IT Support
 
@@ -20,31 +20,32 @@ all: $(SOFT)-$(VERSION)-$(PATCH).zip ocs
 sinclude ../common/global.mk
 
 clean:
-	rm -rf $(SOFT)-$(VERSION)-$(PATCH).zip tmp/$(EXE) tmp
+	rm -rf $(SOFT)-$(VERSION)-$(PATCH).zip tmp
 
 wget: $(EXE)
 
 tmp/$(EXE):
-	@mkdir tmp
+	@mkdir -p tmp
 	@cd tmp
-	@wget -q "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v$(VERSION)/npp.$(VERSION).Installer.x64.exe"
-	@file $(EXE) | grep -q 'PE32 executable' || echo "Error: bad format for binary $(EXE)"
+	@wget -q "https://download.mozilla.org/?product=thunderbird-$(VERSION)-msi-SSL&os=win64&lang=fr" -O $(EXE)
+	@file $(EXE) | grep -q "Subject: Mozilla Thunderbird $(VERSION) x64" || echo "Error: bad format for binary $(EXE)"
 	@grep -q "^$$(sha256sum $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)"
 
 tmp/install.bat: install.bat Makefile
-	@mkdir tmp
+	@mkdir -p tmp
 	@perl -p -e ' \
 		s/^(SET\ssoftversion=)\d[\.\d]+\w?/$${1}$(VERSION)/; \
 		s/^(SET\ssoftpatch=)\d+/$${1}$(PATCH)/;' install.bat > $@
 
-%.zip: Makefile tmp/install.bat tmp/cmdow.exe tmp/$(EXE)
+%.zip: Makefile tmp/install.bat policies.json tmp/cmdow.exe tmp/$(EXE)
 	@rm -f $@
+	@zip -r $@ policies.json
 	@(cd tmp; zip -r ../$@ cmdow.exe install.bat $(EXE))
 	@chmod ugo+rw $@
 
 tmp/cmdow.exe:
-	mkdir -p tmp
-	cp ../common/cmdow.exe tmp/
+	@mkdir -p tmp
+	@cp ../common/cmdow.exe tmp/
 
 ocs:
 	@echo ""

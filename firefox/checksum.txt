@@ -1,1 +1,2 @@
 7902ec207478fce57a9856a180bc8354518bbc43063ca3eb7e9a41089a67718c  Firefox_Setup_91.5.1esr.msi
+c74f898ba8b2ef7edd64774c7688c454a3268de70b0a40611cac8dba03b1bc3e  Firefox_Setup_91.6.0esr.msi
