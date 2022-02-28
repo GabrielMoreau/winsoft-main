@@ -4,7 +4,8 @@
 #
 
 SOFT:=Firefox
-VERSION:=$(shell wget -q 'https://www.mozilla.org/fr/firefox/organizations/notes/' -O - | sed 's/\s/\n/g;' | grep 'data-esr-versions' | cut -f 2 -d '"')
+#VERSION:=$(shell wget -q 'https://www.mozilla.org/fr/firefox/organizations/notes/' -O - | sed 's/\s/\n/g;' | grep 'data-esr-versions' | cut -f 2 -d '"')
+VERSION:=$(shell curl -s -L "https://www.mozilla.org/fr/firefox/organizations/notes/"  | sed -e 's/[[:space:]]/\n/g;' |  grep 'data-esr-versions' | cut -f 2 -d '"')
 PATCH:=1
 
 EXE:=Firefox_Setup_$(VERSION)esr.msi
@@ -22,14 +23,15 @@ sinclude ../common/global.mk
 clean:
 	rm -rf $(SOFT)-$(VERSION)-$(PATCH).zip tmp
 
-wget: $(EXE)
+curl: $(EXE)
 
 tmp/$(EXE):
 	@mkdir -p tmp
 	@cd tmp
-	@wget -q "https://download.mozilla.org/?product=firefox-esr-msi-latest-ssl&os=win64&lang=fr" -O $(EXE)
+#	@wget -q "https://download.mozilla.org/?product=firefox-esr-msi-latest-ssl&os=win64&lang=fr" -O $(EXE)
+	@curl -o $(EXE) -L https://download.mozilla.org/?product=firefox-esr-msi-latest-ssl&os=win64&lang=fr
 	@file $(EXE) | grep -q "Subject: Mozilla Firefox $(VERSION)esr" || echo "Error: bad format for binary $(EXE)"
-	@grep -q "^$$(sha256sum $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)"
+	@grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)"
 
 tmp/install.bat: install.bat Makefile
 	@mkdir -p tmp
