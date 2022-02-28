@@ -32,13 +32,13 @@ REM
 REM Install WinFSP - https://github.com/billziss-gh/winfsp
 REM
 msiexec /quiet /qn /i winfsp-%WinfspVersion%.msi
-REM ping 127.0.0.1 -n 6 > nul
+REM ping 127.0.0.1 -n 6 > NUL
 
 REM
 REM Install SSHFS-Win - https://github.com/billziss-gh/sshfs-win
 REM
 msiexec /quiet /qn /i sshfs-win-%SshfsVersion%-x64.msi
-REM ping 127.0.0.1 -n 6 > nul
+REM ping 127.0.0.1 -n 6 > NUL
 
 REM
 REM Install link in Start Menu

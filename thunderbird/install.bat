@@ -35,15 +35,15 @@ msiexec /i "Thunderbird_Setup_%softversion%.msi" INSTALL_MAINTENANCE_SERVICE=fal
 
 
 REM Wait and remove unused service
-ping 127.0.0.1 -n 2 > nul
+ping 127.0.0.1 -n 2 > NUL
 IF EXIST "c:\Program Files (x86)\Mozilla Thunderbird\uninstall\helper.exe" "c:\Program Files (x86)\Mozilla Thunderbird\uninstall\helper.exe" /S
-ping 127.0.0.1 -n 2 > nul
+ping 127.0.0.1 -n 2 > NUL
 IF EXIST "c:\Program Files (x86)\Mozilla Maintenance Service\uninstall.exe" "c:\Program Files (x86)\Mozilla Maintenance Service\uninstall.exe" /S
 
 
 REM Copy policies
 IF NOT EXIST "C:\Program Files\Mozilla Thunderbird\distribution" MKDIR "C:\Program Files\Mozilla Thunderbird\distribution"
-IF  EXIST "C:\Program Files\Mozilla Thunderbird\distribution" COPY /y policies.json "C:\Program Files\Mozilla Thunderbird\distribution\policies.json" >NUL
+IF EXIST "C:\Program Files\Mozilla Thunderbird\distribution" COPY /y policies.json "C:\Program Files\Mozilla Thunderbird\distribution\policies.json" > NUL
 
 
 REM Change Add and Remove values in the register
