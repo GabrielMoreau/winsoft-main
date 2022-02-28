@@ -13,7 +13,6 @@ IT_TEAM:=IT Support
 
 
 .PHONY: all ocs clean wget
-.ONESHELL:
 
 all: $(SOFT)-$(VERSION)-$(PATCH).zip ocs
 
@@ -26,10 +25,11 @@ wget: $(EXE)
 
 tmp/$(EXE):
 	@mkdir tmp
-	@cd tmp
-	@wget -q "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v$(VERSION)/npp.$(VERSION).Installer.x64.exe"
-	@file $(EXE) | grep -q 'PE32 executable' || echo "Error: bad format for binary $(EXE)"
-	@grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)"
+	@(cd tmp ; \
+		wget -q "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v$(VERSION)/npp.$(VERSION).Installer.x64.exe" ; \
+		file $(EXE) | grep -q 'PE32 executable' || echo "Error: bad format for binary $(EXE)" ; \
+		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
+		)
 
 tmp/install.bat: install.bat Makefile
 	@mkdir tmp

@@ -13,7 +13,6 @@ IT_TEAM:=IT Support
 
 
 .PHONY: all ocs clean wget
-.ONESHELL:
 
 all: $(SOFT)-$(VERSION)-$(PATCH).zip ocs
 

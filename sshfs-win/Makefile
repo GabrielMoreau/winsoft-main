@@ -17,7 +17,6 @@ IT_TEAM:=IT Support
 
 
 .PHONY: all clean wget version ocs
-.ONESHELL:
 
 all: $(SOFT)-$(VERSION)-$(PATCH).zip ocs
 
@@ -25,8 +24,7 @@ sinclude ../common/global.mk
 
 $(SOFT)-$(VERSION)-$(PATCH).zip: ../../winsoft-conf/sshfs-win/conf.yml install.bat install.ps1 tmp/sshfs-win-connect.ps1 sshfs-win.ico tmp/cmdow.exe README.md winfsp-$(WinfspVersion).msi sshfs-win-$(SshfsVersion)-x64.msi
 	@zip -r $@ install.bat install.ps1 sshfs-win.ico README.md winfsp-$(WinfspVersion).msi sshfs-win-$(SshfsVersion)-x64.msi
-	@cd tmp
-	@zip -r ../$@ sshfs-win-connect.ps1 cmdow.exe
+	@(cd tmp; zip -r ../$@ sshfs-win-connect.ps1 cmdow.exe)
 
 clean:
 	@rm -rf tmp sshfswin*.zip winfsp-*.msi sshfs-win-*-x64.msi sshfs-win-manager-setup-v*.exe SiriKali-*.setup.exe
