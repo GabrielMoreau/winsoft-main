@@ -39,16 +39,12 @@ tmp/install.bat: install.bat Makefile
 		s/^(SET\ssoftversion=)\d[\.\d]+\w?/$${1}$(VERSION)/; \
 		s/^(SET\ssoftpatch=)\d+/$${1}$(PATCH)/;' install.bat > $@
 
-%.zip: Makefile tmp/install.bat fzdefaults.xml tmp/cmdow.exe tmp/$(EXE)
+%.zip: Makefile tmp/install.bat fzdefaults.xml tmp/$(EXE)
 	@rm -f $@
 	@zip -r $@ \
 		fzdefaults.xml
-	@(cd tmp; zip -r ../$@ install.bat cmdow.exe $(EXE))
+	@(cd tmp; zip -r ../$@ install.bat $(EXE))
 	@chmod ugo+rw $@
-
-tmp/cmdow.exe:
-	mkdir -p tmp
-	cp ../common/cmdow.exe tmp/
 
 ocs:
 	@echo ""

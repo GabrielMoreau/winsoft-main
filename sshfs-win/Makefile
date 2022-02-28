@@ -22,9 +22,9 @@ all: $(SOFT)-$(VERSION)-$(PATCH).zip ocs
 
 sinclude ../common/global.mk
 
-$(SOFT)-$(VERSION)-$(PATCH).zip: ../../winsoft-conf/sshfs-win/conf.yml install.bat install.ps1 tmp/sshfs-win-connect.ps1 sshfs-win.ico tmp/cmdow.exe README.md winfsp-$(WinfspVersion).msi sshfs-win-$(SshfsVersion)-x64.msi
+$(SOFT)-$(VERSION)-$(PATCH).zip: ../../winsoft-conf/sshfs-win/conf.yml install.bat install.ps1 tmp/sshfs-win-connect.ps1 sshfs-win.ico README.md winfsp-$(WinfspVersion).msi sshfs-win-$(SshfsVersion)-x64.msi
 	@zip -r $@ install.bat install.ps1 sshfs-win.ico README.md winfsp-$(WinfspVersion).msi sshfs-win-$(SshfsVersion)-x64.msi
-	@(cd tmp; zip -r ../$@ sshfs-win-connect.ps1 cmdow.exe)
+	@(cd tmp; zip -r ../$@ sshfs-win-connect.ps1)
 
 clean:
 	@rm -rf tmp sshfswin*.zip winfsp-*.msi sshfs-win-*-x64.msi sshfs-win-manager-setup-v*.exe SiriKali-*.setup.exe
@@ -46,10 +46,6 @@ SiriKali-$(SiriKaliVersion).setup.exe:
 tmp/sshfs-win-connect.ps1: sshfs-win-connect.ps1 ../../winsoft-conf/sshfs-win/conf.yml
 	@mkdir -p tmp
 	@sed -e 's/__SERVER_SFTP__/$(ServerSFTP)/g; s/__NetworkDrive__/$(NetworkDrive)/g;' sshfs-win-connect.ps1 > tmp/sshfs-win-connect.ps1
-
-tmp/cmdow.exe:
-	@mkdir -p tmp
-	@cp ../common/cmdow.exe tmp/
 
 version:
 	@echo $(WinfspVersion) $(WinfspMajorVersion) $(SshfsVersion) $(ManagerVersion) $(SiriKaliVersion) $(PkgVersion)

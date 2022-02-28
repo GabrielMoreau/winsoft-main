@@ -1,7 +1,23 @@
-@ECHO OFF
+REM @ECHO OFF
 
 REM Hide the Window
-"cmdow.exe" @ /hid
+REM "cmdow.exe" @ /hid
+
+REM
+REM   SSHFS-Win
+REM
+
+REM Name
+SET softname=SSHFS-Win
+
+SET logdir=%ProgramData%\OCS Inventory NG\Agent\DeployLog
+IF NOT EXIST "%logdir%" (
+  MKDIR "%logdir%"
+)
+CALL :INSTALL 1> "%logdir%\%softname%.txt" 2>&1
+EXIT /B
+
+:INSTALL
 
 SET WinfspVersion=1.10.22006
 SET SshfsVersion=3.5.20357
