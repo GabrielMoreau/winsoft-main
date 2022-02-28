@@ -4,7 +4,7 @@
 #
 
 SOFT:=VLC
-VERSION:=$(shell wget -q 'https://www.videolan.org/vlc/download-windows.html' -O - | sed -e 's/"/\n/g;' | grep -- -win64.exe | head -1 | cut -f 5 -d '/')
+VERSION:=$(shell curl -s -L 'https://www.videolan.org/vlc/download-windows.html' | sed -e 's/"/\n/g;' | grep -- -win64.exe | head -1 | cut -f 5 -d '/')
 PATCH:=1
 
 EXE:=vlc-$(VERSION)-win64.exe
@@ -24,15 +24,15 @@ clean:
 wget: $(EXE)
 
 tmp/$(EXE):
-	@mkdir tmp
+	@mkdir -p tmp
 	@(cd tmp ; \
-		wget -q "https://get.videolan.org/vlc/$(VERSION)/win64/vlc-$(VERSION)-win64.exe" ; \
+		curl -s -o "$(EXE)" -L "https://get.videolan.org/vlc/$(VERSION)/win64/vlc-$(VERSION)-win64.exe" ; \
 		file $(EXE) | grep -q 'PE32 executable' || echo "Error: bad format for binary $(EXE)" ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
 
 tmp/install.bat: install.bat Makefile
-	@mkdir tmp
+	@mkdir -p tmp
 	@perl -p -e ' \
 		s/^(SET\ssoftversion=)\d[\.\d]+\w?/$${1}$(VERSION)/; \
 		s/^(SET\ssoftpatch=)\d+/$${1}$(PATCH)/;' install.bat > $@

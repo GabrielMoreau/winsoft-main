@@ -4,7 +4,7 @@
 #
 
 SOFT:=WinDirStat
-VERSION:=$(shell wget -q 'https://windirstat.net/download.html' -O - | sed -e 's/"/\n/g;' | grep 'Latest version:' | cut -f 3 -d ' ' |cut -f 1 -d '<')
+VERSION:=$(shell curl -s -L 'https://windirstat.net/download.html' | sed -e 's/"/\n/g;' | grep 'Latest version:' | cut -f 3 -d ' ' |cut -f 1 -d '<')
 PATCH:=3
 
 EXE:=windirstat$(VERSION)_setup.exe
@@ -24,15 +24,15 @@ clean:
 wget: $(EXE)
 
 tmp/$(EXE):
-	@mkdir tmp
+	@mkdir -p tmp
 	@(cd tmp ; \
-		wget -q "https://windirstat.mirror.wearetriple.com//wds_current_setup.exe" -O $(EXE) ; \
+		curl -s -o "$(EXE)" -L "https://windirstat.mirror.wearetriple.com//wds_current_setup.exe" ; \
 		file $(EXE) | grep -q 'PE32 executable' || echo "Error: bad format for binary $(EXE)" ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
 
 tmp/install.bat: install.bat Makefile
-	@mkdir tmp
+	@mkdir -p tmp
 	@perl -p -e ' \
 		s/^(SET\ssoftversion=)\d[\.\d]+\w?/$${1}$(VERSION)/; \
 		s/^(SET\ssoftpatch=)\d+/$${1}$(PATCH)/;' install.bat > $@

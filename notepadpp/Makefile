@@ -4,7 +4,7 @@
 #
 
 SOFT:=NotepadPP
-VERSION:=$(shell wget -q 'https://notepad-plus-plus.org/' -O - | grep '/downloads/v' | cut -f 3 -d '/' | cut -f 2 -d 'v')
+VERSION:=$(shell curl -s -L 'https://notepad-plus-plus.org/' | grep '/downloads/v' | cut -f 3 -d '/' | cut -f 2 -d 'v')
 PATCH:=6
 
 EXE:=npp.$(VERSION).Installer.x64.exe
@@ -24,15 +24,15 @@ clean:
 wget: $(EXE)
 
 tmp/$(EXE):
-	@mkdir tmp
+	@mkdir -p tmp
 	@(cd tmp ; \
-		wget -q "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v$(VERSION)/npp.$(VERSION).Installer.x64.exe" ; \
+		curl -s -o "$(EXE)" -L "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v$(VERSION)/npp.$(VERSION).Installer.x64.exe" ; \
 		file $(EXE) | grep -q 'PE32 executable' || echo "Error: bad format for binary $(EXE)" ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
 
 tmp/install.bat: install.bat Makefile
-	@mkdir tmp
+	@mkdir -p tmp
 	@perl -p -e ' \
 		s/^(SET\ssoftversion=)\d[\.\d]+\w?/$${1}$(VERSION)/; \
 		s/^(SET\ssoftpatch=)\d+/$${1}$(PATCH)/;' install.bat > $@

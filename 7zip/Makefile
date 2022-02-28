@@ -4,7 +4,7 @@
 #
 
 SOFT:=7-Zip
-VERSION:=$(shell wget -q 'https://www.7-zip.org/' -O - | sed -e 's/>/\n/g;' | grep 'Download 7-Zip' | cut -f 3 -d ' ')
+VERSION:=$(shell curl -s -L 'https://www.7-zip.org/' | sed -e 's/>/\n/g;' | grep 'Download 7-Zip' | cut -f 3 -d ' ')
 VERSIONSHORT:=$(shell echo $(VERSION) | sed -e 's/\.//g;')
 PATCH:=1
 
@@ -25,15 +25,15 @@ clean:
 wget: $(EXE)
 
 tmp/$(EXE):
-	@mkdir tmp
+	@mkdir -p tmp
 	@(cd tmp ; \
-		wget -q "https://www.7-zip.org/a/$(EXE)" ; \
+		curl -s -o "$(EXE)" -L "https://www.7-zip.org/a/$(EXE)" ; \
 		file $(EXE) | grep -q 'Composite Document File V2 Document, Little Endian' || echo "Error: bad format for binary $(EXE)" ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
 
 tmp/install.bat: install.bat Makefile
-	@mkdir tmp
+	@mkdir -p tmp
 	@perl -p -e ' \
 		s/^(SET\ssoftversion=)\d[\.\d]+\w?/$${1}$(VERSION)/; \
 		s/^(SET\ssoftversionshort=)\d[\.\d]+\w?/$${1}$(VERSIONSHORT)/; \

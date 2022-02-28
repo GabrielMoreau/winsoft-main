@@ -4,7 +4,7 @@
 #
 
 SOFT:=Putty
-VERSION:=$(shell wget -q 'https://www.chiark.greenend.org.uk/~sgtatham/putty/' -O - | grep 'The latest version is' | cut -f 5 -d ' ' | cut -f 1,2 -d '.')
+VERSION:=$(shell curl -s -L 'https://www.chiark.greenend.org.uk/~sgtatham/putty/' | grep 'The latest version is' | cut -f 5 -d ' ' | cut -f 1,2 -d '.')
 PATCH:=1
 
 EXE:=putty-64bit-$(VERSION)-installer.msi
@@ -26,7 +26,7 @@ wget: $(EXE)
 tmp/$(EXE):
 	@mkdir -p tmp
 	@(cd tmp ; \
-		wget -q "https://the.earth.li/~sgtatham/putty/latest/w64/putty-64bit-$(VERSION)-installer.msi" ; \
+		curl -s -o "$(EXE)" -L "https://the.earth.li/~sgtatham/putty/latest/w64/putty-64bit-$(VERSION)-installer.msi" ; \
 		file $(EXE) | grep -q 'Little Endian, Os: Windows, Version 5.0, MSI Installer' || echo "Error: bad format for binary $(EXE)" ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
