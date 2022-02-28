@@ -4,7 +4,7 @@ REM Hide the Window
 REM "cmdow.exe" @ /hid
 
 REM
-REM   VLC
+REM   Firefox
 REM
 
 REM Name
