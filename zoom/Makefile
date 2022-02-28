@@ -7,6 +7,8 @@ SOFT:=Zoom
 VERSION:=$(shell file tmp/ZoomInstallerFull.msi 2> /dev/null | sed 's/, /\n/g;' | grep '^Comments:' | cut -f 2 -d ' ')
 PATCH:=1
 
+ZSSOHOST:=$(shell grep -h '^ZSSOHOST' conf.yml ../../winsoft-conf/zoom/conf.yml 2>/dev/null | cut -f 2 -d ':' | sed -e 's/[[:space:]]//g;' | head -1)
+
 EXE:=ZoomInstallerFull-$(VERSION).msi
 
 IT_TEAM:=IT Support
@@ -39,7 +41,8 @@ tmp/install.bat: install.bat Makefile
 	@mkdir -p tmp
 	@perl -p -e ' \
 		s/^(SET\ssoftversion=)\d[\.\d]+\w?/$${1}$(VERSION)/; \
-		s/^(SET\ssoftpatch=)\d+/$${1}$(PATCH)/;' install.bat > $@
+		s/^(SET\ssoftpatch=)\d+/$${1}$(PATCH)/; \
+		s/__ZSSOHOST__/$(ZSSOHOST)/g;' install.bat > $@
 
 %.zip: Makefile tmp/install.bat tmp/$(EXE)
 	@rm -f $@
