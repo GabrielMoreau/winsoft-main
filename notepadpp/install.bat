@@ -42,6 +42,7 @@ IF %LOOPCOUNT% GEQ 21 (
   ECHO Error: Too many loop before uninstall finish - Quit
   EXIT 5
 )
+ECHO Loop counter: %LOOPCOUNT%
 ping 127.0.0.1 -n 5 > NUL
 reg query "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\%regkey%"
 IF %ERRORLEVEL% EQU 0 GOTO WAIT
