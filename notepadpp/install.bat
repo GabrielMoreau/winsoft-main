@@ -34,12 +34,19 @@ REM Uninstall previous version
 IF EXIST "%ProgramFiles%\Notepad++\uninstall.exe" (
   "%ProgramFiles%\Notepad++\uninstall.exe" /S
 )
+
+SET /A LOOPCOUNT=0 
 :WAIT
+SET /A LOOPCOUNT+=1
+IF %LOOPCOUNT% GEQ 21 (
+  ECHO Error: Too many loop before uninstall finish - Quit
+  EXIT 5
+)
 ping 127.0.0.1 -n 5 > NUL
 reg query "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\%regkey%"
-if %ERRORLEVEL% EQU 0 goto WAIT
+IF %ERRORLEVEL% EQU 0 GOTO WAIT
 reg query "HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\%regkey%"
-if %ERRORLEVEL% EQU 0 goto WAIT
+IF %ERRORLEVEL% EQU 0 GOTO WAIT
 ping 127.0.0.1 -n 2 > NUL
 
 
