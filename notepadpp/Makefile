@@ -5,7 +5,7 @@
 
 SOFT:=NotepadPP
 VERSION:=$(shell curl -s -L 'https://notepad-plus-plus.org/' | grep '/downloads/v' | cut -f 3 -d '/' | cut -f 2 -d 'v')
-PATCH:=6
+PATCH:=7
 
 EXE:=npp.$(VERSION).Installer.x64.exe
 

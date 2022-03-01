@@ -34,6 +34,13 @@ REM Uninstall previous version
 IF EXIST "%ProgramFiles%\Notepad++\uninstall.exe" (
   "%ProgramFiles%\Notepad++\uninstall.exe" /S
 )
+:WAIT
+ping 127.0.0.1 -n 5 > NUL
+reg query "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\%regkey%"
+if %ERRORLEVEL% EQU 0 goto WAIT
+reg query "HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\%regkey%"
+if %ERRORLEVEL% EQU 0 goto WAIT
+ping 127.0.0.1 -n 2 > NUL
 
 
 REM Silent install
