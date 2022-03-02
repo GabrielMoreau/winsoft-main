@@ -21,7 +21,7 @@ sinclude ../common/global.mk
 clean:
 	rm -rf $(SOFT)-$(VERSION)-$(PATCH).zip tmp
 
-curl: $(EXE)
+wget: $(EXE)
 
 tmp/$(EXE):
 	@mkdir -p tmp
