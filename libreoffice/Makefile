@@ -9,17 +9,16 @@ VERSION:=$(shell curl -s 'https://fr.libreoffice.org/download/telecharger-libreo
 	| head -1 | cut -f 7 -d '/')
 PATCH:=1
 
-EXE_LO:="LibreOffice_$(VERSION)_Win_x86.msi"
+EXE_LO:="LibreOffice_$(VERSION)_Win_x64.msi"
 EXE_HELP:="LibreOffice_$(VERSION)_Win_x64_helppack_fr.msi"
 
-URL_LO:=$(shell curl -s "https://download.documentfoundation.org/libreoffice/stable/$(VERSION)/win/x86/$(EXE_LO)" \
+URL_LO:=$(shell curl -s "https://download.documentfoundation.org/libreoffice/stable/$(VERSION)/win/x86_64/$(EXE_LO)" \
 	| sed -e 's/"/\n/g;' | grep "^https://.*/$(EXE_LO)$$" | head -1)
 
 URL_HELP:=$(shell curl -s "https://download.documentfoundation.org/libreoffice/stable/$(VERSION)/win/x86_64/$(EXE_HELP)" \
 	| sed -e 's/"/\n/g;' | grep "^https://.*/$(EXE_HELP)$$" | head -1)
 
 IT_TEAM:=IT Support
-
 
 .PHONY: all ocs clean wget
 
