@@ -38,18 +38,19 @@ IF EXIST "%ProgramFiles%\Notepad++\uninstall.exe" (
 SET /A LOOPCOUNT=0 
 :WAIT
 SET /A LOOPCOUNT+=1
-IF %LOOPCOUNT% GEQ 21 (
-  ECHO Error: Too many loop before uninstall finish - Quit
-  EXIT 5
+IF %LOOPCOUNT% GEQ 31 (
+  ECHO Error: Too many loop before uninstall finish - Continue and cross our fingers!
+  GOTO NEXT
 )
 ECHO Loop counter: %LOOPCOUNT%
-ping 127.0.0.1 -n 5 > NUL
+ping 127.0.0.1 -n 6 > NUL
 reg query "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\%regkey%"
 IF %ERRORLEVEL% EQU 0 GOTO WAIT
 reg query "HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\%regkey%"
 IF %ERRORLEVEL% EQU 0 GOTO WAIT
-ping 127.0.0.1 -n 2 > NUL
+ping 127.0.0.1 -n 3 > NUL
 
+:NEXT
 
 REM Silent install
 "%softexe%" /S
