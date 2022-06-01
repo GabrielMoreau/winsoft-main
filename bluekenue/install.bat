@@ -26,7 +26,7 @@ SET softpatch=1
 
 
 REM Silent install
-msiexec /i "BlueKenue64Installer%softversion%.msi" /quiet /qn /norestart /log c:\temp\bluekenuemsi.log
+msiexec /i "BlueKenue64Installer%softversion%.msi" /quiet /qn /norestart /log "%logdir%\%softname%-MSI.txt"
 
 
 EXIT
