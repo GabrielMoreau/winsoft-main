@@ -4,7 +4,7 @@
 #
 
 SOFT:=Inkscape
-VERSION:=$(shell curl -s -L 'https://inkscape.org/en/release/' | sed -e 's/>/\n/g;' | grep 'Download Inkscape'  | cut -f 3 -d ' ')
+VERSION:=$(shell curl -s -L 'https://inkscape.org/en/release/' | sed -e 's/>/\n/g;' | grep 'Inkscape.*title' | cut -f 3 -d ' ')
 PATCH:=1
 URL:=$(shell curl -s -L  'https://inkscape.org/release/all/windows/64-bit/msi/' | sed -e 's/"/\n/g;' | egrep "/gallery/.*/inkscape-$(VERSION)_")
 
