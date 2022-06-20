@@ -1,1 +1,2 @@
 cd465bbc69c9adb7606c8d67ea27a07211f4f68b83c372ddc6c2682a129299e5  FileZilla_3.57.0_win64-setup.exe
+8b3aacbe041a49978457c52c4ddfac98ab7edc4d14b9bb7109b72180843073a0  FileZilla_3.60.1_win64-setup.exe
