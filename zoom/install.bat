@@ -26,7 +26,7 @@ SET softpatch=1
 
 
 REM Silent install
-msiexec /i ZoomInstallerFull-$(VERSION).msi /quiet /qn /norestart /log "%logdir%\%softname%-MSI.txt" MSIRESTARTMANAGERCONTROL="Disable" ZoomAutoUpdate="true" ZNoDesktopShortCut="true" ZSSOHOST="__ZSSOHOST__" ZConfig="nogoogle=1;nofacebook=1" ZRecommend="AudioAutoAdjust=1"
+msiexec /i ZoomInstallerFull-%softversion%.msi /quiet /qn /norestart /log "%logdir%\%softname%-MSI.txt" MSIRESTARTMANAGERCONTROL="Disable" ZoomAutoUpdate="true" ZNoDesktopShortCut="true" ZSSOHOST="__ZSSOHOST__" ZConfig="nogoogle=1;nofacebook=1" ZRecommend="AudioAutoAdjust=1"
 
 
 EXIT

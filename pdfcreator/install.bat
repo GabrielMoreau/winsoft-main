@@ -28,7 +28,7 @@ REM SET regkey={0001B4FD-9EA3-4D90-A79E-FD14BA3AB01D}
 
 REM Silent install
 REM "PDFCreator-0.9.3.exe" /silent /sp- /NORESTART 
-"PDFCreator-%softversion%_setup.exe" /verysilent /norestart /noicons /sp-
+"PDFCreator-%softversion%-setup.exe" /verysilent /norestart /noicons /sp-
 
 REM Change Add and Remove values in the register
 REM IF NOT "%regkey%"=="FALSE" (
