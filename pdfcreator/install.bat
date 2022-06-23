@@ -27,8 +27,10 @@ REM PDF Creator ne semble pas changer de clef...
 REM SET regkey={0001B4FD-9EA3-4D90-A79E-FD14BA3AB01D}
 
 REM Silent install
-REM "PDFCreator-0.9.3.exe" /silent /sp- /NORESTART 
-"PDFCreator-%softversion%-setup.exe" /verysilent /norestart /noicons /sp-
+REM "PDFCreator-0.9.3.exe" /silent /sp- /NORESTART
+REM https://docs.pdfforge.org/pdfcreator/en/pdfcreator/installing-pdfcreator/setup-command-line-parameters/#verysilent
+REM No Architect Component
+"PDFCreator-%softversion%-setup.exe" /VerySilent /NoRestart /NoIcons /COMPONENTS="none" /sp-
 
 REM Change Add and Remove values in the register
 REM IF NOT "%regkey%"=="FALSE" (
