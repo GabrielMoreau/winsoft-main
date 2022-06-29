@@ -47,7 +47,7 @@ tmp/$(EXE_HELP):
 		grep -q "^$$(shasum -a 256 $(EXE_HELP))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE_HELP)" ; \
 		)
 
-tmp/install.bat: install.bat Makefile
+tmp/install.bat: install.bat Makefile tmp/$(EXE_LO)
 	@mkdir -p tmp
 	@perl -p -e ' \
 		s/^(SET\ssoftversion=)\d[\.\d]+\w?/$${1}$(VERSION)/; \

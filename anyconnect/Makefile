@@ -25,7 +25,7 @@ control:
 	@file $(EXE) | grep -q "Subject: Cisco AnyConnect Secure Mobility Client" || echo "Error: bad format for binary $(EXE)"
 	@grep -q "^$$(shasum -a 256 $(EXE))$$" ./checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 
-tmp/install.bat: install.bat Makefile
+tmp/install.bat: install.bat Makefile $(EXE)
 	@mkdir -p tmp
 	@perl -p -e ' \
 		s/^(SET\ssoftversion=)\d[\.\d]+\w?/$${1}$(VERSION)/; \
