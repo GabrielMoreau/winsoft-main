@@ -23,7 +23,7 @@ SET softpatch=1
 
 REM Silent install
 REM TeamViewer_Setup.exe /S
-TeamViewer-%softversion%-Setup-x64.exe
+TeamViewer-%softversion%-Setup-x64.exe /S
 
 
 REM Disable auto update

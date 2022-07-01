@@ -22,6 +22,6 @@ SET softpatch=1
 
 
 REM Silent install
-Skype-%softversion%-.exe /VERYSILENT /NORESTART /SUPPRESSMSGBOXES /DL=1 /LOG="%logdir%\%softname%-MSI.txt"
+Skype-%softversion%.exe /VERYSILENT /NORESTART /SUPPRESSMSGBOXES /DL=1 /LOG="%logdir%\%softname%-MSI.txt"
 
 EXIT
