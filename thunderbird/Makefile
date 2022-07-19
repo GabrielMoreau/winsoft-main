@@ -5,7 +5,7 @@
 
 SOFT:=Thunderbird
 VERSION:=$(shell curl -s -L 'https://www.thunderbird.net/en-US/thunderbird/all/' | sed -e 's/[[:space:]]/\n/g;' | grep 'data-thunderbird-version' | cut -f 2 -d '"')
-PATCH:=1
+PATCH:=2
 
 EXE:=Thunderbird_Setup_$(VERSION).msi
 
@@ -37,9 +37,9 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 		s/^(SET\ssoftversion=)\d[\.\d]+\w?/$${1}$(VERSION)/; \
 		s/^(SET\ssoftpatch=)\d+/$${1}$(PATCH)/;' install.bat > $@
 
-%.zip: Makefile tmp/install.bat policies.json tmp/$(EXE)
+%.zip: Makefile tmp/install.bat policies.json tmp/$(EXE) post-install.ps1
 	@rm -f $@
-	@zip -r $@ policies.json
+	@zip -r $@ policies.json post-install.ps1
 	@(cd tmp; zip -r ../$@ install.bat $(EXE))
 	@chmod ugo+rw $@
 

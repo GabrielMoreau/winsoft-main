@@ -47,14 +47,27 @@ IF EXIST "C:\Program Files\Mozilla Thunderbird\distribution" COPY /y policies.js
 
 
 REM Change Add and Remove values in the register
- > tmp_install.reg ECHO Windows Registry Editor Version 5.00
->> tmp_install.reg ECHO.
->> tmp_install.reg ECHO [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\%regkey%]
->> tmp_install.reg ECHO "DisplayVersion"="%softversion% (fr)"
->> tmp_install.reg ECHO "Comments"="Package OCS v%softpatch% (%DATE:~-4%/%DATE:~-7,-5%/%DATE:~-10,-8%)"
->> tmp_install.reg ECHO "DisplayName"="%softname% (%softversion% OCS)"
->> tmp_install.reg ECHO.
-regedit.exe /S "tmp_install.reg"
+REM  > tmp_install.reg ECHO Windows Registry Editor Version 5.00
+REM >> tmp_install.reg ECHO.
+REM >> tmp_install.reg ECHO [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\%regkey%]
+REM >> tmp_install.reg ECHO "DisplayVersion"="%softversion% (fr)"
+REM >> tmp_install.reg ECHO "Comments"="Package OCS v%softpatch% (%DATE:~-4%/%DATE:~-7,-5%/%DATE:~-10,-8%)"
+REM >> tmp_install.reg ECHO "DisplayName"="%softname% (%softversion% OCS)"
+REM >> tmp_install.reg ECHO.
+REM regedit.exe /S "tmp_install.reg"
 
+
+
+SET pwrsh=%WINDIR%\System32\WindowsPowerShell\V1.0\powershell.exe
+IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET pwrsh=%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe
+
+REM add rights
+%pwrsh% Set-ExecutionPolicy RemoteSigned -Force -Scope LocalMachine
+
+REM unblock
+%pwrsh% "Unblock-File -Path .\*.ps1"
+
+REM execute
+%pwrsh% -File ".\post-install.ps1"
 
 EXIT
