@@ -16,6 +16,8 @@ EXIT /B
 
 :INSTALL
 
+ECHO BEGIN %date%-%time%
+
 
 SET softversion=2.6.11
 SET softpatch=1
@@ -25,4 +27,5 @@ REM Silent install
 CitrixWorkspaceApp-%softversion%.exe /silent /noreboot /AutoUpdateCheck=disabled /LOG="%logdir%\%softname%-MSI.txt"
 
 
+ECHO END %date%-%time%
 EXIT

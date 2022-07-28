@@ -15,6 +15,8 @@ EXIT /B
 
 :INSTALL
 
+ECHO BEGIN %date%-%time%
+
 
 REM IF EXIST "%ProgramFiles%\PDFCreator\unins000.exe" "%ProgramFiles%\PDFCreator\unins000.exe" /verysilent
 REM ping 127.0.0.1 -n 6 > NUL
@@ -50,4 +52,6 @@ REM MKDIR "Accessoires"
 REM COPY /B /Y "%ALLUSERSPROFILE%\Bureau\PDFCreator.lnk" "Accessoires\PDFCreator - Manager.lnk"
 REM DEL /F /Q "%ALLUSERSPROFILE%\Bureau\PDFCreator.lnk"
 
+
+ECHO END %date%-%time%
 EXIT

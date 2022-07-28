@@ -19,6 +19,8 @@ EXIT /B
 
 :INSTALL
 
+ECHO BEGIN %date%-%time%
+
 SET softversion=91.5.1
 SET softpatch=1
 
@@ -27,4 +29,5 @@ REM Silent install
 x2goclient-%softversion%-setup.exe /S
 
 
+ECHO END %date%-%time%
 EXIT

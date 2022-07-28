@@ -19,6 +19,8 @@ EXIT /B
 
 :INSTALL
 
+ECHO BEGIN %date%-%time%
+
 SET softversion=3.0.13
 SET softpatch=1
 SET regkey=VLC media player
@@ -46,3 +48,7 @@ IF %ERRORLEVEL% EQU 0 (
   >> tmp_install.reg ECHO.
   regedit.exe /S "tmp_install.reg"
 )
+
+
+ECHO END %date%-%time%
+EXIT

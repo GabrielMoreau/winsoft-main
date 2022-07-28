@@ -16,6 +16,8 @@ EXIT /B
 
 :INSTALL
 
+ECHO BEGIN %date%-%time%
+
 SET softversion=91.5.1
 SET softpatch=1
 
@@ -24,4 +26,5 @@ REM Silent install
 Zotero-%softversion%_setup.exe /S
 
 
+ECHO END %date%-%time%
 EXIT

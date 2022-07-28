@@ -19,6 +19,8 @@ EXIT /B
 
 :INSTALL
 
+ECHO BEGIN %date%-%time%
+
 SET softversion=91.5.1
 SET softpatch=1
 REM SET regkey=Inkscape (%softversion%)
@@ -39,4 +41,5 @@ REM >> tmp_install.reg ECHO.
 REM regedit.exe /S "tmp_install.reg"
 
 
+ECHO END %date%-%time%
 EXIT

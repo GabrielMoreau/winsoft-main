@@ -19,6 +19,8 @@ EXIT /B
 
 :INSTALL
 
+ECHO BEGIN %date%-%time%
+
 SET softversion=0.70
 SET softpatch=2
 
@@ -26,3 +28,6 @@ SET softpatch=2
 REM Silent install
 msiexec /i putty-64bit-%softversion%-installer.msi /q
 
+
+ECHO END %date%-%time%
+EXIT

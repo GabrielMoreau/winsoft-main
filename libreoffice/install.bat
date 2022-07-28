@@ -17,6 +17,8 @@ EXIT /B
 
 :INSTALL
 
+ECHO BEGIN %date%-%time%
+
 SET softversion=7.1.3
 SET softpatch=1
 
@@ -31,4 +33,5 @@ REM Silent help install
 msiexec /qn /i "LibreOffice_%softversion%_Win_x64_helppack_fr.msi" /norestart /l "%logdir%\%softname%-help.txt"
 
 
+ECHO END %date%-%time%
 EXIT

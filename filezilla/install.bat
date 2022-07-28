@@ -19,6 +19,8 @@ EXIT /B
 
 :INSTALL
 
+ECHO BEGIN %date%-%time%
+
 REM Version parameter (auto update by Makefile)
 SET softversion=3.55.0
 SET softpatch=7
@@ -51,3 +53,7 @@ IF %ERRORLEVEL% EQU 0 (
   >> tmp_install.reg ECHO.
   regedit.exe /S "tmp_install.reg"
 )
+
+
+ECHO END %date%-%time%
+EXIT

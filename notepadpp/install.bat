@@ -19,6 +19,8 @@ EXIT /B
 
 :INSTALL
 
+ECHO BEGIN %date%-%time%
+
 REM Version parameter (auto update by Makefile)
 SET softversion=8.3
 SET softexe=npp.%softversion%.Installer.x64.exe
@@ -90,3 +92,7 @@ IF %ERRORLEVEL% EQU 0 (
   >> tmp_install.reg ECHO.
   regedit.exe /S "tmp_install.reg"
 )
+
+
+ECHO END %date%-%time%
+EXIT

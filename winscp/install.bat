@@ -16,6 +16,8 @@ EXIT /B
 
 :INSTALL
 
+ECHO BEGIN %date%-%time%
+
 
 SET softversion=2.6.11
 SET softpatch=1
@@ -33,4 +35,6 @@ REM REG ADD "HKCU\SOFTWARE\Martin Prikryl\WinSCP 2\Configuration\Interface\Updat
 REM Disable WinSCP Collection of Anonymous Usage Statistics
 REM REG ADD "HKCU\SOFTWARE\Martin Prikryl\WinSCP 2\Configuration\Interface" /v "CollectUsage" /t REG_DWORD /d "00000000" /f
 
+
+ECHO END %date%-%time%
 EXIT

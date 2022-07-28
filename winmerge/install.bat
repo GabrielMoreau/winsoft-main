@@ -16,6 +16,8 @@ EXIT /B
 
 :INSTALL
 
+ECHO BEGIN %date%-%time%
+
 
 SET softversion=2.6.11
 SET softpatch=1
@@ -41,4 +43,6 @@ REM >> tmp_install.reg ECHO "DisplayName"="%softname% (%softversion% OCS)"
 REM >> tmp_install.reg ECHO.
 REM regedit.exe /S "tmp_install.reg"
 
+
+ECHO END %date%-%time%
 EXIT

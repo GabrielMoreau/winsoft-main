@@ -19,6 +19,8 @@ EXIT /B
 
 :INSTALL
 
+ECHO BEGIN %date%-%time%
+
 SET softversion=91.5.1
 SET softpatch=1
 SET process=firefox.exe
@@ -47,3 +49,7 @@ REM IF EXIST "C:\Program Files (x86)\Mozilla Firefox\" COPY /y mozilla.cfg "C:\P
 
 REM IF EXIST "C:\Program Files\Mozilla Firefox\" COPY /y local-settings.js "C:\Program Files\Mozilla Firefox\defaults\pref" > NUL
 REM IF EXIST "C:\Program Files\Mozilla Firefox\" COPY /y mozilla.cfg "C:\Program Files\Mozilla Firefox\mozilla.cfg" > NUL
+
+
+ECHO END %date%-%time%
+EXIT

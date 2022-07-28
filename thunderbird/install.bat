@@ -19,6 +19,8 @@ EXIT /B
 
 :INSTALL
 
+ECHO BEGIN %date%-%time%
+
 SET softversion=91.5.1
 SET softpatch=1
 SET regkey=Mozilla Thunderbird (%softversion%)
@@ -70,4 +72,6 @@ REM unblock
 REM execute
 %pwrsh% -File ".\post-install.ps1"
 
+
+ECHO END %date%-%time%
 EXIT

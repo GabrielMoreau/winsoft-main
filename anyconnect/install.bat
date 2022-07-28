@@ -16,6 +16,8 @@ EXIT /B
 
 :INSTALL
 
+ECHO BEGIN %date%-%time%
+
 SET softversion=4.10.04071
 SET softpatch=1
 
@@ -37,4 +39,5 @@ IF NOT EXIST "%ProgramData%\Cisco\Cisco AnyConnect Secure Mobility Client\Profil
 COPY /B /Y "Profile_VPN_Default.xml" "%ProgramData%\Cisco\Cisco AnyConnect Secure Mobility Client\Profile\Profile_VPN_Default.xml"
 
 
+ECHO END %date%-%time%
 EXIT

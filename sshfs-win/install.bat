@@ -19,6 +19,8 @@ EXIT /B
 
 :INSTALL
 
+ECHO BEGIN %date%-%time%
+
 SET WinfspVersion=1.10.22006
 SET SshfsVersion=3.5.20357
 SET ManagerVersion=1.3.1
@@ -45,4 +47,6 @@ REM Install link in Start Menu
 REM
 %pwrsh% -File "install.ps1"
 
+
+ECHO END %date%-%time%
 EXIT

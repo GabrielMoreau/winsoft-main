@@ -16,6 +16,8 @@ EXIT /B
 
 :INSTALL
 
+ECHO BEGIN %date%-%time%
+
 
 SET softversion=2.18.0
 SET softpatch=1
@@ -23,4 +25,6 @@ SET softpatch=1
 REM Silent install
 Git-%softversion%-64-bit.exe /VERYSILENT /NORESTART /NOCANCEL /SP- /CLOSEAPPLICATIONS /RESTARTAPPLICATIONS
 
+
+ECHO END %date%-%time%
 EXIT

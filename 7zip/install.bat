@@ -19,6 +19,8 @@ EXIT /B
 
 :INSTALL
 
+ECHO BEGIN %date%-%time%
+
 SET softversion=18.05
 SET softversionshort=1805
 SET softpatch=1
@@ -31,3 +33,7 @@ taskkill /T /F /IM %process%
 
 REM Silent install
 msiexec /i "7z%softversionshort%-x64.msi" /quiet
+
+
+ECHO END %date%-%time%
+EXIT

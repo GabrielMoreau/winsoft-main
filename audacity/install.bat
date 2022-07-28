@@ -26,5 +26,4 @@ audacity-win-%softversion%-64bit.exe /TASKS="!desktopicon,!resetprefs" /VERYSILE
 
 
 ECHO END %date%-%time%
-
 EXIT

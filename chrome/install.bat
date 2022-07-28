@@ -16,6 +16,8 @@ EXIT /B
 
 :INSTALL
 
+ECHO BEGIN %date%-%time%
+
 SET softversion=91.5.1
 SET softpatch=1
 
@@ -36,4 +38,5 @@ IF EXIST "C:\Program Files\Google\Chrome\Application\" (
 	COPY /B /Y "master_preferences.json" "C:\Program Files\Google\Chrome\Application\master_preferences"
 	)
 
+ECHO END %date%-%time%
 EXIT

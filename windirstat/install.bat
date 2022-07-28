@@ -19,6 +19,8 @@ EXIT /B
 
 :INSTALL
 
+ECHO BEGIN %date%-%time%
+
 SET softversion=1.1.2
 SET softpatch=1
 SET regkey=windirstat
@@ -42,3 +44,7 @@ IF %ERRORLEVEL% EQU 0 (
   >> tmp_install.reg ECHO.
   regedit.exe /S "tmp_install.reg"
 )
+
+
+ECHO END %date%-%time%
+EXIT
