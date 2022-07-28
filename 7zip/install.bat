@@ -1,8 +1,5 @@
 REM @ECHO OFF
 
-REM Hide the Window
-REM "cmdow.exe" @ /hid
-
 REM
 REM   7-Zip
 REM

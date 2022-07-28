@@ -1,5 +1,4 @@
-REM Hide the Window
-REM "cmdow.exe" @ /hid
+REM @ECHO OFF
 
 REM
 REM   LibreOffice
