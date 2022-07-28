@@ -29,18 +29,18 @@ REM Silent install
 
 
 REM Better reg uninstall key
-reg query "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\%regkey%"
-IF %ERRORLEVEL% EQU 0 (
-  ECHO Better reg uninstall key
-   > tmp_install.reg ECHO Windows Registry Editor Version 5.00
-  >> tmp_install.reg ECHO.
-  >> tmp_install.reg ECHO [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\%regkey%]
-  >> tmp_install.reg ECHO "DisplayVersion"="%softversion%"
-  >> tmp_install.reg ECHO "Comments"="Package OCS v%softpatch% (%DATE:~-4%/%DATE:~-7,-5%/%DATE:~-10,-8%)"
-  >> tmp_install.reg ECHO "DisplayName"="%softname% (%softversion% OCS/%softpatch%)"
-  >> tmp_install.reg ECHO.
-  regedit.exe /S "tmp_install.reg"
-)
+REM reg query "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\%regkey%"
+REM IF %ERRORLEVEL% EQU 0 (
+REM   ECHO Better reg uninstall key
+REM    > tmp_install.reg ECHO Windows Registry Editor Version 5.00
+REM   >> tmp_install.reg ECHO.
+REM   >> tmp_install.reg ECHO [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\%regkey%]
+REM   >> tmp_install.reg ECHO "DisplayVersion"="%softversion%"
+REM   >> tmp_install.reg ECHO "Comments"="Package OCS v%softpatch% (%DATE:~-4%/%DATE:~-7,-5%/%DATE:~-10,-8%)"
+REM   >> tmp_install.reg ECHO "DisplayName"="%softname% (%softversion% OCS/%softpatch%)"
+REM   >> tmp_install.reg ECHO.
+REM   regedit.exe /S "tmp_install.reg"
+REM )
 
 
 ECHO END %date%-%time%
