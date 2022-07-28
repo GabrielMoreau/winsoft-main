@@ -14,7 +14,7 @@ SET logdir=%ProgramData%\OCS Inventory NG\Agent\DeployLog
 IF NOT EXIST "%logdir%" (
   MKDIR "%logdir%"
 )
-CALL :INSTALL 1> "%logdir%\%softname%.txt" 2>&1
+CALL :INSTALL 1> "%logdir%\%softname%.log" 2>&1
 EXIT /B
 
 :INSTALL
@@ -28,7 +28,7 @@ SET softpatch=1
 
 
 REM Silent install
-msiexec /i "BlueKenue64Installer%softversion%.msi" /quiet /qn /norestart /log "%logdir%\%softname%-MSI.txt"
+msiexec /i "BlueKenue64Installer%softversion%.msi" /quiet /qn /norestart /log "%logdir%\%softname%-MSI.log"
 
 
 ECHO END %date%-%time%

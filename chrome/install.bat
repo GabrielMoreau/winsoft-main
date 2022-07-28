@@ -11,7 +11,7 @@ SET logdir=%ProgramData%\OCS Inventory NG\Agent\DeployLog
 IF NOT EXIST "%logdir%" (
   MKDIR "%logdir%"
 )
-CALL :INSTALL 1> "%logdir%\%softname%.txt" 2>&1
+CALL :INSTALL 1> "%logdir%\%softname%.log" 2>&1
 EXIT /B
 
 :INSTALL
@@ -22,7 +22,7 @@ SET softversion=91.5.1
 SET softpatch=1
 
 REM Silent install
-msiexec /i "googlechromestandaloneenterprise64-%softversion%.msi" /qn /L*V "%logdir%\%softname%-MSI.txt"
+msiexec /i "googlechromestandaloneenterprise64-%softversion%.msi" /qn /L*V "%logdir%\%softname%-MSI.log"
 
 
 REM Disable auto update

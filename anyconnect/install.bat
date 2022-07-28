@@ -11,7 +11,7 @@ SET logdir=%ProgramData%\OCS Inventory NG\Agent\DeployLog
 IF NOT EXIST "%logdir%" (
   MKDIR "%logdir%"
 )
-CALL :INSTALL 1> "%logdir%\%softname%.txt" 2>&1
+CALL :INSTALL 1> "%logdir%\%softname%.log" 2>&1
 EXIT /B
 
 :INSTALL
@@ -23,7 +23,7 @@ SET softpatch=1
 
 
 REM Silent install
-msiexec /i "anyconnect-win-%softversion%-core-vpn-webdeploy-k9.msi" ALLUSERS=1 /qn /norestart /L*v "%logdir%\%softname%-MSI.txt"
+msiexec /i "anyconnect-win-%softversion%-core-vpn-webdeploy-k9.msi" ALLUSERS=1 /qn /norestart /L*v "%logdir%\%softname%-MSI.log"
 
 
 REM Default profile

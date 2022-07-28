@@ -11,7 +11,7 @@ SET logdir=%ProgramData%\OCS Inventory NG\Agent\DeployLog
 IF NOT EXIST "%logdir%" (
   MKDIR "%logdir%"
 )
-CALL :INSTALL 1> "%logdir%\%softname%.txt" 2>&1
+CALL :INSTALL 1> "%logdir%\%softname%.log" 2>&1
 EXIT /B
 
 :INSTALL
@@ -30,7 +30,7 @@ REM IF %ERRORLEVEL%==0 TASKKILL /T /F /IM %process%
 
 
 REM Silent install
-WinMerge-%softversion%-x64-Setup.exe /VERYSILENT /NORESTART /LOG="%logdir%\%softname%-MSI.txt"
+WinMerge-%softversion%-x64-Setup.exe /VERYSILENT /NORESTART /LOG="%logdir%\%softname%-MSI.log"
 REM "%softname%-%softversion%-Setup.exe" /VERYSILENT /SP- /NORESTART
 
 REM Change Add and Remove values in the register
