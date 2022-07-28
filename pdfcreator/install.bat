@@ -1,5 +1,9 @@
 REM @ECHO OFF
 
+REM
+REM   PDFCreator
+REM
+
 REM Name
 SET softname=PDFCreator
 SET softversion=2.3.1

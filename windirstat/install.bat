@@ -1,7 +1,7 @@
 REM @ECHO OFF
 
 REM
-REM   VLC
+REM   WinDirStat
 REM
 
 REM Name
