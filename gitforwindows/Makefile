@@ -6,7 +6,7 @@
 SOFT:=GitForWindows
 VERSION:=$(shell curl -s -L 'https://github.com/git-for-windows/git/releases' | sed -e 's/</\n/g;' | grep '^td>Git-.*-64-bit.exe$$' | grep -v -- '-rc' | head -1 | cut -f 2 -d '-')
 PATCH:=1
-URL:=$(shell curl -s -L 'https://github.com/git-for-windows/git/releases' | sed -e 's/"/\n/g;' | egrep -- '^/.*/Git-.*-64-bit.exe' | grep -v -- '-rc' | head -1)
+URL:=https://github.com$(shell curl -s -L 'https://github.com/git-for-windows/git/releases' | sed -e 's/"/\n/g;' | egrep -- '^/.*/Git-.*-64-bit.exe' | grep -v -- '-rc' | head -1)
 
 EXE:=Git-$(VERSION)-64-bit.exe
 
@@ -27,7 +27,7 @@ wget: tmp/$(EXE)
 tmp/$(EXE):
 	@mkdir -p tmp
 	@(cd tmp ; \
-		curl -s -o "$(EXE)" -L "https://github.com$(URL)" ; \
+		curl -s -o "$(EXE)" -L "$(URL)" ; \
 		file $(EXE) | grep -q "PE32 executable" || echo "Error: bad format for binary $(EXE)" ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)

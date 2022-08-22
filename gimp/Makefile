@@ -6,7 +6,7 @@
 SOFT:=Gimp
 VERSION:=$(shell curl -s -L 'https://www.gimp.org/downloads/' | egrep 'SHA256.*code.*gimp-.*setup.*exe' | cut -f 2 -d '-')
 PATCH:=1
-URL:=$(shell curl -s -L 'https://www.gimp.org/downloads/' | egrep 'gimp-.*-setup.*.exe"' |cut -f 2 -d '"')
+URL:=https:$(shell curl -s -L 'https://www.gimp.org/downloads/' | egrep 'gimp-.*-setup.*.exe"' |cut -f 2 -d '"')
 
 EXE:=gimp-$(VERSION)-setup.exe
 
@@ -27,7 +27,7 @@ wget: tmp/$(EXE)
 tmp/$(EXE):
 	@mkdir -p tmp
 	@(cd tmp ; \
-		curl -s -o "$(EXE)" -L "https:$(URL)" ; \
+		curl -s -o "$(EXE)" -L "$(URL)" ; \
 		file $(EXE) | grep -q "PE32 executable" || echo "Error: bad format for binary $(EXE)" ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)

@@ -6,7 +6,7 @@
 SOFT:=Inkscape
 VERSION:=$(shell curl -s -L 'https://inkscape.org/en/release/' | sed -e 's/>/\n/g;' | grep 'Inkscape.*title' | cut -f 3 -d ' ')
 PATCH:=1
-URL:=$(shell curl -s -L  'https://inkscape.org/release/all/windows/64-bit/msi/' | sed -e 's/"/\n/g;' | egrep "/gallery/.*/inkscape-$(VERSION)_")
+URL:=https://inkscape.org/$(shell curl -s -L  'https://inkscape.org/release/all/windows/64-bit/msi/' | sed -e 's/"/\n/g;' | egrep "/gallery/.*/inkscape-$(VERSION)_")
 
 EXE:=inkscape-$(VERSION)-x64.msi
 
@@ -27,7 +27,7 @@ wget: tmp/$(EXE)
 tmp/$(EXE):
 	@mkdir -p tmp
 	@(cd tmp ; \
-		curl -s -o "$(EXE)" -L "https://inkscape.org/$(URL)" ; \
+		curl -s -o "$(EXE)" -L "$(URL)" ; \
 		file $(EXE) | grep -q "Subject: Inkscape" || echo "Error: bad format for binary $(EXE)" ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
