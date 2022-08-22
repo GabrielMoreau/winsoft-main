@@ -9,8 +9,8 @@ VERSION:=$(shell curl -s 'https://fr.libreoffice.org/download/telecharger-libreo
 	| head -1 | cut -f 7 -d '/')
 PATCH:=1
 
-EXE_LO:="LibreOffice_$(VERSION)_Win_x64.msi"
-EXE_HELP:="LibreOffice_$(VERSION)_Win_x64_helppack_fr.msi"
+EXE_LO:=LibreOffice_$(VERSION)_Win_x64.msi
+EXE_HELP:=LibreOffice_$(VERSION)_Win_x64_helppack_fr.msi
 
 URL_LO:=$(shell curl -s "https://download.documentfoundation.org/libreoffice/stable/$(VERSION)/win/x86_64/$(EXE_LO)" \
 	| sed -e 's/"/\n/g;' | grep "^https://.*/$(EXE_LO)$$" | head -1)
@@ -19,6 +19,7 @@ URL_HELP:=$(shell curl -s "https://download.documentfoundation.org/libreoffice/s
 	| sed -e 's/"/\n/g;' | grep "^https://.*/$(EXE_HELP)$$" | head -1)
 
 IT_TEAM:=IT Support
+
 
 .PHONY: all ocs clean wget
 
@@ -55,7 +56,6 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE_LO)
 
 %.zip: Makefile tmp/install.bat tmp/$(EXE_LO) tmp/$(EXE_HELP)
 	@rm -f $@
-	@#zip -r $@ policies.json
 	@(cd tmp; zip -r ../$@ install.bat $(EXE_LO) $(EXE_HELP))
 	@chmod ugo+rw $@
 
