@@ -4,24 +4,20 @@
 #
 
 SOFT:=BlueKenue
-INSTALLER:=BlueKenue64Installer3.3.4.msi
 VERSION:=3.3.4
 PATCH:=1
 
 EXE:=BlueKenue64Installer$(VERSION).msi
+URL:=https://nrc.canada.ca/sites/default/files/apps/kenue/$(EXE)
 
 IT_TEAM:=IT Support
 
 
-.PHONY: all next ocs clean
+.PHONY: all ocs clean
 
-all:
-	@mkdir -p tmp
-	@rm -f "tmp/$(INSTALLER)"
-	@(cd tmp; curl -s -o $(INSTALLER) -L "https://nrc.canada.ca/sites/default/files/apps/kenue/$(INSTALLER)")
-	@make next
+all: $(SOFT)-$(VERSION)-$(PATCH).zip ocs
 
-next: $(SOFT)-$(VERSION)-$(PATCH).zip ocs
+sinclude ../common/global.mk
 
 clean:
 	rm -rf $(SOFT)-$(VERSION)-$(PATCH).zip tmp
@@ -29,8 +25,8 @@ clean:
 tmp/$(EXE):
 	@mkdir -p tmp
 	@(cd tmp ; \
-		cmp $(INSTALLER) $(EXE) > /dev/null 2>&1 || cp -f $(INSTALLER) $(EXE) ; \
-		file $(EXE) | grep -q "BlueKenue" || echo "Error: bad format for binary $(EXE)" ; \
+		curl -s -o "$(EXE)" -L "$(URL)" ; \
+		file $(EXE) | grep -q 'Composite Document File V2 Document, Little Endian' || echo "Error: bad format for binary $(EXE)" ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
 
