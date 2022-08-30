@@ -4,7 +4,7 @@
 #
 
 SOFT:=AnyConnect
-VERSION:=4.10.04071
+VERSION:=4.10.05111
 PATCH:=1
 
 EXE:=anyconnect-win-$(VERSION)-core-vpn-webdeploy-k9.msi
