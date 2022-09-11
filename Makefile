@@ -10,12 +10,16 @@ help:
 build-all:
 	@for d in $(PKGDIR) ; \
 	do \
+		echo '' ; \
+		echo "#=== $$d ===#" ; \
 		(cd $$d; make) \
 	done
 
 clean-all:
 	@for d in $(PKGDIR) ; \
 	do \
+		echo '' ; \
+		echo "#=== $$d ===#" ; \
 		(cd $$d; make clean) \
 	done
 
@@ -23,6 +27,7 @@ list-pkg:
 	@for d in $(PKGDIR) ; \
 	do \
 		(cd $$d ; \
+		eecho '' ; \
 		echo "#=== $$d ===#" ; \
 		unzip -t *.zip ; \
 		) \
