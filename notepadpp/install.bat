@@ -60,35 +60,8 @@ IF EXIST "%ProgramFiles%\Notepad++\updater_disable" (
   RMDIR /S /Q "%ProgramFiles%\Notepad++\updater_disable"
 )
 IF EXIST "%ProgramFiles%\Notepad++\updater" (
-  RENAME "C:\%ProgramFiles%\Notepad++\updater" "updater_disable"
+  RENAME "%ProgramFiles%\Notepad++\updater" "updater_disable"
 )
-
-REM Better reg uninstall key
-REM reg query "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\%regkey%"
-REM IF %ERRORLEVEL% EQU 0 (
-REM   ECHO Better reg uninstall key
-REM    > tmp_install.reg ECHO Windows Registry Editor Version 5.00
-REM   >> tmp_install.reg ECHO.
-REM   >> tmp_install.reg ECHO [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\%regkey%]
-REM   >> tmp_install.reg ECHO "DisplayVersion"="%softversion%"
-REM   >> tmp_install.reg ECHO "Comments"="Package OCS v%softpatch% (%DATE:~-4%/%DATE:~-7,-5%/%DATE:~-10,-8%)"
-REM   >> tmp_install.reg ECHO "DisplayName"="%softname% (%softversion% OCS/%softpatch%)"
-REM   >> tmp_install.reg ECHO.
-REM   regedit.exe /S "tmp_install.reg"
-REM )
-
-REM reg query "HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\%regkey%"
-REM IF %ERRORLEVEL% EQU 0 (
-REM   ECHO Better reg uninstall key
-REM    > tmp_install.reg ECHO Windows Registry Editor Version 5.00
-REM   >> tmp_install.reg ECHO.
-REM   >> tmp_install.reg ECHO [HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\%regkey%]
-REM   >> tmp_install.reg ECHO "DisplayVersion"="%softversion%"
-REM   >> tmp_install.reg ECHO "Comments"="Package OCS v%softpatch% (%DATE:~-4%/%DATE:~-7,-5%/%DATE:~-10,-8%)"
-REM   >> tmp_install.reg ECHO "DisplayName"="%softname% (%softversion% OCS/%softpatch%)"
-REM   >> tmp_install.reg ECHO.
-REM   regedit.exe /S "tmp_install.reg"
-REM )
 
 
 ECHO END %date%-%time%
