@@ -5,7 +5,7 @@ REM   Firefox
 REM
 
 REM Name
-SET softname=Mozilla Firefox
+SET softname=Mozilla-Firefox
 
 SET logdir=%ProgramData%\OCS Inventory NG\Agent\DeployLog
 IF NOT EXIST "%logdir%" (
@@ -33,7 +33,7 @@ IF %ERRORLEVEL%==0 TASKKILL /T /F /IM %process%
 
 REM Silent install
 REM "Firefox Setup %softversion%esr.exe" -ms
-msiexec /i "Firefox_Setup_%softversion%esr.msi" INSTALL_MAINTENANCE_SERVICE=false /q
+msiexec /i "Firefox-Setup-%softversion%esr.msi" INSTALL_MAINTENANCE_SERVICE=false /q
 
 
 REM voir https://github.com/mozilla/policy-templates/blob/master/README.md

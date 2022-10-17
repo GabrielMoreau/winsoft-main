@@ -5,7 +5,7 @@ REM   Thunderbird
 REM
 
 REM Name
-SET softname=Mozilla Thunderbird
+SET softname=Mozilla-Thunderbird
 
 SET logdir=%ProgramData%\OCS Inventory NG\Agent\DeployLog
 IF NOT EXIST "%logdir%" (
@@ -20,7 +20,6 @@ ECHO BEGIN %date%-%time%
 
 SET softversion=91.5.1
 SET softpatch=1
-SET regkey=Mozilla Thunderbird (%softversion%)
 SET process=thunderbird.exe
 
 
@@ -30,7 +29,7 @@ TASKKILL /T /F /IM %process%
 
 REM Silent install
 REM "Thunderbird Setup %softversion%.exe" /MaintenanceService=false /S
-msiexec /i "Thunderbird_Setup_%softversion%.msi" INSTALL_MAINTENANCE_SERVICE=false /q
+msiexec /i "Thunderbird-Setup-%softversion%.msi" INSTALL_MAINTENANCE_SERVICE=false /q
 
 
 REM Wait and remove unused service
@@ -43,18 +42,6 @@ IF EXIST "c:\Program Files (x86)\Mozilla Maintenance Service\uninstall.exe" "c:\
 REM Copy policies
 IF NOT EXIST "C:\Program Files\Mozilla Thunderbird\distribution" MKDIR "C:\Program Files\Mozilla Thunderbird\distribution"
 IF EXIST "C:\Program Files\Mozilla Thunderbird\distribution" COPY /y policies.json "C:\Program Files\Mozilla Thunderbird\distribution\policies.json" > NUL
-
-
-REM Change Add and Remove values in the register
-REM  > tmp_install.reg ECHO Windows Registry Editor Version 5.00
-REM >> tmp_install.reg ECHO.
-REM >> tmp_install.reg ECHO [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\%regkey%]
-REM >> tmp_install.reg ECHO "DisplayVersion"="%softversion% (fr)"
-REM >> tmp_install.reg ECHO "Comments"="Package OCS v%softpatch% (%DATE:~-4%/%DATE:~-7,-5%/%DATE:~-10,-8%)"
-REM >> tmp_install.reg ECHO "DisplayName"="%softname% (%softversion% OCS)"
-REM >> tmp_install.reg ECHO.
-REM regedit.exe /S "tmp_install.reg"
-
 
 
 SET pwrsh=%WINDIR%\System32\WindowsPowerShell\V1.0\powershell.exe
