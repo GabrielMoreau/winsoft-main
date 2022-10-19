@@ -27,4 +27,9 @@ avidemux-%softversion%-win64.exe /S
 
 
 ECHO END %date%-%time%
+
+IF %ERRORLEVEL% EQU 1223 (
+  REM 0 or 1223 are good exit code for Avidemux installer!
+  EXIT 0
+)
 EXIT
