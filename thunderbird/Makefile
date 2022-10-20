@@ -5,7 +5,7 @@
 
 SOFT:=Thunderbird
 VERSION:=$(shell curl -s -L 'https://www.thunderbird.net/en-US/thunderbird/all/' | sed -e 's/[[:space:]]/\n/g;' | grep 'data-thunderbird-version' | cut -f 2 -d '"')
-PATCH:=2
+PATCH:=1
 
 EXE:=Thunderbird-Setup-$(VERSION).msi
 
