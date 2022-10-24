@@ -41,6 +41,6 @@ space:
 	@for d in $(PKGDIR) ; \
 	do \
 		(cd $$d ; \
-		ls -t *.zip | tail -n +$(KEEP) | xargs -r echo rm -f ; \
+		ls -t *.zip | tail -n +$(KEEP) | xargs -r rm -f ; \
 		) \
 	done
