@@ -26,6 +26,7 @@ wget: $(EXE)
 tmp/$(EXE):
 	@mkdir -p tmp
 	@(cd tmp ; \
+		rm -f *.exe *.msi 2>/dev/null
 		curl -s -o "$(EXE)" -L "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v$(VERSION)/npp.$(VERSION).Installer.x64.exe" ; \
 		file $(EXE) | grep -q 'PE32 executable' || echo "Error: bad format for binary $(EXE)" ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \

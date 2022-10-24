@@ -35,6 +35,7 @@ wget: tmp/$(EXE_LO) tmp/$(EXE_HELP)
 tmp/$(EXE_LO):
 	@mkdir -p tmp
 	@(cd tmp ; \
+		rm -f *_Win_x64.msi 2>/dev/null
 		curl -s -o "$(EXE_LO)" -L "$(URL_LO)" ; \
 		file "$(EXE_LO)" | grep -q "Author: The Document Foundation" || echo "Error: bad format for binary $(EXE_LO)" ; \
 		grep -q "^$$(shasum -a 256 $(EXE_LO))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE_LO)" ; \
@@ -43,6 +44,7 @@ tmp/$(EXE_LO):
 tmp/$(EXE_HELP):
 	@mkdir -p tmp
 	@(cd tmp ; \
+		rm -f *_helppack_fr.msi 2>/dev/null
 		curl -s -o "$(EXE_HELP)" -L "$(URL_HELP)" ; \
 		file "$(EXE_HELP)" | grep -q "Author: The Document Foundation" || echo "Error: bad format for binary $(EXE_HELP)" ; \
 		grep -q "^$$(shasum -a 256 $(EXE_HELP))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE_HELP)" ; \
