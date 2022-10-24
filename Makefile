@@ -14,7 +14,9 @@ build-all:
 		echo "#=== $$d ===#" ; \
 		(cd $$d; make) \
 	done
-	@ls -altr | tail -10
+	@echo ''
+	@echo '#=== Summary: packages created on this last day ===#'
+	@find . -name '*.zip' -a -mtime -1
 
 clean-all:
 	@for d in $(PKGDIR) ; \
