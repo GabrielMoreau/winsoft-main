@@ -14,6 +14,7 @@ build-all:
 		echo "#=== $$d ===#" ; \
 		(cd $$d; make) \
 	done
+	@ls -altr | tail -10
 
 clean-all:
 	@for d in $(PKGDIR) ; \
