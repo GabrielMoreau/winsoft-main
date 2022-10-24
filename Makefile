@@ -1,6 +1,7 @@
-PKGDIR = $(dir $(wildcard */Makefile))
+PKGDIR:=$(dir $(wildcard */Makefile))
+KEEP:=3 # means 2
 
-.PHONY: help build-all clean-all list-pkg
+.PHONY: help build-all clean-all list-pkg space
 
 help:
 	@echo "build-all  build all package"
@@ -30,8 +31,16 @@ list-pkg:
 	@for d in $(PKGDIR) ; \
 	do \
 		(cd $$d ; \
-		eecho '' ; \
+		echo '' ; \
 		echo "#=== $$d ===#" ; \
 		unzip -t *.zip ; \
+		) \
+	done
+
+space:
+	@for d in $(PKGDIR) ; \
+	do \
+		(cd $$d ; \
+		ls -t *.zip | tail -n +$(KEEP) | xargs -r echo rm -f ; \
 		) \
 	done
