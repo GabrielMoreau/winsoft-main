@@ -17,7 +17,7 @@ build-all:
 	done
 	@echo ''
 	@echo '#=== Summary: packages created on this last day ===#'
-	@find . -name '*.zip' -a -mtime -1
+	@find . -name '*.zip' -a -mtime -1 -exec ls -ltr {} \+
 
 clean-all:
 	@for d in $(PKGDIR) ; \
