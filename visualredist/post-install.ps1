@@ -6,13 +6,13 @@
 		$App = (Get-ItemProperty -Path $Key.PSPath)
 		$DisplayName  = $App.DisplayName
 		If ($DisplayName -match 'Microsoft Visual .* Redistributable') {
-			$DisplayVersion = $App.DisplayVersion
+			[version]$DisplayVersion = $App.DisplayVersion
 			$KeyProduct = $Key | Split-Path -Leaf
 			#Write-Output "# $DisplayName / $DisplayVersion / $KeyProduct"
 
 			If ($DisplayName -match '2010.*x64') {
 				# 10.0.40219.325
-				If ($DisplayVersion -ne '10.0.40219') {
+				If ($DisplayVersion -lt [version]'10.0.40219') {
 					$Exe = '2010\vcredist_x64.exe'
 					$Args = '/q /norestart'
 					If (Test-Path -Path "$Exe") {
@@ -22,7 +22,7 @@
 				}
 			}
 			ElseIf ($DisplayName -match '2010.*x86') {
-				If ($DisplayVersion -ne '10.0.40219') {
+				If ($DisplayVersion -lt [version]'10.0.40219') {
 					$Exe = '2010\vcredist_x86.exe'
 					$Args = '/q /norestart'
 					If (Test-Path -Path "$Exe") {
@@ -33,7 +33,7 @@
 			}
 
 			ElseIf ($DisplayName -match '2012.*x64') {
-				If ($DisplayVersion -ne '11.0.61030.0') {
+				If ($DisplayVersion -lt [version]'11.0.61030.0') {
 					$Exe = '2012\vcredist_x64.exe'
 					$Args = '/install /quiet /norestart'
 					If (Test-Path -Path "$Exe") {
@@ -43,7 +43,7 @@
 				}
 			}
 			ElseIf ($DisplayName -match '2012.*x86') {
-				If ($DisplayVersion -ne '11.0.61030.0') {
+				If ($DisplayVersion -lt [version]'11.0.61030.0') {
 					$Exe = '2012\vcredist_x86.exe'
 					$Args = '/install /quiet /norestart'
 					If (Test-Path -Path "$Exe") {
@@ -54,7 +54,7 @@
 			}
 
 			ElseIf ($DisplayName -match '2013.*x64') {
-				If ($DisplayVersion -ne '12.0.40664.0') {
+				If ($DisplayVersion -lt [version]'12.0.40664.0') {
 					$Exe = '2013\vcredist_x64.exe'
 					$Args = '/install /quiet /norestart'
 					If (Test-Path -Path "$Exe") {
@@ -64,7 +64,7 @@
 				}
 			}
 			ElseIf ($DisplayName -match '2013.*x86') {
-				If ($DisplayVersion -ne '12.0.40664.0') {
+				If ($DisplayVersion -lt [version]'12.0.40664.0') {
 					$Exe = '2013\vcredist_x86.exe'
 					$Args = '/install /quiet /norestart'
 					If (Test-Path -Path "$Exe") {
@@ -75,7 +75,7 @@
 			}
 
 			ElseIf ($DisplayName -match '2015-2019.*x64') {
-				If ($DisplayVersion -ne '14.29.30139.0') {
+				If ($DisplayVersion -lt [version]'14.29.30139.0') {
 					$Exe = '2015-2019\vc_redist.x64.exe'
 					$Args = '/install /quiet /norestart'
 					If (Test-Path -Path "$Exe") {
@@ -85,7 +85,7 @@
 				}
 			}
 			ElseIf ($DisplayName -match '2015-2019.*x86') {
-				If ($DisplayVersion -ne '14.29.30139.0') {
+				If ($DisplayVersion -lt [version]'14.29.30139.0') {
 					$Exe = '2015-2019\vc_redist.x86.exe'
 					$Args = '/install /quiet /norestart'
 					If (Test-Path -Path "$Exe") {
@@ -96,7 +96,7 @@
 			}
 
 			ElseIf ($DisplayName -match '2015-2022.*x64') {
-				If ($DisplayVersion -ne '14.32.31332.0') {
+				If ($DisplayVersion -lt [version]'14.32.31332.0') {
 					$Exe = '2015-2022\vc_redist.x64.exe'
 					$Args = '/install /quiet /norestart'
 					If (Test-Path -Path "$Exe") {
@@ -106,7 +106,7 @@
 				}
 			}
 			ElseIf ($DisplayName -match '2015-2022.*x86') {
-				If ($DisplayVersion -ne '14.32.31332.0') {
+				If ($DisplayVersion -lt [version]'14.32.31332.0') {
 					$Exe = '2015-2022\vc_redist.x86.exe'
 					$Args = '/install /quiet /norestart'
 					If (Test-Path -Path "$Exe") {
