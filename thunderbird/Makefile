@@ -1,6 +1,6 @@
 
 #
-# Firefox
+# Thunderbird
 #
 
 SOFT:=Thunderbird

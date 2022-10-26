@@ -5,7 +5,7 @@ REM   VisualCPPRedistribuable
 REM
 
 REM Name
-SET softname=Mozilla-VisualCPPRedistribuable
+SET softname=VisualCPPRedistribuable
 
 SET logdir=%ProgramData%\OCS Inventory NG\Agent\DeployLog
 IF NOT EXIST "%logdir%" (

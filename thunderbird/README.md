@@ -1,6 +1,6 @@
 # Mozilla Thunderbird - Mail reader
 
-Firefox is a free and open-source web browser developed by the Mozilla Foundation.
+Thunderbird is a free and open-source email reader developed by the Mozilla Foundation.
 
 * Website : https://www.thunderbird.net/
 * Wikipedia : https://en.wikipedia.org/wiki/Mozilla_Thunderbird
