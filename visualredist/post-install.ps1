@@ -18,6 +18,8 @@
 						Write-Output "Update Microsoft Visual C++ 2008 (x64) redistributable"
 						Start-Process -FilePath "$Exe" -ArgumentList "$Args" -WindowStyle 'Hidden' -ErrorAction 'SilentlyContinue'
 					}
+				} Else {
+					Write-Output "Microsoft Visual C++ 2008 (x64) redistributable already at version $DisplayVersion"
 				}
 			}
 			ElseIf ($DisplayName -match '2008.*x86') {
@@ -28,6 +30,8 @@
 						Write-Output "Update Microsoft Visual C++ 2008 (x86) redistributable"
 						Start-Process -FilePath "$Exe" -ArgumentList "$Args" -WindowStyle 'Hidden' -ErrorAction 'SilentlyContinue'
 					}
+				} Else {
+					Write-Output "Microsoft Visual C++ 2008 (x86) redistributable already at version $DisplayVersion"
 				}
 			}
 
@@ -40,6 +44,8 @@
 						Write-Output "Update Microsoft Visual C++ 2010 (x64) redistributable"
 						Start-Process -FilePath "$Exe" -ArgumentList "$Args" -WindowStyle 'Hidden' -ErrorAction 'SilentlyContinue'
 					}
+				} Else {
+					Write-Output "Microsoft Visual C++ 2010 (x64) redistributable already at version $DisplayVersion"
 				}
 			}
 			ElseIf ($DisplayName -match '2010.*x86') {
@@ -50,6 +56,8 @@
 						Write-Output "Update Microsoft Visual C++ 2010 (x86) redistributable"
 						Start-Process -FilePath "$Exe" -ArgumentList "$Args" -WindowStyle 'Hidden' -ErrorAction 'SilentlyContinue'
 					}
+				} Else {
+					Write-Output "Microsoft Visual C++ 2010 (x86) redistributable already at version $DisplayVersion"
 				}
 			}
 
@@ -61,6 +69,8 @@
 						Write-Output "Update Microsoft Visual C++ 2012 (x64) redistributable"
 						Start-Process -FilePath "$Exe" -ArgumentList "$Args" -WindowStyle 'Hidden' -ErrorAction 'SilentlyContinue'
 					}
+				} Else {
+					Write-Output "Microsoft Visual C++ 2012 (x64) redistributable already at version $DisplayVersion"
 				}
 			}
 			ElseIf ($DisplayName -match '2012.*x86') {
@@ -71,6 +81,8 @@
 						Write-Output "Update Microsoft Visual C++ 2012 (x86) redistributable"
 						Start-Process -FilePath "$Exe" -ArgumentList "$Args" -WindowStyle 'Hidden' -ErrorAction 'SilentlyContinue'
 					}
+				} Else {
+					Write-Output "Microsoft Visual C++ 2012 (x86) redistributable already at version $DisplayVersion"
 				}
 			}
 
@@ -82,6 +94,8 @@
 						Write-Output "Update Microsoft Visual C++ 2013 (x64) redistributable"
 						Start-Process -FilePath "$Exe" -ArgumentList "$Args" -WindowStyle 'Hidden' -ErrorAction 'SilentlyContinue'
 					}
+				} Else {
+					Write-Output "Microsoft Visual C++ 2013 (x64) redistributable already at version $DisplayVersion"
 				}
 			}
 			ElseIf ($DisplayName -match '2013.*x86') {
@@ -92,6 +106,8 @@
 						Write-Output "Update Microsoft Visual C++ 2013 (x86) redistributable"
 						Start-Process -FilePath "$Exe" -ArgumentList "$Args" -WindowStyle 'Hidden' -ErrorAction 'SilentlyContinue'
 					}
+				} Else {
+					Write-Output "Microsoft Visual C++ 2013 (x86) redistributable already at version $DisplayVersion"
 				}
 			}
 
@@ -103,6 +119,8 @@
 						Write-Output "Update Microsoft Visual C++ 2015-2019 (x64) redistributable"
 						Start-Process -FilePath "$Exe" -ArgumentList "$Args" -WindowStyle 'Hidden' -ErrorAction 'SilentlyContinue'
 					}
+				} Else {
+					Write-Output "Microsoft Visual C++ 2015-2019 (x64) redistributable already at version $DisplayVersion"
 				}
 			}
 			ElseIf ($DisplayName -match '2015-2019.*x86') {
@@ -113,6 +131,8 @@
 						Write-Output "Update Microsoft Visual C++ 2015-2019 (x86) redistributable"
 						Start-Process -FilePath "$Exe" -ArgumentList "$Args" -WindowStyle 'Hidden' -ErrorAction 'SilentlyContinue'
 					}
+				} Else {
+					Write-Output "Microsoft Visual C++ 2015-2019 (x86) redistributable already at version $DisplayVersion"
 				}
 			}
 
@@ -124,6 +144,8 @@
 						Write-Output "Update Microsoft Visual C++ 2015-2022 (x64) redistributable"
 						Start-Process -FilePath "$Exe" -ArgumentList "$Args" -WindowStyle 'Hidden' -ErrorAction 'SilentlyContinue'
 					}
+				} Else {
+					Write-Output "Microsoft Visual C++ 2015-2022 (x64) redistributable already at version $DisplayVersion"
 				}
 			}
 			ElseIf ($DisplayName -match '2015-2022.*x86') {
@@ -134,6 +156,8 @@
 						Write-Output "Update Microsoft Visual C++ 2015-2022 (x86) redistributable"
 						Start-Process -FilePath "$Exe" -ArgumentList "$Args" -WindowStyle 'Hidden' -ErrorAction 'SilentlyContinue'
 					}
+				} Else {
+					Write-Output "Microsoft Visual C++ 2015-2022 (x86) redistributable already at version $DisplayVersion"
 				}
 			}
 		}
