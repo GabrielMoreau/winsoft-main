@@ -10,7 +10,28 @@
 			$KeyProduct = $Key | Split-Path -Leaf
 			#Write-Output "# $DisplayName / $DisplayVersion / $KeyProduct"
 
-			If ($DisplayName -match '2010.*x64') {
+			If ($DisplayName -match '2008.*x64') {
+				If ($DisplayVersion -lt [version]'9.0.30729.6161') {
+					$Exe = '2008\vcredist_x64.exe'
+					$Args = '/q'
+					If (Test-Path -Path "$Exe") {
+						Write-Output "Update Microsoft Visual C++ 2008 (x64) redistributable"
+						Start-Process -FilePath "$Exe" -ArgumentList "$Args" -WindowStyle 'Hidden' -ErrorAction 'SilentlyContinue'
+					}
+				}
+			}
+			ElseIf ($DisplayName -match '2008.*x86') {
+				If ($DisplayVersion -lt [version]'9.0.30729.6161') {
+					$Exe = '2008\vcredist_x86.exe'
+					$Args = '/q'
+					If (Test-Path -Path "$Exe") {
+						Write-Output "Update Microsoft Visual C++ 2008 (x86) redistributable"
+						Start-Process -FilePath "$Exe" -ArgumentList "$Args" -WindowStyle 'Hidden' -ErrorAction 'SilentlyContinue'
+					}
+				}
+			}
+
+			ElseIf ($DisplayName -match '2010.*x64') {
 				# 10.0.40219.325
 				If ($DisplayVersion -lt [version]'10.0.40219') {
 					$Exe = '2010\vcredist_x64.exe'

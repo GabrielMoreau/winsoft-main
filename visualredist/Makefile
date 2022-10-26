@@ -4,12 +4,14 @@
 #
 
 SOFT:=VisualCPPRedistribuable
-VERSION:=0.8
+VERSION:=0.9
 PATCH:=1
 
 IT_TEAM:=IT Support
 
 VCREDIST:=
+VCREDIST+=tmp/2008/vcredist_x64.exe
+VCREDIST+=tmp/2008/vcredist_x86.exe
 VCREDIST+=tmp/2010/vcredist_x64.exe
 VCREDIST+=tmp/2010/vcredist_x86.exe
 VCREDIST+=tmp/2012/vcredist_x64.exe
@@ -41,7 +43,7 @@ tmp/install.bat: install.bat Makefile
 %.zip: Makefile tmp/install.bat post-install.ps1 view.ps1 $(VCREDIST)
 	@rm -f $@
 	@zip -r $@ post-install.ps1 view.ps1
-	@(cd tmp; zip -r ../$@ install.bat  2010 2012 2013 2015-2019 2015-2022)
+	@(cd tmp; zip -r ../$@ install.bat  2008 2010 2012 2013 2015-2019 2015-2022)
 	@chmod ugo+rw $@
 
 ocs:
@@ -57,6 +59,19 @@ ocs:
 	@echo " --- "
 	@echo "Install and update: $(SOFT)"
 	@echo ""
+
+
+tmp/2008/vcredist_x64.exe:
+	@mkdir -p tmp/2008
+	@curl -s -o $@ -L https://download.microsoft.com/download/5/D/8/5D8C65CB-C849-4025-8E95-C3966CAFD8AE/vcredist_x64.exe
+	@file $@ | grep -q "PE32 executable" || echo "Error: bad format for binary $@"
+	@grep -q "^$$(shasum -a 256 $@)$$" checksum.txt || echo "Error: bad checksum for binary $@"
+
+tmp/2008/vcredist_x86.exe:
+	@mkdir -p tmp/2008
+	@curl -s -o $@ -L https://download.microsoft.com/download/5/D/8/5D8C65CB-C849-4025-8E95-C3966CAFD8AE/vcredist_x86.exe
+	@file $@ | grep -q "PE32 executable" || echo "Error: bad format for binary $@"
+	@grep -q "^$$(shasum -a 256 $@)$$" checksum.txt || echo "Error: bad checksum for binary $@"
 
 
 tmp/2010/vcredist_x64.exe:

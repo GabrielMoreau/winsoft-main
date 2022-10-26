@@ -12,9 +12,10 @@ This package does not install the redistributable visual C++ packages but simply
 * Silent install : https://silentinstallhq.com/visual-c-redistributable-silent-install-master-list/
 
 Last versions :
-* folder 2010 - 10.0.40219.325
-* folder 2012 - 11.0.61030.0
-* folder 2013 - 12.0.40664.0
+* folder 2008      -  9.0.30729.6161
+* folder 2010      - 10.0.40219.325
+* folder 2012      - 11.0.61030.0
+* folder 2013      - 12.0.40664.0
 * folder 2015-2019 - 14.29.30139.0
 * folder 2015-2022 - 14.32.31332.0
 
