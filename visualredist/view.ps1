@@ -9,8 +9,8 @@
 		If ($DisplayName -match 'Redistributable') {
 			$DisplayVersion = $App.DisplayVersion
 			$KeyProduct = $Key | Split-Path -Leaf
-			echo "# $DisplayName / $DisplayVersion / $KeyProduct"
+			"# {0,-66} / {1,-14} / {2}" -F $DisplayName, $DisplayVersion, $KeyProduct
 		}
-	}
+	} | Sort-Object
 
 Read-Host “Press ENTER to exit...”
