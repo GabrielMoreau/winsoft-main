@@ -26,7 +26,7 @@ wget: $(EXE)
 tmp/$(EXE):
 	@mkdir -p tmp
 	@(cd tmp ; \
-		rm -f *.exe *.msi 2>/dev/null
+		rm -f *.exe *.msi 2>/dev/null ; \
 		curl -s -o "$(EXE)" -L 'https://download.mozilla.org/?product=firefox-esr-msi-latest-ssl&os=win64&lang=fr' ; \
 		file $(EXE) | grep -q "Subject: Mozilla Firefox $(VERSION)esr" || echo "Error: bad format for binary $(EXE)" ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
