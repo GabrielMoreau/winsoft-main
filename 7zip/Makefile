@@ -29,7 +29,7 @@ tmp/$(EXE):
 	@(cd tmp ; \
 		rm -f *.exe *.msi 2>/dev/null ; \
 		curl -s -o "$(EXE)" -L "https://www.7-zip.org/a/$(EXE)" ; \
-		file $(EXE) | grep -q 'Composite Document File V2 Document, Little Endian' || echo "Error: bad format for binary $(EXE)" ; \
+		file $(EXE) | grep -q 'Composite Document File V2 Document, Little Endian.*$(VERSION)' || echo "Error: bad format for binary $(EXE)" ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
 

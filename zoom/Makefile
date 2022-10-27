@@ -34,7 +34,7 @@ tmp/$(EXE):
 	@mkdir -p tmp
 	@(cd tmp ; \
 		cmp $(INSTALLER) $(EXE) > /dev/null 2>&1 || cp -f $(INSTALLER) $(EXE) ; \
-		file $(EXE) | grep -q "Subject: Zoom Meetings" || echo "Error: bad format for binary $(EXE)" ; \
+		file $(EXE) | grep -q "Subject: Zoom Meetings.*Comments: $(VERSION)" || echo "Error: bad format for binary $(EXE)" ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
 
