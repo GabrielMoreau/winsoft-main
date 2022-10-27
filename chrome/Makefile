@@ -4,8 +4,8 @@
 #
 
 SOFT:=Chrome
-#VERSION:=$(shell curl -s -L 'https://en.wikipedia.org/wiki/Google_Chrome_version_history' | grep -A 3 'Anchor_to_the_latest_release' |grep 'background:#a0e75a;' | cut -f 2 -d '>')
-VERSION:=$(shell curl -s -L 'https://chromereleases.googleblog.com/search/label/Stable%20updates' | sed -e 's/[<>]/\n/g;' | grep '^The Stable channel has been updated to .* for Windows'  | cut -f 8 -d ' ' | grep '[[:digit:]][[:digit:]\.]' | head -1)
+#VERSION:=$(shell curl -s -L 'https://versionhistory.googleapis.com/v1/chrome/platforms/win/channels/stable/versions' | grep '"version":' | head -1 | cut -f 4 -d '"')
+VERSION:=$(shell curl -s -L https://omahaproxy.appspot.com/json | sed -e 's/{/\n/g;' | grep '"os": "win64"' | grep '"channel": "stable"' | sed -e 's/,/\n/g' | grep '"current_version":' |cut -f 4 -d'"')
 PATCH:=1
 URL:=https://dl.google.com/chrome/install/googlechromestandaloneenterprise64.msi
 
@@ -28,9 +28,9 @@ wget: tmp/$(EXE)
 tmp/$(EXE):
 	@mkdir -p tmp
 	@(cd tmp ; \
-		rm -f *.exe *.msi 2>/dev/null
+		rm -f *.exe *.msi 2>/dev/null ; \
 		curl -s -o "$(EXE)" -L "$(URL)" ; \
-		file $(EXE) | grep -q "Subject: Google Chrome Installer" || echo "Error: bad format for binary $(EXE)" ; \
+		file $(EXE) | grep -q "Subject: Google Chrome Installer.*Comments: $(VERSION) Copyright" || echo "Error: bad format for binary $(EXE)" ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
 
