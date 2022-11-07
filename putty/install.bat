@@ -23,8 +23,13 @@ SET softpatch=2
 
 
 REM Silent install
-msiexec /i putty-64bit-%softversion%-installer.msi /q
+msiexec /i putty-64bit-%softversion%-installer.msi /qn /norestart /L*v "%logdir%\%softname%-MSI.log"
 
 
 ECHO END %date%-%time%
+
+REM IF %ERRORLEVEL% EQU 1603 (
+REM   REM 0 or 1603 are good exit code for Putty MSI installer!
+REM   EXIT 0
+REM )
 EXIT
