@@ -12,6 +12,10 @@ URL2:=$(shell curl -s -L 'https://www.virtualbox.org/wiki/Downloads' | sed -e 's
 EXE1:=VirtualBox-$(VERSION)-Win.exe
 EXE2:=Oracle-VM-VirtualBox-Extension-Pack-$(VERSION).vbox-extpack
 
+VCREDIST:=
+VCREDIST+=tmp/2015-2019/vc_redist.x64.exe
+VCREDIST+=tmp/2015-2022/vc_redist.x64.exe
+
 IT_TEAM:=IT Support
 
 
@@ -51,9 +55,10 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE1) tmp/$(EXE2)
 		s/^(SET\ssoftversion=)\d[\.\d]+\w?/$${1}$(VERSION)/; \
 		s/^(SET\ssoftpatch=)\d+/$${1}$(PATCH)/;' install.bat > $@
 
-%.zip: Makefile tmp/install.bat tmp/$(EXE1) tmp/$(EXE2)
+%.zip: Makefile pre-install.ps1 tmp/install.bat tmp/$(EXE1) tmp/$(EXE2) $(VCREDIST)
 	@rm -f $@
-	@(cd tmp; zip -r ../$@ install.bat $(EXE1) $(EXE2))
+	@zip -r $@ pre-install.ps1
+	@(cd tmp; zip -r ../$@ install.bat $(EXE1) $(EXE2) 2015-2019 2015-2022)
 	@chmod ugo+rw $@
 
 ocs:
@@ -69,3 +74,29 @@ ocs:
 	@echo " --- "
 	@echo "Install and update: $(SOFT)"
 	@echo ""
+
+
+tmp/2015-2019/vc_redist.x64.exe:
+	@mkdir -p tmp/2015-2019
+	@curl -s -o $@ -L https://aka.ms/vs/16/release/vc_redist.x64.exe
+	@file $@ | grep -q "PE32 executable" || echo "Error: bad format for binary $@"
+	@grep -q "^$$(shasum -a 256 $@)$$" checksum.txt || echo "Error: bad checksum for binary $@"
+
+tmp/2015-2019/vc_redist.x86.exe:
+	@mkdir -p tmp/2015-2019
+	@curl -s -o $@ -L https://aka.ms/vs/16/release/vc_redist.x86.exe
+	@file $@ | grep -q "PE32 executable" || echo "Error: bad format for binary $@"
+	@grep -q "^$$(shasum -a 256 $@)$$" checksum.txt || echo "Error: bad checksum for binary $@"
+
+
+tmp/2015-2022/vc_redist.x64.exe:
+	@mkdir -p tmp/2015-2022
+	@curl -s -o $@ -L https://aka.ms/vs/17/release/vc_redist.x64.exe
+	@file $@ | grep -q "PE32 executable" || echo "Error: bad format for binary $@"
+	@grep -q "^$$(shasum -a 256 $@)$$" checksum.txt || echo "Error: bad checksum for binary $@"
+
+tmp/2015-2022/vc_redist.x86.exe:
+	@mkdir -p tmp/2015-2022
+	@curl -s -o $@ -L https://aka.ms/vs/17/release/vc_redist.x86.exe
+	@file $@ | grep -q "PE32 executable" || echo "Error: bad format for binary $@"
+	@grep -q "^$$(shasum -a 256 $@)$$" checksum.txt || echo "Error: bad checksum for binary $@"
