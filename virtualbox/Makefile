@@ -26,7 +26,7 @@ all: $(SOFT)-$(VERSION)-$(PATCH).zip ocs
 sinclude ../common/global.mk
 
 clean:
-	rm -rf $(SOFT)-$(VERSION)-$(PATCH).zip tmp
+	rm -rf $(SOFT)-$(VERSION)-$(PATCH).zip tmp resources
 
 wget: tmp/$(EXE1) tmp/$(EXE2)
 
