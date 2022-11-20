@@ -1,9 +1,9 @@
 
 #
-# VisualCPPRedistribuable
+# VisualCPPRedistributable
 #
 
-SOFT:=VisualCPPRedistribuable
+SOFT:=VisualCPPRedistributable
 VERSION:=1.0
 PATCH:=1
 

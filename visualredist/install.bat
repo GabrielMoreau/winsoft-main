@@ -1,11 +1,11 @@
 REM @ECHO OFF
 
 REM
-REM   VisualCPPRedistribuable
+REM   VisualCPPRedistributable
 REM
 
 REM Name
-SET softname=VisualCPPRedistribuable
+SET softname=VisualCPPRedistributable
 
 SET logdir=%ProgramData%\OCS Inventory NG\Agent\DeployLog
 IF NOT EXIST "%logdir%" (
