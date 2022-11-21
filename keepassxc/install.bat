@@ -20,7 +20,7 @@ ECHO BEGIN %date%-%time%
 
 SET softversion=2.7.1
 SET softpatch=1
-SET process=firefox.exe
+SET process=KeepassXC.exe
 
 
 REM Kill the current process
