@@ -13,7 +13,10 @@ build-all:
 	do \
 		echo '' ; \
 		echo "#=== $$d ===#" ; \
-		(cd $$d; make) \
+		(cd $$d; \
+			make > .make.log 2>&1; \
+			find . -name '*.zip' -a -mtime -1 -exec cat .make.log \; \
+		) \
 	done
 	@echo ''
 	@echo '#=== Summary: packages created on this last day ===#'
@@ -24,23 +27,24 @@ clean-all:
 	do \
 		echo '' ; \
 		echo "#=== $$d ===#" ; \
-		(cd $$d; make clean) \
+		(cd $$d; make clean; rm -f .make.log) \
 	done
 
 list-pkg:
 	@for d in $(PKGDIR) ; \
 	do \
-		(cd $$d ; \
-		echo '' ; \
-		echo "#=== $$d ===#" ; \
-		unzip -t *.zip ; \
+		(cd $$d; \
+			echo ''; \
+			echo "#=== $$d ===#"; \
+			unzip -t *.zip; \
 		) \
 	done
 
 space:
 	@for d in $(PKGDIR) ; \
 	do \
-		(cd $$d ; \
-		ls -t *.zip | tail -n +$(KEEP) | xargs -r rm -f ; \
+		(cd $$d; \
+			ls -t *.zip | tail -n +$(KEEP) | xargs -r rm -f; \
+			rm -f .make.log; \
 		) \
 	done
