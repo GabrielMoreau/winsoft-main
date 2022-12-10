@@ -6,14 +6,14 @@
 SOFT:=Audacity
 VERSION:=$(shell curl -s -L 'https://www.audacityteam.org/download/windows/' | grep 'Current Version:' | sed -e 's/[[:space:]<]/:/g;' | cut -f 5 -d ':')
 PATCH:=1
-URL:=$(shell curl -s -L 'https://www.audacityteam.org/download/windows/' | sed -e 's/"/\n/g;' | egrep '/audacity-win-.*-64bit.exe' | head -1)
+URL:=$(shell curl -s -L 'https://www.audacityteam.org/download/windows/' | sed -e 's/"/\n/g;' | egrep '/audacity-win-.*-x64.exe' | head -1)
 
-EXE:=audacity-win-$(VERSION)-64bit.exe
+EXE:=audacity-win-$(VERSION)-x64.exe
 
 IT_TEAM:=IT Support
 
 
-.PHONY: all ocs clean wget
+.PHONY: all version ocs clean wget
 
 all: $(SOFT)-$(VERSION)-$(PATCH).zip ocs
 
@@ -21,6 +21,11 @@ sinclude ../common/global.mk
 
 clean:
 	rm -rf $(SOFT)-$(VERSION)-$(PATCH).zip tmp
+
+version:
+	@echo "VERSION: $(VERSION)"
+	@echo "URL: $(URL)"
+	@echo "EXE: $(EXE)"
 
 wget: tmp/$(EXE)
 
@@ -30,6 +35,7 @@ tmp/$(EXE):
 		rm -f *.exe *.msi 2>/dev/null ; \
 		curl -s -o "$(EXE)" -L "$(URL)" ; \
 		file $(EXE) | grep -q "PE32 executable" || echo "Error: bad format for binary $(EXE)" ; \
+		which peres >/dev/null && { peres -a $(EXE) | grep -q "^Product Version:[[:space:]]*$(VERSION)" || echo "Error: bad version for binary $(EXE)" ; } ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
 

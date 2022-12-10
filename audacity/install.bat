@@ -22,7 +22,7 @@ SET softversion=91.5.1
 SET softpatch=1
 
 REM Silent install
-audacity-win-%softversion%-64bit.exe /TASKS="!desktopicon,!resetprefs" /VERYSILENT /NORESTART /LOG="%logdir%\%softname%-MSI.log" 
+audacity-win-%softversion%-x64.exe /TASKS="!desktopicon,!resetprefs" /VERYSILENT /NORESTART /LOG="%logdir%\%softname%-MSI.log" 
 
 
 ECHO END %date%-%time%
