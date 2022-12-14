@@ -5,6 +5,10 @@
 		"uBlock0@raymondhill.net": {
         "installation_mode": "force_installed",
         "install_url": "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi"
+      },
+    "f-secure": {
+        "installation_mode": "force_installed",
+        "install_url": "https://download.sp.f-secure.com/online-safety/fs_firefox_https.xpi"
       }
     }
   }
