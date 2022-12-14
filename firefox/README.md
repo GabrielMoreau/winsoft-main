@@ -29,3 +29,5 @@ Ces données sont utilisées pour :
 Si vous refusez que nous collections ces données, la Protection de la navigation par F-Secure ne peut pas bloquer les sites dangereux, protéger vos activités bancaires en ligne, ni afficher les évaluations des résultats de recherche.
 Pour plus d'informations sur les données que nous collectons et leur usage, consultez notre Politique de confidentialité.
 ```
+
+Nous pouvons choisir ```normal_installed``` pour laisser l'utilisateur choisir ou non d'accepter l'extension ou ```blocked``` pour empêcher son installation.

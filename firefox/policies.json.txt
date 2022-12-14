@@ -9,6 +9,10 @@
         "ols@f-secure.com": {
           "installation_mode": "normal_installed",
           "install_url": "https://download.sp.f-secure.com/online-safety/fs_firefox_https.xpi"
+        },
+        "ols@f-secure.com": {
+          "installation_mode": "blocked",
+          "install_url": "https://download.sp.f-secure.com/online-safety/fs_firefox_https.xpi"
         }
     }
   }
