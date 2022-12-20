@@ -13,7 +13,7 @@ EXE:=putty-64bit-$(VERSION)-installer.msi
 IT_TEAM:=IT Support
 
 
-.PHONY: all ocs clean wget
+.PHONY: all ocs clean version wget
 
 all: $(SOFT)-$(VERSION)-$(PATCH).zip ocs
 
@@ -21,6 +21,11 @@ sinclude ../common/global.mk
 
 clean:
 	rm -rf $(SOFT)-$(VERSION)-$(PATCH).zip tmp
+
+version:
+	@echo "VERSION: $(VERSION)"
+	@echo "URL: $(URL)"
+	@echo "EXE: $(EXE)"
 
 wget: tmp/$(EXE)
 
