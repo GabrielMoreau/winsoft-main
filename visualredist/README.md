@@ -34,4 +34,5 @@ Example of package on a computer
 # Microsoft VC++ redistributables repacked.                          / 12.0.0.0       / {F0C8928A-BF8F-4AAF-B8BF-9CE865DBC711}
 # Microsoft Visual C++ 2015-2019 Redistributable (x86) - 14.29.30139 / 14.29.30139.0  / {8d5fdf81-7022-423f-bd8b-b513a1050ae1}
 # Microsoft Visual C++ 2015-2022 Redistributable (x64) - 14.31.31103 / 14.31.31103.0  / {2aaf1df0-eb13-4099-9992-962bb4e596d1}
+# Microsoft Visual C++ 2017 Redistributable (x64) - 14.14.26429      / 14.14.26429.4
 ```
