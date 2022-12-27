@@ -19,11 +19,14 @@ VCREDIST+=tmp/2015-2022/vc_redist.x64.exe
 IT_TEAM:=IT Support
 
 
-.PHONY: all ocs clean wget
+.PHONY: all check-version ocs clean wget
 
-all: $(SOFT)-$(VERSION)-$(PATCH).zip ocs
+all: check-version $(SOFT)-$(VERSION)-$(PATCH).zip ocs
 
 sinclude ../common/global.mk
+
+check-version:
+	echo $(VERSION) | egrep '^[[:digit:]][\.[:digit:]]*$' || $(error VERSION is undefined)
 
 clean:
 	rm -rf $(SOFT)-$(VERSION)-$(PATCH).zip tmp resources

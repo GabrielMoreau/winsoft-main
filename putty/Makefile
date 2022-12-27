@@ -13,11 +13,14 @@ EXE:=putty-64bit-$(VERSION)-installer.msi
 IT_TEAM:=IT Support
 
 
-.PHONY: all ocs clean version wget
+.PHONY: all check-version ocs clean version wget
 
-all: $(SOFT)-$(VERSION)-$(PATCH).zip ocs
+all: check-version $(SOFT)-$(VERSION)-$(PATCH).zip ocs
 
 sinclude ../common/global.mk
+
+check-version:
+	echo $(VERSION) | egrep '^[[:digit:]][\.[:digit:]]*$' || $(error VERSION is undefined)
 
 clean:
 	rm -rf $(SOFT)-$(VERSION)-$(PATCH).zip tmp

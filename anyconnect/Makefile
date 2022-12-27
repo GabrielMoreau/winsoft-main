@@ -12,11 +12,14 @@ EXE:=anyconnect-win-$(VERSION)-core-vpn-webdeploy-k9.msi
 IT_TEAM:=IT Support
 
 
-.PHONY: all control ocs clean wget
+.PHONY: all check-version control ocs clean wget
 
-all: control $(SOFT)-$(VERSION)-$(PATCH).zip ocs
+all: check-version control $(SOFT)-$(VERSION)-$(PATCH).zip ocs
 
 sinclude ../common/global.mk
+
+check-version:
+	echo $(VERSION) | egrep '^[[:digit:]][\.[:digit:]]*$' || $(error VERSION is undefined)
 
 clean:
 	rm -rf $(SOFT)-$(VERSION)-$(PATCH).zip tmp

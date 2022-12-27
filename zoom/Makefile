@@ -15,7 +15,7 @@ EXE:=ZoomInstallerFull-$(VERSION).msi
 IT_TEAM:=IT Support
 
 
-.PHONY: all next ocs clean
+.PHONY: all check-version next ocs clean
 
 all:
 	@mkdir -p tmp
@@ -25,7 +25,10 @@ all:
 
 sinclude ../common/global.mk
 
-next: $(SOFT)-$(VERSION)-$(PATCH).zip ocs
+check-version:
+	echo $(VERSION) | egrep '^[[:digit:]][\.[:digit:]]*$' || $(error VERSION is undefined)
+
+next: check-version $(SOFT)-$(VERSION)-$(PATCH).zip ocs
 
 clean:
 	rm -rf $(SOFT)-$(VERSION)-$(PATCH).zip tmp

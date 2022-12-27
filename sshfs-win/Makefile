@@ -16,11 +16,14 @@ PATCH:=$(PkgVersion)
 IT_TEAM:=IT Support
 
 
-.PHONY: all clean wget version ocs
+.PHONY: all check-version clean wget version ocs
 
-all: $(SOFT)-$(VERSION)-$(PATCH).zip ocs
+all: check-version $(SOFT)-$(VERSION)-$(PATCH).zip ocs
 
 sinclude ../common/global.mk
+
+check-version:
+	echo $(VERSION) | egrep '^[[:digit:]][\.[:digit:]]*$' || $(error VERSION is undefined)
 
 $(SOFT)-$(VERSION)-$(PATCH).zip: ../../winsoft-conf/sshfs-win/conf.yml install.bat install.ps1 tmp/sshfs-win-connect.ps1 sshfs-win.ico README.md winfsp-$(WinfspVersion).msi sshfs-win-$(SshfsVersion)-x64.msi
 	@zip -r $@ install.bat install.ps1 sshfs-win.ico README.md winfsp-$(WinfspVersion).msi sshfs-win-$(SshfsVersion)-x64.msi
