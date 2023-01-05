@@ -3,7 +3,7 @@
 #
 
 SOFT:=KeepassXC
-VERSION:=curl -s -L 'https://github.com/keepassxreboot/keepassxc/releases/latest' | sed -e 's/[[:space:]]/\n/g;' | grep 'href="/keepassxreboot/keepassxc/releases/tag/' | cut -f 6 -d '/' sed 's/.$//'
+VERSION:=$(shell curl -s -L 'https://github.com/keepassxreboot/keepassxc/releases/latest' | sed -e 's/[[:space:]]/\n/g;' | grep 'href="/keepassxreboot/keepassxc/releases/tag/' | cut -f 6 -d '/' | cut -f 1 -d '"')
 PATCH:=1
 
 EXE:=KeePassXC-$(VERSION)-Win64.msi
