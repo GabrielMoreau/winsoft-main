@@ -11,14 +11,12 @@ EXE:=KeePassXC-$(VERSION)-Win64.msi
 IT_TEAM:=IT Support
 
 
-.PHONY: all check-version ocs clean wget
+.PHONY: all ocs clean wget
 
-all: check-version $(SOFT)-$(VERSION)-$(PATCH).zip ocs
+all: $(SOFT)-$(VERSION)-$(PATCH).zip ocs
 
 sinclude ../common/global.mk
 
-check-version:
-	echo $(VERSION) | egrep '^[[:digit:]][\.[:digit:]]*$' || $(error VERSION is undefined)
 
 clean:
 	rm -rf $(SOFT)-$(VERSION)-$(PATCH).zip tmp
