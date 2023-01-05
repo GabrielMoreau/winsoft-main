@@ -3,7 +3,7 @@
 #
 
 SOFT:=KeepassXC
-VERSION:=2.7.1
+VERSION:=curl -s -L 'https://github.com/keepassxreboot/keepassxc/releases/latest' | sed -e 's/[[:space:]]/\n/g;' | grep 'href="/keepassxreboot/keepassxc/releases/tag/' | cut -f 6 -d '/' sed 's/.$//'
 PATCH:=1
 
 EXE:=KeePassXC-$(VERSION)-Win64.msi
@@ -30,7 +30,7 @@ tmp/$(EXE):
 	@(cd tmp ; \
 		rm -f *.exe *.msi 2>/dev/null ; \
 		curl -s -o "$(EXE)" -L 'https://github.com/keepassxreboot/keepassxc/releases/download/$(VERSION)/KeePassXC-$(VERSION)-Win64.msi' ; \
- 		curl -s -o "checksum.txt" -L 'https://github.com/keepassxreboot/keepassxc/releases/download/$(VERSION)/KeePassXC-$(VERSION)-Win64.msi.DIGEST' ; \       
+ 		curl -s -o "checksum.txt" -L 'https://github.com/keepassxreboot/keepassxc/releases/download/$(VERSION)/KeePassXC-$(VERSION)-Win64.msi.DIGEST' ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
 
