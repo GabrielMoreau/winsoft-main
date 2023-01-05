@@ -26,7 +26,7 @@ all:
 sinclude ../common/global.mk
 
 check-version:
-	echo $(VERSION) | egrep '^[[:digit:]][\.[:digit:]]*$' || $(error VERSION is undefined)
+	@echo $(VERSION) | egrep -q '^[[:digit:]][\.[:digit:]]*$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
 
 next: check-version $(SOFT)-$(VERSION)-$(PATCH).zip ocs
 

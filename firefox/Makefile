@@ -12,17 +12,22 @@ EXE:=Firefox-Setup-$(VERSION)esr.msi
 IT_TEAM:=IT Support
 
 
-.PHONY: all check-version ocs clean wget
+.PHONY: all check-version version ocs clean wget
 
 all: check-version $(SOFT)-$(VERSION)-$(PATCH).zip ocs
 
 sinclude ../common/global.mk
 
 check-version:
-	echo $(VERSION) | egrep '^[[:digit:]][\.[:digit:]]*$' || $(error VERSION is undefined)
+	@echo $(VERSION) | egrep -q '^[[:digit:]][\.[:digit:]]*$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
 
 clean:
 	rm -rf $(SOFT)-$(VERSION)-$(PATCH).zip tmp
+
+version:
+	@echo "VERSION: $(VERSION)"
+	@echo "URL: $(URL)"
+	@echo "EXE: $(EXE)"
 
 wget: $(EXE)
 

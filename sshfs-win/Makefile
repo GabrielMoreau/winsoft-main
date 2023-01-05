@@ -23,7 +23,7 @@ all: check-version $(SOFT)-$(VERSION)-$(PATCH).zip ocs
 sinclude ../common/global.mk
 
 check-version:
-	echo $(VERSION) | egrep '^[[:digit:]][\.[:digit:]]*$' || $(error VERSION is undefined)
+	@echo $(VERSION) | egrep -q '^[[:digit:]][\.[:digit:]]*$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
 
 $(SOFT)-$(VERSION)-$(PATCH).zip: ../../winsoft-conf/sshfs-win/conf.yml install.bat install.ps1 tmp/sshfs-win-connect.ps1 sshfs-win.ico README.md winfsp-$(WinfspVersion).msi sshfs-win-$(SshfsVersion)-x64.msi
 	@zip -r $@ install.bat install.ps1 sshfs-win.ico README.md winfsp-$(WinfspVersion).msi sshfs-win-$(SshfsVersion)-x64.msi
