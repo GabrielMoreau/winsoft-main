@@ -22,6 +22,20 @@ SET softversion=91.5.1
 SET softpatch=1
 
 
+REM PowerShell
+SET pwrsh=%WINDIR%\System32\WindowsPowerShell\V1.0\powershell.exe
+IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET pwrsh=%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe
+
+REM Add rights
+%pwrsh% Set-ExecutionPolicy RemoteSigned -Force -Scope LocalMachine
+
+REM Unblock
+%pwrsh% "Unblock-File -Path .\*.ps1"
+
+REM Execute
+%pwrsh% -File ".\pre-install.ps1"
+
+
 REM Silent install
 VirtualBox-%softversion%-Win.exe --silent --ignore-reboot
 
