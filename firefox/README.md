@@ -8,6 +8,20 @@ Firefox is a free and open-source web browser developed by the Mozilla Foundatio
 * Download ESR : https://www.mozilla.org/fr/firefox/enterprise/#download
 * Policies templates : https://github.com/mozilla/policy-templates/releases
 
+Policies can be specified by creating a file called policies.json.
+See also: https://github.com/mozilla/policy-templates
+
+For extension, you need to know the ID.
+On method for example is to do
+```bash
+wget  -q https://addons.mozilla.org/firefox/downloads/latest/cookie-autodelete/latest.xpi
+unzip -p latest.xpi manifest.json | grep 'id.:' ; rm latest.xpi
+```
+It's possible to validate the `policies.json` file with
+```bash
+cat policies.json | jq empty
+```
+
 ## Extension F-secure
 
 * https://help.f-secure.com/product.html#business/psb-portal/latest/en/task_DEB5ED2F1918438592921906DA2685F2-psb-portal-latest-en

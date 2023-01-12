@@ -5,9 +5,10 @@
 
 SOFT:=FirefoxESR
 VERSION:=$(shell curl -s -L 'https://www.mozilla.org/fr/firefox/organizations/notes/' | sed -e 's/[[:space:]]/\n/g;' | grep 'data-esr-versions' | cut -f 2 -d '"')
-PATCH:=1
+URL:=https://download.mozilla.org/?product=firefox-esr-msi-latest-ssl&os=win64&lang=fr
+PATCH:=4
 
-EXE:=Firefox-Setup-$(VERSION)esr.msi
+EXE:=Firefox-Setup-$(VERSION)-esr.msi
 
 IT_TEAM:=IT Support
 
@@ -35,7 +36,7 @@ tmp/$(EXE):
 	@mkdir -p tmp
 	@(cd tmp ; \
 		rm -f *.exe *.msi 2>/dev/null ; \
-		curl -s -o "$(EXE)" -L 'https://download.mozilla.org/?product=firefox-esr-msi-latest-ssl&os=win64&lang=fr' ; \
+		curl -s -o "$(EXE)" -L "$(URL)" ; \
 		file $(EXE) | grep -q "Subject: Mozilla Firefox $(VERSION)esr" || echo "Error: bad format for binary $(EXE)" ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)

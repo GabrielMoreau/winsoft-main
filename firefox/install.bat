@@ -32,20 +32,14 @@ IF %ERRORLEVEL%==0 TASKKILL /T /F /IM %process%
 
 
 REM Silent install
-REM "Firefox Setup %softversion%esr.exe" -ms
-msiexec /i "Firefox-Setup-%softversion%esr.msi" INSTALL_MAINTENANCE_SERVICE=false /q
+msiexec /i "Firefox-Setup-%softversion%-esr.msi" INSTALL_MAINTENANCE_SERVICE=false /q
 
 
 REM voir https://github.com/mozilla/policy-templates/blob/master/README.md
-IF NOT EXIST "C:\Program Files\Mozilla Firefox\distribution" MKDIR "C:\Program Files\Mozilla Firefox\distribution"
-IF EXIST "C:\Program Files\Mozilla Firefox\distribution" COPY /y policies.json "C:\Program Files\Mozilla Firefox\distribution\policies.json" > NUL
-
-
-REM IF EXIST "C:\Program Files (x86)\Mozilla Firefox\" COPY /y local-settings.js "C:\Program Files (x86)\Mozilla Firefox\defaults\pref" > NUL
-REM IF EXIST "C:\Program Files (x86)\Mozilla Firefox\" COPY /y mozilla.cfg "C:\Program Files (x86)\Mozilla Firefox\mozilla.cfg" > NUL
-
-REM IF EXIST "C:\Program Files\Mozilla Firefox\" COPY /y local-settings.js "C:\Program Files\Mozilla Firefox\defaults\pref" > NUL
-REM IF EXIST "C:\Program Files\Mozilla Firefox\" COPY /y mozilla.cfg "C:\Program Files\Mozilla Firefox\mozilla.cfg" > NUL
+IF EXIST "C:\Program Files\Mozilla Firefox" (
+  IF NOT EXIST "C:\Program Files\Mozilla Firefox\distribution" MKDIR "C:\Program Files\Mozilla Firefox\distribution"
+  IF EXIST "C:\Program Files\Mozilla Firefox\distribution" COPY /y policies.json "C:\Program Files\Mozilla Firefox\distribution\policies.json" > NUL
+)
 
 
 ECHO END %date%-%time%

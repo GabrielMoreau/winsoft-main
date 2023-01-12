@@ -1,19 +1,52 @@
 {
   "policies": {
-    "DisableAppUpdate": true,
+    "DontCheckDefaultBrowser": true, 
+    "AppAutoUpdate": false,
+    "ExtensionUpdate": true,
     "ExtensionSettings": {
       "uBlock0@raymondhill.net": {
         "installation_mode": "force_installed",
         "install_url": "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi"
       },
-      "cookie-autodelete@firefox.mozilla.org": {
+      "CookieAutoDelete@kennydo.com": {
         "installation_mode": "force_installed",
         "install_url": "https://addons.mozilla.org/firefox/downloads/latest/cookie-autodelete/latest.xpi"
       },
-      "keepassxc-browser@firefox.mozilla.org": {
+      "keepassxc-browser@keepassxc.org": {
         "installation_mode": "normal_installed",
         "install_url": "https://addons.mozilla.org/firefox/downloads/latest/keepassxc-browser/latest.xpi"
+      },
+      "French-GC@grammalecte.net": {
+        "installation_mode": "force_installed",
+        "install_url": "https://addons.mozilla.org/firefox/downloads/latest/grammalecte-fr/latest.xpi"
       }
+    },
+    "SearchEngines": {
+      "Add": [
+        {
+          "Name": "DuckDuckGo-FR",
+          "URLTemplate": "https://duckduckgo.com/?q={searchTerms}&kl=fr-fr",
+          "Method": "GET",
+          "IconURL": "https://duckduckgo.com/favicon.ico",
+          "Alias": "ddg-fr",
+          "Description": "Recommanded search engine"
+        }
+      ],
+      "Remove": ["Amazon.fr", "eBay"],
+      "Default": "Google"
+    },
+    "DNSOverHTTPS": {
+      "Enabled": false,
+      "ProviderURL": "",
+      "Locked": true
+    },
+    "UserMessaging": {
+      "WhatsNew": false,
+      "ExtensionRecommendations": false,
+      "FeatureRecommendations": false,
+      "UrlbarInterventions": false,
+      "SkipOnboarding": true,
+      "MoreFromMozilla": false
     }
   }
 }
