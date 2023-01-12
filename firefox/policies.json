@@ -1,5 +1,6 @@
 {
   "policies": {
+    "PrimaryPassword": true,
     "DontCheckDefaultBrowser": true, 
     "AppAutoUpdate": false,
     "ExtensionUpdate": true,
