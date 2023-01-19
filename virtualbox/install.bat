@@ -20,7 +20,7 @@ ECHO BEGIN %date%-%time%
 
 SET softversion=91.5.1
 SET softpatch=1
-
+SET softextpack=Oracle-VM-VirtualBox-Extension-Pack-91.5.1.vbox-extpack
 
 REM PowerShell
 SET pwrsh=%WINDIR%\System32\WindowsPowerShell\V1.0\powershell.exe
@@ -37,10 +37,20 @@ REM Execute
 
 
 REM Silent install
-VirtualBox-%softversion%-Win.exe --silent --ignore-reboot
+VirtualBox-%softversion%-Win.exe --silent --extract --path .\
+FOR %%m IN (*.msi) DO (msiexec /i "%%m" /qn /norestart /L*v "%logdir%\%softname%-MSI.log")
+
 
 IF EXIST "%ProgramFiles%\Oracle\VirtualBox\VBoxManage.exe" (
-  echo y | "%ProgramFiles%\Oracle\VirtualBox\VBoxManage.exe" extpack install --replace ".\Oracle-VM-VirtualBox-Extension-Pack-%softversion%.vbox-extpack"
+  REM Disable VirtualBox Update
+  "%ProgramFiles%\Oracle\VirtualBox\VBoxManage.exe" setextradata global GUI/UpdateDate "never"
+
+  REM Install Extension Pack
+  echo y | "%ProgramFiles%\Oracle\VirtualBox\VBoxManage.exe" extpack install --replace ".\%softextpack%"
+) ELSE (
+  REM VirtualBox not well installed
+  ECHO VBoxManage is not installed, reinstall VirtualBox...
+  EXIT 44
 )
 
 

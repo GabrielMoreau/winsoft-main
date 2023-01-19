@@ -10,7 +10,7 @@ URL1:=$(shell curl -s -L 'https://www.virtualbox.org/wiki/Downloads' | sed -e 's
 URL2:=$(shell curl -s -L 'https://www.virtualbox.org/wiki/Downloads' | sed -e 's/[<>"]/\n/g;' | grep "/$(VERSION)/Oracle_VM_VirtualBox_Extension")
 
 EXE1:=VirtualBox-$(VERSION)-Win.exe
-EXE2:=Oracle-VM-VirtualBox-Extension-Pack-$(VERSION).vbox-extpack
+EXE2:=$(shell basename $(URL2))
 
 VCREDIST:=
 VCREDIST+=tmp/2015-2019/vc_redist.x64.exe
@@ -19,7 +19,7 @@ VCREDIST+=tmp/2015-2022/vc_redist.x64.exe
 IT_TEAM:=IT Support
 
 
-.PHONY: all check-version ocs clean wget
+.PHONY: all check-version ocs clean version wget
 
 all: check-version $(SOFT)-$(VERSION)-$(PATCH).zip ocs
 
@@ -30,6 +30,13 @@ check-version:
 
 clean:
 	rm -rf $(SOFT)-$(VERSION)-$(PATCH).zip tmp resources
+
+version:
+	@echo "VERSION: $(VERSION)"
+	@echo "URL1: $(URL1)"
+	@echo "EXE1: $(EXE1)"
+	@echo "URL2: $(URL2)"
+	@echo "EXE2: $(EXE2)"
 
 wget: tmp/$(EXE1) tmp/$(EXE2)
 
@@ -56,7 +63,8 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE1) tmp/$(EXE2)
 	@mkdir -p tmp
 	@perl -p -e ' \
 		s/^(SET\ssoftversion=)\d[\.\d]+\w?/$${1}$(VERSION)/; \
-		s/^(SET\ssoftpatch=)\d+/$${1}$(PATCH)/;' install.bat > $@
+		s/^(SET\ssoftpatch=)\d+/$${1}$(PATCH)/; \
+		s/^(SET\ssoftextpack=).+/$${1}$(EXE2)/;' install.bat > $@
 
 %.zip: Makefile pre-install.ps1 tmp/install.bat tmp/$(EXE1) tmp/$(EXE2) $(VCREDIST)
 	@rm -f $@
