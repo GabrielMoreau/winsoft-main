@@ -1,5 +1,6 @@
 {
   "policies": {
+    "PrimaryPassword": true,
     "DisableAppUpdate": true
   }
 }
