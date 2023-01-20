@@ -14,7 +14,7 @@ EXE:=FileZilla_$(VERSION)_win64-setup.exe
 IT_TEAM:=IT Support
 
 
-.PHONY: all check-version ocs clean wget
+.PHONY: all check-version ocs clean version wget
 
 all: check-version $(SOFT)-$(VERSION)-$(PATCH).zip ocs
 
@@ -25,6 +25,11 @@ check-version:
 
 clean:
 	rm -rf $(SOFT)-$(VERSION)-$(PATCH).zip $(EXE) tmp
+
+version:
+	@echo "VERSION: $(VERSION)"
+	@echo "URL: $(URL)"
+	@echo "EXE: $(EXE)"
 
 wget: tmp/$(EXE)
 
