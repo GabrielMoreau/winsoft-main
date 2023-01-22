@@ -43,7 +43,7 @@ If ($ToDo -eq 'install-2019') {
 	$Args = '/install /quiet /norestart'
 	If (Test-Path -Path "$Exe") {
 		Write-Output "Update Microsoft Visual C++ 2015-2019 (x64) redistributable"
-		Start-Process -FilePath "$Exe" -ArgumentList "$Args" -WindowStyle 'Hidden' -ErrorAction 'SilentlyContinue'
+		Start-Process -FilePath "$Exe" -ArgumentList "$Args" -WindowStyle 'Hidden' -ErrorAction 'SilentlyContinue' -Wait
 	}
 }
 
@@ -52,7 +52,7 @@ ElseIf ($ToDo -eq 'install-2022') {
 	$Args = '/install /quiet /norestart'
 	If (Test-Path -Path "$Exe") {
 		Write-Output "Update Microsoft Visual C++ 2015-2022 (x64) redistributable"
-		Start-Process -FilePath "$Exe" -ArgumentList "$Args" -WindowStyle 'Hidden' -ErrorAction 'SilentlyContinue'
+		Start-Process -FilePath "$Exe" -ArgumentList "$Args" -WindowStyle 'Hidden' -ErrorAction 'SilentlyContinue' -Wait
 	}
 }
 
