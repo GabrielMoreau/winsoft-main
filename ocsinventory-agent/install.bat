@@ -24,7 +24,13 @@ SET ocsserver=ocs-server.example.com
 SET ocsssl=1
 
 REM Silent install
-OCS-Windows-Agent-Setup-%softversion%-x64.exe /S /NOSPLASH /UPGRADE /NP /DEBUG /NOW /SSL=%ocsssl% /DEBUG=1 /SERVER=%ocsserver%
+OCS-Windows-Agent-Setup-%softversion%-x64.exe /S /NOSPLASH /UPGRADE /NP /DEBUG=1 /SSL=%ocsssl% /SERVER=%ocsserver% /PROXY_TYPE=0
+
+REM Wait
+ping 127.0.0.1 -n 30 > NUL
+
+REM Install again
+OCS-Windows-Agent-Setup-%softversion%-x64.exe /S /NOSPLASH /UPGRADE /NP /DEBUG=1 /SSL=%ocsssl% /SERVER=%ocsserver% /PROXY_TYPE=0 /NOW
 
 
 ECHO END %date%-%time%
