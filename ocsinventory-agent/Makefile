@@ -41,6 +41,7 @@ tmp/$(EXE):
 		rm -f *.exe *.msi 2>/dev/null ; \
 		curl -s -o "$(FOLDER).zip" -L "$(URL)" ; \
 		unzip -q "$(FOLDER).zip" ; \
+		rm -f "$(FOLDER).zip" ; \
 		mv -f "$(FOLDER)/OCS-Windows-Agent-Setup-x64.exe" "$(EXE)"; \
 		file $(EXE) | grep -q "Nullsoft Installer self-extracting archive" || echo "Error: bad format for binary $(EXE)" ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
@@ -48,7 +49,7 @@ tmp/$(EXE):
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
-	perl -p -e ' \
+	@perl -p -e ' \
 		s/^(SET\ssoftversion=)\d[\.\d]+\w?/$${1}$(VERSION)/; \
 		s/^(SET\ssoftpatch=)\d+/$${1}$(PATCH)/; \
 		s#^(SET\socsserver=).*#$${1}$(OCS_SERVER)#; \
