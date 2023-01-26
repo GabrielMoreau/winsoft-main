@@ -43,9 +43,9 @@ IF %LOOPCOUNT% GEQ 31 (
 )
 ECHO Loop counter: %LOOPCOUNT%
 ping 127.0.0.1 -n 6 > NUL
-reg query "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\%regkey%"
+REG QUERY "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\%regkey%"
 IF %ERRORLEVEL% EQU 0 GOTO WAIT
-reg query "HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\%regkey%"
+REG QUERY "HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\%regkey%"
 IF %ERRORLEVEL% EQU 0 GOTO WAIT
 ping 127.0.0.1 -n 3 > NUL
 
