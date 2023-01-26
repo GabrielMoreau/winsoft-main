@@ -26,6 +26,18 @@ REM Silent install
 msiexec /i putty-64bit-%softversion%-installer.msi /qn /norestart /L*v "%logdir%\%softname%-MSI.log"
 
 
+REM Clean register
+REM Putty version 0.78
+REG QUERY "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{4EEF2644-700F-46F8-9655-915145248986}"
+IF %ERRORLEVEL% EQU 0 (
+  REM Putty version 0.77
+  REG QUERY "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{E078C644-A120-4668-AD62-02E9FD530190}"
+  IF %ERRORLEVEL% EQU 0 (
+    REM Delete old key
+    REG DELETE "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{E078C644-A120-4668-AD62-02E9FD530190}" /VA /F
+  )
+)
+
 ECHO END %date%-%time%
 
 REM IF %ERRORLEVEL% EQU 1603 (
