@@ -23,14 +23,28 @@ SET softpatch=1
 SET ocsserver=ocs-server.example.com
 SET ocsssl=1
 
-REM Silent install
-OCS-Windows-Agent-Setup-%softversion%-x64.exe /S /NOSPLASH /UPGRADE /NP /DEBUG=1 /SSL=%ocsssl% /SERVER=%ocsserver% /PROXY_TYPE=0
+REM Stop OCS service
+SET servicename=OCS Inventory Service
+SC QUERYEX "%servicename%" | FIND "STATE" | FIND "RUNNING" >NUL && (
+  ECHO %servicename% is running, stop it
+  NET STOP  "OCS Inventory Service"
+)
+SC QUERYEX "%servicename%" | FIND "STATE"
 
-REM Wait
-ping 127.0.0.1 -n 30 > NUL
+REM Kill process
+TASKKILL /T /F /IM OcsSystray.exe
+TASKKILL /T /F /IM OcsService.exe
+TASKKILL /T /F /IM OcsInventory.exe
+TASKKILL /T /F /IM download.exe
+TASKKILL /T /F /IM inst32.exe
+
 
 REM Install again
 OCS-Windows-Agent-Setup-%softversion%-x64.exe /S /NOSPLASH /UPGRADE /NP /DEBUG=1 /SSL=%ocsssl% /SERVER=%ocsserver% /PROXY_TYPE=0 /NOW
+
+
+REM Start service
+REM NET START  "OCS Inventory Service"
 
 
 ECHO END %date%-%time%
