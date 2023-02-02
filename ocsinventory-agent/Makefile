@@ -55,8 +55,17 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 		s#^(SET\socsserver=).*#$${1}$(OCS_SERVER)#; \
 		s/^(SET\socsssl=)\d/$${1}$(OCS_SSL)/;' install.bat > $@
 
-%.zip: Makefile tmp/install.bat tmp/$(EXE)
+tmp/post-install.bat: post-install.bat Makefile tmp/$(EXE)
+	@mkdir -p tmp
+	@perl -p -e ' \
+		s/^(SET\ssoftversion=)\d[\.\d]+\w?/$${1}$(VERSION)/; \
+		s/^(SET\ssoftpatch=)\d+/$${1}$(PATCH)/; \
+		s#^(SET\socsserver=).*#$${1}$(OCS_SERVER)#; \
+		s/^(SET\socsssl=)\d/$${1}$(OCS_SSL)/;' post-install.bat > $@
+
+%.zip: Makefile set-task.ps1 tmp/install.bat tmp/post-install.bat tmp/$(EXE)
 	@rm -f $@
+	@zip -r $@ set-task.ps1
 	@(cd tmp; zip -r ../$@ install.bat $(EXE))
 	@chmod ugo+rw $@
 

@@ -20,31 +20,31 @@ ECHO BEGIN %date%-%time%
 
 SET softversion=91.5.1
 SET softpatch=1
-SET ocsserver=ocs-server.example.com
-SET ocsssl=1
 
-REM Stop OCS service
-SET servicename=OCS Inventory Service
-SC QUERYEX "%servicename%" | FIND "STATE" | FIND "RUNNING" >NUL && (
-  ECHO %servicename% is running, stop it
-  NET STOP  "OCS Inventory Service"
+SET pwrsh=%WINDIR%\System32\WindowsPowerShell\V1.0\powershell.exe
+IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET pwrsh=%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe
+
+
+REM Create folder
+IF NOT EXIST "%ProgramData%\OCS Inventory NG" (
+  MKDIR "%ProgramData%\OCS Inventory NG"
 )
-SC QUERYEX "%servicename%" | FIND "STATE"
+IF NOT EXIST "%ProgramData%\OCS Inventory NG\DelayedInstall" (
+  MKDIR "%ProgramData%\OCS Inventory NG\DelayedInstall"
+)
 
-REM Kill process
-TASKKILL /T /F /IM OcsSystray.exe
-TASKKILL /T /F /IM OcsService.exe
-TASKKILL /T /F /IM OcsInventory.exe
-TASKKILL /T /F /IM download.exe
-TASKKILL /T /F /IM inst32.exe
+REM Copy installation files
+COPY /B /Y "post-install.bat" "%ProgramData%\OCS Inventory NG\DelayedInstall\post-install.bat"
+COPY /B /Y "OCS-Windows-Agent-Setup-%softversion%-x64.exe" "%ProgramData%\OCS Inventory NG\DelayedInstall\OCS-Windows-Agent-Setup-%softversion%-x64.exe"
 
+REM add rights
+%pwrsh% Set-ExecutionPolicy RemoteSigned -Force -Scope LocalMachine
 
-REM Install again
-OCS-Windows-Agent-Setup-%softversion%-x64.exe /S /NOSPLASH /UPGRADE /NP /DEBUG=1 /SSL=%ocsssl% /SERVER=%ocsserver% /PROXY_TYPE=0 /NOW
+REM unblock
+%pwrsh% "Unblock-File -Path .\set-task.ps1"
 
-
-REM Start service
-REM NET START  "OCS Inventory Service"
+REM execute
+%pwrsh% -File ".\set-task.ps1"
 
 
 ECHO END %date%-%time%
