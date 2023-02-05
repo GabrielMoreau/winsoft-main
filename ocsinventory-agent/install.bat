@@ -21,11 +21,11 @@ ECHO BEGIN %date%-%time%
 SET softversion=91.5.1
 SET softpatch=1
 
-SET pwrsh=%WINDIR%\System32\WindowsPowerShell\V1.0\powershell.exe
-IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET pwrsh=%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe
 
-
-REM Create folder
+REM Create and clean folder
+IF EXIST "%ProgramData%\OCS Inventory NG\DelayedInstall" (
+  RMDIR /S /Q "%ProgramData%\OCS Inventory NG\DelayedInstall"
+)
 IF NOT EXIST "%ProgramData%\OCS Inventory NG" (
   MKDIR "%ProgramData%\OCS Inventory NG"
 )
@@ -34,17 +34,21 @@ IF NOT EXIST "%ProgramData%\OCS Inventory NG\DelayedInstall" (
 )
 
 REM Copy installation files
-COPY /B /Y "post-install.bat" "%ProgramData%\OCS Inventory NG\DelayedInstall\post-install.bat"
+COPY /A /Y "install-outofservice.bat" "%ProgramData%\OCS Inventory NG\DelayedInstall\install-outofservice.bat"
 COPY /B /Y "OCS-Windows-Agent-Setup-%softversion%-x64.exe" "%ProgramData%\OCS Inventory NG\DelayedInstall\OCS-Windows-Agent-Setup-%softversion%-x64.exe"
+
+
+SET pwrsh=%WINDIR%\System32\WindowsPowerShell\V1.0\powershell.exe
+IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET pwrsh=%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe
 
 REM add rights
 %pwrsh% Set-ExecutionPolicy RemoteSigned -Force -Scope LocalMachine
 
 REM unblock
-%pwrsh% "Unblock-File -Path .\set-task.ps1"
+%pwrsh% "Unblock-File -Path .\*.ps1"
 
 REM execute
-%pwrsh% -File ".\set-task.ps1"
+%pwrsh% -File ".\post-install.ps1"
 
 
 ECHO END %date%-%time%

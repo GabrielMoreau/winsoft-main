@@ -8,7 +8,7 @@ OCS_SSL:=1
 
 SOFT:=OCSInventory-Agent
 VERSION:=$(shell curl -s -L 'https://github.com/OCSInventory-NG/WindowsAgent/releases/latest' | sed 's/</\n/g;'| grep '^meta property.*Release Agent Windows' |cut -f 6 -d ' ')
-PATCH:=3
+PATCH:=5
 URL:=https://github.com/OCSInventory-NG/WindowsAgent/releases/download/$(VERSION)/OCS-Windows-Agent-$(VERSION)_x64.zip
 FOLDER:=OCS-Windows-Agent-$(VERSION)_x64
 EXE:=OCS-Windows-Agent-Setup-$(VERSION)-x64.exe
@@ -55,18 +55,18 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 		s#^(SET\socsserver=).*#$${1}$(OCS_SERVER)#; \
 		s/^(SET\socsssl=)\d/$${1}$(OCS_SSL)/;' install.bat > $@
 
-tmp/post-install.bat: post-install.bat Makefile tmp/$(EXE)
+tmp/install-outofservice.bat: install-outofservice.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
 	@perl -p -e ' \
 		s/^(SET\ssoftversion=)\d[\.\d]+\w?/$${1}$(VERSION)/; \
 		s/^(SET\ssoftpatch=)\d+/$${1}$(PATCH)/; \
 		s#^(SET\socsserver=).*#$${1}$(OCS_SERVER)#; \
-		s/^(SET\socsssl=)\d/$${1}$(OCS_SSL)/;' post-install.bat > $@
+		s/^(SET\socsssl=)\d/$${1}$(OCS_SSL)/;' install-outofservice.bat > $@
 
-%.zip: Makefile set-task.ps1 tmp/install.bat tmp/post-install.bat tmp/$(EXE)
+%.zip: Makefile post-install.ps1 tmp/install.bat tmp/install-outofservice.bat tmp/$(EXE)
 	@rm -f $@
-	@zip -r $@ set-task.ps1
-	@(cd tmp; zip -r ../$@ install.bat $(EXE))
+	@zip -r $@ post-install.ps1
+	@(cd tmp; zip -r ../$@ install.bat install-outofservice.bat $(EXE))
 	@chmod ugo+rw $@
 
 ocs:
