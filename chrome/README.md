@@ -1,4 +1,4 @@
-# Chrome - Google Chrome naigator
+# Chrome - Google Chrome navigator
 
 Google Chrome is a cross-platform web browser developed by Google.
 
