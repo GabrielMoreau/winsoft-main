@@ -1,0 +1,86 @@
+
+#
+# HandBrake
+#
+
+SOFT:=HandBrake
+PATCH:=1
+VERSION:=$(shell curl -s -L 'https://github.com/HandBrake/HandBrake/releases/latest' | sed 's/</\n/g;'| grep '^meta property.*Release ' | cut -f 4 -d ' ')
+URL1:=https://github.com/HandBrake/HandBrake/releases/download/$(VERSION)/HandBrake-$(VERSION)-x86_64-Win_GUI.exe
+
+URL2:=$(shell curl -s -L https://dotnet.microsoft.com/$(shell curl -s -L 'https://dotnet.microsoft.com/en-us/download/dotnet/6.0' | sed -e 's/"/\n/g;' | grep 'thank-you/runtime-desktop.*windows-x64-installer'  | head -1) | sed -e 's/"/\n/g;' | grep '^https.*windowsdesktop-runtime-.*-win-x64.exe' | head -1)
+VERSION2:=$(shell basename $(URL2) | cut -f 3 -d '-')
+
+EXE1:=HandBrake-$(VERSION)-x86_64-Win_GUI.exe
+EXE2:=windowsdesktop-runtime-$(VERSION2)-win-x64.exe
+
+IT_TEAM:=IT Support
+
+
+.PHONY: all check-version ocs clean version wget
+
+all: check-version $(SOFT)-$(VERSION)-$(PATCH).zip ocs
+
+sinclude ../common/global.mk
+
+check-version:
+	@echo $(VERSION) | egrep -q '^[[:digit:]][\.[:digit:]]*$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
+
+clean:
+	rm -rf $(SOFT)-$(VERSION)-$(PATCH).zip tmp
+
+version:
+	@echo "VERSION: $(VERSION)"
+	@echo "URL1: $(URL1)"
+	@echo "EXE1: $(EXE1)"
+	@echo "URL2: $(URL2)"
+	@echo "EXE2: $(EXE2)"
+	@echo "VERSION2: $(VERSION2)"
+
+wget: tmp/$(EXE1)
+
+tmp/$(EXE1):
+	@mkdir -p tmp
+	@(cd tmp ; \
+		rm -f HandBrake-*.exe 2>/dev/null ; \
+		curl -s -o "$(EXE1)" -L "$(URL1)" ; \
+		file $(EXE1) | grep -q "PE32 executable.*Nullsoft Installer" || echo "Error: bad format for binary $(EXE1)" ; \
+		# which peres >/dev/null && { peres -a $(EXE1) | grep -q "^Product Version:[[:space:]]*$(VERSION)" || echo "Error: bad version for binary $(EXE1)" ; } ; \
+		grep -q "^$$(shasum -a 256 $(EXE1))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE1)" ; \
+		)
+
+tmp/$(EXE2):
+	@mkdir -p tmp
+	@(cd tmp ; \
+		rm -f windowsdesktop-runtime*.exe 2>/dev/null ; \
+		curl -s -o "$(EXE2)" -L "$(URL2)" ; \
+		file $(EXE2) | grep -q "PE32 executable" || echo "Error: bad format for binary $(EXE2)" ; \
+		which peres >/dev/null && { peres -a $(EXE2) | grep -q "^Product Version:[[:space:]]*$(VERSION2)" || echo "Error: bad version for binary $(EXE2)" ; } ; \
+		grep -q "^$$(shasum -a 256 $(EXE2))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE2)" ; \
+		)
+
+tmp/install.bat: install.bat Makefile tmp/$(EXE1) tmp/$(EXE2)
+	@mkdir -p tmp
+	@perl -p -e ' \
+		s/^(SET\ssoftversion=)\d[\.\d]+\w?/$${1}$(VERSION)/; \
+		s/^(SET\ssoftruntimever=)\d[\.\d]+\w?/$${1}$(VERSION2)/; \
+		s/^(SET\ssoftpatch=)\d+/$${1}$(PATCH)/;' install.bat > $@
+
+%.zip: Makefile tmp/install.bat tmp/$(EXE1) tmp/$(EXE2)
+	@rm -f $@
+	@(cd tmp; zip -r ../$@ install.bat $(EXE1) $(EXE2))
+	@chmod ugo+rw $@
+
+ocs:
+	@echo ""
+	@echo "Name:    $(SOFT)-$(VERSION)-$(PATCH)"
+	@echo "Launch:  install.bat"
+	@echo "Message: yes"
+	@echo "Delay:   5"
+	@echo "Cancel:  no"
+	@echo "Report:  yes"
+	@echo ""
+	@echo "$(IT_TEAM)"
+	@echo " --- "
+	@echo "Install and update: $(SOFT)"
+	@echo ""
