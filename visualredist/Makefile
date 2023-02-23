@@ -23,7 +23,7 @@ VCREDIST+=tmp/2015-2019/vc_redist.x86.exe
 VCREDIST+=tmp/2015-2022/vc_redist.x64.exe
 VCREDIST+=tmp/2015-2022/vc_redist.x86.exe
 
-.PHONY: all check-version ocs clean wget
+.PHONY: all check-version ocs clean version wget
 
 all: check-version $(SOFT)-$(VERSION)-$(PATCH).zip ocs
 
@@ -35,6 +35,9 @@ check-version:
 clean:
 	rm -rf $(SOFT)-$(VERSION)-$(PATCH).zip tmp
 
+version: tmp/version.txt
+	@sed -e 's#/# #g; s/__//g; s/^s/ */; s/[[:space:]]*;//;' tmp/version.txt
+
 wget: $(VCREDIST)
 
 tmp/install.bat: install.bat Makefile
@@ -43,10 +46,27 @@ tmp/install.bat: install.bat Makefile
 		s/^(SET\ssoftversion=)\d[\.\d]+\w?/$${1}$(VERSION)/; \
 		s/^(SET\ssoftpatch=)\d+/$${1}$(PATCH)/;' install.bat > $@
 
-%.zip: Makefile tmp/install.bat post-install.ps1 view.ps1 $(VCREDIST)
+tmp/version.txt: $(VCREDIST)
+	@echo "s/__2008-x64__/$$(peres -a tmp/2008/vcredist_x64.exe | egrep 'Product Version:' | awk '{print $$3}')/;"  > $@
+	@echo "s/__2008-x86__/$$(peres -a tmp/2008/vcredist_x86.exe | egrep 'Product Version:' | awk '{print $$3}')/;" >> $@
+	@echo "s/__2010-x64__/$$(peres -a tmp/2010/vcredist_x64.exe | egrep 'Product Version:' | awk '{print $$3}')/;" >> $@
+	@echo "s/__2010-x86__/$$(peres -a tmp/2010/vcredist_x86.exe | egrep 'Product Version:' | awk '{print $$3}')/;" >> $@
+	@echo "s/__2012-x64__/$$(peres -a tmp/2012/vcredist_x64.exe | egrep 'Product Version:' | awk '{print $$3}')/;" >> $@
+	@echo "s/__2012-x86__/$$(peres -a tmp/2012/vcredist_x86.exe | egrep 'Product Version:' | awk '{print $$3}')/;" >> $@
+	@echo "s/__2013-x64__/$$(peres -a tmp/2013/vcredist_x64.exe | egrep 'Product Version:' | awk '{print $$3}')/;" >> $@
+	@echo "s/__2013-x86__/$$(peres -a tmp/2013/vcredist_x86.exe | egrep 'Product Version:' | awk '{print $$3}')/;" >> $@
+	@echo "s/__2015-2019-x64__/$$(peres -a tmp/2015-2019/vc_redist.x64.exe | egrep 'Product Version:' | awk '{print $$3}')/;" >> $@
+	@echo "s/__2015-2019-x86__/$$(peres -a tmp/2015-2019/vc_redist.x86.exe | egrep 'Product Version:' | awk '{print $$3}')/;" >> $@
+	@echo "s/__2015-2022-x64__/$$(peres -a tmp/2015-2022/vc_redist.x64.exe | egrep 'Product Version:' | awk '{print $$3}')/;" >> $@
+	@echo "s/__2015-2022-x86__/$$(peres -a tmp/2015-2022/vc_redist.x86.exe | egrep 'Product Version:' | awk '{print $$3}')/;" >> $@
+
+tmp/post-install.ps1: post-install.ps1 tmp/version.txt Makefile
+	@perl -p -e "$$(cat tmp/version.txt)" post-install.ps1 > $@
+
+%.zip: Makefile tmp/install.bat tmp/post-install.ps1 view.ps1 $(VCREDIST)
 	@rm -f $@
-	@zip -r $@ post-install.ps1 view.ps1
-	@(cd tmp; zip -r ../$@ install.bat  2008 2010 2012 2013 2015-2019 2015-2022)
+	@zip -r $@ view.ps1
+	@(cd tmp; zip -r ../$@ install.bat post-install.ps1 2008 2010 2012 2013 2015-2019 2015-2022)
 	@chmod ugo+rw $@
 
 ocs:
@@ -66,77 +86,89 @@ ocs:
 
 tmp/2008/vcredist_x64.exe:
 	@mkdir -p tmp/2008
-	@curl -s -o $@ -L https://download.microsoft.com/download/5/D/8/5D8C65CB-C849-4025-8E95-C3966CAFD8AE/vcredist_x64.exe
+	@curl -s -o $@ -L $$(grep '^2008-x64' url.txt | cut -f 2 -d ' ')
 	@file $@ | grep -q "PE32 executable" || echo "Error: bad format for binary $@"
 	@grep -q "^$$(shasum -a 256 $@)$$" checksum.txt || echo "Error: bad checksum for binary $@"
+	@grep -q "[[:space:]]$$(peres -a $@ | egrep 'Product Version:' | awk '{print $$3}')$$" version.txt || echo "Error: bad version for binary $@"
 
 tmp/2008/vcredist_x86.exe:
 	@mkdir -p tmp/2008
-	@curl -s -o $@ -L https://download.microsoft.com/download/5/D/8/5D8C65CB-C849-4025-8E95-C3966CAFD8AE/vcredist_x86.exe
+	@curl -s -o $@ -L $$(grep '^2008-x86' url.txt | cut -f 2 -d ' ')
 	@file $@ | grep -q "PE32 executable" || echo "Error: bad format for binary $@"
 	@grep -q "^$$(shasum -a 256 $@)$$" checksum.txt || echo "Error: bad checksum for binary $@"
+	@grep -q "[[:space:]]$$(peres -a $@ | egrep 'Product Version:' | awk '{print $$3}')$$" version.txt || echo "Error: bad version for binary $@"
 
 
 tmp/2010/vcredist_x64.exe:
 	@mkdir -p tmp/2010
-	@curl -s -o $@ -L https://download.microsoft.com/download/1/6/5/165255E7-1014-4D0A-B094-B6A430A6BFFC/vcredist_x64.exe
+	@curl -s -o $@ -L $$(grep '^2010-x64' url.txt | cut -f 2 -d ' ')
 	@file $@ | grep -q "PE32 executable" || echo "Error: bad format for binary $@"
 	@grep -q "^$$(shasum -a 256 $@)$$" checksum.txt || echo "Error: bad checksum for binary $@"
+	@grep -q "[[:space:]]$$(peres -a $@ | egrep 'Product Version:' | awk '{print $$3}')$$" version.txt || echo "Error: bad version for binary $@"
 
 tmp/2010/vcredist_x86.exe:
 	@mkdir -p tmp/2010
-	@curl -s -o $@ -L https://download.microsoft.com/download/1/6/5/165255E7-1014-4D0A-B094-B6A430A6BFFC/vcredist_x86.exe
+	@curl -s -o $@ -L $$(grep '^2010-x86' url.txt | cut -f 2 -d ' ')
 	@file $@ | grep -q "PE32 executable" || echo "Error: bad format for binary $@"
 	@grep -q "^$$(shasum -a 256 $@)$$" checksum.txt || echo "Error: bad checksum for binary $@"
+	@grep -q "[[:space:]]$$(peres -a $@ | egrep 'Product Version:' | awk '{print $$3}')$$" version.txt || echo "Error: bad version for binary $@"
 
 
 tmp/2012/vcredist_x64.exe:
 	@mkdir -p tmp/2012
-	@curl -s -o $@ -L https://download.microsoft.com/download/1/6/B/16B06F60-3B20-4FF2-B699-5E9B7962F9AE/VSU_4/vcredist_x64.exe
+	@curl -s -o $@ -L $$(grep '^2012-x64' url.txt | cut -f 2 -d ' ')
 	@file $@ | grep -q "PE32 executable" || echo "Error: bad format for binary $@"
 	@grep -q "^$$(shasum -a 256 $@)$$" checksum.txt || echo "Error: bad checksum for binary $@"
+	@grep -q "[[:space:]]$$(peres -a $@ | egrep 'Product Version:' | awk '{print $$3}')$$" version.txt || echo "Error: bad version for binary $@"
 
 tmp/2012/vcredist_x86.exe:
 	@mkdir -p tmp/2012
-	@curl -s -o $@ -L https://download.microsoft.com/download/1/6/B/16B06F60-3B20-4FF2-B699-5E9B7962F9AE/VSU_4/vcredist_x86.exe
+	@curl -s -o $@ -L $$(grep '^2012-x86' url.txt | cut -f 2 -d ' ')
 	@file $@ | grep -q "PE32 executable" || echo "Error: bad format for binary $@"
 	@grep -q "^$$(shasum -a 256 $@)$$" checksum.txt || echo "Error: bad checksum for binary $@"
+	@grep -q "[[:space:]]$$(peres -a $@ | egrep 'Product Version:' | awk '{print $$3}')$$" version.txt || echo "Error: bad version for binary $@"
 
 
 tmp/2013/vcredist_x64.exe:
 	@mkdir -p tmp/2013
-	@curl -s -o $@ -L https://aka.ms/highdpimfc2013x64enu
+	@curl -s -o $@ -L $$(grep '^2013-x64' url.txt | cut -f 2 -d ' ')
 	@file $@ | grep -q "PE32 executable" || echo "Error: bad format for binary $@"
 	@grep -q "^$$(shasum -a 256 $@)$$" checksum.txt || echo "Error: bad checksum for binary $@"
+	@grep -q "[[:space:]]$$(peres -a $@ | egrep 'Product Version:' | awk '{print $$3}')$$" version.txt || echo "Error: bad version for binary $@"
 
 tmp/2013/vcredist_x86.exe:
 	@mkdir -p tmp/2013
-	@curl -s -o $@ -L https://aka.ms/highdpimfc2013x86enu
+	@curl -s -o $@ -L $$(grep '^2013-x86' url.txt | cut -f 2 -d ' ')
 	@file $@ | grep -q "PE32 executable" || echo "Error: bad format for binary $@"
 	@grep -q "^$$(shasum -a 256 $@)$$" checksum.txt || echo "Error: bad checksum for binary $@"
+	@grep -q "[[:space:]]$$(peres -a $@ | egrep 'Product Version:' | awk '{print $$3}')$$" version.txt || echo "Error: bad version for binary $@"
 
 
 tmp/2015-2019/vc_redist.x64.exe:
 	@mkdir -p tmp/2015-2019
-	@curl -s -o $@ -L https://aka.ms/vs/16/release/vc_redist.x64.exe
+	@curl -s -o $@ -L $$(grep '^2015-2019-x64' url.txt | cut -f 2 -d ' ')
 	@file $@ | grep -q "PE32 executable" || echo "Error: bad format for binary $@"
 	@grep -q "^$$(shasum -a 256 $@)$$" checksum.txt || echo "Error: bad checksum for binary $@"
+	@grep -q "[[:space:]]$$(peres -a $@ | egrep 'Product Version:' | awk '{print $$3}')$$" version.txt || echo "Error: bad version for binary $@"
 
 tmp/2015-2019/vc_redist.x86.exe:
 	@mkdir -p tmp/2015-2019
-	@curl -s -o $@ -L https://aka.ms/vs/16/release/vc_redist.x86.exe
+	@curl -s -o $@ -L $$(grep '^2015-2019-x86' url.txt | cut -f 2 -d ' ')
 	@file $@ | grep -q "PE32 executable" || echo "Error: bad format for binary $@"
 	@grep -q "^$$(shasum -a 256 $@)$$" checksum.txt || echo "Error: bad checksum for binary $@"
+	@grep -q "[[:space:]]$$(peres -a $@ | egrep 'Product Version:' | awk '{print $$3}')$$" version.txt || echo "Error: bad version for binary $@"
 
 
 tmp/2015-2022/vc_redist.x64.exe:
 	@mkdir -p tmp/2015-2022
-	@curl -s -o $@ -L https://aka.ms/vs/17/release/vc_redist.x64.exe
+	@curl -s -o $@ -L $$(grep '^2015-2022-x64' url.txt | cut -f 2 -d ' ')
 	@file $@ | grep -q "PE32 executable" || echo "Error: bad format for binary $@"
 	@grep -q "^$$(shasum -a 256 $@)$$" checksum.txt || echo "Error: bad checksum for binary $@"
+	@grep -q "[[:space:]]$$(peres -a $@ | egrep 'Product Version:' | awk '{print $$3}')$$" version.txt || echo "Error: bad version for binary $@"
 
 tmp/2015-2022/vc_redist.x86.exe:
 	@mkdir -p tmp/2015-2022
-	@curl -s -o $@ -L https://aka.ms/vs/17/release/vc_redist.x86.exe
+	@curl -s -o $@ -L $$(grep '^2015-2022-x86' url.txt | cut -f 2 -d ' ')
 	@file $@ | grep -q "PE32 executable" || echo "Error: bad format for binary $@"
 	@grep -q "^$$(shasum -a 256 $@)$$" checksum.txt || echo "Error: bad checksum for binary $@"
+	@grep -q "[[:space:]]$$(peres -a $@ | egrep 'Product Version:' | awk '{print $$3}')$$" version.txt || echo "Error: bad version for binary $@"

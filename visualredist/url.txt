@@ -1,0 +1,16 @@
+
+# Get URL for download latest version
+# See https://github.com/abbodi1406/vcredist/blob/master/source_links/README.md
+
+2008-x64 https://download.microsoft.com/download/5/D/8/5D8C65CB-C849-4025-8E95-C3966CAFD8AE/vcredist_x64.exe
+2008-x86 https://download.microsoft.com/download/5/D/8/5D8C65CB-C849-4025-8E95-C3966CAFD8AE/vcredist_x86.exe
+2010-x64 https://download.microsoft.com/download/1/6/5/165255E7-1014-4D0A-B094-B6A430A6BFFC/vcredist_x64.exe
+2010-x86 https://download.microsoft.com/download/1/6/5/165255E7-1014-4D0A-B094-B6A430A6BFFC/vcredist_x86.exe
+2012-x64 https://download.microsoft.com/download/1/6/B/16B06F60-3B20-4FF2-B699-5E9B7962F9AE/VSU_4/vcredist_x64.exe
+2012-x86 https://download.microsoft.com/download/1/6/B/16B06F60-3B20-4FF2-B699-5E9B7962F9AE/VSU_4/vcredist_x86.exe
+2013-x64 https://aka.ms/highdpimfc2013x64enu
+2013-x86 https://aka.ms/highdpimfc2013x86enu
+2015-2019-x64 https://aka.ms/vs/16/release/vc_redist.x64.exe
+2015-2019-x86 https://aka.ms/vs/16/release/vc_redist.x86.exe
+2015-2022-x64 https://aka.ms/vs/17/release/vc_redist.x64.exe
+2015-2022-x86 https://aka.ms/vs/17/release/vc_redist.x86.exe
