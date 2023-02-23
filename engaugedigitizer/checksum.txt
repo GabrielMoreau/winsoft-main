@@ -1,0 +1,1 @@
+dcc6136cfdf18bb059036ea6fad2407d6e708813b5d6d6820eee44032ddb249b  digit-exe-windows10-64-bit-installer-12.1.msi
