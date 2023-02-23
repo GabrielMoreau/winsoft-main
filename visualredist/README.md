@@ -12,16 +12,29 @@ This package does not install the redistributable visual C++ packages but simply
 * Silent install : https://silentinstallhq.com/visual-c-redistributable-silent-install-master-list/
 
 Last versions :
-* folder 2008      -  9.0.30729.6161
-* folder 2010      - 10.0.40219.325
+* folder 2008      -  9.0.30729.5677
+* folder 2010      - 10.0.40219.473
 * folder 2012      - 11.0.61030.0
 * folder 2013      - 12.0.40664.0
 * folder 2015-2019 - 14.29.30139.0
-* folder 2015-2022 - 14.32.31332.0
+* folder 2015-2022 - 14.34.31938.0
 
-Have the version of an executable:
+Have the version of an executable with `sigcheck.exe` or `peres` (natif):
 ```
 Sysinternals\sigcheck.exe -a -h .\vcredist_ia64.exe
+peres -a .\vcredist_ia64.exe | egrep 'Product Version:'
+```
+
+Under GNU/Linux amd64
+```
+sudo dpkg --add-architecture i386 && sudo apt-get update && sudo apt-get install wine32
+wine ~/Sysinternals/sigcheck.exe -a -h .\vcredist_ia64.exe
+```
+
+It's possible to automate
+```bash
+find tmp/ -name '*.exe' | xargs -r -n 1 wine ~/Sysinternals/sigcheck.exe -a -h | egrep '(Product|Prod version):' | cut -f 2 -d ':'
+find tmp/ -name '*.exe' | xargs -r -n 1 peres -a | egrep 'Product Version:' | awk '{print $3}'
 ```
 
 Example of package on a computer
