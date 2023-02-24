@@ -1,1 +1,2 @@
 7b83284f45fc936d73be622fe86728ea7307142c58afcba4915dcb23d6fcaf05  MicrosoftEdgeEnterpriseX64-110.0.1587.50.msi
+6b40ba9e503c750322eae05317cccacd97021df6a009617d9980d6bdbc08e861  MicrosoftEdgeEnterpriseX64-110.0.1587.56.msi
