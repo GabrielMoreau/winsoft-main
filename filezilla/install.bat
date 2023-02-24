@@ -26,16 +26,27 @@ SET softexe=FileZilla_%softversion%_win64-setup.exe
 ECHO Uninstall previous version if exist
 IF EXIST "%ProgramFiles%\FileZilla FTP Client\uninstall.exe" (
   "%ProgramFiles%\FileZilla FTP Client\uninstall.exe" /S
+)
+IF EXIST "%ProgramFiles%\FileZilla FTP Client\uninstall.exe" (
   "%ProgramFiles%\FileZilla FTP Client\uninstall.exe" /S
 )
-
+IF EXIST "%ProgramFiles(x86)%\FileZilla FTP Client\uninstall.exe" (
+  "%ProgramFiles(x86)%\FileZilla FTP Client\uninstall.exe" /S
+)
+IF EXIST "%ProgramFiles(x86)%\FileZilla FTP Client\uninstall.exe" (
+  "%ProgramFiles(x86)%\FileZilla FTP Client\uninstall.exe" /S
+)
 
 ECHO Silent install
 "%softexe%" /user=all /S
 
-
 ECHO Disable welcome and check update
-COPY /A /Y "fzdefaults.xml" "%ProgramFiles%\FileZilla FTP Client\fzdefaults.xml"
+IF EXIST "%ProgramFiles%\FileZilla FTP Client" (
+  COPY /A /Y "fzdefaults.xml" "%ProgramFiles%\FileZilla FTP Client\fzdefaults.xml"
+)
+IF EXIST "%ProgramFiles(x86)%\FileZilla FTP Client" (
+  COPY /A /Y "fzdefaults.xml" "%ProgramFiles(x86)%\FileZilla FTP Client\fzdefaults.xml"
+)
 
 
 ECHO END %date%-%time%
