@@ -22,7 +22,7 @@ SET softversion=91.5.1
 SET softpatch=1
 
 
-REM Silent install
+ECHO Silent install %softname%
 xournalpp-%softversion%-windows.exe /VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP- /S /quiet
 
 
