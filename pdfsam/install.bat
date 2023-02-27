@@ -1,11 +1,11 @@
 REM @ECHO OFF
 
 REM
-REM   PDFsam
+REM   PDFsam Basic
 REM
 
 REM Name
-SET softname=PDFsam
+SET softname=PDFsamBasic
 
 SET logdir=%ProgramData%\OCS Inventory NG\Agent\DeployLog
 IF NOT EXIST "%logdir%" (

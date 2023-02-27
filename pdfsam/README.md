@@ -1,4 +1,4 @@
-# PDFsam - split, merge, extract PDF files
+# PDFsam Basic - split, merge, extract PDF files
 
 PDFsam Basic, a free, open source, multi-platform software designed
 to split, merge, extract pages, mix and rotate PDF documents.
