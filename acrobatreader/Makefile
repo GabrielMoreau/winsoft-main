@@ -7,10 +7,10 @@ SOFT:=AcrobatReader
 VERSIONLONG:=$(shell curl -s 'https://helpx.adobe.com/acrobat/release-note/release-notes-acrobat-reader.html' | grep 'disablelinktracking="false">DC ' | cut -f 2 -d '(' | cut -f 1 -d ')' | head -1)
 VERSIONCOLLAPSE:=$(shell echo $(VERSIONLONG) | sed -e 's/\.//g;')
 VERSIONSHORT:=$(shell echo $(VERSIONLONG) | sed -e 's/[\.0[:space:]]//g;')
-PATCH:=1
-URL:=https://ardownload2.adobe.com/pub/adobe/reader/win/AcrobatDC/$(VERSIONCOLLAPSE)/AcroRdrDC$(VERSIONCOLLAPSE)_fr_FR.exe
+PATCH:=2
+URL:=https://ardownload2.adobe.com/pub/adobe/acrobat/win/AcrobatDC/$(VERSIONCOLLAPSE)/AcroRdrDCx64$(VERSIONCOLLAPSE)_fr_FR.exe
 
-EXE:=AcroRdrDC$(VERSIONCOLLAPSE)_fr_FR.exe
+EXE:=AcroRdrDCx64$(VERSIONCOLLAPSE)_fr_FR.exe
 
 IT_TEAM:=IT Support
 
