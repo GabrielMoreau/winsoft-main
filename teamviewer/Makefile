@@ -4,7 +4,7 @@
 #
 
 SOFT:=TeamViewer
-VERSION:=$(shell curl -s -L 'https://www.teamviewer.com/en/download/windows/' | sed -e 's/[<>]/\n/g;' | grep '^Current version:' | cut -f 3 -d ' ')
+VERSION:=$(shell curl -s -L 'https://www.teamviewer.com/en/download/windows/' | sed -e 's/[<>]/\n/g;' | grep '^Current version:' | cut -f 3 -d ' ' | head -1)
 PATCH:=1
 URL:=https://download.teamviewer.com/download/TeamViewer_Setup_x64.exe
 
@@ -13,7 +13,7 @@ EXE:=TeamViewer-$(VERSION)-Setup-x64.exe
 IT_TEAM:=IT Support
 
 
-.PHONY: all check-version ocs clean wget
+.PHONY: all check-version ocs clean version wget
 
 all: check-version $(SOFT)-$(VERSION)-$(PATCH).zip ocs
 
@@ -24,6 +24,11 @@ check-version:
 
 clean:
 	rm -rf $(SOFT)-$(VERSION)-$(PATCH).zip tmp
+
+version:
+	@echo "VERSION: $(VERSION)"
+	@echo "URL: $(URL)"
+	@echo "EXE: $(EXE)"
 
 wget: tmp/$(EXE)
 
