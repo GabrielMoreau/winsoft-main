@@ -13,7 +13,7 @@ EXE:=gimp-$(VERSION)-setup.exe
 IT_TEAM:=IT Support
 
 
-.PHONY: all check-version ocs clean wget
+.PHONY: all check-version ocs clean version wget
 
 all: check-version $(SOFT)-$(VERSION)-$(PATCH).zip ocs
 
@@ -23,7 +23,12 @@ check-version:
 	@echo $(VERSION) | egrep -q '^[[:digit:]][\.[:digit:]]*$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
 
 clean:
-	rm -rf $(SOFT)-$(VERSION)-$(PATCH).zip tmp
+	rm -rf $(SOFT)-$(VERSION)-$(PATCH).zip tmp resources
+
+version:
+	@echo "VERSION: $(VERSION)"
+	@echo "URL: $(URL)"
+	@echo "EXE: $(EXE)"
 
 wget: tmp/$(EXE)
 
