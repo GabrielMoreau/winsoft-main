@@ -35,8 +35,8 @@ check-version:
 clean:
 	rm -rf $(SOFT)-$(VERSION)-$(PATCH).zip tmp resources
 
-version: tmp/version.txt
-	@sed -e 's#/# #g; s/__//g; s/^s/ */; s/[[:space:]]*;//;' tmp/version.txt
+version: tmp/version-replace.txt
+	@sed -e 's#/# #g; s/__//g; s/^s/ */; s/[[:space:]]*;//;' tmp/version-replace.txt
 
 wget: $(VCREDIST)
 
@@ -46,7 +46,7 @@ tmp/install.bat: install.bat Makefile
 		s/^(SET\ssoftversion=)\d[\.\d]+\w?/$${1}$(VERSION)/; \
 		s/^(SET\ssoftpatch=)\d+/$${1}$(PATCH)/;' install.bat > $@
 
-tmp/version.txt: $(VCREDIST)
+tmp/version-replace.txt: $(VCREDIST)
 	@echo "s/__2008-x64__/$$(peres -a tmp/2008/vcredist_x64.exe | egrep 'Product Version:' | awk '{print $$3}')/;"  > $@
 	@echo "s/__2008-x86__/$$(peres -a tmp/2008/vcredist_x86.exe | egrep 'Product Version:' | awk '{print $$3}')/;" >> $@
 	@echo "s/__2010-x64__/$$(peres -a tmp/2010/vcredist_x64.exe | egrep 'Product Version:' | awk '{print $$3}')/;" >> $@
@@ -60,10 +60,14 @@ tmp/version.txt: $(VCREDIST)
 	@echo "s/__2015-2022-x64__/$$(peres -a tmp/2015-2022/vc_redist.x64.exe | egrep 'Product Version:' | awk '{print $$3}')/;" >> $@
 	@echo "s/__2015-2022-x86__/$$(peres -a tmp/2015-2022/vc_redist.x86.exe | egrep 'Product Version:' | awk '{print $$3}')/;" >> $@
 
-tmp/post-install.ps1: post-install.ps1 tmp/version.txt Makefile
-	@perl -p -e "$$(cat tmp/version.txt)" post-install.ps1 > $@
+tmp/version.txt: tmp/version-replace.txt
+	@sed -e 's#/# #g; s/__//g; s/^s/ */; s/[[:space:]]*;//;' tmp/version-replace.txt > $@
+	@cmp version.txt tmp/version.txt || diff --side-by-side version.txt tmp/version.txt
 
-%.zip: Makefile tmp/install.bat tmp/post-install.ps1 view.ps1 $(VCREDIST)
+tmp/post-install.ps1: post-install.ps1 tmp/version-replace.txt Makefile
+	@perl -p -e "$$(cat tmp/version-replace.txt)" post-install.ps1 > $@
+
+%.zip: Makefile tmp/install.bat tmp/post-install.ps1 view.ps1 $(VCREDIST) tmp/version.txt
 	@rm -f $@
 	@zip -r $@ view.ps1
 	@(cd tmp; zip -r ../$@ install.bat post-install.ps1 2008 2010 2012 2013 2015-2019 2015-2022)
