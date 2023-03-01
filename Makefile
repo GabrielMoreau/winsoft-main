@@ -7,6 +7,7 @@ help:
 	@echo "build-all  build all package"
 	@echo "clean-all  clean all package"
 	@echo "list-pkg   list all package"
+	@echo "space      clean old package"
 
 build-all:
 	@for d in $(PKGDIR) ; \
