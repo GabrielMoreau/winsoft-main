@@ -13,7 +13,7 @@ URL:=https://downloads.micron.ox.ac.uk/fiji_update/mirrors/fiji-latest/fiji-win6
 ZIP:=fiji-win64.zip
 SUBFOLDER:=Fiji.app-$(VERSION)
 EXE:=$(SUBFOLDER)/ImageJ-win64.exe
-PATCH:=2
+PATCH:=1
 
 IT_TEAM:=IT Support
 
@@ -41,7 +41,7 @@ tmp/%.exe:
 	@mkdir -p tmp
 	@(cd tmp ; \
 		rm -rf "Fiji.app" "Fiji.app-$(VERSION)" "$(ZIP)" "$(EXE)" 2>/dev/null ; \
-		curl -o "$(ZIP)" -L "$(URL)" ; \
+		curl -# -o "$(ZIP)" -L "$(URL)" ; \
 		unzip -q "$(ZIP)" ; \
 		mv Fiji.app "Fiji.app-$(VERSION)" ; \
 		curl -s -L 'http://rsbweb.nih.gov/ij/plugins/ankaphase/ANKAphase.zip' -o ANKAphase.zip ; \
@@ -55,9 +55,13 @@ tmp/%.exe:
 
 %.zip: Makefile tmp/$(EXE) install.bat post-install.ps1
 	@mkdir -p tmp
-	@perl -p -e ' \
-		s/^(SET\ssoftversion=)\d[\.\d]+/$${1}$(VERSION)/; \
-		s/^(SET\ssoftpatch=)\d+/$${1}$(PATCH)/;' install.bat > tmp/$(SUBFOLDER)/install.bat
+	IVERSION=$$(zgrep 'plugin update-site.*filename="jars/ij-[[:digit:]]' tmp/$(SUBFOLDER)/db.xml.gz  | cut -f 4 -d '"' | cut -f 2 -d '-' | sed -e 's/.jar$$//;') ; \
+	NVERSION=$$(echo $${IVERSION} | sed -e 's/\w$$//;') ; \
+	perl -p -e " \
+		s/^(SET\ssoftversion=)\d[\.\d]+/\$${1}$(VERSION)/; \
+		s/^(SET\ssoftpatch=)\d+/\$${1}$(PATCH)/; \
+		s/^(SET\ssoftiversion=)\d.*/\$${1}$${IVERSION}/; \
+		s/^(SET\ssoftnversion=)\d.*/\$${1}$${NVERSION}/;" install.bat > tmp/$(SUBFOLDER)/install.bat
 	@perl -p -e ' \
 		s/^(\$$ImageJVersion = )"\d[\.\d]+"/$${1}"$(VERSION)"/; ' post-install.ps1 > tmp/$(SUBFOLDER)/post-install.ps1
 	@rm -f $@
