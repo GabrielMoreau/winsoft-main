@@ -14,21 +14,13 @@ If (Test-Path "${Env:ProgramData}\ImageJ\version.txt" -PathType Leaf) {
 	# $ImageJVersionOld_number = [float]$ImageJVersionOld
 }
 
-#copie des fichiers ij.jar  ImageJ-win64.exe  jre  luts  macros  plugins*
+# Install files and folders
 ForEach ($File in 'install.bat', 'uninstall.bat', 'db.xml.gz', 'ImageJ-win64.exe', 'README.md', 'WELCOME.md') {
 	Copy-Item -LiteralPath "$File" -Destination "${Env:ProgramData}\ImageJ" -Force
 }
 ForEach ($Folder in 'Contents', 'images', 'jars', 'java', 'lib', 'licenses', 'luts', 'macros', 'plugins', 'retro', 'scripts') {
 	Copy-Item -LiteralPath "$Folder" -Destination "${Env:ProgramData}\ImageJ" -Recurse -Force
 }
-Copy-Item -LiteralPath 'install.bat'    -Destination "${Env:ProgramData}\ImageJ" -Force
-Copy-Item -LiteralPath 'uninstall.bat'  -Destination "${Env:ProgramData}\ImageJ" -Force
-Copy-Item -LiteralPath 'ij.jar'         -Destination "${Env:ProgramData}\ImageJ" -Force
-Copy-Item -LiteralPath 'ImageJ-win64.exe'     -Destination "${Env:ProgramData}\ImageJ" -Force
-Copy-Item -LiteralPath 'jre'            -Destination "${Env:ProgramData}\ImageJ" -Recurse -Force
-Copy-Item -LiteralPath 'luts'           -Destination "${Env:ProgramData}\ImageJ" -Recurse -Force
-Copy-Item -LiteralPath 'macros'         -Destination "${Env:ProgramData}\ImageJ" -Recurse -Force
-Copy-Item -LiteralPath 'plugins'        -Destination "${Env:ProgramData}\ImageJ" -Recurse -Force
 
 # ImageJ Script in Start Menu
 $StartMenu = "${Env:ProgramData}\Microsoft\Windows\Start Menu\Programs"
