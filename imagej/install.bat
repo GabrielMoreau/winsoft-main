@@ -33,7 +33,7 @@ REM Copy post-install script
 COPY /Y post-install.ps1 "%ProgramData%\ImageJ"
 
 REM Execution right post-install.ps1
-%pwrsh% "Unblock-File -Path ${env:ProgramFiles}\ImageJ\post-install.ps1"
+%pwrsh% "Unblock-File -Path ${env:ProgramData}\ImageJ\post-install.ps1"
 
 REM Post-install (install SWMB and run it one time)
 %pwrsh% -File "%ProgramData%\ImageJ\post-install.ps1"
