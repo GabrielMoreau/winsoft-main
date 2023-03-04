@@ -1,4 +1,4 @@
-# ImageJ / Fiji - Image processing program
+# ImageJ - Image processing program (Fiji Distribution)
 
 ImageJ is a Java-based image processing program. ImageJ was designed
 with an open architecture that provides extensibility via Java plugins

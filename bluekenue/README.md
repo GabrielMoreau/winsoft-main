@@ -1,4 +1,4 @@
-# BlueKenue
+# BlueKenue - Tool for hydraulic modellers
 
 Logiciel pour modélisateurs hydrauliques
 

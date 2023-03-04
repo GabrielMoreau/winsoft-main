@@ -1,4 +1,4 @@
-# XournalPP - PDF annotate and hand note-taking software
+# Xournal++ - PDF annotate and hand note-taking software
 
 Xournal++ is a hand note-taking software written in C++ with the target
 of flexibility, functionality and speed. It is used to annotate a pdf

@@ -1,4 +1,4 @@
-# VirtualBox - Hypervisor for virtual machines
+# VirtualBox6 - Oracle Hypervisor for virtual machines
 
 VirtualBox supports the creation and management of guest virtual machines
 running Windows, Linux.

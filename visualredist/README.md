@@ -1,4 +1,4 @@
-# Visual C++ Redistributable
+# VisualRedist - Visual C++ Redistributable Library
 
 Many applications require redistributable Visual C++ runtime library packages to function correctly.
 These packages are often installed independently of applications,

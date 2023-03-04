@@ -1,4 +1,4 @@
-# SumatraPDF - free and open-source document viewer
+# SumatraPDF - Free and open-source document viewer (PDF, DjVu, EPUB...)
 
 Sumatra PDF is a free and open-source document viewer that supports many
 document formats including: Portable Document Format (PDF), Microsoft

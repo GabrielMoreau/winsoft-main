@@ -1,4 +1,4 @@
-# Skype - VoIP and Videoconferencing
+# Skype - VoIP and Videoconferencing Client
 
 Skype is a proprietary telecommunications application, best known for
 VoIP-based videotelephony, videoconferencing and voice calls.

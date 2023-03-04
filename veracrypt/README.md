@@ -1,4 +1,4 @@
-# VeraCrypt - Crypt disk
+# VeraCrypt - Crypt disk and volume (USK key)
 
 VeraCrypt is a free and open-source utility for on-the-fly encryption (OTFE).
 The software can create a virtual encrypted disk that works just like a

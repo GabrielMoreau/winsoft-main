@@ -1,4 +1,4 @@
-# Zoom - Web Conference
+# Zoom - Web Conference Client
 
 Zoom Meetings is a proprietary video teleconferencing software program.
 
