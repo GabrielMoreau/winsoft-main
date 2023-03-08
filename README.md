@@ -11,6 +11,15 @@ make ocs
 You just have to put this Zip package on your server.
 The command to run for the installation is always `install.bat`.
 
+A master `Makefile` allows to build all packages automatically.
+It is possible to put a `.noauto` file in each folder to avoid this
+construction.
+
+* `build-all`  build all package except if `.noauto` file
+* `clean-all`  clean all package except if `.noauto` file
+* `list-pkg`   list all package
+* `space`      clean old package
+
 However, some packages need some parameters.
 These parameters depend on your site.
 So, in addition to the `winsoft-main` folder, you must have a `winsoft-conf` folder.

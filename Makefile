@@ -4,15 +4,16 @@ KEEP:=3 # means 2
 .PHONY: help build-all clean-all list-pkg space
 
 help:
-	@echo "build-all  build all package"
-	@echo "clean-all  clean all package"
-	@echo "list-pkg   list all package"
-	@echo "space      clean old package"
+	@echo "* \`build-all\`  build all package except if \`.noauto\` file"
+	@echo "* \`clean-all\`  clean all package except if \`.noauto\` file"
+	@echo "* \`list-pkg\`   list all package"
+	@echo "* \`space\`      clean old package"
 
 build-all:
 	@for d in $(PKGDIR) ; \
 	do \
 		echo '' ; \
+		[ -f "$$d/.noauto" ] && { echo "#=== pass:$$d" ; continue ; } ; \
 		echo "#=== $$d ===#" ; \
 		(cd $$d; \
 			make > .make.log 2>&1; \
@@ -27,6 +28,7 @@ clean-all:
 	@for d in $(PKGDIR) ; \
 	do \
 		echo '' ; \
+		[ -f "$$d/.noauto" ] && { echo "#=== pass:$$d" ; continue ; } ; \
 		echo "#=== $$d ===#" ; \
 		(cd $$d; make clean; rm -f .make.log) \
 	done
