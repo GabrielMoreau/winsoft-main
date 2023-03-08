@@ -1,4 +1,4 @@
-# AcrobatReader - PDF reader
+# AcrobatReader - Adobe PDF reader
 
 Adobe Acrobat is a family of application software to view, create,
 manipulate, print and manage PDF files.
