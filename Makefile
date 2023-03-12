@@ -13,7 +13,7 @@ build-all:
 	@for d in $(PKGDIR) ; \
 	do \
 		echo '' ; \
-		[ -f "$$d/.noauto" ] && { echo "#=== pass:$$d" ; continue ; } ; \
+		grep -q "^$$d" ./common/noauto.conf ../winsoft-conf/common/noauto.conf 2> /dev/null && { echo "#=== pass:$$d" ; continue ; } ; \
 		echo "#=== $$d ===#" ; \
 		(cd $$d; \
 			make > .make.log 2>&1; \
@@ -28,7 +28,7 @@ clean-all:
 	@for d in $(PKGDIR) ; \
 	do \
 		echo '' ; \
-		[ -f "$$d/.noauto" ] && { echo "#=== pass:$$d" ; continue ; } ; \
+		grep -q "^$$d" ./common/noauto.conf ../winsoft-conf/common/noauto.conf 2> /dev/null && { echo "#=== pass:$$d" ; continue ; } ; \
 		echo "#=== $$d ===#" ; \
 		(cd $$d; make clean; rm -f .make.log) \
 	done
