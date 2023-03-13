@@ -24,12 +24,12 @@ build-all:
 		echo "#=== $$d ===#"
 		(cd $$d; \
 			make > .make.log 2>&1; \
-			find . -maxdepth 1 -name '*.zip' -a -mtime -1 -exec cat .make.log \; \
+			find . -maxdepth 1 -name '*.zip' -a -mtime -1 -not -path '*/tmp/*' -exec cat .make.log \; \
 		)
 	done
 	echo ''
 	echo '#=== Summary: packages created on this last day ===#'
-	find . -maxdepth 2 -name '*.zip' -a -mtime -1 -exec ls -ltr {} \+
+	find . -maxdepth 2 -name '*.zip' -a -mtime -1 -not -path '*/tmp/*' -exec ls -ltr {} \+
 
 clean-all:
 	@
