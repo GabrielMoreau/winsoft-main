@@ -1,0 +1,1 @@
+3417d7079810e41dc2ff3c61fd2bcc0b121612e62cb92d3dd7f1e6935f938b74  FreeCAD-WIN-x64-installer-0.20.2.3.exe
