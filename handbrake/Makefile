@@ -5,14 +5,16 @@
 
 SOFT:=HandBrake
 PATCH:=1
-VERSION:=$(shell curl -s -L 'https://github.com/HandBrake/HandBrake/releases/latest' | sed 's/</\n/g;'| grep '^meta property.*Release ' | cut -f 4 -d ' ')
-URL1:=https://github.com/HandBrake/HandBrake/releases/download/$(VERSION)/HandBrake-$(VERSION)-x86_64-Win_GUI.exe
+VERSION1:=$(shell curl -s -L 'https://github.com/HandBrake/HandBrake/releases/latest' | sed 's/</\n/g;'| grep '^meta property.*Release ' | cut -f 4 -d ' ')
+URL1:=https://github.com/HandBrake/HandBrake/releases/download/$(VERSION1)/HandBrake-$(VERSION1)-x86_64-Win_GUI.exe
 
 URL2:=$(shell curl -s -L https://dotnet.microsoft.com/$(shell curl -s -L 'https://dotnet.microsoft.com/en-us/download/dotnet/6.0' | sed -e 's/"/\n/g;' | grep 'thank-you/runtime-desktop.*windows-x64-installer'  | head -1) | sed -e 's/"/\n/g;' | grep '^https.*windowsdesktop-runtime-.*-win-x64.exe' | head -1)
 VERSION2:=$(shell basename $(URL2) | cut -f 3 -d '-')
 
-EXE1:=HandBrake-$(VERSION)-x86_64-Win_GUI.exe
+EXE1:=HandBrake-$(VERSION1)-x86_64-Win_GUI.exe
 EXE2:=windowsdesktop-runtime-$(VERSION2)-win-x64.exe
+
+VERSION:=$(VERSION1).$(shell echo $(VERSION2) | sed 's/\.//g;')
 
 IT_TEAM:=IT Support
 
@@ -31,11 +33,12 @@ clean:
 
 version:
 	@echo "VERSION: $(VERSION)"
+	@echo "VERSION1: $(VERSION1)"
 	@echo "URL1: $(URL1)"
 	@echo "EXE1: $(EXE1)"
+	@echo "VERSION2: $(VERSION2)"
 	@echo "URL2: $(URL2)"
 	@echo "EXE2: $(EXE2)"
-	@echo "VERSION2: $(VERSION2)"
 
 wget: tmp/$(EXE1)
 
@@ -45,7 +48,7 @@ tmp/$(EXE1):
 		rm -f HandBrake-*.exe 2>/dev/null ; \
 		curl -s -o "$(EXE1)" -L "$(URL1)" ; \
 		file $(EXE1) | grep -q "PE32 executable.*Nullsoft Installer" || echo "Error: bad format for binary $(EXE1)" ; \
-		# which peres >/dev/null && { peres -a $(EXE1) | grep -q "^Product Version:[[:space:]]*$(VERSION)" || echo "Error: bad version for binary $(EXE1)" ; } ; \
+		# which peres >/dev/null && { peres -a $(EXE1) | grep -q "^Product Version:[[:space:]]*$(VERSION1)" || echo "Error: bad version for binary $(EXE1)" ; } ; \
 		grep -q "^$$(shasum -a 256 $(EXE1))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE1)" ; \
 		)
 
@@ -62,7 +65,7 @@ tmp/$(EXE2):
 tmp/install.bat: install.bat Makefile tmp/$(EXE1) tmp/$(EXE2)
 	@mkdir -p tmp
 	@perl -p -e ' \
-		s/^(SET\ssoftversion=)\d[\.\d]+\w?/$${1}$(VERSION)/; \
+		s/^(SET\ssoftversion=)\d[\.\d]+\w?/$${1}$(VERSION1)/; \
 		s/^(SET\ssoftruntimever=)\d[\.\d]+\w?/$${1}$(VERSION2)/; \
 		s/^(SET\ssoftpatch=)\d+/$${1}$(PATCH)/;' install.bat > $@
 
