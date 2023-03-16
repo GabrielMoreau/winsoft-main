@@ -10,6 +10,7 @@ help:
 	echo "* \`clean-all\`  clean all package except if \`.noauto\` file"
 	echo "* \`list-pkg\`   list all package"
 	echo "* \`space\`      clean old package"
+	echo "* \`version\`    get all package version"
 
 build-all:
 	@
@@ -64,4 +65,18 @@ space:
 			ls -t *.zip | tail -n +$(KEEP) | xargs -r rm -f; \
 			rm -f .make.log; \
 		)
+	done
+
+version:
+	@
+	for d in $(PKGDIR)
+	do
+		echo ''
+		if [ -f "$$d/.noauto" ] || grep -q "^$$d" ./common/noauto.conf ../winsoft-conf/common/noauto.conf 2> /dev/null
+		then
+			echo "#=== pass:$$d"
+			continue
+		fi
+		echo "#=== $$d ===#"
+		(cd $$d; make version)
 	done
