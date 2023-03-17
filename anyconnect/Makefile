@@ -12,7 +12,7 @@ EXE:=anyconnect-win-$(VERSION)-core-vpn-webdeploy-k9.msi
 IT_TEAM:=IT Support
 
 
-.PHONY: all check-version control ocs clean wget
+.PHONY: all check-version control ocs clean version wget
 
 all: check-version control $(SOFT)-$(VERSION)-$(PATCH).zip ocs
 
@@ -23,6 +23,11 @@ check-version:
 
 clean:
 	rm -rf $(SOFT)-$(VERSION)-$(PATCH).zip tmp
+
+version:
+	@echo "VERSION: $(VERSION)"
+	@echo "URL: $(URL)"
+	@echo "EXE: $(EXE)"
 
 control:
 	@file $(EXE) | grep -q "Subject: Cisco AnyConnect Secure Mobility Client" || echo "Error: bad format for binary $(EXE)"

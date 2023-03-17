@@ -14,7 +14,7 @@ EXE:=googlechromestandaloneenterprise64-$(VERSION).msi
 IT_TEAM:=IT Support
 
 
-.PHONY: all check-version ocs clean wget
+.PHONY: all check-version ocs version clean wget
 
 all: check-version $(SOFT)-$(VERSION)-$(PATCH).zip ocs
 
@@ -25,6 +25,11 @@ check-version:
 
 clean:
 	rm -rf $(SOFT)-$(VERSION)-$(PATCH).zip tmp
+
+version:
+	@echo "VERSION: $(VERSION)"
+	@echo "URL: $(URL)"
+	@echo "EXE: $(EXE)"
 
 wget: tmp/$(EXE)
 
