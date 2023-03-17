@@ -16,7 +16,7 @@ EXE:=AcroRdrDCx64$(VERSIONCOLLAPSE)_fr_FR.exe
 IT_TEAM:=IT Support
 
 
-.PHONY: all check-version ocs clean version wget
+.PHONY: all check-version clean control next ocs version wget
 .ONESHELL:
 
 all: $(SOFT)-$(VERSIONLONG)-$(PATCH).zip ocs

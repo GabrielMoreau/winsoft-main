@@ -18,7 +18,7 @@ PATCH:=1
 IT_TEAM:=IT Support
 
 
-.PHONY: all check-version clean version ocs
+.PHONY: all check-version clean control next ocs version wget
 .SECONDARY:
 
 all: check-version $(SOFT)-$(VERSION)-$(PATCH).zip ocs

@@ -13,7 +13,7 @@ URL:=https://nrc.canada.ca/sites/default/files/apps/kenue/$(EXE)
 IT_TEAM:=IT Support
 
 
-.PHONY: all check-version ocs clean version
+.PHONY: all check-version clean control next ocs version wget
 
 all: check-version $(SOFT)-$(VERSION)-$(PATCH).zip ocs
 

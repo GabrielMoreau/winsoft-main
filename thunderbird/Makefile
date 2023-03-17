@@ -12,7 +12,7 @@ EXE:=Thunderbird-Setup-$(VERSION).msi
 IT_TEAM:=IT Support
 
 
-.PHONY: all check-version ocs version clean wget
+.PHONY: all check-version clean control next ocs version wget
 
 all: check-version $(SOFT)-$(VERSION)-$(PATCH).zip ocs
 

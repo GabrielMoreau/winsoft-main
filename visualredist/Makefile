@@ -23,7 +23,7 @@ VCREDIST+=tmp/2015-2019/vc_redist.x86.exe
 VCREDIST+=tmp/2015-2022/vc_redist.x64.exe
 VCREDIST+=tmp/2015-2022/vc_redist.x86.exe
 
-.PHONY: all check-version ocs clean version wget
+.PHONY: all check-version clean control next ocs version wget
 
 all: check-version $(SOFT)-$(VERSION)-$(PATCH).zip ocs
 

@@ -13,7 +13,7 @@ EXE:=digit-exe-windows10-64-bit-installer-$(VERSION).msi
 IT_TEAM:=IT Support
 
 
-.PHONY: all check-version ocs clean version wget
+.PHONY: all check-version clean control next ocs version wget
 
 all: check-version $(SOFT)-$(VERSION)-$(PATCH).zip ocs
 

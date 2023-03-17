@@ -15,7 +15,7 @@ URL:=https://www.paraview.org/paraview-downloads/download.php?submit=Download&ve
 IT_TEAM:=IT Support
 
 
-.PHONY: all check-version version ocs clean wget
+.PHONY: all check-version clean control next ocs version wget
 
 all: check-version $(SOFT)-$(VERSION)-$(PATCH).zip ocs
 

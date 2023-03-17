@@ -15,7 +15,7 @@ EXE:=ZoomInstallerFull-$(VERSION).msi
 IT_TEAM:=IT Support
 
 
-.PHONY: all check-version next ocs version clean
+.PHONY: all check-version clean control next ocs version wget
 
 all:
 	@mkdir -p tmp

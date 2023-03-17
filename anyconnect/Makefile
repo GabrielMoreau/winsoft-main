@@ -12,7 +12,7 @@ EXE:=anyconnect-win-$(VERSION)-core-vpn-webdeploy-k9.msi
 IT_TEAM:=IT Support
 
 
-.PHONY: all check-version control ocs clean version wget
+.PHONY: all check-version clean control next ocs version wget
 
 all: check-version control $(SOFT)-$(VERSION)-$(PATCH).zip ocs
 

@@ -14,7 +14,7 @@ EXE:=FileZilla_$(VERSION)_win64-setup.exe
 IT_TEAM:=IT Support
 
 
-.PHONY: all check-version ocs clean version wget
+.PHONY: all check-version clean control next ocs version wget
 
 all: check-version $(SOFT)-$(VERSION)-$(PATCH).zip ocs
 
