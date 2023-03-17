@@ -7,6 +7,7 @@ SOFT:=Zoom
 INSTALLER:=ZoomInstallerFull.msi
 VERSION:=$(shell file tmp/$(INSTALLER) 2> /dev/null | sed -e 's/,[[:space:]]/\n/g;' | grep '^Comments:' | cut -f 2 -d ' ')
 PATCH:=1
+URL:=https://zoom.us/client/latest/$(INSTALLER)
 
 ZSSOHOST:=$(shell grep -h '^ZSSOHOST' conf.yml ../../winsoft-conf/zoom/conf.yml 2>/dev/null | cut -f 2 -d ':' | sed -e 's/[[:space:]]//g;' | head -1)
 
@@ -20,7 +21,7 @@ IT_TEAM:=IT Support
 all:
 	@mkdir -p tmp
 	@rm -f "tmp/$(INSTALLER)"
-	@(cd tmp; curl -s -o $(INSTALLER) -L "https://zoom.us/client/latest/$(INSTALLER)")
+	@(cd tmp; curl -s -o $(INSTALLER) -L "$(URL)")
 	@make next
 
 sinclude ../common/global.mk

@@ -6,6 +6,7 @@
 SOFT:=WinDirStat
 VERSION:=$(shell curl -s -L 'https://windirstat.net/download.html' | sed -e 's/"/\n/g;' | grep 'Latest version:' | cut -f 3 -d ' ' |cut -f 1 -d '<')
 PATCH:=3
+URL:=https://windirstat.mirror.wearetriple.com//wds_current_setup.exe
 
 EXE:=windirstat$(VERSION)_setup.exe
 
@@ -35,7 +36,7 @@ tmp/$(EXE):
 	@mkdir -p tmp
 	@(cd tmp ; \
 		rm -f *.exe *.msi 2>/dev/null ; \
-		curl -s -o "$(EXE)" -L "https://windirstat.mirror.wearetriple.com//wds_current_setup.exe" ; \
+		curl -s -o "$(EXE)" -L "$(URL)" ; \
 		file $(EXE) | grep -q 'PE32 executable' || echo "Error: bad format for binary $(EXE)" ; \
 		which peres >/dev/null && { peres -a $(EXE) | grep -q "^Product Version:[[:space:]]*$(VERSION)" || echo "Error: bad version for binary $(EXE)" ; } ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \

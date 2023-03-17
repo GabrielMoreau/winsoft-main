@@ -6,6 +6,7 @@
 SOFT:=VLC
 VERSION:=$(shell curl -s -L 'https://www.videolan.org/vlc/download-windows.html' | sed -e 's/"/\n/g;' | grep -- -win64.exe | head -1 | cut -f 5 -d '/')
 PATCH:=1
+URL:=https://get.videolan.org/vlc/$(VERSION)/win64/vlc-$(VERSION)-win64.exe
 
 EXE:=vlc-$(VERSION)-win64.exe
 
@@ -35,7 +36,7 @@ tmp/$(EXE):
 	@mkdir -p tmp
 	@(cd tmp ; \
 		rm -f *.exe *.msi 2>/dev/null ; \
-		curl -s -o "$(EXE)" -L "https://get.videolan.org/vlc/$(VERSION)/win64/vlc-$(VERSION)-win64.exe" ; \
+		curl -s -o "$(EXE)" -L "$(URL)" ; \
 		file $(EXE) | grep -q 'PE32 executable' || echo "Error: bad format for binary $(EXE)" ; \
 		#which peres >/dev/null && { peres -a $(EXE) | grep -q "^Product Version:[[:space:]]*$(VERSION)" || echo "Error: bad version for binary $(EXE)" ; } ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
