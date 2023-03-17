@@ -78,5 +78,5 @@ version:
 			continue
 		fi
 		echo "#=== $$d ===#"
-		(cd $$d; make version)
+		(cd $$d; make version) | grep -v '^make'
 	done
