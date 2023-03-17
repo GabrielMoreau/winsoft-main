@@ -26,7 +26,7 @@ clean:
 
 version:
 	@echo "VERSION: $(VERSION)"
-	@echo "URL: $(URL)"
+	@echo "URL: No download here"
 	@echo "EXE: $(EXE)"
 
 control:

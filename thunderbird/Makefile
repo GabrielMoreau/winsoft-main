@@ -6,6 +6,7 @@
 SOFT:=Thunderbird
 VERSION:=$(shell curl -s -L 'https://www.thunderbird.net/en-US/thunderbird/all/' | sed -e 's/[[:space:]]/\n/g;' | grep 'data-thunderbird-version' | cut -f 2 -d '"')
 PATCH:=1
+URL:=https://download.mozilla.org/?product=thunderbird-$(VERSION)-msi-SSL&os=win64&lang=fr
 
 EXE:=Thunderbird-Setup-$(VERSION).msi
 
@@ -35,7 +36,7 @@ tmp/$(EXE):
 	@mkdir -p tmp
 	@(cd tmp ; \
 		rm -f *.exe *.msi 2>/dev/null ; \
-		curl -s -o "$(EXE)" -L "https://download.mozilla.org/?product=thunderbird-$(VERSION)-msi-SSL&os=win64&lang=fr" ; \
+		curl -s -o "$(EXE)" -L "$(URL)" ; \
 		file $(EXE) | grep -q "Subject: Mozilla Thunderbird $(VERSION) x64" || echo "Error: bad format for binary $(EXE)" ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
