@@ -6,6 +6,7 @@
 SOFT:=AnyConnect
 VERSION:=4.10.05111
 PATCH:=1
+VERSIONONLINE:=$(shell curl -s 'https://www.cisco.com/c/en/us/td/docs/security/vpn_client/anyconnect/anyconnect410/release/notes/release-notes-anyconnect-4-10.html' | sed -e 's/[<>]/\n/g;' | grep '^AnyConnect [[:digit:]].* New Features' | head -1 | cut -f 2 -d ' ')
 
 EXE:=anyconnect-win-$(VERSION)-core-vpn-webdeploy-k9.msi
 
@@ -20,6 +21,7 @@ sinclude ../common/global.mk
 
 check-version:
 	@echo $(VERSION) | egrep -q '^[[:digit:]][\.[:digit:]]*$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
+	@[ "$(VERSION)" != "$(VERSIONONLINE)" ] && echo "Warning: a new version $(VERSIONONLINE) exist on Cisco website!"
 
 clean:
 	rm -rf $(SOFT)-$(VERSION)-$(PATCH).zip tmp
@@ -28,6 +30,7 @@ version:
 	@echo "VERSION: $(VERSION)"
 	@echo "URL: No download here"
 	@echo "EXE: $(EXE)"
+	@echo "VERSIONONLINE: $(VERSIONONLINE)"
 
 control:
 	@file $(EXE) | grep -q "Subject: Cisco AnyConnect Secure Mobility Client" || echo "Error: bad format for binary $(EXE)"
