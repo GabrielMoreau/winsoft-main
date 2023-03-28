@@ -6,7 +6,7 @@
 SOFT:=Miktex
 VERSION:=$(shell curl -s -L 'https://github.com/MiKTeX/miktex/releases/latest' | sed -e 's/[[:space:]]/\n/g;' | grep 'href="/MiKTeX/miktex/releases/tag/' | cut -f 6 -d '/' | cut -f 1 -d '"')
 URL:=https://miktex.org/download/win/miktexsetup-x64.zip
-PATCH:=1
+PATCH:=2
 
 ZIP:=miktexsetup-x64.zip
 EXE:=miktexsetup_standalone.exe
