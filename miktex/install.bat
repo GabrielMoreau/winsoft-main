@@ -29,6 +29,9 @@ miktexsetup_standalone.exe --verbose --local-package-repository=C:\temp\miktex -
 REM Silent install
 miktexsetup_standalone.exe --verbose --local-package-repository=C:\temp\miktex --shared=yes --user-config="<APPDATA>\MiKTeX" --user-data="<LOCALAPPDATA>\MiKTeX" --user-install="<APPDATA>\MiKTeX" --package-set=basic install
 
+REM wait before Remove
+ping -n 31 127.0.0.1 -w 1000 > nul
+
 REM remove localdownload
 rmdir /S /Q "C:\temp\miktex"
 
