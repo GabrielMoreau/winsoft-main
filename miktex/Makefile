@@ -4,12 +4,12 @@
 #
 
 SOFT:=Miktex
-VERSION:=$(shell curl -s -L 'https://github.com/MiKTeX/miktex/releases/latest' | sed -e 's/[[:space:]]/\n/g;' | grep 'href="/MiKTeX/miktex/releases/tag/' | cut -f 6 -d '/' | cut -f 1 -d '"')
+VERSION:=$(shell curl -s -L 'https://github.com/MiKTeX/miktex/releases/latest' | sed -e 's/[[:space:]"]/\n/g;' | grep '^/MiKTeX/miktex/releases/tag/' | head -1 | xargs -r basename)
 URL:=https://miktex.org/download/win/miktexsetup-x64.zip
-PATCH:=2
+PATCH:=3
 
 ZIP:=miktexsetup-x64.zip
-EXE:=miktexsetup_standalone.exe
+EXE:=miktexsetup-standalone-$(VERSION).exe
 
 IT_TEAM:=IT Support
 
@@ -35,9 +35,12 @@ wget: $(EXE)
 tmp/$(EXE):
 	@mkdir -p tmp
 	@(cd tmp ; \
-		rm -f *.exe *.msi 2>/dev/null ; \
-		curl -s -o "$(ZIP)" -L "$(URL)" ; \
+		rm -f *.exe *.zip 2>/dev/null ; \
+		curl -# -o "$(ZIP)" -L "$(URL)" ; \
 		unzip -q "$(ZIP)" ; \
+		mv miktexsetup_standalone.exe miktexsetup-standalone-$(VERSION).exe ; \
+		file $(EXE) | grep -q "PE32+ executable" || echo "Error: bad format for binary $(EXE)" ; \
+		# which peres >/dev/null && { peres -a $(EXE) | grep -q "^Product Version:[[:space:]]*$(VERSION)" || echo "Error: bad version for binary $(EXE)" ; } ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
 

@@ -1,1 +1,1 @@
-c9a3b1696240da62342d447a066eddf2272cdb04e65f0758aff04b34b22669a7  miktexsetup_standalone.exe
+c9a3b1696240da62342d447a066eddf2272cdb04e65f0758aff04b34b22669a7  miktexsetup-standalone-22.10.exe

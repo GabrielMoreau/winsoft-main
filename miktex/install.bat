@@ -19,21 +19,22 @@ EXIT /B
 ECHO BEGIN %date%-%time%
 
 
-SET softversion=
+SET softversion=21.09
 SET softpatch=1
 
 
-REM download
-miktexsetup_standalone.exe --verbose --local-package-repository=C:\temp\miktex --package-set=basic download
+ECHO Download
+miktexsetup-standalone-%softversion%.exe --verbose --local-package-repository=%SystemDrive%\Temp\MiKTeX --package-set=basic download
 
-REM Silent install
-miktexsetup_standalone.exe --verbose --local-package-repository=C:\temp\miktex --shared=yes --user-config="<APPDATA>\MiKTeX" --user-data="<LOCALAPPDATA>\MiKTeX" --user-install="<APPDATA>\MiKTeX" --package-set=basic install
+ECHO Silent install
+miktexsetup-standalone-%softversion%.exe --verbose --local-package-repository=%SystemDrive%\Temp\MiKTeX --shared=yes --user-config="<APPDATA>\MiKTeX" --user-data="<LOCALAPPDATA>\MiKTeX" --user-install="<APPDATA>\MiKTeX" --package-set=basic install
 
-REM wait before Remove
+ECHO Wait before Remove
 ping -n 31 127.0.0.1 -w 1000 > nul
 
-REM remove localdownload
-rmdir /S /Q "C:\temp\miktex"
+ECHO Remove localdownload
+RMDIR /S /Q "%SystemDrive%\Temp\MiKTeX"
+
 
 ECHO END %date%-%time%
 EXIT
