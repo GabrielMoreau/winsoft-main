@@ -1,7 +1,7 @@
 REM @ECHO OFF
 
 REM
-REM   Texmaker
+REM   TexMaker
 REM
 
 REM Name

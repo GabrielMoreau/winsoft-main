@@ -4,11 +4,9 @@
 #
 
 SOFT:=TexMaker
-VERSION:=$(shell curl -s -L 'https://www.xm1math.net/texmaker/index.html' | sed -e 's/[<>]/\n/g;' | grep 'DOWNLOAD version' | cut -f 3 -d ' ')
+VERSION:=$(shell curl -s -L 'https://www.xm1math.net/texmaker/' | sed -e 's/[<>]/\n/g;' | grep 'DOWNLOAD version' | cut -f 3 -d ' ')
 URL:=https://www.xm1math.net/texmaker/assets/files/Texmaker_$(VERSION)_Win_x64.msi
 PATCH:=1
-
-
 
 EXE:=Texmaker_$(VERSION)_Win_x64.msi
 
@@ -37,8 +35,8 @@ tmp/$(EXE):
 	@mkdir -p tmp
 	@(cd tmp ; \
 		rm -f *.exe *.zip 2>/dev/null ; \
-		curl -s -o "$(EXE)" -L "$(URL)" ; \
-		file $(EXE) | grep -q "Texmaker" || echo "Error: bad format for binary $(EXE)" ; \
+		curl -# -o "$(EXE)" -L "$(URL)" ; \
+		file $(EXE) | grep -q "Composite Document File.*Texmaker $(VERSION)" || echo "Error: bad format for binary $(EXE)" ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
 
