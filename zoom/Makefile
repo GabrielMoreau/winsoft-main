@@ -42,6 +42,7 @@ version:
 tmp/$(EXE):
 	@mkdir -p tmp
 	@(cd tmp ; \
+		find ./ -name '*.msi' -a -not -name "$(INSTALLER)" -a -not -name "$(EXE)" -delete ; \
 		cmp $(INSTALLER) $(EXE) > /dev/null 2>&1 || cp -f $(INSTALLER) $(EXE) ; \
 		file $(EXE) | grep -q "Subject: Zoom Meetings.*Comments: $(VERSION)" || echo "Error: bad format for binary $(EXE)" ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
