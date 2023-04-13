@@ -47,10 +47,15 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 		s/^(SET\ssoftversion=)\d[\.\d]+\w?/$${1}$(VERSION)/; \
 		s/^(SET\ssoftpatch=)\d+/$${1}$(PATCH)/;' install.bat > $@
 
-%.zip: Makefile tmp/install.bat policies.json tmp/$(EXE) post-install.ps1
+tmp/post-install.ps1: post-install.ps1 Makefile tmp/$(EXE)
+	@mkdir -p tmp
+	@perl -p -e ' \
+		s/^(.RefVersion = .)\d[\.\d]+/$${1}$(VERSION)/;' post-install.ps1 > $@
+
+%.zip: Makefile tmp/install.bat tmp/post-install.ps1 policies.json tmp/$(EXE)
 	@rm -f $@
-	@zip -r $@ policies.json post-install.ps1
-	@(cd tmp; zip -r ../$@ install.bat $(EXE))
+	@zip -r $@ policies.json
+	@(cd tmp; zip -r ../$@ install.bat post-install.ps1 $(EXE))
 	@chmod ugo+rw $@
 
 ocs:
