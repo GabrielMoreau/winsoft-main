@@ -23,7 +23,7 @@ SET softpatch=1
 SET process=firefox.exe
 
 
-REM Kill the current process
+ECHO Kill the current process
 VER | FIND /I "10.0" > NUL
 IF %ERRORLEVEL%==0 TASKKILL /T /F /IM %process%
 
@@ -31,7 +31,7 @@ VER | FIND /I "6.1" > NUL
 IF %ERRORLEVEL%==0 TASKKILL /T /F /IM %process%
 
 
-REM Silent install
+ECHO Silent install %softname%
 msiexec /i "Firefox-Setup-%softversion%-esr.msi" INSTALL_MAINTENANCE_SERVICE=false /q
 
 
@@ -40,6 +40,20 @@ IF EXIST "C:\Program Files\Mozilla Firefox" (
   IF NOT EXIST "C:\Program Files\Mozilla Firefox\distribution" MKDIR "C:\Program Files\Mozilla Firefox\distribution"
   IF EXIST "C:\Program Files\Mozilla Firefox\distribution" COPY /y policies.json "C:\Program Files\Mozilla Firefox\distribution\policies.json" > NUL
 )
+
+
+ECHO Search PowerShell
+SET pwrsh=%WINDIR%\System32\WindowsPowerShell\V1.0\powershell.exe
+IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET pwrsh=%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe
+
+ECHO Add rights
+%pwrsh% Set-ExecutionPolicy RemoteSigned -Force -Scope LocalMachine
+
+ECHO unblock
+%pwrsh% "Unblock-File -Path .\*.ps1"
+
+ECHO Execute post-install script
+%pwrsh% -File ".\post-install.ps1"
 
 
 ECHO END %date%-%time%
