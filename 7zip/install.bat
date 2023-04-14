@@ -28,10 +28,6 @@ ECHO Kill running process
 taskkill /T /F /IM %process%
 
 
-ECHO Silent install %softname%
-msiexec /i "7z%softversionshort%-x64.msi" /quiet
-
-
 ECHO Search PowerShell
 SET pwrsh=%WINDIR%\System32\WindowsPowerShell\V1.0\powershell.exe
 IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET pwrsh=%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe
@@ -41,6 +37,15 @@ ECHO Add rights
 
 ECHO unblock
 %pwrsh% "Unblock-File -Path .\*.ps1"
+
+
+ECHO Execute pre-install script
+%pwrsh% -File ".\pre-install.ps1"
+
+
+ECHO Silent install %softname%
+msiexec /i "7z%softversionshort%-x64.msi" /quiet
+
 
 ECHO Execute post-install script
 %pwrsh% -File ".\post-install.ps1"

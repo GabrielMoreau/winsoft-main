@@ -5,3 +5,5 @@
 
 * Website : https://www.7-zip.org/
 * Wikipedia : https://en.wikipedia.org/wiki/7-Zip
+
+* Silent install : https://silentinstallhq.com/7-zip-19-00-silent-install-how-to-guide/
