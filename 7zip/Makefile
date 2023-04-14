@@ -7,9 +7,9 @@ SOFT:=7-Zip
 VERSION:=$(shell curl -s -L 'https://www.7-zip.org/' | sed -e 's/>/\n/g;' | grep 'Download 7-Zip' | cut -f 3 -d ' ')
 VERSIONSHORT:=$(shell echo $(VERSION) | sed -e 's/\.//g;')
 PATCH:=1
+EXE:=7z$(VERSIONSHORT)-x64.msi
 URL:=https://www.7-zip.org/a/$(EXE)
 
-EXE:=7z$(VERSIONSHORT)-x64.msi
 
 IT_TEAM:=IT Support
 
@@ -38,7 +38,7 @@ tmp/$(EXE):
 	@(cd tmp ; \
 		rm -f *.exe *.msi 2>/dev/null ; \
 		curl -s -o "$(EXE)" -L "$(URL)" ; \
-		file $(EXE) | grep -q 'Composite Document File V2 Document, Little Endian.*$(VERSION)' || echo "Error: bad format for binary $(EXE)" ; \
+		file $(EXE) | grep -q 'Composite Document File V2 Document, Little Endian.*$(VERSIONSHORT)' || echo "Error: bad format for binary $(EXE)" ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
 
