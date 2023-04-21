@@ -21,12 +21,14 @@ ECHO BEGIN %date%-%time%
 SET softversion=91.5.1
 SET softpatch=1
 
-REM NPCAP
+REM NPCAP or Win10Pcap
 SET softversion2=91.5.1
 
-REM Silent install
-npcap-%softversion2%.exe /S
+ECHO Silent install NPcap
+REM npcap-%softversion2%.exe /S
+msiexec /i Win10Pcap-v%softversion2%.msi ALLUSERS=1 /qn /L*v "%logdir%\%softname%-MSI2.log" 2>&1
 
+ECHO Silent install %softname%
 Wireshark-win64-%softversion%.exe /S
 
 
