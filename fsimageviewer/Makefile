@@ -72,5 +72,5 @@ ocs:
 	@echo ""
 	@echo "$(IT_TEAM)"
 	@echo " --- "
-	@echo "Install and update: $(SOFT) ($(VERSION))"
+	@echo "Install and/or Update: $(SOFT) ($(VERSION))"
 	@echo ""
