@@ -19,7 +19,7 @@ VCREDIST+=tmp/2015-2022/vc_redist.x64.exe
 IT_TEAM:=IT Support
 
 
-.PHONY: all check-version clean control next ocs version wget
+.PHONY: all check-version clean control next ocs version wget checksum
 
 all: check-version $(SOFT)-$(VERSION)-$(PATCH).zip ocs
 
@@ -37,6 +37,16 @@ version:
 	@echo "EXE1: $(EXE1)"
 	@echo "URL2: $(URL2)"
 	@echo "EXE2: $(EXE2)"
+
+checksum:
+	@mkdir -p tmp
+	@(cd tmp ; \
+		grep -q "^$$(shasum -a 256 $(EXE1))$$" ../checksum.txt && exit ; \
+		shasum -a 256 "$(EXE1)" | sed -e 's#tmp/##;' >> ../checksum.txt ; \
+		grep -q "^$$(shasum -a 256 $(EXE2))$$" ../checksum.txt && exit ; \
+		shasum -a 256 "$(EXE2)" | sed -e 's#tmp/##;' >> ../checksum.txt ; \
+		tail -6 ../checksum.txt ; \
+		)
 
 wget: tmp/$(EXE1) tmp/$(EXE2)
 
