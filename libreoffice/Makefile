@@ -21,7 +21,7 @@ URL_HELP:=$(shell curl -s "https://download.documentfoundation.org/libreoffice/s
 IT_TEAM:=IT Support
 
 
-.PHONY: all check-version clean control next ocs version wget
+.PHONY: all check-version clean control next ocs version wget checksum
 
 all: check-version $(SOFT)-$(VERSION)-$(PATCH).zip ocs
 
@@ -39,6 +39,16 @@ version:
 	@echo "EXE_LO: $(EXE_LO)"
 	@echo "URL_HELP: $(URL_HELP)"
 	@echo "EXE_HELP: $(EXE_HELP)"
+
+checksum:
+	@mkdir -p tmp
+	@(cd tmp ; \
+		grep -q "^$$(shasum -a 256 $(EXE_LO))$$" ../checksum.txt && exit ; \
+		shasum -a 256 "$(EXE_LO)" | sed -e 's#tmp/##;' >> ../checksum.txt ; \
+		grep -q "^$$(shasum -a 256 $(EXE_HELP))$$" ../checksum.txt && exit ; \
+		shasum -a 256 "$(EXE_HELP)" | sed -e 's#tmp/##;' >> ../checksum.txt ; \
+		tail -6 ../checksum.txt ; \
+		)
 
 wget: tmp/$(EXE_LO) tmp/$(EXE_HELP)
 

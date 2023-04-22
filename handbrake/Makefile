@@ -19,7 +19,7 @@ VERSION:=$(VERSION1).$(shell echo $(VERSION2) | sed 's/\.//g;')
 IT_TEAM:=IT Support
 
 
-.PHONY: all check-version clean control next ocs version wget
+.PHONY: all check-version clean control next ocs version wget checksum
 
 all: check-version $(SOFT)-$(VERSION)-$(PATCH).zip ocs
 
@@ -39,6 +39,16 @@ version:
 	@echo "VERSION2: $(VERSION2)"
 	@echo "URL2: $(URL2)"
 	@echo "EXE2: $(EXE2)"
+
+checksum:
+	@mkdir -p tmp
+	@(cd tmp ; \
+		grep -q "^$$(shasum -a 256 $(EXE1))$$" ../checksum.txt && exit ; \
+		shasum -a 256 "$(EXE1)" | sed -e 's#tmp/##;' >> ../checksum.txt ; \
+		grep -q "^$$(shasum -a 256 $(EXE2))$$" ../checksum.txt && exit ; \
+		shasum -a 256 "$(EXE2)" | sed -e 's#tmp/##;' >> ../checksum.txt ; \
+		tail -6 ../checksum.txt ; \
+		)
 
 wget: tmp/$(EXE1)
 

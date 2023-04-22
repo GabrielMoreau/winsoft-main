@@ -18,7 +18,7 @@ PATCH:=1
 IT_TEAM:=IT Support
 
 
-.PHONY: all check-version clean control next ocs version wget
+.PHONY: all check-version clean control next ocs version wget checksum
 .SECONDARY:
 
 all: check-version $(SOFT)-$(VERSION)-$(PATCH).zip ocs
@@ -36,6 +36,14 @@ version:
 	@echo "URL: $(URL)"
 	@echo "EXE: $(EXE)"
 	@echo "ZIP: $(ZIP)"
+
+checksum:
+	@mkdir -p tmp
+	@(cd tmp ; \
+		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt && exit ; \
+		shasum -a 256 "$(EXE)" | sed -e 's#tmp/##;' >> ../checksum.txt ; \
+		tail -3 ../checksum.txt ; \
+		)
 
 tmp/%.exe:
 	@mkdir -p tmp

@@ -16,7 +16,7 @@ EXE:=AcroRdrDCx64$(VERSIONCOLLAPSE)_fr_FR.exe
 IT_TEAM:=IT Support
 
 
-.PHONY: all check-version clean control next ocs version wget
+.PHONY: all check-version clean control next ocs version wget checksum
 .ONESHELL:
 
 all: $(SOFT)-$(VERSIONLONG)-$(PATCH).zip ocs
@@ -35,6 +35,14 @@ version:
 	@echo "VERSIONSHORT:    $(VERSIONSHORT)"
 	@echo "URL: $(URL)"
 	@echo "EXE: $(EXE)"
+
+checksum:
+	@mkdir -p tmp
+	@(cd tmp ; \
+		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt && exit ; \
+		shasum -a 256 "$(EXE)" | sed -e 's#tmp/##;' >> ../checksum.txt ; \
+		tail -3 ../checksum.txt ; \
+		)
 
 wget: tmp/$(EXE)
 
