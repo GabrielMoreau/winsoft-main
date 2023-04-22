@@ -13,7 +13,7 @@ EXE:=MicrosoftEdgeEnterpriseX64-$(VERSION).msi
 IT_TEAM:=IT Support
 
 
-.PHONY: all check-version clean control next ocs version wget
+.PHONY: all check-version clean control next ocs version wget checksum
 
 all: check-version $(SOFT)-$(VERSION)-$(PATCH).zip ocs
 
@@ -30,13 +30,21 @@ version:
 	@echo "URL: $(URL)"
 	@echo "EXE: $(EXE)"
 
+checksum:
+	@mkdir -p tmp
+	@(cd tmp ; \
+		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt && exit ; \
+		shasum -a 256 "$(EXE)" | sed -e 's#tmp/##;' >> ../checksum.txt ; \
+		tail -3 ../checksum.txt ; \
+		)
+
 wget: tmp/$(EXE)
 
 tmp/$(EXE):
 	@mkdir -p tmp
 	@(cd tmp ; \
 		rm -f *.exe *.msi 2>/dev/null ; \
-		curl -s -o "$(EXE)" -L "$(URL)" ; \
+		curl -# -o "$(EXE)" -L "$(URL)" ; \
 		file $(EXE) | grep -q "MSI Installer.*Comments: $(VERSION)" || echo "Error: bad format for binary $(EXE)" ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)

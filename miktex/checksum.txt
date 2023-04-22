@@ -1,1 +1,2 @@
 c9a3b1696240da62342d447a066eddf2272cdb04e65f0758aff04b34b22669a7  miktexsetup-standalone-22.10.exe
+e47440f724d9bcb09c6b3872edfed783b0d876aafba0d59ec322dfd0ce6ea408  miktexsetup-standalone-23.4.exe
