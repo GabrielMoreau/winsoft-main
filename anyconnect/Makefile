@@ -21,7 +21,7 @@ sinclude ../common/global.mk
 
 check-version:
 	@echo $(VERSION) | egrep -q '^[[:digit:]][\.[:digit:]]*$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
-	@[ "$(VERSION)" != "$(VERSIONONLINE)" ] && echo "Warning: a new version $(VERSIONONLINE) exist on Cisco website!"
+	@[ "$(VERSION)" != "$(VERSIONONLINE)" ] && { echo '#'; echo "# Warning: a new version $(VERSIONONLINE) exist on Cisco website!"; echo '#'; }
 
 clean:
 	rm -rf $(SOFT)-$(VERSION)-$(PATCH).zip tmp
