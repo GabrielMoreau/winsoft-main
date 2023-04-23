@@ -56,8 +56,9 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 		s/^(SET\ssoftversion=)\d[\.\d]+\w?/$${1}$(VERSION)/; \
 		s/^(SET\ssoftpatch=)\d+/$${1}$(PATCH)/;' install.bat > $@
 
-%.zip: Makefile tmp/install.bat tmp/$(EXE)
+%.zip: Makefile tmp/install.bat pre-install.ps1 tmp/$(EXE)
 	@rm -f $@
+	@zip -r $@ pre-install.ps1
 	@(cd tmp; zip -r ../$@ install.bat $(EXE))
 	@chmod ugo+rw $@
 
@@ -66,11 +67,14 @@ ocs:
 	@echo "Name:    $(SOFT)-$(VERSION)-$(PATCH)"
 	@echo "Launch:  install.bat"
 	@echo "Message: yes"
-	@echo "Delay:   5"
+	@echo "Delay:   20"
 	@echo "Cancel:  no"
 	@echo "Report:  yes"
 	@echo ""
 	@echo "$(IT_TEAM)"
 	@echo " --- "
 	@echo "Install and/or Update: $(SOFT) ($(VERSION))"
+	@echo " --- "
+	@echo "The software will be stopped during the installation,"
+	@echo "make a quick save or postpone the update."
 	@echo ""

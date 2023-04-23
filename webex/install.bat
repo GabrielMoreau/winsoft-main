@@ -20,6 +20,26 @@ ECHO BEGIN %date%-%time%
 
 SET softversion=91.5.1
 SET softpatch=1
+SET process=CiscoCollabHost.exe
+
+
+ECHO Kill running process
+taskkill /T /F /IM %process%
+
+
+ECHO Search PowerShell
+SET pwrsh=%WINDIR%\System32\WindowsPowerShell\V1.0\powershell.exe
+IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET pwrsh=%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe
+
+ECHO Add rights
+%pwrsh% Set-ExecutionPolicy RemoteSigned -Force -Scope LocalMachine
+
+ECHO unblock
+%pwrsh% "Unblock-File -Path .\*.ps1"
+
+
+ECHO Execute pre-install script
+%pwrsh% -File ".\pre-install.ps1"
 
 
 ECHO Silent install %softname%
