@@ -22,7 +22,7 @@ SET softversion=91.5.1
 SET softpatch=1
 
 
-REM Silent install
+ECHO Silent install %softname%
 avidemux-%softversion%-win64.exe /S
 
 

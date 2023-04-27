@@ -21,27 +21,10 @@ ECHO BEGIN %date%-%time%
 
 SET softversion=2.6.11
 SET softpatch=1
-REM SET regkey=WinMerge-%softversion%_is1
-REM SET process=WinMergeU.exe
-
-REM Kill the current process
-REM VER | FIND /I "XP" > nul
-REM IF %ERRORLEVEL%==0 TASKKILL /T /F /IM %process%
 
 
-REM Silent install
+ECHO Silent install %softname%
 WinMerge-%softversion%-x64-Setup.exe /VERYSILENT /NORESTART /LOG="%logdir%\%softname%-MSI.log"
-REM "%softname%-%softversion%-Setup.exe" /VERYSILENT /SP- /NORESTART
-
-REM Change Add and Remove values in the register
-REM  > tmp_install.reg ECHO Windows Registry Editor Version 5.00
-REM >> tmp_install.reg ECHO.
-REM >> tmp_install.reg ECHO [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\%regkey%]
-REM >> tmp_install.reg ECHO "DisplayVersion"="%softversion% (fr)"
-REM >> tmp_install.reg ECHO "Comments"="Package OCS v%softpatch% (%DATE:~-4%/%DATE:~-7,-5%/%DATE:~-10,-8%)"
-REM >> tmp_install.reg ECHO "DisplayName"="%softname% (%softversion% OCS)"
-REM >> tmp_install.reg ECHO.
-REM regedit.exe /S "tmp_install.reg"
 
 
 ECHO END %date%-%time%
@@ -49,4 +32,5 @@ ECHO END %date%-%time%
 IF %ERRORLEVEL% EQU 259 (
   ECHO 0 or 259 are good exit code for %softname% installer!
   EXIT 0
-)EXIT
+)
+EXIT
