@@ -45,4 +45,8 @@ REM regedit.exe /S "tmp_install.reg"
 
 
 ECHO END %date%-%time%
-EXIT
+
+IF %ERRORLEVEL% EQU 259 (
+  ECHO 0 or 259 are good exit code for %softname% installer!
+  EXIT 0
+)EXIT
