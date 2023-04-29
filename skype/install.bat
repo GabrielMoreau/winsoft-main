@@ -23,8 +23,12 @@ SET softversion=2.6.11
 SET softpatch=1
 
 
-REM Silent install
+ECHO Silent install %softname%
 Skype-%softversion%.exe /VERYSILENT /NORESTART /SUPPRESSMSGBOXES /DL=1 /LOG="%logdir%\%softname%-MSI.log"
+
+ECHO Remove desktop shortcut
+IF EXIST "%PUBLIC%\Desktop\%softname%.lnk"          DEL /F /Q "%PUBLIC%\Desktop\%softname%.lnk"
+IF EXIST "%ALLUSERSPROFILE%\Desktop\%softname%.lnk" DEL /F /Q "%ALLUSERSPROFILE%\Desktop\%softname%.lnk"
 
 
 ECHO END %date%-%time%

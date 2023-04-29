@@ -29,6 +29,10 @@ Msiexec /x {AC76BA86-7AD7-1033-7B44-AC0F074E4100} /qn
 ECHO Silent Install %softname%
 AcroRdrDCx64%softversion%_fr_FR.exe /sAll /rs /msi EULA_ACCEPT=YES DISABLEDESKTOPSHORTCUT=1 /L*V "%logdir%\%softname%-MSI.log"
 
+ECHO Remove desktop shortcut
+IF EXIST "%PUBLIC%\Desktop\Adobe Reader X.lnk"          DEL /F /Q "%PUBLIC%\Desktop\Adobe Reader X.lnk"
+IF EXIST "%ALLUSERSPROFILE%\Desktop\Adobe Reader X.lnk" DEL /F /Q "%ALLUSERSPROFILE%\Desktop\Adobe Reader X.lnk"
+
 
 ECHO END %date%-%time%
 EXIT
