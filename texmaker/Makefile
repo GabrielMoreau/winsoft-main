@@ -42,7 +42,7 @@ wget: $(EXE)
 tmp/$(EXE):
 	@mkdir -p tmp
 	@(cd tmp ; \
-		rm -f *.exe *.zip 2>/dev/null ; \
+		rm -f *.exe *.msi *.zip 2>/dev/null ; \
 		curl -# -o "$(EXE)" -L "$(URL)" ; \
 		file $(EXE) | grep -q "Composite Document File.*Texmaker $(VERSION)" || echo "Error: bad format for binary $(EXE)" ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
