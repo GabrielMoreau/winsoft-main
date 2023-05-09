@@ -4,8 +4,8 @@
 #
 
 SOFT:=MSEdge
-VERSION:=$(shell curl --silent -L https://www.microsoft.com/en-us/edge/business/download | sed -e 's/[[:space:],\{]/\n/g;' | egrep '^\([[:digit:]][[:digit:]\.]*\)' | cut -f 2 -d '(' | cut -f 1 -d ')' | head -1)
-URL:=$(shell curl curl --silent -L https://www.microsoft.com/en-us/edge/business/download | sed -e 's/[[:space:],]/\n/g;' | grep '^downloadUrl.*MicrosoftEdgeEnterpriseX64.msi' | head -1 | sed -e 's#\\u002F#/#g;' | cut -f 2 -d '"')
+VERSION:=$(shell curl --silent -L https://www.microsoft.com/en-us/edge/business/download | sed -e 's/[[:space:],\{]/\n/g;' | egrep '^"[[:digit:]][[:digit:]]*\.[[:digit:]\.]*"' | cut -f 2 -d '"' | head -1)
+URL:=$(shell curl --silent -L https://www.microsoft.com/en-us/edge/business/download | sed -e 's/[[:space:],]/\n/g;' | grep '^downloadUrl.*MicrosoftEdgeEnterpriseX64.msi' | head -1 | sed -e 's#\\u002F#/#g;' | cut -f 2 -d '"')
 PATCH:=1
 
 EXE:=MicrosoftEdgeEnterpriseX64-$(VERSION).msi
