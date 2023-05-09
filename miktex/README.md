@@ -1,4 +1,4 @@
-# Miktex - TeX and LaTeX distribution
+# MiKTeX - TeX and LaTeX distribution
 
 MiKTeX is a modern TeX distribution for Windows, Linux and macOS.
 

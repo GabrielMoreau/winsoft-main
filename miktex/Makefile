@@ -1,9 +1,9 @@
 
 #
-# Miktex
+# MiKTeX
 #
 
-SOFT:=Miktex
+SOFT:=MiKTeX
 VERSION:=$(shell curl -s -L 'https://github.com/MiKTeX/miktex/releases/latest' | sed -e 's/[[:space:]"]/\n/g;' | grep '^/MiKTeX/miktex/releases/tag/' | head -1 | xargs -r basename)
 URL:=https://miktex.org/download/win/miktexsetup-x64.zip
 PATCH:=3

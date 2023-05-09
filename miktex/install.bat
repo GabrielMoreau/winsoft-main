@@ -1,11 +1,11 @@
 REM @ECHO OFF
 
 REM
-REM   Mikex
+REM   MiKTeX
 REM
 
 REM Name
-SET softname=Miktex
+SET softname=MiKTeX
 
 SET logdir=%ProgramData%\OCS Inventory NG\Agent\DeployLog
 IF NOT EXIST "%logdir%" (
