@@ -22,25 +22,43 @@ SET softversion=1.1.2
 SET softpatch=1
 SET regkey=windirstat
 SET softexec=windirstat%softversion%_setup.exe
+SET shortcut=%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\%softname%.lnk
 
 
-REM Silent install
+ECHO Silent install %softname%
 "%softexec%" /S
 
 
-REM Better reg uninstall key
-REM reg query "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\%regkey%"
-REM IF %ERRORLEVEL% EQU 0 (
-REM   ECHO Better reg uninstall key
-REM    > tmp_install.reg ECHO Windows Registry Editor Version 5.00
-REM   >> tmp_install.reg ECHO.
-REM   >> tmp_install.reg ECHO [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\%regkey%]
-REM   >> tmp_install.reg ECHO "DisplayVersion"="%softversion%"
-REM   >> tmp_install.reg ECHO "Comments"="Package OCS v%softpatch% (%DATE:~-4%/%DATE:~-7,-5%/%DATE:~-10,-8%)"
-REM   >> tmp_install.reg ECHO "DisplayName"="%softname% (%softversion% OCS/%softpatch%)"
-REM   >> tmp_install.reg ECHO.
-REM   regedit.exe /S "tmp_install.reg"
-REM )
+ECHO Copy uninstall script
+IF EXIST "%ProgramFiles(x86)%\WinDirStat\Uninstall.exe" (
+  COPY /A /Y "uninstall.bat" "%ProgramFiles(x86)%\WinDirStat\uninstall.bat"
+)
+
+
+ECHO Search PowerShell
+SET pwrsh=%WINDIR%\System32\WindowsPowerShell\V1.0\powershell.exe
+IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET pwrsh=%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe
+
+ECHO Create shortcut
+IF EXIST "%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs" (
+  %pwrsh% -Command "$WS = New-Object -ComObject WScript.Shell; $SC = $WS.CreateShortcut('%shortcut%'); $SC.TargetPath = '%ProgramFiles(x86)%\WinDirStat\windirstat.exe'; $SC.Save();" -ExecutionPolicy Bypass -NoLogo -NonInteractive -NoProfile
+)
+
+ECHO Better reg uninstall key
+ > tmp_install.reg ECHO Windows Registry Editor Version 5.00
+>> tmp_install.reg ECHO.
+>> tmp_install.reg ECHO [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\%regkey%]
+>> tmp_install.reg ECHO "DisplayVersion"="%softversion%"
+>> tmp_install.reg ECHO "Comments"="%softname%  (%DATE:~-4%/%DATE:~-7,-5%/%DATE:~-10,-8%)"
+>> tmp_install.reg ECHO "DisplayName"="%softname% %softversion%"
+>> tmp_install.reg ECHO "UninstallString"="%SystemDrive%\\Program Files (x86)\\WinDirStat\\uninstall.bat"
+>> tmp_install.reg ECHO "InstallLocation"="%SystemDrive%\\Program Files (x86)\\WinDirStat"
+>> tmp_install.reg ECHO "InstallFolder"="%SystemDrive%\\Program Files (x86)\\WinDirStat"
+>> tmp_install.reg ECHO "DisplayIcon"="%SystemDrive%\\Program Files (x86)\\WinDirStat\\windirstat.exe,0"
+>> tmp_install.reg ECHO "URLInfoAbout"="http://windirstat.info/"
+>> tmp_install.reg ECHO "Publisher"="The authors of WinDirStat"
+>> tmp_install.reg ECHO.
+regedit.exe /S "tmp_install.reg"
 
 
 ECHO END %date%-%time%

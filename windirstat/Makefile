@@ -5,7 +5,7 @@
 
 SOFT:=WinDirStat
 VERSION:=$(shell curl -s -L 'https://windirstat.net/download.html' | sed -e 's/"/\n/g;' | grep 'Latest version:' | cut -f 3 -d ' ' |cut -f 1 -d '<')
-PATCH:=3
+PATCH:=1
 URL:=https://windirstat.mirror.wearetriple.com//wds_current_setup.exe
 
 EXE:=windirstat$(VERSION)_setup.exe
@@ -56,8 +56,9 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 		s/^(SET\ssoftversion=)\d[\.\d]+\w?/$${1}$(VERSION)/; \
 		s/^(SET\ssoftpatch=)\d+/$${1}$(PATCH)/;' install.bat > $@
 
-%.zip: Makefile tmp/install.bat tmp/$(EXE)
+%.zip: Makefile tmp/install.bat tmp/$(EXE) uninstall.bat
 	@rm -f $@
+	@zip -r ./$@ uninstall.bat
 	@(cd tmp; zip -r ../$@ install.bat $(EXE))
 	@chmod ugo+rw $@
 
