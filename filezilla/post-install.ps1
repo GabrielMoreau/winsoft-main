@@ -1,9 +1,9 @@
 
-# Clean old duplicate key with Firefox in the name (same uninstall string)
+# Clean old duplicate key with FileZilla in the name (same uninstall string)
 
 $RefVersion = '91.5.1'
 $RefUninstallString = ''
-$RefName = 'Firefox'
+$RefName = 'FileZilla'
 
 Function ToVersion {
 	Param (

@@ -26,5 +26,19 @@ ECHO Silent install %softname%
 msiexec /i "inkscape-%softversion%-x64.msi" ALLUSERS=1 /qn
 
 
+ECHO Search PowerShell
+SET pwrsh=%WINDIR%\System32\WindowsPowerShell\V1.0\powershell.exe
+IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET pwrsh=%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe
+
+ECHO Add rights
+%pwrsh% Set-ExecutionPolicy RemoteSigned -Force -Scope LocalMachine
+
+ECHO unblock
+%pwrsh% "Unblock-File -Path .\*.ps1"
+
+ECHO Execute post-install script
+%pwrsh% -File ".\post-install.ps1"
+
+
 ECHO END %date%-%time%
 EXIT

@@ -24,12 +24,13 @@ Function ToVersion {
 		If (!($DisplayName -match $RefName)) { Return }
 		$DisplayVersion = $App.DisplayVersion
 		$Exe = $App.UninstallString
-		#Echo '++++++++' $Name $DisplayName $DisplayVersion $Exe
+		$KeyPath = $App.PSPath
 		If ((ToVersion($DisplayVersion)) -eq (ToVersion($RefVersion))) {
 			$RefUninstallString = $Exe
-			$KeyPath = $App.PSPath
 			Echo "Ref Key $DisplayName / $DisplayVersion / $Exe / $KeyPath"
-			}
+		} Else {
+			Echo "Other Key $DisplayName / $DisplayVersion / $Exe / $KeyPath"
+		}
 	}
 
 If ($RefUninstallString -ne '') {
@@ -41,11 +42,13 @@ If ($RefUninstallString -ne '') {
 			If (!($DisplayName -match $RefName)) { Return }
 			$DisplayVersion = $App.DisplayVersion
 			$Exe = $App.UninstallString
+			$KeyPath = $App.PSPath
 			# Echo "Check Key $DisplayName : $DisplayVersion < $RefVersion ?"
-			If (($Exe -eq $RefUninstallString) -And ((ToVersion($DisplayVersion)) -lt (ToVersion($RefVersion)))) {
-				$KeyPath = $App.PSPath
+			If ((($Exe -eq $RefUninstallString) -Or ($Exe -eq $Null)) -And ((ToVersion($DisplayVersion)) -lt (ToVersion($RefVersion)))) {
 				Echo "Remove Key $DisplayName / $DisplayVersion / $Exe / $KeyPath"
 				Remove-Item -Path "$KeyPath" -Force -Recurse -ErrorAction SilentlyContinue
+			} Else {
+				Echo "Keep Key $DisplayName / $DisplayVersion / $Exe / $KeyPath / $(ToVersion($DisplayVersion))"
 			}
 		}
 }

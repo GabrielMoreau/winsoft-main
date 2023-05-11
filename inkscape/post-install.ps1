@@ -1,9 +1,9 @@
 
-# Clean old duplicate key with Firefox in the name (same uninstall string)
+# Clean old duplicate key with Inkscape in the name (same uninstall string)
 
 $RefVersion = '91.5.1'
 $RefUninstallString = ''
-$RefName = 'Firefox'
+$RefName = 'Inkscape'
 
 Function ToVersion {
 	Param (
