@@ -44,6 +44,17 @@ IF EXIST "%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs" (
   %pwrsh% -Command "$WS = New-Object -ComObject WScript.Shell; $SC = $WS.CreateShortcut('%shortcut%'); $SC.TargetPath = '%ProgramFiles(x86)%\WinDirStat\windirstat.exe'; $SC.Save();" -ExecutionPolicy Bypass -NoLogo -NonInteractive -NoProfile
 )
 
+
+ECHO Clean register
+reg query "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\%regkey%"
+IF %ERRORLEVEL% EQU 0 (
+  REG DELETE "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\%regkey%" /F
+)
+reg query "HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\%regkey%"
+IF %ERRORLEVEL% EQU 0 (
+  REG DELETE "HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\%regkey%" /F
+)
+
 ECHO Better reg uninstall key
  > tmp_install.reg ECHO Windows Registry Editor Version 5.00
 >> tmp_install.reg ECHO.
