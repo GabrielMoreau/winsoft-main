@@ -1,7 +1,20 @@
 # WinSoft-Main - Main files for package build
 
-Each folder (except common) contains a software (or a coherent set of software) useful for users.
-In each folder, there is a `Makefile` that will allow to build the OCS Inventory package.
+WinSoft is the acronym for Windows Software.
+WinSoft-Main helps you create packages
+(Zip archives with a built-in silent installer)
+of the latest versions of many standard Windows software. 
+
+Each folder (except the common folder) contains a piece of software
+(or a coherent set of software) that is useful to users.
+In each folder there is a `Makefile` which will build the OCS Inventory
+package which is just a Zip archive.
+Inside this archive, the DOS script `install.bat` starts the
+installation process, or uninstallation if it is an obsolete software
+package with `uninstall` in its name.
+
+With a little work, it would be quite easy to transform these Zip
+archives into WAPT packages.
 
 ```bash
 make
