@@ -1,6 +1,6 @@
 # Released under the MIT License (MIT)
 
-Copyright (C) 2021-2022, LEGI UMR 5519 / CNRS UGA G-INP, Grenoble, France
+Copyright (C) 2021-2023, LEGI UMR 5519 / CNRS UGA G-INP, Grenoble, France
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation
