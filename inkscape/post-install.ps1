@@ -16,6 +16,7 @@ Function ToVersion {
 	Return [version]$Version
 }
 
+# Find last install
 @(Get-ChildItem -Recurse 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall';
   Get-ChildItem -Recurse "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall") |
 	ForEach {
@@ -33,6 +34,7 @@ Function ToVersion {
 		}
 	}
 
+# Remove empty key and old same key
 If ($RefUninstallString -ne '') {
 	@(Get-ChildItem -Recurse 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall';
 	  Get-ChildItem -Recurse "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall") |
