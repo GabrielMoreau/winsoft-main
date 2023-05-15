@@ -48,7 +48,7 @@ checksum:
 tmp/%.exe:
 	@mkdir -p tmp
 	@(cd tmp ; \
-		rm -rf "Fiji.app" "Fiji.app-$(VERSION)" "$(ZIP)" "$(EXE)" 2>/dev/null ; \
+		rm -rf Fiji.app Fiji.app-* ANKAphase.zip "$(ZIP)" "$(EXE)" 2>/dev/null ; \
 		curl -# -o "$(ZIP)" -L "$(URL)" ; \
 		unzip -q "$(ZIP)" ; \
 		mv Fiji.app "Fiji.app-$(VERSION)" ; \
@@ -63,7 +63,7 @@ tmp/%.exe:
 
 %.zip: Makefile tmp/$(EXE) install.bat post-install.ps1
 	@mkdir -p tmp
-	IVERSION=$$(zgrep 'plugin update-site.*filename="jars/ij-[[:digit:]]' tmp/$(SUBFOLDER)/db.xml.gz  | cut -f 4 -d '"' | cut -f 2 -d '-' | sed -e 's/.jar$$//;') ; \
+	@IVERSION=$$(zgrep 'plugin update-site.*filename="jars/ij-[[:digit:]]' tmp/$(SUBFOLDER)/db.xml.gz  | cut -f 4 -d '"' | cut -f 2 -d '-' | sed -e 's/.jar$$//;') ; \
 	NVERSION=$$(echo $${IVERSION} | sed -e 's/\w$$//;') ; \
 	perl -p -e " \
 		s/^(SET\ssoftversion=)\d[\.\d]+/\$${1}$(VERSION)/; \
