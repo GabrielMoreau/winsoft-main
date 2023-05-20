@@ -4,6 +4,7 @@ WinSoft is the acronym for Windows Software.
 WinSoft-Main helps you create packages
 (Zip archives with a built-in silent installer)
 of the latest versions of many standard Windows software. 
+A better name could be Windows AutoBuild Silent Package Software.
 
 Each folder (except the common folder) contains a piece of software
 (or a coherent set of software) that is useful to users.
@@ -14,7 +15,7 @@ installation process, or uninstallation if it is an obsolete software
 package with `uninstall` in its name.
 
 With a little work, it would be quite easy to transform these Zip
-archives into WAPT packages.
+archives into WAPT, or PDQDeploy packages.
 
 ```bash
 make
