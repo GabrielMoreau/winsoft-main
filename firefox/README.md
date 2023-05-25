@@ -22,6 +22,9 @@ It's possible to validate the `policies.json` file with
 cat policies.json | jq empty
 ```
 
+You can see the deployed policies by using the URL about:policies
+
+
 ## Extension F-secure
 
 * https://help.f-secure.com/product.html#business/psb-portal/latest/en/task_DEB5ED2F1918438592921906DA2685F2-psb-portal-latest-en

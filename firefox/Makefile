@@ -60,9 +60,9 @@ tmp/post-install.ps1: post-install.ps1 Makefile tmp/$(EXE)
 	@perl -p -e ' \
 		s/^(.RefVersion = .)\d[\.\d]+/$${1}$(VERSION)/;' post-install.ps1 > $@
 
-%.zip: Makefile tmp/install.bat tmp/post-install.ps1 policies.json tmp/$(EXE)
+%.zip: Makefile tmp/install.bat tmp/post-install.ps1 policies.json pre-install.ps1 tmp/$(EXE)
 	@rm -f $@
-	@zip -r $@ policies.json
+	@zip -r $@ policies.json pre-install.ps1
 	@(cd tmp; zip -r ../$@ install.bat post-install.ps1 $(EXE))
 	@chmod ugo+rw $@
 

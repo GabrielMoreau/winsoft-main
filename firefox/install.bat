@@ -31,17 +31,6 @@ VER | FIND /I "6.1" > NUL
 IF %ERRORLEVEL%==0 TASKKILL /T /F /IM %process%
 
 
-ECHO Silent install %softname%
-msiexec /i "Firefox-Setup-%softversion%-esr.msi" INSTALL_MAINTENANCE_SERVICE=false /q
-
-
-REM voir https://github.com/mozilla/policy-templates/blob/master/README.md
-IF EXIST "C:\Program Files\Mozilla Firefox" (
-  IF NOT EXIST "C:\Program Files\Mozilla Firefox\distribution" MKDIR "C:\Program Files\Mozilla Firefox\distribution"
-  IF EXIST "C:\Program Files\Mozilla Firefox\distribution" COPY /y policies.json "C:\Program Files\Mozilla Firefox\distribution\policies.json" > NUL
-)
-
-
 ECHO Search PowerShell
 SET pwrsh=%WINDIR%\System32\WindowsPowerShell\V1.0\powershell.exe
 IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET pwrsh=%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe
@@ -51,6 +40,22 @@ ECHO Add rights
 
 ECHO unblock
 %pwrsh% "Unblock-File -Path .\*.ps1"
+
+
+ECHO Execute pre-install script (clean register policies)
+%pwrsh% -File ".\pre-install.ps1"
+
+
+ECHO Silent install %softname%
+msiexec /i "Firefox-Setup-%softversion%-esr.msi" INSTALL_MAINTENANCE_SERVICE=false /q
+
+
+REM voir https://github.com/mozilla/policy-templates/blob/master/README.md
+ECHO Push policies
+IF EXIST "C:\Program Files\Mozilla Firefox" (
+  IF NOT EXIST "C:\Program Files\Mozilla Firefox\distribution" MKDIR "C:\Program Files\Mozilla Firefox\distribution"
+  IF EXIST "C:\Program Files\Mozilla Firefox\distribution" COPY /y policies.json "C:\Program Files\Mozilla Firefox\distribution\policies.json" > NUL
+)
 
 ECHO Execute post-install script
 %pwrsh% -File ".\post-install.ps1"
