@@ -76,7 +76,7 @@ space:
 	for d in $(PKGDIR)
 	do
 		(cd $$d; \
-			ls -t *.zip | tail -n +$(KEEP) | xargs -r rm -f; \
+			ls -t *.zip 2>/dev/null | tail -n +$(KEEP) | xargs -r rm -f; \
 			rm -f .make.log; \
 		)
 	done
