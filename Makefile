@@ -46,6 +46,20 @@ clean-all:
 		(cd $$d; make clean; rm -f .make.log)
 	done
 
+checksum-all:
+	@
+	for d in $(PKGDIR)
+	do
+		echo ''
+		if [ -f "$$d/.noauto" ] || grep -q "^$$d" ./common/noauto.conf ../winsoft-conf/common/noauto.conf 2> /dev/null
+		then
+			echo "#=== pass:$$d"
+			continue
+		fi
+		echo "#=== $$d ===#"
+		(cd $$d; grep -q '^checksum:' Makefile && make checksum)
+	done
+
 list-pkg:
 	@
 	for d in $(PKGDIR)
