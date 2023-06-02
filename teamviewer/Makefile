@@ -4,7 +4,7 @@
 #
 
 SOFT:=TeamViewer
-VERSION:=$(shell curl -s -L 'https://www.teamviewer.com/en/download/windows/' | sed -e 's/[<>]/\n/g;' | grep '^Current version:' | cut -f 3 -d ' ' | head -1)
+VERSION:=$(shell curl -s -L 'https://www.teamviewer.com/en/download/windows/' | sed -e 's/[[:space:]]/\n/g; s/[<>]/ /g;' | grep 'data-dl-version-label' | cut -f 2 -d ' ' | head -1)
 PATCH:=1
 URL:=https://download.teamviewer.com/download/TeamViewer_Setup_x64.exe
 
