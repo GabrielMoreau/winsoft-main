@@ -4,7 +4,7 @@
 #
 
 SOFT:=Teams
-VERSION:=$(shell curl -s -L 'https://learn.microsoft.com/en-us/officeupdates/teams-app-versioning' | grep -A 15 'Windows version history' | tail -1 | cut -f 2 -d '>' | cut -f 1 -d '<')
+VERSION:=$(shell curl -s -L 'https://learn.microsoft.com/en-us/officeupdates/teams-app-versioning' | grep -A 30 'Windows version history' | grep '^<td' | cut -f 2 -d '>' | cut -f 1 -d '<' | egrep '^[[:digit:]][[:digit:]]?\.[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+$$' | head -1)
 URL:=https://teams.microsoft.com/downloads/desktopurl?env=production&plat=windows&arch=x64&managedInstaller=true&download=true
 PATCH:=1
 
