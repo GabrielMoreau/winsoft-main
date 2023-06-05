@@ -30,7 +30,7 @@ clean:
 	rm -rf $(SOFT)-$(VERSIONLONG)-$(PATCH).zip tmp resources
 
 version:
-	@echo "VERSIONLONG:     $(VERSIONLONG)"
+	@echo "VERSION:         $(VERSIONLONG)"
 	@echo "VERSIONCOLLAPSE: $(VERSIONCOLLAPSE)"
 	@echo "VERSIONSHORT:    $(VERSIONSHORT)"
 	@echo "URL: $(URL)"

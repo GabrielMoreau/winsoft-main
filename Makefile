@@ -79,7 +79,7 @@ list-version:
 		then
 			continue
 		fi
-		printf "%25s %s\n" "$${d%/}" $$(cd $$d; make version | grep '^VERSION:' | cut -f 2 -d ' ')
+		printf "%25s %s\n" "$${d%/}" $$(cd $$d; make version | grep '^VERSION:' | awk '{print $$2}')
 	done
 
 space:
