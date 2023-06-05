@@ -71,6 +71,17 @@ list-pkg:
 		)
 	done
 
+list-version:
+	@
+	for d in $(PKGDIR)
+	do
+		if [ -f "$$d/.noauto" ] || grep -q "^$$d" ./common/noauto.conf ../winsoft-conf/common/noauto.conf 2> /dev/null
+		then
+			continue
+		fi
+		printf "%25s %s\n" "$${d%/}" $$(cd $$d; make version | grep '^VERSION:' | cut -f 2 -d ' ')
+	done
+
 space:
 	@
 	for d in $(PKGDIR)
