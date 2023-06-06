@@ -4,7 +4,7 @@
 #
 
 SOFT:=Webex
-VERSION:=$(shell curl -s -L 'https://help.webex.com/en-us/article/mqkve8/Webex-App-%7C-Release-notes'| sed -e 's/[<>[:space:]]/\n/g; s/—/-/g;' | grep '^Windows-[[:digit:]]' | head -1 | cut -f 2 -d '-')
+VERSION:=$(shell curl -s -L 'https://help.webex.com/fr-fr/article/mqkve8/Application-Webex|-Notes-de-version'| sed -e 's/[<>[:space:]]/\n/g; s/—/-/g;' | grep '^Windows-[[:digit:]]' | head -1 | cut -f 2 -d '-')
 PATCH:=1
 URL:=https://binaries.webex.com/WebexTeamsDesktop-Windows-Gold/Webex.msi
 
