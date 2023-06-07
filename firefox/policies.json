@@ -48,6 +48,17 @@
       "UrlbarInterventions": false,
       "SkipOnboarding": true,
       "MoreFromMozilla": false
+    },
+    "SanitizeOnShutdown": {
+      "Cache": true,
+      "Cookies": true,
+      "Downloads": false,
+      "FormData": false,
+      "History": false,
+      "Sessions": true,
+      "SiteSettings": false,
+      "OfflineApps": false,
+      "Locked": true
     }
   }
 }
