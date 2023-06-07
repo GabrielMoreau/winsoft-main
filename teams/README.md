@@ -1,4 +1,4 @@
-# Microsoft Teams - Videoconferencing and communication platform
+# MSTeams - Microsoft Videoconferencing and communication platform
 
 Microsoft Teams is a proprietary business communication platform, as
 part of the Microsoft 365 family of products. Teams offering workspace
