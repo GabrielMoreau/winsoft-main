@@ -22,6 +22,11 @@ SET softversion=91.5.1
 SET softpatch=1
 
 
+ECHO Silent Uninstall XnView on 32-bit or 64-bit System
+IF EXIST "%ProgramFiles%\XnView\unins000.exe"      "%ProgramFiles%\XnView\unins000.exe"      /VERYSILENT /NORESTART
+IF EXIST "%ProgramFiles(x86)%\XnView\unins000.exe" "%ProgramFiles(x86)%\XnView\unins000.exe" /VERYSILENT /NORESTART
+
+
 ECHO Silent install %softname%
 XnViewMP-win-%softversion%-x64.exe /VERYSILENT /NORESTART /SUPPRESSMSGBOXES /MERGETASKS=!desktopicon /LOG="%logdir%\%softname%-MSI.log"
 

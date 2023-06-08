@@ -11,3 +11,6 @@ batch renaming and screen capture tools.
 * Download : https://www.xnview.com/en/xnviewmp/
 * Silent install : https://silentinstallhq.com/xnview-silent-install-how-to-guide
   https://wapt.tranquil.it/store/en/tis-xnview-mp
+
+The `install.bat` scriptremoves older versions of XnView,
+leaving only the XnViewMP version on the workstation.
