@@ -30,5 +30,10 @@ ECHO Silent install %softname%
 RStudio-%softversion%.exe /S
 
 
+ECHO Remove desktop shortcut for R
+IF EXIST "%PUBLIC%\Desktop\R %softversion2%.lnk"          DEL /F /Q "%PUBLIC%\Desktop\R %softversion2%.lnk"
+IF EXIST "%ALLUSERSPROFILE%\Desktop\R %softversion2%.lnk" DEL /F /Q "%ALLUSERSPROFILE%\Desktop\R %softversion2%.lnk"
+
+
 ECHO END %date%-%time%
 EXIT
