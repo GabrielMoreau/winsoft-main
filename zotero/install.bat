@@ -22,8 +22,13 @@ SET softversion=91.5.1
 SET softpatch=1
 
 
-REM Silent install
+ECHO Silent install %softname%
 Zotero-%softversion%_setup.exe /S
+
+
+ECHO Remove desktop shortcut
+IF EXIST "%PUBLIC%\Desktop\%softname%.lnk"          DEL /F /Q "%PUBLIC%\Desktop\%softname%.lnk"
+IF EXIST "%ALLUSERSPROFILE%\Desktop\%softname%.lnk" DEL /F /Q "%ALLUSERSPROFILE%\Desktop\%softname%.lnk"
 
 
 ECHO END %date%-%time%

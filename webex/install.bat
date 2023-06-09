@@ -46,5 +46,10 @@ ECHO Silent install %softname%
 msiexec /i "Webex-%softversion%.msi" ACCEPT_EULA=TRUE ALLUSERS=1 AUTOUPGRADEENABLED=0 AUTOSTART_WITH_WINDOWS=False /qn /L*v "%logdir%\%softname%-MSI.log"
 
 
+ECHO Remove desktop shortcut
+IF EXIST "%PUBLIC%\Desktop\%softname%.lnk"          DEL /F /Q "%PUBLIC%\Desktop\%softname%.lnk"
+IF EXIST "%ALLUSERSPROFILE%\Desktop\%softname%.lnk" DEL /F /Q "%ALLUSERSPROFILE%\Desktop\%softname%.lnk"
+
+
 ECHO END %date%-%time%
 EXIT
