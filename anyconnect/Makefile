@@ -10,6 +10,7 @@ VERSIONONLINE:=$(shell curl -s 'https://www.cisco.com/c/en/us/td/docs/security/v
 
 EXE:=anyconnect-win-$(VERSION)-core-vpn-webdeploy-k9.msi
 
+CISCO_VPN_SERVER:=vpn.example.com
 IT_TEAM:=IT Support
 
 
@@ -50,10 +51,15 @@ tmp/install.bat: install.bat Makefile $(EXE)
 		s/^(SET\ssoftversion=)\d[\.\d]+\w?/$${1}$(VERSION)/; \
 		s/^(SET\ssoftpatch=)\d+/$${1}$(PATCH)/;' install.bat > $@
 
-%.zip: Makefile tmp/install.bat $(EXE) Profile_VPN_Default.xml
+tmp/Profile_VPN_Default.xml: install.bat Makefile
+	@mkdir -p tmp
+	@perl -p -e ' \
+		s/^(__VPN_SERVER__)/$(CISCO_VPN_SERVER)/;' Profile_VPN_Default.xml > $@
+
+%.zip: Makefile tmp/install.bat $(EXE) tmp/Profile_VPN_Default.xml
 	@rm -f $@
-	@zip -r $@ $(EXE) Profile_VPN_Default.xml
-	@(cd tmp; zip -r ../$@ install.bat $(EXE))
+	@zip -r $@ $(EXE)
+	@(cd tmp; zip -r ../$@ install.bat $(EXE) Profile_VPN_Default.xml)
 	@chmod ugo+rw $@
 
 ocs:

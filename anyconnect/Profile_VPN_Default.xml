@@ -33,8 +33,8 @@
 	</ClientInitialization>
 	<ServerList>
 		<HostEntry>
-			<HostName>vpn.grenet.fr</HostName>
-			<HostAddress>vpn.grenet.fr</HostAddress>
+			<HostName>__VPN_SERVER__</HostName>
+			<HostAddress>__VPN_SERVER__</HostAddress>
 		</HostEntry>
 	</ServerList>
 </AnyConnectProfile>
