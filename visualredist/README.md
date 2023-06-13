@@ -17,7 +17,7 @@ Last versions :
 * folder 2012      - 11.0.61030.0
 * folder 2013      - 12.0.40664.0
 * folder 2015-2019 - 14.29.30139.0
-* folder 2015-2022 - 14.34.31938.0
+* folder 2015-2022 - 14.36.32532.0
 
 Have the version of an executable with `sigcheck.exe` or `peres` (natif):
 ```

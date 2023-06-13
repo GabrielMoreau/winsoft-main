@@ -23,7 +23,7 @@ $ToDo = 'unknown'
 			}
 
 			ElseIf ($DisplayName -match '2015-2022.*x64') {
-				If ($DisplayVersion -lt [version]'14.34.31931.0') {
+				If ($DisplayVersion -lt [version]'14.36.32532.0') {
 					If ($ToDo -eq 'unknown') {
 						$ToDo = 'install-2022'
 					}
