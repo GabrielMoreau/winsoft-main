@@ -4,7 +4,7 @@
 #
 
 SOFT:=AnyConnect
-VERSION:=4.10.05111
+VERSION:=4.10.07061
 PATCH:=1
 VERSIONONLINE:=$(shell curl -s 'https://www.cisco.com/c/en/us/td/docs/security/vpn_client/anyconnect/anyconnect410/release/notes/release-notes-anyconnect-4-10.html' | sed -e 's/[<>]/\n/g;' | grep '^AnyConnect [[:digit:]].* New Features' | head -1 | cut -f 2 -d ' ')
 
@@ -22,7 +22,7 @@ sinclude ../common/global.mk
 
 check-version:
 	@echo $(VERSION) | egrep -q '^[[:digit:]][\.[:digit:]]*$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
-	@[ "$(VERSION)" != "$(VERSIONONLINE)" ] && { echo '#'; echo "# Warning: a new version $(VERSIONONLINE) exist on Cisco website!"; echo '#'; }
+	@[ "$(VERSION)" = "$(VERSIONONLINE)" ] || { echo '#'; echo "# Warning: a new version $(VERSIONONLINE) exist on Cisco website!"; echo '#'; }
 
 clean:
 	rm -rf $(SOFT)-$(VERSION)-$(PATCH).zip tmp
@@ -34,11 +34,10 @@ version:
 	@echo "VERSIONONLINE: $(VERSIONONLINE)"
 
 checksum:
-	@mkdir -p tmp
-	@(cd tmp ; \
-		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt && exit ; \
-		shasum -a 256 "$(EXE)" | sed -e 's#tmp/##;' >> ../checksum.txt ; \
-		tail -3 ../checksum.txt ; \
+	@( \
+		grep -q "^$$(shasum -a 256 $(EXE))$$" ./checksum.txt && exit; \
+		shasum -a 256 "$(EXE)" | sed -e 's#tmp/##;' >> ./checksum.txt; \
+		tail -3 ./checksum.txt; \
 		)
 
 control:
