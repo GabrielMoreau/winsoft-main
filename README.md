@@ -19,7 +19,7 @@ package which is just a Zip archive.
 Inside this archive, the DOS script `install.bat` starts the
 installation process, or uninstallation if it is an obsolete software
 package with `uninstall` in its name.
-There are sometimes pre-install and post-install scripts
+There are sometimes `pre-install.ps1` and `post-install.ps1` scripts
 written in PowerShell.
 
 With a little work, it would be quite easy to transform these Zip
@@ -67,3 +67,12 @@ to facilitate automation.
 Note the optional use of the `peres` tool (Debian `pev` package)
 which allows to retrieve the version number in a `setup.exe` installation file.
 If this tool is available, a version number check is performed.
+malheureusement, il y a de nombreux p
+
+Unfortunately, many installation programs `setup.exe` have no version
+number (Product Version). This is a pity, as there is sometimes some
+doubt as to the actual version of a program.
+
+Similarly, some MSI packages have the version number in the comment or
+subject line, but not all. It is therefore difficult to always validate
+this version number.
