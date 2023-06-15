@@ -54,7 +54,7 @@ tmp/Profile_VPN_Default.xml: Profile_VPN_Default.xml Makefile
 	@mkdir -p tmp
 	@perl -p -e ' \
 		s/(__VPN_SERVER__)/$(CISCO_VPN_SERVER)/;' Profile_VPN_Default.xml > $@
-	@if grep -q '__VPN_SERVER__' $@; then echo "Error: bad VPN Server replacement in $<"; fi
+	@if grep -q '__VPN_SERVER__' $@; then echo "Error: bad VPN Server substitution in $<"; fi
 
 %.zip: Makefile tmp/install.bat $(EXE) tmp/Profile_VPN_Default.xml
 	@rm -f $@
