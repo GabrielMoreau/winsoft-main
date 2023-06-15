@@ -46,7 +46,7 @@ checksum:
 		grep -q "^$$(shasum -a 256 $(EXE1))$$" ../checksum.txt || { shasum -a 256 "$(EXE1)" | sed -e 's#tmp/##;' >> ../checksum.txt ; } ; \
 		grep -q "^$$(shasum -a 256 $(EXE2))$$" ../checksum.txt || { shasum -a 256 "$(EXE2)" | sed -e 's#tmp/##;' >> ../checksum.txt ; } ; \
 		)
-	@find . -name checksum.txt -a -mtime -1 >/dev/null && tail -6 checksum.txt
+	@[ $$(( $$(date '+%s') - $$(stat -c '%Y' checksum.txt) )) -lt 60 ] && tail -6 checksum.txt
 
 wget: tmp/$(EXE1)
 
