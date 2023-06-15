@@ -53,7 +53,7 @@ tmp/install.bat: install.bat Makefile $(EXE)
 tmp/Profile_VPN_Default.xml: install.bat Makefile
 	@mkdir -p tmp
 	@perl -p -e ' \
-		s/^(__VPN_SERVER__)/$(CISCO_VPN_SERVER)/;' Profile_VPN_Default.xml > $@
+		s/(__VPN_SERVER__)/$(CISCO_VPN_SERVER)/;' Profile_VPN_Default.xml > $@
 
 %.zip: Makefile tmp/install.bat $(EXE) tmp/Profile_VPN_Default.xml
 	@rm -f $@

@@ -36,7 +36,7 @@ IF NOT EXIST "%ProgramData%\Cisco\Cisco AnyConnect Secure Mobility Client" (
 IF NOT EXIST "%ProgramData%\Cisco\Cisco AnyConnect Secure Mobility Client\Profile" (
   MKDIR "%ProgramData%\Cisco\Cisco AnyConnect Secure Mobility Client\Profile"
 )
-COPY /B /Y "Profile_VPN_Default.xml" "%ProgramData%\Cisco\Cisco AnyConnect Secure Mobility Client\Profile\Profile_VPN_Default.xml"
+COPY /A /Y "Profile_VPN_Default.xml" "%ProgramData%\Cisco\Cisco AnyConnect Secure Mobility Client\Profile\Profile_VPN_Default.xml"
 
 
 ECHO END %date%-%time%
