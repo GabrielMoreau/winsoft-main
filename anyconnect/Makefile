@@ -50,7 +50,7 @@ tmp/install.bat: install.bat Makefile $(EXE)
 		s/^(SET\ssoftversion=)\d[\.\d]+\w?/$${1}$(VERSION)/; \
 		s/^(SET\ssoftpatch=)\d+/$${1}$(PATCH)/;' install.bat > $@
 
-tmp/Profile_VPN_Default.xml: install.bat Makefile
+tmp/Profile_VPN_Default.xml: Profile_VPN_Default.xml Makefile
 	@mkdir -p tmp
 	@perl -p -e ' \
 		s/(__VPN_SERVER__)/$(CISCO_VPN_SERVER)/;' Profile_VPN_Default.xml > $@
