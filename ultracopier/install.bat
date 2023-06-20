@@ -22,7 +22,23 @@ SET softversion=91.5.1
 SET softpatch=1
 
 
-REM Silent install
+ECHO Remove old version (not clean but work's with /S flag)
+IF EXIST "%ProgramFiles%\Ultracopier" (
+  RMDIR /S /Q "%ProgramFiles%\Ultracopier"
+)
+IF EXIST "%ProgramFiles(x86)%\Ultracopier" (
+  RMDIR /S /Q "%ProgramFiles(x86)%\Ultracopier"
+)
+REG QUERY "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Ultracopier"
+IF %ERRORLEVEL% EQU 0 (
+  REG DELETE "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Ultracopier" /F
+)
+REG QUERY "HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Ultracopier"
+IF %ERRORLEVEL% EQU 0 (
+  REG DELETE "HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Ultracopier" /F
+)
+
+ECHO Silent install %softname%
 ultracopier-windows-x86_64-%softversion%-setup.exe /S
 
 
