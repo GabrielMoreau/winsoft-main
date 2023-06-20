@@ -22,11 +22,16 @@ SET softversion=4.10.04071
 SET softpatch=1
 
 
-REM Silent install
+ECHO Stop VPN service
+REM Get-Service -Name 'vpnagent'
+REM Get-Service -DisplayName 'Cisco AnyConnect Secure Mobility Agent'
+NET STOP "vpnagent"
+
+ECHO Silent install %softname%
 msiexec /i "anyconnect-win-%softversion%-core-vpn-webdeploy-k9.msi" ALLUSERS=1 /qn /norestart /L*v "%logdir%\%softname%-MSI.log"
 
 
-REM Default profile
+ECHO Copy default profile
 IF NOT EXIST "%ProgramData%\Cisco" (
   MKDIR "%ProgramData%\Cisco"
 )
@@ -36,7 +41,15 @@ IF NOT EXIST "%ProgramData%\Cisco\Cisco AnyConnect Secure Mobility Client" (
 IF NOT EXIST "%ProgramData%\Cisco\Cisco AnyConnect Secure Mobility Client\Profile" (
   MKDIR "%ProgramData%\Cisco\Cisco AnyConnect Secure Mobility Client\Profile"
 )
-COPY /A /Y "Profile_VPN_Default.xml" "%ProgramData%\Cisco\Cisco AnyConnect Secure Mobility Client\Profile\Profile_VPN_Default.xml"
+
+ECHO Stop VPN service
+NET STOP "vpnagent"
+
+ECHO Copy Profile
+COPY /B /Y "Profile_VPN_Default.xml" "%ProgramData%\Cisco\Cisco AnyConnect Secure Mobility Client\Profile\Profile_VPN_Default.xml"
+
+ECHO Start VPN service
+NET START "vpnagent"
 
 
 ECHO END %date%-%time%
