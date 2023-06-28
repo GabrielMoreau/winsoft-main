@@ -1,1 +1,2 @@
 c395798af29cc4a63f47af46b6a2e5aa985742dae1417fcba482270ef65e584b  blender-3.5.1-windows-x64.msi
+ac93288c9fbd4dce776e254e54d4e054a9168d17b8aa1b852549aa22b7d68c25  blender-3.6.0-windows-x64.msi
