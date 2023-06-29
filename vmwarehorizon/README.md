@@ -9,3 +9,6 @@ from any location.
 
 * Download : https://en.wikipedia.org/wiki/VMware_Horizon
 * Silent install : https://silentinstallhq.com/vmware-horizon-client-silent-install-how-to-guide/
+
+You should manually check regularly for updates to the Horizon client at https://www.vmware.com/go/viewclients.
+If you have a script to get the URL of the latest client version, please share it.
