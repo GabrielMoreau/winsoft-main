@@ -92,7 +92,7 @@ list-md:
 	do
 		url=$$(grep '* Website : ' $${pkg}/README.md | cut -f 4 -d ' ')
 		head -1 $${pkg}/README.md |perl -p -e "s{^#\s(.*)\s-\s(.*)}{ | [\\1]($${pkg}/README.md) | \\2 | [&#127968;]($${url})  |};" | sed -e 's/\[&#127968;\]()//;'
-	done
+	done | sort
 
 space:
 	@

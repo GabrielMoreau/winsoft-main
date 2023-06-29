@@ -97,11 +97,10 @@ this version number.
  | [Dell Command Update](dellcmdupdate/README.md) | Update BIOS and Firmware | [&#127968;](https://www.dell.com/)  |
  | [Digikam](digikam/README.md) | Image organizer and tag editor  | [&#127968;](https://www.digikam.org/)  |
  | [Engauge Digitizer](engaugedigitizer/README.md) | Digitalize curve image to data point | [&#127968;](https://markummitchell.github.io/engauge-digitizer/)  |
+ | [FastStone Image Viewer](fsimageviewer/README.md) | Image browser, converter and editor | [&#127968;](https://www.faststone.org/)  |
  | [FileZilla](filezilla/README.md) | FTP/SFTP client | [&#127968;](https://filezilla-project.org/)  |
- | [Mozilla Firefox](firefox/README.md) | Web navigator | [&#127968;](https://www.mozilla.org)  |
  | [FlashPlayer-Uninstall](flashplayer-uninstall/README.md) | Remove all version of Adobe Flash Player |   |
  | [FreeCAD](freecad/README.md) | Parametric 3D modeler (CAD) | [&#127968;](https://www.freecad.org/)  |
- | [FastStone Image Viewer](fsimageviewer/README.md) | Image browser, converter and editor | [&#127968;](https://www.faststone.org/)  |
  | [Gimp](gimp/README.md) | Image graphics editor | [&#127968;](https://www.gimp.org/)  |
  | [GitForWindows](gitforwindows/README.md) | Git for the Windows OS | [&#127968;](https://gitforwindows.org/)  |
  | [Gwyddion](gwyddion/README.md) | Data visualization and analysis for SPM | [&#127968;](http://gwyddion.net/)  |
@@ -114,7 +113,10 @@ this version number.
  | [LibreOffice](libreoffice/README.md) | Libre Office suite based on the OpenDocument standard | [&#127968;](https://www.libreoffice.org/)  |
  | [LightBulb](lightbulb/README.md) | Automatically adjusts screen gamma and color temperature | [&#127968;](https://github.com/Tyrrrz/LightBulb)  |
  | [MiKTeX](miktex/README.md) | TeX and LaTeX distribution | [&#127968;](https://miktex.org/)  |
+ | [Mozilla Firefox](firefox/README.md) | Web navigator | [&#127968;](https://www.mozilla.org)  |
+ | [Mozilla Thunderbird](thunderbird/README.md) | Mail reader | [&#127968;](https://www.thunderbird.net/)  |
  | [MSEdge](msedge/README.md) | Microsoft Edge (Chrome) navigator | [&#127968;](https://www.microsoft.com/en-us/edge/business)  |
+ | [MSTeams](teams/README.md) | Microsoft Videoconferencing and communication platform | [&#127968;](https://www.microsoft.com/fr-fr/microsoft-teams/)  |
  | [Nextcloud](nextcloud/README.md) | Cloud Suite | [&#127968;](https://nextcloud.com/)  |
  | [Notepad++](notepadpp/README.md) | Text editor | [&#127968;](https://notepad-plus-plus.org)  |
  | [OBS Studio](obsstudio/README.md) | Screencasting and streaming application | [&#127968;](https://obsproject.com/)  |
@@ -130,15 +132,13 @@ this version number.
  | [Skype](skype/README.md) | VoIP and Videoconferencing Client | [&#127968;](https://www.skype.com/)  |
  | [SSHFS-Win](sshfs-win/README.md) | Connect network drive on an SSH/SFTP server |   |
  | [SumatraPDF](sumatrapdf/README.md) | Free and open-source document viewer (PDF, DjVu, EPUB...) | [&#127968;](https://www.sumatrapdfreader.org/free-pdf-reader)  |
- | [MSTeams](teams/README.md) | Microsoft Videoconferencing and communication platform | [&#127968;](https://www.microsoft.com/fr-fr/microsoft-teams/)  |
  | [TeamViewer](teamviewer/README.md) | Remote access and remote control | [&#127968;](https://www.teamviewer.com)  |
  | [TexMaker](texmaker/README.md) | Free cross-platform LaTeX editor | [&#127968;](https://www.xm1math.net/texmaker/)  |
- | [Mozilla Thunderbird](thunderbird/README.md) | Mail reader | [&#127968;](https://www.thunderbird.net/)  |
  | [TortoiseSVN](tortoisesvn/README.md) | Subversion Client | [&#127968;](https://tortoisesvn.net/)  |
  | [Ultracopier](ultracopier/README.md) | File-copying software | [&#127968;](https://ultracopier.herman-brule.com/)  |
  | [VeraCrypt](veracrypt/README.md) | Crypt disk and volume (USK key) | [&#127968;](https://veracrypt.fr/)  |
- | [VirtualBox7](virtualbox/README.md) | Oracle Hypervisor for virtual machines | [&#127968;](https://www.virtualbox.org/)  |
  | [VirtualBox6](virtualbox6/README.md) | Oracle Hypervisor for virtual machines | [&#127968;](https://www.virtualbox.org/)  |
+ | [VirtualBox7](virtualbox/README.md) | Oracle Hypervisor for virtual machines | [&#127968;](https://www.virtualbox.org/)  |
  | [VisualRedist](visualredist/README.md) | Visual C++ Redistributable Library |   |
  | [VLC](vlc/README.md) | VLC media player | [&#127968;](https://www.videolan.org/)  |
  | [VMware Horizon Client](vmwarehorizon/README.md) | Client for VDI VMware Horizon (virtual desktop) | [&#127968;](https://www.vmware.com/products/horizon.html)  |
