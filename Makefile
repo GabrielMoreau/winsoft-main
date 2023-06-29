@@ -83,9 +83,16 @@ list-version:
 	done
 
 list-md:
-	@echo ' | Software | Detail |'
-	@echo ' | -------- | ------ |'
-	head --quiet --line 1 $$(git ls-files | grep '^[[:alpha:][:digit:]-]*/README.md') | sed -e 's/^#/ |/; s/ - / | /; s/$$/ |/;' | sort
+	@
+	echo '## List of '$$(git ls-files | grep '^[[:alpha:][:digit:]-]*/README.md' | wc -l)' packages'
+	echo ''
+	echo ' | Software | Detail | &#127968; |'
+	echo ' | -------- | ------ | --------- |'
+	for pkg in $$(git ls-files | grep '^[[:alpha:][:digit:]-]*/README.md' | xargs -r dirname | grep -v '/')
+	do
+		url=$$(grep '* Website : ' $${pkg}/README.md | cut -f 4 -d ' ')
+		head -1 $${pkg}/README.md |perl -p -e "s{^#\s(.*)\s-\s(.*)}{ | [\\1]($${pkg}/README.md) | \\2 | [&#127968;]($${url})  |};" | sed -e 's/\[&#127968;\]()//;'
+	done
 
 space:
 	@
