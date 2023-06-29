@@ -77,79 +77,79 @@ Similarly, some MSI packages have the version number in the comment or
 subject line, but not all. It is therefore difficult to always validate
 this version number.
 
-## List of package
+## List of 72 packages
 
- | Software | Detail |
- | -------- | ------ |
- | 7-Zip | File archiver with a high compression ratio |
- | AcrobatReader | Adobe PDF reader |
- | AnyConnect | Cisco AnyConnect VPN |
- | Arduino IDE | Vector graphics editor |
- | Audacity | Digital Audio Editor |
- | Avidemux | Vector graphics editor |
- | Balena Etcher | Flash OS images to SD cards & USB drives, safely and easily |
- | Bandicut | Join and cut video |
- | Blender | 3D computer graphics software (animated films, virtual reality) |
- | BlueKenue | Tool for hydraulic modellers |
- | Chrome | Google Chrome navigator |
- | CitrixWorkspace | Citrix remote workspace client |
- | Darktable | Photography application and raw developer |
- | Dell Command Update | Update BIOS and Firmware |
- | Digikam | Image organizer and tag editor  |
- | Engauge Digitizer | Digitalize curve image to data point |
- | FastStone Image Viewer | Image browser, converter and editor |
- | FileZilla | FTP/SFTP client |
- | FlashPlayer-Uninstall | Remove all version of Adobe Flash Player |
- | FreeCAD | Parametric 3D modeler (CAD) |
- | Gimp | Image graphics editor |
- | GitForWindows | Git for the Windows OS |
- | Gwyddion | Data visualization and analysis for SPM |
- | HandBrake | Video converter |
- | HP Image Assistant | HPIA |
- | ImageJ | Image processing program (Fiji Distribution) |
- | Inkscape | Vector graphics editor |
- | Kaspersky Endpoint | Uninstall script |
- | KeepassXC | Free and open-source password manager. |
- | LibreOffice | Libre Office suite based on the OpenDocument standard |
- | LightBulb | Automatically adjusts screen gamma and color temperature |
- | MiKTeX | TeX and LaTeX distribution |
- | Mozilla Firefox | Web navigator |
- | Mozilla Thunderbird | Mail reader |
- | MSEdge | Microsoft Edge (Chrome) navigator |
- | MSTeams | Microsoft Videoconferencing and communication platform |
- | Nextcloud | Cloud Suite |
- | Notepad++ | Text editor |
- | OBS Studio | Screencasting and streaming application |
- | OCSInventory-Agent | Windows Agent for OCS-Inventory |
- | OpenShot | Open-source video editor |
- | OSBIOSUpdateNow | Force Windows and DELL/HP BIOS to update now |
- | ParaView | Vector graphics editor |
- | PDFCreator | Create PDF file |
- | PDFsam Basic | Split, merge, extract PDF files |
- | PuTTY | SSH Client |
- | RStudio | Integrated development environment for R |
- | SimpleTruss | Drawing and calculating simple lattices |
- | Skype | VoIP and Videoconferencing Client |
- | SSHFS-Win | Connect network drive on an SSH/SFTP server |
- | SumatraPDF | Free and open-source document viewer (PDF, DjVu, EPUB...) |
- | TeamViewer | Remote access and remote control |
- | TexMaker | Free cross-platform LaTeX editor |
- | TortoiseSVN | Subversion Client |
- | Ultracopier | File-copying software |
- | VeraCrypt | Crypt disk and volume (USK key) |
- | VirtualBox6 | Oracle Hypervisor for virtual machines |
- | VirtualBox7 | Oracle Hypervisor for virtual machines |
- | VisualRedist | Visual C++ Redistributable Library |
- | VLC | VLC media player |
- | VMware Horizon Client | Client for VDI VMware Horizon (virtual desktop) |
- | VSCode | Source-code editor |
- | Webex | Web conferencing, videoconferencing  |
- | WinDirStat | Disk usage viewer and cleanup tool |
- | WinMerge | Diff between two or three files |
- | WinSCP | SCP and SFTP file transfert |
- | Wireshark | Network Packet Analyser |
- | X2GoClient | Client Windows for NX Linux remote desktop |
- | XnViewMP | Image viewer, browser and converter |
- | Xournal++ | PDF annotate and hand note-taking software |
- | Zoom | Web Conference Client |
- | Zotero | Manage bibliographic data |
+ | Software | Detail | &#127968; |
+ | -------- | ------ | --------- |
+ | [7-Zip](7zip/README.md) | File archiver with a high compression ratio | [&#127968;](https://www.7-zip.org/)  |
+ | [AcrobatReader](acrobatreader/README.md) | Adobe PDF reader | [&#127968;](https://www.adobe.com/)  |
+ | [AnyConnect](anyconnect/README.md) | Cisco AnyConnect VPN | [&#127968;](https://www.cisco.com/c/en/us/security/vpn-endpoint-security-clients/)  |
+ | [Arduino IDE](arduinoide/README.md) | Vector graphics editor | [&#127968;](https://www.arduino.cc/)  |
+ | [Audacity](audacity/README.md) | Digital Audio Editor | [&#127968;](https://wiki.audacityteam.org/wiki/Audacity_Wiki_Home_Page)  |
+ | [Avidemux](avidemux/README.md) | Vector graphics editor | [&#127968;](http://fixounet.free.fr/avidemux/)  |
+ | [Balena Etcher](balenaetcher/README.md) | Flash OS images to SD cards & USB drives, safely and easily | [&#127968;](https://etcher.balena.io/)  |
+ | [Bandicut](bandicut/README.md) | Join and cut video | [&#127968;](https://www.bandicam.com/bandicut-video-cutter/)  |
+ | [Blender](blender/README.md) | 3D computer graphics software (animated films, virtual reality) | [&#127968;](https://www.blender.org/)  |
+ | [BlueKenue](bluekenue/README.md) | Tool for hydraulic modellers | [&#127968;](https://nrc.canada.ca/fr/recherche-developpement/produits-services/logiciels-applications/blue-kenuetm-logiciel-modelisateurs-hydrauliques)  |
+ | [Chrome](chrome/README.md) | Google Chrome navigator | [&#127968;](https://www.google.com/chrome/)  |
+ | [CitrixWorkspace](citrixworkspace/README.md) | Citrix remote workspace client | [&#127968;](https://www.citrix.com/)  |
+ | [Darktable](darktable/README.md) | Photography application and raw developer | [&#127968;](https://www.darktable.org/)  |
+ | [Dell Command Update](dellcmdupdate/README.md) | Update BIOS and Firmware | [&#127968;](https://www.dell.com/)  |
+ | [Digikam](digikam/README.md) | Image organizer and tag editor  | [&#127968;](https://www.digikam.org/)  |
+ | [Engauge Digitizer](engaugedigitizer/README.md) | Digitalize curve image to data point | [&#127968;](https://markummitchell.github.io/engauge-digitizer/)  |
+ | [FileZilla](filezilla/README.md) | FTP/SFTP client | [&#127968;](https://filezilla-project.org/)  |
+ | [Mozilla Firefox](firefox/README.md) | Web navigator | [&#127968;](https://www.mozilla.org)  |
+ | [FlashPlayer-Uninstall](flashplayer-uninstall/README.md) | Remove all version of Adobe Flash Player |   |
+ | [FreeCAD](freecad/README.md) | Parametric 3D modeler (CAD) | [&#127968;](https://www.freecad.org/)  |
+ | [FastStone Image Viewer](fsimageviewer/README.md) | Image browser, converter and editor | [&#127968;](https://www.faststone.org/)  |
+ | [Gimp](gimp/README.md) | Image graphics editor | [&#127968;](https://www.gimp.org/)  |
+ | [GitForWindows](gitforwindows/README.md) | Git for the Windows OS | [&#127968;](https://gitforwindows.org/)  |
+ | [Gwyddion](gwyddion/README.md) | Data visualization and analysis for SPM | [&#127968;](http://gwyddion.net/)  |
+ | [HandBrake](handbrake/README.md) | Video converter | [&#127968;](https://handbrake.fr/)  |
+ | [HP Image Assistant](hpimageassist/README.md) | HPIA | [&#127968;](https://www.hp.com/us-en/solutions/client-management-solutions.html)  |
+ | [ImageJ](imagej/README.md) | Image processing program (Fiji Distribution) | [&#127968;](https://imagej.net/)  |
+ | [Inkscape](inkscape/README.md) | Vector graphics editor | [&#127968;](https://inkscape.org/)  |
+ | [Kaspersky Endpoint](kaspersky-uninstall/README.md) | Uninstall script | [&#127968;](https://gitlab.in2p3.fr/resinfo-gt/swmb/resinfo-swmb/-/tree/master/dists/uninstall-kaspersky)  |
+ | [KeepassXC](keepassxc/README.md) | Free and open-source password manager. | [&#127968;](https://keepassxc.org/)  |
+ | [LibreOffice](libreoffice/README.md) | Libre Office suite based on the OpenDocument standard | [&#127968;](https://www.libreoffice.org/)  |
+ | [LightBulb](lightbulb/README.md) | Automatically adjusts screen gamma and color temperature | [&#127968;](https://github.com/Tyrrrz/LightBulb)  |
+ | [MiKTeX](miktex/README.md) | TeX and LaTeX distribution | [&#127968;](https://miktex.org/)  |
+ | [MSEdge](msedge/README.md) | Microsoft Edge (Chrome) navigator | [&#127968;](https://www.microsoft.com/en-us/edge/business)  |
+ | [Nextcloud](nextcloud/README.md) | Cloud Suite | [&#127968;](https://nextcloud.com/)  |
+ | [Notepad++](notepadpp/README.md) | Text editor | [&#127968;](https://notepad-plus-plus.org)  |
+ | [OBS Studio](obsstudio/README.md) | Screencasting and streaming application | [&#127968;](https://obsproject.com/)  |
+ | [OCSInventory-Agent](ocsinventory-agent/README.md) | Windows Agent for OCS-Inventory | [&#127968;](https://ocsinventory-ng.org)  |
+ | [OpenShot](openshot/README.md) | Open-source video editor | [&#127968;](https://www.openshot.org/)  |
+ | [OSBIOSUpdateNow](osbiosupdatenow/README.md) | Force Windows and DELL/HP BIOS to update now |   |
+ | [ParaView](paraview/README.md) | Vector graphics editor | [&#127968;](https://www.paraview.org/)  |
+ | [PDFCreator](pdfcreator/README.md) | Create PDF file | [&#127968;](https://www.pdfforge.org/)  |
+ | [PDFsam Basic](pdfsam/README.md) | Split, merge, extract PDF files | [&#127968;](https://pdfsam.org/)  |
+ | [PuTTY](putty/README.md) | SSH Client | [&#127968;](https://www.chiark.greenend.org.uk/~sgtatham/putty/)  |
+ | [RStudio](rstudio/README.md) | Integrated development environment for R | [&#127968;](https://github.com/rstudio/rstudio,)  |
+ | [SimpleTruss](simpletruss/README.md) | Drawing and calculating simple lattices | [&#127968;](http://www.apartmina.cz/simpletruss/)  |
+ | [Skype](skype/README.md) | VoIP and Videoconferencing Client | [&#127968;](https://www.skype.com/)  |
+ | [SSHFS-Win](sshfs-win/README.md) | Connect network drive on an SSH/SFTP server |   |
+ | [SumatraPDF](sumatrapdf/README.md) | Free and open-source document viewer (PDF, DjVu, EPUB...) | [&#127968;](https://www.sumatrapdfreader.org/free-pdf-reader)  |
+ | [MSTeams](teams/README.md) | Microsoft Videoconferencing and communication platform | [&#127968;](https://www.microsoft.com/fr-fr/microsoft-teams/)  |
+ | [TeamViewer](teamviewer/README.md) | Remote access and remote control | [&#127968;](https://www.teamviewer.com)  |
+ | [TexMaker](texmaker/README.md) | Free cross-platform LaTeX editor | [&#127968;](https://www.xm1math.net/texmaker/)  |
+ | [Mozilla Thunderbird](thunderbird/README.md) | Mail reader | [&#127968;](https://www.thunderbird.net/)  |
+ | [TortoiseSVN](tortoisesvn/README.md) | Subversion Client | [&#127968;](https://tortoisesvn.net/)  |
+ | [Ultracopier](ultracopier/README.md) | File-copying software | [&#127968;](https://ultracopier.herman-brule.com/)  |
+ | [VeraCrypt](veracrypt/README.md) | Crypt disk and volume (USK key) | [&#127968;](https://veracrypt.fr/)  |
+ | [VirtualBox7](virtualbox/README.md) | Oracle Hypervisor for virtual machines | [&#127968;](https://www.virtualbox.org/)  |
+ | [VirtualBox6](virtualbox6/README.md) | Oracle Hypervisor for virtual machines | [&#127968;](https://www.virtualbox.org/)  |
+ | [VisualRedist](visualredist/README.md) | Visual C++ Redistributable Library |   |
+ | [VLC](vlc/README.md) | VLC media player | [&#127968;](https://www.videolan.org/)  |
+ | [VMware Horizon Client](vmwarehorizon/README.md) | Client for VDI VMware Horizon (virtual desktop) | [&#127968;](https://www.vmware.com/products/horizon.html)  |
+ | [VSCode](vscode/README.md) | Source-code editor | [&#127968;](https://code.visualstudio.com/)  |
+ | [Webex](webex/README.md) | Web conferencing, videoconferencing  | [&#127968;](https://www.webex.com/)  |
+ | [WinDirStat](windirstat/README.md) | Disk usage viewer and cleanup tool | [&#127968;](https://windirstat.net/)  |
+ | [WinMerge](winmerge/README.md) | Diff between two or three files | [&#127968;](https://winmerge.org/)  |
+ | [WinSCP](winscp/README.md) | SCP and SFTP file transfert | [&#127968;](https://winscp.net/)  |
+ | [Wireshark](wireshark/README.md) | Network Packet Analyser | [&#127968;](https://wireshark.org/)  |
+ | [X2GoClient](x2goclient/README.md) | Client Windows for NX Linux remote desktop | [&#127968;](https://wiki.x2go.org/doku.php/start)  |
+ | [XnViewMP](xnviewmp/README.md) | Image viewer, browser and converter |   |
+ | [Xournal++](xournalpp/README.md) | PDF annotate and hand note-taking software | [&#127968;](https://github.com/xournalpp/xournalpp)  |
+ | [Zoom](zoom/README.md) | Web Conference Client | [&#127968;](https://zoom.us/)  |
+ | [Zotero](zotero/README.md) | Manage bibliographic data | [&#127968;](https://www.zotero.org/)  |
