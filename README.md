@@ -76,3 +76,78 @@ doubt as to the actual version of a program.
 Similarly, some MSI packages have the version number in the comment or
 subject line, but not all. It is therefore difficult to always validate
 this version number.
+
+## List of package
+
+ | 7-Zip | File archiver with a high compression ratio |
+ | AcrobatReader | Adobe PDF reader |
+ | AnyConnect | Cisco AnyConnect VPN |
+ | Arduino IDE | Vector graphics editor |
+ | Audacity | Digital Audio Editor |
+ | Avidemux | Vector graphics editor |
+ | Balena Etcher | Flash OS images to SD cards & USB drives, safely and easily |
+ | Bandicut | Join and cut video |
+ | Blender | 3D computer graphics software (animated films, virtual reality) |
+ | BlueKenue | Tool for hydraulic modellers |
+ | Chrome | Google Chrome navigator |
+ | CitrixWorkspace | Citrix remote workspace client |
+ | Darktable | Photography application and raw developer |
+ | Dell Command Update | Update BIOS and Firmware |
+ | Digikam | Image organizer and tag editor  |
+ | Engauge Digitizer | Digitalize curve image to data point |
+ | FastStone Image Viewer | Image browser, converter and editor |
+ | FileZilla | FTP/SFTP client |
+ | FlashPlayer-Uninstall | Remove all version of Adobe Flash Player |
+ | FreeCAD | Parametric 3D modeler (CAD) |
+ | Gimp | Image graphics editor |
+ | GitForWindows | Git for the Windows OS |
+ | Gwyddion | Data visualization and analysis for SPM |
+ | HandBrake | Video converter |
+ | HP Image Assistant | HPIA |
+ | ImageJ | Image processing program (Fiji Distribution) |
+ | Inkscape | Vector graphics editor |
+ | Kaspersky Endpoint | Uninstall script |
+ | KeepassXC | Free and open-source password manager. |
+ | LibreOffice | Libre Office suite based on the OpenDocument standard |
+ | LightBulb | Automatically adjusts screen gamma and color temperature |
+ | MiKTeX | TeX and LaTeX distribution |
+ | Mozilla Firefox | Web navigator |
+ | Mozilla Thunderbird | Mail reader |
+ | MSEdge | Microsoft Edge (Chrome) navigator |
+ | MSTeams | Microsoft Videoconferencing and communication platform |
+ | Nextcloud | Cloud Suite |
+ | Notepad++ | Text editor |
+ | OBS Studio | Screencasting and streaming application |
+ | OCSInventory-Agent | Windows Agent for OCS-Inventory |
+ | OpenShot | Open-source video editor |
+ | OSBIOSUpdateNow | Force Windows and DELL/HP BIOS to update now |
+ | ParaView | Vector graphics editor |
+ | PDFCreator | Create PDF file |
+ | PDFsam Basic | Split, merge, extract PDF files |
+ | PuTTY | SSH Client |
+ | RStudio | Integrated development environment for R |
+ | SimpleTruss | Drawing and calculating simple lattices |
+ | Skype | VoIP and Videoconferencing Client |
+ | SSHFS-Win | Connect network drive on an SSH/SFTP server |
+ | SumatraPDF | Free and open-source document viewer (PDF, DjVu, EPUB...) |
+ | TeamViewer | Remote access and remote control |
+ | TexMaker | Free cross-platform LaTeX editor |
+ | TortoiseSVN | Subversion Client |
+ | Ultracopier | File-copying software |
+ | VeraCrypt | Crypt disk and volume (USK key) |
+ | VirtualBox6 | Oracle Hypervisor for virtual machines |
+ | VirtualBox7 | Oracle Hypervisor for virtual machines |
+ | VisualRedist | Visual C++ Redistributable Library |
+ | VLC | VLC media player |
+ | VMware Horizon Client | Client for VDI VMware Horizon (virtual desktop) |
+ | VSCode | Source-code editor |
+ | Webex | Web conferencing, videoconferencing  |
+ | WinDirStat | Disk usage viewer and cleanup tool |
+ | WinMerge | Diff between two or three files |
+ | WinSCP | SCP and SFTP file transfert |
+ | Wireshark | Network Packet Analyser |
+ | X2GoClient | Client Windows for NX Linux remote desktop |
+ | XnViewMP | Image viewer, browser and converter |
+ | Xournal++ | PDF annotate and hand note-taking software |
+ | Zoom | Web Conference Client |
+ | Zotero | Manage bibliographic data |

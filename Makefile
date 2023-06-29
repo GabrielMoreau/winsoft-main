@@ -82,6 +82,9 @@ list-version:
 		printf "%25s %s\n" "$${d%/}" $$(cd $$d; make version | grep '^VERSION:' | awk '{print $$2}')
 	done
 
+list-md:
+	head --quiet --line 1 $$(git ls-files | grep '^[[:alpha:][:digit:]-]*/README.md') | sed -e 's/^#/ |/; s/ - / | /; s/$$/ |/;' | sort
+
 space:
 	@
 	for d in $(PKGDIR)
