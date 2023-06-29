@@ -1,6 +1,12 @@
 # OSBIOSUpdateNow - Force Windows and DELL/HP BIOS to update now
 
-OSBIOSUpdateNow launch the command:
+The OSBIOSUpdateNow package uses a DOS script to execute the
+`wuauclt.exe` command, then attempts to update the BIOS. It then uses
+the `dcu-cli.exe` (Dell Command | Update) executable on DELL-branded
+machines, and the `HPImageAssistant.exe` (HPIA) program on HP-branded
+computers.
+
+Example
 ```dos
 wuauclt /detectnow /updatenow
 ```
