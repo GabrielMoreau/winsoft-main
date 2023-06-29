@@ -79,6 +79,8 @@ this version number.
 
 ## List of package
 
+ | Software | Detail |
+ | -------- | ------ |
  | 7-Zip | File archiver with a high compression ratio |
  | AcrobatReader | Adobe PDF reader |
  | AnyConnect | Cisco AnyConnect VPN |

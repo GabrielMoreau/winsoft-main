@@ -83,6 +83,8 @@ list-version:
 	done
 
 list-md:
+	@echo ' | Software | Detail |'
+	@echo ' | -------- | ------ |'
 	head --quiet --line 1 $$(git ls-files | grep '^[[:alpha:][:digit:]-]*/README.md') | sed -e 's/^#/ |/; s/ - / | /; s/$$/ |/;' | sort
 
 space:
