@@ -1,4 +1,4 @@
-# Webex - Web conferencing, videoconferencing 
+# Webex - Cisco Web conferencing and videoconferencing Client
 
 Webex by Cisco is an American company that develops and sells web
 conferencing, videoconferencing and contact center as a service

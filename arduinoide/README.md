@@ -1,4 +1,4 @@
-# Arduino IDE - Vector graphics editor
+# Arduino IDE - Integrated Development Environment for Arduino
 
 Arduino is an open-source hardware and software company, project, and
 user community that designs and manufactures single-board

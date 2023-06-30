@@ -1,4 +1,4 @@
-# HP Image Assistant - HPIA
+# HP Image Assistant - Assistance to IT System Administrators (HPIA) for HP computer
 
 The HP Image Assistant is an essential tool that provides assistance
 to IT System Administrators to improve the quality and security of

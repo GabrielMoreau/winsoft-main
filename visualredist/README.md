@@ -1,4 +1,4 @@
-# VisualRedist - Visual C++ Redistributable Library
+# VisualRedist (Action) - Microsoft Visual C++ Redistributable Library update for all version
 
 Many applications require redistributable Visual C++ runtime library packages to function correctly.
 These packages are often installed independently of applications,
@@ -6,6 +6,7 @@ allowing multiple applications to make use of the package while only having to i
 
 This package does not install the redistributable visual C++ packages but simply updates them if needed.
 
+* Website : https://learn.microsoft.com/fr-fr/cpp/windows/latest-supported-vc-redist
 * Wikipedia : https://en.wikipedia.org/wiki/Microsoft_Visual_C%2B%2B
 
 * Direct download link : https://github.com/abbodi1406/vcredist

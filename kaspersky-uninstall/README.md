@@ -1,4 +1,4 @@
-# Kaspersky Endpoint - Uninstall script
+# Kaspersky Endpoint (Uninstall) - Silent remove Kaspersky Endpoint
 
 * Website : https://gitlab.in2p3.fr/resinfo-gt/swmb/resinfo-swmb/-/tree/master/dists/uninstall-kaspersky
 

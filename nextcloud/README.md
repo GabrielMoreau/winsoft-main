@@ -1,4 +1,4 @@
-# Nextcloud - Cloud Suite
+# Nextcloud - Cloud Suite agent
 
 Nextcloud  is a suite of client–server software for creating
 and using file hosting services.

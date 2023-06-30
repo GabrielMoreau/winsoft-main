@@ -1,4 +1,4 @@
-# Dell Command Update - Update BIOS and Firmware
+# Dell Command Update - Update BIOS and Firmware for Dell computer
 
 Dell Command | Update is a stand-alone application, for commercial
 client computers, that provides updates for system software that is

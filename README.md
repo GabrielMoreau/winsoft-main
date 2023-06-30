@@ -84,7 +84,7 @@ this version number.
  | [7-Zip](7zip/README.md) | File archiver with a high compression ratio | [&#127968;](https://www.7-zip.org/)  |
  | [AcrobatReader](acrobatreader/README.md) | Adobe PDF reader | [&#127968;](https://www.adobe.com/)  |
  | [AnyConnect](anyconnect/README.md) | Cisco AnyConnect VPN | [&#127968;](https://www.cisco.com/c/en/us/security/vpn-endpoint-security-clients/)  |
- | [Arduino IDE](arduinoide/README.md) | Vector graphics editor | [&#127968;](https://www.arduino.cc/)  |
+ | [Arduino IDE](arduinoide/README.md) | Integrated Development Environment for Arduino | [&#127968;](https://www.arduino.cc/)  |
  | [Audacity](audacity/README.md) | Digital Audio Editor | [&#127968;](https://wiki.audacityteam.org/wiki/Audacity_Wiki_Home_Page)  |
  | [Avidemux](avidemux/README.md) | Vector graphics editor | [&#127968;](http://fixounet.free.fr/avidemux/)  |
  | [Balena Etcher](balenaetcher/README.md) | Flash OS images to SD cards & USB drives, safely and easily | [&#127968;](https://etcher.balena.io/)  |
@@ -94,21 +94,21 @@ this version number.
  | [Chrome](chrome/README.md) | Google Chrome navigator | [&#127968;](https://www.google.com/chrome/)  |
  | [CitrixWorkspace](citrixworkspace/README.md) | Citrix remote workspace client | [&#127968;](https://www.citrix.com/)  |
  | [Darktable](darktable/README.md) | Photography application and raw developer | [&#127968;](https://www.darktable.org/)  |
- | [Dell Command Update](dellcmdupdate/README.md) | Update BIOS and Firmware | [&#127968;](https://www.dell.com/)  |
+ | [Dell Command Update](dellcmdupdate/README.md) | Update BIOS and Firmware for Dell computer | [&#127968;](https://www.dell.com/)  |
  | [Digikam](digikam/README.md) | Image organizer and tag editor  | [&#127968;](https://www.digikam.org/)  |
  | [Engauge Digitizer](engaugedigitizer/README.md) | Digitalize curve image to data point | [&#127968;](https://markummitchell.github.io/engauge-digitizer/)  |
  | [FastStone Image Viewer](fsimageviewer/README.md) | Image browser, converter and editor | [&#127968;](https://www.faststone.org/)  |
- | [FileZilla](filezilla/README.md) | FTP/SFTP client | [&#127968;](https://filezilla-project.org/)  |
- | [FlashPlayer-Uninstall](flashplayer-uninstall/README.md) | Remove all version of Adobe Flash Player |   |
+ | [FileZilla](filezilla/README.md) | Graphical two panel FTP/SFTP client | [&#127968;](https://filezilla-project.org/)  |
+ | [FlashPlayer (Uninstall)](flashplayer-uninstall/README.md) | Remove all version of Adobe Flash Player | [&#127968;](https://www.adobe.com/products/flashplayer/end-of-life.html)  |
  | [FreeCAD](freecad/README.md) | Parametric 3D modeler (CAD) | [&#127968;](https://www.freecad.org/)  |
  | [Gimp](gimp/README.md) | Image graphics editor | [&#127968;](https://www.gimp.org/)  |
  | [GitForWindows](gitforwindows/README.md) | Git for the Windows OS | [&#127968;](https://gitforwindows.org/)  |
  | [Gwyddion](gwyddion/README.md) | Data visualization and analysis for SPM | [&#127968;](http://gwyddion.net/)  |
  | [HandBrake](handbrake/README.md) | Video converter | [&#127968;](https://handbrake.fr/)  |
- | [HP Image Assistant](hpimageassist/README.md) | HPIA | [&#127968;](https://www.hp.com/us-en/solutions/client-management-solutions.html)  |
+ | [HP Image Assistant](hpimageassist/README.md) | Assistance to IT System Administrators (HPIA) for HP computer | [&#127968;](https://www.hp.com/us-en/solutions/client-management-solutions.html)  |
  | [ImageJ](imagej/README.md) | Image processing program (Fiji Distribution) | [&#127968;](https://imagej.net/)  |
  | [Inkscape](inkscape/README.md) | Vector graphics editor | [&#127968;](https://inkscape.org/)  |
- | [Kaspersky Endpoint](kaspersky-uninstall/README.md) | Uninstall script | [&#127968;](https://gitlab.in2p3.fr/resinfo-gt/swmb/resinfo-swmb/-/tree/master/dists/uninstall-kaspersky)  |
+ | [Kaspersky Endpoint (Uninstall)](kaspersky-uninstall/README.md) | Silent remove Kaspersky Endpoint | [&#127968;](https://gitlab.in2p3.fr/resinfo-gt/swmb/resinfo-swmb/-/tree/master/dists/uninstall-kaspersky)  |
  | [KeepassXC](keepassxc/README.md) | Free and open-source password manager. | [&#127968;](https://keepassxc.org/)  |
  | [LibreOffice](libreoffice/README.md) | Libre Office suite based on the OpenDocument standard | [&#127968;](https://www.libreoffice.org/)  |
  | [LightBulb](lightbulb/README.md) | Automatically adjusts screen gamma and color temperature | [&#127968;](https://github.com/Tyrrrz/LightBulb)  |
@@ -117,12 +117,12 @@ this version number.
  | [Mozilla Thunderbird](thunderbird/README.md) | Mail reader | [&#127968;](https://www.thunderbird.net/)  |
  | [MSEdge](msedge/README.md) | Microsoft Edge (Chrome) navigator | [&#127968;](https://www.microsoft.com/en-us/edge/business)  |
  | [MSTeams](teams/README.md) | Microsoft Videoconferencing and communication platform | [&#127968;](https://www.microsoft.com/fr-fr/microsoft-teams/)  |
- | [Nextcloud](nextcloud/README.md) | Cloud Suite | [&#127968;](https://nextcloud.com/)  |
+ | [Nextcloud](nextcloud/README.md) | Cloud Suite agent | [&#127968;](https://nextcloud.com/)  |
  | [Notepad++](notepadpp/README.md) | Text editor | [&#127968;](https://notepad-plus-plus.org)  |
  | [OBS Studio](obsstudio/README.md) | Screencasting and streaming application | [&#127968;](https://obsproject.com/)  |
  | [OCSInventory-Agent](ocsinventory-agent/README.md) | Windows Agent for OCS-Inventory | [&#127968;](https://ocsinventory-ng.org)  |
  | [OpenShot](openshot/README.md) | Open-source video editor | [&#127968;](https://www.openshot.org/)  |
- | [OSBIOSUpdateNow](osbiosupdatenow/README.md) | Force Windows and DELL/HP BIOS to update now |   |
+ | [OSBIOSUpdateNow (Action)](osbiosupdatenow/README.md) | Force Windows and DELL/HP BIOS to update now |   |
  | [ParaView](paraview/README.md) | Vector graphics editor | [&#127968;](https://www.paraview.org/)  |
  | [PDFCreator](pdfcreator/README.md) | Create PDF file | [&#127968;](https://www.pdfforge.org/)  |
  | [PDFsam Basic](pdfsam/README.md) | Split, merge, extract PDF files | [&#127968;](https://pdfsam.org/)  |
@@ -139,16 +139,16 @@ this version number.
  | [VeraCrypt](veracrypt/README.md) | Crypt disk and volume (USK key) | [&#127968;](https://veracrypt.fr/)  |
  | [VirtualBox6](virtualbox6/README.md) | Oracle Hypervisor for virtual machines | [&#127968;](https://www.virtualbox.org/)  |
  | [VirtualBox7](virtualbox/README.md) | Oracle Hypervisor for virtual machines | [&#127968;](https://www.virtualbox.org/)  |
- | [VisualRedist](visualredist/README.md) | Visual C++ Redistributable Library |   |
- | [VLC](vlc/README.md) | VLC media player | [&#127968;](https://www.videolan.org/)  |
+ | [VisualRedist (Action)](visualredist/README.md) | Microsoft Visual C++ Redistributable Library update for all version | [&#127968;](https://learn.microsoft.com/fr-fr/cpp/windows/latest-supported-vc-redist)  |
+ | [VLC](vlc/README.md) | VideoLAN media player Client | [&#127968;](https://www.videolan.org/)  |
  | [VMware Horizon Client](vmwarehorizon/README.md) | Client for VDI VMware Horizon (virtual desktop) | [&#127968;](https://www.vmware.com/products/horizon.html)  |
- | [VSCode](vscode/README.md) | Source-code editor | [&#127968;](https://code.visualstudio.com/)  |
- | [Webex](webex/README.md) | Web conferencing, videoconferencing  | [&#127968;](https://www.webex.com/)  |
+ | [VSCode](vscode/README.md) | Microsoft Source-code editor | [&#127968;](https://code.visualstudio.com/)  |
+ | [Webex](webex/README.md) | Cisco Web conferencing and videoconferencing Client | [&#127968;](https://www.webex.com/)  |
  | [WinDirStat](windirstat/README.md) | Disk usage viewer and cleanup tool | [&#127968;](https://windirstat.net/)  |
  | [WinMerge](winmerge/README.md) | Diff between two or three files | [&#127968;](https://winmerge.org/)  |
  | [WinSCP](winscp/README.md) | SCP and SFTP file transfert | [&#127968;](https://winscp.net/)  |
  | [Wireshark](wireshark/README.md) | Network Packet Analyser | [&#127968;](https://wireshark.org/)  |
- | [X2GoClient](x2goclient/README.md) | Client Windows for NX Linux remote desktop | [&#127968;](https://wiki.x2go.org/doku.php/start)  |
+ | [X2GoClient](x2goclient/README.md) | Client Windows for X2GO (NX) Linux remote desktop | [&#127968;](https://wiki.x2go.org/doku.php/start)  |
  | [XnViewMP](xnviewmp/README.md) | Image viewer, browser and converter |   |
  | [Xournal++](xournalpp/README.md) | PDF annotate and hand note-taking software | [&#127968;](https://github.com/xournalpp/xournalpp)  |
  | [Zoom](zoom/README.md) | Web Conference Client | [&#127968;](https://zoom.us/)  |

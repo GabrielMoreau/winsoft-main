@@ -1,4 +1,4 @@
-# X2GoClient - Client Windows for NX Linux remote desktop
+# X2GoClient - Client Windows for X2GO (NX) Linux remote desktop
 
 X2Go is an open source remote desktop software for Linux
 that uses a modified NX 3 protocol.

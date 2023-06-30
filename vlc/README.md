@@ -1,4 +1,4 @@
-# VLC - VLC media player
+# VLC - VideoLAN media player Client
 
 VLC media player (previously the VideoLAN Client and commonly known as simply VLC) is a free and open-source,
 portable, cross-platform media player software and streaming media server developed by the VideoLAN project.
