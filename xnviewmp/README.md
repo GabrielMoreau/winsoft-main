@@ -5,7 +5,7 @@ viewing, converting, organizing and editing raster images, as well as
 general purpose file management. It comes with built-in hex inspection,
 batch renaming and screen capture tools.
 
-* Website https://www.xnview.com
+* Website : https://www.xnview.com
 * Wikipedia : https://en.wikipedia.org/wiki/XnView
 
 * Download : https://www.xnview.com/en/xnviewmp/

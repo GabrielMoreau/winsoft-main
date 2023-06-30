@@ -149,7 +149,7 @@ this version number.
  | [WinSCP](winscp/README.md) | SCP and SFTP file transfert | [&#127968;](https://winscp.net/)  |
  | [Wireshark](wireshark/README.md) | Network Packet Analyser | [&#127968;](https://wireshark.org/)  |
  | [X2GoClient](x2goclient/README.md) | Client Windows for X2GO (NX) Linux remote desktop | [&#127968;](https://wiki.x2go.org/doku.php/start)  |
- | [XnViewMP](xnviewmp/README.md) | Image viewer, browser and converter |   |
+ | [XnViewMP](xnviewmp/README.md) | Image viewer, browser and converter | [&#127968;](https://www.xnview.com)  |
  | [Xournal++](xournalpp/README.md) | PDF annotate and hand note-taking software | [&#127968;](https://github.com/xournalpp/xournalpp)  |
  | [Zoom](zoom/README.md) | Web Conference Client | [&#127968;](https://zoom.us/)  |
  | [Zotero](zotero/README.md) | Manage bibliographic data | [&#127968;](https://www.zotero.org/)  |
