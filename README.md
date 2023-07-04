@@ -77,7 +77,7 @@ Similarly, some MSI packages have the version number in the comment or
 subject line, but not all. It is therefore difficult to always validate
 this version number.
 
-## List of 72 packages
+## List of 73 packages
 
  | Software | Detail | &#127968; |
  | -------- | ------ | --------- |
@@ -111,7 +111,7 @@ this version number.
  | [Kaspersky Endpoint (Uninstall)](kaspersky-uninstall/README.md) | Silent remove Kaspersky Endpoint | [&#127968;](https://gitlab.in2p3.fr/resinfo-gt/swmb/resinfo-swmb/-/tree/master/dists/uninstall-kaspersky)  |
  | [KeepassXC](keepassxc/README.md) | Free and open-source password manager. | [&#127968;](https://keepassxc.org/)  |
  | [LibreOffice](libreoffice/README.md) | Libre Office suite based on the OpenDocument standard | [&#127968;](https://www.libreoffice.org/)  |
- | [LightBulb](lightbulb/README.md) | Automatically adjusts screen gamma and color temperature | [&#127968;](https://github.com/Tyrrrz/LightBulb)  |
+ | [LightBulb](lightbulb/README.md) | Automatically adjusts screen gamma and color temperature during the day | [&#127968;](https://github.com/Tyrrrz/LightBulb)  |
  | [MiKTeX](miktex/README.md) | TeX and LaTeX distribution | [&#127968;](https://miktex.org/)  |
  | [Mozilla Firefox](firefox/README.md) | Web navigator | [&#127968;](https://www.mozilla.org)  |
  | [Mozilla Thunderbird](thunderbird/README.md) | Mail reader | [&#127968;](https://www.thunderbird.net/)  |
@@ -133,6 +133,7 @@ this version number.
  | [SSHFS-Win](sshfs-win/README.md) | Connect network drive on an SSH/SFTP server |   |
  | [SumatraPDF](sumatrapdf/README.md) | Free and open-source document viewer (PDF, DjVu, EPUB...) | [&#127968;](https://www.sumatrapdfreader.org/free-pdf-reader)  |
  | [TeamViewer](teamviewer/README.md) | Remote access and remote control | [&#127968;](https://www.teamviewer.com)  |
+ | [Telegram Messenger](telegram/README.md) | Desktop Instant messaging application | [&#127968;](https://telegram.org/)  |
  | [TexMaker](texmaker/README.md) | Free cross-platform LaTeX editor | [&#127968;](https://www.xm1math.net/texmaker/)  |
  | [TortoiseSVN](tortoisesvn/README.md) | Subversion Client | [&#127968;](https://tortoisesvn.net/)  |
  | [Ultracopier](ultracopier/README.md) | File-copying software | [&#127968;](https://ultracopier.herman-brule.com/)  |
