@@ -9,4 +9,9 @@ other features.
 * Wikipedia : https://en.wikipedia.org/wiki/Telegram_(software)
 
 * Download : https://github.com/telegramdesktop/tdesktop
-* Sielnt install : https://silentinstallhq.com/telegram-desktop-silent-install-how-to-guide/
+* Silent install : https://silentinstallhq.com/telegram-desktop-silent-install-how-to-guide/
+
+We use the portable version, which we install in `ProgramFiles` in
+order to have a global installation for all users. The official setup
+installs the software under the user's profile and sets a key in the
+user's registry. This is not what we want.
