@@ -4,11 +4,11 @@
 #
 
 SOFT:=Telegram
-URL:=https://github.com$(shell curl -s  -L 'https://github.com/telegramdesktop/tdesktop/releases' |sed 's/"/\n/g;' | grep '^https://github.com/telegramdesktop/tdesktop/releases/expanded_assets' | xargs -r -n 1 curl -s  -L | sed 's/"/\n/g;' | grep '/tsetup-x64.*exe' | head -1)
+URL:=https://github.com$(shell curl -s  -L 'https://github.com/telegramdesktop/tdesktop/releases' |sed 's/"/\n/g;' | grep '^https://github.com/telegramdesktop/tdesktop/releases/expanded_assets' | xargs -r -n 1 curl -s  -L | sed 's/"/\n/g;' | grep '/tportable-x64.*zip' | head -1)
 VERSION:=$(shell echo $(URL) | cut -f 8	 -d '/' | sed -s 's/^v//;')
 PATCH:=1
 
-EXE:=tsetup-x64.$(VERSION).exe
+EXE:=tportable-x64.$(VERSION).zip
 
 IT_TEAM:=IT Support
 
@@ -43,11 +43,18 @@ wget: tmp/$(EXE)
 tmp/$(EXE):
 	@mkdir -p tmp
 	@(cd tmp ; \
-		rm -f *.exe *.msi 2>/dev/null ; \
+		rm -f *.zip 2>/dev/null ; \
 		curl -s -o "$(EXE)" -L "$(URL)" ; \
-		file $(EXE) | grep -q "PE32 executable" || echo "Error: bad format for binary $(EXE)" ; \
-		which peres >/dev/null && { peres -a $(EXE) | grep -q "^Product Version:[[:space:]]*$(VERSION)" || echo "Error: bad version for binary $(EXE)" ; } ; \
+		file $(EXE) | grep -q "Zip archive data" || echo "Error: bad format for binary $(EXE)" ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
+		)
+
+tmp/Telegram/Telegram.exe: tmp/$(EXE)
+	@mkdir -p tmp
+	@(cd tmp ; \
+		rm -rf Telegram 2>/dev/null ; \
+		unzip -q $(EXE) ; \
+		which peres >/dev/null && { peres -a 'Telegram/Telegram.exe' | grep -q "^Product Version:[[:space:]]*$(VERSION)" || echo "Error: bad version for binary $(EXE)" ; } ; \
 		)
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE)
@@ -56,9 +63,10 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 		s/^(SET\ssoftversion=)\d[\.\d]+\w?/$${1}$(VERSION)/; \
 		s/^(SET\ssoftpatch=)\d+/$${1}$(PATCH)/;' install.bat > $@
 
-%.zip: Makefile tmp/install.bat tmp/$(EXE)
+%.zip: Makefile uninstall.bat tmp/install.bat tmp/$(EXE) tmp/Telegram/Telegram.exe
 	@rm -f $@
-	@(cd tmp; zip -r ../$@ install.bat $(EXE))
+	@zip -r $@ uninstall.bat
+	@(cd tmp; zip -r ../$@ install.bat Telegram)
 	@chmod ugo+rw $@
 
 ocs:
