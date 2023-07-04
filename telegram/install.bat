@@ -22,7 +22,11 @@ SET softversion=91.5.1
 SET softpatch=1
 SET regkey=Telegram Desktop
 SET shortcut=%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\Telegram.lnk
+SET process=Telegram.exe
 
+
+ECHO Kill running process
+taskkill /T /F /IM %process%
 
 ECHO Clean old version before install
 CALL .\uninstall.bat
