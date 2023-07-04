@@ -1,4 +1,4 @@
-# RStudio - Integrated development environment for R
+# RStudio - Integrated development environment for R (include R)
 
 RStudio is an integrated development environment for R, a programming
 language for statistical computing and graphics.
