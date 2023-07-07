@@ -1,1 +1,2 @@
 5ec3d3df985d8d265b399a73d4162febf6946b28b2e62c97da5d794f6d59642e  arduino-ide_2.1.0_Windows_64bit.msi
+1493205d3ed960e8aa7b6187b1adfeef4dc4ebbae268eaccfcf90ef95e2d5a97  arduino-ide_2.1.1_Windows_64bit.msi
