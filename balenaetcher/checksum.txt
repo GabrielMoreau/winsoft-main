@@ -1,2 +1,3 @@
 eaec03357a06c213f4a966f44e2f0fa5b6f19ca4f5147fe9bd61b27431e0ba5b  balenaEtcher-Setup-1.18.4.exe
 ef62d5092b551775cd1a9a52197fe10d1ec89225b36c6593f13bc7876e6e64ee  balenaEtcher-Setup-1.18.8.exe
+3248227518f4aaf25f83c06a7fb476cf7f71705c234f6ce8c9cdcc98362409a6  balenaEtcher-Setup-1.18.11.exe
