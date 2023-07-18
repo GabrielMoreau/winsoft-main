@@ -1,5 +1,8 @@
 # Windows11Update - Update Windows 10 or 11 to the last version of Windows 11
 
+**Warning:** this package (script) has never been tested!
+For the moment, it's mainly a proof of concept.
+
 The Windows11Update package uses a DOS script to execute the
 `Windows11InstallationAssistant.exe` command.
 This command installs the latest version of Windows 11 if the workstation
