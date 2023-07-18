@@ -146,7 +146,7 @@ this version number.
  | [VSCode](vscode/README.md) | Microsoft Source-code editor | [&#127968;](https://code.visualstudio.com/)  |
  | [Webex](webex/README.md) | Cisco Web conferencing and videoconferencing Client | [&#127968;](https://www.webex.com/)  |
  | [WinDirStat](windirstat/README.md) | Disk usage viewer and cleanup tool | [&#127968;](https://windirstat.net/)  |
- | [Windows11Update](windows11update/README.md) | Update Windows 10 or 11 to the last version of Windows 11 |   |
+ | [Windows11Update](windows11update/README.md) | Update Windows 10 or 11 to the last version of Windows 11 | [&#127968;](https://www.microsoft.com/software-download/windows11)  |
  | [WinMerge](winmerge/README.md) | Diff between two or three files | [&#127968;](https://winmerge.org/)  |
  | [WinSCP](winscp/README.md) | SCP and SFTP file transfert | [&#127968;](https://winscp.net/)  |
  | [Wireshark](wireshark/README.md) | Network Packet Analyser | [&#127968;](https://wireshark.org/)  |

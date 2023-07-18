@@ -8,6 +8,7 @@ process, the workstation will not be rebooted automatically.
 
 After the first reboot, Windows 11 will automatically reboot several times.
 
-* website : https://www.microsoft.com/software-download/windows11
+* Website : https://www.microsoft.com/software-download/windows11
+* Wikipedia : https://en.wikipedia.org/wiki/Windows_11
 
 * See Also : https://learn.microsoft.com/en-us/answers/questions/1020951/upgrading-w10-to-w11-with-windows11installationass?page=1#answer-1021082
