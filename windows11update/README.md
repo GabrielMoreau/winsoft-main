@@ -9,7 +9,11 @@ This command installs the latest version of Windows 11 if the workstation
 is compatible. The user has no interaction, however, at the end of the
 process, the workstation will not be rebooted automatically. 
 
-After the first reboot, Windows 11 will automatically reboot several times.
+```dos
+Windows11InstallationAssistant.exe /QuietInstall /SkipEULA /NoRestartUI 
+```
+
+After the first reboot made by the user, Windows 11 will automatically reboot several times.
 
 * Website : https://www.microsoft.com/software-download/windows11
 * Wikipedia : https://en.wikipedia.org/wiki/Windows_11
