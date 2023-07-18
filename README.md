@@ -77,7 +77,7 @@ Similarly, some MSI packages have the version number in the comment or
 subject line, but not all. It is therefore difficult to always validate
 this version number.
 
-## List of 73 packages
+## List of 74 packages
 
  | Software | Detail | &#127968; |
  | -------- | ------ | --------- |
@@ -127,7 +127,7 @@ this version number.
  | [PDFCreator](pdfcreator/README.md) | Create PDF file | [&#127968;](https://www.pdfforge.org/)  |
  | [PDFsam Basic](pdfsam/README.md) | Split, merge, extract PDF files | [&#127968;](https://pdfsam.org/)  |
  | [PuTTY](putty/README.md) | SSH Client | [&#127968;](https://www.chiark.greenend.org.uk/~sgtatham/putty/)  |
- | [RStudio](rstudio/README.md) | Integrated development environment for R | [&#127968;](https://github.com/rstudio/rstudio,)  |
+ | [RStudio](rstudio/README.md) | Integrated development environment for R (include R) | [&#127968;](https://github.com/rstudio/rstudio,)  |
  | [SimpleTruss](simpletruss/README.md) | Drawing and calculating simple lattices | [&#127968;](http://www.apartmina.cz/simpletruss/)  |
  | [Skype](skype/README.md) | VoIP and Videoconferencing Client | [&#127968;](https://www.skype.com/)  |
  | [SSHFS-Win](sshfs-win/README.md) | Connect network drive on an SSH/SFTP server |   |
@@ -146,6 +146,7 @@ this version number.
  | [VSCode](vscode/README.md) | Microsoft Source-code editor | [&#127968;](https://code.visualstudio.com/)  |
  | [Webex](webex/README.md) | Cisco Web conferencing and videoconferencing Client | [&#127968;](https://www.webex.com/)  |
  | [WinDirStat](windirstat/README.md) | Disk usage viewer and cleanup tool | [&#127968;](https://windirstat.net/)  |
+ | [Windows11Update](windows11update/README.md) | Update Windows 10 or 11 to the last version of Windows 11 |   |
  | [WinMerge](winmerge/README.md) | Diff between two or three files | [&#127968;](https://winmerge.org/)  |
  | [WinSCP](winscp/README.md) | SCP and SFTP file transfert | [&#127968;](https://winscp.net/)  |
  | [Wireshark](wireshark/README.md) | Network Packet Analyser | [&#127968;](https://wireshark.org/)  |
