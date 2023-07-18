@@ -5,7 +5,7 @@
 
 SOFT:=Windows11Update
 URL:=$(shell curl -s -L 'https://www.microsoft.com/software-download/windows11' | grep 'windows11-upgrade-now' | sed -e 's/"/\n/g;' | grep '^https://go.microsoft.com/fwlink/')
-VERSION:=$(shell echo $(URL) |cut -f 2 -d '=')
+VERSION:=$(shell echo $(URL) | cut -f 2 -d '=')
 PATCH:=1
 
 EXE:=Windows11InstallationAssistant-$(VERSION).exe

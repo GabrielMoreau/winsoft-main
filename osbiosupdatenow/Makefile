@@ -4,8 +4,12 @@
 #
 
 SOFT:=OSBIOSUpdateNow
-VERSION:=0.7
+URL11:=$(shell curl -s -L 'https://www.microsoft.com/software-download/windows11' | grep 'windows11-upgrade-now' | sed -e 's/"/\n/g;' | grep '^https://go.microsoft.com/fwlink/')
+VERSION11:=$(shell echo $(URL11) | cut -f 2 -d '=')
+VERSION:=0.8.$(VERSION11)
 PATCH:=1
+
+EXE:=Windows11InstallationAssistant-$(VERSION11).exe
 
 
 IT_TEAM:=IT Support
@@ -25,18 +29,35 @@ clean:
 
 version:
 	@echo "VERSION: $(VERSION)"
+	@echo "VERSION11: $(VERSION11)"
+	@echo "URL11: $(URL11)"
+	@echo "EXE: $(EXE)"
 
 checksum:
-
-tmp/install.bat: install.bat Makefile
 	@mkdir -p tmp
-	@perl -p -e ' \
-		s/^(SET\ssoftversion=)\d[\.\d]+\w?/$${1}$(VERSION)/; \
-		s/^(SET\ssoftpatch=)\d+/$${1}$(PATCH)/;' install.bat > $@
+	@(cd tmp ; \
+		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt && exit ; \
+		shasum -a 256 "$(EXE)" | sed -e 's#tmp/##;' >> ../checksum.txt ; \
+		tail -3 ../checksum.txt ; \
+		)
 
-%.zip: Makefile tmp/install.bat
+tmp/$(EXE):
+	@mkdir -p tmp
+	@(cd tmp ; \
+		rm -f *.exe *.msi 2>/dev/null ; \
+		curl -# -o "$(EXE)" -L "$(URL11)" ; \
+		file $(EXE) | grep -q "PE32 executable" || echo "Error: bad format for binary $(EXE)" ; \
+		# which peres >/dev/null && { peres -a $(EXE) | grep -q "^Product Version:[[:space:]]*$(VERSION)" || echo "Error: bad version for binary $(EXE)" ; } ; \
+		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
+		)
+
+tmp/install.bat: install.bat Makefile tmp/$(EXE)
+	@mkdir -p tmp
+	@sed -e 's/__VERSION__/$(VERSION)/; s/__PATCH__/$(PATCH)/; s/__VERSION11__/$(VERSION11)/;' install.bat > $@
+
+%.zip: Makefile tmp/install.bat tmp/$(EXE)
 	@rm -f $@
-	@(cd tmp; zip -r ../$@ install.bat)
+	@(cd tmp; zip -r ../$@ install.bat $(EXE))
 	@chmod ugo+rw $@
 
 ocs:

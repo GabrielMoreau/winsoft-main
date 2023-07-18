@@ -18,15 +18,30 @@ EXIT /B
 
 ECHO BEGIN %date%-%time%
 
-SET softversion=91.5.1
-SET softpatch=1
+SET softversion=__VERSION__
+SET softpatch=__PATCH__
 
 
-ECHO Windows update
+ECHO Choose OS
+VER | FIND /I "10.0" > NUL
+IF %ERRORLEVEL%==0 GOTO WIN10
+
+VER | FIND /I "11.0" > NUL
+IF %ERRORLEVEL%==0 GOTO WIN11
+
+:WIN10
+ECHO Windows 10 update
 REM UsoClient ScanInstallWait
 wuauclt /detectnow /updatenow
+GOTO NEXT
+
+:WIN11
+ECHO Windows 11 update
+Windows11InstallationAssistant-__VERSION11__.exe /QuietInstall /SkipEULA /NoRestartUI 
+GOTO NEXT
 
 
+:NEXT
 ECHO Wait 30 s
 ping 127.0.0.1 -n 30 > NUL
 
