@@ -54,7 +54,7 @@ tmp/$(EXE1):
 	@mkdir -p tmp
 	@(cd tmp ; \
 		rm -f *.exe *.msi 2>/dev/null ; \
-		curl -s -o "$(EXE1)" -L "$(URL1)" ; \
+		curl -# -o "$(EXE1)" -L "$(URL1)" ; \
 		file $(EXE1) | grep -q "PE32 executable" || echo "Error: bad format for binary $(EXE1)" ; \
 		which peres >/dev/null && { peres -a $(EXE1) | grep -q "^Product Version:[[:space:]]*$(VERSION)" || echo "Error: bad version for binary $(EXE1)" ; } ; \
 		grep -q "^$$(shasum -a 256 $(EXE1))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE1)" ; \
@@ -64,8 +64,8 @@ tmp/$(EXE2):
 	@mkdir -p tmp
 	@(cd tmp ; \
 		rm -f *.vbox-extpack 2>/dev/null ; \
-		curl -s -o "$(EXE2)" -L "$(URL2)" ; \
-		file $(EXE2) | grep -q "gzip compressed data, max compression" || echo "Error: bad format for binary $(EXE2)" ; \
+		curl -# -o "$(EXE2)" -L "$(URL2)" ; \
+		file $(EXE2) | grep -q "gzip compressed data," || echo "Error: bad format for binary $(EXE2)" ; \
 		grep -q "^$$(shasum -a 256 $(EXE2))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE2)" ; \
 		)
 
@@ -99,25 +99,25 @@ ocs:
 
 tmp/2015-2019/vc_redist.x64.exe:
 	@mkdir -p tmp/2015-2019
-	@curl -s -o $@ -L https://aka.ms/vs/16/release/vc_redist.x64.exe
+	@curl -# -o $@ -L https://aka.ms/vs/16/release/vc_redist.x64.exe
 	@file $@ | grep -q "PE32 executable" || echo "Error: bad format for binary $@"
 	@grep -q "^$$(shasum -a 256 $@)$$" checksum.txt || echo "Error: bad checksum for binary $@"
 
 tmp/2015-2019/vc_redist.x86.exe:
 	@mkdir -p tmp/2015-2019
-	@curl -s -o $@ -L https://aka.ms/vs/16/release/vc_redist.x86.exe
+	@curl -# -o $@ -L https://aka.ms/vs/16/release/vc_redist.x86.exe
 	@file $@ | grep -q "PE32 executable" || echo "Error: bad format for binary $@"
 	@grep -q "^$$(shasum -a 256 $@)$$" checksum.txt || echo "Error: bad checksum for binary $@"
 
 
 tmp/2015-2022/vc_redist.x64.exe:
 	@mkdir -p tmp/2015-2022
-	@curl -s -o $@ -L https://aka.ms/vs/17/release/vc_redist.x64.exe
+	@curl -# -o $@ -L https://aka.ms/vs/17/release/vc_redist.x64.exe
 	@file $@ | grep -q "PE32 executable" || echo "Error: bad format for binary $@"
 	@grep -q "^$$(shasum -a 256 $@)$$" checksum.txt || echo "Error: bad checksum for binary $@"
 
 tmp/2015-2022/vc_redist.x86.exe:
 	@mkdir -p tmp/2015-2022
-	@curl -s -o $@ -L https://aka.ms/vs/17/release/vc_redist.x86.exe
+	@curl -# -o $@ -L https://aka.ms/vs/17/release/vc_redist.x86.exe
 	@file $@ | grep -q "PE32 executable" || echo "Error: bad format for binary $@"
 	@grep -q "^$$(shasum -a 256 $@)$$" checksum.txt || echo "Error: bad checksum for binary $@"
