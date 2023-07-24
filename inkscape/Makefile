@@ -4,9 +4,9 @@
 #
 
 SOFT:=Inkscape
-VERSION:=$(shell curl -s -L 'https://inkscape.org/en/release/' | sed -e 's/>/\n/g;' | grep 'Inkscape.*title' | cut -f 3 -d ' ')
+VERSION:=$(shell curl -s -L 'https://inkscape.org/en/release/' | sed -e 's/>/\n/g;' | grep 'Inkscape.*title' | cut -f 3 -d ' ' | grep '^[[:digit:]]' | head -1)
 PATCH:=1
-URL:=https://inkscape.org/$(shell curl -s -L  'https://inkscape.org/release/all/windows/64-bit/msi/' | sed -e 's/"/\n/g;' | egrep "/gallery/.*/inkscape-$(VERSION)_")
+URL:=https://inkscape.org/$(shell curl -s -L  'https://inkscape.org/release/inkscape-$(VERSION)/windows/64-bit/msi/dl' |  sed -e 's/\s/\n/g; s/"/=/g;' | grep '^url=' | cut -f 2 -d '=')
 
 EXE:=inkscape-$(VERSION)-x64.msi
 
