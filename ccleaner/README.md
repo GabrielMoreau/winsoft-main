@@ -9,4 +9,5 @@ unwanted files and invalid Windows Registry entries from a computer.
 Be carreful, CCleaner Free and Professional are for home use only.
 Use only on personnal computer.
 
-* Upload : https://www.ccleaner.com/ccleaner/download
+* Download : https://www.ccleaner.com/ccleaner/download
+* Silent install : https://silentinstallhq.com/ccleaner-silent-install-how-to-guide/

@@ -9,4 +9,5 @@ or damaged disk (if possible)
 Be carreful, Recuva Free and Professional are for home use only.
 Use only on personnal computer.
 
-* Upload : https://www.ccleaner.com/fr-fr/recuva/download
+* Download : https://www.ccleaner.com/fr-fr/recuva/download
+* Silent install : https://silent-install.net/software/piriform/recuva/1.53.1087
