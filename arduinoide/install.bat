@@ -42,8 +42,8 @@ msiexec /i "arduino-ide_%softversion%_Windows_64bit.msi" ALLUSERS=1 /qn /L*v "%l
 
 
 ECHO Remove desktop shortcut
-IF EXIST "%PUBLIC%\Desktop\Arduino IDE.lnk"          DEL /F /Q "%PUBLIC%\Desktop\Arduino IDE.lnk"
-IF EXIST "%ALLUSERSPROFILE%\Desktop\Arduino IDE.lnk" DEL /F /Q "%ALLUSERSPROFILE%\Desktop\Arduino IDE.lnk"
+IF EXIST "%PUBLIC%\Desktop\Arduino*IDE.lnk"          DEL /F /Q "%PUBLIC%\Desktop\Arduino*IDE.lnk"
+IF EXIST "%ALLUSERSPROFILE%\Desktop\Arduino*IDE.lnk" DEL /F /Q "%ALLUSERSPROFILE%\Desktop\Arduino*IDE.lnk"
 
 
 ECHO END %date%-%time%

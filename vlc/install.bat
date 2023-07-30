@@ -40,8 +40,8 @@ ECHO Execute post-install script
 %pwrsh% -File ".\post-install.ps1"
 
 ECHO Remove desktop shortcut
-IF EXIST "%PUBLIC%\Desktop\VLC media player.lnk"          DEL /F /Q "%PUBLIC%\Desktop\VLC media player.lnk"
-IF EXIST "%ALLUSERSPROFILE%\Desktop\VLC media player.lnk" DEL /F /Q "%ALLUSERSPROFILE%\Desktop\VLC media player.lnk"
+IF EXIST "%PUBLIC%\Desktop\VLC*media*player.lnk"          DEL /F /Q "%PUBLIC%\Desktop\VLC*media*player.lnk"
+IF EXIST "%ALLUSERSPROFILE%\Desktop\VLC*media*player.lnk" DEL /F /Q "%ALLUSERSPROFILE%\Desktop\VLC*media*player.lnk"
 
 
 ECHO END %date%-%time%

@@ -26,8 +26,8 @@ ECHO Silent install %softname%
 FSViewerSetup-%softversion%.exe /S
 
 ECHO Remove desktop shortcut
-IF EXIST "%PUBLIC%\Desktop\FastStone Image Viewer.lnk"          DEL /F /Q "%PUBLIC%\Desktop\FastStone Image Viewer.lnk"
-IF EXIST "%ALLUSERSPROFILE%\Desktop\FastStone Image Viewer.lnk" DEL /F /Q "%ALLUSERSPROFILE%\Desktop\FastStone Image Viewer.lnk"
+IF EXIST "%PUBLIC%\Desktop\FastStone*Image*Viewer.lnk"          DEL /F /Q "%PUBLIC%\Desktop\FastStone*Image*Viewer.lnk"
+IF EXIST "%ALLUSERSPROFILE%\Desktop\FastStone*Image*Viewer.lnk" DEL /F /Q "%ALLUSERSPROFILE%\Desktop\FastStone*Image*Viewer.lnk"
 
 
 ECHO END %date%-%time%
