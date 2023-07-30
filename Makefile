@@ -99,10 +99,11 @@ space:
 	for d in $(PKGDIR)
 	do
 		(cd $$d; \
-			ls -t *.zip 2>/dev/null | tail -n +$(KEEP) | xargs -r rm -f; \
+			ls -t *.zip 2>/dev/null | tail -n +$(KEEP) | xargs -r rm -vf; \
 			rm -f .make.log; \
 		)
 	done
+	echo "ls */*.zip | cut -f 1 -d '/' | sort | uniq -c | sort -n"
 
 version:
 	@
