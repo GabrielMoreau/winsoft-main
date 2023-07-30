@@ -18,25 +18,30 @@ EXIT /B
 
 ECHO BEGIN %date%-%time%
 
-SET softversion=91.5.1
-SET softpatch=1
+SET softversion=__VERSION__
+SET softpatch=__PATCH__
 
-REM Silent install
+ECHO Silent install %softname%
 msiexec /i "googlechromestandaloneenterprise64-%softversion%.msi" /qn /L*V "%logdir%\%softname%-MSI.log"
 
 
-REM Disable auto update
+ECHO Disable auto update
 sc stop gupdate
 sc config gupdate start= disabled
 regedit.exe /S "chrome-manual-updates.reg"
 
-REM Copy preferences
+ECHO Copy preferences
 IF EXIST "C:\Program Files (x86)\Google\Chrome\Application\" (
 	COPY /B /Y "master_preferences.json" "C:\Program Files (x86)\Google\Chrome\Application\master_preferences"
 	)
 IF EXIST "C:\Program Files\Google\Chrome\Application\" (
 	COPY /B /Y "master_preferences.json" "C:\Program Files\Google\Chrome\Application\master_preferences"
 	)
+
+ECHO Remove desktop shortcut
+IF EXIST "%PUBLIC%\Desktop\Google Chrome.lnk"          DEL /F /Q "%PUBLIC%\Desktop\Google Chrome.lnk"
+IF EXIST "%ALLUSERSPROFILE%\Desktop\Google Chrome.lnk" DEL /F /Q "%ALLUSERSPROFILE%\Desktop\Google Chrome.lnk"
+
 
 ECHO END %date%-%time%
 EXIT
