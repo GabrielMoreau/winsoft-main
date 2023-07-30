@@ -18,8 +18,8 @@ EXIT /B
 
 ECHO BEGIN %date%-%time%
 
-SET softversion=91.5.1
-SET softpatch=1
+SET softversion=__VERSION__
+SET softpatch=__PATCH__
 
 
 ECHO Search PowerShell
@@ -40,6 +40,10 @@ VC_redist.x64.exe /install /quiet /norestart
 ECHO Silent install %softname%
 OBS-Studio-%softversion%-Full-Installer-x64.exe /S
 
+ECHO Remove desktop shortcut
+IF EXIST "%PUBLIC%\Desktop\OBS*Studio.lnk"          DEL /F /Q "%PUBLIC%\Desktop\OBS*Studio.lnk"
+IF EXIST "%ALLUSERSPROFILE%\Desktop\OBS*Studio.lnk" DEL /F /Q "%ALLUSERSPROFILE%\Desktop\OBS*Studio.lnk"
+
 
 ECHO Disable Auto Updates
 REM Write for system in C:\Windows\System32\config\systemprofile\AppData\Roaming\obs-studio
@@ -48,6 +52,7 @@ REM So no work at global configuration...
 REM COPY /A /Y "global.ini" "%AppData%\obs-studio\global.ini"
 REM Just copy in install folder, user have to copy it in their app data folder
 COPY /A /Y "global.ini" "%ProgramFiles%\obs-studio\global.ini"
+
 
 ECHO END %date%-%time%
 EXIT
