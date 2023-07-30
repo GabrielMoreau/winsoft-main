@@ -13,3 +13,8 @@ the annotations.
 * Framasoft : https://framalibre.org/content/xournal
 
 * Download : https://github.com/xournalpp/xournalpp/releases/latest
+
+Because we're installing this software under the SYSTEM account, which
+doesn't really have a profile, we need to manually create a shortcut in
+the global menu and add a registry key to uninstall Xournal++
+(see https://github.com/xournalpp/xournalpp/issues/4445).
