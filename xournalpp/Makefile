@@ -45,7 +45,7 @@ tmp/$(EXE):
 	@mkdir -p tmp
 	@(cd tmp ; \
 		rm -f *.exe *.msi 2>/dev/null ; \
-		curl -s -o "$(ZIP)" -L "$(URL)" ; \
+		curl -# -o "$(ZIP)" -L "$(URL)" ; \
 		unzip -q "$(ZIP)" ; \
 		rm -f "$(ZIP)" ; \
 		file $(EXE) | grep -q "PE32 executable.*Nullsoft Installer self-extracting archive" || echo "Error: bad format for binary $(EXE)" ; \
@@ -59,8 +59,9 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 		s/^(SET\ssoftversion=)\d[\.\d]+\w?/$${1}$(VERSION)/; \
 		s/^(SET\ssoftpatch=)\d+/$${1}$(PATCH)/;' install.bat > $@
 
-%.zip: Makefile tmp/install.bat tmp/$(EXE)
+%.zip: Makefile uninstall.bat tmp/install.bat tmp/$(EXE)
 	@rm -f $@
+	@zip -r $@ uninstall.bat
 	@(cd tmp; zip -r ../$@ install.bat $(EXE))
 	@chmod ugo+rw $@
 
