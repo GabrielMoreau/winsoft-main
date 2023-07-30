@@ -18,12 +18,16 @@ EXIT /B
 
 ECHO BEGIN %date%-%time%
 
-SET softversion=91.5.1
-SET softpatch=1
+SET softversion=__VERSION__
+SET softpatch=__PATCH__
 
 
 ECHO Silent install %softname%
 avidemux-%softversion%-win64.exe /S
+
+ECHO Remove desktop shortcut
+IF EXIST "%PUBLIC%\Desktop\Avidemux*.lnk"          DEL /F /Q "%PUBLIC%\Desktop\Avidemux*.lnk"
+IF EXIST "%ALLUSERSPROFILE%\Desktop\Avidemux*.lnk" DEL /F /Q "%ALLUSERSPROFILE%\Desktop\Avidemux*.lnk"
 
 
 ECHO END %date%-%time%
