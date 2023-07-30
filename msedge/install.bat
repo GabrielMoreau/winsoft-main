@@ -27,4 +27,9 @@ msiexec /i MicrosoftEdgeEnterpriseX64-%softversion%.msi DONOTCREATEDESKTOPSHORTC
 
 
 ECHO END %date%-%time%
+
+IF %ERRORLEVEL% EQU 1603 (
+  ECHO 0 or 1603 are good exit code for %softname% installer!
+  EXIT 0
+)
 EXIT
