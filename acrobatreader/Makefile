@@ -59,8 +59,8 @@ tmp/$(EXE):
 tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
 	@perl -p -e ' \
-		s/^(SET\ssoftversion=)\d[\.\d]+\w?/$${1}$(VERSIONCOLLAPSE)/; \
-		s/^(SET\ssoftpatch=)\d+/$${1}$(PATCH)/;' install.bat > $@
+		s/__VERSION__/$(VERSIONCOLLAPSE)/; \
+		s/__PATCH__/$(PATCH)/;' install.bat > $@
 	@grep -q "softversion=$(VERSIONCOLLAPSE)" $@ || echo "Error: bad version in install.bat"
 
 %.zip: Makefile tmp/install.bat tmp/$(EXE)

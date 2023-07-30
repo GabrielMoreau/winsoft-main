@@ -19,8 +19,8 @@ EXIT /B
 ECHO BEGIN %date%-%time%
 
 
-SET softversion=5.71
-SET softpatch=1
+SET softversion=__VERSION__
+SET softpatch=__PATCH__
 
 REM https://silentinstallhq.com/adobe-reader-silent-uninstall-strings-master-list/
 ECHO Uninstall %softname% Silent
@@ -32,6 +32,8 @@ AcroRdrDCx64%softversion%_fr_FR.exe /sAll /rs /msi EULA_ACCEPT=YES DISABLEDESKTO
 ECHO Remove desktop shortcut
 IF EXIST "%PUBLIC%\Desktop\Adobe Reader X.lnk"          DEL /F /Q "%PUBLIC%\Desktop\Adobe Reader X.lnk"
 IF EXIST "%ALLUSERSPROFILE%\Desktop\Adobe Reader X.lnk" DEL /F /Q "%ALLUSERSPROFILE%\Desktop\Adobe Reader X.lnk"
+IF EXIST "%PUBLIC%\Desktop\Adobe*Acrobat.lnk"           DEL /F /Q "%PUBLIC%\Desktop\Adobe*Acrobat.lnk"
+IF EXIST "%ALLUSERSPROFILE%\Desktop\Adobe*Acrobat.lnk"  DEL /F /Q "%ALLUSERSPROFILE%\Desktop\Adobe*Acrobat.lnk"
 
 
 ECHO END %date%-%time%
