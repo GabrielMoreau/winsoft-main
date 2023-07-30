@@ -18,8 +18,8 @@ EXIT /B
 
 ECHO BEGIN %date%-%time%
 
-SET softversion=91.5.1
-SET softpatch=1
+SET softversion=__VERSION__
+SET softpatch=__PATCH__
 
 
 ECHO Search PowerShell
@@ -38,11 +38,15 @@ ECHO Execute pre-install script
 
 
 ECHO Silent install %softname%
-msiexec /i "inkscape-%softversion%-x64.msi" ALLUSERS=1 /qn
+msiexec /i "inkscape-%softversion%-x64.msi" ALLUSERS=1 /qn /L*v "%logdir%\%softname%-MSI.log"
 
 
 ECHO Execute post-install script
 %pwrsh% -File ".\post-install.ps1"
+
+ECHO Remove desktop shortcut
+IF EXIST "%PUBLIC%\Desktop\Inkscape.lnk"          DEL /F /Q "%PUBLIC%\Desktop\Inkscape.lnk"
+IF EXIST "%ALLUSERSPROFILE%\Desktop\Inkscape.lnk" DEL /F /Q "%ALLUSERSPROFILE%\Desktop\Inkscape.lnk"
 
 
 ECHO END %date%-%time%
