@@ -18,12 +18,17 @@ EXIT /B
 
 ECHO BEGIN %date%-%time%
 
-SET softversion=91.5.1
-SET softpatch=1
+SET softversion=__VERSION__
+SET softpatch=__PATCH__
 
 
 ECHO Silent install %softname%
 msiexec /i "pdfsam-%softversion%.msi" /qn /norestart CHECK_FOR_UPDATES=false CHECK_FOR_NEWS=false PLAY_SOUNDS=false DONATE_NOTIFICATION=false SKIPTHANKSPAGE=Yes PREMIUM_MODULES=false /L*v "%logdir%\%softname%-MSI.log"
+
+
+ECHO Remove desktop shortcut
+IF EXIST "%PUBLIC%\Desktop\PDFsam*Basic.lnk"          DEL /F /Q "%PUBLIC%\Desktop\PDFsam*Basic.lnk"
+IF EXIST "%ALLUSERSPROFILE%\Desktop\PDFsam*Basic.lnk" DEL /F /Q "%ALLUSERSPROFILE%\Desktop\PDFsam*Basic.lnk"
 
 
 ECHO END %date%-%time%

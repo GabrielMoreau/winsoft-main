@@ -18,12 +18,16 @@ EXIT /B
 
 ECHO BEGIN %date%-%time%
 
-SET softversion=91.5.1
-SET softpatch=1
+SET softversion=__VERSION__
+SET softpatch=__PATCH__
 
 
 ECHO Silent install %softname%
 FreeCAD-WIN-x64-installer-%softversion%.exe /S
+
+ECHO Remove desktop shortcut
+IF EXIST "%PUBLIC%\Desktop\FreeCAD*.lnk"          DEL /F /Q "%PUBLIC%\Desktop\FreeCAD*.lnk"
+IF EXIST "%ALLUSERSPROFILE%\Desktop\FreeCAD*.lnk" DEL /F /Q "%ALLUSERSPROFILE%\Desktop\FreeCAD*.lnk"
 
 
 ECHO END %date%-%time%
