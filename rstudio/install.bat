@@ -18,21 +18,21 @@ EXIT /B
 
 ECHO BEGIN %date%-%time%
 
-SET softversion=91.5.1
-SET softpatch=1
-SET softversion2=91.5.1
+SET softversion1=__VERSION1__
+SET softversion2=__VERSION2__
+SET softpatch=__PATCH__
 
 
 ECHO Silent install R
 R-%softversion2%-win.exe /VERYSILENT /NORESTART
 
 ECHO Silent install %softname%
-RStudio-%softversion%.exe /S
+RStudio-%softversion1%.exe /S
 
 
 ECHO Remove desktop shortcut for R
-IF EXIST "%PUBLIC%\Desktop\R %softversion2%.lnk"          DEL /F /Q "%PUBLIC%\Desktop\R %softversion2%.lnk"
-IF EXIST "%ALLUSERSPROFILE%\Desktop\R %softversion2%.lnk" DEL /F /Q "%ALLUSERSPROFILE%\Desktop\R %softversion2%.lnk"
+IF EXIST "%PUBLIC%\Desktop\R*%softversion2%.lnk"          DEL /F /Q "%PUBLIC%\Desktop\R*%softversion2%.lnk"
+IF EXIST "%ALLUSERSPROFILE%\Desktop\R*%softversion2%.lnk" DEL /F /Q "%ALLUSERSPROFILE%\Desktop\R*%softversion2%.lnk"
 
 
 ECHO END %date%-%time%
