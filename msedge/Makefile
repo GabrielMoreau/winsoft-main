@@ -21,7 +21,7 @@ all:
 	@(cd tmp; \
 		echo $(VERSION) | egrep -q '^[[:digit:]][\.[:digit:]]*$$'                        || curl -# -o $(INSTALLER) -L "$(URL)"; \
 		file "$(INSTALLER)" 2> /dev/null | grep -q "MSI Installer.*Comments: $(VERSION)" || curl -# -o $(INSTALLER) -L "$(URL)"; \
-		grep -q "^$(UUID):" version.txt 2> /dev/null                                     || curl -# -o $(INSTALLER) -L "$(URL)"; \
+		grep -q "^$(UUID):" ../version.txt 2> /dev/null                                  || curl -# -o $(INSTALLER) -L "$(URL)"; \
 		)	#@rm -f "tmp/$(INSTALLER)"
 	@make next
 
