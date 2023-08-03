@@ -1,1 +1,2 @@
 3417d7079810e41dc2ff3c61fd2bcc0b121612e62cb92d3dd7f1e6935f938b74  FreeCAD-WIN-x64-installer-0.20.2.3.exe
+e6a023e2b1aa8b46cb944fdf146c2d6dde46b3955a84cbb15a66d825c933166e  FreeCAD-WIN-x64-installer-0.21.0.1.exe
