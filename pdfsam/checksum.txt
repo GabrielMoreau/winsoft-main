@@ -1,3 +1,4 @@
 3a11b5a622b52b4be8c48cdcca63eb64fec94a944b75ae9aad4b9f279e2fa84c  pdfsam-5.0.3.msi
 e26539fa992d513ae8cfe72e4b57326ffbbd70f3821d6afd2d6033837efd7482  pdfsam-5.1.1.msi
 8cbb535cf6955aa0070303c51c7019b97cccbdb798e1af55e044005ce7cdbf53  pdfsam-5.1.2.msi
+2d3d4297de0deb5c95a8be8eeab5aae3ed581e49561a5f8593d9ec4bf8f76eaa  pdfsam-5.1.3.msi
