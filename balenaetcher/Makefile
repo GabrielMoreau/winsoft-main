@@ -70,7 +70,7 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@zip -r $@ uninstall.bat
 	@(cd tmp; zip --quiet -r ../$@ install.bat BalenaEtcher)
 	@chmod ugo+rw $@
-	@echo -n 'Number of files: '; unzip -t $@ | grep 'OK' | wc -l
+	@echo -n '  Zip / Number of files: '; unzip -t $@ | grep 'OK' | wc -l
 
 ocs:
 	@echo ""
