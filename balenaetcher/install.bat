@@ -58,7 +58,7 @@ ECHO Better reg uninstall key
 >> tmp_install.reg ECHO "UninstallString"="%SystemDrive%\\Program Files\\balena-etcher\\uninstall.bat"
 >> tmp_install.reg ECHO "InstallLocation"="%SystemDrive%\\Program Files\\balena-etcher"
 >> tmp_install.reg ECHO "InstallFolder"="%SystemDrive%\\Program Files\\balena-etcher"
->> tmp_install.reg ECHO "DisplayIcon"="%SystemDrive%\\Program Files\\balena-etcher\\resources\\icons\\3.ico"
+>> tmp_install.reg ECHO "DisplayIcon"="%SystemDrive%\\Program Files\\balena-etcher\\balenaEtcher.exe,0"
 >> tmp_install.reg ECHO "URLInfoAbout"="https://etcher.balena.io/"
 >> tmp_install.reg ECHO "Publisher"="Balena Ltd."
 >> tmp_install.reg ECHO.
