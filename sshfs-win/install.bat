@@ -1,4 +1,3 @@
-REM @ECHO OFF
 
 REM
 REM   SSHFS-Win
@@ -18,31 +17,35 @@ EXIT /B
 
 ECHO BEGIN %date%-%time%
 
-SET WinfspVersion=1.10.22006
-SET SshfsVersion=3.5.20357
-SET ManagerVersion=1.3.1
-SET SiriKaliVersion=1.4.8
-SET PkgVersion=9
+SET WinfspVersion=__WINFSP_VERSION__
+SET SshfsVersion=__SSHFS_VERSION__
+SET softpatch=__PATCH__
 
+
+ECHO Search PowerShell
 SET pwrsh=%WINDIR%\System32\WindowsPowerShell\V1.0\powershell.exe
 IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET pwrsh=%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe
 
-REM
-REM Install WinFSP - https://github.com/billziss-gh/winfsp
-REM
+ECHO Add rights
+%pwrsh% Set-ExecutionPolicy RemoteSigned -Force -Scope LocalMachine
+
+ECHO unblock
+%pwrsh% "Unblock-File -Path .\*.ps1"
+
+
+ECHO Execute pre-install script
+%pwrsh% -File ".\pre-install.ps1"
+
+
+ECHO Silent install WinFSP - https://github.com/billziss-gh/winfsp
 msiexec /quiet /qn /i winfsp-%WinfspVersion%.msi
-REM ping 127.0.0.1 -n 6 > NUL
 
-REM
-REM Install SSHFS-Win - https://github.com/billziss-gh/sshfs-win
-REM
+ECHO Silent install SSHFS-Win - https://github.com/billziss-gh/sshfs-win
 msiexec /quiet /qn /i sshfs-win-%SshfsVersion%-x64.msi
-REM ping 127.0.0.1 -n 6 > NUL
 
-REM
-REM Install link in Start Menu
-REM
-%pwrsh% -File "install.ps1"
+
+ECHO Execute post-install script
+%pwrsh% -File ".\post-install.ps1"
 
 
 ECHO END %date%-%time%
