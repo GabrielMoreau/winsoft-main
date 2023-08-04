@@ -4,14 +4,14 @@
 #
 
 SOFT:=VisualCPPRedistributable
-VERSION:=1.4
+VERSION:=1.6
 PATCH:=1
 
 IT_TEAM:=IT Support
 
 VCREDIST:=
-VCREDIST+=tmp/2005/vcredist_x64.exe
-VCREDIST+=tmp/2005/vcredist_x86.exe
+VCREDIST+=tmp/2005/vcredist_x64.EXE
+VCREDIST+=tmp/2005/vcredist_x86.EXE
 VCREDIST+=tmp/2008/vcredist_x64.exe
 VCREDIST+=tmp/2008/vcredist_x86.exe
 VCREDIST+=tmp/2010/vcredist_x64.exe
@@ -49,12 +49,18 @@ tmp/install.bat: install.bat Makefile
 		s/^(SET\ssoftpatch=)\d+/$${1}$(PATCH)/;' install.bat > $@
 
 tmp/version-replace.txt: $(VCREDIST)
-	@echo "s/__2005-x64__/$$(peres -a tmp/2005/vcredist_x64.exe | egrep 'Product Version:' | awk '{print $$3}')/;"  > $@
-	@echo "s/__2005-x86__/$$(peres -a tmp/2005/vcredist_x86.exe | egrep 'Product Version:' | awk '{print $$3}')/;" >> $@
-	@echo "s/__2008-x64__/$$(peres -a tmp/2008/vcredist_x64.exe | egrep 'Product Version:' | awk '{print $$3}')/;" >> $@
-	@echo "s/__2008-x86__/$$(peres -a tmp/2008/vcredist_x86.exe | egrep 'Product Version:' | awk '{print $$3}')/;" >> $@
-	@echo "s/__2010-x64__/$$(peres -a tmp/2010/vcredist_x64.exe | egrep 'Product Version:' | awk '{print $$3}')/;" >> $@
-	@echo "s/__2010-x86__/$$(peres -a tmp/2010/vcredist_x86.exe | egrep 'Product Version:' | awk '{print $$3}')/;" >> $@
+	@echo "s/__2005-x64-bad__/$$(peres -a tmp/2005/vcredist_x64.EXE | egrep 'Product Version:' | awk '{print $$3}')/;"  > $@
+	@echo "s/__2005-x86-bad__/$$(peres -a tmp/2005/vcredist_x86.EXE | egrep 'Product Version:' | awk '{print $$3}')/;" >> $@
+	@echo "s/__2008-x64-bad__/$$(peres -a tmp/2008/vcredist_x64.exe | egrep 'Product Version:' | awk '{print $$3}')/;" >> $@
+	@echo "s/__2008-x86-bad__/$$(peres -a tmp/2008/vcredist_x86.exe | egrep 'Product Version:' | awk '{print $$3}')/;" >> $@
+	@echo "s/__2010-x64-bad__/$$(peres -a tmp/2010/vcredist_x64.exe | egrep 'Product Version:' | awk '{print $$3}')/;" >> $@
+	@echo "s/__2010-x86-bad__/$$(peres -a tmp/2010/vcredist_x86.exe | egrep 'Product Version:' | awk '{print $$3}')/;" >> $@
+	@echo "s/__2005-x64__/$$(grep '* 2005-x64[[:space:]]' version.txt | awk '{print $$3}')/;" >> $@
+	@echo "s/__2005-x86__/$$(grep '* 2005-x86[[:space:]]' version.txt | awk '{print $$3}')/;" >> $@
+	@echo "s/__2008-x64__/$$(grep '* 2008-x64[[:space:]]' version.txt | awk '{print $$3}')/;" >> $@
+	@echo "s/__2008-x86__/$$(grep '* 2008-x86[[:space:]]' version.txt | awk '{print $$3}')/;" >> $@
+	@echo "s/__2010-x64__/$$(grep '* 2010-x64[[:space:]]' version.txt | awk '{print $$3}')/;" >> $@
+	@echo "s/__2010-x86__/$$(grep '* 2010-x86[[:space:]]' version.txt | awk '{print $$3}')/;" >> $@
 	@echo "s/__2012-x64__/$$(peres -a tmp/2012/vcredist_x64.exe | egrep 'Product Version:' | awk '{print $$3}')/;" >> $@
 	@echo "s/__2012-x86__/$$(peres -a tmp/2012/vcredist_x86.exe | egrep 'Product Version:' | awk '{print $$3}')/;" >> $@
 	@echo "s/__2013-x64__/$$(peres -a tmp/2013/vcredist_x64.exe | egrep 'Product Version:' | awk '{print $$3}')/;" >> $@
@@ -93,14 +99,14 @@ ocs:
 	@echo ""
 
 
-tmp/2005/vcredist_x64.exe: url.txt
+tmp/2005/vcredist_x64.EXE: url.txt
 	@mkdir -p tmp/2005
 	@curl -s -o $@ -L $$(grep '^2005-x64' url.txt | cut -f 2 -d ' ')
 	@file $@ | grep -q "PE32 executable" || echo "Error: bad format for binary $@"
 	@grep -q "^$$(shasum -a 256 $@)$$" checksum.txt || echo "Error: bad checksum for binary $@"
 	@grep -q "[[:space:]]$$(peres -a $@ | egrep 'Product Version:' | awk '{print $$3}')$$" version.txt || echo "Error: bad version for binary $@"
 
-tmp/2005/vcredist_x86.exe: url.txt
+tmp/2005/vcredist_x86.EXE: url.txt
 	@mkdir -p tmp/2005
 	@curl -s -o $@ -L $$(grep '^2005-x86' url.txt | cut -f 2 -d ' ')
 	@file $@ | grep -q "PE32 executable" || echo "Error: bad format for binary $@"
