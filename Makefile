@@ -25,7 +25,7 @@ build-all:
 		echo "#=== $$d ===#"
 		(cd $$d; \
 			make > .make.log 2>&1; \
-			find . -maxdepth 1 -name '*.zip' -a -mtime -1 -not -path '*/tmp/*' -exec cat .make.log \; \
+			[ $$(find . -maxdepth 1 -name '*.zip' -a -mtime -1 -not -path '*/tmp/*' -print | wc -l) -gt 0 ] && cat .make.log; \
 		)
 	done
 	echo ''
@@ -100,7 +100,6 @@ space:
 	do
 		(cd $$d; \
 			ls -t *.zip 2>/dev/null | tail -n +$(KEEP) | xargs -r rm -vf; \
-			rm -f .make.log; \
 		)
 	done
 	echo "ls */*.zip | cut -f 1 -d '/' | sort | uniq -c | sort -n"
