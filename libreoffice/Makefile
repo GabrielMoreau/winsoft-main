@@ -43,12 +43,10 @@ version:
 checksum:
 	@mkdir -p tmp
 	@(cd tmp ; \
-		grep -q "^$$(shasum -a 256 $(EXE_LO))$$" ../checksum.txt && exit ; \
-		shasum -a 256 "$(EXE_LO)" | sed -e 's#tmp/##;' >> ../checksum.txt ; \
-		grep -q "^$$(shasum -a 256 $(EXE_HELP))$$" ../checksum.txt && exit ; \
-		shasum -a 256 "$(EXE_HELP)" | sed -e 's#tmp/##;' >> ../checksum.txt ; \
-		tail -6 ../checksum.txt ; \
+		grep -q "^$$(shasum -a 256 $(EXE_LO))$$" ../checksum.txt   || { shasum -a 256 "$(EXE_LO)"   | sed -e 's#tmp/##;' >> ../checksum.txt ; } ; \
+		grep -q "^$$(shasum -a 256 $(EXE_HELP))$$" ../checksum.txt || { shasum -a 256 "$(EXE_HELP)" | sed -e 's#tmp/##;' >> ../checksum.txt ; } ; \
 		)
+	@[ $$(( $$(date '+%s') - $$(stat -c '%Y' checksum.txt) )) -lt 60 ] && tail -6 checksum.txt
 
 wget: tmp/$(EXE_LO) tmp/$(EXE_HELP)
 
@@ -56,7 +54,7 @@ tmp/$(EXE_LO):
 	@mkdir -p tmp
 	@(cd tmp ; \
 		rm -f *_Win_x86-64.msi 2>/dev/null ; \
-		curl -s -o "$(EXE_LO)" -L "$(URL_LO)" ; \
+		curl -# -o "$(EXE_LO)" -L "$(URL_LO)" ; \
 		file "$(EXE_LO)" | grep -q "Author: The Document Foundation.*$(VERSION)" || echo "Error: bad format for binary $(EXE_LO)" ; \
 		grep -q "^$$(shasum -a 256 $(EXE_LO))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE_LO)" ; \
 		)
@@ -65,7 +63,7 @@ tmp/$(EXE_HELP):
 	@mkdir -p tmp
 	@(cd tmp ; \
 		rm -f *_helppack_fr.msi 2>/dev/null ; \
-		curl -s -o "$(EXE_HELP)" -L "$(URL_HELP)" ; \
+		curl -# -o "$(EXE_HELP)" -L "$(URL_HELP)" ; \
 		file "$(EXE_HELP)" | grep -q "Author: The Document Foundation.*$(VERSION)" || echo "Error: bad format for binary $(EXE_HELP)" ; \
 		grep -q "^$$(shasum -a 256 $(EXE_HELP))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE_HELP)" ; \
 		)
@@ -73,8 +71,8 @@ tmp/$(EXE_HELP):
 tmp/install.bat: install.bat Makefile tmp/$(EXE_LO)
 	@mkdir -p tmp
 	@perl -p -e ' \
-		s/^(SET\ssoftversion=)\d[\.\d]+\w?/$${1}$(VERSION)/; \
-		s/^(SET\ssoftpatch=)\d+/$${1}$(PATCH)/;' install.bat > $@
+		s/__VERSION__/$(VERSION)/; \
+		s/__PATCH__/$(PATCH)/;' install.bat > $@
 
 %.zip: Makefile tmp/install.bat tmp/$(EXE_LO) tmp/$(EXE_HELP)
 	@rm -f $@
