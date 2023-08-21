@@ -4,9 +4,10 @@
 #
 
 SOFT:=Gimp
-VERSION:=$(shell curl -s -L 'https://www.gimp.org/downloads/' | egrep 'SHA256.*code.*gimp-.*setup.*exe' | cut -f 2 -d '-')
+SHORTVERSION:=$(shell curl -s -L 'https://www.gimp.org/downloads/' | egrep 'SHA256.*code.*gimp-.*setup.*exe' | cut -f 2 -d '-')
+VERSION:=$(shell curl -s -L 'https://www.gimp.org/downloads/' | grep -E 'gimp-.*-setup.*.exe"' | sed -e 's/-setup-\([[:digit:]][[:digit:]]*\)/.0.\1/; s/\.exe/-exe/;' | cut -f 2 -d '"' | xargs -r -n 1 basename | cut -f 2 -d '-')
 PATCH:=1
-URL:=https:$(shell curl -s -L 'https://www.gimp.org/downloads/' | egrep 'gimp-.*-setup.*.exe"' |cut -f 2 -d '"')
+URL:=https:$(shell curl -s -L 'https://www.gimp.org/downloads/' | egrep 'gimp-.*-setup.*.exe"' | cut -f 2 -d '"')
 
 EXE:=gimp-$(VERSION)-setup.exe
 
@@ -44,9 +45,9 @@ tmp/$(EXE):
 	@mkdir -p tmp
 	@(cd tmp ; \
 		rm -f *.exe *.msi 2>/dev/null ; \
-		curl -s -o "$(EXE)" -L "$(URL)" ; \
+		curl -# -o "$(EXE)" -L "$(URL)" ; \
 		file $(EXE) | grep -q "PE32 executable" || echo "Error: bad format for binary $(EXE)" ; \
-		which peres >/dev/null && { peres -a $(EXE) | grep -q "^Product Version:[[:space:]]*$(VERSION)" || echo "Error: bad version for binary $(EXE)" ; } ; \
+		which peres >/dev/null && { peres -a $(EXE) | grep -q "^Product Version:[[:space:]]*$(SHORTVERSION)" || echo "Error: bad version for binary $(EXE)" ; } ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
 
