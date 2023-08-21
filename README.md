@@ -67,7 +67,6 @@ to facilitate automation.
 Note the optional use of the `peres` tool (Debian `pev` package)
 which allows to retrieve the version number in a `setup.exe` installation file.
 If this tool is available, a version number check is performed.
-malheureusement, il y a de nombreux p
 
 Unfortunately, many installation programs `setup.exe` have no version
 number (Product Version). This is a pity, as there is sometimes some
@@ -75,7 +74,13 @@ doubt as to the actual version of a program.
 
 Similarly, some MSI packages have the version number in the comment or
 subject line, but not all. It is therefore difficult to always validate
-this version number.
+this version number. We can sometime use `msiextract` to extract an
+`.exe` file and then use `peres` on it!
+Please devops, put always the version number clearly in the comment...
+
+```bash
+apt install make curl wget pev msitools
+```
 
 ## List of 79 packages
 
