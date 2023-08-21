@@ -4,10 +4,11 @@
 #
 
 SOFT:=ParaView
-VERSION:=$(shell curl -s -L  'https://www.paraview.org/files/listing.txt' | cut -f 2 -d '/' | grep '^v' | sed -e 's/^v//;' | uniq | sort -V | tail -1)
+SHORTVERSION:=$(shell curl -s -L  'https://www.paraview.org/files/listing.txt' | cut -f 2 -d '/' | grep '^v' | sed -e 's/^v//;' | uniq | sort -V | tail -1)
+VERSION:=$(shell curl -s -L 'https://www.paraview.org/files/listing.txt' | grep "/v.*/ParaView.*\.msi[[:space:]]" | awk '{print $$1}' | egrep -v -- '-(RC[[:digit:]]*|MPI)-' | xargs -r -n 1 basename | cut -f 2 -d '-' | sort -V  | tail -1)
 PATCH:=1
-EXE:=$(shell curl -s -L 'https://www.paraview.org/files/listing.txt' | grep "/v$(VERSION)/ParaView" | grep '\.msi[[:space:]]' | egrep -v -- '-(RC[[:digit:]]*|MPI)-' | awk '{print $1}' | sort | head -1 | sed -e 's#[[:space:]]#/#g;' | cut -f 3 -d '/')
-URL:=https://www.paraview.org/paraview-downloads/download.php?submit=Download&version=v$(VERSION)&type=binary&os=Windows&downloadFile=$(EXE)
+EXE:=$(shell curl -s -L 'https://www.paraview.org/files/listing.txt' | grep "/v$(SHORTVERSION)/ParaView-$(VERSION)-Windows.*\.msi[[:space:]]" | awk '{print $$1}' | egrep -v -- '-(RC[[:digit:]]*|MPI)-' | sort | head -1 | sed -e 's#[[:space:]]#/#g;' | cut -f 3 -d '/')
+URL:=https://www.paraview.org/paraview-downloads/download.php?submit=Download&version=v$(SHORTVERSION)&type=binary&os=Windows&downloadFile=$(EXE)
 
 # https://www.paraview.org/paraview-downloads/download.php?submit=Download&version=v5.11&type=binary&os=Windows&downloadFile=ParaView-5.11.0-Windows-Python3.9-msvc2017-AMD64.msi
 
@@ -29,6 +30,7 @@ clean:
 
 version:
 	@echo "VERSION: $(VERSION)"
+	@echo "SHORTVERSION: $(SHORTVERSION)"
 	@echo "URL: $(URL)"
 	@echo "EXE: $(EXE)"
 
@@ -46,8 +48,8 @@ tmp/$(EXE):
 	@mkdir -p tmp
 	@(cd tmp ; \
 		rm -f *.exe *.msi 2>/dev/null ; \
-		curl -s -o "$(EXE)" -L "$(URL)" ; \
-		file $(EXE) | grep -q "Composite Document File V2 Document, Little Endian.*$(VERSION)" || echo "Error: bad format for binary $(EXE)" ; \
+		curl -# -o "$(EXE)" -L "$(URL)" ; \
+		file $(EXE) | grep -q "Composite Document File V2 Document, Little Endian.*Subject: ParaView, Author: Kitware, Inc" || echo "Error: bad format for binary $(EXE)" ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
 
