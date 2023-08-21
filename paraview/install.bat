@@ -18,12 +18,32 @@ EXIT /B
 
 ECHO BEGIN %date%-%time%
 
-SET softversion=5.10.2
-SET softpatch=1
-SET softexe=ParaView-5.10.2.msi
+SET softversion=__VERSION__
+SET softpatch=__PATCH__
+SET softexe=__EXE__
+SET process=paraview.exe
 
 
-REM Silent install
+ECHO Kill running process
+taskkill /T /F /IM %process%
+
+
+ECHO Search PowerShell
+SET pwrsh=%WINDIR%\System32\WindowsPowerShell\V1.0\powershell.exe
+IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET pwrsh=%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe
+
+ECHO Add rights
+%pwrsh% Set-ExecutionPolicy RemoteSigned -Force -Scope LocalMachine
+
+ECHO unblock
+%pwrsh% "Unblock-File -Path .\*.ps1"
+
+
+ECHO Execute pre-install script
+%pwrsh% -File ".\pre-install.ps1"
+
+
+ECHO Silent install %softname%
 msiexec /i "%softexe%" ALLUSERS=1 /qn /L*v "%logdir%\%softname%-MSI.log" 
 
 
