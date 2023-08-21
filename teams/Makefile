@@ -4,7 +4,8 @@
 #
 
 SOFT:=Teams
-VERSION:=$(shell curl -s -L 'https://learn.microsoft.com/en-us/officeupdates/teams-app-versioning' | grep -A 30 'Windows version history' | grep '^<td' | cut -f 2 -d '>' | cut -f 1 -d '<' | egrep '^[[:digit:]][[:digit:]]?\.[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+$$' | head -1)
+VERSION:=$(shell curl -s -L 'https://learn.microsoft.com/en-us/officeupdates/teams-app-versioning' | grep -A 30 'Windows version history' | grep '^<td' | cut -f 2 -d '>' | cut -f 1 -d '<' | cut -f 1 -d ' ' | egrep '^[[:digit:]][[:digit:]]?\.[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+$$' | head -1)
+SHORTVERSION:=$(shell echo $(VERSION) | sed -e 's/00/0/g;')
 URL:=https://teams.microsoft.com/downloads/desktopurl?env=production&plat=windows&arch=x64&managedInstaller=true&download=true
 PATCH:=1
 
@@ -26,6 +27,7 @@ clean:
 
 version:
 	@echo "VERSION: $(VERSION)"
+	@echo "SHORTVERSION: $(SHORTVERSION)"
 	@echo "URL: $(URL)"
 	@echo "EXE: $(EXE)"
 
@@ -45,6 +47,8 @@ tmp/$(EXE):
 		rm -f *.exe *.msi 2>/dev/null ; \
 		curl -# -o "$(EXE)" -L "$(URL)" ; \
 		file $(EXE) | grep -q "Composite Document File.*Subject: Microsoft Teams" || echo "Error: bad format for binary $(EXE)" ; \
+		which msiextract >/dev/null && { rm -rf 'Program File'; msiextract $(EXE) ; } ; \
+        which peres >/dev/null && { peres -a 'Program Files/Teams Installer/Teams.exe' | grep -q "^Product Version:[[:space:]]*$(SHORTVERSION)" || echo "Error: bad version for binary $(EXE)" ; } ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
 
