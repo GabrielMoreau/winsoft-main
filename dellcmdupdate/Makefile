@@ -44,7 +44,7 @@ wget: tmp/$(EXE)
 
 tmp/$(EXE):
 	@mkdir -p tmp
-	@(cd tmp ; \
+	(cd tmp ; \
 		rm -f *.exe *.msi 2>/dev/null ; \
 		#curl -# -o "$(EXE)" -L "$(URL)" ; \
 		wget -q --show-progress -O "$(EXE)" "$(URL)" ; \
@@ -55,16 +55,11 @@ tmp/$(EXE):
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
-	@perl -p -e ' \
-		s/^(SET\ssoftversion=)\d[\.\d]+\w?/$${1}$(VERSION)/; \
-		s/^(SET\ssoftpatch=)\d+/$${1}$(PATCH)/; \
-		s/^(SET\ssoftexe=)\w.+/$${1}$(EXE)/; \
-		s/^(SET\ssoftversionlow=)\d[_\d]+/$${1}$(VERSION_LOW)/;' install.bat > $@
+	@sed -e 's/__VERSION__/$(VERSION)/; s/__PATCH__/$(PATCH)/; s/__EXE__/$(EXE)/; s/__VERSION_LOW__/$(VERSION_LOW)/;' install.bat > $@
 
 tmp/pre-install.ps1: pre-install.ps1 Makefile tmp/$(EXE)
 	@mkdir -p tmp
-	@perl -p -e ' \
-		s/__VERSION__/$(VERSION)/;' pre-install.ps1 > $@
+	@sed -e 's/__VERSION__/$(VERSION)/;' pre-install.ps1 > $@
 
 %.zip: Makefile tmp/install.bat tmp/pre-install.ps1 tmp/$(EXE)
 	@rm -f $@

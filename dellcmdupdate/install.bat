@@ -18,10 +18,10 @@ EXIT /B
 
 ECHO BEGIN %date%-%time%
 
-SET softversion=1.5.1
-SET softpatch=1
-SET softexe=Dell-Command-Update.exe
-SET softversionlow=1_5_1
+SET softversion=__VERSION__
+SET softpatch=__PATCH__
+SET softexe=__EXE__
+SET softversionlow=__VERSION_LOW__
 
 
 ECHO Search PowerShell
