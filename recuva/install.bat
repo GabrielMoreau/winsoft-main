@@ -19,8 +19,8 @@ EXIT /B
 ECHO BEGIN %date%-%time%
 
 
-SET softversion=5.71
-SET softpatch=1
+SET softversion=__VERSION__
+SET softpatch=__PATCH__
 
 
 ECHO Silent install %softname%

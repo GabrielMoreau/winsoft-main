@@ -19,8 +19,8 @@ EXIT /B
 ECHO BEGIN %date%-%time%
 
 
-SET softversion=5.71
-SET softpatch=1
+SET softversion=__VERSION__
+SET softpatch=__PATCH__
 
 SET pwrsh=%WINDIR%\System32\WindowsPowerShell\V1.0\powershell.exe
 IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET pwrsh=%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe
