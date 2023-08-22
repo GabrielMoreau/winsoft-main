@@ -1,7 +1,7 @@
 
 # Clean old duplicate key with 7-Zip in the name (same uninstall string)
 
-$RefVersion = '91.5.1'
+$RefVersion = '__VERSION__'
 $RefUninstallString = ''
 $RefName = '7-Zip'
 

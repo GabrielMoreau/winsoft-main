@@ -18,9 +18,9 @@ EXIT /B
 
 ECHO BEGIN %date%-%time%
 
-SET softversion=18.05
-SET softversionshort=1805
-SET softpatch=1
+SET softversion=__VERSION__
+SET softversionshort=__VERSIONSHORT__
+SET softpatch=__PATCH__
 SET process=7z.exe
 
 
