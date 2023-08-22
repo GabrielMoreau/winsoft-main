@@ -1,4 +1,4 @@
-# BleachBit - Vector graphics editor
+# BleachBit - Clean computer files and privacy manager
 
 BleachBit is a free and open-source disk space cleaner, privacy manager,
 and computer system optimizer. 
