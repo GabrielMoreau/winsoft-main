@@ -44,7 +44,7 @@ tmp/$(EXE):
 	@mkdir -p tmp
 	@(cd tmp ; \
 		rm -f *.zip 2>/dev/null ; \
-		curl -s -o "$(EXE)" -L "$(URL)" ; \
+		curl -# -o "$(EXE)" -L "$(URL)" ; \
 		file $(EXE) | grep -q "Zip archive data" || echo "Error: bad format for binary $(EXE)" ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
@@ -59,9 +59,7 @@ tmp/Telegram/Telegram.exe: tmp/$(EXE)
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
-	@perl -p -e ' \
-		s/^(SET\ssoftversion=)\d[\.\d]+\w?/$${1}$(VERSION)/; \
-		s/^(SET\ssoftpatch=)\d+/$${1}$(PATCH)/;' install.bat > $@
+	@sed -e 's/__VERSION__/$(VERSION)/; s/__PATCH__/$(PATCH)/;' install.bat > $@
 
 %.zip: Makefile uninstall.bat tmp/install.bat tmp/$(EXE) tmp/Telegram/Telegram.exe
 	@rm -f $@
