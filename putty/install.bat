@@ -18,8 +18,8 @@ EXIT /B
 
 ECHO BEGIN %date%-%time%
 
-SET softversion=0.70
-SET softpatch=2
+SET softversion=__VERSION__
+SET softpatch=__PATCH__
 
 
 REM Silent install
