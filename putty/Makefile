@@ -53,9 +53,14 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
 	@sed -e 's/__VERSION__/$(VERSION)/; s/__PATCH__/$(PATCH)/;' install.bat > $@
 
-%.zip: Makefile tmp/install.bat tmp/$(EXE)
+tmp/post-install.ps1: post-install.ps1 Makefile tmp/$(EXE)
+	@mkdir -p tmp
+	@sed -e 's/__VERSION__/$(VERSION)/;' post-install.ps1 > $@
+
+%.zip: Makefile pre-install.ps1 tmp/install.bat tmp/post-install.ps1 tmp/$(EXE)
 	@rm -f $@
-	@(cd tmp; zip -r ../$@ install.bat $(EXE))
+	@zip -r ./$@ pre-install.ps1
+	@(cd tmp; zip -r ../$@ install.bat post-install.ps1 $(EXE))
 	@chmod ugo+rw $@
 
 ocs:
