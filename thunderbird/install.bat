@@ -18,8 +18,8 @@ EXIT /B
 
 ECHO BEGIN %date%-%time%
 
-SET softversion=91.5.1
-SET softpatch=1
+SET softversion=__VERSION__
+SET softpatch=__PATCH__
 SET process=thunderbird.exe
 
 

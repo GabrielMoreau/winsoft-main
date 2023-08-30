@@ -45,7 +45,7 @@ tmp/$(EXE):
 	@mkdir -p tmp
 	@(cd tmp ; \
 		rm -f *.exe *.msi 2>/dev/null ; \
-		curl -s -o "$(EXE)" -L "$(URL)" ; \
+		curl -# -o "$(EXE)" -L "$(URL)" ; \
 		file $(EXE) | grep -q "Subject: Google Chrome Installer.*Comments: $(VERSION) Copyright" || echo "Error: bad format for binary $(EXE)" ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
