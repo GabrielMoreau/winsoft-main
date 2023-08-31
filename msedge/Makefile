@@ -68,10 +68,15 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@perl -p -e ' \
 		s/__VERSION__/$(VERSION)/; \
 		s/__PATCH__/$(PATCH)/;' install.bat > $@
+		
+tmp/post-install.ps1: post-install.ps1 Makefile tmp/$(EXE)
+	@mkdir -p tmp
+	@perl -p -e ' \
+		s/^(.RefVersion = .)\d[\.\d]+/$${1}$(VERSION)/;' post-install.ps1 > $@
 
-%.zip: Makefile tmp/install.bat tmp/$(EXE)
+%.zip: Makefile tmp/install.bat tmp/post-install.ps1 tmp/$(EXE)
 	@rm -f $@
-	@(cd tmp; zip -r ../$@ install.bat $(EXE))
+	@(cd tmp; zip -r ../$@ install.bat post-install.ps1 $(EXE))
 	@chmod ugo+rw $@
 
 ocs:
