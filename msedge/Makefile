@@ -5,7 +5,7 @@
 
 SOFT:=MSEdge
 INSTALLER:=MicrosoftEdgeEnterpriseX64.msi
-PATCH:=1
+PATCH:=2
 URL:=$(shell curl --silent -L https://www.microsoft.com/en-us/edge/business/download | sed -e 's/[[:space:],]/\n/g;' | grep '^downloadUrl.*MicrosoftEdgeEnterpriseX64.msi' | head -1 | sed -e 's#\\u002F#/#g;' | cut -f 2 -d '"')
 UUID:=$(shell dirname "$(URL)" | xargs -r basename)
 VERSION:=$(shell (grep "^$(UUID):" version.txt 2> /dev/null || file tmp/MicrosoftEdgeEnterpriseX64.msi 2> /dev/null | sed -s 's/, /\n/g;' |grep '^Comments:') | awk '{print $$2}')
