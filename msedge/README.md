@@ -8,3 +8,6 @@ built on a Chromium-based.
 
 * Download : https://www.microsoft.com/en-us/edge/business/download
 * Silent Install : https://silentinstallhq.com/microsoft-edge-version-101-silent-install-how-to-guide/
+
+* Documentation : https://learn.microsoft.com/en-us/deployedge/
+* Policies : https://learn.microsoft.com/en-us/deployedge/microsoft-edge-policies
