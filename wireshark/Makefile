@@ -76,10 +76,7 @@ tmp/$(EXE2):
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE1) tmp/$(EXE2)
 	@mkdir -p tmp
-	@perl -p -e ' \
-		s/^(SET\ssoftversion=)\d[\.\d]+\w?/$${1}$(VERSION1)/; \
-		s/^(SET\ssoftversion2=)\d[\.\d]+\w?/$${1}$(VERSION2)/; \
-		s/^(SET\ssoftpatch=)\d+/$${1}$(PATCH)/;' install.bat > $@
+	@sed -e 's/__VERSION1__/$(VERSION1)/; s/__VERSION2__/$(VERSION2)/; s/__PATCH__/$(PATCH)/;' install.bat > $@
 
 %.zip: Makefile tmp/install.bat tmp/$(EXE1) tmp/$(EXE2)
 	@rm -f $@
