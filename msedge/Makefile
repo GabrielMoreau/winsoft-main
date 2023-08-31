@@ -5,7 +5,7 @@
 
 SOFT:=MSEdge
 INSTALLER:=MicrosoftEdgeEnterpriseX64.msi
-PATCH:=1
+PATCH:=2
 URL:=$(shell curl --silent -L https://www.microsoft.com/en-us/edge/business/download | sed -e 's/[[:space:],]/\n/g;' | grep '^downloadUrl.*MicrosoftEdgeEnterpriseX64.msi' | head -1 | sed -e 's#\\u002F#/#g;' | cut -f 2 -d '"')
 UUID:=$(shell dirname "$(URL)" | xargs -r basename)
 VERSION:=$(shell (grep "^$(UUID):" version.txt 2> /dev/null || file tmp/MicrosoftEdgeEnterpriseX64.msi 2> /dev/null | sed -s 's/, /\n/g;' |grep '^Comments:') | awk '{print $$2}')
@@ -68,10 +68,15 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@perl -p -e ' \
 		s/__VERSION__/$(VERSION)/; \
 		s/__PATCH__/$(PATCH)/;' install.bat > $@
+		
+tmp/post-install.ps1: post-install.ps1 Makefile tmp/$(EXE)
+	@mkdir -p tmp
+	@perl -p -e ' \
+		s/^(.RefVersion = .)\d[\.\d]+/$${1}$(VERSION)/;' post-install.ps1 > $@
 
-%.zip: Makefile tmp/install.bat tmp/$(EXE)
+%.zip: Makefile tmp/install.bat tmp/post-install.ps1 tmp/$(EXE)
 	@rm -f $@
-	@(cd tmp; zip -r ../$@ install.bat $(EXE))
+	@(cd tmp; zip -r ../$@ install.bat post-install.ps1 $(EXE))
 	@chmod ugo+rw $@
 
 ocs:

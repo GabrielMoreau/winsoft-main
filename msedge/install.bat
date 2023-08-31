@@ -21,10 +21,21 @@ ECHO BEGIN %date%-%time%
 SET softversion=__VERSION__
 SET softpatch=__PATCH__
 
+ECHO Search PowerShell
+SET pwrsh=%WINDIR%\System32\WindowsPowerShell\V1.0\powershell.exe
+IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET pwrsh=%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe
+
+ECHO Add rights
+%pwrsh% Set-ExecutionPolicy RemoteSigned -Force -Scope LocalMachine
+
+ECHO unblock
+%pwrsh% "Unblock-File -Path .\*.ps1"
 
 REM Silent install
 msiexec /i MicrosoftEdgeEnterpriseX64-%softversion%.msi DONOTCREATEDESKTOPSHORTCUT=true DONOTCREATETASKBARSHORTCUT=true /qn /L*v "%logdir%\%softname%-MSI.log"
 
+ECHO Execute post-install script
+%pwrsh% -File ".\post-install.ps1"
 
 ECHO END %date%-%time%
 
