@@ -52,13 +52,11 @@ tmp/$(EXE):
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
-	@perl -p -e ' \
-		s/__VERSION__/$(VERSION)/; \
-		s/__PATCH__/$(PATCH)/;' install.bat > $@
+	@sed -e 's/__VERSION__/$(VERSION)/; s/__PATCH__/$(PATCH)/;' install.bat > $@
 
-%.zip: Makefile tmp/install.bat tmp/$(EXE) chrome-manual-updates.reg master_preferences.json
+%.zip: Makefile tmp/install.bat tmp/$(EXE) chrome-parameters.reg master_preferences.json
 	@rm -f $@
-	@zip -r $@ chrome-manual-updates.reg master_preferences.json
+	@zip -r $@ chrome-parameters.reg master_preferences.json
 	@(cd tmp; zip -r ../$@ install.bat $(EXE))
 	@chmod ugo+rw $@
 

@@ -28,7 +28,7 @@ msiexec /i "googlechromestandaloneenterprise64-%softversion%.msi" /qn /L*V "%log
 ECHO Disable auto update
 sc stop gupdate
 sc config gupdate start= disabled
-regedit.exe /S "chrome-manual-updates.reg"
+regedit.exe /S "chrome-parameters.reg"
 
 ECHO Copy preferences
 IF EXIST "C:\Program Files (x86)\Google\Chrome\Application\" (
