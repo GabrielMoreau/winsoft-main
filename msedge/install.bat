@@ -33,12 +33,12 @@ ECHO unblock
 %pwrsh% "Unblock-File -Path .\*.ps1"
 
 
+ECHO Execute pre-install script
+%pwrsh% -File ".\pre-install.ps1"
+
+
 ECHO Silent install %softname%
 msiexec /i MicrosoftEdgeEnterpriseX64-%softversion%.msi DONOTCREATEDESKTOPSHORTCUT=true DONOTCREATETASKBARSHORTCUT=true /qn /L*v "%logdir%\%softname%-MSI.log"
-
-
-ECHO Execute post-install script
-%pwrsh% -File ".\post-install.ps1"
 
 
 ECHO END %date%-%time%
