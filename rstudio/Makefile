@@ -71,14 +71,15 @@ tmp/$(EXE2):
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE) tmp/$(EXE2)
 	@mkdir -p tmp
-	@perl -p -e ' \
-		s/__VERSION1__/$(VERSION1)/; \
-		s/__VERSION2__/$(VERSION2)/; \
-		s/__PATCH__/$(PATCH)/;' install.bat > $@
+	@sed -e 's/__VERSION1__/$(VERSION1)/; s/__PATCH__/$(PATCH)/; s/__VERSION2__/$(VERSION2)/;' install.bat > $@
 
-%.zip: Makefile tmp/install.bat tmp/$(EXE) tmp/$(EXE2)
+tmp/pre-install.ps1: pre-install.ps1 Makefile tmp/$(EXE) tmp/$(EXE2)
+	@mkdir -p tmp
+	@sed -e 's/__VERSION1__/$(VERSION1)/; s/__PATCH__/$(PATCH)/; s/__VERSION2__/$(VERSION2)/;' pre-install.ps1 > $@
+
+%.zip: Makefile tmp/install.bat tmp/pre-install.ps1 tmp/$(EXE) tmp/$(EXE2)
 	@rm -f $@
-	@(cd tmp; zip -r ../$@ install.bat $(EXE) $(EXE2))
+	@(cd tmp; zip -r ../$@ install.bat pre-install.ps1 $(EXE) $(EXE2))
 	@chmod ugo+rw $@
 
 ocs:

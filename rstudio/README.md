@@ -4,6 +4,8 @@ RStudio is an integrated development environment for R, a programming
 language for statistical computing and graphics.
 
 This package comes with the R language.
+To conserve space on user workstation disks, the installation of a new
+version deletes older versions of R.
 
 * Website : https://github.com/rstudio/rstudio, https://posit.co/products/open-source/rstudio/, https://cloud.r-project.org/ (R)
 * Wikipedia : https://en.wikipedia.org/wiki/RStudio
