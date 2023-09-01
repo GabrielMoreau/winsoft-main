@@ -59,8 +59,9 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 		s/__VERSION__/$(VERSION)/; \
 		s/__PATCH__/$(PATCH)/;' install.bat > $@
 
-%.zip: Makefile tmp/install.bat tmp/$(EXE)
+%.zip: Makefile pre-install.ps1 tmp/install.bat tmp/$(EXE)
 	@rm -f $@
+	@zip -r ./$@ pre-install.ps1
 	@(cd tmp; zip -r ../$@ install.bat $(EXE))
 	@chmod ugo+rw $@
 

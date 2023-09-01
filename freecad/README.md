@@ -12,3 +12,6 @@ around engineering, such as architecture or electrical engineering.
 * Download : https://github.com/FreeCAD/FreeCAD/releases
 * Forge : https://github.com/FreeCAD/FreeCAD
 * Silent install : https://wiki.freecad.org/Installing_on_Windows
+
+To conserve space on user workstation disks, the installation of a new
+version deletes older versions.
