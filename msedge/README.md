@@ -11,3 +11,12 @@ built on a Chromium-based.
 
 * Documentation : https://learn.microsoft.com/en-us/deployedge/
 * Policies : https://learn.microsoft.com/en-us/deployedge/microsoft-edge-policies
+
+
+Some browser extensions are preinstalled, most of which are
+security-related:
+* Ublock Origin
+* Cookie AutoDelete
+* KeePassXC-Browser
+* Decentraleyes
+* ClearURLs
