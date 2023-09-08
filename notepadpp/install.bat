@@ -19,9 +19,9 @@ EXIT /B
 ECHO BEGIN %date%-%time%
 
 REM Version parameter (auto update by Makefile)
-SET softversion=8.3
+SET softversion=__VERSION__
+SET softpatch=__PATCH__
 SET softexe=npp.%softversion%.Installer.x64.exe
-SET softpatch=4
 SET regkey=Notepad++
 
 
