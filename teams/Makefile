@@ -23,7 +23,7 @@ check-version:
 	@echo $(VERSION) | egrep -q '^[[:digit:]][\.[:digit:]]*$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
 
 clean:
-	rm -rf $(SOFT)-$(VERSION)-$(PATCH).zip tmp
+	rm -rf $(SOFT)-$(VERSION)-$(PATCH).zip tmp resources
 
 version:
 	@echo "VERSION: $(VERSION)"
@@ -48,7 +48,7 @@ tmp/$(EXE):
 		curl -# -o "$(EXE)" -L "$(URL)" ; \
 		file $(EXE) | grep -q "Composite Document File.*Subject: Microsoft Teams" || echo "Error: bad format for binary $(EXE)" ; \
 		which msiextract >/dev/null && { rm -rf 'Program File'; msiextract $(EXE) ; } ; \
-        which peres >/dev/null && { peres -a 'Program Files/Teams Installer/Teams.exe' | grep -q "^Product Version:[[:space:]]*$(SHORTVERSION)" || echo "Error: bad version for binary $(EXE)" ; } ; \
+		which peres >/dev/null && { peres -a 'Program Files/Teams Installer/Teams.exe' | grep -q "^Product Version:[[:space:]]*$(SHORTVERSION)" || echo "Error: bad version for binary $(EXE)" ; } ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
 
