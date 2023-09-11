@@ -29,6 +29,7 @@ build-all:
 		)
 	done
 	echo ''
+	echo '#==================================================#'
 	echo '#=== Summary: packages created on this last day ===#'
 	find . -maxdepth 2 -name '*.zip' -a -mtime -1 -not -path '*/tmp/*' -exec ls -ltr {} \+
 
