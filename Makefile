@@ -102,7 +102,6 @@ space:
 			ls -t *.zip 2>/dev/null | tail -n +$(KEEP) | xargs -r rm -vf; \
 		)
 	done
-	echo "ls */*.zip | cut -f 1 -d '/' | sort | uniq -c | sort -n"
 
 version:
 	@
