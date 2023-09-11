@@ -1,4 +1,3 @@
-REM @ECHO OFF
 
 REM
 REM   RocketChat
@@ -18,12 +17,12 @@ EXIT /B
 
 ECHO BEGIN %date%-%time%
 
-SET softversion=3.9.5
-SET softpatch=1
+SET softversion=__VERSION__
+SET softpatch=__PATCH__
 SET process=Rocket.Chat.exe
 
 
-REM Kill the current process
+ECHO Kill the current process
 VER | FIND /I "10.0" > NUL
 IF %ERRORLEVEL%==0 TASKKILL /T /F /IM %process%
 
@@ -31,14 +30,16 @@ VER | FIND /I "6.1" > NUL
 IF %ERRORLEVEL%==0 TASKKILL /T /F /IM %process%
 
 
-REM Silent install
-msiexec.exe /q /i "rocketchat-%softversion%-win-x64.msi" ALLUSERS=1 /l*v "%logdir%\%softname%-MSI.log"
+ECHO Silent install %softname%
+msiexec /q /i "rocketchat-%softversion%-win-x64.msi" ALLUSERS=1 /l*v "%logdir%\%softname%-MSI.log"
+
 
 ECHO Push policies
 IF EXIST "C:\Program Files\rocketchat\" (
-  IF NOT EXIST "C:\Program Files\rocketchat\resources" MKDIR "C:\Program Files\rocketchat\resources"
-  IF EXIST "C:\Program Files\rocketchat\resources" COPY /y servers.json "C:\Program Files\rocketrhat\resources\servers.json" > NUL
+  IF NOT EXIST "%ProgramFiles%\rocketchat\resources" MKDIR "%ProgramFiles%\rocketchat\resources"
+  IF EXIST     "%ProgramFiles%\rocketchat\resources" COPY /A /Y servers.json "%ProgramFiles%\rocketchat\resources\servers.json"
 )
+
 
 ECHO END %date%-%time%
 EXIT

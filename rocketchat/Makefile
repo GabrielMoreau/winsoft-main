@@ -43,20 +43,22 @@ tmp/$(EXE):
 	@mkdir -p tmp
 	@(cd tmp ; \
 		rm -f *.exe *.msi 2>/dev/null ; \
-		curl -s -o "$(EXE)" -L "$(URL)" ; \
+		curl -# -o "$(EXE)" -L "$(URL)" ; \
+		file $(EXE) | grep -q "Subject: Rocket.Chat" || echo "Error: bad format for binary $(EXE)" ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
-	@perl -p -e ' \
-		s/^(SET\ssoftversion=)\d[\.\d]+\w?/$${1}$(VERSION)/; \
-		s/^(SET\ssoftpatch=)\d+/$${1}$(PATCH)/;' install.bat > $@
+	@sed -e 's/__VERSION__/$(VERSION)/; s/__PATCH__/$(PATCH)/;' install.bat > $@
 
-%.zip: Makefile tmp/install.bat servers.json tmp/$(EXE)
+tmp/servers.json: servers.json Makefile tmp/$(EXE)
+	@mkdir -p tmp
+	@if [ -e ../../winsoft-conf/rocketchat/servers.json ]; then cp -f ../../winsoft-conf/rocketchat/servers.json tmp/; else cp -f servers.json tmp/; fi
+
+%.zip: Makefile tmp/install.bat tmp/servers.json tmp/$(EXE)
 	@rm -f $@
-	@zip -r $@ servers.json
-	@(cd tmp; zip -r ../$@ install.bat $(EXE))
+	@(cd tmp; zip -r ../$@ install.bat servers.json $(EXE))
 	@chmod ugo+rw $@
 
 ocs:

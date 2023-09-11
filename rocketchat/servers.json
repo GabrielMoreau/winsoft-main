@@ -1,4 +1,4 @@
-{
-  "IN2P3 Rocket Chat": "https://chat.in2p3.fr/",
-  "UGA Rocket Chat": "https://tchat.univ-grenoble-alpes.fr/"
-}
+# Put your configuration in your conf folder
+# Do not change this file!
+# ../../winsoft-conf/rocketchat/servers.json
+{ }
