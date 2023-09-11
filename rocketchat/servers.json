@@ -1,4 +1,8 @@
 # Put your configuration in your conf folder
 # Do not change this file!
 # ../../winsoft-conf/rocketchat/servers.json
+#
+# Example:
+# { "IN2P3 Rocket Chat": "https://chat.in2p3.fr/" }
+#
 { }
