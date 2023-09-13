@@ -3,6 +3,7 @@
     "PrimaryPassword": true,
     "DontCheckDefaultBrowser": true, 
     "AppAutoUpdate": false,
+	"ManualAppUpdateOnly": true,
     "ExtensionUpdate": true,
     "ExtensionSettings": {
       "uBlock0@raymondhill.net": {
