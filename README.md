@@ -82,7 +82,7 @@ Please devops, put always the version number clearly in the comment...
 apt install make curl wget pev msitools
 ```
 
-## List of 80 packages
+## List of 81 packages
 
  | Software | Detail | &#127968; |
  | -------- | ------ | --------- |
@@ -136,6 +136,7 @@ apt install make curl wget pev msitools
  | [PDFsam Basic](pdfsam/README.md) | Split, merge, extract PDF files | [&#127968;](https://pdfsam.org/)  |
  | [PuTTY](putty/README.md) | SSH Client | [&#127968;](https://www.chiark.greenend.org.uk/~sgtatham/putty/)  |
  | [Recuva](recuva/README.md) | Recovers files on Windows computer | [&#127968;](https://www.ccleaner.com/recuva)  |
+ | [RocketChat](rocketchat/README.md) | Chat desktop client for RocketChat servers | [&#127968;](https://www.rocket.chat/)  |
  | [RStudio](rstudio/README.md) | Integrated development environment for R (include R) | [&#127968;](https://github.com/rstudio/rstudio,)  |
  | [RTools](rtools/README.md) | Extend R language from source packages | [&#127968;](https://cran.r-project.org/bin/windows/Rtools/)  |
  | [SimpleTruss](simpletruss/README.md) | Drawing and calculating simple lattices | [&#127968;](http://www.apartmina.cz/simpletruss/)  |
