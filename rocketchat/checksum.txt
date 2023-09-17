@@ -1,1 +1,2 @@
 d1db0ad73652322cef83e6f04eae630c790eb0eed187f2da7198b7578e8fa393  rocketchat-3.9.6-win-x64.msi
+d71b9dddfd00bb9c483ac44847c38a60f0ca24c75ede0dc817f729b1cf941c3b  rocketchat-3.9.7-win-x64.msi

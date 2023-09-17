@@ -56,8 +56,9 @@ tmp/servers.json: servers.json Makefile tmp/$(EXE)
 	@mkdir -p tmp
 	@if [ -e ../../winsoft-conf/rocketchat/servers.json ]; then cp -f ../../winsoft-conf/rocketchat/servers.json tmp/; else cp -f servers.json tmp/; fi
 
-%.zip: Makefile tmp/install.bat tmp/servers.json tmp/$(EXE)
+%.zip: Makefile pre-install.ps1 tmp/install.bat tmp/servers.json tmp/$(EXE)
 	@rm -f $@
+	@zip -r $@ pre-install.ps1
 	@(cd tmp; zip -r ../$@ install.bat servers.json $(EXE))
 	@chmod ugo+rw $@
 
