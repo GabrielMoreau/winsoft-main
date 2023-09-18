@@ -6,7 +6,7 @@
 SOFT:=MiKTeX
 VERSION:=$(shell curl -s -L 'https://github.com/MiKTeX/miktex/releases/latest' | sed -e 's/[[:space:]"]/\n/g;' | grep '^/MiKTeX/miktex/releases/tag/' | head -1 | xargs -r basename)
 URL:=https://miktex.org/download/win/miktexsetup-x64.zip
-PATCH:=3
+PATCH:=1
 
 ZIP:=miktexsetup-x64.zip
 EXE:=miktexsetup-standalone-$(VERSION).exe
@@ -23,7 +23,7 @@ check-version:
 	@echo $(VERSION) | egrep -q '^[[:digit:]][\.[:digit:]]*$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
 
 clean:
-	rm -rf $(SOFT)-$(VERSION)-$(PATCH).zip tmp
+	rm -rf $(SOFT)-$(VERSION)-$(PATCH).zip tmp resources
 
 version:
 	@echo "VERSION: $(VERSION)"
@@ -54,9 +54,7 @@ tmp/$(EXE):
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
-	@perl -p -e ' \
-		s/^(SET\ssoftversion=)\d[\.\d]+\w?/$${1}$(VERSION)/; \
-		s/^(SET\ssoftpatch=)\d+/$${1}$(PATCH)/;' install.bat > $@
+	@sed -e 's/__VERSION__/$(VERSION)/; s/__PATCH__/$(PATCH)/;' install.bat > $@
 
 %.zip: Makefile tmp/install.bat tmp/$(EXE)
 	@rm -f $@
