@@ -29,8 +29,8 @@ build-all:
 		)
 	done
 	echo ''
-	echo '#==================================================#'
-	echo '#=== Summary: packages created on this last day ===#'
+	echo '#=====================================================================#'
+	echo '#=== Summary: packages created on this last day ('$$(date '+%Y-%m-%d %H:%M')') ===#'
 	find . -maxdepth 2 -name '*.zip' -a -mtime -1 -not -path '*/tmp/*' -exec ls -ltr {} \+
 
 clean-all:
