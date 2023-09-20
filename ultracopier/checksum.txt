@@ -1,2 +1,3 @@
 bab8071f4747d3b2a6314be2c2185fc55db9865f495b0a86446d1ea38b8f6476  ultracopier-windows-x86_64-2.2.6.6-setup.exe
 cae96dba1e1e56b71ab750caa507894b629973aad669a6268c61de8345dc4854  ultracopier-windows-x86_64-2.2.6.7-setup.exe
+fa77b194b1c88a84263d30d280da221c38d3f9126e77c49eb6c3ca1f81065d42  ultracopier-windows-x86_64-2.2.6.8-setup.exe
