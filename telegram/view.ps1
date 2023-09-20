@@ -16,9 +16,12 @@ $RefName = 'Telegram'
 		$Publisher = $App.Publisher
 		$KeyProduct = $Key | Split-Path -Leaf
 		$Exe = $App.UninstallString
-		"# {0,-66} / {1,-14} / {2} / {3} (C) {4}" -F $DisplayName, $DisplayVersion, $KeyProduct, $Exe, $Publisher
+		"# {0,-25} / {1,-14} / {2} / {3} (C) {4}" -F $DisplayName, $DisplayVersion, $KeyProduct, $Exe, $Publisher
 	} | Sort-Object
 
 Read-Host “Press ENTER to exit...”
 
 Return
+
+# Telegram Desktop 4.9.9    / 4.9.9          / Telegram Desktop / C:\Program Files\Telegram Desktop\uninstall.bat (C) Telegram FZ-LLC
+# Telegram Desktop          / 4.9.9          / {53F49750-6209-4FBF-9CA8-7A333C87D1ED}_is1 / "C:\Users\xxxxxxxxx\AppData\Roaming\Telegram Desktop\unins000.exe" (C) Telegram FZ-LLC

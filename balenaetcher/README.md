@@ -10,3 +10,8 @@ every byte of data was written correctly, and much more.
 
 * Download : https://github.com/balena-io/etcher/releases/latest
 * Forge : https://github.com/balena-io/etcher
+* Silent install : https://silentinstallhq.com/etcher-silent-install-how-to-guide/?expand_article=1
+
+By default, balenaEtcher is installed in the current user's folder.
+The installation suggested here installs in the system folder and adds
+the correct uninstall key.
