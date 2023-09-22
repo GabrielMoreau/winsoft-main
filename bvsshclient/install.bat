@@ -27,4 +27,9 @@ BvSshClient-Inst-%softversion%.exe -acceptEULA -noDesktopIcon=y -autoUpdates=0
 
 
 ECHO END %date%-%time%
+
+IF %ERRORLEVEL% EQU 1 (
+  REM 0 or 1 are good exit code for this installer!
+  EXIT 0
+)
 EXIT
