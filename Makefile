@@ -24,7 +24,7 @@ build-all:
 		fi
 		echo "#=== $$d ===#"
 		(cd $$d; \
-			make > .make.log 2>&1; \
+			make > .make.log; \
 			[ $$(find . -maxdepth 1 -name '*.zip' -a -mtime -1 -not -path '*/tmp/*' -print | wc -l) -gt 0 ] && cat .make.log; \
 		)
 	done

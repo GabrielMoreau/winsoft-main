@@ -16,7 +16,7 @@ URL:=https://www.paraview.org/paraview-downloads/download.php?submit=Download&ve
 IT_TEAM:=IT Support
 
 
-.PHONY: all check-version clean control next ocs version wget checksum
+.PHONY: all check-version clean control next ocs version wget checksum check-exe
 
 all: check-version $(SOFT)-$(VERSION)-$(PATCH).zip ocs
 
@@ -53,14 +53,14 @@ tmp/$(EXE):
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
 
+check-exe: tmp/$(EXE)
+	@cd tmp; file $(EXE) | grep -q "Composite Document File V2 Document, Little Endian.*Subject: ParaView, Author: Kitware, Inc" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 1; }
+ 
 tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
-	@perl -p -e ' \
-		s/__VERSION__/$(VERSION)/; \
-		s/__PATCH__/$(PATCH)/; \
-		s/__EXE__/$(EXE)/;' install.bat > $@
+	@sed -e 's/__VERSION__/$(VERSION)/; s/__PATCH__/$(PATCH)/; s/__EXE__/$(EXE)/;' install.bat > $@
 
-%.zip: Makefile pre-install.ps1 tmp/install.bat tmp/$(EXE)
+%.zip: Makefile pre-install.ps1 tmp/install.bat tmp/$(EXE) check-exe
 	@rm -f $@
 	zip -r ./$@ pre-install.ps1
 	@(cd tmp; zip -r ../$@ install.bat $(EXE))

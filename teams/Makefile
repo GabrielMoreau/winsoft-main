@@ -13,7 +13,7 @@ EXE:=Teams_$(VERSION)_windows_x64.msi
 
 IT_TEAM:=IT Support
 
-.PHONY: all check-version clean control next ocs version wget checksum
+.PHONY: all check-version clean control next ocs version wget checksum check-exe
 
 all: check-version $(SOFT)-$(VERSION)-$(PATCH).zip ocs
 
@@ -52,13 +52,16 @@ tmp/$(EXE):
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
 
+check-exe: tmp/$(EXE)
+	@cd tmp; which peres >/dev/null && { peres -a 'Program Files/Teams Installer/Teams.exe' | grep -q "^Product Version:[[:space:]]*$(SHORTVERSION)" || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 1; } ; }
+
 tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
 	@perl -p -e ' \
 		s/^(SET\ssoftversion=)\d[\.\d]+\w?/$${1}$(VERSION)/; \
 		s/^(SET\ssoftpatch=)\d+/$${1}$(PATCH)/;' install.bat > $@
 
-%.zip: Makefile pre-install.ps1 tmp/install.bat tmp/$(EXE)
+%.zip: Makefile pre-install.ps1 tmp/install.bat tmp/$(EXE) check-exe
 	@rm -f $@
 	@zip -r $@ pre-install.ps1
 	@(cd tmp; zip -r ../$@ install.bat $(EXE))
