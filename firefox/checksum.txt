@@ -23,3 +23,4 @@ eea23ed16fa02ff28b1c1118ea3c74c43fce313d3080562f6d317b0938d31ac9  Firefox-Setup-
 88edca14d362a4ddb4820188ad8f8c830f18d6a36e1b6a841743ef1cd0aff0fe  Firefox-Setup-102.15.0-esr.msi
 93777305f22cdd84703699edcd40a3cfabd3fd959d2f80ae97f61e57a828ae13  Firefox-Setup-102.15.1-esr.msi
 461e399b6dce22c3480041b5898e0821e8263b73e73224db62c64facd1fc9636  Firefox-Setup-115.3.0-esr.msi
+bdbd2ea94fde86dcddca04a60f23327f671e9a932d6a45e2f3dc6409a566f6ef  Firefox-Setup-115.3.1-esr.msi
