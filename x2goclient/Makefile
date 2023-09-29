@@ -20,7 +20,7 @@ all: check-version $(SOFT)-$(VERSION)-$(PATCH).zip ocs
 sinclude ../common/global.mk
 
 check-version:
-	@echo $(VERSION) | egrep -q '^[[:digit:]][\.[:digit:]]*$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
+	@echo $(VERSION) | grep -qE -- '^[[:digit:]][\.[:digit:]-]*$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
 
 clean:
 	rm -rf $(SOFT)-$(VERSION)-$(PATCH).zip tmp
