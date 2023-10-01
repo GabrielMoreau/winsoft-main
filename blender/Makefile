@@ -13,7 +13,7 @@ EXE:=blender-$(VERSION)-windows-x64.msi
 IT_TEAM:=IT Support
 
 
-.PHONY: all check-version clean control next ocs version wget checksum
+.PHONY: all check-version clean control next ocs version wget checksum check-exe
 
 all: check-version $(SOFT)-$(VERSION)-$(PATCH).zip ocs
 
@@ -50,13 +50,16 @@ tmp/$(EXE):
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
 
+check-exe: tmp/$(EXE)
+	@cd tmp; file $(EXE) | grep -q "Subject: blender, Author: Blender Foundation" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 1; }
+
 tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
 	@perl -p -e ' \
 		s/__VERSION__/$(VERSION)/; \
 		s/__PATCH__/$(PATCH)/;' install.bat > $@
 
-%.zip: Makefile tmp/install.bat tmp/$(EXE)
+%.zip: Makefile tmp/install.bat tmp/$(EXE) check-exe
 	@rm -f $@
 	@(cd tmp; zip -r ../$@ install.bat $(EXE))
 	@chmod ugo+rw $@
