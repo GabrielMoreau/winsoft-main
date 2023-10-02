@@ -84,8 +84,8 @@ apt install make curl wget pev msitools
 
 ## List of 83 packages
 
- | Software | Detail | &#127968; |
- | -------- | ------ | --------- |
+ | Software | Detail | &#127968; | © |
+ | -------- | ------ | --------- | - |
  | [7-Zip](7zip/README.md) | File archiver with a high compression ratio | [&#127968;](https://www.7-zip.org/) | ![](./common/img/lic-copyleft.svg) |
  | [AcrobatReader](acrobatreader/README.md) | Adobe PDF reader | [&#127968;](https://www.adobe.com/) | ![](./common/img/lic-copyright.svg) |
  | [AnyConnect](anyconnect/README.md) | Cisco AnyConnect VPN | [&#127968;](https://www.cisco.com/c/en/us/security/vpn-endpoint-security-clients/) | ![](./common/img/lic-copyright.svg) |
