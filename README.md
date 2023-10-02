@@ -84,7 +84,7 @@ apt install make curl wget pev msitools
 
 ## List of 83 packages
 
- | Software | Detail | &#127968; | © |
+ | Software | Detail | &#127968; |   |
  | -------- | ------ | --------- | - |
  | [7-Zip](7zip/README.md) | File archiver with a high compression ratio | [&#127968;](https://www.7-zip.org/) | [🄯](https://en.wikipedia.org/wiki/Free_license) |
  | [AcrobatReader](acrobatreader/README.md) | Adobe PDF reader | [&#127968;](https://www.adobe.com/) | [©](https://en.wikipedia.org/wiki/Proprietary_software) |

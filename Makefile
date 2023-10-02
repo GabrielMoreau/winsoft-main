@@ -87,7 +87,7 @@ list-md:
 	@
 	echo '## List of '$$(git ls-files | grep '^[[:alpha:][:digit:]-]*/README.md' | wc -l)' packages'
 	echo ''
-	echo ' | Software | Detail | &#127968; | © |'
+	echo ' | Software | Detail | &#127968; |   |'
 	echo ' | -------- | ------ | --------- | - |'
 	for pkg in $$(git ls-files | grep '^[[:alpha:][:digit:]-]*/README.md' | xargs -r dirname | grep -v '/')
 	do
