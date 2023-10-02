@@ -13,7 +13,7 @@ EXE:=VeraCrypt-Setup-x64-$(VERSION).msi
 IT_TEAM:=IT Support
 
 
-.PHONY: all check-version clean control next ocs version wget checksum
+.PHONY: all check-version clean control next ocs version wget checksum check-exe
 
 all: check-version $(SOFT)-$(VERSION)-$(PATCH).zip ocs
 
@@ -44,18 +44,19 @@ tmp/$(EXE):
 	@mkdir -p tmp
 	@(cd tmp ; \
 		rm -f *.exe *.msi 2>/dev/null ; \
-		curl -s -o "$(EXE)" -L "$(URL)" ; \
-		file $(EXE) | grep -q "Subject: VeraCrypt 1.25.9 64-bit MSI Installer" || echo "Error: bad format for binary $(EXE)" ; \
+		curl -# -o "$(EXE)" -L "$(URL)" ; \
+		file $(EXE) | grep -q "Subject: VeraCrypt $(VERSION) 64-bit MSI Installer" || echo "Error: bad format for binary $(EXE)" ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
 
+check-exe: tmp/$(EXE)
+	@cd tmp; file $(EXE) | grep -q "Subject: VeraCrypt $(VERSION) 64-bit MSI Installer" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 1; }
+
 tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
-	@perl -p -e ' \
-		s/^(SET\ssoftversion=)\d[\.\d]+\w?/$${1}$(VERSION)/; \
-		s/^(SET\ssoftpatch=)\d+/$${1}$(PATCH)/;' install.bat > $@
+	@sed -e 's/__VERSION__/$(VERSION)/; s/__PATCH__/$(PATCH)/;' install.bat > $@
 
-%.zip: Makefile tmp/install.bat tmp/$(EXE)
+%.zip: Makefile tmp/install.bat tmp/$(EXE) check-exe
 	@rm -f $@
 	@(cd tmp; zip -r ../$@ install.bat $(EXE))
 	@chmod ugo+rw $@
