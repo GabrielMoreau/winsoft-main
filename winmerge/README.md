@@ -1,7 +1,7 @@
 # WinMerge - Diff between two or three files
 
-WinMerge is a free software tool for data comparison and merging of
-text-like files.
+WinMerge is a free and open-source software tool for data comparison
+and merging of text-like files.
 It is useful for determining what has changed between versions,
 and then merging changes between versions. 
 

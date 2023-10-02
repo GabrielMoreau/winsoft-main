@@ -1,5 +1,6 @@
 # Digikam - Image organizer and tag editor 
 
+DigiKam is a free and open-source imaging sofware.
 DigiKam supports all major image file formats, such as JPEG and PNG as
 well as over 200 raw image formats and can organize collections of
 photographs in directory-based albums, or dynamic albums by date,

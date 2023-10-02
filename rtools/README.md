@@ -1,6 +1,7 @@
 # RTools - Extend R language from source packages
 
-Toolchains for building R and R packages from source on Windows.
+Toolchains is a free and open-source software for building R
+and R packages from source on Windows.
 
 * Website : https://cran.r-project.org/bin/windows/Rtools/
 

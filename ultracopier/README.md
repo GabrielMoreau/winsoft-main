@@ -1,6 +1,6 @@
 # Ultracopier - File-copying software
 
-Ultracopier is file-copying software for Windows, macOS, and Linux.
+Ultracopier is a free and open-source file-copying software for Windows, macOS, and Linux.
 It supersedes SuperCopier.
 
 * Website : https://ultracopier.herman-brule.com/
