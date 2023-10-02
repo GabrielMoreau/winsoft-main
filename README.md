@@ -118,7 +118,7 @@ apt install make curl wget pev msitools
  | [HP Support Assistant](hpsupportassist/README.md) | Assist for computer maintenance, software upgrades, troubleshooting problems | [&#127968;](https://support.hp.com/us-en/help/hp-support-assistant) | [©](https://en.wikipedia.org/wiki/Proprietary_software) |
  | [ImageJ](imagej/README.md) | Image processing program (Fiji Distribution) | [&#127968;](https://imagej.net/) | [🄯](https://en.wikipedia.org/wiki/Free_license) |
  | [Inkscape](inkscape/README.md) | Vector graphics editor | [&#127968;](https://inkscape.org/) | [🄯](https://en.wikipedia.org/wiki/Free_license) |
- | [Kaspersky Endpoint (Uninstall)](kaspersky-uninstall/README.md) | Silent remove Kaspersky Endpoint | [&#127968;](https://gitlab.in2p3.fr/resinfo-gt/swmb/resinfo-swmb/-/tree/master/dists/uninstall-kaspersky) | [©](https://en.wikipedia.org/wiki/Proprietary_software) |
+ | [Kaspersky Endpoint (Uninstall)](kaspersky-uninstall/README.md) | Silent remove Kaspersky Endpoint | [&#127968;](https://gitlab.in2p3.fr/resinfo-gt/swmb/resinfo-swmb/-/tree/master/dists/uninstall-kaspersky) | [🄯](https://en.wikipedia.org/wiki/Free_license) |
  | [KeepassXC](keepassxc/README.md) | Free and open-source password manager. | [&#127968;](https://keepassxc.org/) | [🄯](https://en.wikipedia.org/wiki/Free_license) |
  | [LibreOffice](libreoffice/README.md) | Libre Office suite based on the OpenDocument standard | [&#127968;](https://www.libreoffice.org/) | [🄯](https://en.wikipedia.org/wiki/Free_license) |
  | [LightBulb](lightbulb/README.md) | Automatically adjusts screen gamma and color temperature during the day | [&#127968;](https://github.com/Tyrrrz/LightBulb) | [🄯](https://en.wikipedia.org/wiki/Free_license) |
@@ -144,7 +144,7 @@ apt install make curl wget pev msitools
  | [SimpleTruss](simpletruss/README.md) | Drawing and calculating simple lattices | [&#127968;](http://www.apartmina.cz/simpletruss/) | [©](https://en.wikipedia.org/wiki/Proprietary_software) |
  | [Skype](skype/README.md) | VoIP and Videoconferencing Client | [&#127968;](https://www.skype.com/) | [©](https://en.wikipedia.org/wiki/Proprietary_software) |
  | [Speccy](speccy/README.md) | Display hardware computer information | [&#127968;](https://www.ccleaner.com/speccy) | [©](https://en.wikipedia.org/wiki/Proprietary_software) |
- | [SSHFS-Win](sshfs-win/README.md) | Connect network drive on an SSH/SFTP server | [&#127968;](https://github.com/billziss-gh/sshfs-win) | [©](https://en.wikipedia.org/wiki/Proprietary_software) |
+ | [SSHFS-Win](sshfs-win/README.md) | Connect network drive on an SSH/SFTP server | [&#127968;](https://github.com/billziss-gh/sshfs-win) | [🄯](https://en.wikipedia.org/wiki/Free_license) |
  | [SumatraPDF](sumatrapdf/README.md) | Free and open-source document viewer (PDF, DjVu, EPUB...) | [&#127968;](https://www.sumatrapdfreader.org/free-pdf-reader) | [🄯](https://en.wikipedia.org/wiki/Free_license) |
  | [TeamViewer](teamviewer/README.md) | Remote access and remote control | [&#127968;](https://www.teamviewer.com) | [©](https://en.wikipedia.org/wiki/Proprietary_software) |
  | [Telegram Messenger](telegram/README.md) | Desktop Instant messaging application | [&#127968;](https://telegram.org/) | [🄯](https://en.wikipedia.org/wiki/Free_license) |

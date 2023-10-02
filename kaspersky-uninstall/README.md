@@ -1,5 +1,8 @@
 # Kaspersky Endpoint (Uninstall) - Silent remove Kaspersky Endpoint
 
+Kaspersky Endpoint Uninstall is a free and open-source script for
+uninstalling Kaspersky Endpoint from your computers.
+
 * Website : https://gitlab.in2p3.fr/resinfo-gt/swmb/resinfo-swmb/-/tree/master/dists/uninstall-kaspersky
 
 * Download : https://resinfo-gt.pages.in2p3.fr/swmb/resinfo-swmb/

@@ -1,7 +1,8 @@
 # SSHFS-Win - Connect network drive on an SSH/SFTP server
 
-SSHFS-Win is a minimal port of SSHFS to Windows. Under the hood it uses
-Cygwin for the POSIX environment and WinFsp for the FUSE functionality.
+SSHFS-Win is a free and open-source minimal port of SSHFS to Windows.
+Under the hood it uses Cygwin for the POSIX environment and WinFsp
+for the FUSE functionality.
 Once you have installed WinFsp and SSHFS-Win you can map a network
 drive to a directory on an SSHFS host using Windows Explorer or the
 net use command.
