@@ -23,7 +23,7 @@ SET softpatch=__PATCH__
 
 
 REM Silent install
-msiexec /i VeraCrypt-Setup-x64-%softversion%.msi ACCEPTLICENSE=YES INSTALLDESKTOPSHORTCUT="" /qn /L*v "%logdir%\%softname%-MSI.log"
+msiexec /i VeraCrypt-Setup-x64-%softversion%.msi ACCEPTLICENSE=YES INSTALLDESKTOPSHORTCUT="" /qn /norestart /L*v "%logdir%\%softname%-MSI.log"
 
 
 ECHO END %date%-%time%
