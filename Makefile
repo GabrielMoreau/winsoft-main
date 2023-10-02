@@ -91,9 +91,9 @@ list-md:
 	echo ' | -------- | ------ | --------- | - |'
 	for pkg in $$(git ls-files | grep '^[[:alpha:][:digit:]-]*/README.md' | xargs -r dirname | grep -v '/')
 	do
-		img=$$(grep -q 'open-source' $${pkg}/README.md && echo 'lic-copyleft.svg' || echo 'lic-copyright.svg')
+		lic=$$(grep -q 'open-source' $${pkg}/README.md && echo '🄯' || echo '©')
 		url=$$(grep '* Website : ' $${pkg}/README.md | cut -f 4 -d ' ')
-		head -1 $${pkg}/README.md |perl -p -e "s{^#\s(.*)\s-\s(.*)}{ | [\\1]($${pkg}/README.md) | \\2 | [&#127968;]($${url}) | ![](./common/img/$${img}) |};" | sed -e 's/\[&#127968;\]()//;'
+		head -1 $${pkg}/README.md |perl -p -e "s{^#\s(.*)\s-\s(.*)}{ | [\\1]($${pkg}/README.md) | \\2 | [&#127968;]($${url}) | $${lic} |};" | sed -e 's/\[&#127968;\]()//;'
 	done | sort
 
 space:
