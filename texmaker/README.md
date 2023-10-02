@@ -1,6 +1,6 @@
 # TexMaker - Free cross-platform LaTeX editor
 
-TexMaker is a free, modern and cross-platform LaTeX editor for linux,
+TexMaker is a free, open-source, modern and cross-platform LaTeX editor for linux,
 macosx and windows systems that integrates many tools needed to develop
 documents with LaTeX, in just one application.
 TexMaker includes unicode support, spell checking, auto-completion,

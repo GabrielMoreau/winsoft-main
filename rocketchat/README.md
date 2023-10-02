@@ -1,6 +1,6 @@
 # RocketChat - Chat desktop client for RocketChat servers
 
-Rocket.Chat is free software for team communication, like Mattermost
+Rocket.Chat is free and open-source software for team communication, like Mattermost
 (or Slack, which is not free). You can chat with other members in public
 threads, private newsgroups or private messages.
 

@@ -1,6 +1,6 @@
 # TortoiseSVN - Subversion Client
 
-TortoiseSVN is a Subversion client,
+TortoiseSVN is a free and open-source Subversion client,
 implemented as a Microsoft Windows shell extension,
 that helps programmers manage different versions
 of the source code for their programs.

@@ -1,6 +1,6 @@
 # MiKTeX - TeX and LaTeX distribution
 
-MiKTeX is a modern TeX distribution for Windows, Linux and macOS.
+MiKTeX is a free and open-source modern TeX distribution for Windows, Linux and macOS.
 MiKTeX provides the tools necessary to prepare documents using the
 TeX/LaTeX markup language, as well as a simple TeX editor: TeXworks.
 

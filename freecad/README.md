@@ -1,6 +1,6 @@
 # FreeCAD - Parametric 3D modeler (CAD)
 
-FreeCAD is a general-purpose parametric 3D computer-aided design (CAD)
+FreeCAD is a free and open-source general-purpose parametric 3D computer-aided design (CAD)
 modeler and a building information modeling (BIM) software application
 with finite element method (FEM) support. It is intended for mechanical
 engineering product design but also expands to a wider range of uses
