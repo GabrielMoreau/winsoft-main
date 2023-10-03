@@ -7,7 +7,7 @@ VERSION:=$(shell curl -s -L 'https://github.com/Ultimaker/Cura/releases/latest' 
 PATCH:=1
 URL:=https://github.com/Ultimaker/Cura/releases/download/$(VERSION)/UltiMaker-Cura-$(VERSION)-win64.msi
 
-EXE:=ultimaker-cura-$(VERSION)-win-x64.msi
+EXE:=UltiMaker-Cura-$(VERSION)-win64.msi
 
 IT_TEAM:=IT Support
 
@@ -44,7 +44,7 @@ tmp/$(EXE):
 	@(cd tmp ; \
 		rm -f *.exe *.msi 2>/dev/null ; \
 		curl -# -o "$(EXE)" -L "$(URL)" ; \
-		file $(EXE) | grep -q "Subject: Ultimaker" || echo "Error: bad format for binary $(EXE)" ; \
+		file $(EXE) | grep -q "Subject: UltiMaker Cura the most popular 3D printing slicer" || echo "Error: bad format for binary $(EXE)" ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
 

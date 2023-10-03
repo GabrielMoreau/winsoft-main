@@ -4,7 +4,7 @@ REM   UltiMaker Cura
 REM
 
 REM Name
-SET softname=UltiMaker
+SET softname=UltiMakerCura
 
 SET logdir=%ProgramData%\OCS Inventory NG\Agent\DeployLog
 IF NOT EXIST "%logdir%" (
@@ -19,14 +19,15 @@ ECHO BEGIN %date%-%time%
 
 SET softversion=__VERSION__
 SET softpatch=__PATCH__
-SET process=
+REM SET process=
 
 
-ECHO Kill the current process
-TASKKILL /T /F /IM %process%
+REM ECHO Kill the current process
+REM TASKKILL /T /F /IM %process%
 
 ECHO Silent install %softname%
-msiexec /q /i "UltiMaker-Cura-%softversion%-win64.msi" /l*v "%logdir%\%softname%-MSI.log"
+msiexec /i "UltiMaker-Cura-%softversion%-win64.msi" /qn /norestart /l*v "%logdir%\%softname%-MSI.log"
+
 
 ECHO END %date%-%time%
 EXIT
