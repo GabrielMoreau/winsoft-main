@@ -19,11 +19,7 @@ ECHO BEGIN %date%-%time%
 
 SET softversion=__VERSION__
 SET softpatch=__PATCH__
-REM SET process=
 
-
-REM ECHO Kill the current process
-REM TASKKILL /T /F /IM %process%
 
 ECHO Silent install %softname%
 msiexec /i "UltiMaker-Cura-%softversion%-win64.msi" /qn /norestart /l*v "%logdir%\%softname%-MSI.log"
