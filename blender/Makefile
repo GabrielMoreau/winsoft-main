@@ -15,7 +15,7 @@ IT_TEAM:=IT Support
 
 .PHONY: all check-version clean control next ocs version wget checksum check-exe
 
-all: check-version $(SOFT)-$(VERSION)-$(PATCH).zip ocs
+all: check-version check-exe $(SOFT)-$(VERSION)-$(PATCH).zip ocs
 
 sinclude ../common/global.mk
 
@@ -59,7 +59,7 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 		s/__VERSION__/$(VERSION)/; \
 		s/__PATCH__/$(PATCH)/;' install.bat > $@
 
-%.zip: Makefile tmp/install.bat tmp/$(EXE) check-exe
+%.zip: Makefile tmp/install.bat tmp/$(EXE)
 	@rm -f $@
 	@(cd tmp; zip -r ../$@ install.bat $(EXE))
 	@chmod ugo+rw $@
