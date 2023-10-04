@@ -27,4 +27,9 @@ msiexec /i VeraCrypt-Setup-x64-%softversion%.msi ACCEPTLICENSE=YES INSTALLDESKTO
 
 
 ECHO END %date%-%time%
+
+IF %ERRORLEVEL% EQU 1603 (
+  ECHO 0 or 1603 are good exit code for %softname% installer!
+  EXIT 0
+)
 EXIT
