@@ -5,9 +5,9 @@ virtual desktop from your device of choice giving you on-the-go access
 from any location.
 
 * Website : https://www.vmware.com/products/horizon.html
-* Wikipedia : https://fr.wikipedia.org/wiki/VMwareHorizon
+* Wikipedia : https://en.wikipedia.org/wiki/VMware_Horizon
 
-* Download : https://en.wikipedia.org/wiki/VMware_Horizon
+* Download : https://www.vmware.com/go/viewclients
 * Silent install : https://silentinstallhq.com/vmware-horizon-client-silent-install-how-to-guide/
 
 You should manually check regularly for updates to the Horizon client at https://www.vmware.com/go/viewclients.
