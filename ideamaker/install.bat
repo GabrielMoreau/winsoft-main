@@ -1,10 +1,10 @@
 
 REM
-REM   ideaMaker
+REM   IdeaMaker
 REM
 
 REM Name
-SET softname=ideaMaker
+SET softname=IdeaMaker
 
 SET logdir=%ProgramData%\OCS Inventory NG\Agent\DeployLog
 IF NOT EXIST "%logdir%" (

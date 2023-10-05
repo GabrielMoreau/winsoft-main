@@ -1,24 +1,20 @@
 #
-# ideaMaker
+# IdeaMaker
 #
 
-SOFT:=ideaMaker
-# version error on this page
-#VERSION:=$(shell curl -s -L 'https://www.raise3d.com/ideamaker/' | grep -i "Current Version"  | sed -e 's/<[^>]*>//g' | cut -f 4 -d ' ')
-VERSION:=$(shell curl -s -L 'https://www.raise3d.eu/download/' | grep "<h4>Windows</h4>" -A2 | grep -i -v "Alpha" | grep -i Version |sed -e 's/<[^>]*>//g' | sed 's/^[ ]*//g' | cut -d' ' -f2)
+SOFT:=IdeaMaker
 PATCH:=1
-
-#URL:=https://download.raise3d.com/ideamaker/release/4.3.3/install_ideaMaker_4.3.3.6560.exe
-URL:=$(shell curl -s -L 'https://www.raise3d.eu/download/' | grep "<h4>Windows</h4>" -A2 | grep -i -v "Alpha" | grep -i href | cut -d'"' -f2)
-
+URL:=$(shell curl -s -L 'https://www.raise3d.eu/download/' | grep -A2 '<h4>Windows</h4>' | grep 'href=.*/release/.*/install_ideaMaker_.*[[:digit:]]\.exe' | cut -f 2 -d '"')
+VERSION:=$(shell basename "$(URL)" | cut -f 3 -d '_' | sed -e 's/\.exe//;')
+PATCH:=1
 EXE:=install_ideaMaker_$(VERSION).exe
 
 IT_TEAM:=IT Support
 
 
-.PHONY: all check-version clean control next ocs version wget checksum
+.PHONY: all check-version clean control next ocs version wget checksum check-exe
 
-all: check-version $(SOFT)-$(VERSION)-$(PATCH).zip ocs
+all: check-version check-exe $(SOFT)-$(VERSION)-$(PATCH).zip ocs
 
 sinclude ../common/global.mk
 
@@ -26,7 +22,7 @@ check-version:
 	@echo $(VERSION) | egrep -q '^[[:digit:]][\.[:digit:]]*$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
 
 clean:
-	rm -rf $(SOFT)-$(VERSION)-$(PATCH).zip tmp
+	rm -rf $(SOFT)-$(VERSION)-$(PATCH).zip tmp resources
 
 version:
 	@echo "VERSION: $(VERSION)"
@@ -48,8 +44,13 @@ tmp/$(EXE):
 	@(cd tmp ; \
 		rm -f *.exe 2>/dev/null ; \
 		curl -# -o "$(EXE)" -L "$(URL)" ; \
-		file $(EXE) | grep -q 'PE32 executable' || echo "Error: bad format for binary $(EXE)" ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
+		)
+
+check-exe: tmp/$(EXE)
+	@(cd tmp ; \
+		file $(EXE) | grep -q "PE32 executable" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 1; } ; \
+		which peres >/dev/null && { peres -a $(EXE) | grep -q "^Product Version:[[:space:]]*$(VERSION)" || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 1; } ; } ; \
 		)
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE)
