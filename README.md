@@ -82,7 +82,7 @@ Please devops, put always the version number clearly in the comment...
 apt install make curl wget pev msitools
 ```
 
-## List of 84 packages
+## List of 86 packages
 
  | Software | Detail | &#127968; |   |
  | -------- | ------ | --------- | - |
@@ -138,6 +138,7 @@ apt install make curl wget pev msitools
  | [PDFsam Basic](pdfsam/README.md) | Split, merge, extract PDF files | [&#127968;](https://pdfsam.org/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
  | [Proton Mail Bridge](protonmailbridge/README.md) | Secure messaging client | [&#127968;](https://proton.me/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
  | [PuTTY](putty/README.md) | SSH Client | [&#127968;](https://www.chiark.greenend.org.uk/~sgtatham/putty/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
+ | [Raise3D ideaMaker](ideamaker/README.md) | 3D Slicer Software | [&#127968;](https://www.raise3d.eu/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
  | [Recuva](recuva/README.md) | Recovers files on Windows computer | [&#127968;](https://www.ccleaner.com/recuva) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
  | [RocketChat](rocketchat/README.md) | Chat desktop client for RocketChat servers | [&#127968;](https://www.rocket.chat/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
  | [RStudio](rstudio/README.md) | Integrated development environment for R (include R) | [&#127968;](https://github.com/rstudio/rstudio,) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
