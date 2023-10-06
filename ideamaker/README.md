@@ -7,3 +7,6 @@ ideaMaker is a slicing software from Raise3D which prepares 3D models for printi
 
 * Download : https://www.raise3d.eu/download/
 * Silent install : NSIS
+
+ideaMaker put an uninstall register key in hive `HKU` and not `HKLM`.
+A script `uninstall.bat` has been added for a register key in `HKLM`.

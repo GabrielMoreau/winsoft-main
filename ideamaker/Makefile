@@ -58,8 +58,9 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
 	@sed -e 's/__VERSION__/$(VERSION)/; s/__PATCH__/$(PATCH)/;' install.bat > $@
 
-%.zip: Makefile tmp/install.bat tmp/$(EXE)
+%.zip: Makefile tmp/install.bat tmp/$(EXE) uninstall.bat
 	@rm -f $@
+	@zip -r ./$@ uninstall.bat
 	@(cd tmp; zip -r ../$@ install.bat $(EXE))
 	@chmod ugo+rw $@
 
