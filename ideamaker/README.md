@@ -1,6 +1,7 @@
-# Raise3D ideaMaker - 3D Slicer Software
+# Raise3D ideaMaker - Slicer Software (3D printing)
 
 ideaMaker is a slicing software from Raise3D which prepares 3D models for printing and turns them into G-Code file for your Raise3D printer.
+See https://en.wikipedia.org/wiki/Slicer_(3D_printing).
 
 * Website : https://www.raise3d.eu/
 * Software : https://www.raise3d.com/ideamaker/
