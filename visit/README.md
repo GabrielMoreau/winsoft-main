@@ -1,0 +1,12 @@
+# VisIt - Interactive, scalable, visualization, animation and analysis tool
+
+VisIt is a free and open-source interactive parallel visualization and graphical analysis tool for viewing scientific data.
+It can be used to visualize scalar and vector fields defined on 2D and 3D structured and unstructured meshes.
+VisIt was designed to handle big data set sizes in the terascale range and small data sets in the kilobyte range.
+
+* Website : https://visit-dav.github.io/visit-website/
+* Wikipedia : https://en.wikipedia.org/wiki/VisIt
+* Licence : bsd
+* Category : imaging
+
+* Download : https://visit-dav.github.io/visit-website/releases-as-tables/
