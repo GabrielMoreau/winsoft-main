@@ -53,24 +53,20 @@ tmp/$(EXE):
 check-exe: tmp/$(EXE)
 	@(cd tmp ; \
 		file $(EXE) | grep -q "Subject: Inkscape" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 1; } ; \
-		# which peres >/dev/null && { peres -a $(EXE) | grep -q "^Product Version:[[:space:]]*$(VERSION)" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 1; } ; \
+		# which peres >/dev/null && { peres -a $(EXE) | grep -q "^Product Version:[[:space:]]*$(VERSION)" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 1; } ; } ;\
 		)
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
-	@perl -p -e ' \
-		s/__VERSION__/$(VERSION)/; \
-		s/__PATCH__/$(PATCH)/;' install.bat > $@
+	@sed -e 's/__VERSION__/$(VERSION)/; s/__PATCH__/$(PATCH)/;' install.bat > $@
 
 tmp/pre-install.ps1: pre-install.ps1 Makefile tmp/$(EXE)
 	@mkdir -p tmp
-	@perl -p -e ' \
-		s/__VERSION__/$(VERSION)/;' pre-install.ps1 > $@
+	@sed -e 's/__VERSION__/$(VERSION)/;' pre-install.ps1 > $@
 
 tmp/post-install.ps1: post-install.ps1 Makefile tmp/$(EXE)
 	@mkdir -p tmp
-	@perl -p -e ' \
-		s/^(.RefVersion = .)\d[\.\d]+/$${1}$(VERSION)/;' post-install.ps1 > $@
+	@sed -e 's/__VERSION__/$(VERSION)/;' post-install.ps1 > $@
 
 %.zip: Makefile tmp/install.bat tmp/pre-install.ps1 tmp/post-install.ps1 tmp/$(EXE)
 	@rm -f $@
