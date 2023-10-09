@@ -4,7 +4,7 @@
 #
 
 SOFT:=CitrixWorkspace
-VERSION:=$(shell curl -s -L 'https://www.citrix.com/fr-fr/downloads/workspace-app/windows/workspace-app-for-windows-latest.html' | sed -e 's/[<>()]/\n/g;'|  grep '^Version: [[:digit:]]' | cut -f 2 -d ' ')
+VERSION:=$(shell curl -s -L 'https://www.citrix.com/fr-fr/downloads/workspace-app/windows/workspace-app-for-windows-latest.html' | sed -e 's/[<>()]/\n/g;'|  grep '^Version: [[:digit:]]' | head -1 | cut -f 2 -d ' ')
 PATCH:=1
 URL:=https:$(shell curl -s -L 'https://www.citrix.com/fr-fr/downloads/workspace-app/windows/workspace-app-for-windows-latest.html' | sed -e 's/"/\n/g;' | egrep 'downloads.citrix.com.*/CitrixWorkspaceApp.exe.*__gda__')
 
@@ -13,9 +13,9 @@ EXE:=CitrixWorkspaceApp-$(VERSION).exe
 IT_TEAM:=IT Support
 
 
-.PHONY: all check-version clean control next ocs version wget checksum
+.PHONY: all check-version check-exe clean control next ocs version wget checksum
 
-all: check-version $(SOFT)-$(VERSION)-$(PATCH).zip ocs
+all: check-version check-exe $(SOFT)-$(VERSION)-$(PATCH).zip ocs
 
 sinclude ../common/global.mk
 
@@ -49,6 +49,13 @@ tmp/$(EXE):
 		which peres >/dev/null && { peres -a $(EXE) | grep -q "^Product Version:[[:space:]]*$(VERSION)" || echo "Error: bad version for binary $(EXE)" ; } ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
+
+check-exe: tmp/$(EXE)
+	@(cd tmp ; \
+		file $(EXE) | grep -q "PE32 executable" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 1; } ; \
+		which peres >/dev/null && { peres -a $(EXE) | grep -q "^Product Version:[[:space:]]*$(VERSION)" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 1; } ; } ;\
+		)
+
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
