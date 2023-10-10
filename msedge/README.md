@@ -1,4 +1,4 @@
-# MSEdge - Microsoft Edge (Chrome) navigator
+# MS Edge - Microsoft Edge (Chrome) navigator
 
 Microsoft Edge is a proprietary, cross-platform web browser
 built on a Chromium-based.

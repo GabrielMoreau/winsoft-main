@@ -1,4 +1,4 @@
-# 3DSlicer - Visualization and analysis of medical image computing data sets
+# 3D Slicer - Visualization and analysis of medical image computing data sets
 
 3D Slicer is a free, open source software for visualization, processing,
 segmentation, registration, and analysis of medical, biomedical,and other

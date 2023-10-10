@@ -1,4 +1,4 @@
-# VSCode - Microsoft Source-code editor
+# MS VSCode - Microsoft Source-code editor
 
 Visual Studio Code (VS Code) is a source-code editor made by Microsoft
 with the Electron Framework, for Windows, Linux and macOS.
