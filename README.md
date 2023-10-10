@@ -86,7 +86,7 @@ apt install make curl wget pev msitools
 
  | Software | Detail | &#127968; |   |
  | -------- | ------ | --------- | - |
- | [3DSlicer](3dslicer/README.md) | Visualization and analysis of medical image computing data sets | [&#127968;](https://www.slicer.org/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
+ | [3D Slicer](3dslicer/README.md) | Visualization and analysis of medical image computing data sets | [&#127968;](https://www.slicer.org/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
  | [7-Zip](7zip/README.md) | File archiver with a high compression ratio | [&#127968;](https://www.7-zip.org/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
  | [AcrobatReader](acrobatreader/README.md) | Adobe PDF reader | [&#127968;](https://www.adobe.com/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
  | [AnyConnect](anyconnect/README.md) | Cisco AnyConnect VPN | [&#127968;](https://www.cisco.com/c/en/us/security/vpn-endpoint-security-clients/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
@@ -126,8 +126,10 @@ apt install make curl wget pev msitools
  | [MiKTeX](miktex/README.md) | TeX and LaTeX distribution | [&#127968;](https://miktex.org/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
  | [Mozilla Firefox](firefox/README.md) | Web navigator | [&#127968;](https://www.mozilla.org) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
  | [Mozilla Thunderbird](thunderbird/README.md) | Mail reader | [&#127968;](https://www.thunderbird.net/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
- | [MSEdge](msedge/README.md) | Microsoft Edge (Chrome) navigator | [&#127968;](https://www.microsoft.com/en-us/edge/business) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
- | [MSTeams](teams/README.md) | Microsoft Videoconferencing and communication platform | [&#127968;](https://www.microsoft.com/fr-fr/microsoft-teams/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
+ | [MS Edge](msedge/README.md) | Microsoft Edge (Chrome) navigator | [&#127968;](https://www.microsoft.com/en-us/edge/business) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
+ | [MS Teams](teams/README.md) | Microsoft Videoconferencing and communication platform | [&#127968;](https://www.microsoft.com/fr-fr/microsoft-teams/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
+ | [MS VisualRedist (Action)](visualredist/README.md) | Microsoft Visual C++ Redistributable Library update for all version | [&#127968;](https://learn.microsoft.com/fr-fr/cpp/windows/latest-supported-vc-redist) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
+ | [MS VSCode](vscode/README.md) | Microsoft Source-code editor | [&#127968;](https://code.visualstudio.com/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
  | [Nextcloud](nextcloud/README.md) | Cloud Suite agent | [&#127968;](https://nextcloud.com/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
  | [Notepad++](notepadpp/README.md) | Text editor | [&#127968;](https://notepad-plus-plus.org) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
  | [OBS Studio](obsstudio/README.md) | Screencasting and streaming application | [&#127968;](https://obsproject.com/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
@@ -159,10 +161,8 @@ apt install make curl wget pev msitools
  | [VirtualBox6](virtualbox6/README.md) | Oracle Hypervisor for virtual machines | [&#127968;](https://www.virtualbox.org/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
  | [VirtualBox7](virtualbox/README.md) | Oracle Hypervisor for virtual machines | [&#127968;](https://www.virtualbox.org/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
  | [VisIt](visit/README.md) | Interactive, scalable, visualization, animation and analysis tool | [&#127968;](https://visit-dav.github.io/visit-website/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
- | [VisualRedist (Action)](visualredist/README.md) | Microsoft Visual C++ Redistributable Library update for all version | [&#127968;](https://learn.microsoft.com/fr-fr/cpp/windows/latest-supported-vc-redist) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
  | [VLC](vlc/README.md) | VideoLAN media player Client | [&#127968;](https://www.videolan.org/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
  | [VMware Horizon Client](vmwarehorizon/README.md) | Client for VDI VMware Horizon (virtual desktop) | [&#127968;](https://www.vmware.com/products/horizon.html) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
- | [VSCode](vscode/README.md) | Microsoft Source-code editor | [&#127968;](https://code.visualstudio.com/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
  | [Webex](webex/README.md) | Cisco Web conferencing and videoconferencing Client | [&#127968;](https://www.webex.com/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
  | [WinDirStat](windirstat/README.md) | Disk usage viewer and cleanup tool | [&#127968;](https://windirstat.net/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
  | [Windows11Update](windows11update/README.md) | Update Windows 10 or 11 to the last version of Windows 11 | [&#127968;](https://www.microsoft.com/software-download/windows11) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
