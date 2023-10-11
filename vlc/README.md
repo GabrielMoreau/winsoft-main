@@ -5,3 +5,5 @@ portable, cross-platform media player software and streaming media server develo
 
 * Website : https://www.videolan.org/
 * Wikipedia : https://en.wikipedia.org/wiki/VLC_media_player
+
+* Download : https://www.videolan.org/vlc/download-windows.html
