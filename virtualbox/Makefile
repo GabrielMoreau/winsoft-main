@@ -19,9 +19,9 @@ VCREDIST+=tmp/2015-2022/vc_redist.x64.exe
 IT_TEAM:=IT Support
 
 
-.PHONY: all check-version clean control next ocs version wget checksum
+.PHONY: all check-version clean control next ocs version wget checksum check-exe1 check-exe2
 
-all: check-version $(SOFT)-$(VERSION)-$(PATCH).zip ocs
+all: check-version check-exe1 check-exe2 $(SOFT)-$(VERSION)-$(PATCH).zip ocs
 
 sinclude ../common/global.mk
 
@@ -41,12 +41,10 @@ version:
 checksum:
 	@mkdir -p tmp
 	@(cd tmp ; \
-		grep -q "^$$(shasum -a 256 $(EXE1))$$" ../checksum.txt && exit ; \
-		shasum -a 256 "$(EXE1)" | sed -e 's#tmp/##;' >> ../checksum.txt ; \
-		grep -q "^$$(shasum -a 256 $(EXE2))$$" ../checksum.txt && exit ; \
-		shasum -a 256 "$(EXE2)" | sed -e 's#tmp/##;' >> ../checksum.txt ; \
-		tail -6 ../checksum.txt ; \
+		grep -q "^$$(shasum -a 256 $(EXE1))$$" ../checksum.txt || { shasum -a 256 "$(EXE1)" | sed -e 's#tmp/##;' >> ../checksum.txt ; } ; \
+		grep -q "^$$(shasum -a 256 $(EXE2))$$" ../checksum.txt || { shasum -a 256 "$(EXE2)" | sed -e 's#tmp/##;' >> ../checksum.txt ; } ; \
 		)
+	@[ $$(( $$(date '+%s') - $$(stat -c '%Y' checksum.txt) )) -lt 60 ] && tail -6 checksum.txt
 
 wget: tmp/$(EXE1) tmp/$(EXE2)
 
@@ -55,9 +53,15 @@ tmp/$(EXE1):
 	@(cd tmp ; \
 		rm -f *.exe *.msi 2>/dev/null ; \
 		curl -# -o "$(EXE1)" -L "$(URL1)" ; \
-		file $(EXE1) | grep -q "PE32 executable" || echo "Error: bad format for binary $(EXE1)" ; \
-		which peres >/dev/null && { peres -a $(EXE1) | grep -q "^Product Version:[[:space:]]*$(VERSION)" || echo "Error: bad version for binary $(EXE1)" ; } ; \
+		#file $(EXE1) | grep -q "PE32 executable" || echo "Error: bad format for binary $(EXE1)" ; \
+		#which peres >/dev/null && { peres -a $(EXE1) | grep -q "^Product Version:[[:space:]]*$(VERSION)" || echo "Error: bad version for binary $(EXE1)" ; } ; \
 		grep -q "^$$(shasum -a 256 $(EXE1))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE1)" ; \
+		)
+
+check-exe1: tmp/$(EXE1)
+	@(cd tmp ; \
+		file $(EXE1) | grep -q "PE32 executable" || { echo "Error: bad format for binary $(EXE1)" 1>&2 ; exit 1; } ; \
+		which peres >/dev/null && { peres -a $(EXE1) | grep -q "^Product Version:[[:space:]]*$(VERSION)" || { echo "Error: bad version for binary $(EXE1)" 1>&2 ; exit 1; }; } ; \
 		)
 
 tmp/$(EXE2):
@@ -65,16 +69,18 @@ tmp/$(EXE2):
 	@(cd tmp ; \
 		rm -f *.vbox-extpack 2>/dev/null ; \
 		curl -# -o "$(EXE2)" -L "$(URL2)" ; \
-		file $(EXE2) | grep -q "gzip compressed data," || echo "Error: bad format for binary $(EXE2)" ; \
+		#file $(EXE2) | grep -q "gzip compressed data," || echo "Error: bad format for binary $(EXE2)" ; \
 		grep -q "^$$(shasum -a 256 $(EXE2))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE2)" ; \
+		)
+
+check-exe2: tmp/$(EXE2)
+	@(cd tmp ; \
+		file $(EXE2) | grep -q "gzip compressed data," || { echo "Error: bad format for binary $(EXE2)" 1>&2 ; exit 1; } ; \
 		)
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE1) tmp/$(EXE2)
 	@mkdir -p tmp
-	@perl -p -e ' \
-		s/^(SET\ssoftversion=)\d[\.\d]+\w?/$${1}$(VERSION)/; \
-		s/^(SET\ssoftpatch=)\d+/$${1}$(PATCH)/; \
-		s/^(SET\ssoftextpack=).+/$${1}$(EXE2)/;' install.bat > $@
+	@sed -e 's/__VERSION__/$(VERSION)/; s/__PATCH__/$(PATCH)/; s/__PACKEXT__/$(EXE2)/;' install.bat > $@
 
 %.zip: Makefile pre-install.ps1 tmp/install.bat tmp/$(EXE1) tmp/$(EXE2) $(VCREDIST)
 	@rm -f $@

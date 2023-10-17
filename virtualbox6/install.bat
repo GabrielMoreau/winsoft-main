@@ -18,9 +18,9 @@ EXIT /B
 
 ECHO BEGIN %date%-%time%
 
-SET softversion=91.5.1
-SET softpatch=1
-SET softextpack=Oracle-VM-VirtualBox-Extension-Pack-91.5.1.vbox-extpack
+SET softversion=__VERSION__
+SET softpatch=__PATCH__
+SET softextpack=__PACKEXT__
 
 REM PowerShell
 SET pwrsh=%WINDIR%\System32\WindowsPowerShell\V1.0\powershell.exe
