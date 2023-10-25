@@ -18,8 +18,8 @@ EXIT /B
 
 ECHO BEGIN %date%-%time%
 
-SET softversion=3.4.1
-SET softpatch=1
+SET softversion=__VERSION__
+SET softpatch=__PATCH__
 
 
 ECHO Silent install %softname%
@@ -28,6 +28,7 @@ SumatraPDF-%softversion%-64-install.exe -s -all-users -with-filter
 ECHO Remove desktop link
 IF EXIST "%ALLUSERSPROFILE%\Desktop\SumatraPDF.lnk" DEL /F /Q "%ALLUSERSPROFILE%\Desktop\SumatraPDF.lnk"
 IF EXIST "%ALLUSERSPROFILE%\Bureau\SumatraPDF.lnk"  DEL /F /Q "%ALLUSERSPROFILE%\Bureau\SumatraPDF.lnk"
+IF EXIST "%PUBLIC%\Desktop\SumatraPDF.lnk"          DEL /F /Q "%PUBLIC%\Desktop\SumatraPDF.lnk"
 
 
 ECHO Search PowerShell
