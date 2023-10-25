@@ -19,9 +19,9 @@ VERSION:=$(VERSION1).$(shell echo $(VERSION2) | sed 's/\.//g;')
 IT_TEAM:=IT Support
 
 
-.PHONY: all check-version clean control next ocs version wget checksum
+.PHONY: all check-version check-exe1 check-exe2 clean control next ocs version wget checksum
 
-all: check-version $(SOFT)-$(VERSION)-$(PATCH).zip ocs
+all: check-version check-exe1 check-exe2 $(SOFT)-$(VERSION)-$(PATCH).zip ocs
 
 sinclude ../common/global.mk
 
@@ -54,28 +54,37 @@ tmp/$(EXE1):
 	@mkdir -p tmp
 	@(cd tmp ; \
 		rm -f HandBrake-*.exe 2>/dev/null ; \
-		curl -s -o "$(EXE1)" -L "$(URL1)" ; \
-		file $(EXE1) | grep -q "PE32 executable.*Nullsoft Installer" || echo "Error: bad format for binary $(EXE1)" ; \
+		curl -# -o "$(EXE1)" -L "$(URL1)" ; \
+		#file $(EXE1) | grep -q "PE32 executable.*Nullsoft Installer" || echo "Error: bad format for binary $(EXE1)" ; \
 		# which peres >/dev/null && { peres -a $(EXE1) | grep -q "^Product Version:[[:space:]]*$(VERSION1)" || echo "Error: bad version for binary $(EXE1)" ; } ; \
 		grep -q "^$$(shasum -a 256 $(EXE1))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE1)" ; \
+		)
+
+check-exe1: tmp/$(EXE1)
+	@(cd tmp ; \
+		file $(EXE1) | grep -q "PE32 executable.*Nullsoft Installer" || { echo "Error: bad format for binary $(EXE1)" 1>&2 ; exit 1; } ; \
+		# which peres >/dev/null && { peres -a $(EXE1) | grep -q "^Product Version:[[:space:]]*$(VERSION1)" || echo "Error: bad version for binary $(EXE1)" ; } ; \
 		)
 
 tmp/$(EXE2):
 	@mkdir -p tmp
 	@(cd tmp ; \
 		rm -f windowsdesktop-runtime*.exe 2>/dev/null ; \
-		curl -s -o "$(EXE2)" -L "$(URL2)" ; \
+		curl -# -o "$(EXE2)" -L "$(URL2)" ; \
 		file $(EXE2) | grep -q "PE32 executable" || echo "Error: bad format for binary $(EXE2)" ; \
 		which peres >/dev/null && { peres -a $(EXE2) | grep -q "^Product Version:[[:space:]]*$(VERSION2)" || echo "Error: bad version for binary $(EXE2)" ; } ; \
 		grep -q "^$$(shasum -a 256 $(EXE2))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE2)" ; \
 		)
 
+check-exe2: tmp/$(EXE2)
+	@(cd tmp ; \
+		file $(EXE2) | grep -q "PE32 executable" || { echo "Error: bad format for binary $(EXE2)" 1>&2 ; exit 1; } ; \
+		which peres >/dev/null && { peres -a $(EXE2) | grep -q "^Product Version:[[:space:]]*$(VERSION2)" || { echo "Error: bad format for binary $(EXE2)" 1>&2 ; exit 1; } ; } ;\
+		)
+
 tmp/install.bat: install.bat Makefile tmp/$(EXE1) tmp/$(EXE2)
 	@mkdir -p tmp
-	@perl -p -e ' \
-		s/^(SET\ssoftversion=)\d[\.\d]+\w?/$${1}$(VERSION1)/; \
-		s/^(SET\ssoftruntimever=)\d[\.\d]+\w?/$${1}$(VERSION2)/; \
-		s/^(SET\ssoftpatch=)\d+/$${1}$(PATCH)/;' install.bat > $@
+	@sed -e 's/__VERSION1__/$(VERSION1)/; s/__PATCH__/$(PATCH)/; s/__VERSION2__/$(VERSION2)/;' install.bat > $@
 
 %.zip: Makefile tmp/install.bat tmp/$(EXE1) tmp/$(EXE2)
 	@rm -f $@

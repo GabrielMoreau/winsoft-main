@@ -18,14 +18,15 @@ EXIT /B
 
 ECHO BEGIN %date%-%time%
 
-SET softversion=91.5.1
-SET softpatch=1
-SET softruntimever=6.5.1
+SET softversion=__VERSION1__
+SET softpatch=__PATCH__
+SET softruntimever=__VERSION2__
 
 
-REM Silent install
+Echo Silent install WindowsDesktop-Runtime
 windowsdesktop-runtime-%softruntimever%-win-x64.exe /install /quiet /norestart
 
+Echo Silent install %softname%
 HandBrake-%softversion%-x86_64-Win_GUI.exe /S
 
 
