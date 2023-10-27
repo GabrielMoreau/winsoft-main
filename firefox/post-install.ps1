@@ -1,7 +1,7 @@
 
 # Clean old duplicate key with Firefox in the name (same uninstall string)
 
-$RefVersion = '91.5.1'
+$RefVersion = '__VERSION__'
 $RefUninstallString = ''
 $RefName = 'Firefox'
 
