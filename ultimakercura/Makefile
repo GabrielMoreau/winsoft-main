@@ -5,16 +5,16 @@
 SOFT:=UltiMakerCura
 VERSION:=$(shell curl -s -L 'https://github.com/Ultimaker/Cura/releases/latest' | sed -e 's/[[:space:]]/\n/g;' | grep 'href="/Ultimaker/Cura/releases/tag/' | cut -f 6 -d '/' | cut -f 1 -d '"')
 PATCH:=1
-URL:=https://github.com/Ultimaker/Cura/releases/download/$(VERSION)/UltiMaker-Cura-$(VERSION)-win64.msi
+URL:=https://github.com/Ultimaker/Cura/releases/download/$(VERSION)/UltiMaker-Cura-$(VERSION)-win64-X64.msi
 
 EXE:=UltiMaker-Cura-$(VERSION)-win64.msi
 
 IT_TEAM:=IT Support
 
 
-.PHONY: all check-version clean control next ocs version wget checksum
+.PHONY: all check-version check-exe clean control next ocs version wget checksum
 
-all: check-version $(SOFT)-$(VERSION)-$(PATCH).zip ocs
+all: check-version check-exe $(SOFT)-$(VERSION)-$(PATCH).zip ocs
 
 sinclude ../common/global.mk
 
@@ -44,8 +44,13 @@ tmp/$(EXE):
 	@(cd tmp ; \
 		rm -f *.exe *.msi 2>/dev/null ; \
 		curl -# -o "$(EXE)" -L "$(URL)" ; \
-		file $(EXE) | grep -q "Subject: UltiMaker Cura the most popular 3D printing slicer" || echo "Error: bad format for binary $(EXE)" ; \
+		# file $(EXE) | grep -q "Subject: UltiMaker Cura the most popular 3D printing slicer" || echo "Error: bad format for binary $(EXE)" ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
+		)
+
+check-exe: tmp/$(EXE)
+	@(cd tmp ; \
+		file $(EXE) | grep -q "Subject: UltiMaker Cura the most popular 3D printing slicer" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 1; } ; \
 		)
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE)
