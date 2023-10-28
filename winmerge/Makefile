@@ -4,18 +4,18 @@
 #
 
 SOFT:=WinMerge
-VERSION:=$(shell curl -s -L 'https://winmerge.org/downloads/' | egrep -- 'dt>WinMerge-.*-x64-Setup.exe' | cut -f 2 -d '-')
+VERSION:=$(shell curl -s -L 'https://github.com/WinMerge/winmerge/releases/latest' | sed 's/</\n/g;'| grep '^meta property.*og:title' | cut -f 4 -d ' ' | sed -e 's/^v//;' | head -1)
 PATCH:=1
-URL:=$(shell curl -s -L 'https://winmerge.org/downloads/' | sed -s 's/"/\n/g;' | egrep -- 'github.com.*/WinMerge-.*-x64-Setup.exe')
+URL:=https://github.com/WinMerge/winmerge/releases/download/v$(VERSION)/WinMerge-$(VERSION)-x64-Setup.exe
 
 EXE:=WinMerge-$(VERSION)-x64-Setup.exe
 
 IT_TEAM:=IT Support
 
 
-.PHONY: all check-version clean control next ocs version wget checksum
+.PHONY: all check-version check-exe clean control next ocs version wget checksum
 
-all: check-version $(SOFT)-$(VERSION)-$(PATCH).zip ocs
+all: check-version check-exe $(SOFT)-$(VERSION)-$(PATCH).zip ocs
 
 sinclude ../common/global.mk
 
@@ -44,17 +44,21 @@ tmp/$(EXE):
 	@mkdir -p tmp
 	@(cd tmp ; \
 		rm -f *.exe *.msi 2>/dev/null ; \
-		curl -s -o "$(EXE)" -L "$(URL)" ; \
-		file $(EXE) | grep -q "PE32 executable" || echo "Error: bad format for binary $(EXE)" ; \
-		which peres >/dev/null && { peres -a $(EXE) | grep -q "^Product Version:[[:space:]]*$(VERSION)" || echo "Error: bad version for binary $(EXE)" ; } ; \
+		curl -# -o "$(EXE)" -L "$(URL)" ; \
+		#file $(EXE) | grep -q "PE32 executable" || echo "Error: bad format for binary $(EXE)" ; \
+		#which peres >/dev/null && { peres -a $(EXE) | grep -q "^Product Version:[[:space:]]*$(VERSION)" || echo "Error: bad version for binary $(EXE)" ; } ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
+		)
+
+check-exe: tmp/$(EXE)
+	@(cd tmp ; \
+		file $(EXE) | grep -q "PE32 executable" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 1; } ; \
+		which peres >/dev/null && { peres -a $(EXE) | grep -q "^Product Version:[[:space:]]*$(VERSION)" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 1; } ; } ;\
 		)
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
-	@perl -p -e ' \
-		s/^(SET\ssoftversion=)\d[\.\d]+\w?/$${1}$(VERSION)/; \
-		s/^(SET\ssoftpatch=)\d+/$${1}$(PATCH)/;' install.bat > $@
+	@sed -e 's/__VERSION__/$(VERSION)/; s/__PATCH__/$(PATCH)/;' install.bat > $@
 
 %.zip: Makefile tmp/install.bat tmp/$(EXE)
 	@rm -f $@
