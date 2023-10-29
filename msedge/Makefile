@@ -14,7 +14,7 @@ EXE:=MicrosoftEdgeEnterpriseX64-$(VERSION).msi
 IT_TEAM:=IT Support
 
 
-.PHONY: all check-version clean control next ocs version wget checksum
+.PHONY: all check-version check-exe clean control next ocs version wget checksum
 
 all:
 	@mkdir -p tmp
@@ -30,7 +30,7 @@ sinclude ../common/global.mk
 check-version:
 	@echo $(VERSION) | egrep -q '^[[:digit:]][\.[:digit:]]*$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
 
-next: check-version $(SOFT)-$(VERSION)-$(PATCH).zip ocs
+next: check-version check-exe $(SOFT)-$(VERSION)-$(PATCH).zip ocs
 
 clean:
 	rm -rf $(SOFT)-$(VERSION)-$(PATCH).zip tmp
@@ -49,7 +49,7 @@ checksum:
 		tail -3 ../checksum.txt ; \
 		)
 	@grep "^$(UUID):" version.txt 2> /dev/null || echo "$(UUID): $(VERSION)" >> ./version.txt
-	@tail -1 ./version.txt
+	@tail -2 ./version.txt
 
 wget: tmp/$(EXE)
 
@@ -58,10 +58,16 @@ tmp/$(EXE):
 	@(cd tmp ; \
 		find ./ -name '*.msi' -a -not -name "$(INSTALLER)" -a -not -name "$(EXE)" -delete ; \
 		cmp $(INSTALLER) $(EXE) > /dev/null 2>&1 || cp -f $(INSTALLER) $(EXE) ; \
-		file $(EXE) | grep -q "MSI Installer.*Comments: $(VERSION)" || echo "Error: bad format for binary $(EXE)" ; \
+		# file $(EXE) | grep -q "MSI Installer.*Comments: $(VERSION)" || echo "Error: bad format for binary $(EXE)" ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
 	@grep -q "^$(UUID): $(VERSION)$$" version.txt 2> /dev/null  || echo "Error: bad UUID for version $(VERSION) in version.txt"
+
+check-exe: tmp/$(EXE)
+	@(cd tmp ; \
+		file $(EXE) | grep -q "MSI Installer.*Comments: $(VERSION)" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 1; } ; \
+		# which peres >/dev/null && { peres -a $(EXE) | grep -q "^Product Version:[[:space:]]*$(VERSION)" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 1; } ; } ;\
+		)
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
