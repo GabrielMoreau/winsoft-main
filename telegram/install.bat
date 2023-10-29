@@ -65,6 +65,16 @@ ECHO Better reg uninstall key
 >> tmp_install.reg ECHO.
 regedit.exe /S "tmp_install.reg"
 
+REM HKU	Telegram Desktop	Telegram FZ-LLC	4.8.3	{53F49750-6209-4FBF-9CA8-7A333C87D1ED}_is1	"C:\Program Files\Telegram Desktop\unins000.exe"	
+ECHO Clean reg uninstall key in HKU
+REG QUERY "HKEY_USERS\.DEFAULT\Software\Microsoft\Windows\CurrentVersion\Uninstall\{53F49750-6209-4FBF-9CA8-7A333C87D1ED}_is1"
+IF %ERRORLEVEL% NEQ 0 GOTO Next
+REG QUERY "HKEY_USERS\.DEFAULT\Software\Microsoft\Windows\CurrentVersion\Uninstall\{53F49750-6209-4FBF-9CA8-7A333C87D1ED}_is1" /v "UninstallString" | FIND /N "%SystemDrive%\Program Files\Telegram Desktop\unins000.ex" > NUL && (
+  ECHO REG DELETE HKU
+  REG DELETE "HKEY_USERS\.DEFAULT\Software\Microsoft\Windows\CurrentVersion\Uninstall\{53F49750-6209-4FBF-9CA8-7A333C87D1ED}_is1" /F
+  )
+:Next
+
 
 ECHO END %date%-%time%
 EXIT
