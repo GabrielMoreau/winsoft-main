@@ -82,7 +82,7 @@ Please devops, put always the version number clearly in the comment...
 apt install make curl wget pev msitools
 ```
 
-## List of 90 packages
+## List of 91 packages
 
  | Software | Detail | &#127968; |   |
  | -------- | ------ | --------- | - |
@@ -153,6 +153,7 @@ apt install make curl wget pev msitools
  | [Speccy](speccy/README.md) | Display hardware computer information | [&#127968;](https://www.ccleaner.com/speccy) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
  | [SSHFS-Win](sshfs-win/README.md) | Connect network drive on an SSH/SFTP server | [&#127968;](https://github.com/billziss-gh/sshfs-win) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
  | [SumatraPDF](sumatrapdf/README.md) | Free and open-source document viewer (PDF, DjVu, EPUB...) | [&#127968;](https://www.sumatrapdfreader.org/free-pdf-reader) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
+ | [Tabby](tabby/README.md) | Modern terminal for local shells, SSH, etc | [&#127968;](https://tabby.sh/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
  | [TeamViewer](teamviewer/README.md) | Remote access and remote control | [&#127968;](https://www.teamviewer.com) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
  | [Telegram Messenger](telegram/README.md) | Desktop Instant messaging application | [&#127968;](https://telegram.org/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
  | [TexMaker](texmaker/README.md) | Free cross-platform LaTeX editor | [&#127968;](https://www.xm1math.net/texmaker/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
