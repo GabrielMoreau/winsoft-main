@@ -26,6 +26,10 @@ SET softpatch=__PATCH__
 ECHO Silent install %softname%
 tabby-%softversion%-setup-x64.exe /S /ALLUSERS
 
+ECHO Remove desktop shortcut
+IF EXIST "%PUBLIC%\Desktop\Tabby Terminal.lnk"          DEL /F /Q "%PUBLIC%\Desktop\Tabby Terminal.lnk"
+IF EXIST "%ALLUSERSPROFILE%\Desktop\Tabby Terminal.lnk" DEL /F /Q "%ALLUSERSPROFILE%\Desktop\Tabby Terminal.lnk"
+
 
 ECHO END %date%-%time%
 EXIT
