@@ -1,4 +1,3 @@
-REM @ECHO OFF
 
 REM
 REM   EngaugeDigitizer
@@ -18,12 +17,16 @@ EXIT /B
 
 ECHO BEGIN %date%-%time%
 
-SET softversion=91.5.1
-SET softpatch=1
+SET softversion=__VERSION__
+SET softpatch=__PATCH__
 
 
-REM Silent install
+ECHO Silent install %softname%
 msiexec /i "digit-exe-windows10-64-bit-installer-%softversion%.msi" /qn /norestart /L*v "%logdir%\%softname%-MSI.log"
+
+ECHO Remove desktop shortcut
+IF EXIST "%PUBLIC%\Desktop\Engauge Digitizer.lnk"          DEL /F /Q "%PUBLIC%\Desktop\Engauge Digitizer.lnk"
+IF EXIST "%ALLUSERSPROFILE%\Desktop\Engauge Digitizer.lnk" DEL /F /Q "%ALLUSERSPROFILE%\Desktop\Engauge Digitizer.lnk"
 
 
 ECHO END %date%-%time%
