@@ -9,3 +9,4 @@ and, formerly, video games.
 * Wikipedia : https://en.wikipedia.org/wiki/Blender_(software)
 
 * Download : https://inkscape.org/release/inkscape-dev/?latest=1
+* Silent install : https://silentinstallhq.com/blender-silent-install-how-to-guide/
