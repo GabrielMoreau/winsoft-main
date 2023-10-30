@@ -1,4 +1,3 @@
-REM @ECHO OFF
 
 REM
 REM   Bandicut
@@ -18,12 +17,16 @@ EXIT /B
 
 ECHO BEGIN %date%-%time%
 
-SET softversion=91.5.1
-SET softpatch=1
+SET softversion=__VERSION__
+SET softpatch=__PATCH__
 
 
-REM Silent install
+ECHO Silent install %softname%
 bandicut-setup-%softversion%.exe /S
+
+ECHO Remove desktop shortcut
+IF EXIST "%PUBLIC%\Desktop\%softname%.lnk"          DEL /F /Q "%PUBLIC%\Desktop\%softname%.lnk"
+IF EXIST "%ALLUSERSPROFILE%\Desktop\%softname%.lnk" DEL /F /Q "%ALLUSERSPROFILE%\%softname%.lnk"
 
 
 ECHO END %date%-%time%
