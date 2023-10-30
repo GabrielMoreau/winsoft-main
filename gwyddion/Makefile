@@ -15,7 +15,7 @@ IT_TEAM:=IT Support
 
 .PHONY: all check-version check-exe clean control next ocs version wget checksum
 
-all: check-version check-exe $(SOFT)-$(VERSION)-$(PATCH).zip ocs
+all: check-version check-exe $(SOFT)-$(VERSION)-$(PATCH).zip Uninstall-$(SOFT)_$(VERSION)-$(PATCH)_x64.zip ocs
 
 sinclude ../common/global.mk
 
@@ -23,7 +23,7 @@ check-version:
 	@echo $(VERSION) | egrep -q '^[[:digit:]][\.[:digit:]]*$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
 
 clean:
-	rm -rf $(SOFT)-$(VERSION)-$(PATCH).zip tmp resources
+	rm -rf $(SOFT)-$(VERSION)-$(PATCH).zip Uninstall-$(SOFT)_$(VERSION)-$(PATCH)_x64.zip tmp resources
 
 version:
 	@echo "VERSION: $(VERSION)"
@@ -65,9 +65,16 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@(cd tmp; zip -r ../$@ install.bat $(EXE))
 	@chmod ugo+rw $@
 
-ocs:
+Uninstall-$(SOFT)_$(VERSION)-$(PATCH)_x64.zip: Makefile uninstall.bat uninstall.ps1
+	@rm -f $@
+	@zip -r ./$@ uninstall.bat uninstall.ps1
+	@printf "@ uninstall.bat\n@=install.bat\n" | zipnote -w ./$@
+	@chmod ugo+rw $@
+
+ocs: $(SOFT)-$(VERSION)-$(PATCH).zip Uninstall-$(SOFT)_$(VERSION)-$(PATCH)_x64.zip
 	@echo ""
 	@echo "Name:    $(SOFT)-$(VERSION)-$(PATCH)"
+	@echo "Name:    Uninstall-$(SOFT)_$(VERSION)-$(PATCH)_x64"
 	@echo "Launch:  install.bat"
 	@echo "Message: yes"
 	@echo "Delay:   5"
