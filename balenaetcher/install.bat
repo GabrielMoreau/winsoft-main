@@ -24,11 +24,25 @@ SET shortcut=%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\%softname%.
 SET process=balenaEtcher.exe
 
 
+ECHO Search PowerShell
+SET pwrsh=%WINDIR%\System32\WindowsPowerShell\V1.0\powershell.exe
+IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET pwrsh=%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe
+
+ECHO Add rights
+%pwrsh% Set-ExecutionPolicy RemoteSigned -Force -Scope LocalMachine
+
+ECHO unblock
+%pwrsh% "Unblock-File -Path .\*.ps1"
+
+
 ECHO Kill running process
 taskkill /T /F /IM %process%
 
 ECHO Clean old version before install
 CALL .\uninstall.bat
+
+ECHO Execute pre-install script to remove HKU version
+%pwrsh% -File ".\pre-install.ps1"
 
 
 ECHO Silent install %softname%
@@ -37,10 +51,6 @@ MOVE "BalenaEtcher" "%ProgramFiles%\%regkey%"
 ECHO Copy uninstall script
 COPY /A /Y "uninstall.bat" "%ProgramFiles%\%regkey%\uninstall.bat"
 
-
-ECHO Search PowerShell
-SET pwrsh=%WINDIR%\System32\WindowsPowerShell\V1.0\powershell.exe
-IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET pwrsh=%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe
 
 ECHO Create shortcut
 IF EXIST "%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs" (

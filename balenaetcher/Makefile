@@ -61,14 +61,16 @@ tmp/BalenaEtcher/balenaEtcher.exe: tmp/$(EXE)
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
-	@perl -p -e ' \
-		s/__VERSION__/$(VERSION)/; \
-		s/__PATCH__/$(PATCH)/;' install.bat > $@
+	@sed -e 's/__VERSION__/$(VERSION)/; s/__PATCH__/$(PATCH)/;' install.bat > $@
 
-%.zip: Makefile tmp/install.bat tmp/$(EXE) tmp/BalenaEtcher/balenaEtcher.exe
+tmp/pre-install.ps1: pre-install.ps1 Makefile tmp/$(EXE)
+	@mkdir -p tmp
+	@sed -e 's/__VERSION__/$(VERSION)/;' pre-install.ps1 > $@
+
+%.zip: Makefile tmp/install.bat tmp/pre-install.ps1 tmp/$(EXE) tmp/BalenaEtcher/balenaEtcher.exe
 	@rm -f $@
 	@zip -r $@ uninstall.bat
-	@(cd tmp; zip --quiet -r ../$@ install.bat BalenaEtcher)
+	@(cd tmp; zip --quiet -r ../$@ install.bat pre-install.ps1 BalenaEtcher)
 	@chmod ugo+rw $@
 	@echo -n '  Zip / Number of files: '; unzip -t $@ | grep 'OK' | wc -l
 
