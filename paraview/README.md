@@ -5,7 +5,7 @@ to create vector images,
 primarily in Scalable Vector Graphics (SVG) format.
 
 * Website : https://www.paraview.org/
-* Wikipedia : https://fr.wikipedia.org/wiki/ParaView
+* Wikipedia : https://en.wikipedia.org/wiki/ParaView
 
 * Download : https://www.paraview.org/download/
 

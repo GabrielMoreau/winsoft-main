@@ -6,6 +6,6 @@ free-form drawing, transcoding between different image file formats,
 and more specialized tasks. 
 
 * Website : https://www.gimp.org/
-* Wikipedia : https://fr.wikipedia.org/wiki/GIMP
+* Wikipedia : https://en.wikipedia.org/wiki/GIMP
 
 * Download : https://www.gimp.org/downloads/

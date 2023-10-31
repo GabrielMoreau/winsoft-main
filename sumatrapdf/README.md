@@ -7,7 +7,7 @@ Open XML Paper Specification (OpenXPS, OXPS, XPS), and Comic Book Archive
 file (CB7, CBR, CBT, CBZ).
 
 * Website : https://www.sumatrapdfreader.org/free-pdf-reader
-* Wikipedia : https://fr.wikipedia.org/wiki/Sumatra_PDF
+* Wikipedia : https://en.wikipedia.org/wiki/Sumatra_PDF
 
 * Download : https://www.sumatrapdfreader.org/download-free-pdf-viewer
 * Silent Install : https://www.sumatrapdfreader.org/docs/Command-line-arguments

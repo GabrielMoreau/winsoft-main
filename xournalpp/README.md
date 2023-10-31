@@ -9,7 +9,7 @@ remarks on the document. The edited document can be exported in the
 Xournal format for further editing or as a pdf to embed the annotations.
 
 * Website : https://github.com/xournalpp/xournalpp
-* Wikipedia : https://fr.wikipedia.org/wiki/XournalPP
+* Wikipedia : https://en.wikipedia.org/wiki/Xournal
 * Framasoft : https://framalibre.org/content/xournal
 
 * Download : https://github.com/xournalpp/xournalpp/releases/latest

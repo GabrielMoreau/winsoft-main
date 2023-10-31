@@ -4,7 +4,7 @@ HandBrake is a open-source tool for converting video from nearly
 any format to a selection of modern, widely supported codecs.
 
 * Website : https://handbrake.fr/
-* Wikipedia : https://fr.wikipedia.org/wiki/HandBrake
+* Wikipedia : https://en.wikipedia.org/wiki/HandBrake
 * Framasoft : https://framalibre.org/content/handbrake
 
 * Download : https://github.com/HandBrake/HandBrake

@@ -6,7 +6,7 @@ It is useful for determining what has changed between versions,
 and then merging changes between versions. 
 
 * Website : https://winmerge.org/
-* Wikipedia : https://fr.wikipedia.org/wiki/WinMerge
+* Wikipedia : https://en.wikipedia.org/wiki/WinMerge
 * Source : https://github.com/WinMerge/winmerge
 
 * Download : https://winmerge.org/downloads/?lang=fr

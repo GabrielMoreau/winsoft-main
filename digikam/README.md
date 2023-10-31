@@ -9,7 +9,7 @@ Users can also add captions and ratings to their images,
 search through them and save searches for later use.
 
 * Website : https://www.digikam.org/
-* Wikipedia : https://fr.wikipedia.org/wiki/DigiKam
+* Wikipedia : https://en.wikipedia.org/wiki/DigiKam
 
 * Download : https://www.digikam.org/download/
 * Silent install : https://silent-install.net/software/the_digikam_team/digikam/5.8.0
