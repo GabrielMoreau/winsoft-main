@@ -54,10 +54,7 @@ tmp/$(EXE):
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
-	@perl -p -e ' \
-		s/__VERSION__/$(VERSION)/; \
-		s/__VERSIONLONG__/$(VERSIONLONG)/; \
-		s/__PATCH__/$(PATCH)/;' install.bat > $@
+	@sed -e 's/__VERSION__/$(VERSION)/; s/__PATCH__/$(PATCH)/; s/__VERSIONLONG__/$(VERSIONLONG)/;' install.bat > $@
 
 %.zip: Makefile tmp/install.bat tmp/$(EXE)
 	@rm -f $@
