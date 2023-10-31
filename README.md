@@ -82,7 +82,7 @@ Please devops, put always the version number clearly in the comment...
 apt install make curl wget pev msitools
 ```
 
-## List of 91 packages
+## List of 92 packages
 
  | Software | Detail | &#127968; |   |
  | -------- | ------ | --------- | - |
@@ -166,6 +166,7 @@ apt install make curl wget pev msitools
  | [VisIt](visit/README.md) | Interactive, scalable, visualization, animation and analysis tool | [&#127968;](https://visit-dav.github.io/visit-website/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
  | [VLC](vlc/README.md) | VideoLAN media player Client | [&#127968;](https://www.videolan.org/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
  | [VMware Horizon Client](vmwarehorizon/README.md) | Client for VDI VMware Horizon (virtual desktop) | [&#127968;](https://www.vmware.com/products/horizon.html) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
+ | [VMware Workstation Player](vmwareplayer/README.md) | Virtualization software for computers | [&#127968;](https://www.vmware.com/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
  | [Webex](webex/README.md) | Cisco Web conferencing and videoconferencing Client | [&#127968;](https://www.webex.com/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
  | [WinDirStat](windirstat/README.md) | Disk usage viewer and cleanup tool | [&#127968;](https://windirstat.net/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
  | [Windows11Update](windows11update/README.md) | Update Windows 10 or 11 to the last version of Windows 11 | [&#127968;](https://www.microsoft.com/software-download/windows11) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |

@@ -1,7 +1,8 @@
-# VMware Player - Virtualization software for computers
+# VMware Workstation Player - Virtualization software for computers
 
 VMware Player is a virtualization software package for x64 computers running Microsoft Windows or Linux.
 VMware Player is available for personal non-commercial use.
+You need a license for professional use.
 
 * Website : https://www.vmware.com/
 * Wikipedia : https://en.wikipedia.org/wiki/VMware_Workstation_Player
