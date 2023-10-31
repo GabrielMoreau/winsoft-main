@@ -39,7 +39,7 @@ New-PSDrive -PSProvider 'Registry' -Name 'HKU' -Root 'HKEY_USERS' -ErrorAction '
 			If (!(Test-Path "$Exe")) {
 				$KeyPath = $App.PSPath
 				Write-Output "Warning: Remove Key $DisplayName / $DisplayVersion / $Exe / $KeyPath"
-				# Remove-Item -Path "$KeyPath" -Force -Recurse -ErrorAction SilentlyContinue
+				Remove-Item -Path "$KeyPath" -Force -Recurse -ErrorAction SilentlyContinue
 			}
 		} Else { Return }
 
@@ -62,7 +62,8 @@ New-PSDrive -PSProvider 'Registry' -Name 'HKU' -Root 'HKEY_USERS' -ErrorAction '
 
 # View
 @(Get-ChildItem -Recurse 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall';
-  Get-ChildItem -Recurse "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall") |
+  Get-ChildItem -Recurse "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall";
+  Get-ChildItem -Recurse 'HKU:\.DEFAULT\Software\Microsoft\Windows\CurrentVersion\Uninstall') |
 	ForEach {
 		$Key = $_
 		$App = (Get-ItemProperty -Path $Key.PSPath)
@@ -71,7 +72,7 @@ New-PSDrive -PSProvider 'Registry' -Name 'HKU' -Root 'HKEY_USERS' -ErrorAction '
 
 		$DisplayVersion = $App.DisplayVersion
 		$KeyProduct = $Key | Split-Path -Leaf
-		Write-Output "Remove: $DisplayName / $DisplayVersion / $KeyProduct / $($App.UninstallString)"
+		Write-Output "Show: $DisplayName / $DisplayVersion / $KeyProduct / $($App.UninstallString)"
 	}
 
 # HKU	balenaEtcher 1.18.8	Balena Ltd.	1.18.8	d2f3b6c7-6f49-59e2-b8a5-f72e33900c2b	"C:\WINDOWS\system32\config\systemprofile\AppData\Local\Programs\balena-etcher\Uninstall balenaEtcher.exe" /currentuser
