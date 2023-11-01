@@ -4,7 +4,7 @@
 #
 
 SOFT:=Teams
-VERSION:=$(shell curl -s -L 'https://learn.microsoft.com/en-us/officeupdates/teams-app-versioning' | grep -A 30 'Windows version history' | grep '^<td' | cut -f 2 -d '>' | cut -f 1 -d '<' | cut -f 1 -d ' ' | egrep '^[[:digit:]][[:digit:]]?\.[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+$$' | head -1)
+VERSION:=$(shell curl -s -L 'https://learn.microsoft.com/en-us/officeupdates/teams-app-versioning' | grep -A 30 'Windows version history' | paste -sd '' | sed -e s'#<tr>#\n#g;' | grep -Ev '(windows-version-history|Slimcore version|Rolling out)' | sed -e 's/[<>]/\n/g;' | egrep '^[[:digit:]][[:digit:]]?\.[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+$$' | head -1)
 SHORTVERSION:=$(shell echo $(VERSION) | sed -e 's/00/0/g;')
 URL:=https://teams.microsoft.com/downloads/desktopurl?env=production&plat=windows&arch=x64&managedInstaller=true&download=true
 PATCH:=1
@@ -48,18 +48,18 @@ tmp/$(EXE):
 		curl -# -o "$(EXE)" -L "$(URL)" ; \
 		file $(EXE) | grep -q "Composite Document File.*Subject: Microsoft Teams" || echo "Error: bad format for binary $(EXE)" ; \
 		which msiextract >/dev/null && { rm -rf 'Program File'; msiextract $(EXE) ; } ; \
-		which peres >/dev/null && { peres -a 'Program Files/Teams Installer/Teams.exe' | grep -q "^Product Version:[[:space:]]*$(SHORTVERSION)" || echo "Error: bad version for binary $(EXE)" ; } ; \
+		which peres >/dev/null && { peres -a 'Program Files/Teams Installer/Teams.exe' | grep -q "^Product Version:[[:space:]]*$(SHORTVERSION)" || echo "Error: bad version for binary Program Files/Teams Installer/Teams.exe" ; } ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
 
 check-exe: tmp/$(EXE)
-	@cd tmp; which peres >/dev/null && { peres -a 'Program Files/Teams Installer/Teams.exe' | grep -q "^Product Version:[[:space:]]*$(SHORTVERSION)" || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 1; } ; }
+	@cd tmp; \
+		file $(EXE) | grep -q "Composite Document File.*Subject: Microsoft Teams" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 1; } ; \
+		which peres >/dev/null && { peres -a 'Program Files/Teams Installer/Teams.exe' | grep -q "^Product Version:[[:space:]]*$(SHORTVERSION)" || { echo "Error: bad version for binary Program Files/Teams Installer/Teams.exe" 1>&2 ; exit 1; } ; }
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
-	@perl -p -e ' \
-		s/^(SET\ssoftversion=)\d[\.\d]+\w?/$${1}$(VERSION)/; \
-		s/^(SET\ssoftpatch=)\d+/$${1}$(PATCH)/;' install.bat > $@
+	@sed -e 's/__VERSION__/$(VERSION)/; s/__PATCH__/$(PATCH)/;' install.bat > $@
 
 %.zip: Makefile pre-install.ps1 tmp/install.bat tmp/$(EXE)
 	@rm -f $@

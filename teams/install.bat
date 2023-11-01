@@ -19,8 +19,8 @@ EXIT /B
 ECHO BEGIN %date%-%time%
 
 
-SET softversion=1.4.00.3321
-SET softpatch=1
+SET softversion=__VERSION__
+SET softpatch=__PATCH__
 
 ECHO Fix PowerShell
 SET pwrsh=%WINDIR%\System32\WindowsPowerShell\V1.0\powershell.exe
@@ -36,8 +36,9 @@ ECHO Execute pre-install
 %pwrsh% -File ".\pre-install.ps1"
 
 
-ECHO Silent install
+ECHO Silent install %softname%
 msiexec /i "Teams_%softversion%_windows_x64.msi" OPTIONS="noAutoStart=true" ALLUSERS=1 /qn /log "%logdir%\%softname%-MSI.log"
+
 
 ECHO END %date%-%time%
 EXIT
