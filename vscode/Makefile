@@ -14,12 +14,12 @@ EXE:=VSCodeSetup-x64-$(VERSION).exe
 IT_TEAM:=IT Support
 
 
-.PHONY: all check-version clean control next ocs version wget checksum
+.PHONY: all check-version check-exe clean control next ocs version wget checksum
 
 all:
 	@mkdir -p tmp
 	@rm -f "tmp/$(INSTALLER)"
-	@(cd tmp; curl -s -o $(INSTALLER) -L "$(URL)")
+	@(cd tmp; curl -s --time-cond $(INSTALLER) -o $(INSTALLER) -L "$(URL)")
 	@make next
 
 sinclude ../common/global.mk
@@ -27,7 +27,7 @@ sinclude ../common/global.mk
 check-version:
 	@echo $(VERSION) | egrep -q '^[[:digit:]][\.[:digit:]]*$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
 
-next: check-version $(SOFT)-$(VERSION)-$(PATCH).zip ocs
+next: check-version check-exe $(SOFT)-$(VERSION)-$(PATCH).zip ocs
 
 clean:
 	rm -rf $(SOFT)-$(VERSION)-$(PATCH).zip tmp resources
@@ -52,9 +52,15 @@ tmp/$(EXE):
 	@(cd tmp ; \
 		find ./ -name '*.exe' -a -not -name "$(INSTALLER)" -a -not -name "$(EXE)" -delete ; \
 		cmp $(INSTALLER) $(EXE) > /dev/null 2>&1 || cp -f $(INSTALLER) $(EXE) ; \
-		file $(EXE) | grep -q "PE32 executable" || echo "Error: bad format for binary $(EXE)" ; \
-		which peres >/dev/null && { peres -a $(EXE) | grep -q "^Product Version:[[:space:]]*$(VERSION)" || echo "Error: bad version for binary $(EXE)" ; } ; \
+		#file $(EXE) | grep -q "PE32 executable" || echo "Error: bad format for binary $(EXE)" ; \
+		#which peres >/dev/null && { peres -a $(EXE) | grep -q "^Product Version:[[:space:]]*$(VERSION)" || echo "Error: bad version for binary $(EXE)" ; } ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
+		)
+
+check-exe: tmp/$(EXE)
+	@(cd tmp ; \
+		file $(EXE) | grep -q "PE32 executable" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 1; } ; \
+		which peres >/dev/null && { peres -a $(EXE) | grep -q "^Product Version:[[:space:]]*$(VERSION)" || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 1; } ; } ;\
 		)
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE)
