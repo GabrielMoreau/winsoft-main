@@ -19,8 +19,8 @@ EXIT /B
 ECHO BEGIN %date%-%time%
 
 REM Version parameter (auto update by Makefile)
-SET softversion=3.55.0
-SET softpatch=7
+SET softversion=__VERSION__
+SET softpatch=__PATCH__
 SET softexe=FileZilla_%softversion%_win64-setup.exe
 
 ECHO Uninstall previous version if exist
