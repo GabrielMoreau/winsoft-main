@@ -4,7 +4,8 @@
 #
 
 SOFT:=KiCad
-URL:=$(shell curl -s -L 'https://www.kicad.org/download/windows/' | sed -e 's/"/\n/g;' | grep '^https://github.com/.*/kicad-.*-x86_64.exe' | head -1)
+#URL:=$(shell curl -s -L 'https://www.kicad.org/download/windows/' | sed -e 's/"/\n/g;' | grep '^https://github.com/.*/kicad-.*-x86_64.exe' | head -1)
+URL:=$(shell curl -s -L 'https://api.github.com/repos/KiCad/kicad-source-mirror/releases/latest' | grep 'browser_download_url.*x86_64.exe' | cut -f 4 -d '"' | head -1)
 VERSION:=$(shell basename $(URL) | cut -f 2 -d '-')
 PATCH:=1
 EXE:=kicad-$(VERSION)-x86_64.exe
