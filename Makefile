@@ -1,5 +1,5 @@
 PKGDIR:=$(dir $(wildcard */Makefile))
-KEEP:=3 # means 2
+KEEP:=2
 
 .PHONY: help build-all clean-all list-pkg space
 .ONESHELL:
@@ -101,7 +101,7 @@ space:
 	for d in $(PKGDIR)
 	do
 		(cd $$d; \
-			ls -t *.zip 2>/dev/null | tail -n +$(KEEP) | xargs -r rm -vf; \
+			ls -t *.zip 2>/dev/null | tail -n +$$(($(KEEP) + 1)) | xargs -r rm -vf; \
 		)
 	done
 
