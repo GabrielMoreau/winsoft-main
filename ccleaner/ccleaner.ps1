@@ -7,12 +7,12 @@ $Process = "ccleaner"
 
 # stop processus
 If (Get-Process $Process -ea 0) {
-	Stop-Process -name $Process
+	Stop-Process -Name $Process
 }
 
 
 # silent install
-.\ccsetup-__SOFTVERSION__.exe /S /L=1036 | Out-Null
+.\ccsetup-__VERSION__.exe /S /L=1036 | Out-Null
 
 
 # copy ini file and fix right for all user
@@ -30,9 +30,9 @@ ForEach ($ProgramPath in "${Env:ProgramFiles}\CCleaner", "${Env:ProgramFiles(x86
 
 # remove desktop shortcuts
 If (Test-Path "${Env:USERPROFILE}\Desktop\CCleaner.lnk" -PathType leaf) {
-	Remove-Item -path "${Env:USERPROFILE}\Desktop\CCleaner.lnk"
+	Remove-Item -Path "${Env:USERPROFILE}\Desktop\CCleaner.lnk"
 }
 
 If (Test-Path "C:\Users\Public\Desktop\CCleaner.lnk" -PathType leaf) {
-	Remove-Item -path "C:\Users\Public\Desktop\CCleaner.lnk"
+	Remove-Item -Path "C:\Users\Public\Desktop\CCleaner.lnk"
 }
