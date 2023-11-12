@@ -6,6 +6,8 @@ VisIt was designed to handle big data set sizes in the terascale range and small
 
 * Website : https://visit-dav.github.io/visit-website/
 * Wikipedia : https://en.wikipedia.org/wiki/VisIt
+* Forge : https://github.com/visit-dav/visit
+* Version API : https://api.github.com/repos/visit-dav/visit/releases/latest
 * Licence : bsd
 * Category : imaging
 

@@ -4,7 +4,7 @@
 #
 
 SOFT:=VisIt
-URL:=$(shell curl -s -L 'https://visit-dav.github.io/visit-website/releases-as-tables/' | sed -e 's/[[:space:]]/\n/g;' | grep '^href=.*/visit.*\.exe"' | head -1 | cut -f 2 -d '"')
+URL:=$(shell curl -sL 'https://api.github.com/repos/visit-dav/visit/releases/latest' | grep 'browser_download_url.*_x64.exe' | cut -f 4 -d '"' | head -1)
 VERSION:=$(shell basename $(URL) | cut -f 1 -d '_' | sed -e 's/^visit//;')
 PATCH:=1
 
