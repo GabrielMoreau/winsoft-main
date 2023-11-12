@@ -6,6 +6,8 @@ It features an integrated environment for schematic capture, PCB layout, manufac
 
 * Website : https://www.kicad.org
 * Wikipedia : https://en.wikipedia.org/wiki/KiCad
+* Forge : https://github.com/KiCad/kicad-source-mirror
+* Version API : https://api.github.com/repos/KiCad/kicad-source-mirror/releases/latest
 
 * Download : https://www.kicad.org/download/windows/
 * Silent install : https://silentinstallhq.com/kicad-silent-install-how-to-guide/
