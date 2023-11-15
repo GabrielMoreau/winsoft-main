@@ -44,12 +44,11 @@ version:
 checksum:
 	@mkdir -p tmp
 	@(cd tmp ; \
-		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt && exit ; \
-		shasum -a 256 "$(EXE)" | sed -e 's#tmp/##;' >> ../checksum.txt ; \
-		tail -3 ../checksum.txt ; \
+		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt  || { shasum -a 256 "$(EXE)" | sed -e 's#tmp/##;' >> ../checksum.txt ; } ; \
 		)
+	@[ $$(( $$(date '+%s') - $$(stat -c '%Y' checksum.txt) )) -lt 60 ] && tail -3 checksum.txt
 	@grep "^$(UUID):" version.txt 2> /dev/null || echo "$(UUID): $(VERSION)" >> ./version.txt
-	@tail -2 ./version.txt
+	@[ $$(( $$(date '+%s') - $$(stat -c '%Y' version.txt) )) -lt 60 ] && tail -2 version.txt
 
 wget: tmp/$(EXE)
 
