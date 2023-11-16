@@ -32,7 +32,7 @@ IF NOT EXIST "%ProgramFiles%\Npcap\npcap.cat" (
 )
 
 ECHO Silent install %softname%
-Wireshark-win64-%softversion%.exe /S
+Wireshark-%softversion%-x64.exe /S
 
 
 ECHO END %date%-%time%

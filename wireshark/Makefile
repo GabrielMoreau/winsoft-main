@@ -6,8 +6,9 @@
 SOFT:=Wireshark
 VERSION1:=$(shell curl -s -L 'https://www.wireshark.org/download.html' | sed -e 's/[<>]/\n/g' | grep 'current stable release' | cut -f 8 -d ' ' | sed -e 's/\.$$//;')
 PATCH:=1
-URL1:=$(shell curl -s -L 'https://www.wireshark.org/download.html' | sed -e 's/"/\n/g;' | egrep "/Wireshark-win64-$(VERSION1).exe")
-EXE1:=Wireshark-win64-$(VERSION1).exe
+# https://1.eu.dl.wireshark.org/win64/Wireshark-4.2.0-x64.exe
+URL1:=$(shell curl -s -L 'https://www.wireshark.org/download.html' | sed -e 's/"/\n/g;' | egrep "/Wireshark-$(VERSION1)-x64.exe")
+EXE1:=Wireshark-$(VERSION1)-x64.exe
 
 #URL2:=https://npcap.com/$(shell curl -s -L 'https://npcap.com/' | sed -e 's/"/\n/g;' | egrep '^dist/npcap-.*exe')
 #VERSION2:=$(shell echo $(URL2) | sed -e 's/\.exe//;' | cut -f 2 -d '-')
@@ -23,9 +24,9 @@ VERSION:=$(VERSION1).$(shell echo $(VERSION2) | sed -e 's/\.//g;')
 IT_TEAM:=IT Support
 
 
-.PHONY: all check-version clean control next ocs version wget checksum
+.PHONY: all check-version check-exe clean control next ocs version wget checksum
 
-all: check-version $(SOFT)-$(VERSION)-$(PATCH).zip ocs
+all: check-version check-exe $(SOFT)-$(VERSION)-$(PATCH).zip ocs
 
 sinclude ../common/global.mk
 
@@ -60,8 +61,8 @@ tmp/$(EXE1):
 	@mkdir -p tmp
 	@(cd tmp ; \
 		curl -# -o "$(EXE1)" -L "$(URL1)" ; \
-		file $(EXE1) | grep -q "Nullsoft Installer self-extracting archive" || echo "Error: bad format for binary $(EXE1)" ; \
-		which peres >/dev/null && { peres -a $(EXE1) | grep -q "^Product Version:[[:space:]]*$(VERSION1)" || echo "Error: bad version for binary $(EXE1)" ; } ; \
+		# file $(EXE1) | grep -q "Nullsoft Installer self-extracting archive" || echo "Error: bad format for binary $(EXE1)" ; \
+		# which peres >/dev/null && { peres -a $(EXE1) | grep -q "^Product Version:[[:space:]]*$(VERSION1)" || echo "Error: bad version for binary $(EXE1)" ; } ; \
 		grep -q "^$$(shasum -a 256 $(EXE1))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE1)" ; \
 		)
 
@@ -69,9 +70,19 @@ tmp/$(EXE2):
 	@mkdir -p tmp
 	@(cd tmp ; \
 		curl -# -o "$(EXE2)" -L "$(URL2)" ; \
-		file $(EXE2) | grep -q "MSI Installer.*Subject: Win10Pcap" || echo "Error: bad format for binary $(EXE2)" ; \
+		# file $(EXE2) | grep -q "MSI Installer.*Subject: Win10Pcap" || echo "Error: bad format for binary $(EXE2)" ; \
 		#which peres >/dev/null && { peres -a $(EXE2) | grep -q "^Product Version:[[:space:]]*$(VERSION2)" || echo "Error: bad version for binary $(EXE2)" ; } ; \
 		grep -q "^$$(shasum -a 256 $(EXE2))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE2)" ; \
+		)
+
+check-exe: tmp/$(EXE1) tmp/$(EXE2)
+	@(cd tmp ; \
+		file $(EXE1) | grep -q "Nullsoft Installer self-extracting archive" || { echo "Error: bad format for binary $(EXE1)" 1>&2 ; exit 1; } ; \
+		which peres >/dev/null && { peres -a $(EXE1) | grep -q "^Product Version:[[:space:]]*$(VERSION1)" || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 1; } ; } ;\
+		)
+	@(cd tmp ; \
+		file $(EXE2) | grep -q "MSI Installer.*Subject: Win10Pcap" || { echo "Error: bad format for binary $(EXE2)" 1>&2 ; exit 1; } ; \
+		#which peres >/dev/null && { peres -a $(EXE1) | grep -q "^Product Version:[[:space:]]*$(VERSION1)" || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 1; } ; } ;\
 		)
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE1) tmp/$(EXE2)
