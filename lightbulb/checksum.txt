@@ -1,2 +1,3 @@
 cd35ab2423321e6926f903d8da750f05f687f97e7fdc516a786f7f80a35a1510  LightBulb-Installer-2.4.5.exe
 9da0d39d190407dd3546229e1207fa5b94c6c7a27ee01d27c0ac15f75129c146  LightBulb-Installer-2.4.6.exe
+e5e2cc9da1a80deafbe4e0f7ea8ff89fa0e8a73fa4f1662af9820fac7d746706  LightBulb-Installer-2.4.7.exe
