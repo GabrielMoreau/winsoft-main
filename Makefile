@@ -1,7 +1,8 @@
 PKGDIR:=$(dir $(wildcard */Makefile))
 KEEP:=2
+SHELL:=/bin/bash
 
-.PHONY: help build-all clean-all list-pkg space
+.PHONY: help build-all clean-all list-pkg list-version list-md space version
 .ONESHELL:
 
 help:
@@ -60,6 +61,15 @@ checksum-all:
 		echo "#=== $$d ===#"
 		(cd $$d; grep -q '^checksum:' Makefile && make checksum)
 	done
+
+last-checksum:
+	@
+	while read zip
+	do
+		d=$$(dirname $$zip)
+		echo "#=== $$d ===#"
+		(cd $$d; grep -q '^checksum:' Makefile && make checksum)
+	done < <(find . -maxdepth 2 -name '*.zip' -a -mtime -1 -not -path '*/tmp/*' -print)
 
 list-pkg:
 	@
