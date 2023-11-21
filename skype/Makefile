@@ -4,9 +4,9 @@
 #
 
 SOFT:=Skype
-VERSION:=$(shell basename $$(curl 'https://get.skype.com/go/getskype-skypeforwindows' -s -L -I -o /dev/null -w '%{url_effective}') .exe | cut -f 2 -d '-')
+URL:=$(shell curl 'https://get.skype.com/go/getskype-skypeforwindows' -s -L -I -o /dev/null -w '%{url_effective}')
+VERSION:=$(shell basename $(URL) .exe | cut -f 2 -d '-')
 PATCH:=1
-URL:=https://download.skype.com/s4l/download/win/Skype-$(VERSION).exe
 
 EXE:=Skype-$(VERSION).exe
 
@@ -30,13 +30,12 @@ version:
 	@echo "URL: $(URL)"
 	@echo "EXE: $(EXE)"
 
-checksum:
+checksum: tmp/$(EXE)
 	@mkdir -p tmp
 	@(cd tmp ; \
-		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt && exit ; \
-		shasum -a 256 "$(EXE)" | sed -e 's#tmp/##;' >> ../checksum.txt ; \
-		tail -3 ../checksum.txt ; \
+		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || { shasum -a 256 "$(EXE)" | sed -e 's#tmp/##;' >> ../checksum.txt ; } ; \
 		)
+	@if [ $$(( $$(date '+%s') - $$(stat -c '%Y' checksum.txt) )) -lt 60 ]; then tail -3 checksum.txt; fi
 
 wget: tmp/$(EXE)
 
