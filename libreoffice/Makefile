@@ -21,9 +21,9 @@ URL_HELP:=$(shell curl -s "https://download.documentfoundation.org/libreoffice/s
 IT_TEAM:=IT Support
 
 
-.PHONY: all check-version clean control next ocs version wget checksum
+.PHONY: all check-version check-exe1 check-exe2 clean control next ocs version wget checksum
 
-all: check-version $(SOFT)-$(VERSION)-$(PATCH).zip ocs
+all: check-version check-exe1 check-exe2 $(SOFT)-$(VERSION)-$(PATCH).zip ocs
 
 sinclude ../common/global.mk
 
@@ -55,8 +55,14 @@ tmp/$(EXE_LO):
 	@(cd tmp ; \
 		rm -f *_Win_x86-64.msi 2>/dev/null ; \
 		curl -# -o "$(EXE_LO)" -L "$(URL_LO)" ; \
-		file "$(EXE_LO)" | grep -q "Author: The Document Foundation.*$(VERSION)" || echo "Error: bad format for binary $(EXE_LO)" ; \
+		#file "$(EXE_LO)" | grep -q "Author: The Document Foundation.*$(VERSION)" || echo "Error: bad format for binary $(EXE_LO)" ; \
 		grep -q "^$$(shasum -a 256 $(EXE_LO))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE_LO)" ; \
+		)
+		
+check-exe1: tmp/$(EXE_LO)
+	@(cd tmp ; \
+		file $(EXE_LO) | grep -q "Author: The Document Foundation.*$(VERSION)" || { echo "Error: bad format for binary $(EXE_LO)" 1>&2 ; exit 1; } ; \
+		#which peres >/dev/null && { peres -a $(EXE) | grep -q "^Product Version:[[:space:]]*$(PVERSION)" || { echo "Error: bad format for binary $(EXE_LO)" 1>&2 ; exit 1; } ; } ;\
 		)
 
 tmp/$(EXE_HELP):
@@ -64,15 +70,19 @@ tmp/$(EXE_HELP):
 	@(cd tmp ; \
 		rm -f *_helppack_fr.msi 2>/dev/null ; \
 		curl -# -o "$(EXE_HELP)" -L "$(URL_HELP)" ; \
-		file "$(EXE_HELP)" | grep -q "Author: The Document Foundation.*$(VERSION)" || echo "Error: bad format for binary $(EXE_HELP)" ; \
+		#file "$(EXE_HELP)" | grep -q "Author: The Document Foundation.*$(VERSION)" || echo "Error: bad format for binary $(EXE_HELP)" ; \
 		grep -q "^$$(shasum -a 256 $(EXE_HELP))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE_HELP)" ; \
+		)
+		
+check-exe2: tmp/$(EXE_HELP)
+	@(cd tmp ; \
+		file $(EXE_HELP) | grep -q "Author: The Document Foundation.*$(VERSION)" || { echo "Error: bad format for binary $(EXE_HELP)" 1>&2 ; exit 1; } ; \
+		#which peres >/dev/null && { peres -a $(EXE) | grep -q "^Product Version:[[:space:]]*$(PVERSION)" || { echo "Error: bad format for binary $(EXE_LO)" 1>&2 ; exit 1; } ; } ;\
 		)
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE_LO)
 	@mkdir -p tmp
-	@perl -p -e ' \
-		s/__VERSION__/$(VERSION)/; \
-		s/__PATCH__/$(PATCH)/;' install.bat > $@
+	@sed -e 's/__VERSION__/$(VERSION)/; s/__PATCH__/$(PATCH)/;' install.bat > $@
 
 %.zip: Makefile tmp/install.bat tmp/$(EXE_LO) tmp/$(EXE_HELP)
 	@rm -f $@
