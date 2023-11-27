@@ -57,15 +57,15 @@ tmp/$(EXE):
 	@(cd tmp ; \
 		find ./ -name '*.msi' -a -not -name "$(INSTALLER)" -a -not -name "$(EXE)" -delete ; \
 		cmp $(INSTALLER) $(EXE) > /dev/null 2>&1 || cp -f $(INSTALLER) $(EXE) ; \
-		# file $(EXE) | grep -q "MSI Installer.*Comments: $(VERSION)" || echo "Error: bad format for binary $(EXE)" ; \
+		# file $(EXE) | grep -q "MSI Installer.*Comments: $(VERSION)" || echo "Error: bad format or version for binary $(EXE)" ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
 	@grep -q "^$(UUID): $(VERSION)$$" version.txt 2> /dev/null  || echo "Error: bad UUID for version $(VERSION) in version.txt"
 
 check-exe: tmp/$(EXE)
 	@(cd tmp ; \
-		file $(EXE) | grep -q "MSI Installer.*Comments: $(VERSION)" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 1; } ; \
-		# which peres >/dev/null && { peres -a $(EXE) | grep -q "^Product Version:[[:space:]]*$(VERSION)" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 1; } ; } ;\
+		file $(EXE) | grep -q "MSI Installer.*Comments: $(VERSION)" || { echo "Error: bad format or version for binary $(EXE)" 1>&2 ; exit 1; } ; \
+		# which peres >/dev/null && { peres -a $(EXE) | grep -q "^Product Version:[[:space:]]*$(VERSION)" || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 1; } ; } ;\
 		)
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE)

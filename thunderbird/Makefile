@@ -45,13 +45,13 @@ tmp/$(EXE):
 	@(cd tmp ; \
 		rm -f *.exe *.msi 2>/dev/null ; \
 		curl -# -o "$(EXE)" -L "$(URL)" ; \
-		#file $(EXE) | grep -q "Subject: Mozilla Thunderbird $(VERSION) x64" || echo "Error: bad format for binary $(EXE)" ; \
+		#file $(EXE) | grep -q "Subject: Mozilla Thunderbird $(VERSION) x64" || echo "Error: bad format or version for binary $(EXE)" ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
 
 check-exe: tmp/$(EXE)
 	@(cd tmp ; \
-		file $(EXE) | grep -q "Subject: Mozilla Thunderbird $(VERSION) x64" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 1; } ; \
+		file $(EXE) | grep -q "Subject: Mozilla Thunderbird $(VERSION) x64" || { echo "Error: bad format or version for binary $(EXE)" 1>&2 ; exit 1; } ; \
 		)
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE)

@@ -45,12 +45,12 @@ tmp/$(EXE):
 	@(cd tmp ; \
 		rm -f *.exe *.msi 2>/dev/null ; \
 		curl -# -o "$(EXE)" -L "$(URL)" ; \
-		file $(EXE) | grep -q "Subject: VeraCrypt $(VERSION) 64-bit MSI Installer" || echo "Error: bad format for binary $(EXE)" ; \
+		file $(EXE) | grep -q "Subject: VeraCrypt $(VERSION) 64-bit MSI Installer" || echo "Error: bad format or version for binary $(EXE)" ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
 
 check-exe: tmp/$(EXE)
-	@cd tmp; file $(EXE) | grep -q "Subject: VeraCrypt $(VERSION) 64-bit MSI Installer" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 1; }
+	@cd tmp; file $(EXE) | grep -q "Subject: VeraCrypt $(VERSION) 64-bit MSI Installer" || { echo "Error: bad format or version for binary $(EXE)" 1>&2 ; exit 1; }
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp

@@ -60,7 +60,7 @@ check-exe: tmp/BalenaEtcher/balenaEtcher.exe
 	@(cd tmp; \
 		file $(EXE) | grep -q "Zip archive data" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 1; }; \
 		file 'BalenaEtcher/balenaEtcher.exe' | grep -q "PE32+ executable" || { echo "Error: bad format for binary BalenaEtcher/balenaEtcher.exe" 1>&2 ; exit 1; }; \
-		which peres >/dev/null && { peres -a 'BalenaEtcher/balenaEtcher.exe' | grep -q "^Product Version:[[:space:]]*$(VERSION)" || { echo "Error: bad format for binary BalenaEtcher/balenaEtcher.exe" 1>&2 ; exit 1; } ; } ;\
+		which peres >/dev/null && { peres -a 'BalenaEtcher/balenaEtcher.exe' | grep -q "^Product Version:[[:space:]]*$(VERSION)" || { echo "Error: bad version for binary BalenaEtcher/balenaEtcher.exe" 1>&2 ; exit 1; } ; } ;\
 		)
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE)

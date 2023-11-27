@@ -45,7 +45,7 @@ tmp/$(EXE):
 	@(cd tmp ; \
 		rm -f *.exe *.msi 2>/dev/null ; \
 		curl -# -o "$(EXE)" -L "$(URL)" ; \
-		file $(EXE) | grep -q "MSI Installer.*SubVersion Source Control, v$(VERSION)" || echo "Error: bad format for binary $(EXE)" ; \
+		file $(EXE) | grep -q "MSI Installer.*SubVersion Source Control, v$(VERSION)" || echo "Error: bad format or version for binary $(EXE)" ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
 
