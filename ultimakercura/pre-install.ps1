@@ -29,12 +29,14 @@ Function ToVersion {
 
 		If ($($App.UninstallString) -match 'MsiExec.exe') {
 			$Exe = 'msiexec.exe'
-			#$UninstallSplit = $App.UninstallString -Split "/I"
-			#$Args = '/x "' + $UninstallSplit[1].Trim() + '" /qn /norestart'
 			$Args = '/x "' + $KeyProduct + '" /qn /norestart'
-			Write-Output "Remove: $DisplayName / $DisplayVersion / $KeyProduct / $Exe $Args"
+		} ElseIf ($DisplayName -match 'Uninstall.exe') {
+			$UninstallSplit = $App.UninstallString -Split "exe"
+			$Exe = $UninstallSplit[0] + 'exe"'
+			$Args = '/S'
 		} Else { Return }
 
+		Write-Output "Remove: $DisplayName / $DisplayVersion / $KeyProduct / $Exe $Args"
 		$Proc = Start-Process -FilePath "$Exe" -ArgumentList "$Args" -WindowStyle 'Hidden' -ErrorAction 'SilentlyContinue' -PassThru
 
 		$Timeouted = $Null # Reset any previously set timeout
