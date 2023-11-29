@@ -26,13 +26,13 @@ build-all:
 		echo "#=== $$d ===#"
 		(cd $$d; \
 			make > .make.log; \
-			[ $$(find . -maxdepth 1 -name '*.zip' -a -mtime -1 -not -path '*/tmp/*' -print | wc -l) -gt 0 ] && cat .make.log; \
+			[ $$(LANG=C find . -maxdepth 1 -name '*.zip' -a -mtime -0.5 -not -path '*/tmp/*' -print | wc -l) -gt 0 ] && cat .make.log; \
 		)
 	done
 	echo ''
-	echo '#=====================================================================#'
-	echo '#=== Summary: packages created on this last day ('$$(date '+%Y-%m-%d %H:%M')') ===#'
-	find . -maxdepth 2 -name '*.zip' -a -mtime -1 -not -path '*/tmp/*' -exec ls -ltr {} \+
+	echo '#===================================================================#'
+	echo '#=== Summary: packages created since 12 hours ('$$(date '+%Y-%m-%d %H:%M')') ===#'
+	LANG=C find . -maxdepth 2 -name '*.zip' -a -mtime -0.5 -not -path '*/tmp/*' -exec ls -ltr {} \+
 
 clean-all:
 	@
@@ -69,7 +69,7 @@ last-checksum:
 		d=$$(dirname $$zip)
 		echo "#=== $$d ===#"
 		(cd $$d; grep -q '^checksum:' Makefile && make checksum)
-	done < <(find . -maxdepth 2 -name '*.zip' -a -mtime -1 -not -path '*/tmp/*' -print)
+	done < <(LANG=C find . -maxdepth 2 -name '*.zip' -a -mtime -1.25 -not -path '*/tmp/*' -print)
 
 list-pkg:
 	@
