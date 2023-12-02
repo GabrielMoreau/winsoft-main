@@ -1,6 +1,10 @@
+# Do not change variable definition here
+# Change in include main.mk sub-makefile.
 PKGDIR:=$(dir $(wildcard */Makefile))
 KEEP:=2
 SHELL:=/bin/bash
+
+sinclude ../winsoft-conf/common/main.mk
 
 .PHONY: help build-all clean-all list-pkg list-version list-md space version
 .ONESHELL:
