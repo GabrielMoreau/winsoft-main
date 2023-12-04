@@ -115,7 +115,8 @@ space:
 	for d in $(PKGDIR)
 	do
 		(cd $$d; \
-			ls -t *.zip 2>/dev/null | tail -n +$$(($(KEEP) + 1)) | xargs -r rm -vf; \
+			ls -t *.zip 2>/dev/null | grep -v 'Uninstall' | tail -n +$$(($(KEEP) + 1)) | xargs -r rm -vf; \
+			ls -t *.zip 2>/dev/null | grep    'Uninstall' | tail -n +$$(($(KEEP) + 1)) | xargs -r rm -vf; \
 		)
 	done
 
