@@ -4,8 +4,7 @@
 #
 
 SOFT:=Chrome
-#VERSION:=$(shell curl -s -L 'https://versionhistory.googleapis.com/v1/chrome/platforms/win/channels/stable/versions' | grep '"version":' | head -1 | cut -f 4 -d '"')
-VERSION:=$(shell curl -s -L https://omahaproxy.appspot.com/json | sed -e 's/{/\n/g;' | grep '"os": "win64"' | grep '"channel": "stable"' | sed -e 's/,/\n/g' | grep '"current_version":' |cut -f 4 -d'"')
+VERSION:=$(shell curl -s -L 'https://versionhistory.googleapis.com/v1/chrome/platforms/win64/channels/stable/versions/all/releases?filter=endtime=none' | grep '"version":' | head -1 | cut -f 4 -d '"')
 PATCH:=1
 URL:=https://dl.google.com/chrome/install/googlechromestandaloneenterprise64.msi
 
