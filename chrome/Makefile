@@ -4,7 +4,7 @@
 #
 
 SOFT:=Chrome
-VERSION:=$(shell curl -s -L 'https://versionhistory.googleapis.com/v1/chrome/platforms/win64/channels/stable/versions/all/releases?filter=endtime=none' | grep '"version":' | head -1 | cut -f 4 -d '"')
+VERSION:=$(shell curl -s -L 'https://versionhistory.googleapis.com/v1/chrome/platforms/win64/channels/stable/versions/all/releases?filter=endtime=none' | grep '"version":' | cut -f 4 -d '"' | sort -V | tail -1)
 PATCH:=1
 URL:=https://dl.google.com/chrome/install/googlechromestandaloneenterprise64.msi
 
@@ -13,9 +13,9 @@ EXE:=googlechromestandaloneenterprise64-$(VERSION).msi
 IT_TEAM:=IT Support
 
 
-.PHONY: all check-version clean control next ocs version wget checksum
+.PHONY: all check-version check-exe clean control next ocs version wget checksum
 
-all: check-version $(SOFT)-$(VERSION)-$(PATCH).zip ocs
+all: check-version check-exe $(SOFT)-$(VERSION)-$(PATCH).zip ocs
 
 sinclude ../common/global.mk
 
@@ -29,6 +29,7 @@ version:
 	@echo "VERSION: $(VERSION)"
 	@echo "URL: $(URL)"
 	@echo "EXE: $(EXE)"
+	@echo "ZIP: $(SOFT)-$(VERSION)-$(PATCH).zip"
 
 checksum:
 	@mkdir -p tmp
@@ -45,8 +46,14 @@ tmp/$(EXE):
 	@(cd tmp ; \
 		rm -f *.exe *.msi 2>/dev/null ; \
 		curl -# -o "$(EXE)" -L "$(URL)" ; \
-		file $(EXE) | grep -q "Subject: Google Chrome Installer.*Comments: $(VERSION) Copyright" || echo "Error: bad format or version for binary $(EXE)" ; \
+		#file $(EXE) | grep -q "Subject: Google Chrome Installer.*Comments: $(VERSION) Copyright" || echo "Error: bad format or version for binary $(EXE)" ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
+		)
+
+check-exe: tmp/$(EXE)
+	@(cd tmp ; \
+		file $(EXE) | grep -q "Subject: Google Chrome Installer" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 1; } ; \
+		file $(EXE) | grep -q "Comments: $(VERSION) Copyright"   || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 1; } ; \
 		)
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE)
