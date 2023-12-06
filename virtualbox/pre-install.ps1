@@ -13,7 +13,7 @@ $ToDo = 'unknown'
 			#Write-Output "# $DisplayName / $DisplayVersion / $KeyProduct"
 
 			If ($DisplayName -match '2015-2019.*x64') {
-				If ($DisplayVersion -lt [version]'14.29.30139.0') {
+				If ($DisplayVersion -lt [version]'14.29.30153.0') {
 					If ($ToDo -eq 'unknown') {
 						$ToDo = 'install-2019'
 					}
@@ -23,7 +23,7 @@ $ToDo = 'unknown'
 			}
 
 			ElseIf ($DisplayName -match '2015-2022.*x64') {
-				If ($DisplayVersion -lt [version]'14.36.32532.0') {
+				If ($DisplayVersion -lt [version]'14.38.33130.0') {
 					If ($ToDo -eq 'unknown') {
 						$ToDo = 'install-2022'
 					}

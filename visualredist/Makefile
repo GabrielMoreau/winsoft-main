@@ -4,7 +4,7 @@
 #
 
 SOFT:=VisualCPPRedistributable
-VERSION:=1.6
+VERSION:=1.7
 PATCH:=1
 
 IT_TEAM:=IT Support
