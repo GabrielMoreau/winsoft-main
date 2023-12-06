@@ -26,3 +26,5 @@ Return
 # Microsoft Visual C++ 2010  x86 Redistributable - 10.0.40219        / 10.0.40219     / {F0C3E5D1-1ADE-321E-8167-68EF0DE699A5} / MsiExec.exe /X{F0C3E5D1-1ADE-321E-8167-68EF0DE699A5}
 # Microsoft Visual C++ 2015-2019 Redistributable (x86) - 14.29.30139 / 14.29.30139.0  / {8d5fdf81-7022-423f-bd8b-b513a1050ae1} / "C:\ProgramData\Package Cache\{8d5fdf81-7022-423f-bd8b-b513a1050ae1}\VC_redist.x86.exe"  /uninstall
 # Microsoft Visual C++ 2015-2022 Redistributable (x64) - 14.34.31938 / 14.34.31938.0  / {d92971ab-f030-43c8-8545-c66c818d0e05} / "C:\ProgramData\Package Cache\{d92971ab-f030-43c8-8545-c66c818d0e05}\VC_redist.x64.exe"  /uninstall
+# Microsoft Visual C++ 2015-2022 Redistributable (x64) - 14.38.33130 / 14.38.33130.0  / {1de5e707-82da-4db6-b810-5d140cc4cbb3} / "C:\ProgramData\Package Cache\{1de5e707-82da-4db6-b810-5d140cc4cbb3}\VC_redist.x64.exe"  /uninstall
+# Microsoft Visual C++ 2015-2022 Redistributable (x86) - 14.38.33130 / 14.38.33130.0  / {2cfeba4a-21f8-4ea7-9927-c5a5c6f13cc9} / "C:\ProgramData\Package Cache\{2cfeba4a-21f8-4ea7-9927-c5a5c6f13cc9}\VC_redist.x86.exe"  /uninstall
