@@ -68,12 +68,11 @@ checksum-all:
 
 last-checksum:
 	@
-	while read zip
+	while read folder
 	do
-		d=$$(dirname $$zip)
-		echo "#=== $$d ===#"
-		(cd $$d; grep -q '^checksum:' Makefile && make checksum)
-	done < <(LANG=C find . -maxdepth 2 -name '*.zip' -a -mtime -1.25 -not -path '*/tmp/*' -print)
+		echo "#=== $$folder ===#"
+		(cd $$folder; grep -q '^checksum:' Makefile && make checksum)
+	done < <(LANG=C find . -maxdepth 2 -name '*.zip' -a -mtime -1.25 -not -path '*/tmp/*' -print | xargs -r dirname  | sort -u)
 
 list-pkg:
 	@
