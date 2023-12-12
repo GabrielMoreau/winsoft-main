@@ -13,7 +13,7 @@ $RefVersion = '__VERSION__'
 
 		$DisplayVersion = $App.DisplayVersion
 		$KeyProduct = $Key | Split-Path -Leaf
-		
+
 		If ($DisplayVersion -ge [version]$RefVersion) { Return }
 
 		If ($($App.UninstallString) -match 'MsiExec.exe') {

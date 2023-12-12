@@ -5,7 +5,7 @@ $RefVersion = '91.5.1'
 $RefUninstallString = ''
 
 @(Get-ChildItem -Recurse 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall';
-  Get-ChildItem -Recurse "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall") | 
+  Get-ChildItem -Recurse "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall") |
 	Where { $_.Name -match 'digiKam' } |
 	ForEach {
 		$App = (Get-ItemProperty -Path $_.PSPath)
@@ -22,7 +22,7 @@ $RefUninstallString = ''
 
 If ($RefUninstallString -ne '') {
 	@(Get-ChildItem -Recurse 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall';
-	  Get-ChildItem -Recurse "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall") | 
+	  Get-ChildItem -Recurse "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall") |
 		Where { $_.Name -match 'digiKam' } |
 		ForEach {
 			$App = (Get-ItemProperty -Path $_.PSPath)

@@ -44,7 +44,7 @@ ECHO Execute pre-install script
 
 
 ECHO Silent install %softname%
-msiexec /i "%softexe%" ALLUSERS=1 /qn /L*v "%logdir%\%softname%-MSI.log" 
+msiexec /i "%softexe%" ALLUSERS=1 /qn /L*v "%logdir%\%softname%-MSI.log"
 
 
 ECHO END %date%-%time%

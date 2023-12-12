@@ -12,7 +12,7 @@ $RefName = 'PuTTY release'
 
 		$DisplayVersion = $App.DisplayVersion
 		$KeyProduct = $Key | Split-Path -Leaf
-		
+
 		$Args = '/x "' + $KeyProduct + '" /qn'
 		Write-Output "Remove: $DisplayName / $DisplayVersion / $KeyProduct / $($App.UninstallString)"
 

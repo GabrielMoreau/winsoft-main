@@ -7,7 +7,7 @@ SOFT:=OBS-Studio
 URL:=$(shell curl -s -L 'https://obsproject.com/fr/download' | sed -e 's/>/\n/g;' | sed -e 's/"/\n/g;' | egrep '^https://.*/OBS-Studio-.*-Full-Installer-x64.exe$$')
 VERSION:=$(shell basename $(URL) | cut -f 3 -d '-')
 PATCH:=1
- 
+
 EXE:=OBS-Studio-$(VERSION)-Full-Installer-x64.exe
 
 VCREDIST:=

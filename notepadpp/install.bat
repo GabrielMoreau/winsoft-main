@@ -34,7 +34,7 @@ IF EXIST "%ProgramFiles%\Notepad++\uninstall.exe" (
   "%ProgramFiles%\Notepad++\uninstall.exe" /S
 )
 
-SET /A LOOPCOUNT=0 
+SET /A LOOPCOUNT=0
 :WAIT
 SET /A LOOPCOUNT+=1
 IF %LOOPCOUNT% GEQ 31 (

@@ -30,6 +30,6 @@ ECHO Remove desktop shortcut
 IF EXIST "%PUBLIC%\Desktop\Speccy.lnk"          DEL /F /Q "%PUBLIC%\Desktop\Speccy.lnk"
 IF EXIST "%ALLUSERSPROFILE%\Desktop\Speccy.lnk" DEL /F /Q "%ALLUSERSPROFILE%\Desktop\Speccy.lnk"
 
- 
+
 ECHO END %date%-%time%
 EXIT

@@ -35,4 +35,4 @@ $RefName = 'Gwyddion'
 		}
 	}
 
-# HKLM	Gwyddion	Gwyddion developers	2.64.win64	Gwyddion	C:\Program Files\Gwyddion\uninstall.exe	
+# HKLM	Gwyddion	Gwyddion developers	2.64.win64	Gwyddion	C:\Program Files\Gwyddion\uninstall.exe

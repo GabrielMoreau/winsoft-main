@@ -30,6 +30,6 @@ ECHO Remove desktop shortcut
 IF EXIST "%PUBLIC%\Desktop\Recuva.lnk"          DEL /F /Q "%PUBLIC%\Desktop\Recuva.lnk"
 IF EXIST "%ALLUSERSPROFILE%\Desktop\Recuva.lnk" DEL /F /Q "%ALLUSERSPROFILE%\Desktop\Recuva.lnk"
 
- 
+
 ECHO END %date%-%time%
 EXIT

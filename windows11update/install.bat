@@ -23,7 +23,7 @@ SET softpatch=__PATCH__
 
 
 ECHO Silent install %softname%
-Windows11InstallationAssistant-%softversion%.exe /QuietInstall /SkipEULA /NoRestartUI 
+Windows11InstallationAssistant-%softversion%.exe /QuietInstall /SkipEULA /NoRestartUI
 
 
 ECHO END %date%-%time%

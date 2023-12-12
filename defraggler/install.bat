@@ -30,6 +30,6 @@ ECHO Remove desktop shortcut
 IF EXIST "%PUBLIC%\Desktop\Defraggler.lnk"          DEL /F /Q "%PUBLIC%\Desktop\Defraggler.lnk"
 IF EXIST "%ALLUSERSPROFILE%\Desktop\Defraggler.lnk" DEL /F /Q "%ALLUSERSPROFILE%\Desktop\Defraggler.lnk"
 
- 
+
 ECHO END %date%-%time%
 EXIT

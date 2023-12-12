@@ -28,7 +28,7 @@ New-PSDrive -PSProvider 'Registry' -Name 'HKU' -Root 'HKEY_USERS' -ErrorAction '
 
 		$DisplayVersion = $App.DisplayVersion
 		$KeyProduct = $Key | Split-Path -Leaf
-		
+
 		If ((ToVersion($DisplayVersion)) -ge (ToVersion($RefVersion))) { Return }
 
 		If ($($App.UninstallString) -match 'balenaEtcher.exe"') {

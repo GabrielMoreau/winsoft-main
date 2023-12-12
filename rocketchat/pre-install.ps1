@@ -14,7 +14,7 @@ $RefName = 'Rocket.Chat'
 
 		$DisplayVersion = $App.DisplayVersion
 		$KeyProduct = $Key | Split-Path -Leaf
-		
+
 		$UninstallSplit = $App.UninstallString -Split "/I"
 		$Args = '/x "' + $UninstallSplit[1].Trim() + '" /qn'
 		Write-Output "Remove: $DisplayName / $DisplayVersion / $KeyProduct / $Args"

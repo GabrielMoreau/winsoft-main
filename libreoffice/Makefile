@@ -58,7 +58,7 @@ tmp/$(EXE_LO):
 		#file "$(EXE_LO)" | grep -q "Author: The Document Foundation.*$(VERSION)" || echo "Error: bad format or version for binary $(EXE_LO)" ; \
 		grep -q "^$$(shasum -a 256 $(EXE_LO))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE_LO)" ; \
 		)
-		
+	
 check-exe1: tmp/$(EXE_LO)
 	@(cd tmp ; \
 		file $(EXE_LO) | grep -q "Author: The Document Foundation.*$(VERSION)" || { echo "Error: bad format or version for binary $(EXE_LO)" 1>&2 ; exit 1; } ; \
@@ -73,7 +73,7 @@ tmp/$(EXE_HELP):
 		#file "$(EXE_HELP)" | grep -q "Author: The Document Foundation.*$(VERSION)" || echo "Error: bad format or version for binary $(EXE_HELP)" ; \
 		grep -q "^$$(shasum -a 256 $(EXE_HELP))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE_HELP)" ; \
 		)
-		
+
 check-exe2: tmp/$(EXE_HELP)
 	@(cd tmp ; \
 		file $(EXE_HELP) | grep -q "Author: The Document Foundation.*$(VERSION)" || { echo "Error: bad format or version for binary $(EXE_HELP)" 1>&2 ; exit 1; } ; \

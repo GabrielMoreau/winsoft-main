@@ -37,7 +37,7 @@ GOTO NEXT
 
 :WIN11
 ECHO Windows 11 update
-Windows11InstallationAssistant-__VERSION11__.exe /QuietInstall /SkipEULA /NoRestartUI 
+Windows11InstallationAssistant-__VERSION11__.exe /QuietInstall /SkipEULA /NoRestartUI
 GOTO NEXT
 
 
