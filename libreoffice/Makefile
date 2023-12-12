@@ -58,7 +58,7 @@ tmp/$(EXE_LO):
 		#file "$(EXE_LO)" | grep -q "Author: The Document Foundation.*$(VERSION)" || echo "Error: bad format or version for binary $(EXE_LO)" ; \
 		grep -q "^$$(shasum -a 256 $(EXE_LO))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE_LO)" ; \
 		)
-	
+
 check-exe1: tmp/$(EXE_LO)
 	@(cd tmp ; \
 		file $(EXE_LO) | grep -q "Author: The Document Foundation.*$(VERSION)" || { echo "Error: bad format or version for binary $(EXE_LO)" 1>&2 ; exit 1; } ; \
