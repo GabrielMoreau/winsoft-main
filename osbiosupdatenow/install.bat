@@ -31,8 +31,8 @@ IF %ERRORLEVEL%==0 GOTO WIN11
 
 :WIN10
 ECHO Windows 10 update
-REM UsoClient ScanInstallWait
-wuauclt /detectnow /updatenow
+UsoClient.exe ScanInstallWait
+REM wuauclt /detectnow /updatenow
 GOTO NEXT
 
 :WIN11
