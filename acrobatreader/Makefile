@@ -24,15 +24,17 @@ all: check-version check-exe $(SOFT)-$(VERSIONLONG)-$(PATCH).zip ocs
 sinclude ../../winsoft-conf/common/conf.mk
 
 check-version:
-	@echo $(VERSIONLONG) | egrep -q '^[[:digit:]][\.[:digit:]]*$$' || (echo 'VERSIONLONG is undefined' > /dev/stderr ; exit 1)
+	@echo $(VERSIONLONG) | egrep -q '^[[:digit:]][\.[:digit:]]*[[[:alnum:]]$$' || (echo 'VERSIONLONG is undefined' > /dev/stderr ; exit 1)
 
 clean:
 	rm -rf $(SOFT)-$(VERSIONLONG)-$(PATCH).zip tmp resources
 
 version:
 	@echo "VERSION:         $(VERSIONLONG)"
+	@echo "VERSIONLONG:     $(VERSIONLONG)"
 	@echo "VERSIONCOLLAPSE: $(VERSIONCOLLAPSE)"
 	@echo "VERSIONSHORT:    $(VERSIONSHORT)"
+	@echo "URLTRANSIT: $(URLTRANSIT)"
 	@echo "URL: $(URL)"
 	@echo "EXE: $(EXE)"
 
