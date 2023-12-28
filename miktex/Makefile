@@ -4,18 +4,22 @@
 #
 
 SOFT:=MiKTeX
-VERSION:=$(shell curl -s -L 'https://github.com/MiKTeX/miktex/releases/latest' | sed -e 's/[[:space:]"]/\n/g;' | grep '^/MiKTeX/miktex/releases/tag/' | head -1 | xargs -r basename)
-URL:=https://miktex.org/download/win/miktexsetup-x64.zip
+# VERSION:=$(shell curl -s -L 'https://github.com/MiKTeX/miktex/releases/latest' | sed -e 's/[[:space:]"]/\n/g;' | grep '^/MiKTeX/miktex/releases/tag/' | head -1 | xargs -r basename)
+URL:=https://miktex.org/$(shell curl -s -L 'https://miktex.org/download' | sed -e "s/'/\n/g;" | grep '^/download/.*\.zip$$' | sed -e 's#^/##; s/&#x2B;/+/g;' | head -1)
+VERSIONSHORT:=$(shell basename '$(URL)' | cut -f 2 -d '-' | cut -f 1 -d '+')
+VERSION:=$(shell basename '$(URL)' | cut -f 2 -d '-' | sed -e 's/+/./g;')
 PATCH:=1
+# https://miktex.org/download/ctan/systems/win32/miktex/setup/windows-x64/miktexsetup-5.5.0+1763023-x64.zip
+# https://ctan.tetaneutral.net/systems/win32/miktex/setup/windows-x64/miktexsetup-5.5.0+1763023-x64.zip
 
-ZIP:=miktexsetup-x64.zip
+ZIP:=miktexsetup-$(VERSION)-x64.zip
 EXE:=miktexsetup-standalone-$(VERSION).exe
 
 IT_TEAM:=IT Support
 
-.PHONY: all check-version clean control next ocs version wget checksum
+.PHONY: all check-version check-exe check-exe2 clean control next ocs version wget checksum
 
-all: check-version $(SOFT)-$(VERSION)-$(PATCH).zip ocs
+all: check-version check-exe check-exe2 $(SOFT)-$(VERSION)-$(PATCH).zip ocs
 
 sinclude ../common/global.mk
 
@@ -27,6 +31,7 @@ clean:
 
 version:
 	@echo "VERSION: $(VERSION)"
+	@echo "VERSIONSHORT: $(VERSIONSHORT)"
 	@echo "URL: $(URL)"
 	@echo "EXE: $(EXE)"
 
@@ -40,17 +45,35 @@ checksum:
 
 wget: $(EXE)
 
-tmp/$(EXE):
+tmp/$(ZIP):
 	@mkdir -p tmp
 	@(cd tmp ; \
-		rm -f *.exe *.zip 2>/dev/null ; \
+		rm -f *.zip 2>/dev/null ; \
 		curl -# -o "$(ZIP)" -L "$(URL)" ; \
+		)
+
+check-exe2: tmp/$(ZIP)
+	@(cd tmp ; \
+		file $(ZIP) | grep -q 'Zip archive data' || { echo "Error: bad format for zip $(ZIP)" 1>&2 ; exit 1; } ; \
+		)
+
+tmp/$(EXE): check-exe2 tmp/$(ZIP)
+	@mkdir -p tmp
+	@(cd tmp ; \
+		rm -f *.exe 2>/dev/null ; \
 		unzip -q "$(ZIP)" ; \
 		mv miktexsetup_standalone.exe miktexsetup-standalone-$(VERSION).exe ; \
-		file $(EXE) | grep -q "PE32+ executable" || echo "Error: bad format for binary $(EXE)" ; \
+		#file $(EXE) | grep -q "PE32+ executable" || echo "Error: bad format for binary $(EXE)" ; \
 		# which peres >/dev/null && { peres -a $(EXE) | grep -q "^Product Version:[[:space:]]*$(VERSION)" || echo "Error: bad version for binary $(EXE)" ; } ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
+
+check-exe: tmp/$(EXE)
+	@(cd tmp ; \
+		file $(EXE) | grep -q "PE32+ executable" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 1; } ; \
+		which peres >/dev/null && { peres -a $(EXE) | grep -q "^Product Version:[[:space:]]*$(VERSIONSHORT)" || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 1; } ; } ;\
+		)
+
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
