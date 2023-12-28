@@ -9,3 +9,6 @@ Zoom Meetings is a proprietary video teleconferencing software program.
 * Configuration : https://support.zoom.us/hc/fr/articles/201362163-Installation-et-configuration-de-masse-pour-Windows
 
 Your need a configuration file `conf.yml` to specify your default zoom server at the installation.
+
+See also for version number : https://www.zoom.us/rest/download?os=win,
+	https://github.com/ScoopInstaller/Extras/blob/master/bucket/zoom.json
