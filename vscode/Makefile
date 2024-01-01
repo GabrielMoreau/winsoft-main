@@ -5,9 +5,11 @@
 
 SOFT:=VSCode
 INSTALLER:=VSCodeSetup-x64.exe
-VERSION:=$(shell peres -a tmp/$(INSTALLER) 2> /dev/null | grep '^Product Version' | awk '{print $$3}')
+URL:=$(shell curl -s 'https://code.visualstudio.com/sha?build=stable' | sed -e 's/[,{}]/\n/g;' |  grep '/VSCodeSetup-x64-' | cut -f 4 -d '"' | head -1)
+VERSION:=$(shell basename '$(URL)' | cut -f 3 -d '-' | sed -e 's/exe/0/;')
+#VERSION:=$(shell peres -a tmp/$(INSTALLER) 2> /dev/null | grep '^Product Version' | awk '{print $$3}')
 PATCH:=1
-URL:=https://code.visualstudio.com/sha/download?build=stable&os=win32-x64
+#URL:=https://code.visualstudio.com/sha/download?build=stable&os=win32-x64
 
 EXE:=VSCodeSetup-x64-$(VERSION).exe
 
@@ -16,18 +18,18 @@ IT_TEAM:=IT Support
 
 .PHONY: all check-version check-exe clean control next ocs version wget checksum
 
-all:
-	@mkdir -p tmp
-	@rm -f "tmp/$(INSTALLER)"
-	@(cd tmp; curl -s --time-cond $(INSTALLER) -o $(INSTALLER) -L "$(URL)")
-	@make next
+all: check-version check-exe $(SOFT)-$(VERSION)-$(PATCH).zip ocs
+#	@mkdir -p tmp
+#	@rm -f "tmp/$(INSTALLER)"
+#	@(cd tmp; curl -s --time-cond $(INSTALLER) -o $(INSTALLER) -L "$(URL)")
+#	@make next
 
 sinclude ../common/global.mk
 
 check-version:
 	@echo $(VERSION) | egrep -q '^[[:digit:]][\.[:digit:]]*$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
 
-next: check-version check-exe $(SOFT)-$(VERSION)-$(PATCH).zip ocs
+#next: check-version check-exe $(SOFT)-$(VERSION)-$(PATCH).zip ocs
 
 clean:
 	rm -rf $(SOFT)-$(VERSION)-$(PATCH).zip tmp resources
@@ -50,8 +52,10 @@ wget: tmp/$(EXE)
 tmp/$(EXE):
 	@mkdir -p tmp
 	@(cd tmp ; \
-		find ./ -name '*.exe' -a -not -name "$(INSTALLER)" -a -not -name "$(EXE)" -delete ; \
-		cmp $(INSTALLER) $(EXE) > /dev/null 2>&1 || cp -f $(INSTALLER) $(EXE) ; \
+		rm -f *.exe *.msi 2>/dev/null ; \
+		curl -# -o "$(EXE)" -L "$(URL)" ; \
+		#find ./ -name '*.exe' -a -not -name "$(INSTALLER)" -a -not -name "$(EXE)" -delete ; \
+		#cmp $(INSTALLER) $(EXE) > /dev/null 2>&1 || cp -f $(INSTALLER) $(EXE) ; \
 		#file $(EXE) | grep -q "PE32 executable" || echo "Error: bad format for binary $(EXE)" ; \
 		#which peres >/dev/null && { peres -a $(EXE) | grep -q "^Product Version:[[:space:]]*$(VERSION)" || echo "Error: bad version for binary $(EXE)" ; } ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
