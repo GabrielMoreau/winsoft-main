@@ -8,3 +8,4 @@ aab4a3cabc70f7c682b360d08917da501a5f8dd405137761d7f569bb395e3b6f  CitrixWorkspac
 8ee281fc3901c3d66d8161ef80bae7b2fb46ac788036845685fd9d4baecc3303  CitrixWorkspaceApp-23.7.0.15.exe
 c4a09dffd03be1454f4c184fd4ef0d8cfc0b9b6f64ff309fd03c15ad002d6052  CitrixWorkspaceApp-23.9.0.99.exe
 7bfccc86adc372fc77cb9333946a70bbfd9d75b2233ed5c68e703253865bdb74  CitrixWorkspaceApp-23.9.1.104.exe
+70d5df4d76257453cb9ae386d9a861cda45cc45c9886ee143660ecaf633414c7  CitrixWorkspaceApp-23.11.0.132.exe
