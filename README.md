@@ -33,6 +33,24 @@ make ocs
 You just have to put this Zip package on your server.
 The command to run for the installation is always `install.bat`.
 
+## References
+
+There are projects with a similar objective.
+This allows you to find installation parameters
+so that the installation is silent, for example.
+
+Here are just a few of these projects or websites with information
+that is often relevant:
+
+* [Chocolatey](https://chocolatey.org/) - [wikipedia](https://en.wikipedia.org/wiki/Chocolatey), [github](https://github.com/chocolatey/choco)
+* [WAPT](https://www.tranquil.it/) - [wikipedia](https://fr.wikipedia.org/wiki/Wapt_(logiciel))
+* [SilentInstallHQ](https://silentinstallhq.com) - [knowledge-base](https://silentinstallhq.com/silent-install-knowledge-base/)
+* [Scoop](https://github.com/ScoopInstaller/Scoop) - [wikipedia](https://en.wikipedia.org/wiki/Scoop_Package_Manager), [non-portable](https://github.com/ScoopInstaller/Nonportable)
+* [WPKG](https://wpkg.org/)
+
+There's an up-to-date list of [package managers](https://en.wikipedia.org/wiki/List_of_software_package_management_systems)
+on [Wikipedia](https://en.wikipedia.org).
+
 ## Master Target
 
 A master `Makefile` at the root of the project allows all packages to
