@@ -10,6 +10,9 @@ and you can (and should) associate it with a conf repository containing
 the configuration related to your site.
 This is only useful for certain packages.
 
+The master Git repository in on the [GRICAD Gitlab](https://gricad-gitlab.univ-grenoble-alpes.fr/legi/soft/trokata/winsoft-main).
+Other Git repository are mirror or fork.
+
 ## Package structure
 
 Each folder (except the common folder) contains a piece of software
