@@ -45,7 +45,7 @@ checksum:
 	@(cd tmp ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || { shasum -a 256 "$(EXE)" | sed -e 's#tmp/##;' >> ../checksum.txt ; } ; \
 		)
-	@[ $$(( $$(date '+%s') - $$(stat -c '%Y' checksum.txt) )) -lt 60 ] && tail -6 checksum.txt
+	@if [ $$(( $$(date '+%s') - $$(stat -c '%Y' checksum.txt) )) -lt 60 ]; then tail -6 checksum.txt; fi
 
 wget: tmp/$(RSTUDIO_EXE)
 

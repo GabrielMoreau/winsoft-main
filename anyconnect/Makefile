@@ -22,7 +22,7 @@ sinclude ../_common/conf.mk
 
 check-version:
 	@echo $(VERSION) | egrep -q '^[[:digit:]][\.[:digit:]]*$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
-	@[ "$(VERSION)" = "$(VERSIONONLINE)" ] || { echo '#'; echo "# Warning: a new version $(VERSIONONLINE) exist on Cisco website!"; echo '#'; }
+	@if [ "$(VERSION)" != "$(VERSIONONLINE)" ]; then echo '#'; echo "# Warning: a new version $(VERSIONONLINE) exist on Cisco website!"; echo '#'; fi
 
 clean:
 	rm -rf $(SOFT)-$(VERSION)-$(PATCH).zip tmp

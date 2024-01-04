@@ -46,7 +46,7 @@ checksum:
 		grep -q "^$$(shasum -a 256 $(WINFSP_EXE))$$" ../checksum.txt || { shasum -a 256 "$(WINFSP_EXE)" | sed -e 's#tmp/##;' >> ../checksum.txt ; } ; \
 		grep -q "^$$(shasum -a 256 $(SSHFS_EXE))$$" ../checksum.txt  || { shasum -a 256 "$(SSHFS_EXE)"  | sed -e 's#tmp/##;' >> ../checksum.txt ; } ; \
 		)
-	@[ $$(( $$(date '+%s') - $$(stat -c '%Y' checksum.txt) )) -lt 60 ] && tail -6 checksum.txt
+	@if [ $$(( $$(date '+%s') - $$(stat -c '%Y' checksum.txt) )) -lt 60 ]; then tail -6 checksum.txt; fi
 
 wget: winfsp-$(WINFSP_VERSION).msi sshfs-win-$(SSHFS_VERSION)-x64.msi sshfs-win-manager-setup-v$(ManagerVersion).exe SiriKali-$(SiriKaliVersion).setup.exe
 
