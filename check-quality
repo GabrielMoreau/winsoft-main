@@ -1,0 +1,20 @@
+#!/bin/bash
+#
+# check code quality
+
+
+# check unique name in checksum
+for f in $(awk '{print $2}' */checksum.txt | sort | uniq -c  | grep -v '^      1 ' | awk '{print $2}')
+do
+  if [ $(grep -h  $f */checksum.txt | sort -u | wc -l) -ne 1 ]
+  then grep $f */checksum.txt
+  fi
+done
+
+# check unique hash in checksum
+for f in $(awk '{print $1}' */checksum.txt | sort | uniq -c  | grep -v '^      1 ' | awk '{print $2}')
+do
+  if [ $(grep -h  $f */checksum.txt | sort -u | wc -l) -ne 1 ]
+  then grep $f */checksum.txt
+  fi
+done
