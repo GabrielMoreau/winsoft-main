@@ -27,7 +27,7 @@ all: check-version check-exe $(SOFT)-$(VERSION)-$(PATCH).zip ocs
 #	@(cd tmp; curl -s -o $(INSTALLER) -L "$(URL)")
 #	@make next
 
-sinclude ../common/global.mk
+sinclude ../_common/conf.mk
 
 check-version:
 	@echo $(VERSION) | egrep -q '^[[:digit:]][\.[:digit:]]*$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)

@@ -25,7 +25,7 @@ all:
 		)	#@rm -f "tmp/$(INSTALLER)"
 	@make next
 
-sinclude ../common/global.mk
+sinclude ../_common/conf.mk
 
 check-version:
 	@echo $(VERSION) | egrep -q '^[[:digit:]][\.[:digit:]]*$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)

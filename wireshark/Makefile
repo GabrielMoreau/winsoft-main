@@ -28,7 +28,7 @@ IT_TEAM:=IT Support
 
 all: check-version check-exe $(SOFT)-$(VERSION)-$(PATCH).zip ocs
 
-sinclude ../common/global.mk
+sinclude ../_common/conf.mk
 
 check-version:
 	@echo $(VERSION1) | egrep -q '^[[:digit:]][\.[:digit:]]*$$' || (echo 'VERSION1 is undefined' > /dev/stderr ; exit 1)

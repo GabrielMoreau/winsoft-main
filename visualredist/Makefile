@@ -29,7 +29,7 @@ VCREDIST+=tmp/2015-2022/vc_redist.x86.exe
 
 all: check-version $(SOFT)-$(VERSION)-$(PATCH).zip ocs
 
-sinclude ../common/global.mk
+sinclude ../_common/conf.mk
 
 check-version:
 	@echo $(VERSION) | egrep -q '^[[:digit:]][\.[:digit:]]*$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
