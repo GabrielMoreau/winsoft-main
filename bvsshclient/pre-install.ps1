@@ -25,7 +25,7 @@ Function ToVersion {
 		$DisplayVersion = $App.DisplayVersion
 		$KeyProduct = $Key | Split-Path -Leaf
 
-		If ((ToVersion($DisplayVersion)) -ge (ToVersion($RefVersion))) { Return }
+		If ((ToVersion($DisplayVersion)) -gt (ToVersion($RefVersion))) { Return }
 
 		If ($($App.UninstallString) -match 'MsiExec.exe') {
 			$Exe = 'MsiExec.exe'
