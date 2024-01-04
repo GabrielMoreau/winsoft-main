@@ -21,7 +21,7 @@ IT_TEAM:=IT Support
 
 .PHONY: all check-version clean control next ocs version wget
 
-all: check-version $(SOFT)-$(VERSION)-$(PATCH).zip ocs
+all: check-version $(SOFT)_$(VERSION)-$(PATCH)_x64.zip ocs
 
 sinclude ../_common/conf.mk
 
@@ -84,7 +84,7 @@ tmp/install.bat: install.bat Makefile tmp/$(WINFSP_EXE) tmp/$(SSHFS_EXE)
 
 ocs:
 	@echo ""
-	@echo "Name:    $(SOFT)-$(VERSION)-$(PATCH)"
+	@echo "Name:    $(SOFT)_$(VERSION)-$(PATCH)_x64"
 	@echo "Launch:  install.bat"
 	@echo "Message: yes"
 	@echo "Delay:   5"

@@ -16,7 +16,7 @@ IT_TEAM:=IT Support
 
 .PHONY: all check-version clean control next ocs version wget checksum
 
-all: check-version control $(SOFT)-$(VERSION)-$(PATCH).zip ocs
+all: check-version control $(SOFT)_$(VERSION)-$(PATCH)_x64.zip ocs
 
 sinclude ../_common/conf.mk
 
@@ -25,7 +25,7 @@ check-version:
 	@if [ "$(VERSION)" != "$(VERSIONONLINE)" ]; then echo '#'; echo "# Warning: a new version $(VERSIONONLINE) exist on Cisco website!"; echo '#'; fi
 
 clean:
-	rm -rf $(SOFT)-$(VERSION)-$(PATCH).zip tmp
+	rm -rf $(SOFT)_$(VERSION)-$(PATCH)_x64.zip tmp
 
 version:
 	@echo "VERSION: $(VERSION)"
@@ -64,7 +64,7 @@ tmp/Profile_VPN_Default.xml: Profile_VPN_Default.xml Makefile
 
 ocs:
 	@echo ""
-	@echo "Name:    $(SOFT)-$(VERSION)-$(PATCH)"
+	@echo "Name:    $(SOFT)_$(VERSION)-$(PATCH)_x64"
 	@echo "Launch:  install.bat"
 	@echo "Message: yes"
 	@echo "Delay:   5"

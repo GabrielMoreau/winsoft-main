@@ -8,7 +8,7 @@ OCS_SSL:=1
 
 SOFT:=OCSInventory-Agent
 VERSION:=$(shell curl -s -L 'https://github.com/OCSInventory-NG/WindowsAgent/releases/latest' | sed 's/</\n/g;'| grep '^meta property.*Release Agent Windows' |cut -f 6 -d ' ')
-PATCH:=5
+PATCH:=1
 URL:=https://github.com/OCSInventory-NG/WindowsAgent/releases/download/$(VERSION)/OCS-Windows-Agent-$(VERSION)_x64.zip
 FOLDER:=OCS-Windows-Agent-$(VERSION)_x64
 EXE:=OCS-Windows-Agent-Setup-$(VERSION)-x64.exe
@@ -18,7 +18,7 @@ IT_TEAM:=IT Support
 
 .PHONY: all check-version clean control next ocs version wget checksum
 
-all: check-version $(SOFT)-$(VERSION)-$(PATCH).zip ocs
+all: check-version $(SOFT)_$(VERSION)-$(PATCH)_x64.zip ocs
 
 sinclude ../_common/conf.mk
 
@@ -26,7 +26,7 @@ check-version:
 	@echo $(VERSION) | egrep -q '^[[:digit:]][\.[:digit:]]*$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
 
 clean:
-	rm -rf $(SOFT)-$(VERSION)-$(PATCH).zip tmp
+	rm -rf $(SOFT)_$(VERSION)-$(PATCH)_x64.zip tmp
 
 version:
 	@echo "VERSION: $(VERSION)"
@@ -79,7 +79,7 @@ tmp/install-outofservice.bat: install-outofservice.bat Makefile tmp/$(EXE)
 
 ocs:
 	@echo ""
-	@echo "Name:     $(SOFT)-$(VERSION)-$(PATCH)"
+	@echo "Name:     $(SOFT)_$(VERSION)-$(PATCH)_x64"
 	@echo "Launch:   install.bat"
 	@echo "Priority: *8*"
 	@echo "Message:  yes"

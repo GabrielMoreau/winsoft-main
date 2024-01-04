@@ -23,7 +23,7 @@ IT_TEAM:=IT Support
 
 .PHONY: all check-version check-exe1 check-exe2 clean control next ocs version wget checksum
 
-all: check-version check-exe1 check-exe2 $(SOFT)-$(VERSION)-$(PATCH).zip ocs
+all: check-version check-exe1 check-exe2 $(SOFT)_$(VERSION)-$(PATCH)_x64.zip ocs
 
 sinclude ../_common/conf.mk
 
@@ -31,7 +31,7 @@ check-version:
 	@echo $(VERSION) | egrep -q '^[[:digit:]][\.[:digit:]]*$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
 
 clean:
-	rm -rf $(SOFT)-$(VERSION)-$(PATCH).zip tmp
+	rm -rf $(SOFT)_$(VERSION)-$(PATCH)_x64.zip tmp
 
 version:
 	@echo "VERSION: $(VERSION)"
@@ -91,7 +91,7 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE_LO)
 
 ocs:
 	@echo ""
-	@echo "Name:    $(SOFT)-$(VERSION)-$(PATCH)"
+	@echo "Name:    $(SOFT)_$(VERSION)-$(PATCH)_x64"
 	@echo "Launch:  install.bat"
 	@echo "Message: yes"
 	@echo "Delay:   5"
