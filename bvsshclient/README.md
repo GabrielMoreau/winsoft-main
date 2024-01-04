@@ -8,4 +8,5 @@ graphical and command-line SFTP support, tunneling features.
 * Comparaison : https://en.wikipedia.org/wiki/Comparison_of_SSH_clients
 
 * Download : https://www.bitvise.com/ssh-client-download
-* Silent install : https://silentinstallhq.com/bitvise-ssh-client-silent-install-how-to-guide/?expand_article=1
+* Silent install : https://silentinstallhq.com/bitvise-ssh-client-silent-install-how-to-guide/?expand_article=1,
+	https://silent-install.net/software/bitvise/bitvise_ssh_client/8.36

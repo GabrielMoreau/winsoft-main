@@ -48,6 +48,7 @@ that is often relevant:
 * [Chocolatey](https://chocolatey.org/) - [wikipedia](https://en.wikipedia.org/wiki/Chocolatey), [github](https://github.com/chocolatey/choco)
 * [WAPT](https://www.tranquil.it/) - [wikipedia](https://fr.wikipedia.org/wiki/Wapt_(logiciel))
 * [SilentInstallHQ](https://silentinstallhq.com) - [knowledge-base](https://silentinstallhq.com/silent-install-knowledge-base/)
+* [Silent-Install.net](https://silent-install.net/)
 * [Scoop](https://github.com/ScoopInstaller/Scoop) - [wikipedia](https://en.wikipedia.org/wiki/Scoop_Package_Manager), [non-portable](https://github.com/ScoopInstaller/Nonportable)
 * [WPKG](https://wpkg.org/)
 
