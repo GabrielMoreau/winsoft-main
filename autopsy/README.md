@@ -1,4 +1,4 @@
-# Autopsy - Vector graphics editor
+# Autopsy - Digital forensics and recover platform
 
 Autopsy is a free and open-source digital forensics platform.
 Autopsy is a fast, thorough, and efficient hard drive investigation solution that evolves with your needs.
