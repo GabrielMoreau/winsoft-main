@@ -19,7 +19,7 @@ IT_TEAM:=IT Support
 .PHONY: all check-version check-exe clean control next ocs version wget checksum
 .ONESHELL:
 
-all: check-version check-exe $(SOFT)-$(VERSIONLONG)-$(PATCH).zip ocs
+all: check-version check-exe $(SOFT)_$(VERSIONLONG)-$(PATCH)_x64.zip ocs
 
 sinclude ../../winsoft-conf/common/conf.mk
 
@@ -27,7 +27,7 @@ check-version:
 	@echo $(VERSIONLONG) | egrep -q '^[[:digit:]][\.[:digit:]]*[[[:alnum:]]$$' || (echo 'VERSIONLONG is undefined' > /dev/stderr ; exit 1)
 
 clean:
-	rm -rf $(SOFT)-$(VERSIONLONG)-$(PATCH).zip tmp resources
+	rm -rf $(SOFT)_$(VERSIONLONG)-$(PATCH)_x64.zip tmp resources
 
 version:
 	@echo "VERSION:         $(VERSIONLONG)"
@@ -78,7 +78,7 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 
 ocs:
 	@echo ""
-	@echo "Name:    $(SOFT)-$(VERSIONLONG)-$(PATCH)"
+	@echo "Name:    $(SOFT)_$(VERSIONLONG)-$(PATCH)_x64"
 	@echo "Launch:  install.bat"
 	@echo "Message: yes"
 	@echo "Delay:   5"
