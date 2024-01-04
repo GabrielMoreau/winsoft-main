@@ -4,7 +4,8 @@
 #
 
 SOFT:=RStudio
-URL:=$(shell curl -s -L 'https://posit.co/download/rstudio-desktop/' | sed -e 's/"/\n/g;' | egrep '^https://.*/RStudio-.*.exe' | head -1)
+#URL:=$(shell curl -s -L 'https://posit.co/download/rstudio-desktop/' | sed -e 's/"/\n/g;' | egrep '^https://.*/RStudio-.*.exe' | head -1)
+URL:=$(shell curl -s 'https://www.rstudio.com/wp-content/downloads.json' | grep -A4 '"name".*/RStudio-.*\.exe' | grep '"url"' | cut -f 4 -d '"' | head -1)
 VERSION1:=$(shell basename $(URL) | cut -f 2- -d'-' | sed -e 's/\.exe$$//;')
 URL2:=https://cloud.r-project.org/bin/windows/base/$(shell curl -s -L 'https://cloud.r-project.org/bin/windows/base/' | sed -e 's/"/\n/g;' | egrep '^R-.*-win.exe')
 VERSION2:=$(shell basename $(URL2) | cut -f 2 -d'-')
@@ -61,7 +62,7 @@ tmp/$(EXE):
 
 check-exe: tmp/$(EXE)
 	@(cd tmp ; \
-		file $(EXE) | grep -q "PE32 executable" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 1; } ; \
+		file $(EXE) | grep -q "PE32 executable.*Nullsoft Installer self-extracting archive" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 1; } ; \
 		#which peres >/dev/null && { peres -a $(EXE) | grep -q "^Product Version:[[:space:]]*$(VERSION)" || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 1; } ; } ; \
 		)
 
