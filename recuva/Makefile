@@ -20,7 +20,7 @@ IT_TEAM:=IT Support
 
 all: check-version check-exe $(SOFT)_$(VERSION)-$(PATCH)_x64.zip ocs
 
-sinclude ../../winsoft-conf/common/conf.mk
+sinclude ../_common/conf.mk
 
 check-version:
 	@echo $(VERSION) | egrep -q '^[[:digit:]][\.[:digit:]]*$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
