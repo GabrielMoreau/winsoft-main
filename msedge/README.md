@@ -20,3 +20,8 @@ security-related:
 * KeePassXC-Browser
 * Decentraleyes
 * ClearURLs
+
+Is there a link to get the latest Microsoft Edge version number? 
+See https://stackoverflow.com/questions/71620168/is-there-a-link-to-get-the-latest-microsoft-edge-version-number/71644819#71644819
+
+You can have a JSON with the entreprise version here https://edgeupdates.microsoft.com/api/products?view=enterprise

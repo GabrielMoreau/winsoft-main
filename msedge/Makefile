@@ -3,12 +3,18 @@
 # MSEdge
 #
 
+# curl -s -L 'https://edgeupdates.microsoft.com/api/products?view=enterprise' | sed -e 's/,/\n/g;' | grep -A 500 '"Product":"Stable"' | grep -A 40 '"Platform":"Windows"' | grep -A 5 '"Architecture":"x64"' | grep '"ProductVersion":"'
+
 SOFT:=MSEdge
-INSTALLER:=MicrosoftEdgeEnterpriseX64.msi
+VERSION:=$(shell curl -s -L 'https://edgeupdates.microsoft.com/api/products?view=enterprise' | sed -e 's/,/\n/g;' | grep -B 3 '/MicrosoftEdgeEnterpriseX64.msi"' | grep '"ProductVersion":"' | cut -f 4 -d '"' | head -1)
+URL:=$(shell curl -s -L 'https://edgeupdates.microsoft.com/api/products?view=enterprise' | sed -e 's/,/\n/g;' | grep '/MicrosoftEdgeEnterpriseX64.msi"' | cut -f 4 -d '"' | head -1)
+
+#SOFT:=MSEdge
+#INSTALLER:=MicrosoftEdgeEnterpriseX64.msi
 PATCH:=1
-URL:=$(shell curl --silent -L https://www.microsoft.com/en-us/edge/business/download | sed -e 's/[[:space:],]/\n/g;' | grep '^downloadUrl.*MicrosoftEdgeEnterpriseX64.msi' | head -1 | sed -e 's#\\u002F#/#g;' | cut -f 2 -d '"')
+#URL:=$(shell curl --silent -L https://www.microsoft.com/en-us/edge/business/download | sed -e 's/[[:space:],]/\n/g;' | grep '^downloadUrl.*MicrosoftEdgeEnterpriseX64.msi' | head -1 | sed -e 's#\\u002F#/#g;' | cut -f 2 -d '"')
 UUID:=$(shell dirname "$(URL)" | xargs -r basename)
-VERSION:=$(shell (grep "^$(UUID):" version.txt 2> /dev/null || file tmp/MicrosoftEdgeEnterpriseX64.msi 2> /dev/null | sed -s 's/, /\n/g;' |grep '^Comments:') | awk '{print $$2}')
+#VERSION:=$(shell (grep "^$(UUID):" version.txt 2> /dev/null || file tmp/MicrosoftEdgeEnterpriseX64.msi 2> /dev/null | sed -s 's/, /\n/g;' |grep '^Comments:') | awk '{print $$2}')
 EXE:=MicrosoftEdgeEnterpriseX64-$(VERSION).msi
 
 IT_TEAM:=IT Support
@@ -16,21 +22,21 @@ IT_TEAM:=IT Support
 
 .PHONY: all check-version check-exe clean control next ocs version wget checksum
 
-all:
-	@mkdir -p tmp
-	@(cd tmp; \
-		echo $(VERSION) | egrep -q '^[[:digit:]][\.[:digit:]]*$$'                        || curl -# -o $(INSTALLER) -L "$(URL)"; \
-		file "$(INSTALLER)" 2> /dev/null | grep -q "MSI Installer.*Comments: $(VERSION)" || curl -# -o $(INSTALLER) -L "$(URL)"; \
-		grep -q "^$(UUID):" ../version.txt 2> /dev/null                                  || curl -# -o $(INSTALLER) -L "$(URL)"; \
-		)	#@rm -f "tmp/$(INSTALLER)"
-	@make next
+all: check-version check-exe $(SOFT)_$(VERSION)-$(PATCH)_x64.zip ocs
+#	@mkdir -p tmp
+#	@(cd tmp; \
+#		echo $(VERSION) | egrep -q '^[[:digit:]][\.[:digit:]]*$$'                        || curl -# -o $(INSTALLER) -L "$(URL)"; \
+#		file "$(INSTALLER)" 2> /dev/null | grep -q "MSI Installer.*Comments: $(VERSION)" || curl -# -o $(INSTALLER) -L "$(URL)"; \
+#		grep -q "^$(UUID):" ../version.txt 2> /dev/null                                  || curl -# -o $(INSTALLER) -L "$(URL)"; \
+#		)	#@rm -f "tmp/$(INSTALLER)"
+#	@make next
 
 sinclude ../_common/conf.mk
 
 check-version:
 	@echo $(VERSION) | egrep -q '^[[:digit:]][\.[:digit:]]*$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
 
-next: check-version check-exe $(SOFT)_$(VERSION)-$(PATCH)_x64.zip ocs
+#next: check-version check-exe $(SOFT)_$(VERSION)-$(PATCH)_x64.zip ocs
 
 clean:
 	rm -rf $(SOFT)_$(VERSION)-$(PATCH)_x64.zip tmp
@@ -55,8 +61,9 @@ wget: tmp/$(EXE)
 tmp/$(EXE):
 	@mkdir -p tmp
 	@(cd tmp ; \
-		find ./ -name '*.msi' -a -not -name "$(INSTALLER)" -a -not -name "$(EXE)" -delete ; \
-		cmp $(INSTALLER) $(EXE) > /dev/null 2>&1 || cp -f $(INSTALLER) $(EXE) ; \
+		curl -# -o $(EXE) -L "$(URL)" ; \
+		#find ./ -name '*.msi' -a -not -name "$(INSTALLER)" -a -not -name "$(EXE)" -delete ; \
+		#cmp $(INSTALLER) $(EXE) > /dev/null 2>&1 || cp -f $(INSTALLER) $(EXE) ; \
 		# file $(EXE) | grep -q "MSI Installer.*Comments: $(VERSION)" || echo "Error: bad format or version for binary $(EXE)" ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
@@ -64,7 +71,8 @@ tmp/$(EXE):
 
 check-exe: tmp/$(EXE)
 	@(cd tmp ; \
-		file $(EXE) | grep -q "MSI Installer.*Comments: $(VERSION)" || { echo "Error: bad format or version for binary $(EXE)" 1>&2 ; exit 1; } ; \
+		file $(EXE) | grep -q "MSI Installer"        || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 1; } ; \
+		file $(EXE) | grep -q "Comments: $(VERSION)" || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 1; } ; \
 		# which peres >/dev/null && { peres -a $(EXE) | grep -q "^Product Version:[[:space:]]*$(VERSION)" || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 1; } ; } ;\
 		)
 
