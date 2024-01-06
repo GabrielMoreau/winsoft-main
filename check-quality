@@ -18,3 +18,9 @@ do
   then grep $f */checksum.txt
   fi
 done
+
+for m in */Makefile
+do
+  grep -q '^sinclude ../_common/conf.mk' "${m}" || echo "Makefile ${m} not include conf.mk"
+  grep -q '^IT_TEAM:=' "${m}" || echo "Makefile ${m} not include IT_TEAM variable"
+done
