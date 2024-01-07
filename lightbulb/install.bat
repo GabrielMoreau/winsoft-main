@@ -20,7 +20,11 @@ ECHO BEGIN %date%-%time%
 
 SET softversion=__VERSION__
 SET softpatch=__PATCH__
+SET softruntimever=__VERSION2__
 
+
+Echo Silent install WindowsDesktop-Runtime
+windowsdesktop-runtime-%softruntimever%-win-x64.exe /install /quiet /norestart
 
 ECHO Silent install %softname%
 LightBulb-Installer-%softversion%.exe /VERYSILENT /LOG="%logdir%\%softname%-MSI.log"
