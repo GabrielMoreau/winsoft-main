@@ -18,7 +18,7 @@ EXIT /B
 
 ECHO BEGIN %date%-%time%
 
-SET softversion=__VERSION__
+SET softversion=__VERSION1__
 SET softpatch=__PATCH__
 SET softruntimever=__VERSION2__
 
