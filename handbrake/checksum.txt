@@ -10,3 +10,4 @@ c7b9c0dea9d686486921aea9dfb4f86c63d4b11d739fc26bedb55be0d96cf0fb  windowsdesktop
 a60ec80c7475caa726e6bde2b7448b1d8b67de8d2b08347d1d87ece5032c970e  HandBrake-1.7.0-x86_64-Win_GUI.exe
 4e3c646e55d30bcf1d3e3e07e8a5ecaaf1eec34e6e1f4e4c0d071492b3f1666f  HandBrake-1.7.1-x86_64-Win_GUI.exe
 6de8e290e4585039078421fb121bb2a0e36bf362ed85c0429c7354de06ff9cb9  HandBrake-1.7.2-x86_64-Win_GUI.exe
+ece6f1cc55af17d8555fd7ebccfdfb17dff2d3817ce348902b593e8d43ec435b  windowsdesktop-runtime-6.0.26-win-x64.exe
