@@ -6,8 +6,11 @@
 # curl -s -L 'https://edgeupdates.microsoft.com/api/products?view=enterprise' | sed -e 's/,/\n/g;' | grep -A 500 '"Product":"Stable"' | grep -A 40 '"Platform":"Windows"' | grep -A 5 '"Architecture":"x64"' | grep '"ProductVersion":"'
 
 SOFT:=MSEdge
-VERSION:=$(shell curl -s -L 'https://edgeupdates.microsoft.com/api/products?view=enterprise' | sed -e 's/,/\n/g;' | grep -B 3 '/MicrosoftEdgeEnterpriseX64.msi"' | grep '"ProductVersion":"' | cut -f 4 -d '"' | head -1)
-URL:=$(shell curl -s -L 'https://edgeupdates.microsoft.com/api/products?view=enterprise' | sed -e 's/,/\n/g;' | grep '/MicrosoftEdgeEnterpriseX64.msi"' | cut -f 4 -d '"' | head -1)
+#VERSION:=$(shell curl -s -L 'https://edgeupdates.microsoft.com/api/products?view=enterprise' | sed -e 's/,/\n/g;' | grep -A 500 '"Product":"Stable"' | grep -B 3 '/MicrosoftEdgeEnterpriseX64.msi"' | grep '"ProductVersion":"' | cut -f 4 -d '"' | head -1)
+#URL:=$(shell     curl -s -L 'https://edgeupdates.microsoft.com/api/products?view=enterprise' | sed -e 's/,/\n/g;' | grep -A 500 '"Product":"Stable"' | grep      '/MicrosoftEdgeEnterpriseX64.msi"' | cut -f 4 -d '"' | head -1)
+WLINES:=$(shell curl -s -L 'https://edgeupdates.microsoft.com/api/products?view=enterprise')
+VERSION:=$(shell echo '$(WLINES)' | sed -e 's/,/\n/g;' | grep -A 500 '"Product":"Stable"' | grep -B 3 '/MicrosoftEdgeEnterpriseX64.msi"' | grep '"ProductVersion":"' | cut -f 4 -d '"' | head -1)
+URL:=$(shell     echo '$(WLINES)' | sed -e 's/,/\n/g;' | grep -A 500 '"Product":"Stable"' | grep      '/MicrosoftEdgeEnterpriseX64.msi"' | cut -f 4 -d '"' | head -1)
 
 #SOFT:=MSEdge
 #INSTALLER:=MicrosoftEdgeEnterpriseX64.msi
@@ -46,6 +49,7 @@ version:
 	@echo "URL: $(URL)"
 	@echo "EXE: $(EXE)"
 	@echo "UUID: $(UUID)"
+#	@echo "WLINES: $(WLINES)"
 
 checksum:
 	@mkdir -p tmp
