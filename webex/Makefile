@@ -4,7 +4,8 @@
 #
 
 SOFT:=Webex
-VERSION:=$(shell curl -s -L 'https://help.webex.com/fr-fr/article/mqkve8/Application-Webex|-Notes-de-version'| sed -e 's/[<>[:space:]]/\n/g; s/—/-/g;' | grep '^Windows-[[:digit:]]' | head -1 | cut -f 2 -d '-')
+#VERSION:=$(shell curl -s -L 'https://help.webex.com/fr-fr/article/mqkve8/Application-Webex|-Notes-de-version'| sed -e 's/[<>[:space:]]/\n/g; s/—/-/g;' | grep '^Windows-[[:digit:]]' | head -1 | cut -f 2 -d '-')
+VERSION:=$(shell curl -s -L 'https://help.webex.com/article/mqkve8'| sed -e 's/[<>[:space:]]/\n/g; s/—/-/g;' | grep '^Windows-[[:digit:]]' | head -1 | cut -f 2 -d '-')
 PATCH:=1
 URL:=https://binaries.webex.com/WebexTeamsDesktop-Windows-Gold/Webex.msi
 
@@ -13,9 +14,9 @@ EXE:=Webex-$(VERSION).msi
 IT_TEAM:=IT Support
 
 
-.PHONY: all check-version clean control next ocs version wget checksum
+.PHONY: all check-version check-exe clean control next ocs version wget checksum
 
-all: check-version $(SOFT)_$(VERSION)-$(PATCH)_x64.zip ocs
+all: check-version check-exe $(SOFT)_$(VERSION)-$(PATCH)_x64.zip ocs
 
 sinclude ../_common/conf.mk
 
@@ -45,9 +46,15 @@ tmp/$(EXE):
 	@(cd tmp ; \
 		rm -f *.exe *.msi 2>/dev/null ; \
 		curl -# -o "$(EXE)" -L "$(URL)" ; \
-		file $(EXE) | grep -q "Subject: Webex" || echo "Error: bad format for binary $(EXE)" ; \
+		# file $(EXE) | grep -q "Subject: Webex" || echo "Error: bad format for binary $(EXE)" ; \
 		# which peres >/dev/null && { peres -a $(EXE) | grep -q "^Product Version:[[:space:]]*$(VERSION)" || echo "Error: bad version for binary $(EXE)" ; } ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
+		)
+
+check-exe: tmp/$(EXE)
+	@(cd tmp ; \
+		file $(EXE) | grep -q "Subject: Webex Teams" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 1; } ; \
+		# which peres >/dev/null && { peres -a $(EXE) | grep -q "^Product Version:[[:space:]]*$(VERSION)" || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 1; } ; } ;\
 		)
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE)
