@@ -17,7 +17,6 @@ IT_TEAM:=IT Support
 .PHONY: all check-version clean control next ocs version wget checksum
 
 all: check-version $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
-	@echo $(URL)
 
 sinclude ../_common/conf.mk
 
