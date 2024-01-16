@@ -80,7 +80,7 @@ check-exe2: tmp/$(EXE2)
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE1) tmp/$(EXE2)
 	@mkdir -p tmp
-	@sed -e 's/__VERSION__/$(VERSION)/; s/__PATCH__/$(PATCH)/; s/__PACKEXT__/$(EXE2)/;' install.bat > $@
+	@sed -e 's/__VERSION__/$(VERSION)/; s/__PACKEXT__/$(EXE2)/;' install.bat > $@
 
 %.zip: Makefile pre-install.ps1 tmp/install.bat tmp/$(EXE1) tmp/$(EXE2) $(VCREDIST)
 	@rm -f $@

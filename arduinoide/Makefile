@@ -55,7 +55,7 @@ tmp/$(EXE):
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
-	@sed -e 's/__VERSION__/$(VERSION)/; s/__PATCH__/$(PATCH)/;' install.bat > $@
+	@sed -e 's/__VERSION__/$(VERSION)/;' install.bat > $@
 
 tmp/Adafruit.cer:
 	@(cd tmp ; \

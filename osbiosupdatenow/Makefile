@@ -59,7 +59,7 @@ check-exe: tmp/$(EXE)
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
-	@sed -e 's/__VERSION__/$(VERSION)/; s/__PATCH__/$(PATCH)/; s/__VERSION11__/$(VERSION11)/;' install.bat > $@
+	@sed -e 's/__VERSION__/$(VERSION)/; s/__VERSION11__/$(VERSION11)/;' install.bat > $@
 
 %.zip: Makefile tmp/install.bat tmp/$(EXE)
 	@rm -f $@

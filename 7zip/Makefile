@@ -52,7 +52,7 @@ tmp/$(EXE):
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
-	@sed -e 's/__VERSION__/$(VERSION)/; s/__PATCH__/$(PATCH)/; s/__VERSIONSHORT__/$(VERSIONSHORT)/;' install.bat > $@
+	@sed -e 's/__VERSION__/$(VERSION)/; s/__VERSIONSHORT__/$(VERSIONSHORT)/;' install.bat > $@
 
 tmp/post-install.ps1: post-install.ps1 Makefile tmp/$(EXE)
 	@mkdir -p tmp
