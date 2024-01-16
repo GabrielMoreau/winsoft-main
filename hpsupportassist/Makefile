@@ -65,9 +65,7 @@ tmp/setup/InstallHPSA.exe: tmp/$(EXE)
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
-	@perl -p -e ' \
-		s/__VERSION__/$(VERSION)/; \
-		s/__PATCH__/$(PATCH)/;' $< > $@
+	@sed -e 's/__VERSION__/$(VERSION)/;' $< > $@
 
 %.zip: Makefile tmp/install.bat tmp/$(EXE) tmp/setup/InstallHPSA.exe
 	@rm -f $@
