@@ -5,7 +5,7 @@
 
 SOFT:=NotepadPP
 VERSION:=$(shell curl -s -L 'https://notepad-plus-plus.org/' | grep '/downloads/v' | cut -f 3 -d '/' | cut -f 2 -d 'v')
-PATCH:=1
+REVISION:=1
 URL:=https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v$(VERSION)/npp.$(VERSION).Installer.x64.exe
 
 EXE:=npp.$(VERSION).Installer.x64.exe
@@ -15,7 +15,7 @@ IT_TEAM:=IT Support
 
 .PHONY: all check-version check-exe clean control next ocs version wget checksum
 
-all: check-version check-exe $(SOFT)_$(VERSION)-$(PATCH)_x64.zip ocs
+all: check-version check-exe $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
 
 sinclude ../_common/conf.mk
 
@@ -23,7 +23,7 @@ check-version:
 	@echo $(VERSION) | egrep -q '^[[:digit:]][\.[:digit:]]*$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
 
 clean:
-	rm -rf $(SOFT)_$(VERSION)-$(PATCH)_x64.zip tmp/$(EXE) tmp
+	rm -rf $(SOFT)_$(VERSION)-$(REVISION)_x64.zip tmp/$(EXE) tmp
 
 version:
 	@echo "VERSION: $(VERSION)"
@@ -67,7 +67,7 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 
 ocs:
 	@echo ""
-	@echo "Name:    $(SOFT)_$(VERSION)-$(PATCH)_x64"
+	@echo "Name:    $(SOFT)_$(VERSION)-$(REVISION)_x64"
 	@echo "Launch:  install.bat"
 	@echo "Message: yes"
 	@echo "Delay:   20"

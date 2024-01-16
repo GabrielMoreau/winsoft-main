@@ -7,7 +7,7 @@ SOFT:=KiCad
 #URL:=$(shell curl -s -L 'https://www.kicad.org/download/windows/' | sed -e 's/"/\n/g;' | grep '^https://github.com/.*/kicad-.*-x86_64.exe' | head -1)
 URL:=$(shell curl -s -L 'https://api.github.com/repos/KiCad/kicad-source-mirror/releases/latest' | grep 'browser_download_url.*x86_64.exe' | cut -f 4 -d '"' | head -1)
 VERSION:=$(shell basename $(URL) | cut -f 2 -d '-')
-PATCH:=1
+REVISION:=1
 EXE:=kicad-$(VERSION)-x86_64.exe
 
 IT_TEAM:=IT Support
@@ -15,7 +15,7 @@ IT_TEAM:=IT Support
 
 .PHONY: all check-version check-exe clean control next ocs version wget checksum
 
-all: check-version check-exe $(SOFT)_$(VERSION)-$(PATCH)_x64.zip ocs
+all: check-version check-exe $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
 
 sinclude ../_common/conf.mk
 
@@ -23,7 +23,7 @@ check-version:
 	@echo $(VERSION) | egrep -q '^[[:digit:]][\.[:digit:]]*$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
 
 clean:
-	rm -rf $(SOFT)_$(VERSION)-$(PATCH)_x64.zip tmp resources
+	rm -rf $(SOFT)_$(VERSION)-$(REVISION)_x64.zip tmp resources
 
 version:
 	@echo "VERSION: $(VERSION)"
@@ -67,7 +67,7 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 
 ocs:
 	@echo ""
-	@echo "Name:    $(SOFT)_$(VERSION)-$(PATCH)_x64"
+	@echo "Name:    $(SOFT)_$(VERSION)-$(REVISION)_x64"
 	@echo "Launch:  install.bat"
 	@echo "Message: yes"
 	@echo "Delay:   5"

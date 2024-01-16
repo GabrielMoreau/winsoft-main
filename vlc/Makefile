@@ -5,7 +5,7 @@
 
 SOFT:=VLC
 VERSION:=$(shell curl -s -L 'https://download.videolan.org/pub/videolan/vlc/' | grep 'href="[[:digit:]]' | cut -f 2 -d '"' | sed -e 's#/##;'  | sort -V | tail -1)
-PATCH:=1
+REVISION:=1
 URL:=https://get.videolan.org/vlc/$(VERSION)/win64/vlc-$(VERSION)-win64.exe
 
 EXE:=vlc-$(VERSION)-win64.exe
@@ -15,7 +15,7 @@ IT_TEAM:=IT Support
 
 .PHONY: all check-version check-exe clean control next ocs version wget checksum
 
-all: check-version check-exe $(SOFT)_$(VERSION)-$(PATCH)_x64.zip ocs
+all: check-version check-exe $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
 
 sinclude ../_common/conf.mk
 
@@ -23,7 +23,7 @@ check-version:
 	@echo $(VERSION) | egrep -q '^[[:digit:]][\.[:digit:]]*$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
 
 clean:
-	rm -rf $(SOFT)_$(VERSION)-$(PATCH)_x64.zip tmp resources
+	rm -rf $(SOFT)_$(VERSION)-$(REVISION)_x64.zip tmp resources
 
 version:
 	@echo "VERSION: $(VERSION)"
@@ -71,7 +71,7 @@ tmp/post-install.ps1: post-install.ps1 Makefile tmp/$(EXE)
 
 ocs:
 	@echo ""
-	@echo "Name:    $(SOFT)_$(VERSION)-$(PATCH)_x64"
+	@echo "Name:    $(SOFT)_$(VERSION)-$(REVISION)_x64"
 	@echo "Launch:  install.bat"
 	@echo "Message: yes"
 	@echo "Delay:   5"

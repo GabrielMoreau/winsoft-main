@@ -6,7 +6,7 @@
 SOFT:=ArduinoIDE
 URL:=$(shell curl -s -L 'https://www.arduino.cc/en/software' | sed -e 's/>/\n/g;' | sed -e 's/>/\n/g;' | grep 'Windows MSI installer' | cut -f 6 -d '"')
 VERSION:=$(shell basename $(URL) | cut -f 2 -d '_')
-PATCH:=1
+REVISION:=1
 
 Adafruit:=https://raw.githubusercontent.com/basictheprogram/chocolatey-cura-new/4.10/tools/Adafruit.cer
 Arduino:=https://raw.githubusercontent.com/basictheprogram/chocolatey-cura-new/4.10/tools/Arduino.cer
@@ -18,7 +18,7 @@ IT_TEAM:=IT Support
 
 .PHONY: all check-version clean control next ocs version wget checksum
 
-all: check-version $(SOFT)_$(VERSION)-$(PATCH)_x64.zip ocs
+all: check-version $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
 
 sinclude ../_common/conf.mk
 
@@ -26,7 +26,7 @@ check-version:
 	@echo $(VERSION) | egrep -q '^[[:digit:]][\.[:digit:]]*$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
 
 clean:
-	rm -rf $(SOFT)_$(VERSION)-$(PATCH)_x64.zip tmp
+	rm -rf $(SOFT)_$(VERSION)-$(REVISION)_x64.zip tmp
 
 version:
 	@echo "VERSION: $(VERSION)"
@@ -78,7 +78,7 @@ tmp/Arduino.cer:
 
 ocs:
 	@echo ""
-	@echo "Name:    $(SOFT)_$(VERSION)-$(PATCH)_x64"
+	@echo "Name:    $(SOFT)_$(VERSION)-$(REVISION)_x64"
 	@echo "Launch:  install.bat"
 	@echo "Message: yes"
 	@echo "Delay:   5"

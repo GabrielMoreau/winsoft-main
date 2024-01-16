@@ -5,7 +5,7 @@
 
 SOFT:=Thunderbird
 VERSION:=$(shell curl -s -L 'https://www.thunderbird.net/en-US/thunderbird/all/' | sed -e 's/[[:space:]]/\n/g;' | grep 'data-thunderbird-version' | cut -f 2 -d '"')
-PATCH:=1
+REVISION:=1
 URL:=https://download.mozilla.org/?product=thunderbird-$(VERSION)-msi-SSL&os=win64&lang=fr
 
 EXE:=Thunderbird-Setup-$(VERSION).msi
@@ -15,7 +15,7 @@ IT_TEAM:=IT Support
 
 .PHONY: all check-version check-exe clean control next ocs version wget checksum
 
-all: check-version check-exe $(SOFT)_$(VERSION)-$(PATCH)_x64.zip ocs
+all: check-version check-exe $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
 
 sinclude ../_common/conf.mk
 
@@ -23,7 +23,7 @@ check-version:
 	@echo $(VERSION) | egrep -q '^[[:digit:]][\.[:digit:]]*$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
 
 clean:
-	rm -rf $(SOFT)_$(VERSION)-$(PATCH)_x64.zip tmp
+	rm -rf $(SOFT)_$(VERSION)-$(REVISION)_x64.zip tmp
 
 version:
 	@echo "VERSION: $(VERSION)"
@@ -70,7 +70,7 @@ tmp/post-install.ps1: post-install.ps1 Makefile tmp/$(EXE)
 
 ocs:
 	@echo ""
-	@echo "Name:    $(SOFT)_$(VERSION)-$(PATCH)_x64"
+	@echo "Name:    $(SOFT)_$(VERSION)-$(REVISION)_x64"
 	@echo "Launch:  install.bat"
 	@echo "Message: yes"
 	@echo "Delay:   20"

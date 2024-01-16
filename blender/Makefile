@@ -7,7 +7,7 @@ SOFT:=Blender
 VERSION:=$(shell curl -s -L 'https://api.github.com/repos/blender/blender/tags' | grep '"name":' | head -1 | cut -f 4 -d '"' | sed -e 's/^v//;')
 URL:=$(shell curl -s -L 'https://www.blender.org/download/' | sed -e 's/"/\n/g;' | egrep '^https://www.blender.org/.*/.*windows-x64.msi' | head -1 | xargs -r curl -s -L | sed -e 's/"/\n/g;' | egrep '^https://.*/blender-.*windows-x64.msi' | sort -r | head -1 | sed -e 's#/$$##;')
 #VERSION:=$(shell basename $(URL) | cut -f 2 -d '-')
-PATCH:=1
+REVISION:=1
 
 EXE:=blender-$(VERSION)-windows-x64.msi
 
@@ -16,7 +16,7 @@ IT_TEAM:=IT Support
 
 .PHONY: all check-version clean control next ocs version wget checksum check-exe
 
-all: check-version check-exe $(SOFT)_$(VERSION)-$(PATCH)_x64.zip ocs
+all: check-version check-exe $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
 
 sinclude ../_common/conf.mk
 
@@ -24,7 +24,7 @@ check-version:
 	@echo $(VERSION) | egrep -q '^[[:digit:]][\.[:digit:]]*$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
 
 clean:
-	rm -rf $(SOFT)_$(VERSION)-$(PATCH)_x64.zip tmp
+	rm -rf $(SOFT)_$(VERSION)-$(REVISION)_x64.zip tmp
 
 version:
 	@echo "VERSION: $(VERSION)"
@@ -69,7 +69,7 @@ tmp/pre-install.ps1: pre-install.ps1 Makefile tmp/$(EXE)
 
 ocs:
 	@echo ""
-	@echo "Name:    $(SOFT)_$(VERSION)-$(PATCH)_x64"
+	@echo "Name:    $(SOFT)_$(VERSION)-$(REVISION)_x64"
 	@echo "Launch:  install.bat"
 	@echo "Message: yes"
 	@echo "Delay:   5"

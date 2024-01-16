@@ -6,7 +6,7 @@
 SOFT:=Ultracopier
 URL:=$(shell curl -s -L 'https://ultracopier.herman-brule.com/#download' | sed -e 's/"/\n/g;' | grep 'x86_64.*setup.exe')
 VERSION:=$(shell echo $(URL) | cut -f 2 -d '_' | cut -f 2 -d '-')
-PATCH:=1
+REVISION:=1
 
 EXE:=ultracopier-windows-x86_64-$(VERSION)-setup.exe
 
@@ -16,7 +16,7 @@ IT_TEAM:=IT Support
 
 .PHONY: all check-version check-exe clean control next ocs version wget checksum
 
-all: check-version check-exe $(SOFT)_$(VERSION)-$(PATCH)_x64.zip ocs
+all: check-version check-exe $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
 
 sinclude ../_common/conf.mk
 
@@ -24,7 +24,7 @@ check-version:
 	@echo $(VERSION) | egrep -q '^[[:digit:]][\.[:digit:]]*$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
 
 clean:
-	rm -rf $(SOFT)_$(VERSION)-$(PATCH)_x64.zip tmp
+	rm -rf $(SOFT)_$(VERSION)-$(REVISION)_x64.zip tmp
 
 version:
 	@echo "VERSION: $(VERSION)"
@@ -68,7 +68,7 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 
 ocs:
 	@echo ""
-	@echo "Name:    $(SOFT)_$(VERSION)-$(PATCH)_x64"
+	@echo "Name:    $(SOFT)_$(VERSION)-$(REVISION)_x64"
 	@echo "Launch:  install.bat"
 	@echo "Message: yes"
 	@echo "Delay:   5"

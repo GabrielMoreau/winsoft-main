@@ -5,7 +5,7 @@
 
 SOFT:=WinSCP
 VERSION:=$(shell curl -s -L 'https://winscp.net/eng/download.php' | sed -e 's/"/\n/g;' | grep '^/download/WinSCP-.*-Setup.exe' | cut -f 2 -d '-')
-PATCH:=1
+REVISION:=1
 URL:=https://winscp.net$(shell curl -s -L 'https://winscp.net/eng/download.php' | sed -e 's/[[:space:]]/\n/g;' | grep 'href="/download/WinSCP-.*-Setup.exe' | cut -f 2 -d '"')
 
 EXE:=WinSCP-$(VERSION)-Setup.exe
@@ -15,7 +15,7 @@ IT_TEAM:=IT Support
 
 .PHONY: all check-version clean control next ocs version wget checksum
 
-all: check-version $(SOFT)_$(VERSION)-$(PATCH)_x64.zip ocs
+all: check-version $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
 
 sinclude ../_common/conf.mk
 
@@ -23,7 +23,7 @@ check-version:
 	@echo $(VERSION) | egrep -q '^[[:digit:]][\.[:digit:]]*$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
 
 clean:
-	rm -rf $(SOFT)_$(VERSION)-$(PATCH)_x64.zip tmp resources
+	rm -rf $(SOFT)_$(VERSION)-$(REVISION)_x64.zip tmp resources
 
 version:
 	@echo "VERSION: $(VERSION)"
@@ -61,7 +61,7 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 
 ocs:
 	@echo ""
-	@echo "Name:    $(SOFT)_$(VERSION)-$(PATCH)_x64"
+	@echo "Name:    $(SOFT)_$(VERSION)-$(REVISION)_x64"
 	@echo "Launch:  install.bat"
 	@echo "Message: yes"
 	@echo "Delay:   5"

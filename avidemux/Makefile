@@ -6,7 +6,7 @@
 SOFT:=Avidemux
 VERSION:=$(shell curl -s -L 'https://www.fosshub.com/Avidemux.html' | grep 'softwareVersion' | head -1 | sed -e 's/[<>]/ /g;' | cut -f 4 -d ' ')
 VERSION=2.8.0
-PATCH:=1
+REVISION:=1
 URL:=$(shell curl -s -L "https://sourceforge.net/projects/avidemux/files/avidemux/$(VERSION)/" | sed -e 's/[[:space:]]/\n/g;' | grep 'href="https://.*_win64.exe' | cut -f 2 -d '"')
 
 EXE:=avidemux-$(VERSION)-win64.exe
@@ -16,7 +16,7 @@ IT_TEAM:=IT Support
 
 .PHONY: all check-version clean control next ocs version wget checksum
 
-all: check-version $(SOFT)_$(VERSION)-$(PATCH)_x64.zip ocs
+all: check-version $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
 	@echo $(URL)
 
 sinclude ../_common/conf.mk
@@ -25,7 +25,7 @@ check-version:
 	@echo $(VERSION) | egrep -q '^[[:digit:]][\.[:digit:]]*$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
 
 clean:
-	rm -rf $(SOFT)_$(VERSION)-$(PATCH)_x64.zip tmp
+	rm -rf $(SOFT)_$(VERSION)-$(REVISION)_x64.zip tmp
 
 version:
 	@echo "VERSION: $(VERSION)"
@@ -63,7 +63,7 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 
 ocs:
 	@echo ""
-	@echo "Name:    $(SOFT)_$(VERSION)-$(PATCH)_x64"
+	@echo "Name:    $(SOFT)_$(VERSION)-$(REVISION)_x64"
 	@echo "Launch:  install.bat"
 	@echo "Message: yes"
 	@echo "Delay:   5"

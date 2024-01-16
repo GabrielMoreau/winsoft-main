@@ -8,7 +8,7 @@ VERSIONLONG:=$(shell curl -s 'https://helpx.adobe.com/acrobat/release-note/relea
 URLTRANSIT:=$(shell curl -s 'https://helpx.adobe.com/acrobat/release-note/release-notes-acrobat-reader.html' | grep "$(VERSIONLONG)" | sed -e 's/"/\n/g;' | grep '^https')
 VERSIONCOLLAPSE:=$(shell curl -s "$(URLTRANSIT)" |grep AcroRdrDCx64Upd | sed -e 's/"/\n/g;' | grep '^https' | cut -f 9 -d '/' | head -1)
 VERSIONSHORT:=$(shell echo $(VERSIONCOLLAPSE) | sed -e 's/[\.0[:space:]]//g;')
-PATCH:=1
+REVISION:=1
 URL:=https://ardownload2.adobe.com/pub/adobe/acrobat/win/AcrobatDC/$(VERSIONCOLLAPSE)/AcroRdrDCx64$(VERSIONCOLLAPSE)_fr_FR.exe
 
 EXE:=AcroRdrDCx64$(VERSIONCOLLAPSE)_fr_FR.exe
@@ -19,7 +19,7 @@ IT_TEAM:=IT Support
 .PHONY: all check-version check-exe clean control next ocs version wget checksum
 .ONESHELL:
 
-all: check-version check-exe $(SOFT)_$(VERSIONLONG)-$(PATCH)_x64.zip ocs
+all: check-version check-exe $(SOFT)_$(VERSIONLONG)-$(REVISION)_x64.zip ocs
 
 sinclude ../_common/conf.mk
 
@@ -27,7 +27,7 @@ check-version:
 	@echo $(VERSIONLONG) | egrep -q '^[[:digit:]][\.[:digit:]]*[[[:alnum:]]$$' || (echo 'VERSIONLONG is undefined' > /dev/stderr ; exit 1)
 
 clean:
-	rm -rf $(SOFT)_$(VERSIONLONG)-$(PATCH)_x64.zip tmp resources
+	rm -rf $(SOFT)_$(VERSIONLONG)-$(REVISION)_x64.zip tmp resources
 
 version:
 	@echo "VERSION:         $(VERSIONLONG)"
@@ -76,7 +76,7 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 
 ocs:
 	@echo ""
-	@echo "Name:    $(SOFT)_$(VERSIONLONG)-$(PATCH)_x64"
+	@echo "Name:    $(SOFT)_$(VERSIONLONG)-$(REVISION)_x64"
 	@echo "Launch:  install.bat"
 	@echo "Message: yes"
 	@echo "Delay:   5"

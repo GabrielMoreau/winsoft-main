@@ -4,7 +4,7 @@
 #
 
 SOFT:=HandBrake
-PATCH:=1
+REVISION:=1
 VERSION1:=$(shell curl -s -L 'https://github.com/HandBrake/HandBrake/releases/latest' | sed 's/</\n/g;'| grep '^meta property.*Release ' | cut -f 4 -d ' ')
 URL1:=https://github.com/HandBrake/HandBrake/releases/download/$(VERSION1)/HandBrake-$(VERSION1)-x86_64-Win_GUI.exe
 
@@ -21,7 +21,7 @@ IT_TEAM:=IT Support
 
 .PHONY: all check-version check-exe1 check-exe2 clean control next ocs version wget checksum
 
-all: check-version check-exe1 check-exe2 $(SOFT)_$(VERSION)-$(PATCH)_x64.zip ocs
+all: check-version check-exe1 check-exe2 $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
 
 sinclude ../_common/conf.mk
 
@@ -29,7 +29,7 @@ check-version:
 	@echo $(VERSION) | egrep -q '^[[:digit:]][\.[:digit:]]*$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
 
 clean:
-	rm -rf $(SOFT)_$(VERSION)-$(PATCH)_x64.zip tmp resources
+	rm -rf $(SOFT)_$(VERSION)-$(REVISION)_x64.zip tmp resources
 
 version:
 	@echo "VERSION: $(VERSION)"
@@ -93,7 +93,7 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE1) tmp/$(EXE2)
 
 ocs:
 	@echo ""
-	@echo "Name:    $(SOFT)_$(VERSION)-$(PATCH)_x64"
+	@echo "Name:    $(SOFT)_$(VERSION)-$(REVISION)_x64"
 	@echo "Launch:  install.bat"
 	@echo "Message: yes"
 	@echo "Delay:   5"

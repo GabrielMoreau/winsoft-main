@@ -7,7 +7,7 @@ SOFT:=FreeCAD
 PATCHVERSION:=$(shell (echo 0 ; curl -s -L 'https://github.com/FreeCAD/FreeCAD/releases' | sed -e 's/"/\n/g;' | egrep '/FreeCAD-.*-WIN-x64-installer-[[:digit:]][[:digit:]]*\.exe$$' | cut -f 6 -d '-' | cut -f 1 -d '.' ) | sort | tail -1)
 SHORTVERSION:=$(shell curl -s -L 'https://github.com/FreeCAD/FreeCAD/releases/latest' | sed 's/</\n/g;' | grep '^meta property.*og:title' | cut -f 5 -d ' ')
 VERSION:=$(SHORTVERSION).$(PATCHVERSION)
-PATCH:=1
+REVISION:=1
 URL:=https://github.com/FreeCAD/FreeCAD/releases/download/$(SHORTVERSION)/FreeCAD-$(SHORTVERSION)-WIN-x64-installer-$(PATCHVERSION).exe
 
 EXE:=FreeCAD-WIN-x64-installer-$(VERSION).exe
@@ -17,7 +17,7 @@ IT_TEAM:=IT Support
 
 .PHONY: all check-version clean control next ocs version wget checksum
 
-all: check-version $(SOFT)_$(VERSION)-$(PATCH)_x64.zip ocs
+all: check-version $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
 
 sinclude ../_common/conf.mk
 
@@ -25,7 +25,7 @@ check-version:
 	@echo $(VERSION) | egrep -q '^[[:digit:]][\.[:digit:]]*$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
 
 clean:
-	rm -rf $(SOFT)_$(VERSION)-$(PATCH)_x64.zip tmp
+	rm -rf $(SOFT)_$(VERSION)-$(REVISION)_x64.zip tmp
 
 version:
 	@echo "VERSION: $(VERSION)"
@@ -65,7 +65,7 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 
 ocs:
 	@echo ""
-	@echo "Name:    $(SOFT)_$(VERSION)-$(PATCH)_x64"
+	@echo "Name:    $(SOFT)_$(VERSION)-$(REVISION)_x64"
 	@echo "Launch:  install.bat"
 	@echo "Message: yes"
 	@echo "Delay:   5"

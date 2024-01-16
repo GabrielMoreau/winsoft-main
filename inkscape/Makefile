@@ -5,7 +5,7 @@
 
 SOFT:=Inkscape
 VERSION:=$(shell curl -s -L 'https://inkscape.org/en/release/' | sed -e 's/>/\n/g;' | grep 'Inkscape.*title' | cut -f 3 -d ' ' | grep '^[[:digit:]]' | head -1)
-PATCH:=1
+REVISION:=1
 URL:=https://inkscape.org/$(shell curl -s -L  'https://inkscape.org/release/inkscape-$(VERSION)/windows/64-bit/msi/dl' |  sed -e 's/\s/\n/g; s/"/=/g;' | grep '^url=' | cut -f 2 -d '=')
 
 EXE:=inkscape-$(VERSION)-x64.msi
@@ -15,7 +15,7 @@ IT_TEAM:=IT Support
 
 .PHONY: all check-version check-exe clean control next ocs version wget checksum
 
-all: check-version check-exe $(SOFT)_$(VERSION)-$(PATCH)_x64.zip ocs
+all: check-version check-exe $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
 
 sinclude ../_common/conf.mk
 
@@ -23,7 +23,7 @@ check-version:
 	@echo $(VERSION) | egrep -q '^[[:digit:]][\.[:digit:]]*$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
 
 clean:
-	rm -rf $(SOFT)_$(VERSION)-$(PATCH)_x64.zip tmp resources
+	rm -rf $(SOFT)_$(VERSION)-$(REVISION)_x64.zip tmp resources
 
 version:
 	@echo "VERSION: $(VERSION)"
@@ -75,7 +75,7 @@ tmp/post-install.ps1: post-install.ps1 Makefile tmp/$(EXE)
 
 ocs:
 	@echo ""
-	@echo "Name:    $(SOFT)_$(VERSION)-$(PATCH)_x64"
+	@echo "Name:    $(SOFT)_$(VERSION)-$(REVISION)_x64"
 	@echo "Launch:  install.bat"
 	@echo "Message: yes"
 	@echo "Delay:   5"

@@ -8,7 +8,7 @@ URL:=$(shell curl -s -L 'https://www.ccleaner.com/fr-fr/recuva/download/standard
 #VERSION:=$(shell basename "$(URL)" | sed -e 's/rcsetup//; s/\.exe//;')
 VERSION:=$(shell curl -s -L 'https://www.ccleaner.com/recuva/version-history' | grep 'version-history__latest-version' | sed 's/^.*>v\([[:digit:]][[:digit:]]*\)\.\([[:digit:]][[:digit:]]*\)\.\([[:digit:]][[:digit:]]*\).*/\1\.\2.\3/;')
 PVERSION:=$(shell curl -s -L 'https://www.ccleaner.com/recuva/version-history' | grep 'version-history__latest-version' | sed 's/^.*>v\([[:digit:]][[:digit:]]*\)\.0*\([[:digit:]][[:digit:]]*\)\.\([[:digit:]][[:digit:]]*\).*/\1.\2\.*\3/;')
-PATCH:=1
+REVISION:=1
 
 EXE:=rcsetup$(VERSION).exe
 
@@ -18,7 +18,7 @@ IT_TEAM:=IT Support
 .PHONY:  all check-version check-exe clean control next ocs version wget checksum
 .ONESHELL:
 
-all: check-version check-exe $(SOFT)_$(VERSION)-$(PATCH)_x64.zip ocs
+all: check-version check-exe $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
 
 sinclude ../_common/conf.mk
 
@@ -26,7 +26,7 @@ check-version:
 	@echo $(VERSION) | egrep -q '^[[:digit:]][\.[:digit:]]*$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
 
 clean:
-	rm -rf $(SOFT)_$(VERSION)-$(PATCH)_x64.zip tmp resources
+	rm -rf $(SOFT)_$(VERSION)-$(REVISION)_x64.zip tmp resources
 
 version:
 	@echo "VERSION: $(VERSION)"
@@ -69,7 +69,7 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 
 ocs:
 	@echo ""
-	@echo "Name:    $(SOFT)_$(VERSION)-$(PATCH)_x64"
+	@echo "Name:    $(SOFT)_$(VERSION)-$(REVISION)_x64"
 	@echo "Launch:  install.bat"
 	@echo "Message: yes"
 	@echo "Delay:   5"

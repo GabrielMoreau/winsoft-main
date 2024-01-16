@@ -6,7 +6,7 @@
 SOFT:=ParaView
 SHORTVERSION:=$(shell curl -s -L  'https://www.paraview.org/files/listing.txt' | grep "/v.*/ParaView.*\.msi[[:space:]]" | egrep -v -- '-(RC[[:digit:]]*|MPI)-' | cut -f 2 -d '/' | grep '^v' | sed -e 's/^v//;' | uniq | sort -V | tail -1)
 VERSION:=$(shell curl -s -L 'https://www.paraview.org/files/listing.txt' | grep "/v.*/ParaView.*\.msi[[:space:]]" | awk '{print $$1}' | egrep -v -- '-(RC[[:digit:]]*|MPI)-' | xargs -r -n 1 basename | cut -f 2 -d '-' | sort -V  | tail -1)
-PATCH:=1
+REVISION:=1
 EXE:=$(shell curl -s -L 'https://www.paraview.org/files/listing.txt' | grep "/v$(SHORTVERSION)/ParaView-$(VERSION)-Windows.*\.msi[[:space:]]" | awk '{print $$1}' | egrep -v -- '-(RC[[:digit:]]*|MPI)-' | sort | head -1 | sed -e 's#[[:space:]]#/#g;' | cut -f 3 -d '/')
 URL:=https://www.paraview.org/paraview-downloads/download.php?submit=Download&version=v$(SHORTVERSION)&type=binary&os=Windows&downloadFile=$(EXE)
 
@@ -18,7 +18,7 @@ IT_TEAM:=IT Support
 
 .PHONY: all check-version clean control next ocs version wget checksum check-exe
 
-all: check-version check-exe $(SOFT)_$(VERSION)-$(PATCH)_x64.zip ocs
+all: check-version check-exe $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
 
 sinclude ../_common/conf.mk
 
@@ -26,7 +26,7 @@ check-version:
 	@echo $(VERSION) | egrep -q '^[[:digit:]][\.[:digit:]]*$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
 
 clean:
-	rm -rf $(SOFT)_$(VERSION)-$(PATCH)_x64.zip tmp
+	rm -rf $(SOFT)_$(VERSION)-$(REVISION)_x64.zip tmp
 
 version:
 	@echo "VERSION: $(VERSION)"
@@ -68,7 +68,7 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 
 ocs:
 	@echo ""
-	@echo "Name:    $(SOFT)_$(VERSION)-$(PATCH)_x64"
+	@echo "Name:    $(SOFT)_$(VERSION)-$(REVISION)_x64"
 	@echo "Launch:  install.bat"
 	@echo "Message: yes"
 	@echo "Delay:   20"

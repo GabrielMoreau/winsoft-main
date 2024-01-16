@@ -6,7 +6,7 @@
 URL:=https://resinfo-gt.pages.in2p3.fr/swmb/resinfo-swmb/Kasperky-Uninstall-Latest.zip
 SOFT:=Kaspersky-Uninstall
 VERSION:=$(shell curl -s --insecure -L https://resinfo-gt.pages.in2p3.fr/swmb/resinfo-swmb/version.txt)
-PATCH:=1
+REVISION:=1
 
 ZIP:=Kasperky-Uninstall-$(VERSION).zip
 
@@ -18,7 +18,7 @@ IT_TEAM:=IT Support
 
 .PHONY: all check-version clean control next ocs version wget
 
-all: check-version $(SOFT)_$(VERSION)-$(PATCH)_x64.zip ocs
+all: check-version $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
 
 sinclude ../_common/conf.mk
 
@@ -26,7 +26,7 @@ check-version:
 	@echo $(VERSION) | egrep -q '^[[:digit:]][\.[:digit:]]*$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
 
 clean:
-	rm -rf $(SOFT)_$(VERSION)-$(PATCH)_x64.zip $(EXE) tmp
+	rm -rf $(SOFT)_$(VERSION)-$(REVISION)_x64.zip $(EXE) tmp
 
 version:
 	@echo "VERSION: $(VERSION)"
@@ -57,7 +57,7 @@ tmp/install.bat: install.bat Makefile
 
 ocs:
 	@echo ""
-	@echo "Name:    $(SOFT)_$(VERSION)-$(PATCH)_x64"
+	@echo "Name:    $(SOFT)_$(VERSION)-$(REVISION)_x64"
 	@echo "Launch:  install.bat"
 	@echo "Priority: 2"
 	@echo "Message: yes"

@@ -7,7 +7,7 @@ SSHFS_VERSION:=$(shell curl -s -L 'https://github.com/winfsp/sshfs-win/releases/
 SSHFS_URL:=https://github.com/billziss-gh/sshfs-win/releases/download/v$(SSHFS_VERSION)/sshfs-win-$(SSHFS_VERSION)-x64.msi
 SSHFS_EXE:=sshfs-win-$(SSHFS_VERSION)-x64.msi
 
-PATCH:=1
+REVISION:=1
 
 ServerSFTP:=$(shell grep -h '^ServerSFTP' conf.yml ../../winsoft-conf/sshfs-win/conf.yml 2>/dev/null | cut -f 2 -d ':' | sed -e 's/[[:space:]]//g;' | head -1)
 NetworkDrive:=$(shell grep -h '^NetworkDrive' conf.yml ../../winsoft-conf/sshfs-win/conf.yml 2>/dev/null | cut -f 2 -d ':' | sed -e 's/[[:space:]]//g;' | head -1)
@@ -21,7 +21,7 @@ IT_TEAM:=IT Support
 
 .PHONY: all check-version clean control next ocs version wget
 
-all: check-version $(SOFT)_$(VERSION)-$(PATCH)_x64.zip ocs
+all: check-version $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
 
 sinclude ../_common/conf.mk
 
@@ -81,7 +81,7 @@ tmp/install.bat: install.bat Makefile tmp/$(WINFSP_EXE) tmp/$(SSHFS_EXE)
 
 ocs:
 	@echo ""
-	@echo "Name:    $(SOFT)_$(VERSION)-$(PATCH)_x64"
+	@echo "Name:    $(SOFT)_$(VERSION)-$(REVISION)_x64"
 	@echo "Launch:  install.bat"
 	@echo "Message: yes"
 	@echo "Delay:   5"

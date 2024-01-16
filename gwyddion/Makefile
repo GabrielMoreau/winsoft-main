@@ -5,7 +5,7 @@
 
 SOFT:=Gwyddion
 VERSION:=$(shell curl -s -L 'http://gwyddion.net/download.php' | sed -e 's/>/\n/g;' | grep '^Version.*released' | cut -f 1 -d ',' | cut -f 2 -d ' ')
-PATCH:=1
+REVISION:=1
 URL:=http://sourceforge.net/projects/gwyddion/files/gwyddion/$(VERSION)/Gwyddion-$(VERSION).win64.exe
 
 EXE:=Gwyddion-$(VERSION)-x64.exe
@@ -15,7 +15,7 @@ IT_TEAM:=IT Support
 
 .PHONY: all check-version check-exe clean control next ocs version wget checksum
 
-all: check-version check-exe $(SOFT)_$(VERSION)-$(PATCH)_x64.zip Uninstall-$(SOFT)_$(VERSION)-$(PATCH)_x64.zip ocs
+all: check-version check-exe $(SOFT)_$(VERSION)-$(REVISION)_x64.zip Uninstall-$(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
 
 sinclude ../_common/conf.mk
 
@@ -23,7 +23,7 @@ check-version:
 	@echo $(VERSION) | egrep -q '^[[:digit:]][\.[:digit:]]*$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
 
 clean:
-	rm -rf $(SOFT)_$(VERSION)-$(PATCH)_x64.zip Uninstall-$(SOFT)_$(VERSION)-$(PATCH)_x64.zip tmp resources
+	rm -rf $(SOFT)_$(VERSION)-$(REVISION)_x64.zip Uninstall-$(SOFT)_$(VERSION)-$(REVISION)_x64.zip tmp resources
 
 version:
 	@echo "VERSION: $(VERSION)"
@@ -65,16 +65,16 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@(cd tmp; zip -r ../$@ install.bat $(EXE))
 	@chmod ugo+rw $@
 
-Uninstall-$(SOFT)_$(VERSION)-$(PATCH)_x64.zip: Makefile uninstall.bat uninstall.ps1
+Uninstall-$(SOFT)_$(VERSION)-$(REVISION)_x64.zip: Makefile uninstall.bat uninstall.ps1
 	@rm -f $@
 	@zip -r ./$@ uninstall.bat uninstall.ps1
 	@printf "@ uninstall.bat\n@=install.bat\n" | zipnote -w ./$@
 	@chmod ugo+rw $@
 
-ocs: $(SOFT)_$(VERSION)-$(PATCH)_x64.zip Uninstall-$(SOFT)_$(VERSION)-$(PATCH)_x64.zip
+ocs: $(SOFT)_$(VERSION)-$(REVISION)_x64.zip Uninstall-$(SOFT)_$(VERSION)-$(REVISION)_x64.zip
 	@echo ""
-	@echo "Name:    $(SOFT)_$(VERSION)-$(PATCH)_x64"
-	@echo "Name:    Uninstall-$(SOFT)_$(VERSION)-$(PATCH)_x64"
+	@echo "Name:    $(SOFT)_$(VERSION)-$(REVISION)_x64"
+	@echo "Name:    Uninstall-$(SOFT)_$(VERSION)-$(REVISION)_x64"
 	@echo "Launch:  install.bat"
 	@echo "Message: yes"
 	@echo "Delay:   5"

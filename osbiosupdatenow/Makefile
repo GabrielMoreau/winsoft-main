@@ -7,7 +7,7 @@ SOFT:=OSBIOSUpdateNow
 URL11:=$(shell curl -s -L 'https://www.microsoft.com/software-download/windows11' | grep 'windows11-upgrade-now' | sed -e 's/"/\n/g;' | grep '^https://go.microsoft.com/fwlink/')
 VERSION11:=$(shell echo $(URL11) | cut -f 2 -d '=')
 VERSION:=0.9.$(VERSION11)
-PATCH:=1
+REVISION:=1
 
 EXE:=Windows11InstallationAssistant-$(VERSION11).exe
 
@@ -17,7 +17,7 @@ IT_TEAM:=IT Support
 
 .PHONY: all check-version check-exe clean control next ocs version wget checksum
 
-all: check-version check-exe $(SOFT)_$(VERSION)-$(PATCH)_x64.zip ocs
+all: check-version check-exe $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
 
 sinclude ../_common/conf.mk
 
@@ -25,7 +25,7 @@ check-version:
 	@echo $(VERSION) | egrep -q '^[[:digit:]][\.[:digit:]]*$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
 
 clean:
-	rm -rf $(SOFT)_$(VERSION)-$(PATCH)_x64.zip tmp
+	rm -rf $(SOFT)_$(VERSION)-$(REVISION)_x64.zip tmp
 
 version:
 	@echo "VERSION: $(VERSION)"
@@ -68,7 +68,7 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 
 ocs:
 	@echo ""
-	@echo "Name:     $(SOFT)_$(VERSION)-$(PATCH)_x64"
+	@echo "Name:     $(SOFT)_$(VERSION)-$(REVISION)_x64"
 	@echo "Launch:   install.bat"
 	@echo "Priority: *6*"
 	@echo "Message:  yes"

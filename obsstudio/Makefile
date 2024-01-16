@@ -6,7 +6,7 @@
 SOFT:=OBS-Studio
 URL:=$(shell curl -s -L 'https://obsproject.com/fr/download' | sed -e 's/>/\n/g;' | sed -e 's/"/\n/g;' | egrep '^https://.*/OBS-Studio-.*-Full-Installer-x64.exe$$')
 VERSION:=$(shell basename $(URL) | cut -f 3 -d '-')
-PATCH:=1
+REVISION:=1
 
 EXE:=OBS-Studio-$(VERSION)-Full-Installer-x64.exe
 
@@ -18,7 +18,7 @@ IT_TEAM:=IT Support
 
 .PHONY: all check-version clean control next ocs version wget checksum
 
-all: check-version $(SOFT)_$(VERSION)-$(PATCH)_x64.zip ocs
+all: check-version $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
 
 sinclude ../_common/conf.mk
 
@@ -26,7 +26,7 @@ check-version:
 	@echo $(VERSION) | egrep -q '^[[:digit:]][\.[:digit:]]*$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
 
 clean:
-	rm -rf $(SOFT)_$(VERSION)-$(PATCH)_x64.zip tmp resources
+	rm -rf $(SOFT)_$(VERSION)-$(REVISION)_x64.zip tmp resources
 
 version:
 	@echo "VERSION: $(VERSION)"
@@ -70,7 +70,7 @@ tmp/pre-install.ps1: pre-install.ps1 Makefile tmp/$(EXE)
 
 ocs:
 	@echo ""
-	@echo "Name:    $(SOFT)_$(VERSION)-$(PATCH)_x64"
+	@echo "Name:    $(SOFT)_$(VERSION)-$(REVISION)_x64"
 	@echo "Launch:  install.bat"
 	@echo "Message: yes"
 	@echo "Delay:   5"

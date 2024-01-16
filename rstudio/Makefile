@@ -9,7 +9,7 @@ URL:=$(shell curl -s -L 'https://posit.co/download/rstudio-desktop/' | sed -e 's
 VERSION1:=$(shell basename $(URL) | cut -f 2- -d'-' | sed -e 's/\.exe$$//;')
 URL2:=https://cloud.r-project.org/bin/windows/base/$(shell curl -s -L 'https://cloud.r-project.org/bin/windows/base/' | sed -e 's/"/\n/g;' | egrep '^R-.*-win.exe')
 VERSION2:=$(shell basename $(URL2) | cut -f 2 -d'-')
-PATCH:=1
+REVISION:=1
 
 VERSION:=$(shell echo $(VERSION1)-$(VERSION2) | sed -e 's/-/./g;')
 
@@ -21,7 +21,7 @@ IT_TEAM:=IT Support
 
 .PHONY: all check-version check-exe check-exe2 clean control next ocs version wget checksum
 
-all: check-version check-exe check-exe2 $(SOFT)_$(VERSION)-$(PATCH)_x64.zip ocs
+all: check-version check-exe check-exe2 $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
 
 sinclude ../_common/conf.mk
 
@@ -29,7 +29,7 @@ check-version:
 	@echo $(VERSION) | egrep -q '^[[:digit:]][\.[:digit:]]*$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
 
 clean:
-	rm -rf $(SOFT)_$(VERSION)-$(PATCH)_x64.zip tmp resources
+	rm -rf $(SOFT)_$(VERSION)-$(REVISION)_x64.zip tmp resources
 
 version:
 	@echo "VERSION: $(VERSION)"
@@ -99,7 +99,7 @@ tmp/pre-install.ps1: pre-install.ps1 Makefile tmp/$(EXE) tmp/$(EXE2)
 
 ocs:
 	@echo ""
-	@echo "Name:    $(SOFT)_$(VERSION)-$(PATCH)_x64"
+	@echo "Name:    $(SOFT)_$(VERSION)-$(REVISION)_x64"
 	@echo "Launch:  install.bat"
 	@echo "Message: yes"
 	@echo "Delay:   5"

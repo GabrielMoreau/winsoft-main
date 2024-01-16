@@ -7,7 +7,7 @@ URL:=$(shell curl -s -L 'https://filezilla-project.org/download.php?show_all=1' 
 
 SOFT:=FileZilla
 VERSION:=$(shell echo "$(URL)" | cut -f 2 -d '_')
-PATCH:=1
+REVISION:=1
 
 EXE:=FileZilla_$(VERSION)_win64-setup.exe
 
@@ -16,7 +16,7 @@ IT_TEAM:=IT Support
 
 .PHONY: all check-version check-exe clean control next ocs version wget checksum
 
-all: check-version check-exe $(SOFT)_$(VERSION)-$(PATCH)_x64.zip ocs
+all: check-version check-exe $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
 
 sinclude ../_common/conf.mk
 
@@ -24,7 +24,7 @@ check-version:
 	@echo $(VERSION) | egrep -q '^[[:digit:]][\.[:digit:]]*$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
 
 clean:
-	rm -rf $(SOFT)_$(VERSION)-$(PATCH)_x64.zip $(EXE) tmp resources
+	rm -rf $(SOFT)_$(VERSION)-$(REVISION)_x64.zip $(EXE) tmp resources
 
 version:
 	@echo "VERSION: $(VERSION)"
@@ -74,7 +74,7 @@ tmp/post-install.ps1: post-install.ps1 Makefile tmp/$(EXE)
 
 ocs:
 	@echo ""
-	@echo "Name:    $(SOFT)_$(VERSION)-$(PATCH)_x64"
+	@echo "Name:    $(SOFT)_$(VERSION)-$(REVISION)_x64"
 	@echo "Launch:  install.bat"
 	@echo "Message: yes"
 	@echo "Delay:   20"

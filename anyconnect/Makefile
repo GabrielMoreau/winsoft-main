@@ -5,7 +5,7 @@
 
 SOFT:=AnyConnect
 VERSION:=4.10.07061
-PATCH:=1
+REVISION:=1
 VERSIONONLINE:=$(shell curl -s 'https://www.cisco.com/c/en/us/td/docs/security/vpn_client/anyconnect/anyconnect410/release/notes/release-notes-anyconnect-4-10.html' | sed -e 's/[<>]/\n/g;' | grep '^AnyConnect [[:digit:]].* New Features' | head -1 | cut -f 2 -d ' ')
 
 EXE:=anyconnect-win-$(VERSION)-core-vpn-webdeploy-k9.msi
@@ -16,7 +16,7 @@ IT_TEAM:=IT Support
 
 .PHONY: all check-version clean control next ocs version wget checksum
 
-all: check-version control $(SOFT)_$(VERSION)-$(PATCH)_x64.zip ocs
+all: check-version control $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
 
 sinclude ../_common/conf.mk
 
@@ -25,7 +25,7 @@ check-version:
 	@if [ "$(VERSION)" != "$(VERSIONONLINE)" ]; then echo '#'; echo "# Warning: a new version $(VERSIONONLINE) exist on Cisco website!"; echo '#'; fi
 
 clean:
-	rm -rf $(SOFT)_$(VERSION)-$(PATCH)_x64.zip tmp
+	rm -rf $(SOFT)_$(VERSION)-$(REVISION)_x64.zip tmp
 
 version:
 	@echo "VERSION: $(VERSION)"
@@ -61,7 +61,7 @@ tmp/Profile_VPN_Default.xml: Profile_VPN_Default.xml Makefile
 
 ocs:
 	@echo ""
-	@echo "Name:    $(SOFT)_$(VERSION)-$(PATCH)_x64"
+	@echo "Name:    $(SOFT)_$(VERSION)-$(REVISION)_x64"
 	@echo "Launch:  install.bat"
 	@echo "Message: yes"
 	@echo "Delay:   5"

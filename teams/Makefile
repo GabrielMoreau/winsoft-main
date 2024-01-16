@@ -7,7 +7,7 @@ SOFT:=Teams
 VERSION:=$(shell curl -s -L 'https://learn.microsoft.com/en-us/officeupdates/teams-app-versioning' | grep -A 30 'windows-version-history-1' | paste -sd '' | sed -e s'#<tr>#\n#g;' | grep -Ev '(windows-version-history|Slimcore version|Rolling out)' | sed -e 's/[<>]/\n/g;' | egrep '^[[:digit:]][[:digit:]]?\.[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+$$' | head -1)
 SHORTVERSION:=$(shell echo $(VERSION) | sed -e 's/00/0/g;')
 URL:=https://teams.microsoft.com/downloads/desktopurl?env=production&plat=windows&arch=x64&managedInstaller=true&download=true
-PATCH:=1
+REVISION:=1
 
 EXE:=Teams_$(VERSION)_windows_x64.msi
 
@@ -15,7 +15,7 @@ IT_TEAM:=IT Support
 
 .PHONY: all check-version clean control next ocs version wget checksum check-exe
 
-all: check-version check-exe $(SOFT)_$(VERSION)-$(PATCH)_x64.zip ocs
+all: check-version check-exe $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
 
 sinclude ../_common/conf.mk
 
@@ -23,7 +23,7 @@ check-version:
 	@echo $(VERSION) | egrep -q '^[[:digit:]][\.[:digit:]]*$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
 
 clean:
-	rm -rf $(SOFT)_$(VERSION)-$(PATCH)_x64.zip tmp resources
+	rm -rf $(SOFT)_$(VERSION)-$(REVISION)_x64.zip tmp resources
 
 version:
 	@echo "VERSION: $(VERSION)"
@@ -69,7 +69,7 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 
 ocs:
 	@echo ""
-	@echo "Name:    $(SOFT)_$(VERSION)-$(PATCH)_x64"
+	@echo "Name:    $(SOFT)_$(VERSION)-$(REVISION)_x64"
 	@echo "Launch:  install.bat"
 	@echo "Message: yes"
 	@echo "Delay:   5"

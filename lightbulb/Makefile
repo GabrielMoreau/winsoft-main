@@ -5,7 +5,7 @@
 
 SOFT:=LightBulb
 VERSION1:=$(shell curl -s -L 'https://github.com/Tyrrrz/LightBulb/releases/latest'  | sed 's/</\n/g;'| grep '^meta property.*og:title' | cut -f 4 -d ' ')
-PATCH:=1
+REVISION:=1
 URL1:=https://github.com/Tyrrrz/LightBulb/releases/download/$(VERSION1)/LightBulb-Installer.exe
 
 URL2:=$(shell curl -s -L https://dotnet.microsoft.com/$(shell curl -s -L 'https://dotnet.microsoft.com/en-us/download/dotnet/8.0' | sed -e 's/"/\n/g;' | grep 'thank-you/runtime-desktop.*windows-x64-installer'  | head -1) | sed -e 's/"/\n/g;' | grep '^https.*windowsdesktop-runtime-.*-win-x64.exe' | head -1)
@@ -23,7 +23,7 @@ IT_TEAM:=IT Support
 
 .PHONY: all check-version check-exe1 check-exe2 clean control next ocs VERSION1 wget checksum
 
-all: check-version check-exe1 check-exe2 $(SOFT)_$(VERSION)-$(PATCH)_x64.zip ocs
+all: check-version check-exe1 check-exe2 $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
 
 sinclude ../_common/conf.mk
 
@@ -31,7 +31,7 @@ check-version:
 	@echo $(VERSION1) | egrep -q '^[[:digit:]][\.[:digit:]]*$$' || (echo 'VERSION1 is undefined' > /dev/stderr ; exit 1)
 
 clean:
-	rm -rf $(SOFT)_$(VERSION)-$(PATCH)_x64.zip tmp resources
+	rm -rf $(SOFT)_$(VERSION)-$(REVISION)_x64.zip tmp resources
 
 version:
 	@echo "VERSION: $(VERSION)"
@@ -95,7 +95,7 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE1)
 
 ocs:
 	@echo ""
-	@echo "Name:    $(SOFT)_$(VERSION)-$(PATCH)_x64"
+	@echo "Name:    $(SOFT)_$(VERSION)-$(REVISION)_x64"
 	@echo "Launch:  install.bat"
 	@echo "Message: yes"
 	@echo "Delay:   5"

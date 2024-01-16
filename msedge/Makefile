@@ -14,7 +14,7 @@ URL:=$(shell     echo '$(WLINES)' | sed -e 's/,/\n/g;' | grep -A 500 '"Product":
 
 #SOFT:=MSEdge
 #INSTALLER:=MicrosoftEdgeEnterpriseX64.msi
-PATCH:=1
+REVISION:=1
 #URL:=$(shell curl --silent -L https://www.microsoft.com/en-us/edge/business/download | sed -e 's/[[:space:],]/\n/g;' | grep '^downloadUrl.*MicrosoftEdgeEnterpriseX64.msi' | head -1 | sed -e 's#\\u002F#/#g;' | cut -f 2 -d '"')
 UUID:=$(shell dirname "$(URL)" | xargs -r basename)
 #VERSION:=$(shell (grep "^$(UUID):" version.txt 2> /dev/null || file tmp/MicrosoftEdgeEnterpriseX64.msi 2> /dev/null | sed -s 's/, /\n/g;' |grep '^Comments:') | awk '{print $$2}')
@@ -25,7 +25,7 @@ IT_TEAM:=IT Support
 
 .PHONY: all check-version check-exe clean control next ocs version wget checksum
 
-all: check-version check-exe $(SOFT)_$(VERSION)-$(PATCH)_x64.zip ocs
+all: check-version check-exe $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
 #	@mkdir -p tmp
 #	@(cd tmp; \
 #		echo $(VERSION) | egrep -q '^[[:digit:]][\.[:digit:]]*$$'                        || curl -# -o $(INSTALLER) -L "$(URL)"; \
@@ -39,10 +39,10 @@ sinclude ../_common/conf.mk
 check-version:
 	@echo $(VERSION) | egrep -q '^[[:digit:]][\.[:digit:]]*$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
 
-#next: check-version check-exe $(SOFT)_$(VERSION)-$(PATCH)_x64.zip ocs
+#next: check-version check-exe $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
 
 clean:
-	rm -rf $(SOFT)_$(VERSION)-$(PATCH)_x64.zip tmp
+	rm -rf $(SOFT)_$(VERSION)-$(REVISION)_x64.zip tmp
 
 version:
 	@echo "VERSION: $(VERSION)"
@@ -92,7 +92,7 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 
 ocs:
 	@echo ""
-	@echo "Name:    $(SOFT)_$(VERSION)-$(PATCH)_x64"
+	@echo "Name:    $(SOFT)_$(VERSION)-$(REVISION)_x64"
 	@echo "Launch:  install.bat"
 	@echo "Message: yes"
 	@echo "Delay:   5"

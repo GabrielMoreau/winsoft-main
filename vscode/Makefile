@@ -8,7 +8,7 @@ INSTALLER:=VSCodeSetup-x64.exe
 URL:=$(shell curl -s 'https://code.visualstudio.com/sha?build=stable' | sed -e 's/[,{}]/\n/g;' |  grep '/VSCodeSetup-x64-' | cut -f 4 -d '"' | head -1)
 VERSION:=$(shell basename '$(URL)' | cut -f 3 -d '-' | sed -e 's/exe/0/;')
 #VERSION:=$(shell peres -a tmp/$(INSTALLER) 2> /dev/null | grep '^Product Version' | awk '{print $$3}')
-PATCH:=1
+REVISION:=1
 #URL:=https://code.visualstudio.com/sha/download?build=stable&os=win32-x64
 
 EXE:=VSCodeSetup-x64-$(VERSION).exe
@@ -18,7 +18,7 @@ IT_TEAM:=IT Support
 
 .PHONY: all check-version check-exe clean control next ocs version wget checksum
 
-all: check-version check-exe $(SOFT)_$(VERSION)-$(PATCH)_x64.zip ocs
+all: check-version check-exe $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
 #	@mkdir -p tmp
 #	@rm -f "tmp/$(INSTALLER)"
 #	@(cd tmp; curl -s --time-cond $(INSTALLER) -o $(INSTALLER) -L "$(URL)")
@@ -29,10 +29,10 @@ sinclude ../_common/conf.mk
 check-version:
 	@echo $(VERSION) | egrep -q '^[[:digit:]][\.[:digit:]]*$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
 
-#next: check-version check-exe $(SOFT)_$(VERSION)-$(PATCH)_x64.zip ocs
+#next: check-version check-exe $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
 
 clean:
-	rm -rf $(SOFT)_$(VERSION)-$(PATCH)_x64.zip tmp resources
+	rm -rf $(SOFT)_$(VERSION)-$(REVISION)_x64.zip tmp resources
 
 version:
 	@echo "VERSION: $(VERSION)"
@@ -78,7 +78,7 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 
 ocs:
 	@echo ""
-	@echo "Name:    $(SOFT)_$(VERSION)-$(PATCH)_x64"
+	@echo "Name:    $(SOFT)_$(VERSION)-$(REVISION)_x64"
 	@echo "Launch:  install.bat"
 	@echo "Message: yes"
 	@echo "Delay:   5"

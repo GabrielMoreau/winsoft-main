@@ -5,7 +5,7 @@
 
 SOFT:=Digikam
 VERSION:=$(shell curl -s -L 'https://www.digikam.org/download/' | sed -e 's/[<>"=[:space:]]/\n/g;' | egrep '^http.*/digiKam-.*-Win64.exe.mirrorlist' | cut -f 6 -d '/')
-PATCH:=1
+REVISION:=1
 MIRROR:=$(shell  curl -s -L 'https://www.digikam.org/download/' | sed -e 's/[<>"=[:space:]]/\n/g;' | egrep '^http.*/digiKam-.*-Win64.exe.mirrorlist')
 URL:=$(shell curl -s -L "$(MIRROR)" | sed -e 's/"/\n/g;' | egrep '^https://.*/digiKam-.*-Win64.exe' | head -1)
 
@@ -16,7 +16,7 @@ IT_TEAM:=IT Support
 
 .PHONY: all check-version clean control next ocs version wget checksum
 
-all: check-version $(SOFT)_$(VERSION)-$(PATCH)_x64.zip ocs
+all: check-version $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
 
 sinclude ../_common/conf.mk
 
@@ -24,7 +24,7 @@ check-version:
 	@echo $(VERSION) | egrep -q '^[[:digit:]][\.[:digit:]]*$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
 
 clean:
-	rm -rf $(SOFT)_$(VERSION)-$(PATCH)_x64.zip tmp resources
+	rm -rf $(SOFT)_$(VERSION)-$(REVISION)_x64.zip tmp resources
 
 version:
 	@echo "VERSION: $(VERSION)"
@@ -66,7 +66,7 @@ tmp/post-install.ps1: post-install.ps1 Makefile tmp/$(EXE)
 
 ocs:
 	@echo ""
-	@echo "Name:    $(SOFT)_$(VERSION)-$(PATCH)_x64"
+	@echo "Name:    $(SOFT)_$(VERSION)-$(REVISION)_x64"
 	@echo "Launch:  install.bat"
 	@echo "Message: yes"
 	@echo "Delay:   5"
