@@ -65,7 +65,7 @@ check-exe: tmp/Telegram/Telegram.exe tmp/$(EXE)
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
-	@sed -e 's/__VERSION__/$(VERSION)/;' install.bat > $@
+	@sed -e 's/__VERSION__/$(VERSION)/;' $< > $@
 
 %.zip: Makefile uninstall.bat tmp/install.bat tmp/$(EXE) tmp/Telegram/Telegram.exe
 	@rm -f $@

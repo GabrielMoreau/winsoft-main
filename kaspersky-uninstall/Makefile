@@ -48,7 +48,7 @@ tmp/install.bat: install.bat Makefile
 	@mkdir -p tmp
 	@perl -p -e ' \
 		s/^(SET\ssoftversion=)\d[\.\d]+\w?/$${1}$(VERSION)/; \
-		s/^(SET\ssoftpatch=)\d+/$${1}$(PATCH)/;' install.bat > $@
+		s/^(SET\ssoftpatch=)\d+/$${1}$(PATCH)/;' $< > $@
 
 %.zip: Makefile tmp/$(ZIP)
 	@rm -f $@

@@ -86,7 +86,7 @@ check-exe2: tmp/$(EXE2)
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE) tmp/$(EXE2)
 	@mkdir -p tmp
-	@sed -e 's/__VERSION1__/$(VERSION1)/; s/__VERSION2__/$(VERSION2)/;' install.bat > $@
+	@sed -e 's/__VERSION1__/$(VERSION1)/; s/__VERSION2__/$(VERSION2)/;' $< > $@
 
 tmp/pre-install.ps1: pre-install.ps1 Makefile tmp/$(EXE) tmp/$(EXE2)
 	@mkdir -p tmp

@@ -57,7 +57,7 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
 	@perl -p -e ' \
 		s/__VERSION__/$(VERSION)/; \
-		s/__PATCH__/$(PATCH)/;' install.bat > $@
+		s/__PATCH__/$(PATCH)/;' $< > $@
 
 tmp/pre-install.ps1: pre-install.ps1 Makefile tmp/$(EXE)
 	@mkdir -p tmp

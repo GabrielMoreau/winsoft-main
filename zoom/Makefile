@@ -70,7 +70,7 @@ check-exe: tmp/$(EXE)
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
-	@sed -e 's/__VERSION__/$(VERSION)/; s/__ZSSOHOST__/$(ZSSOHOST)/g;' install.bat > $@
+	@sed -e 's/__VERSION__/$(VERSION)/; s/__ZSSOHOST__/$(ZSSOHOST)/g;' $< > $@
 
 %.zip: Makefile tmp/install.bat tmp/$(EXE)
 	@rm -f $@

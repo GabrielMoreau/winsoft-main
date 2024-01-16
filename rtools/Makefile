@@ -64,7 +64,7 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@perl -p -e ' \
 		s/__VERSION_L__/$(LONGVERSION)/; \
 		s/__VERSION_S__/$(SHORTVERSION)/; \
-		s/__PATCH__/$(PATCH)/;' install.bat > $@
+		s/__PATCH__/$(PATCH)/;' $< > $@
 
 %.zip: Makefile tmp/install.bat tmp/$(EXE)
 	@rm -f $@

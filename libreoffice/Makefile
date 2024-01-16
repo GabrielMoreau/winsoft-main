@@ -82,7 +82,7 @@ check-exe2: tmp/$(EXE_HELP)
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE_LO)
 	@mkdir -p tmp
-	@sed -e 's/__VERSION__/$(VERSION)/;' install.bat > $@
+	@sed -e 's/__VERSION__/$(VERSION)/;' $< > $@
 
 %.zip: Makefile tmp/install.bat tmp/$(EXE_LO) tmp/$(EXE_HELP)
 	@rm -f $@
