@@ -46,14 +46,11 @@ control:
 
 tmp/install.bat: install.bat Makefile $(EXE)
 	@mkdir -p tmp
-	@perl -p -e ' \
-		s/^(SET\ssoftversion=)\d[\.\d]+\w?/$${1}$(VERSION)/; \
-		s/^(SET\ssoftpatch=)\d+/$${1}$(PATCH)/;' install.bat > $@
+	@sed -e 's/__VERSION__/$(VERSION)/;' $< > $@
 
 tmp/Profile_VPN_Default.xml: Profile_VPN_Default.xml Makefile
 	@mkdir -p tmp
-	@perl -p -e ' \
-		s/(__VPN_SERVER__)/$(CISCO_VPN_SERVER)/;' Profile_VPN_Default.xml > $@
+	@sed -e 's/__VPN_SERVER__/$(CISCO_VPN_SERVER)/;' $< > $@
 	@if grep -q '__VPN_SERVER__' $@; then echo "Error: bad VPN Server substitution in $<"; fi
 
 %.zip: Makefile tmp/install.bat $(EXE) tmp/Profile_VPN_Default.xml

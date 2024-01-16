@@ -20,8 +20,7 @@ ECHO BEGIN %date%-%time%
 
 REM https://nrc.canada.ca/fr/recherche-developpement/produits-services/logiciels-applications/blue-kenuetm-logiciel-modelisateurs-hydrauliques
 
-SET softversion=3.3.4
-SET softpatch=1
+SET softversion=__VERSION__
 
 
 REM Silent install

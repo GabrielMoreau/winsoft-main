@@ -50,9 +50,7 @@ wget: $(VCREDIST)
 
 tmp/install.bat: install.bat Makefile
 	@mkdir -p tmp
-	@perl -p -e ' \
-		s/^(SET\ssoftversion=)\d[\.\d]+\w?/$${1}$(VERSION)/; \
-		s/^(SET\ssoftpatch=)\d+/$${1}$(PATCH)/;' install.bat > $@
+	@sed -e 's/__VERSION__/$(VERSION)/;' $< > $@
 
 tmp/version-replace.txt: $(VCREDIST)
 	@echo "s/__2005-x64-bad__/$$(peres -a tmp/2005/vcredist_x64.EXE | egrep 'Product Version:' | awk '{print $$3}')/;"  > $@

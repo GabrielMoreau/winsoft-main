@@ -57,19 +57,11 @@ tmp/$(EXE):
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
-	@perl -p -e ' \
-		s/^(SET\ssoftversion=)\d[\.\d]+\w?/$${1}$(VERSION)/; \
-		s/^(SET\ssoftpatch=)\d+/$${1}$(PATCH)/; \
-		s#^(SET\socsserver=).*#$${1}$(OCS_SERVER)#; \
-		s/^(SET\socsssl=)\d/$${1}$(OCS_SSL)/;' install.bat > $@
+	@sed -e 's/__VERSION__/$(VERSION)/; s#__OCS_SERVER__#$(OCS_SERVER)#; s/__OCS_SSL__/$(OCS_SSL)/;' $< > $@
 
 tmp/install-outofservice.bat: install-outofservice.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
-	@perl -p -e ' \
-		s/^(SET\ssoftversion=)\d[\.\d]+\w?/$${1}$(VERSION)/; \
-		s/^(SET\ssoftpatch=)\d+/$${1}$(PATCH)/; \
-		s#^(SET\socsserver=).*#$${1}$(OCS_SERVER)#; \
-		s/^(SET\socsssl=)\d/$${1}$(OCS_SSL)/;' install-outofservice.bat > $@
+	@sed -e 's/__VERSION__/$(VERSION)/; s#__OCS_SERVER__#$(OCS_SERVER)#; s/__OCS_SSL__/$(OCS_SSL)/;' $< > $@
 
 %.zip: Makefile post-install.ps1 tmp/install.bat tmp/install-outofservice.bat tmp/$(EXE)
 	@rm -f $@

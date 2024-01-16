@@ -13,7 +13,7 @@ URL:=https://downloads.micron.ox.ac.uk/fiji_update/mirrors/fiji-latest/fiji-win6
 ZIP:=fiji-win64.zip
 SUBFOLDER:=Fiji.app-$(VERSION)
 EXE:=$(SUBFOLDER)/ImageJ-win64.exe
-PATCH:=1
+REVISION:=1
 
 IT_TEAM:=IT Support
 
@@ -21,7 +21,7 @@ IT_TEAM:=IT Support
 .PHONY: all check-version clean control next ocs version wget checksum
 .SECONDARY:
 
-all: check-version $(SOFT)_$(VERSION)-$(PATCH)_x64.zip ocs
+all: check-version $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
 
 sinclude ../_common/conf.mk
 
@@ -29,7 +29,7 @@ check-version:
 	@echo $(VERSION) | egrep -q '^[[:digit:]][\.[:digit:]]*$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
 
 clean:
-	@rm -rf tmp resources $(SOFT)_$(VERSION)-$(PATCH)_x64.zip
+	@rm -rf tmp resources $(SOFT)_$(VERSION)-$(REVISION)_x64.zip
 
 version:
 	@echo "VERSION: $(VERSION)"
@@ -65,13 +65,8 @@ tmp/%.exe:
 	@mkdir -p tmp
 	@IVERSION=$$(zgrep 'plugin update-site.*filename="jars/ij-[[:digit:]]' tmp/$(SUBFOLDER)/db.xml.gz  | cut -f 4 -d '"' | cut -f 2 -d '-' | sed -e 's/.jar$$//;') ; \
 	NVERSION=$$(echo $${IVERSION} | sed -e 's/\w$$//;') ; \
-	perl -p -e " \
-		s/^(SET\ssoftversion=)\d[\.\d]+/\$${1}$(VERSION)/; \
-		s/^(SET\ssoftpatch=)\d+/\$${1}$(PATCH)/; \
-		s/^(SET\ssoftiversion=)\d.*/\$${1}$${IVERSION}/; \
-		s/^(SET\ssoftnversion=)\d.*/\$${1}$${NVERSION}/;" install.bat > tmp/$(SUBFOLDER)/install.bat
-	@perl -p -e ' \
-		s/^(\$$ImageJVersion = )"\d[\.\d]+"/$${1}"$(VERSION)"/; ' post-install.ps1 > tmp/$(SUBFOLDER)/post-install.ps1
+	sed -e "s/__VERSION__/$(VERSION)/; s/__REVISION__/$(REVISION)/; s/__IVERSION__/$${IVERSION}/; s/__NVERSION__/$${NVERSION}/;" install.bat      > tmp/$(SUBFOLDER)/install.bat ; \
+	sed -e "s/__VERSION__/$(VERSION)/; s/__REVISION__/$(REVISION)/; s/__IVERSION__/$${IVERSION}/; s/__NVERSION__/$${NVERSION}/;" post-install.ps1 > tmp/$(SUBFOLDER)/post-install.ps1
 	@rm -f $@
 	@zip -r $@  uninstall.bat
 	@(cd tmp/$(SUBFOLDER); zip -r ../../$@ install.bat post-install.ps1 db.xml.gz ImageJ-win64.exe README.md WELCOME.md)
@@ -79,9 +74,9 @@ tmp/%.exe:
 	@chmod ugo+rw $@
 
 
-ocs: $(SOFT)_$(VERSION)-$(PATCH)_x64.zip
+ocs: $(SOFT)_$(VERSION)-$(REVISION)_x64.zip
 	@echo ""
-	@echo "Name:    $(SOFT)_$(VERSION)-$(PATCH)_x64"
+	@echo "Name:    $(SOFT)_$(VERSION)-$(REVISION)_x64"
 	@echo "Launch:  install.bat"
 	@echo "Message: yes"
 	@echo "Delay:   5"

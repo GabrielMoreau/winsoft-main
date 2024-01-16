@@ -13,12 +13,12 @@ EXIT /B
 
 ECHO BEGIN %date%-%time%
 
-SET softversion=2.6.8
-SET softpatch=2
+SET softversion=__VERSION__
+SET softrevision=__REVISION__
 SET regkey=ImageJ
 SET softpublisher=The ImageJ Fiji Team
-SET softiversion=1.45b
-SET softnversion=1.45
+SET softiversion=__IVERSION__
+SET softnversion=__NVERSION__
 
 SET pwrsh=%WINDIR%\System32\WindowsPowerShell\V1.0\powershell.exe
 IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET pwrsh=%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe
@@ -47,7 +47,7 @@ ECHO Change Add and Remove values in the register
 >> tmp_install.reg ECHO [HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\%regkey%]
 >> tmp_install.reg ECHO "DisplayVersion"="%softnversion%.%softversion%"
 >> tmp_install.reg ECHO "Comments"="%softname% (%DATE:~-4%/%DATE:~-7,-5%/%DATE:~-10,-8%)"
->> tmp_install.reg ECHO "DisplayName"="%softname% - %softiversion% (Fiji %softversion%-%softpatch%)"
+>> tmp_install.reg ECHO "DisplayName"="%softname% - %softiversion% (Fiji %softversion%-%softrevision%)"
 >> tmp_install.reg ECHO "InstallFolder"="C:\\ProgramData\\ImageJ"
 >> tmp_install.reg ECHO "Publisher"="%softpublisher%"
 >> tmp_install.reg ECHO "UninstallString"="C:\\ProgramData\\ImageJ\\uninstall.bat"

@@ -18,8 +18,7 @@ EXIT /B
 
 ECHO BEGIN %date%-%time%
 
-SET softversion=4.10.04071
-SET softpatch=1
+SET softversion=__VERSION__
 
 
 ECHO Stop VPN service

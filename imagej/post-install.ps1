@@ -7,7 +7,7 @@
 # New-Item -ItemType directory -path "C:\Program Files\ImageJ" -name "print"
 # }
 
-$ImageJVersion = "4.6"
+$ImageJVersion = "__VERSION__"
 
 If (Test-Path "${Env:ProgramData}\ImageJ\version.txt" -PathType Leaf) {
 	$ImageJVersionOld = Get-Content -Path "${Env:ProgramData}\ImageJ\version.txt"

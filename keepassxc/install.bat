@@ -18,8 +18,7 @@ EXIT /B
 
 ECHO BEGIN %date%-%time%
 
-SET softversion=2.7.1
-SET softpatch=1
+SET softversion=__VERSION__
 SET process=KeepassXC.exe
 
 

@@ -19,10 +19,10 @@ EXIT /B
 ECHO BEGIN %date%-%time%
 
 REM Version parameter (auto update by Makefile)
-SET softversion=91.5.1
-SET softpatch=1
-SET ocsserver=ocs-server.example.com
-SET ocsssl=1
+SET softversion=__VERSION__
+SET ocsserver=__OCS_SERVER__
+SET ocsssl=__OCS_SSL__
+
 
 REM Stop OCS service
 SET servicename=OCS Inventory Service

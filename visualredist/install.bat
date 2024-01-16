@@ -18,8 +18,7 @@ EXIT /B
 
 ECHO BEGIN %date%-%time%
 
-SET softversion=91.5.1
-SET softpatch=1
+SET softversion=__VERSION__
 
 
 SET pwrsh=%WINDIR%\System32\WindowsPowerShell\V1.0\powershell.exe

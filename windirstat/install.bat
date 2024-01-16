@@ -18,8 +18,7 @@ EXIT /B
 
 ECHO BEGIN %date%-%time%
 
-SET softversion=1.1.2
-SET softpatch=1
+SET softversion=__VERSION__
 SET regkey=windirstat
 SET softexec=windirstat%softversion%_setup.exe
 SET shortcut=%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\%softname%.lnk
