@@ -62,11 +62,11 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 
 tmp/pre-install.ps1: pre-install.ps1 Makefile tmp/$(EXE)
 	@mkdir -p tmp
-	@sed -e 's/__VERSION__/$(VERSION)/;' pre-install.ps1 > $@
+	@sed -e 's/__VERSION__/$(VERSION)/;' $< > $@
 
 tmp/post-install.ps1: post-install.ps1 Makefile tmp/$(EXE)
 	@mkdir -p tmp
-	@sed -e 's/__VERSION__/$(VERSION)/;' post-install.ps1 > $@
+	@sed -e 's/__VERSION__/$(VERSION)/;' $< > $@
 
 %.zip: Makefile tmp/install.bat tmp/pre-install.ps1 tmp/post-install.ps1 tmp/$(EXE)
 	@rm -f $@

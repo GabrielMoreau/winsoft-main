@@ -79,7 +79,7 @@ tmp/version.txt: tmp/version-replace.txt
 	@cmp version.txt tmp/version.txt || diff --side-by-side version.txt tmp/version.txt
 
 tmp/post-install.ps1: post-install.ps1 tmp/version-replace.txt Makefile
-	@perl -p -e "$$(cat tmp/version-replace.txt)" post-install.ps1 > $@
+	@perl -p -e "$$(cat tmp/version-replace.txt)" $< > $@
 
 %.zip: Makefile tmp/install.bat tmp/post-install.ps1 view.ps1 $(VCREDIST) tmp/version.txt
 	@rm -f $@
