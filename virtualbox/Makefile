@@ -4,9 +4,10 @@
 #
 
 SOFT:=VirtualBox
-VERSION:=$(shell curl -s -L 'https://www.virtualbox.org/wiki/Downloads' | sed -e 's/>[[:space:]]/>/; s/[<>]/\n/g;' | grep 'platform packages' | cut -f 1 -d ' ')
+#VERSION:=$(shell curl -s -L 'https://www.virtualbox.org/wiki/Downloads' | sed -e 's/>[[:space:]]/>/; s/[<>]/\n/g;' | grep 'platform packages' | cut -f 1 -d ' ')
 REVISION:=1
-URL1:=$(shell curl -s -L 'https://www.virtualbox.org/wiki/Downloads' | sed -e 's/[<>"]/\n/g;' | grep "/$(VERSION)/VirtualBox-.*-Win.exe")
+URL1:=$(shell curl -s -L 'https://www.virtualbox.org/wiki/Downloads' | sed -e 's/"/\n/g;' | grep '/VirtualBox-.*-Win.exe' | head -1)
+VERSION:=$(shell dirname '$(URL1)' | xargs -r basename)
 URL2:=$(shell curl -s -L 'https://www.virtualbox.org/wiki/Downloads' | sed -e 's/[<>"]/\n/g;' | grep "/$(VERSION)/Oracle_VM_VirtualBox_Extension")
 
 EXE1:=VirtualBox-$(VERSION)-Win.exe
