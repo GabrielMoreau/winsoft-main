@@ -19,7 +19,6 @@ EXIT /B
 ECHO BEGIN %date%-%time%
 
 SET softversion=__VERSION__
-SET softpatch=__PATCH__
 SET regkey=7d96caee-06e6-597c-9f2f-c7bb2e0948b4
 SET shortcut=%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\Signal-Desktop.lnk
 

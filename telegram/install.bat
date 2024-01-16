@@ -19,7 +19,6 @@ EXIT /B
 ECHO BEGIN %date%-%time%
 
 SET softversion=__VERSION__
-SET softpatch=__PATCH__
 SET regkey=Telegram Desktop
 SET shortcut=%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\Telegram.lnk
 SET process=Telegram.exe

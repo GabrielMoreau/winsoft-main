@@ -20,7 +20,6 @@ ECHO BEGIN %date%-%time%
 
 
 SET softversion=__VERSION__
-SET softpatch=__PATCH__
 
 REM IF EXIST "%ProgramFiles%\PDFCreator\unins000.exe" "%ProgramFiles%\PDFCreator\unins000.exe" /verysilent
 REM ping 127.0.0.1 -n 6 > NUL

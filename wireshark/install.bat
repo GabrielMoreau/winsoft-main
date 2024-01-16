@@ -19,7 +19,6 @@ EXIT /B
 ECHO BEGIN %date%-%time%
 
 SET softversion=__VERSION1__
-SET softpatch=__PATCH__
 
 REM NPCAP or Win10Pcap
 SET softversion2=__VERSION2__

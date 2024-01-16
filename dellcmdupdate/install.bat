@@ -19,7 +19,6 @@ EXIT /B
 ECHO BEGIN %date%-%time%
 
 SET softversion=__VERSION__
-SET softpatch=__PATCH__
 SET softexe=__EXE__
 SET softversionlow=__VERSION_LOW__
 

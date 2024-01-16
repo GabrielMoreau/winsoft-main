@@ -19,7 +19,6 @@ EXIT /B
 ECHO BEGIN %date%-%time%
 
 SET softversion=__VERSION__
-SET softpatch=__PATCH__
 
 ECHO Silent install %softname%
 msiexec /i "googlechromestandaloneenterprise64-%softversion%.msi" /qn /L*V "%logdir%\%softname%-MSI.log"

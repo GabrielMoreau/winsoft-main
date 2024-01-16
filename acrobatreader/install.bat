@@ -20,7 +20,6 @@ ECHO BEGIN %date%-%time%
 
 
 SET softversion=__VERSION__
-SET softpatch=__PATCH__
 
 REM https://silentinstallhq.com/adobe-reader-silent-uninstall-strings-master-list/
 ECHO Uninstall %softname% Silent

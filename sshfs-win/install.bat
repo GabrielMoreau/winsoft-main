@@ -19,7 +19,6 @@ ECHO BEGIN %date%-%time%
 
 SET WinfspVersion=__WINFSP_VERSION__
 SET SshfsVersion=__SSHFS_VERSION__
-SET softpatch=__PATCH__
 
 
 ECHO Search PowerShell

@@ -20,7 +20,6 @@ ECHO BEGIN %date%-%time%
 
 SET softversion=__VERSION__
 SET softversionshort=__VERSIONSHORT__
-SET softpatch=__PATCH__
 SET process=7z.exe
 
 

@@ -20,7 +20,6 @@ ECHO BEGIN %date%-%time%
 
 
 SET softversion=__VERSION__
-SET softpatch=__PATCH__
 
 REM Silent install
 Git-%softversion%-64-bit.exe /VERYSILENT /NORESTART /NOCANCEL /SP- /CLOSEAPPLICATIONS /RESTARTAPPLICATIONS

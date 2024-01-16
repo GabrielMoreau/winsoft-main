@@ -20,7 +20,6 @@ ECHO BEGIN %date%-%time%
 
 
 SET softversion=__VERSION__
-SET softpatch=__PATCH__
 
 ECHO Fix PowerShell
 SET pwrsh=%WINDIR%\System32\WindowsPowerShell\V1.0\powershell.exe

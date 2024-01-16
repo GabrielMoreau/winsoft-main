@@ -20,7 +20,6 @@ ECHO BEGIN %date%-%time%
 
 SET softversion1=__VERSION1__
 SET softversion2=__VERSION2__
-SET softpatch=__PATCH__
 
 
 ECHO Search PowerShell

@@ -21,7 +21,6 @@ ECHO BEGIN %date%-%time%
 REM https://support.zoom.us/hc/fr/articles/201362163-Installation-et-configuration-de-masse-pour-Windows
 
 SET softversion=__VERSION__
-SET softpatch=__PATCH__
 
 
 REM Silent install
