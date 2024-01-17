@@ -6,9 +6,10 @@
 SOFT:=Avidemux
 URL:=$(shell curl -sL 'https://api.github.com/repos/mean00/avidemux2/releases/latest' | grep 'browser_download_url.*64bits.exe' | cut -f 4 -d '"' | head -1)
 VERSION:=$(shell dirname '$(URL)' | xargs -r basename)
+VERSIONSHORT:=$(shell echo '$(VERSION)' | cut -f 1,2 -d '.')
 REVISION:=1
 
-EXE:=avidemux-$(VERSION)-win64.exe
+EXE:=Avidemux_$(VERSION).VC++.64bits.exe
 
 IT_TEAM:=IT Support
 
@@ -27,6 +28,7 @@ clean:
 
 version:
 	@echo "VERSION: $(VERSION)"
+	@echo "VERSIONSHORT: $(VERSIONSHORT)"
 	@echo "URL: $(URL)"
 	@echo "EXE: $(EXE)"
 
@@ -58,11 +60,16 @@ check-exe: tmp/$(EXE)
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
-	@sed -e 's/__VERSION__/$(VERSION)/;' $< > $@
+	@sed -e 's/__VERSION__/$(VERSION)/; s/__VERSIONSHORT__/$(VERSIONSHORT)/;' $< > $@
 
-%.zip: Makefile tmp/install.bat tmp/$(EXE)
+tmp/uninstall.bat: uninstall.bat Makefile tmp/$(EXE)
+	@mkdir -p tmp
+	@sed -e 's/__VERSION__/$(VERSION)/; s/__VERSIONSHORT__/$(VERSIONSHORT)/;' $< > $@
+
+%.zip: Makefile avidemux.qs tmp/install.bat tmp/uninstall.bat tmp/$(EXE)
 	@rm -f $@
-	@(cd tmp; zip -r ../$@ install.bat $(EXE))
+	@zip -r $@ avidemux.qs
+	@(cd tmp; zip -r ../$@ install.bat uninstall.bat $(EXE))
 	@chmod ugo+rw $@
 
 ocs:
