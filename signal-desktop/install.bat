@@ -56,7 +56,7 @@ ECHO Better reg uninstall key
 >> tmp_install.reg ECHO.
 regedit.exe /S "tmp_install.reg"
 
-REM HKU	Signal 6.43.2	Signal Messenger, LLC	6.43.2	%regkey%	"C:\ProgramData\signal-desktop\Uninstall Signal.exe" /currentuser
+REM HKU	Signal 6.43.2	Signal Messenger, LLC	6.43.2	7d96caee-06e6-597c-9f2f-c7bb2e0948b4	"C:\ProgramData\signal-desktop\Uninstall Signal.exe" /currentuser
 ECHO Clean reg uninstall key in HKU
 REG QUERY "HKEY_USERS\.DEFAULT\Software\Microsoft\Windows\CurrentVersion\Uninstall\%regkey%"
 IF %ERRORLEVEL% NEQ 0 GOTO Next
