@@ -7,9 +7,9 @@ SOFT:=Chrome
 # curl -s -L 'https://versionhistory.googleapis.com/v1/chrome/platforms/win64/channels/extended/versions/all/releases?filter=endtime=none'
 # curl -s -L 'https://versionhistory.googleapis.com/v1/chrome/platforms/win64/channels/stable/versions/all/releases?filter=endtime=none'
 VERSION:=$(shell curl -s -L 'https://versionhistory.googleapis.com/v1/chrome/platforms/win64/channels/extended/versions/all/releases?filter=endtime=none' | grep '"version":' | cut -f 4 -d '"' | sort -V | tail -1)
+#VERSION:=$(shell curl -s -L 'https://versionhistory.googleapis.com/v1/chrome/platforms/win64/channels/stable/versions/all/releases?filter=endtime=none' | grep '"version":' | cut -f 4 -d '"' | sort -V | tail -1)
 REVISION:=1
 URL:=https://dl.google.com/chrome/install/googlechromestandaloneenterprise64.msi
-
 EXE:=googlechromestandaloneenterprise64-$(VERSION).msi
 
 IT_TEAM:=IT Support
