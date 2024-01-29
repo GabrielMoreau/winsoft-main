@@ -1,7 +1,20 @@
 {
   "policies": {
+    "FirefoxHome": {
+      "Search": true,
+      "TopSites": false,
+      "SponsoredTopSites": false,
+      "Highlights": false,
+      "Pocket": false,
+      "SponsoredPocket": false,
+      "Snippets": false,
+      "Locked": false
+    },
+    "DisableTelemetry": true,
+    "DisablePocket": true,
+    "DisableFirefoxStudies": true,
     "PrimaryPassword": true,
-    "DontCheckDefaultBrowser": true, 
+    "DontCheckDefaultBrowser": true,
     "AppAutoUpdate": false,
     "ManualAppUpdateOnly": true,
     "ExtensionUpdate": true,
