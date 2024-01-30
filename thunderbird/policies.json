@@ -1,6 +1,13 @@
 {
   "policies": {
     "PrimaryPassword": true,
-    "DisableAppUpdate": true
+    "DisableAppUpdate": true,
+    "ExtensionUpdate": true,
+    "ExtensionSettings": {
+      "French-GC-TB@grammalecte.net": {
+        "installation_mode": "force_installed",
+        "install_url": "https://addons.thunderbird.net/thunderbird/downloads/latest/grammalecte-fr-thunderbird/latest.xpi"
+      }
+    }
   }
 }

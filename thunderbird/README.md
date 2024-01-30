@@ -6,3 +6,23 @@ Thunderbird is a free and open-source email reader developed by the Mozilla Foun
 * Wikipedia : https://en.wikipedia.org/wiki/Mozilla_Thunderbird
 
 * Download : https://www.thunderbird.net/en-US/thunderbird/all/
+* Silent install : https://enterprise.thunderbird.net/deploy/deploy-thunderbird-with-msi-installers
+
+
+## Policies
+
+Policies can be specified by creating a file called policies.json.
+See also: https://github.com/mozilla/policy-templates
+
+For extension, you need to know the ID.
+On method for example is to do
+```bash
+curl -# -L 'https://addons.thunderbird.net/thunderbird/downloads/latest/grammalecte-fr-thunderbird/latest.xpi' -o grammalecte-fr-thunderbird-latest.xpi
+unzip -p grammalecte-fr-thunderbird-latest.xpi manifest.json | grep 'id.:' ; rm grammalecte-fr-thunderbird-latest.xpi
+```
+It's possible to validate the `policies.json` file with
+```bash
+cat policies.json | jq empty
+```
+
+You can see the deployed policies by using the URL about:policies
