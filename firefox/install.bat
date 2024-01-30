@@ -1,4 +1,3 @@
-REM @ECHO OFF
 
 REM
 REM   Firefox
@@ -46,14 +45,14 @@ ECHO Execute pre-install script (clean register policies)
 
 
 ECHO Silent install %softname%
-msiexec /i "Firefox-Setup-%softversion%-esr.msi" INSTALL_MAINTENANCE_SERVICE=false /q
+msiexec /i "Firefox-Setup-%softversion%-esr.msi" INSTALL_MAINTENANCE_SERVICE=false DESKTOP_SHORTCUT=false /q /norestart /L*v "%logdir%\%softname%-MSI.log"
 
 
 REM voir https://github.com/mozilla/policy-templates/blob/master/README.md
 ECHO Push policies
-IF EXIST "C:\Program Files\Mozilla Firefox" (
-  IF NOT EXIST "C:\Program Files\Mozilla Firefox\distribution" MKDIR "C:\Program Files\Mozilla Firefox\distribution"
-  IF EXIST "C:\Program Files\Mozilla Firefox\distribution" COPY /y policies.json "C:\Program Files\Mozilla Firefox\distribution\policies.json" > NUL
+IF EXIST "%ProgramFiles%\Mozilla Firefox" (
+  IF NOT EXIST "%ProgramFiles%\Mozilla Firefox\distribution" MKDIR "%ProgramFiles%s\Mozilla Firefox\distribution"
+  IF EXIST "%ProgramFiles%\Mozilla Firefox\distribution" COPY /y policies.json "%ProgramFiles%\Mozilla Firefox\distribution\policies.json" > NUL
 )
 
 ECHO Execute post-install script
