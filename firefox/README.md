@@ -10,6 +10,9 @@ Firefox is a free and open-source web browser developed by the Mozilla Foundatio
 * Silent install : https://support.mozilla.org/en-US/kb/deploy-firefox-msi-installers,
 	https://silentinstallhq.com/mozilla-firefox-100-silent-install-how-to-guide/
 
+
+## Policies
+
 Policies can be specified by creating a file called policies.json.
 See also: https://github.com/mozilla/policy-templates
 
