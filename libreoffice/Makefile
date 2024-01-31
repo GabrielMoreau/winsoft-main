@@ -55,14 +55,13 @@ tmp/$(EXE_LO):
 	@(cd tmp ; \
 		rm -f *_Win_x86-64.msi 2>/dev/null ; \
 		curl -# -o "$(EXE_LO)" -L "$(URL_LO)" ; \
-		#file "$(EXE_LO)" | grep -q "Author: The Document Foundation.*$(VERSION)" || echo "Error: bad format or version for binary $(EXE_LO)" ; \
 		grep -q "^$$(shasum -a 256 $(EXE_LO))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE_LO)" ; \
 		)
 
 check-exe1: tmp/$(EXE_LO)
 	@(cd tmp ; \
-		file $(EXE_LO) | grep -q "Author: The Document Foundation.*$(VERSION)" || { echo "Error: bad format or version for binary $(EXE_LO)" 1>&2 ; exit 1; } ; \
-		#which peres >/dev/null && { peres -a $(EXE) | grep -q "^Product Version:[[:space:]]*$(PVERSION)" || { echo "Error: bad version for binary $(EXE_LO)" 1>&2 ; exit 1; } ; } ;\
+		file $(EXE_LO) | grep -q "Composite Document File.*, MSI Installer" || { echo "Error: bad format for binary $(EXE_LO)" 1>&2 ; exit 1; } ; \
+		file $(EXE_LO) | grep -q "Author: The Document Foundation.*$(VERSION)" || { echo "Error: bad version for binary $(EXE_LO)" 1>&2 ; exit 1; } ; \
 		)
 
 tmp/$(EXE_HELP):
@@ -70,14 +69,13 @@ tmp/$(EXE_HELP):
 	@(cd tmp ; \
 		rm -f *_helppack_fr.msi 2>/dev/null ; \
 		curl -# -o "$(EXE_HELP)" -L "$(URL_HELP)" ; \
-		#file "$(EXE_HELP)" | grep -q "Author: The Document Foundation.*$(VERSION)" || echo "Error: bad format or version for binary $(EXE_HELP)" ; \
 		grep -q "^$$(shasum -a 256 $(EXE_HELP))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE_HELP)" ; \
 		)
 
 check-exe2: tmp/$(EXE_HELP)
 	@(cd tmp ; \
-		file $(EXE_HELP) | grep -q "Author: The Document Foundation.*$(VERSION)" || { echo "Error: bad format or version for binary $(EXE_HELP)" 1>&2 ; exit 1; } ; \
-		#which peres >/dev/null && { peres -a $(EXE) | grep -q "^Product Version:[[:space:]]*$(PVERSION)" || { echo "Error: bad version for binary $(EXE_LO)" 1>&2 ; exit 1; } ; } ;\
+		file $(EXE_HELP) | grep -q "Composite Document File.*, MSI Installer" || { echo "Error: bad format for binary $(EXE_HELP)" 1>&2 ; exit 1; } ; \
+		file $(EXE_HELP) | grep -q "Author: The Document Foundation.*$(VERSION)" || { echo "Error: bad version for binary $(EXE_HELP)" 1>&2 ; exit 1; } ; \
 		)
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE_LO)
