@@ -1,7 +1,11 @@
 # Windows11Update - Update Windows 10 or 11 to the last version of Windows 11
 
-**Warning:** this package (script) has never been tested!
-For the moment, it's mainly a proof of concept.
+**Warning:** this package (script) has been tested on a few computers!
+So far, it's worked every time, and compatible computers have ended up running Windows 11.
+Don't run this script without warning the person...
+It's much better if they don't work on the computer during the update.
+
+To build the package, just type `make` in a terminal (preferably under Linux).
 
 The Windows11Update package uses a DOS script to execute the
 `Windows11InstallationAssistant.exe` command.
