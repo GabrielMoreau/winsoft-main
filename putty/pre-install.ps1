@@ -1,5 +1,5 @@
 
-$RefName = 'PuTTY release'
+$RefName = '^PuTTY '
 
 # Remove other PuTTY
 @(Get-ChildItem -Recurse 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall';

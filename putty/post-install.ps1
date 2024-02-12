@@ -3,7 +3,7 @@
 
 $RefVersion = '__VERSION__'
 $RefUninstallString = ''
-$RefName = 'PuTTY release'
+$RefName = '^PuTTY '
 
 Function ToVersion {
 	Param (
