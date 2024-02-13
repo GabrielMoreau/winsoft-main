@@ -9,3 +9,9 @@ and application update experience for Dell commercial client hardware.
 
 * Download : https://www.dell.com/support/home/en-us/drivers
 * Silent install : https://silentinstallhq.com/dell-command-update-4-4-silent-install-how-to-guide/
+
+You must have a serial number of a DELL machine to find the latest
+version of the software on the DELL website. In principle, all DELL
+computers use the same version of the software, so why isn't the
+software freely downloadable with its version number clearly displayed?
+That's another debate...

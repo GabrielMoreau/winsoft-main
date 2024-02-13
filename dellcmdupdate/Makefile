@@ -8,15 +8,16 @@ VERSION:=$(shell grep '^[[:digit:]]' url.txt | sort --version-sort -k 1 | tail -
 REVISION:=1
 URL:=$(shell grep '^$(VERSION)[[:space:]]' url.txt | awk '{print $$2}')
 VERSION_LOW:=$(shell echo "$(VERSION)" | sed -e 's/\./_/g;')
+USERAGENT:=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:122.0) Gecko/20100101 Firefox/122.0
 
 EXE:=$(shell basename "$(URL)")
 
 IT_TEAM:=IT Support
 
 
-.PHONY: all check-version check-exe clean control next ocs version wget checksum
+.PHONY: all check-version check-exe clean control next ocs version wget checksum check-update
 
-all: check-version check-exe $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
+all: check-update check-version check-exe $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
 
 sinclude ../_common/conf.mk
 
@@ -42,12 +43,15 @@ checksum:
 
 wget: tmp/$(EXE)
 
+check-update:
+	@./check4new-version || { echo "Error: there is probably a new version online" 1>&2 ; exit 1; }
+
 tmp/$(EXE):
 	@mkdir -p tmp
 	@(cd tmp ; \
 		rm -f *.exe *.msi 2>/dev/null ; \
-		#curl -# -o "$(EXE)" -L "$(URL)" ; \
-		wget -q --show-progress -O "$(EXE)" "$(URL)" ; \
+		curl -# -o "$(EXE)" -L "$(URL)" --user-agent "$(USERAGENT)" ; \
+		#wget -q --show-progress -O "$(EXE)" "$(URL)" ; \
 		# file $(EXE) | grep -q "PE32 executable" || echo "Error: bad format for binary $(EXE)" ; \
 		# which peres >/dev/null && { peres -a $(EXE) | grep -q "^Product Version:[[:space:]]*$(VERSION)" || echo "Error: bad version for binary $(EXE)" ; } ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
