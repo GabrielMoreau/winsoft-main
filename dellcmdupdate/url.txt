@@ -4,3 +4,4 @@
 4.8.0	https://dl.dell.com/FOLDER09622916M/1/Dell-Command-Update-Application_714J9_WIN_4.8.0_A00.EXE
 4.9.0	https://dl.dell.com/FOLDER10012380M/1/Dell-Command-Update-Application_30F6M_WIN_4.9.0_A01.EXE
 5.0.0	https://dl.dell.com/FOLDER10408469M/1/Dell-Command-Update-Application_HYR95_WIN_5.0.0_A00.EXE
+5.2.0	https://dl.dell.com/FOLDER11201514M/1/Dell-Command-Update-Application_4R78G_WIN_5.2.0_A00.EXE
