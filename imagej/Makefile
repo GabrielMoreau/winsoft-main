@@ -52,7 +52,7 @@ tmp/%.exe:
 		curl -# -o "$(ZIP)" -L "$(URL)" ; \
 		unzip -q "$(ZIP)" ; \
 		mv Fiji.app "Fiji.app-$(VERSION)" ; \
-		curl -s -L 'http://rsbweb.nih.gov/ij/plugins/ankaphase/ANKAphase.zip' -o ANKAphase.zip ; \
+		curl -# -o ANKAphase.zip -L 'http://rsbweb.nih.gov/ij/plugins/ankaphase/ANKAphase.zip' ; \
 		unzip -q ANKAphase.zip 'ANKAphase_*.jar' ; \
 		mv ANKAphase_*.jar "Fiji.app-$(VERSION)/plugins/" ; \
 		file "$(EXE)" | grep -q "x86-64, for MS Windows" || echo "Error: bad format for binary $(EXE)" ; \

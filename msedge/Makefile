@@ -7,17 +7,13 @@
 
 SOFT:=MSEdge
 #VERSION:=$(shell curl -s -L 'https://edgeupdates.microsoft.com/api/products?view=enterprise' | sed -e 's/,/\n/g;' | grep -A 500 '"Product":"Stable"' | grep -B 3 '/MicrosoftEdgeEnterpriseX64.msi"' | grep '"ProductVersion":"' | cut -f 4 -d '"' | head -1)
-#URL:=$(shell     curl -s -L 'https://edgeupdates.microsoft.com/api/products?view=enterprise' | sed -e 's/,/\n/g;' | grep -A 500 '"Product":"Stable"' | grep      '/MicrosoftEdgeEnterpriseX64.msi"' | cut -f 4 -d '"' | head -1)
+#URL:=$(shell curl -s -L 'https://edgeupdates.microsoft.com/api/products?view=enterprise' | sed -e 's/,/\n/g;' | grep -A 500 '"Product":"Stable"' | grep      '/MicrosoftEdgeEnterpriseX64.msi"' | cut -f 4 -d '"' | head -1)
 WLINES:=$(shell curl -s -L 'https://edgeupdates.microsoft.com/api/products?view=enterprise' | sed -e 's/,/\n/g;' | grep -A 500 '"Product":"Stable"' | paste -sd ',')
 VERSION:=$(shell echo '$(WLINES)' | sed -e 's/,/\n/g;' | grep -B 3 '/MicrosoftEdgeEnterpriseX64.msi"' | grep '"ProductVersion":"' | cut -f 4 -d '"' | head -1)
 URL:=$(shell     echo '$(WLINES)' | sed -e 's/,/\n/g;' | grep      '/MicrosoftEdgeEnterpriseX64.msi"' | cut -f 4 -d '"' | head -1)
 
-#SOFT:=MSEdge
-#INSTALLER:=MicrosoftEdgeEnterpriseX64.msi
 REVISION:=1
-#URL:=$(shell curl --silent -L https://www.microsoft.com/en-us/edge/business/download | sed -e 's/[[:space:],]/\n/g;' | grep '^downloadUrl.*MicrosoftEdgeEnterpriseX64.msi' | head -1 | sed -e 's#\\u002F#/#g;' | cut -f 2 -d '"')
 UUID:=$(shell dirname "$(URL)" | xargs -r basename)
-#VERSION:=$(shell (grep "^$(UUID):" version.txt 2> /dev/null || file tmp/MicrosoftEdgeEnterpriseX64.msi 2> /dev/null | sed -s 's/, /\n/g;' |grep '^Comments:') | awk '{print $$2}')
 EXE:=MicrosoftEdgeEnterpriseX64-$(VERSION).msi
 
 IT_TEAM:=IT Support
@@ -26,20 +22,11 @@ IT_TEAM:=IT Support
 .PHONY: all check-version check-exe clean control next ocs version wget checksum
 
 all: check-version check-exe $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
-#	@mkdir -p tmp
-#	@(cd tmp; \
-#		echo $(VERSION) | egrep -q '^[[:digit:]][\.[:digit:]]*$$'                        || curl -# -o $(INSTALLER) -L "$(URL)"; \
-#		file "$(INSTALLER)" 2> /dev/null | grep -q "MSI Installer.*Comments: $(VERSION)" || curl -# -o $(INSTALLER) -L "$(URL)"; \
-#		grep -q "^$(UUID):" ../version.txt 2> /dev/null                                  || curl -# -o $(INSTALLER) -L "$(URL)"; \
-#		)	#@rm -f "tmp/$(INSTALLER)"
-#	@make next
 
 sinclude ../_common/conf.mk
 
 check-version:
 	@echo $(VERSION) | egrep -q '^[[:digit:]][\.[:digit:]]*$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
-
-#next: check-version check-exe $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
 
 clean:
 	rm -rf $(SOFT)_$(VERSION)-$(REVISION)_x64.zip tmp
@@ -65,10 +52,8 @@ wget: tmp/$(EXE)
 tmp/$(EXE):
 	@mkdir -p tmp
 	@(cd tmp ; \
+		rm -f *.exe *.msi 2>/dev/null ; \
 		curl -# -o $(EXE) -L "$(URL)" ; \
-		#find ./ -name '*.msi' -a -not -name "$(INSTALLER)" -a -not -name "$(EXE)" -delete ; \
-		#cmp $(INSTALLER) $(EXE) > /dev/null 2>&1 || cp -f $(INSTALLER) $(EXE) ; \
-		# file $(EXE) | grep -q "MSI Installer.*Comments: $(VERSION)" || echo "Error: bad format or version for binary $(EXE)" ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
 	@grep -q "^$(UUID): $(VERSION)$$" version.txt 2> /dev/null  || echo "Error: bad UUID for version $(VERSION) in version.txt"

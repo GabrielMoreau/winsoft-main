@@ -53,6 +53,7 @@ wget: winfsp-$(WINFSP_VERSION).msi sshfs-win-$(SSHFS_VERSION)-x64.msi sshfs-win-
 tmp/$(WINFSP_EXE):
 	@mkdir -p tmp
 	@(cd tmp; \
+		rm -f winfsp-*.msi ; \
 		curl -# -o "$(WINFSP_EXE)" -L "$(WINFSP_URL)" ; \
 		file $(WINFSP_EXE) | grep -q "MSI Installer,.*, Subject: WinFsp - Windows File System Proxy" || echo "Error: bad format for binary $(WINFSP_EXE)" ; \
 		grep -q "^$$(shasum -a 256 $(WINFSP_EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(WINFSP_EXE)" ; \
@@ -61,6 +62,7 @@ tmp/$(WINFSP_EXE):
 tmp/$(SSHFS_EXE):
 	@mkdir -p tmp
 	@(cd tmp; \
+		rm -f sshfs-win-*.msi ; \
 		curl -# -o "$(SSHFS_EXE)" -L "$(SSHFS_URL)" ; \
 		file $(SSHFS_EXE) | grep -q "MSI Installer,.*, Subject: SSHFS-Win" || echo "Error: bad format for binary $(SSHFS_EXE)" ; \
 		grep -q "^$$(shasum -a 256 $(SSHFS_EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(SSHFS_EXE)" ; \

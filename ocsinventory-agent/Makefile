@@ -47,7 +47,7 @@ tmp/$(EXE):
 	@mkdir -p tmp
 	@(cd tmp ; \
 		rm -f *.exe *.msi 2>/dev/null ; \
-		curl -s -o "$(FOLDER).zip" -L "$(URL)" ; \
+		curl -# -o "$(FOLDER).zip" -L "$(URL)" ; \
 		unzip -q "$(FOLDER).zip" ; \
 		rm -f "$(FOLDER).zip" ; \
 		mv -f "$(FOLDER)/OCS-Windows-Agent-Setup-x64.exe" "$(EXE)"; \
