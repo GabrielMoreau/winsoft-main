@@ -58,6 +58,7 @@ wget: tmp/$(EXE1)
 tmp/$(EXE1):
 	@mkdir -p tmp
 	@(cd tmp ; \
+		rm -f Wireshark*.exe ; \
 		curl -# -o "$(EXE1)" -L "$(URL1)" ; \
 		# file $(EXE1) | grep -q "Nullsoft Installer self-extracting archive" || echo "Error: bad format for binary $(EXE1)" ; \
 		# which peres >/dev/null && { peres -a $(EXE1) | grep -q "^Product Version:[[:space:]]*$(VERSION1)" || echo "Error: bad version for binary $(EXE1)" ; } ; \
@@ -67,6 +68,7 @@ tmp/$(EXE1):
 tmp/$(EXE2):
 	@mkdir -p tmp
 	@(cd tmp ; \
+		rm -f Win10Pcap*.msi ; \
 		curl -# -o "$(EXE2)" -L "$(URL2)" ; \
 		# file $(EXE2) | grep -q "MSI Installer.*Subject: Win10Pcap" || echo "Error: bad format for binary $(EXE2)" ; \
 		#which peres >/dev/null && { peres -a $(EXE2) | grep -q "^Product Version:[[:space:]]*$(VERSION2)" || echo "Error: bad version for binary $(EXE2)" ; } ; \
