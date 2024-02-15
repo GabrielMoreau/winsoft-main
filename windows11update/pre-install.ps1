@@ -1,16 +1,16 @@
-# Test
+# Beta script
 # Apply bypass for old TPM
 
-# Script normaly speak english
+# Force script to speak english
 [cultureinfo]::CurrentUICulture='en-US'
 
-# SecureBoot
+# SecureBoot Query
 If (!(Confirm-SecureBootUEFI)) {
 	Write-Error 'Error: SecureBoot is OFF!'
 	Exit 12
 }
 
-# TPM
+# TPM Query
 If (!(Get-Tpm).TpmReady) {
 	Write-Output 'Get-TPM informations'
 	Get-Tpm
