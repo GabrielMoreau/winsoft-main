@@ -1,0 +1,3 @@
+925cc68a346cf5692fc1b52f498db32edd278ade3f4331539b7914e23f3af417  windowsdesktop-runtime-5.0.17-win-x64.exe
+1002a385738783d1a4594e84b95d01fd241536ab7a1fd4f99b1ee13f49f6db9d  windowsdesktop-runtime-6.0.27-win-x64.exe
+61a42e47f5698dddd6afc08a771043d07c39507be0251ca094eb7ed69d0368b1  windowsdesktop-runtime-7.0.16-win-x64.exe
