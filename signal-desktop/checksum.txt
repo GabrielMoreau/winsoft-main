@@ -5,3 +5,4 @@ e020ac507cb8565cb8067f1962446a7178779d42810636a4e3199a4aeb9d0731  signal-desktop
 f2ef7ce1db237ec17cbfc1906347d4d60b2a4ca65fa49d128b6f06614c1fc1eb  signal-desktop-win-6.45.1.exe
 e26dcde7503c5dd4a86c66d133c06716ac74cd9e30ba45cb4bc7fa0c647b1596  signal-desktop-win-6.46.0.exe
 52e83f7bff24d0f67658f5e0ab0f2cca11e89eb06adcbc82bda05cd8a1ac1229  signal-desktop-win-6.47.0.exe
+d9c07b0f06dbd930502d441d2bbbfa7c660bdccc90fd4daeeb5e691dc2756f40  signal-desktop-win-6.47.1.exe
