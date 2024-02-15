@@ -55,6 +55,12 @@ checksum:
 		grep -q "^$$(shasum -a 256 $(EXE7))$$" ../checksum.txt || { shasum -a 256 "$(EXE7)" | sed -e 's#tmp/##;' >> ../checksum.txt ; } ; \
 		)
 	@if [ $$(( $$(date '+%s') - $$(stat -c '%Y' checksum.txt) )) -lt 60 ]; then tail -6 checksum.txt; fi
+	@(cd tmp ; \
+		grep -q "^$(VERSION5)[[:space:]]" ../version.txt || { (echo -n '$(VERSION5) ' ; peres -a $(EXE5) | grep '^Product Version' | awk '{print $$3}') >> ../version.txt ; } ; \
+		grep -q "^$(VERSION6)[[:space:]]" ../version.txt || { (echo -n '$(VERSION6) ' ; peres -a $(EXE6) | grep '^Product Version' | awk '{print $$3}') >> ../version.txt ; } ; \
+		grep -q "^$(VERSION7)[[:space:]]" ../version.txt || { (echo -n '$(VERSION7) ' ; peres -a $(EXE7) | grep '^Product Version' | awk '{print $$3}') >> ../version.txt ; } ; \
+		)
+	@if [ $$(( $$(date '+%s') - $$(stat -c '%Y' version.txt) )) -lt 60 ]; then tail -6 version.txt; fi
 
 wget: tmp/$(EXE5)
 
