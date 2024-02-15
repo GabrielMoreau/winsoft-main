@@ -4,10 +4,12 @@
 #
 
 SOFT:=Chrome
+$(shell mkdir -p tmp; cd tmp; curl -# --time-cond 'googlechromestandaloneenterprise64.msi' -o 'googlechromestandaloneenterprise64.msi' -L 'https://dl.google.com/chrome/install/googlechromestandaloneenterprise64.msi')
+VERSION:=$(shell file tmp/googlechromestandaloneenterprise64.msi | sed -e 's/.*Comments:\s\([[:digit:]][[:digit:]\.]*\).*/\1/;')
 # curl -s -L 'https://versionhistory.googleapis.com/v1/chrome/platforms/win64/channels/extended/versions/all/releases?filter=endtime=none'
 # curl -s -L 'https://versionhistory.googleapis.com/v1/chrome/platforms/win64/channels/stable/versions/all/releases?filter=endtime=none'
 # VERSION:=$(shell curl -s -L 'https://versionhistory.googleapis.com/v1/chrome/platforms/win64/channels/extended/versions/all/releases?filter=endtime=none' | grep '"version":' | cut -f 4 -d '"' | sort -V | tail -1)
-VERSION:=$(shell curl -s -L 'https://versionhistory.googleapis.com/v1/chrome/platforms/win64/channels/stable/versions/all/releases?filter=endtime=none' | grep '"version":' | cut -f 4 -d '"' | sort -V | tail -1)
+# VERSION:=$(shell curl -s -L 'https://versionhistory.googleapis.com/v1/chrome/platforms/win64/channels/stable/versions/all/releases?filter=endtime=none' | grep '"version":' | cut -f 4 -d '"' | sort -V | tail -1)
 # Many times, version is increment by one in the MSI...
 # VERSION_NEXT:=$(shell echo $(VERSION) | cut -f 1-3 -d '.').$(shell echo $$(( $$(echo $(VERSION) | cut -f 4 -d '.') + 1 )) )
 REVISION:=1
@@ -49,8 +51,9 @@ wget: tmp/$(EXE)
 tmp/$(EXE):
 	@mkdir -p tmp
 	@(cd tmp ; \
-		rm -f *.exe *.msi 2>/dev/null ; \
-		curl -# -o "$(EXE)" -L "$(URL)" ; \
+		rm -f googlechromestandaloneenterprise64-*.msi 2>/dev/null ; \
+		ln -f googlechromestandaloneenterprise64.msi "$(EXE)" ; \
+		#curl -# -o "$(EXE)" -L "$(URL)" ; \
 		#file $(EXE) | grep -q "Subject: Google Chrome Installer.*Comments: $(VERSION) Copyright" || echo "Error: bad format or version for binary $(EXE)" ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
