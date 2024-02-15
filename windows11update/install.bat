@@ -31,7 +31,7 @@ ECHO Add rights
 ECHO unblock
 %pwrsh% "Unblock-File -Path .\*.ps1"
 
-%pwrsh% -File ".\requirements.ps1"
+%pwrsh% -File ".\pre-install.ps1"
 
 ECHO errorlevel %ERRORLEVEL%
 
