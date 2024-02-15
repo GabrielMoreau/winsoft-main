@@ -21,9 +21,27 @@ ECHO BEGIN %date%-%time%
 SET softversion=__VERSION__
 
 
-ECHO Silent install %softname%
-Windows11InstallationAssistant-%softversion%.exe /QuietInstall /SkipEULA /NoRestartUI
+ECHO Search PowerShell
+SET pwrsh=%WINDIR%\System32\WindowsPowerShell\V1.0\powershell.exe
+IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET pwrsh=%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe
 
+ECHO Add rights
+%pwrsh% Set-ExecutionPolicy RemoteSigned -Force -Scope LocalMachine
+
+ECHO unblock
+%pwrsh% "Unblock-File -Path .\*.ps1"
+
+%pwrsh% -File ".\requirements.ps1"
+
+ECHO errorlevel %ERRORLEVEL%
+
+IF %ERRORLEVEL% EQU 0 (
+  ECHO Silent install %softname%
+  Windows11InstallationAssistant-%softversion%.exe /QuietInstall /SkipEULA /NoRestartUI
+  )
+ELSE (
+  ECHO %softname% not installed
+  )
 
 ECHO END %date%-%time%
 EXIT
