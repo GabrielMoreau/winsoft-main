@@ -1,4 +1,6 @@
 
+Write-Output "Begin Post-Install"
+
 # Clean old duplicate key with digiKam in the name (same uninstall string)
 
 $RefVersion = '__VERSION__'
@@ -16,7 +18,7 @@ $RefUninstallString = ''
 		If ([version]$DisplayVersion -eq [version]$RefVersion) {
 			$RefUninstallString = $Exe
 			$KeyPath = $App.PSPath
-			Echo "Ref Key $DisplayName / $Exe / $KeyPath"
+			Write-Output "Ref Key: $DisplayName / $Exe / $KeyPath"
 			}
 	}
 
@@ -32,7 +34,7 @@ If ($RefUninstallString -ne '') {
 			# Echo "Check Key $DisplayName : $DisplayVersion < $RefVersion ?"
 			If (($Exe -eq $RefUninstallString) -And ([version]$DisplayVersion -lt [version]$RefVersion)) {
 				$KeyPath = $App.PSPath
-				Echo "Remove Key $DisplayName / $Exe / $KeyPath"
+				Write-Output "Remove Key: $DisplayName / $Exe / $KeyPath"
 				Remove-Item -Path "$KeyPath" -Force -Recurse -ErrorAction SilentlyContinue
 			}
 		}

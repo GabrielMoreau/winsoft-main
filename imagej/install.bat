@@ -39,7 +39,7 @@ ECHO Execution right on script post-install.ps1
 %pwrsh% "Unblock-File -Path ${env:ProgramData}\ImageJ\post-install.ps1"
 
 ECHO Post-install execute
-%pwrsh% -File "%ProgramData%\ImageJ\post-install.ps1"
+%pwrsh% -File "%ProgramData%\ImageJ\post-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
 
 ECHO Change Add and Remove values in the register
  > tmp_install.reg ECHO Windows Registry Editor Version 5.00

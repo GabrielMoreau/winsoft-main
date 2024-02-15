@@ -1,4 +1,6 @@
 
+Write-Output "Begin Pre-Install"
+
 $RefName = 'Inkscape'
 $RefVersion = '__VERSION__'
 
@@ -30,12 +32,12 @@ Function ToVersion {
 		If ($($App.UninstallString) -match 'MsiExec.exe') {
 			$Exe = 'msiexec.exe'
 			$Args = '/x "' + $KeyProduct + '" /qn'
-			Write-Output "Remove: $DisplayName / $DisplayVersion / $KeyProduct / $Exe $Args"
+			Write-Output "Remove MSI: $DisplayName / $DisplayVersion / $KeyProduct / $Exe $Args"
 		} Else {
 			$UninstallSplit = $App.UninstallString -Split "exe"
 			$Exe = $UninstallSplit[0] + 'exe"'
 			$Args = '/S'
-			Write-Output "Remove: $DisplayName / $DisplayVersion / $($App.UninstallString) / $Exe $Args"
+			Write-Output "Remove EXE: $DisplayName / $DisplayVersion / $($App.UninstallString) / $Exe $Args"
 		}
 
 		$Proc = Start-Process -FilePath "$Exe" -ArgumentList "$Args" -WindowStyle 'Hidden' -ErrorAction 'SilentlyContinue' -PassThru
@@ -66,5 +68,5 @@ Function ToVersion {
 
 		$DisplayVersion = $App.DisplayVersion
 		$KeyProduct = $Key | Split-Path -Leaf
-		Write-Output "Remove: $DisplayName / $DisplayVersion / $KeyProduct / $($App.UninstallString)"
+		Write-Output "View: $DisplayName / $DisplayVersion / $KeyProduct / $($App.UninstallString)"
 	}

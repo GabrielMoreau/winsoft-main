@@ -1,4 +1,6 @@
 
+Write-Output "Begin Pre-Install"
+
 $RefName = 'Rocket.Chat'
 
 # Remove old Rocket.Chat

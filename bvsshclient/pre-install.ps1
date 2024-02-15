@@ -1,4 +1,6 @@
 
+Write-Output "Begin Pre-Install"
+
 $RefName = 'Bitvise SSH Client'
 $RefVersion = '__VERSION__'
 

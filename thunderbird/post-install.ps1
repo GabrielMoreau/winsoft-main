@@ -1,4 +1,6 @@
 
+Write-Output "Begin Post-Install"
+
 # Clean old duplicate key with Thunderbird in the name (same uninstall string)
 
 $RefVersion = '__VERSION__'
@@ -27,9 +29,9 @@ Function ToVersion {
 		$KeyPath = $App.PSPath
 		If ((ToVersion($DisplayVersion)) -eq (ToVersion($RefVersion))) {
 			$RefUninstallString = $Exe
-			Echo "Ref Key $DisplayName / $DisplayVersion / $Exe / $KeyPath"
+			Write-Output "Ref Key: $DisplayName / $DisplayVersion / $Exe / $KeyPath"
 		} Else {
-			Echo "Other Key $DisplayName / $DisplayVersion / $Exe / $KeyPath"
+			Write-Output "Other Key: $DisplayName / $DisplayVersion / $Exe / $KeyPath"
 		}
 	}
 
@@ -45,10 +47,10 @@ If ($RefUninstallString -ne '') {
 			$KeyPath = $App.PSPath
 			# Echo "Check Key $DisplayName : $DisplayVersion < $RefVersion ?"
 			If ((($Exe -eq $RefUninstallString) -Or ($Exe -eq $Null)) -And ((ToVersion($DisplayVersion)) -lt (ToVersion($RefVersion)))) {
-				Echo "Remove Key $DisplayName / $DisplayVersion / $Exe / $KeyPath"
+				Write-Output "Remove Key: $DisplayName / $DisplayVersion / $Exe / $KeyPath"
 				Remove-Item -Path "$KeyPath" -Force -Recurse -ErrorAction SilentlyContinue
 			} Else {
-				Echo "Keep Key $DisplayName / $DisplayVersion / $Exe / $KeyPath / $(ToVersion($DisplayVersion))"
+				Write-Output "Keep Key: $DisplayName / $DisplayVersion / $Exe / $KeyPath / $(ToVersion($DisplayVersion))"
 			}
 		}
 }

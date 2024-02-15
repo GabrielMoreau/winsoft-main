@@ -1,4 +1,6 @@
 
+Write-Output "Begin Pre-Install"
+
 # Pre-install script for add extension to MSEdge
 # https://learn.microsoft.com/en-us/deployedge/microsoft-edge-policies#extensioninstallforcelist
 

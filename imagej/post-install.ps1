@@ -1,3 +1,6 @@
+
+Write-Output "Begin Post-Install"
+
 # execution powershell mode RemoteSigned
 # Set-ItemProperty -Path "hklm:\SOFTWARE\Microsoft\PowerShell\1\ShellIds\Microsoft.PowerShell" -Name "ExecutionPolicy" -Value "RemoteSigned"
 

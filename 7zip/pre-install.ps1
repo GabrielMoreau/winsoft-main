@@ -1,4 +1,6 @@
 
+Write-Output "Begin Pre-Install"
+
 $RefName = '7-Zip'
 
 # Remove old 7-Zip (not x64)

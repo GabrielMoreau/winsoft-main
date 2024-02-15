@@ -33,7 +33,7 @@ ECHO unblock
 
 
 ECHO Execute pre-install script
-%pwrsh% -File ".\pre-install.ps1"
+%pwrsh% -File ".\pre-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
 
 
 ECHO Silent install %softname%
@@ -56,7 +56,7 @@ REM )
 
 
 ECHO Execute post-install script
-%pwrsh% -File ".\post-install.ps1"
+%pwrsh% -File ".\post-install.ps1" 1>> "%logdir%\%softname%-PS1.log" 2>&1
 
 
 ECHO END %date%-%time%

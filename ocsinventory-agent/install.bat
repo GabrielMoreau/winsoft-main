@@ -47,7 +47,7 @@ REM unblock
 %pwrsh% "Unblock-File -Path .\*.ps1"
 
 REM execute
-%pwrsh% -File ".\post-install.ps1"
+%pwrsh% -File ".\post-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
 
 
 ECHO END %date%-%time%

@@ -1,4 +1,6 @@
 
+Write-Output "Begin Pre-Install"
+
 $RefName = 'Dell Command . Update'
 $RefVersion = '__VERSION__'
 

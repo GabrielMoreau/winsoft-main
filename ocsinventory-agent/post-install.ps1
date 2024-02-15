@@ -1,4 +1,6 @@
 
+Write-Output "Begin Post-Install"
+
 # Create PostInstall Task
 If (Test-Path -LiteralPath "${Env:ProgramData}\OCS Inventory NG\DelayedInstall\install-outofservice.bat") {
 	$PostInstallUser    = "NT AUTHORITY\SYSTEM"

@@ -1,4 +1,6 @@
 
+Write-Output "Begin Pre-Install"
+
 $ToDo = 'unknown'
 
 @(Get-ChildItem -Recurse 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall';

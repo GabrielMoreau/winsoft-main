@@ -1,4 +1,6 @@
 
+Write-Output "Begin Pre-Install"
+
 $RefName = 'WinFsp'
 
 # Remove old WinFsp

@@ -1,4 +1,6 @@
 
+Write-Output "Begin Post-Install"
+
 # Copy the script on the system
 Copy-Item -Path "sshfs-win-connect.ps1" -Destination "$Env:ProgramFiles\SSHFS-Win\sshfs-win-connect.ps1" -Force
 

@@ -1,4 +1,6 @@
 
+Write-Output "Begin Post-Install"
+
 $Flag2022x86 = ''
 $Flag2022x64 = ''
 $RefName = 'Microsoft Visual C++ Redistributable'

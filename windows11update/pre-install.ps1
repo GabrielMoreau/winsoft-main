@@ -1,3 +1,6 @@
+
+Write-Output "Begin Pre-Install"
+
 # Beta script
 # Apply bypass for old TPM
 

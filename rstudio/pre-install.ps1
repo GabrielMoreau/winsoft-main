@@ -1,4 +1,6 @@
 
+Write-Output "Begin Pre-Install"
+
 $RefName = 'R for Windows'
 $RefVersion = '__VERSION2__'
 

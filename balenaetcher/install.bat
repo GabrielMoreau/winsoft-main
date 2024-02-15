@@ -41,7 +41,7 @@ ECHO Clean old version before install
 CALL .\uninstall.bat
 
 ECHO Execute pre-install script to remove HKU version
-%pwrsh% -File ".\pre-install.ps1"
+%pwrsh% -File ".\pre-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
 
 
 ECHO Silent install %softname%

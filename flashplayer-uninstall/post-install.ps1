@@ -1,4 +1,6 @@
 
+Write-Output "Begin Post-Install"
+
 $RefName = 'Adobe Flash Player'
 
 # View

@@ -1,4 +1,6 @@
 
+Write-Output "Begin Pre-Install"
+
 # Remove Teams Machine-Wide Installer
 @(Get-ChildItem -Recurse 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall';
   Get-ChildItem -Recurse "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall") |

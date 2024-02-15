@@ -1,4 +1,6 @@
 
+Write-Output "Begin Post-Install"
+
 # Clean old duplicate key with 7-Zip in the name (same uninstall string)
 
 $RefVersion = '__VERSION__'
@@ -28,7 +30,7 @@ Function ToVersion {
 		If ((ToVersion($DisplayVersion)) -eq (ToVersion($RefVersion))) {
 			$RefUninstallString = $Exe
 			$KeyPath = $App.PSPath
-			Echo "Ref Key $DisplayName / $DisplayVersion / $Exe / $KeyPath"
+			Write-Output "Ref Key: $DisplayName / $DisplayVersion / $Exe / $KeyPath"
 			}
 	}
 
@@ -44,7 +46,7 @@ If ($RefUninstallString -ne '') {
 			# Echo "Check Key $DisplayName : $DisplayVersion < $RefVersion ?"
 			If (($Exe -eq $RefUninstallString) -And ((ToVersion($DisplayVersion)) -lt (ToVersion($RefVersion)))) {
 				$KeyPath = $App.PSPath
-				Echo "Remove Key $DisplayName / $DisplayVersion / $Exe / $KeyPath"
+				Write-Output "Remove Key: $DisplayName / $DisplayVersion / $Exe / $KeyPath"
 				Remove-Item -Path "$KeyPath" -Force -Recurse -ErrorAction SilentlyContinue
 			}
 		}

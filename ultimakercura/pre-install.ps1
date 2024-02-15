@@ -1,4 +1,6 @@
 
+Write-Output "Begin Pre-Install"
+
 $RefName = 'UltiMaker Cura'
 $RefVersion = '__VERSION__'
 
