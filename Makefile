@@ -4,7 +4,7 @@ PKGDIR:=$(dir $(wildcard */Makefile))
 KEEP:=2
 SHELL:=/bin/bash
 
-sinclude ../winsoft-conf/common/main.mk
+sinclude ../winsoft-conf/_common/main.mk
 
 .PHONY: help build-all clean-all list-pkg list-version list-md space version
 .ONESHELL:
@@ -22,7 +22,7 @@ build-all:
 	for d in $(PKGDIR)
 	do
 		echo ''
-		if [ -f "$$d/.noauto" ] || grep -q "^$$d" ./common/noauto.conf ../winsoft-conf/common/noauto.conf 2> /dev/null
+		if [ -f "$$d/.noauto" ] || grep -q "^$$d" ./_common/noauto.conf ../winsoft-conf/_common/noauto.conf 2> /dev/null
 		then
 			echo "#=== pass:$$d"
 			continue
@@ -43,7 +43,7 @@ clean-all:
 	for d in $(PKGDIR)
 	do
 		echo ''
-		if [ -f "$$d/.noauto" ] || grep -q "^$$d" ./common/noauto.conf ../winsoft-conf/common/noauto.conf 2> /dev/null
+		if [ -f "$$d/.noauto" ] || grep -q "^$$d" ./_common/noauto.conf ../winsoft-conf/_common/noauto.conf 2> /dev/null
 		then
 			echo "#=== pass:$$d"
 			continue
@@ -57,7 +57,7 @@ checksum-all:
 	for d in $(PKGDIR)
 	do
 		echo ''
-		if [ -f "$$d/.noauto" ] || grep -q "^$$d" ./common/noauto.conf ../winsoft-conf/common/noauto.conf 2> /dev/null
+		if [ -f "$$d/.noauto" ] || grep -q "^$$d" ./_common/noauto.conf ../winsoft-conf/_common/noauto.conf 2> /dev/null
 		then
 			echo "#=== pass:$$d"
 			continue
@@ -89,7 +89,7 @@ list-version:
 	@
 	for d in $(PKGDIR)
 	do
-		if [ -f "$$d/.noauto" ] || grep -q "^$$d" ./common/noauto.conf ../winsoft-conf/common/noauto.conf 2> /dev/null
+		if [ -f "$$d/.noauto" ] || grep -q "^$$d" ./_common/noauto.conf ../winsoft-conf/_common/noauto.conf 2> /dev/null
 		then
 			continue
 		fi
@@ -124,7 +124,7 @@ version:
 	for d in $(PKGDIR)
 	do
 		echo ''
-		if [ -f "$$d/.noauto" ] || grep -q "^$$d" ./common/noauto.conf ../winsoft-conf/common/noauto.conf 2> /dev/null
+		if [ -f "$$d/.noauto" ] || grep -q "^$$d" ./_common/noauto.conf ../winsoft-conf/_common/noauto.conf 2> /dev/null
 		then
 			echo "#=== pass:$$d"
 			continue

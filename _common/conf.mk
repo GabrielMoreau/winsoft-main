@@ -18,4 +18,4 @@ CISCO_VPN_SERVER:=vpn.example.com
 
 
 # Include your local parameter if exists
-sinclude ../../winsoft-conf/common/conf.mk
+sinclude ../../winsoft-conf/_common/conf.mk
