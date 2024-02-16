@@ -6,6 +6,8 @@
 # Team Name (all package)
 IT_TEAM:=IT Team
 
+# Log Folder (protect backslash)
+LOGDIR:=%WINDIR%\\Logs
 
 # OCS Inventory Agent (ocsinventory-agent package)
 OCS_SERVER:=https://ocs-server.example.com/ocsinventory
