@@ -6,7 +6,7 @@ REM
 REM Name
 SET softname=Gwyddion
 
-SET logdir=%ProgramData%\OCS Inventory NG\Agent\DeployLog
+SET logdir=__LOGDIR__
 IF NOT EXIST "%logdir%" (
   MKDIR "%logdir%"
 )
@@ -30,7 +30,7 @@ ECHO unblock
 
 
 ECHO Execute uninstall script
-%pwrsh% -File ".\uninstall.ps1"
+%pwrsh% -File ".\uninstall.ps1" 1> "%logdir%\Uninstall-%softname%-PS1.log" 2>&1
 
 
 ECHO END %date%-%time%

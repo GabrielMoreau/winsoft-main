@@ -62,7 +62,7 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 
 tmp/install-outofservice.bat: install-outofservice.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
-	@sed -e 's/__VERSION__/$(VERSION)/; s#__OCS_SERVER__#$(OCS_SERVER)#; s/__OCS_SSL__/$(OCS_SSL)/;' $< > $@
+	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#; s#__OCS_SERVER__#$(OCS_SERVER)#; s/__OCS_SSL__/$(OCS_SSL)/;' $< > $@
 
 %.zip: Makefile post-install.ps1 tmp/install.bat tmp/install-outofservice.bat tmp/$(EXE)
 	@rm -f $@

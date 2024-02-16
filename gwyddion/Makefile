@@ -61,14 +61,19 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
 	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#;' $< > $@
 
+tmp/uninstall.bat: uninstall.bat Makefile
+	@mkdir -p tmp
+	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#;' $< > $@
+
 %.zip: Makefile tmp/install.bat tmp/$(EXE)
 	@rm -f $@
 	@(cd tmp; zip -r ../$@ install.bat $(EXE))
 	@chmod ugo+rw $@
 
-Uninstall-$(SOFT)_$(VERSION)-$(REVISION)_x64.zip: Makefile uninstall.bat uninstall.ps1
+Uninstall-$(SOFT)_$(VERSION)-$(REVISION)_x64.zip: Makefile tmp/uninstall.bat uninstall.ps1
 	@rm -f $@
-	@zip -r ./$@ uninstall.bat uninstall.ps1
+	@zip -r ./$@ uninstall.ps1
+	@(cd tmp; zip -r ../$@ uninstall.bat)
 	@printf "@ uninstall.bat\n@=install.bat\n" | zipnote -w ./$@
 	@chmod ugo+rw $@
 
