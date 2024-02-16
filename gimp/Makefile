@@ -12,6 +12,7 @@ URL:=https:$(shell curl -s -L 'https://www.gimp.org/downloads/' | egrep 'gimp-.*
 EXE:=gimp-$(VERSION)-setup.exe
 
 IT_TEAM:=IT Support
+LOGDIR:=%WINDIR%\\Logs
 
 
 .PHONY: all check-version clean control next ocs version wget checksum
@@ -54,7 +55,7 @@ tmp/$(EXE):
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
-	@sed -e 's/__VERSION__/$(VERSION)/;' $< > $@
+	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#;' $< > $@
 
 %.zip: Makefile tmp/install.bat tmp/$(EXE)
 	@rm -f $@

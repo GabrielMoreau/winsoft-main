@@ -7,8 +7,6 @@ SOFT:=VisualCPPRedistributable
 VERSION:=1.7
 REVISION:=1
 
-IT_TEAM:=IT Support
-
 VCREDIST:=
 VCREDIST+=tmp/2005/vcredist_x64.EXE
 VCREDIST+=tmp/2005/vcredist_x86.EXE
@@ -24,6 +22,10 @@ VCREDIST+=tmp/2015-2019/vc_redist.x64.exe
 VCREDIST+=tmp/2015-2019/vc_redist.x86.exe
 VCREDIST+=tmp/2015-2022/vc_redist.x64.exe
 VCREDIST+=tmp/2015-2022/vc_redist.x86.exe
+
+IT_TEAM:=IT Support
+LOGDIR:=%WINDIR%\\Logs
+
 
 .PHONY: all checksum check-version clean control next ocs version wget
 
@@ -50,7 +52,7 @@ wget: $(VCREDIST)
 
 tmp/install.bat: install.bat Makefile
 	@mkdir -p tmp
-	@sed -e 's/__VERSION__/$(VERSION)/;' $< > $@
+	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#;' $< > $@
 
 tmp/version-replace.txt: $(VCREDIST)
 	@echo "s/__2005-x64-bad__/$$(peres -a tmp/2005/vcredist_x64.EXE | egrep 'Product Version:' | awk '{print $$3}')/;"  > $@

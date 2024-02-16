@@ -5,7 +5,7 @@ REM
 
 SET softname=KiCad
 
-SET logdir=%ProgramData%\OCS Inventory NG\Agent\DeployLog
+SET logdir=__LOGDIR__
 IF NOT EXIST "%logdir%" (
   MKDIR "%logdir%"
 )

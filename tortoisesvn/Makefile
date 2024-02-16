@@ -11,6 +11,7 @@ URL:=$(shell curl -s -L 'https://tortoisesvn.net/downloads.html' | sed -e 's/[<>
 EXE:=TortoiseSVN-$(VERSION)-x64.msi
 
 IT_TEAM:=IT Support
+LOGDIR:=%WINDIR%\\Logs
 
 
 .PHONY: all check-version check-exe clean control next ocs version wget checksum
@@ -58,7 +59,7 @@ check-exe: tmp/$(EXE)
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
-	@sed -e 's/__VERSION__/$(VERSION)/;' $< > $@
+	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#;' $< > $@
 
 %.zip: Makefile tmp/install.bat tmp/$(EXE)
 	@rm -f $@

@@ -17,6 +17,7 @@ ZSSOHOST:=$(shell grep -h '^ZSSOHOST' conf.yml ../../winsoft-conf/zoom/conf.yml 
 EXE:=ZoomInstallerFull-$(VERSION).msi
 
 IT_TEAM:=IT Support
+LOGDIR:=%WINDIR%\\Logs
 
 
 .PHONY: all check-version check-exe clean control next ocs version wget checksum
@@ -70,7 +71,7 @@ check-exe: tmp/$(EXE)
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
-	@sed -e 's/__VERSION__/$(VERSION)/; s/__ZSSOHOST__/$(ZSSOHOST)/g;' $< > $@
+	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#; s/__ZSSOHOST__/$(ZSSOHOST)/g;' $< > $@
 
 %.zip: Makefile tmp/install.bat tmp/$(EXE)
 	@rm -f $@

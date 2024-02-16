@@ -17,6 +17,7 @@ VERSION:=$(SSHFS_VERSION).$(WINFSP_VERSION)
 
 
 IT_TEAM:=IT Support
+LOGDIR:=%WINDIR%\\Logs
 
 
 .PHONY: all check-version clean control next ocs version wget
@@ -74,7 +75,7 @@ tmp/sshfs-win-connect.ps1: sshfs-win-connect.ps1 ../../winsoft-conf/sshfs-win/co
 
 tmp/install.bat: install.bat Makefile tmp/$(WINFSP_EXE) tmp/$(SSHFS_EXE)
 	@mkdir -p tmp
-	@sed -e 's/__WINFSP_VERSION__/$(WINFSP_VERSION)/; s/__SSHFS_VERSION__/$(SSHFS_VERSION)/;' $< > $@
+	@sed -e 's/__WINFSP_VERSION__/$(WINFSP_VERSION)/; s/__SSHFS_VERSION__/$(SSHFS_VERSION)/; s#__LOGDIR__#$(LOGDIR)#;' $< > $@
 
 %.zip: ../../winsoft-conf/sshfs-win/conf.yml tmp/install.bat pre-install.ps1 post-install.ps1 tmp/sshfs-win-connect.ps1 sshfs-win.ico README.md tmp/winfsp-$(WINFSP_VERSION).msi tmp/sshfs-win-$(SSHFS_VERSION)-x64.msi
 	@mkdir -p tmp

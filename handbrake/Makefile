@@ -17,6 +17,7 @@ EXE2:=windowsdesktop-runtime-$(VERSION2)-win-x64.exe
 VERSION:=$(VERSION1).$(shell echo $(VERSION2) | sed 's/\.//g;')
 
 IT_TEAM:=IT Support
+LOGDIR:=%WINDIR%\\Logs
 
 
 .PHONY: all check-version check-exe1 check-exe2 clean control next ocs version wget checksum
@@ -84,7 +85,7 @@ check-exe2: tmp/$(EXE2)
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE1) tmp/$(EXE2)
 	@mkdir -p tmp
-	@sed -e 's/__VERSION1__/$(VERSION1)/; s/__VERSION2__/$(VERSION2)/;' $< > $@
+	@sed -e 's/__VERSION1__/$(VERSION1)/; s/__VERSION2__/$(VERSION2)/; s#__LOGDIR__#$(LOGDIR)#;' $< > $@
 
 %.zip: Makefile tmp/install.bat tmp/$(EXE1) tmp/$(EXE2)
 	@rm -f $@

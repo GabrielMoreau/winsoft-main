@@ -12,6 +12,7 @@ EXE:=anyconnect-win-$(VERSION)-core-vpn-webdeploy-k9.msi
 
 CISCO_VPN_SERVER:=vpn.example.com
 IT_TEAM:=IT Support
+LOGDIR:=%WINDIR%\\Logs
 
 
 .PHONY: all check-version clean control next ocs version wget checksum
@@ -46,7 +47,7 @@ control:
 
 tmp/install.bat: install.bat Makefile $(EXE)
 	@mkdir -p tmp
-	@sed -e 's/__VERSION__/$(VERSION)/;' $< > $@
+	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#;' $< > $@
 
 tmp/Profile_VPN_Default.xml: Profile_VPN_Default.xml Makefile
 	@mkdir -p tmp

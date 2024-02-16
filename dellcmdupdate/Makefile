@@ -13,6 +13,7 @@ USERAGENT:=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:122.0) Gecko/20100101 Fi
 EXE:=$(shell basename "$(URL)")
 
 IT_TEAM:=IT Support
+LOGDIR:=%WINDIR%\\Logs
 
 
 .PHONY: all check-version check-exe clean control next ocs version wget checksum check-update
@@ -65,7 +66,7 @@ check-exe: tmp/$(EXE)
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
-	@sed -e 's/__VERSION__/$(VERSION)/; s/__EXE__/$(EXE)/; s/__VERSION_LOW__/$(VERSION_LOW)/;' $< > $@
+	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#; s/__EXE__/$(EXE)/; s/__VERSION_LOW__/$(VERSION_LOW)/;' $< > $@
 
 tmp/pre-install.ps1: pre-install.ps1 Makefile tmp/$(EXE)
 	@mkdir -p tmp

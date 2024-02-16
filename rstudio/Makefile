@@ -17,6 +17,7 @@ EXE:=RStudio-$(VERSION1).exe
 EXE2:=R-$(VERSION2)-win.exe
 
 IT_TEAM:=IT Support
+LOGDIR:=%WINDIR%\\Logs
 
 
 .PHONY: all check-version check-exe check-exe2 clean control next ocs version wget checksum
@@ -86,7 +87,7 @@ check-exe2: tmp/$(EXE2)
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE) tmp/$(EXE2)
 	@mkdir -p tmp
-	@sed -e 's/__VERSION1__/$(VERSION1)/; s/__VERSION2__/$(VERSION2)/;' $< > $@
+	@sed -e 's/__VERSION1__/$(VERSION1)/; s/__VERSION2__/$(VERSION2)/; s#__LOGDIR__#$(LOGDIR)#;' $< > $@
 
 tmp/pre-install.ps1: pre-install.ps1 Makefile tmp/$(EXE) tmp/$(EXE2)
 	@mkdir -p tmp

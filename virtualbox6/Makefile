@@ -18,6 +18,7 @@ VCREDIST+=tmp/2015-2019/vc_redist.x64.exe
 VCREDIST+=tmp/2015-2022/vc_redist.x64.exe
 
 IT_TEAM:=IT Support
+LOGDIR:=%WINDIR%\\Logs
 
 
 .PHONY: all check-version clean control next ocs version wget checksum check-exe1 check-exe2
@@ -81,7 +82,7 @@ check-exe2: tmp/$(EXE2)
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE1) tmp/$(EXE2)
 	@mkdir -p tmp
-	@sed -e 's/__VERSION__/$(VERSION)/; s/__PACKEXT__/$(EXE2)/;' $< > $@
+	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#; s/__PACKEXT__/$(EXE2)/;' $< > $@
 
 %.zip: Makefile pre-install.ps1 tmp/install.bat tmp/$(EXE1) tmp/$(EXE2) $(VCREDIST)
 	@rm -f $@

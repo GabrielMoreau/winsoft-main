@@ -10,6 +10,7 @@ URL:=https://github.com/RocketChat/Rocket.Chat.Electron/releases/download/$(VERS
 EXE:=rocketchat-$(VERSION)-win-x64.msi
 
 IT_TEAM:=IT Support
+LOGDIR:=%WINDIR%\\Logs
 
 
 .PHONY: all check-version clean control next ocs version wget checksum
@@ -50,7 +51,7 @@ tmp/$(EXE):
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
-	@sed -e 's/__VERSION__/$(VERSION)/;' $< > $@
+	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#;' $< > $@
 
 tmp/servers.json: servers.json Makefile tmp/$(EXE)
 	@mkdir -p tmp

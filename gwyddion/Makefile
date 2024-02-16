@@ -11,6 +11,7 @@ URL:=http://sourceforge.net/projects/gwyddion/files/gwyddion/$(VERSION)/Gwyddion
 EXE:=Gwyddion-$(VERSION)-x64.exe
 
 IT_TEAM:=IT Support
+LOGDIR:=%WINDIR%\\Logs
 
 
 .PHONY: all check-version check-exe clean control next ocs version wget checksum
@@ -58,7 +59,7 @@ check-exe: tmp/$(EXE)
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
-	@sed -e 's/__VERSION__/$(VERSION)/;' $< > $@
+	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#;' $< > $@
 
 %.zip: Makefile tmp/install.bat tmp/$(EXE)
 	@rm -f $@

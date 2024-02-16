@@ -14,6 +14,7 @@ KesSecureString:=$(shell cat securestring-kes.txt ../../winsoft-conf/kaspersky/s
 KesAESKey:=../../winsoft-conf/kaspersky/aes-kaspersky.key
 
 IT_TEAM:=IT Support
+LOGDIR:=%WINDIR%\\Logs
 
 
 .PHONY: all check-version clean control next ocs version wget
@@ -47,7 +48,7 @@ tmp/$(ZIP):
 
 tmp/install.bat: install.bat Makefile
 	@mkdir -p tmp
-	@sed -e 's/__VERSION__/$(VERSION)/;' $< > $@
+	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#;' $< > $@
 
 %.zip: Makefile tmp/$(ZIP)
 	@rm -f $@

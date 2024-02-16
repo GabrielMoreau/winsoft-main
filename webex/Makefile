@@ -12,6 +12,7 @@ URL:=https://binaries.webex.com/WebexTeamsDesktop-Windows-Gold/Webex.msi
 EXE:=Webex-$(VERSION).msi
 
 IT_TEAM:=IT Support
+LOGDIR:=%WINDIR%\\Logs
 
 
 .PHONY: all check-version check-exe clean control next ocs version wget checksum
@@ -59,7 +60,7 @@ check-exe: tmp/$(EXE)
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
-	@sed -e 's/__VERSION__/$(VERSION)/;' $< > $@
+	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#;' $< > $@
 
 %.zip: Makefile tmp/install.bat pre-install.ps1 tmp/$(EXE)
 	@rm -f $@

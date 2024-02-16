@@ -14,6 +14,7 @@ URL:=https://www.paraview.org/paraview-downloads/download.php?submit=Download&ve
 
 
 IT_TEAM:=IT Support
+LOGDIR:=%WINDIR%\\Logs
 
 
 .PHONY: all check-version clean control next ocs version wget checksum check-exe
@@ -58,7 +59,7 @@ check-exe: tmp/$(EXE)
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
-	@sed -e 's/__VERSION__/$(VERSION)/; s/__EXE__/$(EXE)/;' $< > $@
+	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#; s/__EXE__/$(EXE)/;' $< > $@
 
 %.zip: Makefile pre-install.ps1 tmp/install.bat tmp/$(EXE)
 	@rm -f $@

@@ -12,6 +12,7 @@ VERSIONLONG:=$(shell basename $(URL) | cut -f 4-5 -d '-' | sed -e 's/\.exe//;')
 EXE:=VMware-player-full-$(VERSIONLONG).exe
 
 IT_TEAM:=IT Support
+LOGDIR:=%WINDIR%\\Logs
 
 
 .PHONY: all check-version check-exe clean control next ocs version wget checksum check-update 
@@ -61,7 +62,7 @@ check-exe: tmp/$(EXE)
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
-	@sed -e 's/__VERSION__/$(VERSION)/; s/__VERSIONLONG__/$(VERSIONLONG)/;' $< > $@
+	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#; s/__VERSIONLONG__/$(VERSIONLONG)/;' $< > $@
 
 %.zip: Makefile tmp/install.bat tmp/$(EXE)
 	@rm -f $@

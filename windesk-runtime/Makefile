@@ -21,6 +21,7 @@ EXE7:=windowsdesktop-runtime-$(VERSION7)-win-x64.exe
 VERSION:=1.567.$(shell echo $$(( $$(echo $(VERSION5) | cut -f 3 -d '.') + $$(echo $(VERSION6) | cut -f 3 -d '.') + $$(echo $(VERSION7) | cut -f 3 -d '.') )) )
 
 IT_TEAM:=IT Support
+LOGDIR:=%WINDIR%\\Logs
 
 
 .PHONY: all check-version check-exe5 check-exe6 check-exe7 clean control next ocs version wget checksum
@@ -108,7 +109,7 @@ check-exe7: tmp/$(EXE7)
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE5) tmp/$(EXE6) tmp/$(EXE7)
 	@mkdir -p tmp
-	@sed -e 's/__VERSION__/$(VERSION)/; s/__VERSION5__/$(VERSION5)/; s/__VERSION6__/$(VERSION6)/; s/__VERSION7__/$(VERSION7)/;' $< > $@
+	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#; s/__VERSION5__/$(VERSION5)/; s/__VERSION6__/$(VERSION6)/; s/__VERSION7__/$(VERSION7)/;' $< > $@
 
 %.zip: Makefile tmp/install.bat tmp/$(EXE5) tmp/$(EXE6) tmp/$(EXE7)
 	@rm -f $@

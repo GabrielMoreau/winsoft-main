@@ -17,6 +17,7 @@ VERSION:=$(shell echo -n $(DOTVERSION) ; echo $(LONGVERSION) | sed -e 's/^[[:dig
 
 
 IT_TEAM:=IT Support
+LOGDIR:=%WINDIR%\\Logs
 
 
 .PHONY: all check-version clean control next ocs version wget checksum
@@ -61,7 +62,7 @@ tmp/$(EXE):
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
-	@sed -e 's/__VERSION_L__/$(LONGVERSION)/; s/__VERSION_S__/$(SHORTVERSION)/;' $< > $@
+	@sed -e 's/__VERSION_L__/$(LONGVERSION)/; s/__VERSION_S__/$(SHORTVERSION)/; s#__LOGDIR__#$(LOGDIR)#;' $< > $@
 
 %.zip: Makefile tmp/install.bat tmp/$(EXE)
 	@rm -f $@

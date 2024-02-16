@@ -14,6 +14,7 @@ FOLDER:=OCS-Windows-Agent-$(VERSION)_x64
 EXE:=OCS-Windows-Agent-Setup-$(VERSION)-x64.exe
 
 IT_TEAM:=IT Support
+LOGDIR:=%WINDIR%\\Logs
 
 
 .PHONY: all check-version clean control next ocs version wget checksum
@@ -57,7 +58,7 @@ tmp/$(EXE):
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
-	@sed -e 's/__VERSION__/$(VERSION)/; s#__OCS_SERVER__#$(OCS_SERVER)#; s/__OCS_SSL__/$(OCS_SSL)/;' $< > $@
+	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#; s#__OCS_SERVER__#$(OCS_SERVER)#; s/__OCS_SSL__/$(OCS_SSL)/;' $< > $@
 
 tmp/install-outofservice.bat: install-outofservice.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp

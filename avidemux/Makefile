@@ -12,6 +12,7 @@ REVISION:=1
 EXE:=Avidemux_$(VERSION).VC++.64bits.exe
 
 IT_TEAM:=IT Support
+LOGDIR:=%WINDIR%\\Logs
 
 
 .PHONY: all check-version check-exe clean control next ocs version wget checksum
@@ -60,7 +61,7 @@ check-exe: tmp/$(EXE)
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
-	@sed -e 's/__VERSION__/$(VERSION)/; s/__VERSIONSHORT__/$(VERSIONSHORT)/;' $< > $@
+	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#; s/__VERSIONSHORT__/$(VERSIONSHORT)/;' $< > $@
 
 tmp/uninstall.bat: uninstall.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp

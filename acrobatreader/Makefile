@@ -14,6 +14,7 @@ URL:=https://ardownload2.adobe.com/pub/adobe/acrobat/win/AcrobatDC/$(VERSIONCOLL
 EXE:=AcroRdrDCx64$(VERSIONCOLLAPSE)_fr_FR.exe
 
 IT_TEAM:=IT Support
+LOGDIR:=%WINDIR%\\Logs
 
 
 .PHONY: all check-version check-exe clean control next ocs version wget checksum
@@ -66,7 +67,7 @@ check-exe: tmp/$(EXE)
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
-	@sed -e 's/__VERSION__/$(VERSIONCOLLAPSE)/;' $< > $@
+	@sed -e 's/__VERSION__/$(VERSIONCOLLAPSE)/; s#__LOGDIR__#$(LOGDIR)#;' $< > $@
 	@grep -q "softversion=$(VERSIONCOLLAPSE)" $@ || echo "Error: bad version in install.bat"
 
 %.zip: Makefile tmp/install.bat tmp/$(EXE)

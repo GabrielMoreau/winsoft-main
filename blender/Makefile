@@ -12,6 +12,7 @@ REVISION:=1
 EXE:=blender-$(VERSION)-windows-x64.msi
 
 IT_TEAM:=IT Support
+LOGDIR:=%WINDIR%\\Logs
 
 
 .PHONY: all check-version clean control next ocs version wget checksum check-exe
@@ -56,7 +57,7 @@ check-exe: tmp/$(EXE)
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
-	@sed -e 's/__VERSION__/$(VERSION)/;' $< > $@
+	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#;' $< > $@
 
 tmp/pre-install.ps1: pre-install.ps1 Makefile tmp/$(EXE)
 	@mkdir -p tmp

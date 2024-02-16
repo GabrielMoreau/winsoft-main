@@ -16,6 +16,7 @@ EXE:=$(SUBFOLDER)/ImageJ-win64.exe
 REVISION:=1
 
 IT_TEAM:=IT Support
+LOGDIR:=%WINDIR%\\Logs
 
 
 .PHONY: all check-version clean control next ocs version wget checksum
@@ -65,7 +66,7 @@ tmp/%.exe:
 	@mkdir -p tmp
 	@IVERSION=$$(zgrep 'plugin update-site.*filename="jars/ij-[[:digit:]]' tmp/$(SUBFOLDER)/db.xml.gz  | cut -f 4 -d '"' | cut -f 2 -d '-' | sed -e 's/.jar$$//;') ; \
 	NVERSION=$$(echo $${IVERSION} | sed -e 's/\w$$//;') ; \
-	sed -e "s/__VERSION__/$(VERSION)/; s/__REVISION__/$(REVISION)/; s/__IVERSION__/$${IVERSION}/; s/__NVERSION__/$${NVERSION}/;" install.bat      > tmp/$(SUBFOLDER)/install.bat ; \
+	sed -e "s/__VERSION__/$(VERSION)/; s/__REVISION__/$(REVISION)/; s/__IVERSION__/$${IVERSION}/; s/__NVERSION__/$${NVERSION}/;" install.bat | sed -e 's#__LOGDIR__#$(LOGDIR)#;' > tmp/$(SUBFOLDER)/install.bat ; \
 	sed -e "s/__VERSION__/$(VERSION)/; s/__REVISION__/$(REVISION)/; s/__IVERSION__/$${IVERSION}/; s/__NVERSION__/$${NVERSION}/;" post-install.ps1 > tmp/$(SUBFOLDER)/post-install.ps1
 	@rm -f $@
 	@zip -r $@  uninstall.bat

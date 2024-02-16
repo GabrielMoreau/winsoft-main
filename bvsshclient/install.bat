@@ -6,7 +6,7 @@ REM
 REM Name
 SET softname=BvSshClient
 
-SET logdir=%ProgramData%\OCS Inventory NG\Agent\DeployLog
+SET logdir=__LOGDIR__
 IF NOT EXIST "%logdir%" (
   MKDIR "%logdir%"
 )

@@ -19,6 +19,7 @@ URL_HELP:=$(shell curl -s "https://download.documentfoundation.org/libreoffice/s
 	| sed -e 's/"/\n/g;' | grep "^https://.*/$(EXE_HELP)$$" | head -1)
 
 IT_TEAM:=IT Support
+LOGDIR:=%WINDIR%\\Logs
 
 
 .PHONY: all check-version check-exe1 check-exe2 clean control next ocs version wget checksum
@@ -80,7 +81,7 @@ check-exe2: tmp/$(EXE_HELP)
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE_LO)
 	@mkdir -p tmp
-	@sed -e 's/__VERSION__/$(VERSION)/;' $< > $@
+	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#;' $< > $@
 
 %.zip: Makefile tmp/install.bat tmp/$(EXE_LO) tmp/$(EXE_HELP)
 	@rm -f $@
