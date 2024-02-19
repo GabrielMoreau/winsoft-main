@@ -35,7 +35,8 @@ ECHO unblock
 
 
 ECHO Kill running process
-taskkill /T /F /IM %process%
+TASKKILL /T /F /IM %process%
+
 
 ECHO Clean old version before install
 CALL .\uninstall.bat

@@ -1,4 +1,3 @@
-REM @ECHO OFF
 
 REM
 REM   Webex
@@ -23,7 +22,7 @@ SET process=CiscoCollabHost.exe
 
 
 ECHO Kill running process
-taskkill /T /F /IM %process%
+TASKKILL /T /F /IM %process%
 
 
 ECHO Search PowerShell

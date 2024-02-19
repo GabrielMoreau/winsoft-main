@@ -1,4 +1,3 @@
-REM @ECHO OFF
 
 REM
 REM   7-Zip
@@ -24,7 +23,7 @@ SET process=7z.exe
 
 
 ECHO Kill running process
-taskkill /T /F /IM %process%
+TASKKILL /T /F /IM %process%
 
 
 ECHO Search PowerShell

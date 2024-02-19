@@ -1,4 +1,3 @@
-REM @ECHO OFF
 
 REM
 REM   Notepad++
@@ -18,17 +17,17 @@ EXIT /B
 
 ECHO BEGIN %date%-%time%
 
-REM Version parameter (auto update by Makefile)
+ECHO Version parameter (auto update by Makefile)
 SET softversion=__VERSION__
 SET softexe=npp.%softversion%.Installer.x64.exe
 SET regkey=Notepad++
 
 
-REM Kill running process
-taskkill /IM notepad++.exe /F
+ECHO Kill running process
+TASKKILL /IM notepad++.exe /F
 
 
-REM Uninstall previous version
+ECHO Uninstall previous version
 IF EXIST "%ProgramFiles%\Notepad++\uninstall.exe" (
   "%ProgramFiles%\Notepad++\uninstall.exe" /S
 )
@@ -50,11 +49,11 @@ ping 127.0.0.1 -n 3 > NUL
 
 :NEXT
 
-REM Silent install
+ECHO Silent install %softname%
 "%softexe%" /S
 
 
-REM Disable auto update
+ECHO Disable auto update
 IF EXIST "%ProgramFiles%\Notepad++\updater_disable" (
   RMDIR /S /Q "%ProgramFiles%\Notepad++\updater_disable"
 )
