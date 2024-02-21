@@ -21,10 +21,6 @@ ECHO BEGIN %date%-%time%
 SET softversion=__VERSION__
 
 
-ECHO Silent install %softname%
-"vlc-%softversion%-win64.exe" /S /NCRC
-
-
 ECHO Search PowerShell
 SET pwrsh=%WINDIR%\System32\WindowsPowerShell\V1.0\powershell.exe
 IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET pwrsh=%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe
@@ -35,8 +31,17 @@ ECHO Add rights
 ECHO unblock
 %pwrsh% "Unblock-File -Path .\*.ps1"
 
+
+ECHO Execute pre-install script
+%pwrsh% -File ".\pre-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
+
+
+ECHO Silent install %softname%
+"vlc-%softversion%-win64.exe" /S /NCRC
+
+
 ECHO Execute post-install script
-%pwrsh% -File ".\post-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
+%pwrsh% -File ".\post-install.ps1" 1>> "%logdir%\%softname%-PS1.log" 2>&1
 
 ECHO Remove desktop shortcut
 IF EXIST "%PUBLIC%\Desktop\VLC*media*player.lnk"          DEL /F /Q "%PUBLIC%\Desktop\VLC*media*player.lnk"
