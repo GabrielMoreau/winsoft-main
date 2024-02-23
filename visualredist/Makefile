@@ -4,7 +4,7 @@
 #
 
 SOFT:=VisualCPPRedistributable
-VERSION:=1.7
+VERSION:=14.38.8
 REVISION:=1
 
 VCREDIST:=
