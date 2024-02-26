@@ -60,8 +60,7 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 
 tmp/pre-install.ps1: pre-install.ps1 Makefile tmp/$(EXE)
 	@mkdir -p tmp
-	@perl -p -e ' \
-		s/__VERSION__/$(VERSION)/;' $< > $@
+	@sed -e 's/__VERSION__/$(VERSION)/; s/__2015-2022-x64__/14.38.33135.0/' $< > $@
 
 %.zip: Makefile global.ini tmp/install.bat tmp/pre-install.ps1 tmp/$(EXE) $(VCREDIST)
 	@rm -f $@
