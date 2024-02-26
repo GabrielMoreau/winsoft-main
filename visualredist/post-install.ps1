@@ -155,27 +155,27 @@ Function ToVersion {
 			}
 
 			ElseIf ($DisplayName -match '(2015-2019|\s2015\s|\s2017\s).*x64') {
-				If ((ToVersion($DisplayVersion)) -lt (ToVersion('__2015-2019-x64__'))) {
-					$Exe = '2015-2019\vc_redist.x64.exe'
+				If ((ToVersion($DisplayVersion)) -lt (ToVersion('__2015-2022-x64__'))) {
+					$Exe = '2015-2022\vc_redist.x64.exe'
 					$Args = '/install /quiet /norestart'
 					If (Test-Path -Path "$Exe") {
-						Write-Output "Update Microsoft Visual C++ 2015-2019 (x64) redistributable"
+						Write-Output "Update Microsoft Visual C++ 2015-2022 (x64) redistributable"
 						Start-Process -FilePath "$Exe" -ArgumentList "$Args" -WindowStyle 'Hidden' -ErrorAction 'SilentlyContinue'
 					}
 				} Else {
-					Write-Output "Microsoft Visual C++ 2015-2019 (x64) redistributable already at version $DisplayVersion or higher"
+					Write-Output "Microsoft Visual C++ 2015-2022 (x64) redistributable already at version $DisplayVersion or higher"
 				}
 			}
 			ElseIf ($DisplayName -match '(2015-2019|\s2015\s|\s2017\s).*x86') {
-				If ((ToVersion($DisplayVersion)) -lt (ToVersion('__2015-2019-x64__'))) {
-					$Exe = '2015-2019\vc_redist.x86.exe'
+				If ((ToVersion($DisplayVersion)) -lt (ToVersion('__2015-2022-x64__'))) {
+					$Exe = '2015-2022\vc_redist.x86.exe'
 					$Args = '/install /quiet /norestart'
 					If (Test-Path -Path "$Exe") {
-						Write-Output "Update Microsoft Visual C++ 2015-2019 (x86) redistributable"
+						Write-Output "Update Microsoft Visual C++ 2015-2022 (x86) redistributable"
 						Start-Process -FilePath "$Exe" -ArgumentList "$Args" -WindowStyle 'Hidden' -ErrorAction 'SilentlyContinue'
 					}
 				} Else {
-					Write-Output "Microsoft Visual C++ 2015-2019 (x86) redistributable already at version $DisplayVersion or higher"
+					Write-Output "Microsoft Visual C++ 2015-2022 (x86) redistributable already at version $DisplayVersion or higher"
 				}
 			}
 

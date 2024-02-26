@@ -21,6 +21,8 @@ Last versions :
 * folder 2015-2019 - 14.29.30153.0
 * folder 2015-2022 - 14.38.33135.0
 
+Version 2015-2019 is now replaced by version 2015-2022.
+
 Have the version of an executable with `sigcheck.exe` or `peres` (natif):
 ```
 Sysinternals\sigcheck.exe -a -h .\vcredist_ia64.exe

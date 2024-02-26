@@ -18,8 +18,8 @@ VCREDIST+=tmp/2012/vcredist_x64.exe
 VCREDIST+=tmp/2012/vcredist_x86.exe
 VCREDIST+=tmp/2013/vcredist_x64.exe
 VCREDIST+=tmp/2013/vcredist_x86.exe
-VCREDIST+=tmp/2015-2019/vc_redist.x64.exe
-VCREDIST+=tmp/2015-2019/vc_redist.x86.exe
+#VCREDIST+=tmp/2015-2019/vc_redist.x64.exe
+#VCREDIST+=tmp/2015-2019/vc_redist.x86.exe
 VCREDIST+=tmp/2015-2022/vc_redist.x64.exe
 VCREDIST+=tmp/2015-2022/vc_redist.x86.exe
 
@@ -71,8 +71,8 @@ tmp/version-replace.txt: $(VCREDIST)
 	@echo "s/__2012-x86__/$$(peres -a tmp/2012/vcredist_x86.exe | egrep 'Product Version:' | awk '{print $$3}')/;" >> $@
 	@echo "s/__2013-x64__/$$(peres -a tmp/2013/vcredist_x64.exe | egrep 'Product Version:' | awk '{print $$3}')/;" >> $@
 	@echo "s/__2013-x86__/$$(peres -a tmp/2013/vcredist_x86.exe | egrep 'Product Version:' | awk '{print $$3}')/;" >> $@
-	@echo "s/__2015-2019-x64__/$$(peres -a tmp/2015-2019/vc_redist.x64.exe | egrep 'Product Version:' | awk '{print $$3}')/;" >> $@
-	@echo "s/__2015-2019-x86__/$$(peres -a tmp/2015-2019/vc_redist.x86.exe | egrep 'Product Version:' | awk '{print $$3}')/;" >> $@
+	@#echo "s/__2015-2019-x64__/$$(peres -a tmp/2015-2019/vc_redist.x64.exe | egrep 'Product Version:' | awk '{print $$3}')/;" >> $@
+	@#echo "s/__2015-2019-x86__/$$(peres -a tmp/2015-2019/vc_redist.x86.exe | egrep 'Product Version:' | awk '{print $$3}')/;" >> $@
 	@echo "s/__2015-2022-x64__/$$(peres -a tmp/2015-2022/vc_redist.x64.exe | egrep 'Product Version:' | awk '{print $$3}')/;" >> $@
 	@echo "s/__2015-2022-x86__/$$(peres -a tmp/2015-2022/vc_redist.x86.exe | egrep 'Product Version:' | awk '{print $$3}')/;" >> $@
 
@@ -86,7 +86,7 @@ tmp/post-install.ps1: post-install.ps1 tmp/version-replace.txt Makefile
 %.zip: Makefile tmp/install.bat tmp/post-install.ps1 view.ps1 $(VCREDIST) tmp/version.txt
 	@rm -f $@
 	@zip -r $@ view.ps1
-	@(cd tmp; zip -r ../$@ install.bat post-install.ps1 2005 2008 2010 2012 2013 2015-2019 2015-2022)
+	@(cd tmp; zip -r ../$@ install.bat post-install.ps1 2005 2008 2010 2012 2013 2015-2022) # 2015-2019
 	@chmod ugo+rw $@
 
 ocs:
@@ -180,19 +180,19 @@ tmp/2013/vcredist_x86.exe: url.txt
 	@grep -q "[[:space:]]$$(peres -a $@ | egrep 'Product Version:' | awk '{print $$3}')$$" version.txt || echo "Error: bad version for binary $@"
 
 
-tmp/2015-2019/vc_redist.x64.exe: url.txt
-	@mkdir -p tmp/2015-2019
-	@curl -# -o $@ -L $$(grep '^2015-2019-x64' url.txt | cut -f 2 -d ' ')
-	@file $@ | grep -q "PE32 executable" || echo "Error: bad format for binary $@"
-	@grep -q "^$$(shasum -a 256 $@)$$" checksum.txt || echo "Error: bad checksum for binary $@"
-	@grep -q "[[:space:]]$$(peres -a $@ | egrep 'Product Version:' | awk '{print $$3}')$$" version.txt || echo "Error: bad version for binary $@"
+#tmp/2015-2019/vc_redist.x64.exe: url.txt
+#	@mkdir -p tmp/2015-2019
+#	@curl -# -o $@ -L $$(grep '^2015-2019-x64' url.txt | cut -f 2 -d ' ')
+#	@file $@ | grep -q "PE32 executable" || echo "Error: bad format for binary $@"
+#	@grep -q "^$$(shasum -a 256 $@)$$" checksum.txt || echo "Error: bad checksum for binary $@"
+#	@grep -q "[[:space:]]$$(peres -a $@ | egrep 'Product Version:' | awk '{print $$3}')$$" version.txt || echo "Error: bad version for binary $@"
 
-tmp/2015-2019/vc_redist.x86.exe: url.txt
-	@mkdir -p tmp/2015-2019
-	@curl -# -o $@ -L $$(grep '^2015-2019-x86' url.txt | cut -f 2 -d ' ')
-	@file $@ | grep -q "PE32 executable" || echo "Error: bad format for binary $@"
-	@grep -q "^$$(shasum -a 256 $@)$$" checksum.txt || echo "Error: bad checksum for binary $@"
-	@grep -q "[[:space:]]$$(peres -a $@ | egrep 'Product Version:' | awk '{print $$3}')$$" version.txt || echo "Error: bad version for binary $@"
+#tmp/2015-2019/vc_redist.x86.exe: url.txt
+#	@mkdir -p tmp/2015-2019
+#	@curl -# -o $@ -L $$(grep '^2015-2019-x86' url.txt | cut -f 2 -d ' ')
+#	@file $@ | grep -q "PE32 executable" || echo "Error: bad format for binary $@"
+#	@grep -q "^$$(shasum -a 256 $@)$$" checksum.txt || echo "Error: bad checksum for binary $@"
+#	@grep -q "[[:space:]]$$(peres -a $@ | egrep 'Product Version:' | awk '{print $$3}')$$" version.txt || echo "Error: bad version for binary $@"
 
 
 tmp/2015-2022/vc_redist.x64.exe: url.txt
