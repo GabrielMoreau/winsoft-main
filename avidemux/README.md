@@ -17,8 +17,9 @@ Tasks can be automated using projects, job queue and powerful scripting capabili
 Example
 
  | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
- | HKLM | Avidemux 2.8 - 64 bits |  | 2.8.0.220109 | Avidemux 2.8 - 64 bits (64-bit) | C:\Program Files\Avidemux 2.8 - 64 bits\uninstall.exe |
- | HKU | Avidemux VC++ 64bits | Mean | 2.8.1 | {0694d9fc-951c-4992-85e9-23eb6d1a8082} | C:\Program Files\Avidemux 2.8 VC++ 64bits\Uninstall Avidemux VC++ 64bits.exe |
+ |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
+ | HKLM | Avidemux 2.8 - 64 bits |  | 2.8.0.220109 | `Avidemux 2.8 - 64 bits (64-bit)` | `C:\Program Files\Avidemux 2.8 - 64 bits\uninstall.exe` |
+ | HKU | Avidemux VC++ 64bits | Mean | 2.8.1 | `{0694d9fc-951c-4992-85e9-23eb6d1a8082}` | `C:\Program Files\Avidemux 2.8 VC++ 64bits\Uninstall Avidemux VC++ 64bits.exe` |
 
 ## Uninstall
 

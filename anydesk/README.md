@@ -19,6 +19,6 @@ AnyDesk.exe --start-with-win --create-shortcuts --remove-first --update-disabled
 }}}
 
 Sample of register key
-{{{
-HKLM	AnyDesk MSI	AnyDesk Software GmbH	8.0.5	{62853EBF-E9DD-4AA5-B20A-5A6C3DD74FF3}	MsiExec.exe /X{62853EBF-E9DD-4AA5-B20A-5A6C3DD74FF3}
-}}}
+
+ |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
+ | HKLM | AnyDesk MSI | AnyDesk Software GmbH | 8.0.5 | `{62853EBF-E9DD-4AA5-B20A-5A6C3DD74FF3}` | `MsiExec.exe /X{62853EBF-E9DD-4AA5-B20A-5A6C3DD74FF3}` |
