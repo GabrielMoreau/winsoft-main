@@ -3,6 +3,7 @@
 3D Slicer is a free, open source software for visualization, processing,
 segmentation, registration, and analysis of medical, biomedical,and other
 3D images and meshes; and planning and navigating image-guided procedures.
+See https://en.wikipedia.org/wiki/Slicer_(3D_printing).
 
 * Website : https://www.slicer.org/
 * Wikipedia : https://en.wikipedia.org/wiki/3D_Slicer

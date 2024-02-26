@@ -2,6 +2,7 @@
 
 A powerful and versatile Slicer for Resin and Filament 3D Printers.
 You must have an account on [mango3d](https://mango3d.io/) in order to run the software.
+See https://en.wikipedia.org/wiki/Slicer_(3D_printing).
 
 * Website : https://mango3d.io/
 * Download : https://mango3d.io/downloads/
