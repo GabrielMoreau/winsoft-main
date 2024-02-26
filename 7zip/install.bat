@@ -42,7 +42,7 @@ ECHO Execute pre-install script
 
 
 ECHO Silent install %softname%
-msiexec /i "7z%softversionshort%-x64.msi" /quiet
+MsiExec.exe /i "7z%softversionshort%-x64.msi" /quiet /L*V "%logdir%\%softname%-MSI.log"
 
 
 ECHO Execute post-install script
