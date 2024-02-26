@@ -10,10 +10,11 @@ Communication may be one-to-one between users or may involve group messaging.
 
 * Download : https://signal.org/fr/download/windows/
 * Silent install : https://silentinstallhq.com/signal-silent-install-how-to-guide/,
-	http://wapt.tranquil.it/store/fr/tis-signal-desktop/,
-	https://www.reddit.com/r/SCCM/comments/tmh5g7/has_anyone_found_a_way_to_deploy_signal_for/
+ | http://wapt.tranquil.it/store/fr/tis-signal-desktop/,
+ | https://www.reddit.com/r/SCCM/comments/tmh5g7/has_anyone_found_a_way_to_deploy_signal_for/
 
 Example of default installation
-```
-HKU	Signal 6.43.2	Signal Messenger, LLC	6.43.2	7d96caee-06e6-597c-9f2f-c7bb2e0948b4	"C:\WINDOWS\system32\config\systemprofile\AppData\Local\Programs\signal-desktop\Uninstall Signal.exe" /currentuser
-```
+
+ | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
+ |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
+ | HKU | Signal 6.43.2 | Signal Messenger, LLC | 6.43.2 | `7d96caee-06e6-597c-9f2f-c7bb2e0948b4` | `"C:\WINDOWS\system32\config\systemprofile\AppData\Local\Programs\signal-desktop\Uninstall Signal.exe" /currentuser` |
