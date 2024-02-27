@@ -12,16 +12,25 @@ $RefName = '7-Zip'
 		$DisplayName  = $App.DisplayName
 		If (!($DisplayName -match $RefName)) { Return }
 
-		If (!($App.UninstallString -match 'MsiExec.exe')) { Return } # only msi
-
+		$UninstallString = $App.UninstallString
 		$DisplayVersion = $App.DisplayVersion
 		$KeyProduct = $Key | Split-Path -Leaf
+		If ($UninstallString -match 'MsiExec.exe') {
+			$Exe = 'MsiExec.exe'
+			$UninstallSplit = $UninstallString -Split "/I"
+			$Args = '/x "' + $UninstallSplit[1].Trim() + '" /qn /norestart'
+		} Else {
+			$UninstallSplit = $UninstallString -Split "exe"
+			$Exe = $UninstallSplit[0] + 'exe"'
+			$Args = '/S'
+			If (!(Test-Path -Path "$Exe")) {
+				Write-Output "Error: executable not exists $Exe"
+				Return
+			}
+		}
+		Write-Output "Remove: $DisplayName / $DisplayVersion / $KeyProduct / $Exe $Args"
 
-		$UninstallSplit = $App.UninstallString -Split "/I"
-		$Args = '/x "' + $UninstallSplit[1].Trim() + '" /qn /norestart'
-		Write-Output "Remove: $DisplayName / $DisplayVersion / $KeyProduct / $Args"
-
-		$Proc = Start-Process -FilePath "MsiExec.exe" -ArgumentList "$Args" -WindowStyle 'Hidden' -ErrorAction 'SilentlyContinue' -PassThru
+		$Proc = Start-Process -FilePath "$Exe" -ArgumentList "$Args" -WindowStyle 'Hidden' -ErrorAction 'SilentlyContinue' -PassThru
 
 		$Timeouted = $Null # Reset any previously set timeout
 		# Wait up to 180 seconds for normal termination

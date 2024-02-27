@@ -52,3 +52,48 @@ If ($RefUninstallString -ne '') {
 			}
 		}
 }
+
+$SoftInstalled = $False
+# Test if installed
+@(Get-ChildItem -Recurse 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall';
+  Get-ChildItem -Recurse "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall") |
+	ForEach {
+		$Key = $_
+		$App = (Get-ItemProperty -Path $Key.PSPath)
+		$DisplayName  = $App.DisplayName
+		If ($DisplayName -match $RefName) {
+			$SoftInstalled = $True
+			Return
+		}
+	}
+If ($SoftInstalled -eq $False) {
+	$Exe = "7z$RefVersionShort-x64.exe"
+	$Args = "/S"
+	Write-Output "Install Exe: $Exe $Args"
+	$Proc = Start-Process -FilePath "$Exe" -ArgumentList "$Args" -WindowStyle 'Hidden' -ErrorAction 'SilentlyContinue' -PassThru
+
+	$Timeouted = $Null # Reset any previously set timeout
+	# Wait up to 180 seconds for normal termination
+	$Proc | Wait-Process -Timeout 300 -ErrorAction SilentlyContinue -ErrorVariable Timeouted
+	If ($Timeouted) {
+		# Terminate the process
+		$Proc | Kill
+		Write-Output "Error: kill $RefName install"
+	} ElseIf ($Proc.ExitCode -ne 0) {
+		Write-Output "Error: $RefName install return code $($Proc.ExitCode)"
+	}
+}
+
+# View
+@(Get-ChildItem -Recurse 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall';
+  Get-ChildItem -Recurse "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall") |
+	ForEach {
+		$Key = $_
+		$App = (Get-ItemProperty -Path $Key.PSPath)
+		$DisplayName  = $App.DisplayName
+		If (!($DisplayName -match $RefName)) { Return }
+
+		$DisplayVersion = $App.DisplayVersion
+		$KeyProduct = $Key | Split-Path -Leaf
+		Write-Output "View: $DisplayName / $DisplayVersion / $KeyProduct / $($App.UninstallString)"
+	}
