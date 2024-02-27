@@ -42,7 +42,8 @@ ECHO Execute pre-install script
 
 
 ECHO Silent install %softname%
-MsiExec.exe /i "7z%softversionshort%-x64.msi" /quiet /L*V "%logdir%\%softname%-MSI.log"
+REM MsiExec.exe /i "7z%softversionshort%-x64.msi" /quiet /L*V "%logdir%\%softname%-MSI.log"
+ScriptRunner.exe -appvscript 7z%softversionshort%-x64.exe /S -appvscriptrunnerparameters -wait -timeout=120
 
 
 ECHO Execute post-install script

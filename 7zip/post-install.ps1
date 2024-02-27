@@ -4,6 +4,7 @@ Write-Output "Begin Post-Install"
 # Clean old duplicate key with 7-Zip in the name (same uninstall string)
 
 $RefVersion = '__VERSION__'
+$RefVersionShort='__VERSIONSHORT__'
 $RefUninstallString = ''
 $RefName = '7-Zip'
 
