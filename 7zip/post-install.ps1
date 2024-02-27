@@ -26,7 +26,7 @@ Function ToVersion {
 		If (!($DisplayName -match $RefName)) { Return }
 		$DisplayVersion = $App.DisplayVersion
 		$Exe = $App.UninstallString
-		#Echo '++++++++' $Name $DisplayName $DisplayVersion $Exe
+		Write-Output "Key Item: $Name $DisplayName $DisplayVersion $Exe"
 		If ((ToVersion($DisplayVersion)) -eq (ToVersion($RefVersion))) {
 			$RefUninstallString = $Exe
 			$KeyPath = $App.PSPath
@@ -43,7 +43,7 @@ If ($RefUninstallString -ne '') {
 			If (!($DisplayName -match $RefName)) { Return }
 			$DisplayVersion = $App.DisplayVersion
 			$Exe = $App.UninstallString
-			# Echo "Check Key $DisplayName : $DisplayVersion < $RefVersion ?"
+			Write-Output "Check Key: $DisplayName : $DisplayVersion < $RefVersion ?"
 			If (($Exe -eq $RefUninstallString) -And ((ToVersion($DisplayVersion)) -lt (ToVersion($RefVersion)))) {
 				$KeyPath = $App.PSPath
 				Write-Output "Remove Key: $DisplayName / $DisplayVersion / $Exe / $KeyPath"

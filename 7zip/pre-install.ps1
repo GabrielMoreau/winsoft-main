@@ -3,7 +3,7 @@ Write-Output "Begin Pre-Install"
 
 $RefName = '7-Zip'
 
-# Remove old 7-Zip (not x64)
+# Remove old 7-Zip
 @(Get-ChildItem -Recurse 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall';
   Get-ChildItem -Recurse "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall") |
 	ForEach {
@@ -12,7 +12,6 @@ $RefName = '7-Zip'
 		$DisplayName  = $App.DisplayName
 		If (!($DisplayName -match $RefName)) { Return }
 
-		If ($DisplayName -match '(x64 edition)') { Return } # only 32 bit
 		If (!($App.UninstallString -match 'MsiExec.exe')) { Return } # only msi
 
 		$DisplayVersion = $App.DisplayVersion
@@ -34,6 +33,13 @@ $RefName = '7-Zip'
 			Return
 		} ElseIf ($Proc.ExitCode -ne 0) {
 			Write-Output "Error: $RefName uninstall return code $($Proc.ExitCode)"
+			#If ($Proc.ExitCode -eq 1612) {
+			#	Write-Output "Warning: no clean uninstall procedure"
+			#	If (Test-Path -Path "${Env:ProgramFiles}\7-Zip") {
+			#		Remove-Item -LiteralPath "${Env:ProgramFiles}\7-Zip" -Force -Recurse -ErrorAction SilentlyContinue
+			#	}
+			#	Remove-Item -Path $Key.PSPath -Verbose -Force -Recurse -ErrorAction SilentlyContinue
+			#}
 			Return
 		}
 	}

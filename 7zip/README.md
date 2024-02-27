@@ -7,3 +7,11 @@
 * Wikipedia : https://en.wikipedia.org/wiki/7-Zip
 
 * Silent install : https://silentinstallhq.com/7-zip-19-00-silent-install-how-to-guide/
+
+## Register Key
+
+Example :
+
+ | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
+ |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
+ | HKLM | 7-Zip 18.05 (x64 edition) | Igor Pavlov | 18.05.00.0 | `{23170F69-40C1-2702-1805-000001000000}` | `MsiExec.exe /I{23170F69-40C1-2702-1805-000001000000}` |
