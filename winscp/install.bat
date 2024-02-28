@@ -23,7 +23,7 @@ SET softversion=__VERSION__
 
 
 REM Silent install
-WinSCP-%softversion%-Setup.exe /VERYSILENT /NORESTART /ALLUSERS /MERGETASKS=!desktopicon /LOG="%logdir%\%softname%-MSI.log"
+ScriptRunner.exe -appvscript WinSCP-%softversion%-Setup.exe /VERYSILENT /NORESTART /ALLUSERS /MERGETASKS=!desktopicon /LOG="%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=300
 
 REM Comment beacuse of HKCU reg
 REM Disable WinSCP Check For Updates

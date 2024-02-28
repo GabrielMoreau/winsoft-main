@@ -31,7 +31,7 @@ IF NOT EXIST "%ProgramFiles%\Npcap\npcap.cat" (
 )
 
 ECHO Silent install %softname%
-Wireshark-%softversion%-x64.exe /S
+ScriptRunner.exe -appvscript Wireshark-%softversion%-x64.exe /S -appvscriptrunnerparameters -wait -timeout=300
 
 
 ECHO END %date%-%time%

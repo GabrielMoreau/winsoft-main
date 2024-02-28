@@ -27,7 +27,7 @@ IF EXIST "%ProgramFiles(x86)%\XnView\unins000.exe" "%ProgramFiles(x86)%\XnView\u
 
 
 ECHO Silent install %softname%
-XnViewMP-win-%softversion%-x64.exe /VERYSILENT /NORESTART /SUPPRESSMSGBOXES /MERGETASKS=!desktopicon /LOG="%logdir%\%softname%-MSI.log"
+ScriptRunner.exe -appvscript XnViewMP-win-%softversion%-x64.exe /VERYSILENT /NORESTART /SUPPRESSMSGBOXES /MERGETASKS=!desktopicon /LOG="%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=300
 
 
 ECHO END %date%-%time%

@@ -28,7 +28,7 @@ TASKKILL /T /F /IM %process%
 
 REM Silent install
 REM "Thunderbird Setup %softversion%.exe" /MaintenanceService=false /S
-msiexec /i "Thunderbird-Setup-%softversion%.msi" INSTALL_MAINTENANCE_SERVICE=false DESKTOP_SHORTCUT=true /q /norestart /L*v "%logdir%\%softname%-MSI.log"
+ScriptRunner.exe -appvscript MsiExec.exe /i "Thunderbird-Setup-%softversion%.msi" INSTALL_MAINTENANCE_SERVICE=false DESKTOP_SHORTCUT=true /q /norestart /L*v "%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=300
 
 
 REM Wait and remove unused service

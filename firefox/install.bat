@@ -45,7 +45,7 @@ ECHO Execute pre-install script (clean register policies)
 
 
 ECHO Silent install %softname%
-msiexec /i "Firefox-Setup-%softversion%-esr.msi" INSTALL_MAINTENANCE_SERVICE=false /q /norestart /L*v "%logdir%\%softname%-MSI.log"
+ScriptRunner.exe -appvscript MsiExec.exe /i "Firefox-Setup-%softversion%-esr.msi" INSTALL_MAINTENANCE_SERVICE=false /q /norestart /L*v "%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=300 -appvscriptrunnerparameters -wait -timeout=300
 
 
 REM voir https://github.com/mozilla/policy-templates/blob/master/README.md
