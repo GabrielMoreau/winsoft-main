@@ -21,7 +21,12 @@ SET softversion=__VERSION__
 
 
 ECHO Silent install %softname%
-ScriptRunner.exe -appvscript LycheeSlicer-%softversion%.exe /S -appvscriptrunnerparameters -wait -timeout=120
+ScriptRunner.exe -appvscript LycheeSlicer-%softversion%.exe /S -appvscriptrunnerparameters -wait -timeout=300
+
+
+ECHO Remove desktop shortcut
+IF EXIST "%PUBLIC%\Desktop\LycheeSlicer.lnk"          DEL /F /Q "%PUBLIC%\Desktop\LycheeSlicer.lnk"
+IF EXIST "%ALLUSERSPROFILE%\Desktop\LycheeSlicer.lnk" DEL /F /Q "%ALLUSERSPROFILE%\Desktop\LycheeSlicer.lnk"
 
 
 ECHO END %date%-%time%
