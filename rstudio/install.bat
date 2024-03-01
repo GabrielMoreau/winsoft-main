@@ -38,10 +38,11 @@ ECHO Execute pre-install script
 
 
 ECHO Silent install R
-R-%softversion2%-win.exe /VERYSILENT /NORESTART
+ScriptRunner.exe -appvscript R-%softversion2%-win.exe /VERYSILENT /NORESTART -appvscriptrunnerparameters -wait -timeout=300
+
 
 ECHO Silent install %softname%
-RStudio-%softversion1%.exe /S
+ScriptRunner.exe -appvscript RStudio-%softversion1%.exe /S -appvscriptrunnerparameters -wait -timeout=300
 
 
 ECHO Remove desktop shortcut for R
