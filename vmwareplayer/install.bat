@@ -21,7 +21,7 @@ SET softversion=__VERSIONLONG__
 
 
 ECHO Silent install %softname%
-VMware-player-full-%softversion%.exe /s /v "/qn EULAS_AGREED=1 AUTOSOFTWAREUPDATE=0 DATACOLLECTION=0 ADDLOCAL=ALL DESKTOP_SHORTCUT=0 STARTMENU_SHORTCUT=1 REBOOT=ReallySuppress"
+ScriptRunner.exe -appvscript VMware-player-full-%softversion%.exe /s /v "/qn EULAS_AGREED=1 AUTOSOFTWAREUPDATE=0 DATACOLLECTION=0 ADDLOCAL=ALL DESKTOP_SHORTCUT=0 STARTMENU_SHORTCUT=1 REBOOT=ReallySuppress" -appvscriptrunnerparameters -wait -timeout=300
 
 
 ECHO END %date%-%time%
