@@ -22,7 +22,7 @@ SET softversion=__VERSION__
 
 
 ECHO Silent install %softname%
-msiexec /i "pdfsam-%softversion%.msi" /qn /norestart CHECK_FOR_UPDATES=false CHECK_FOR_NEWS=false PLAY_SOUNDS=false DONATE_NOTIFICATION=false SKIPTHANKSPAGE=Yes PREMIUM_MODULES=false /L*v "%logdir%\%softname%-MSI.log"
+ScriptRunner.exe -appvscript MsiExec.exe /i "pdfsam-%softversion%.msi" /qn /norestart CHECK_FOR_UPDATES=false CHECK_FOR_NEWS=false PLAY_SOUNDS=false DONATE_NOTIFICATION=false SKIPTHANKSPAGE=Yes PREMIUM_MODULES=false /L*v "%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=300
 
 
 ECHO Remove desktop shortcut

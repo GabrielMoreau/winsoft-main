@@ -37,7 +37,7 @@ REM Execute
 
 REM Silent install
 VirtualBox-%softversion%-Win.exe --silent --extract --path .\
-FOR %%m IN (*.msi) DO (msiexec /i "%%m" /qn /norestart /L*v "%logdir%\%softname%-MSI.log")
+FOR %%m IN (*.msi) DO (ScriptRunner.exe -appvscript MsiExec.exe /i "%%m" /qn /norestart /L*v "%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=300)
 
 
 IF EXIST "%ProgramFiles%\Oracle\VirtualBox\VBoxManage.exe" (

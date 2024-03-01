@@ -23,7 +23,7 @@ SET softversion=__VERSION__
 
 
 ECHO Silent install
-msiexec /i "Texmaker_%softversion%_Win_x64.msi"  /q
+ScriptRunner.exe -appvscript MsiExec.exe /i "Texmaker_%softversion%_Win_x64.msi"  /q -appvscriptrunnerparameters -wait -timeout=300
 
 
 ECHO END %date%-%time%

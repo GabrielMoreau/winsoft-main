@@ -37,7 +37,7 @@ ECHO Execute pre-install script
 
 
 ECHO Silent install %softname%
-msiexec /i putty-64bit-%softversion%-installer.msi /qn /norestart /L*v "%logdir%\%softname%-MSI.log"
+ScriptRunner.exe -appvscript MsiExec.exe /i putty-64bit-%softversion%-installer.msi /qn /norestart /L*v "%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=300
 
 REM 0.78 "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{4EEF2644-700F-46F8-9655-915145248986}"
 REM 0.77 "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{E078C644-A120-4668-AD62-02E9FD530190}"

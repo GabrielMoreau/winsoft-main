@@ -37,10 +37,10 @@ ECHO Execute pre-install script
 
 
 ECHO Silent install WinFSP - https://github.com/billziss-gh/winfsp
-msiexec /quiet /qn /i winfsp-%WinfspVersion%.msi
+ScriptRunner.exe -appvscript MsiExec.exe /quiet /qn /i winfsp-%WinfspVersion%.msi -appvscriptrunnerparameters -wait -timeout=300
 
 ECHO Silent install SSHFS-Win - https://github.com/billziss-gh/sshfs-win
-msiexec /quiet /qn /i sshfs-win-%SshfsVersion%-x64.msi
+ScriptRunner.exe -appvscript MsiExec.exe /quiet /qn /i sshfs-win-%SshfsVersion%-x64.msi -appvscriptrunnerparameters -wait -timeout=300
 
 
 ECHO Execute post-install script

@@ -32,7 +32,7 @@ IF %ERRORLEVEL%==0 TASKKILL /T /F /IM %process%
 
 REM Silent install
 REM https://keepassxc.org/docs/KeePassXC_GettingStarted.html
-msiexec.exe /q /i "KeePassXC-%softversion%-Win64.msi" AUTOSTARTPROGRAM=0 LAUNCHAPPONEXIT=0
+ScriptRunner.exe -appvscript MsiExec.exe /q /i "KeePassXC-%softversion%-Win64.msi" AUTOSTARTPROGRAM=0 LAUNCHAPPONEXIT=0 -appvscriptrunnerparameters -wait -timeout=300
 
 ECHO END %date%-%time%
 EXIT

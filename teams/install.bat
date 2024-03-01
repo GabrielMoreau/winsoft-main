@@ -36,7 +36,7 @@ ECHO Execute pre-install
 
 
 ECHO Silent install %softname%
-msiexec /i "Teams_%softversion%_windows_x64.msi" OPTIONS="noAutoStart=true" ALLUSERS=1 /qn /log "%logdir%\%softname%-MSI.log"
+ScriptRunner.exe -appvscript MsiExec.exe /i "Teams_%softversion%_windows_x64.msi" OPTIONS="noAutoStart=true" ALLUSERS=1 /qn /log "%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=300
 
 
 ECHO END %date%-%time%

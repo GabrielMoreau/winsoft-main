@@ -24,7 +24,7 @@ SET softversion=__VERSION__
 
 
 REM Silent install
-msiexec /i "BlueKenue64Installer%softversion%.msi" /quiet /qn /norestart /log "%logdir%\%softname%-MSI.log"
+ScriptRunner.exe -appvscript MsiExec.exe /i "BlueKenue64Installer%softversion%.msi" /quiet /qn /norestart /log "%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=300
 
 
 ECHO END %date%-%time%

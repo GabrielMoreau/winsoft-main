@@ -44,7 +44,7 @@ CALL .\uninstall.bat 1> "%logdir%\%softname%-DEL.log" 2>&1
 
 ECHO Silent install %softname%
 REM prusa3d_win_%softversion%.exe /qn /norestart /exenoupdates /exenoui /exelog "%logdir%\%softname%-MSI.log"
-REM ScriptRunner.exe -appvscript prusa3d_win_%softversion%.exe /qn /norestart /exenoupdates /exenoui /exelog "%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=60
+REM ScriptRunner.exe -appvscript prusa3d_win_%softversion%.exe /qn /norestart /exenoupdates /exenoui /exelog "%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=300
 IF EXIST "%ProgramFiles%\Prusa3D" (
   MD "%ProgramFiles%\Prusa3D"
 )

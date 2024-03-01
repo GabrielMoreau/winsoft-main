@@ -41,7 +41,7 @@ ECHO Execute pre-install script
 
 
 ECHO Silent install %softname%
-msiexec /q /i "rocketchat-%softversion%-win-x64.msi" ALLUSERS=1 /l*v "%logdir%\%softname%-MSI.log"
+ScriptRunner.exe -appvscript MsiExec.exe /q /i "rocketchat-%softversion%-win-x64.msi" ALLUSERS=1 /l*v "%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=300
 
 
 ECHO Push policies

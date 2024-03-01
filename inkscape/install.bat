@@ -37,7 +37,7 @@ ECHO Execute pre-install script
 
 
 ECHO Silent install %softname%
-msiexec /i "inkscape-%softversion%-x64.msi" ALLUSERS=1 /qn /L*v "%logdir%\%softname%-MSI.log"
+ScriptRunner.exe -appvscript MsiExec.exe /i "inkscape-%softversion%-x64.msi" ALLUSERS=1 /qn /L*v "%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=300
 
 
 ECHO Execute post-install script

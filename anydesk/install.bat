@@ -37,8 +37,8 @@ ECHO Execute pre-install script
 
 
 ECHO Silent install %softname%
-MsiExec.exe /i AnyDesk-%softversion%.msi /qn /L*v "%logdir%\%softname%-MSI.log"
-REM AnyDesk-%softversion%.exe --start-with-win --create-shortcuts --remove-first --update-disabled --silent
+ScriptRunner.exe -appvscript MsiExec.exe /i AnyDesk-%softversion%.msi /qn /L*v "%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=300
+REM ScriptRunner.exe -appvscript AnyDesk-%softversion%.exe --start-with-win --create-shortcuts --remove-first --update-disabled --silent -appvscriptrunnerparameters -wait -timeout=300
 
 
 ECHO Remove desktop shortcut
