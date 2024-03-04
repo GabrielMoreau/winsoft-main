@@ -22,7 +22,7 @@ SET regkey=ideaMaker
 
 
 ECHO Silent install %softname%
-install_ideaMaker_%softversion%.exe /S
+ScriptRunner.exe -appvscript install_ideaMaker_%softversion%.exe /S -appvscriptrunnerparameters -wait -timeout=300
 
 
 IF EXIST "%ProgramFiles%\Raise3D\ideaMaker\uninstall.exe" (

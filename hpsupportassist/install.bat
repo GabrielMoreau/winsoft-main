@@ -21,13 +21,13 @@ SET softversion=__VERSION__
 
 
 ECHO Disabled automatic install, notifytray and notifypopup
-Reg.exe ADD "HKLM\SOFTWARE\WOW6432Node\Hewlett-Packard\HPActiveSupport\HPSF" /v NotifyTray /t REG_SZ /d 0 /f
-Reg.exe ADD "HKLM\SOFTWARE\WOW6432Node\Hewlett-Packard\HPActiveSupport\HPSF" /v NotifyPopup /t REG_SZ /d 0 /f
-Reg.exe ADD "HKLM\SOFTWARE\WOW6432Node\Hewlett-Packard\HPActiveSupport\HPHC" /v Install /t REG_SZ /d 0 /f
+REG ADD "HKLM\SOFTWARE\WOW6432Node\Hewlett-Packard\HPActiveSupport\HPSF" /v NotifyTray /t REG_SZ /d 0 /f
+REG ADD "HKLM\SOFTWARE\WOW6432Node\Hewlett-Packard\HPActiveSupport\HPSF" /v NotifyPopup /t REG_SZ /d 0 /f
+REG ADD "HKLM\SOFTWARE\WOW6432Node\Hewlett-Packard\HPActiveSupport\HPHC" /v Install /t REG_SZ /d 0 /f
 
 
 ECHO Silent install %softname%
-InstallHPSA.exe /S /v/qn
+ScriptRunner.exe -appvscript InstallHPSA.exe /S /v/qn -appvscriptrunnerparameters -wait -timeout=1200
 
 
 ECHO Remove desktop shortcut
