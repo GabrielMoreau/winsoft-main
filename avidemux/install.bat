@@ -1,4 +1,3 @@
-REM @ECHO OFF
 
 REM
 REM   Avidemux
@@ -25,8 +24,8 @@ SET shortcut=%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\Avidemux.ln
 
 
 ECHO Silent install %softname%
-REM avidemux-%softversion%-win64.exe /S
-Avidemux_%softversion%.VC++.64bits.exe --script ".\avidemux.qs"
+REM ScriptRunner.exe -appvscript avidemux-%softversion%-win64.exe /S -appvscriptrunnerparameters -wait -timeout=300
+ScriptRunner.exe -appvscript Avidemux_%softversion%.VC++.64bits.exe --script ".\avidemux.qs" -appvscriptrunnerparameters -wait -timeout=300
 
 
 ECHO Copy avidemux.qs (need for silent uninstall)

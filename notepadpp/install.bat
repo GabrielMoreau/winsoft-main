@@ -29,7 +29,7 @@ TASKKILL /IM notepad++.exe /F
 
 ECHO Uninstall previous version
 IF EXIST "%ProgramFiles%\Notepad++\uninstall.exe" (
-  "%ProgramFiles%\Notepad++\uninstall.exe" /S
+  ScriptRunner.exe -appvscript "%ProgramFiles%\Notepad++\uninstall.exe" /S -appvscriptrunnerparameters -wait -timeout=300
 )
 
 SET /A LOOPCOUNT=0

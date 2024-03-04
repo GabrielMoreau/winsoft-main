@@ -1,4 +1,3 @@
-REM @ECHO OFF
 
 REM
 REM   FastStoneImageViewer
@@ -22,7 +21,8 @@ SET softversion=__VERSION__
 
 
 ECHO Silent install %softname%
-FSViewerSetup-%softversion%.exe /S
+ScriptRunner.exe -appvscript FSViewerSetup-%softversion%.exe /S -appvscriptrunnerparameters -wait -timeout=300
+
 
 ECHO Remove desktop shortcut
 IF EXIST "%PUBLIC%\Desktop\FastStone*Image*Viewer.lnk"          DEL /F /Q "%PUBLIC%\Desktop\FastStone*Image*Viewer.lnk"

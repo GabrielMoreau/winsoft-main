@@ -1,4 +1,3 @@
-REM @ECHO OFF
 
 REM
 REM   BleachBit
@@ -27,7 +26,7 @@ REM IF EXIST "%ProgramFiles(x86)%\BleachBit\uninstall.exe" "%ProgramFiles(x86)%\
 
 
 ECHO Silent install %softname%
-BleachBit-%softversion%-setup.exe /allusers /S
+ScriptRunner.exe -appvscript BleachBit-%softversion%-setup.exe /allusers /S -appvscriptrunnerparameters -wait -timeout=300
 
 
 ECHO Remove desktop shortcut

@@ -1,4 +1,3 @@
-REM @ECHO OFF
 
 REM
 REM   SumatraPDF
@@ -22,7 +21,8 @@ SET softversion=__VERSION__
 
 
 ECHO Silent install %softname%
-SumatraPDF-%softversion%-64-install.exe -s -all-users -with-filter
+ScriptRunner.exe -appvscript SumatraPDF-%softversion%-64-install.exe -s -all-users -with-filter -appvscriptrunnerparameters -wait -timeout=300
+
 
 ECHO Remove desktop link
 IF EXIST "%ALLUSERSPROFILE%\Desktop\SumatraPDF.lnk" DEL /F /Q "%ALLUSERSPROFILE%\Desktop\SumatraPDF.lnk"

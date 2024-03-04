@@ -1,4 +1,3 @@
-REM @ECHO OFF
 
 REM
 REM   SimpleTruss
@@ -22,7 +21,7 @@ SET softversion=__VERSION__
 
 
 ECHO Silent install %softname%
-SimpleTrussSetup-%softversion%.exe /VERYSILENT
+ScriptRunner.exe -appvscript SimpleTrussSetup-%softversion%.exe /VERYSILENT -appvscriptrunnerparameters -wait -timeout=300
 
 
 ECHO END %date%-%time%

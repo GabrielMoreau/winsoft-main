@@ -24,7 +24,8 @@ SET shortcut=%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\Signal-Desk
 
 
 ECHO Silent install %softname%
-signal-desktop-win-%softversion%.exe /S /D=%ProgramData%\signal-desktop
+ScriptRunner.exe -appvscript signal-desktop-win-%softversion%.exe /S /D=%ProgramData%\signal-desktop -appvscriptrunnerparameters -wait -timeout=300
+
 
 ECHO Copy uninstall script
 COPY /A /Y "uninstall.bat" "%ProgramData%\signal-desktop\uninstall.bat"

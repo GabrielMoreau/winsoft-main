@@ -1,4 +1,3 @@
-REM @ECHO OFF
 
 REM
 REM   Audacity
@@ -20,8 +19,9 @@ ECHO BEGIN %date%-%time%
 
 SET softversion=__VERSION__
 
-REM Silent install
-audacity-win-%softversion%-x64.exe /TASKS="!desktopicon,!resetprefs" /VERYSILENT /NORESTART /LOG="%logdir%\%softname%-MSI.log"
+
+ECHO Silent install %softname%
+ScriptRunner.exe -appvscript audacity-win-%softversion%-x64.exe /TASKS="!desktopicon,!resetprefs" /VERYSILENT /NORESTART /LOG="%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=300
 
 
 ECHO END %date%-%time%

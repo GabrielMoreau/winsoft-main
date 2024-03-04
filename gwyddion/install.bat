@@ -1,4 +1,3 @@
-REM @ECHO OFF
 
 REM
 REM   Gwyddion
@@ -22,7 +21,7 @@ SET softversion=__VERSION__
 
 
 ECHO Silent install %softname%
-Gwyddion-%softversion%-x64.exe /S
+ScriptRunner.exe -appvscript Gwyddion-%softversion%-x64.exe /S -appvscriptrunnerparameters -wait -timeout=300
 
 
 ECHO END %date%-%time%

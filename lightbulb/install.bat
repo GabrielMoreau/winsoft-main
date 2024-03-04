@@ -1,4 +1,3 @@
-REM @ECHO OFF
 
 REM
 REM   LightBulb
@@ -23,10 +22,11 @@ SET softruntimever=__VERSION2__
 
 
 Echo Silent install WindowsDesktop-Runtime
-windowsdesktop-runtime-%softruntimever%-win-x64.exe /install /quiet /norestart
+ScriptRunner.exe -appvscript windowsdesktop-runtime-%softruntimever%-win-x64.exe /install /quiet /norestart -appvscriptrunnerparameters -wait -timeout=300
+
 
 ECHO Silent install %softname%
-LightBulb-Installer-%softversion%.exe /VERYSILENT /LOG="%logdir%\%softname%-MSI.log"
+ScriptRunner.exe -appvscript LightBulb-Installer-%softversion%.exe /VERYSILENT /LOG="%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=300
 
 
 ECHO END %date%-%time%

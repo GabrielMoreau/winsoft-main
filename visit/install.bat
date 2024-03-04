@@ -1,4 +1,3 @@
-REM @ECHO OFF
 
 REM
 REM   VisIt
@@ -22,7 +21,8 @@ SET softversion=__VERSION__
 
 
 ECHO Silent install %softname%
-visit%softversion%_x64.exe /S
+ScriptRunner.exe -appvscript visit%softversion%_x64.exe /S -appvscriptrunnerparameters -wait -timeout=300
+
 
 ECHO Remove desktop shortcut
 IF EXIST "%PUBLIC%\Desktop\VisIt*.lnk"          DEL /F /Q "%PUBLIC%\Desktop\VisIt*.lnk"

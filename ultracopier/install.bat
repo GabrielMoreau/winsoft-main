@@ -1,4 +1,3 @@
-REM @ECHO OFF
 
 REM
 REM   Ultracopier
@@ -37,8 +36,9 @@ IF %ERRORLEVEL% EQU 0 (
   REG DELETE "HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Ultracopier" /F
 )
 
+
 ECHO Silent install %softname%
-ultracopier-windows-x86_64-%softversion%-setup.exe /S
+ScriptRunner.exe -appvscript ultracopier-windows-x86_64-%softversion%-setup.exe /S -appvscriptrunnerparameters -wait -timeout=300
 
 
 ECHO END %date%-%time%

@@ -21,7 +21,8 @@ SET softversion=__VERSION__
 
 
 ECHO Silent install %softname%
-bandicut-setup-%softversion%.exe /S
+ScriptRunner.exe -appvscript bandicut-setup-%softversion%.exe /S -appvscriptrunnerparameters -wait -timeout=300
+
 
 ECHO Remove desktop shortcut
 IF EXIST "%PUBLIC%\Desktop\%softname%.lnk"          DEL /F /Q "%PUBLIC%\Desktop\%softname%.lnk"

@@ -1,4 +1,3 @@
-REM @ECHO OFF
 
 REM
 REM   Picocrypt
@@ -22,8 +21,9 @@ SET softversion=__VERSION__
 SET regkey=EvanSu.Picocrypt_is1
 SET shortcut=%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\%softname%.lnk
 
+
 ECHO Silent install %softname%
-Picocrypt-Installer-%softversion%.exe /VERYSILENT /NORESTART /DIR="%ProgramFiles%\Picocrypt" /LOG="%logdir%\%softname%-MSI.log"
+ScriptRunner.exe -appvscript Picocrypt-Installer-%softversion%.exe /VERYSILENT /NORESTART /DIR="%ProgramFiles%\Picocrypt" /LOG="%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=300
 
 
 ECHO Search PowerShell
