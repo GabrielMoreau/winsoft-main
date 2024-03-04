@@ -1,4 +1,3 @@
-REM @ECHO OFF
 
 REM
 REM   OpenShot
@@ -22,7 +21,7 @@ SET softversion=__VERSION__
 
 
 ECHO Silent install %softname%
-OpenShot-v%softversion%-x86_64.exe /VERYSILENT /NORESTART /LOG="%logdir%\%softname%-MSI.log"
+ScriptRunner.exe -appvscript OpenShot-v%softversion%-x86_64.exe /VERYSILENT /NORESTART /LOG="%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=300
 
 
 ECHO END %date%-%time%

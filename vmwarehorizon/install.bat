@@ -1,4 +1,3 @@
-REM @ECHO OFF
 
 REM
 REM   VMwareHorizon
@@ -22,7 +21,7 @@ SET softversion=__VERSIONLONG__
 
 
 ECHO Silent install %softname%
-VMware-Horizon-Client-%softversion%.exe /silent /install /norestart /log "%logdir%\%softname%-MSI.log" DESKTOP_SHORTCUT=0
+ScriptRunner.exe -appvscript VMware-Horizon-Client-%softversion%.exe /silent /install /norestart /log "%logdir%\%softname%-MSI.log" DESKTOP_SHORTCUT=0 -appvscriptrunnerparameters -wait -timeout=300
 
 
 ECHO END %date%-%time%

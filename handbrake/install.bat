@@ -1,4 +1,3 @@
-REM @ECHO OFF
 
 REM
 REM   HandBrake
@@ -23,10 +22,11 @@ SET softruntimever=__VERSION2__
 
 
 Echo Silent install WindowsDesktop-Runtime
-windowsdesktop-runtime-%softruntimever%-win-x64.exe /install /quiet /norestart
+ScriptRunner.exe -appvscript windowsdesktop-runtime-%softruntimever%-win-x64.exe /install /quiet /norestart -appvscriptrunnerparameters -wait -timeout=300
+
 
 Echo Silent install %softname%
-HandBrake-%softversion%-x86_64-Win_GUI.exe /S
+ScriptRunner.exe -appvscript HandBrake-%softversion%-x86_64-Win_GUI.exe /S -appvscriptrunnerparameters -wait -timeout=300
 
 
 ECHO END %date%-%time%

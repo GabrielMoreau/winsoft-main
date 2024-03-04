@@ -1,4 +1,3 @@
-REM @ECHO OFF
 
 REM
 REM   FreeCAD
@@ -37,7 +36,7 @@ ECHO Execute pre-install script
 
 
 ECHO Silent install %softname%
-FreeCAD-WIN-x64-installer-%softversion%.exe /S
+ScriptRunner.exe -appvscript FreeCAD-WIN-x64-installer-%softversion%.exe /S -appvscriptrunnerparameters -wait -timeout=300
 
 ECHO Remove desktop shortcut
 IF EXIST "%PUBLIC%\Desktop\FreeCAD*.lnk"          DEL /F /Q "%PUBLIC%\Desktop\FreeCAD*.lnk"

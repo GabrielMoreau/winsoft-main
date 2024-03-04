@@ -1,4 +1,3 @@
-REM @ECHO OFF
 
 REM
 REM   Defraggler
@@ -23,7 +22,8 @@ SET softversion=__VERSION__
 
 
 ECHO Silent install %softname%
-dfsetup%softversion%.exe /S
+ScriptRunner.exe -appvscript dfsetup%softversion%.exe /S -appvscriptrunnerparameters -wait -timeout=300
+
 
 ECHO Remove desktop shortcut
 IF EXIST "%PUBLIC%\Desktop\Defraggler.lnk"          DEL /F /Q "%PUBLIC%\Desktop\Defraggler.lnk"

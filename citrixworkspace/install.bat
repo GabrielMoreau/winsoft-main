@@ -1,4 +1,3 @@
-REM @ECHO OFF
 
 REM
 REM   CitrixWorkspace
@@ -22,8 +21,8 @@ ECHO BEGIN %date%-%time%
 SET softversion=__VERSION__
 
 
-REM Silent install
-CitrixWorkspaceApp-%softversion%.exe /silent /noreboot /AutoUpdateCheck=disabled /LOG="%logdir%\%softname%-MSI.log"
+ECHO Silent install %softname%
+ScriptRunner.exe -appvscript CitrixWorkspaceApp-%softversion%.exe /silent /noreboot /AutoUpdateCheck=disabled /LOG="%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=300
 
 
 ECHO END %date%-%time%

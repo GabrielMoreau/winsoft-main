@@ -1,4 +1,3 @@
-REM @ECHO OFF
 
 REM
 REM   X2GoClient
@@ -21,8 +20,8 @@ ECHO BEGIN %date%-%time%
 SET softversion=__VERSION__
 
 
-REM Silent install
-x2goclient-%softversion%-setup.exe /S
+ECHO Silent install %softname%
+ScriptRunner.exe -appvscript x2goclient-%softversion%-setup.exe /S -appvscriptrunnerparameters -wait -timeout=300
 
 
 ECHO END %date%-%time%

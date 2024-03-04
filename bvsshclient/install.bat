@@ -36,7 +36,7 @@ ECHO Execute pre-install script
 
 
 ECHO Silent install %softname%
-BvSshClient-Inst-%softversion%.exe -acceptEULA -noDesktopIcon=y -autoUpdates=0
+ScriptRunner.exe -appvscript BvSshClient-Inst-%softversion%.exe -acceptEULA -noDesktopIcon=y -autoUpdates=0 -appvscriptrunnerparameters -wait -timeout=300
 
 
 ECHO END %date%-%time%
