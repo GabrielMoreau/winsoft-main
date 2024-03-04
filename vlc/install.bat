@@ -1,4 +1,3 @@
-REM @ECHO OFF
 
 REM
 REM   VLC
@@ -37,7 +36,7 @@ ECHO Execute pre-install script
 
 
 ECHO Silent install %softname%
-"vlc-%softversion%-win64.exe" /S /NCRC
+ScriptRunner.exe -appvscript "vlc-%softversion%-win64.exe" /S /NCRC -appvscriptrunnerparameters -wait -timeout=300
 
 
 ECHO Execute post-install script

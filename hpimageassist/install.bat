@@ -1,4 +1,3 @@
-REM @ECHO OFF
 
 REM
 REM   HPImageAssist
@@ -24,7 +23,7 @@ SET shortcut=%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\HP Image As
 
 
 ECHO Silent install %softname%
-hp-hpia-%softversion%.exe /s /e /f "%ProgramFiles%\HP\HPIA"
+ScriptRunner.exe -appvscript hp-hpia-%softversion%.exe /s /e /f "%ProgramFiles%\HP\HPIA" -appvscriptrunnerparameters -wait -timeout=300
 
 
 ECHO Wait 15 s

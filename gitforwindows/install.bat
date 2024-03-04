@@ -1,4 +1,3 @@
-REM @ECHO OFF
 
 REM
 REM   GitForWindows
@@ -21,8 +20,9 @@ ECHO BEGIN %date%-%time%
 
 SET softversion=__VERSION__
 
-REM Silent install
-Git-%softversion%-64-bit.exe /VERYSILENT /NORESTART /NOCANCEL /SP- /CLOSEAPPLICATIONS /RESTARTAPPLICATIONS
+
+ECHO Silent install %softname%
+ScriptRunner.exe -appvscript Git-%softversion%-64-bit.exe /VERYSILENT /NORESTART /NOCANCEL /SP- /CLOSEAPPLICATIONS /RESTARTAPPLICATIONS -appvscriptrunnerparameters -wait -timeout=300
 
 
 ECHO END %date%-%time%

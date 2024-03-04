@@ -36,7 +36,7 @@ ECHO Execute pre-install script
 
 
 ECHO Silent install %softname%
-Slicer-%softversion%-win-amd64.exe /S /D=%ProgramData%\Slicer.org
+ScriptRunner.exe -appvscript Slicer-%softversion%-win-amd64.exe /S /D=%ProgramData%\Slicer.org -appvscriptrunnerparameters -wait -timeout=300
 
 
 REM ECHO Remove desktop shortcut

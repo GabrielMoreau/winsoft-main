@@ -1,4 +1,3 @@
-REM @ECHO OFF
 
 REM
 REM   TeamViewer
@@ -23,7 +22,7 @@ SET softversion=__VERSION__
 
 
 ECHO Silent install %softname%
-TeamViewer-%softversion%-Setup-x64.exe /S
+ScriptRunner.exe -appvscript TeamViewer-%softversion%-Setup-x64.exe /S -appvscriptrunnerparameters -wait -timeout=300
 
 
 ECHO Disable auto update

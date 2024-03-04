@@ -1,4 +1,3 @@
-REM @ECHO OFF
 
 REM
 REM   Darktable
@@ -22,7 +21,8 @@ SET softversion=__VERSION__
 
 
 ECHO Silent install %softname%
-darktable-%softversion%-win64.exe /S
+ScriptRunner.exe -appvscript darktable-%softversion%-win64.exe /S -appvscriptrunnerparameters -wait -timeout=300
+
 
 ECHO Remove desktop shortcut
 IF EXIST "%PUBLIC%\Desktop\Darktable.lnk"          DEL /F /Q "%PUBLIC%\Desktop\Darktable.lnk"

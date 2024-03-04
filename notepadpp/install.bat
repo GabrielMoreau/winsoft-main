@@ -47,10 +47,11 @@ REG QUERY "HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\
 IF %ERRORLEVEL% EQU 0 GOTO WAIT
 ping 127.0.0.1 -n 3 > NUL
 
+
 :NEXT
 
 ECHO Silent install %softname%
-"%softexe%" /S
+ScriptRunner.exe -appvscript "%softexe%" /S -appvscriptrunnerparameters -wait -timeout=300
 
 
 ECHO Disable auto update

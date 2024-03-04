@@ -1,4 +1,3 @@
-REM @ECHO OFF
 
 REM
 REM   OBS-Studio
@@ -35,11 +34,14 @@ ECHO unblock
 ECHO Execute pre-install script
 %pwrsh% -File ".\pre-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
 
+
 ECHO Silent install CPP Redistributable DLL
-VC_redist.x64.exe /install /quiet /norestart
+ScriptRunner.exe -appvscript VC_redist.x64.exe /install /quiet /norestart -appvscriptrunnerparameters -wait -timeout=300
+
 
 ECHO Silent install %softname%
-OBS-Studio-%softversion%-Full-Installer-x64.exe /S
+ScriptRunner.exe -appvscript OBS-Studio-%softversion%-Full-Installer-x64.exe /S -appvscriptrunnerparameters -wait -timeout=300
+
 
 ECHO Remove desktop shortcut
 IF EXIST "%PUBLIC%\Desktop\OBS*Studio.lnk"          DEL /F /Q "%PUBLIC%\Desktop\OBS*Studio.lnk"
