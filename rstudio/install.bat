@@ -1,4 +1,3 @@
-REM @ECHO OFF
 
 REM
 REM   RStudio
@@ -29,7 +28,7 @@ IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET pwrsh=%W
 ECHO Add rights
 %pwrsh% Set-ExecutionPolicy RemoteSigned -Force -Scope LocalMachine
 
-ECHO unblock
+ECHO Unblock
 %pwrsh% "Unblock-File -Path .\*.ps1"
 
 

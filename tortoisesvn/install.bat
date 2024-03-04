@@ -1,4 +1,3 @@
-REM @ECHO OFF
 
 REM
 REM   TortoiseSVN
@@ -21,7 +20,7 @@ ECHO BEGIN %date%-%time%
 SET softversion=__VERSION__
 
 
-REM Silent install
+ECHO Silent install %softname%
 ScriptRunner.exe -appvscript MsiExec.exe /i "TortoiseSVN-%softversion%-x64.msi" /qn /norestart /L*v "%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=300
 
 

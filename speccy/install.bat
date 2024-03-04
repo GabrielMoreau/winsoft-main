@@ -1,4 +1,3 @@
-REM @ECHO OFF
 
 REM
 REM   Speccy
@@ -23,7 +22,8 @@ SET softversion=__VERSION__
 
 
 ECHO Silent install %softname%
-spsetup%softversion%.exe /S
+ScriptRunner.exe -appvscript spsetup%softversion%.exe /S -appvscriptrunnerparameters -wait -timeout=300
+
 
 ECHO Remove desktop shortcut
 IF EXIST "%PUBLIC%\Desktop\Speccy.lnk"          DEL /F /Q "%PUBLIC%\Desktop\Speccy.lnk"

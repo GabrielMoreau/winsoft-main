@@ -1,4 +1,3 @@
-REM @ECHO OFF
 
 REM
 REM   Gimp
@@ -22,7 +21,7 @@ ECHO BEGIN %date%-%time%
 SET softversion=__VERSION__
 
 
-REM Silent install
+ECHO Silent install %softname%
 ScriptRunner.exe -appvscript gimp-%softversion%-setup.exe /VERYSILENT /NORESTART /ALLUSERS /LOG="%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=300
 
 

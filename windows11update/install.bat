@@ -1,4 +1,3 @@
-REM @ECHO OFF
 
 REM
 REM   Windows11Update
@@ -34,12 +33,14 @@ ECHO unblock
 %pwrsh% -File ".\pre-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
 ECHO Preinstall ErrorLevel Return: %ERRORLEVEL%
 
+
 IF %ERRORLEVEL% EQU 0 (
-  ECHO Silent install %softname%
+  ECHO Silent install %softname% - No ScriptRunner
   Windows11InstallationAssistant-%softversion%.exe /QuietInstall /SkipEULA /NoRestartUI
 ) ELSE (
   ECHO Hardware not compatible, %softname% will not be installed
 )
+
 
 ECHO END %date%-%time%
 EXIT

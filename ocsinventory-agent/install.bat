@@ -1,4 +1,3 @@
-REM @ECHO OFF
 
 REM
 REM   OCSInventory-Agent

@@ -1,4 +1,3 @@
-REM @ECHO OFF
 
 REM
 REM   Skype
@@ -24,6 +23,7 @@ SET softversion=__VERSION__
 
 ECHO Silent install %softname%
 ScriptRunner.exe -appvscript Skype-%softversion%.exe /VERYSILENT /NORESTART /SUPPRESSMSGBOXES /DL=1 /LOG="%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=300
+
 
 ECHO Remove desktop shortcut
 IF EXIST "%PUBLIC%\Desktop\%softname%.lnk"          DEL /F /Q "%PUBLIC%\Desktop\%softname%.lnk"

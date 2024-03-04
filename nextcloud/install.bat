@@ -1,4 +1,3 @@
-REM @ECHO OFF
 
 REM
 REM   Nextcloud
@@ -21,7 +20,7 @@ ECHO BEGIN %date%-%time%
 SET softversion=__VERSION__
 
 
-REM Silent install
+ECHO Silent install %softname%
 ScriptRunner.exe -appvscript MsiExec.exe /i Nextcloud-%softversion%-x64.msi REBOOT=ReallySuppress /qn -appvscriptrunnerparameters -wait -timeout=300
 
 

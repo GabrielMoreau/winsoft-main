@@ -1,4 +1,3 @@
-REM @ECHO OFF
 
 REM
 REM   FlashPlayer-Uninstall
@@ -22,7 +21,7 @@ SET softversion=__VERSION__
 
 
 ECHO Silent install %softname%
-uninstall_flash_player-%softversion%.exe -uninstall
+ScriptRunner.exe -appvscript uninstall_flash_player-%softversion%.exe -uninstall -appvscriptrunnerparameters -wait -timeout=300
 
 
 ECHO Search PowerShell

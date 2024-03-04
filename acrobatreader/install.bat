@@ -1,4 +1,3 @@
-REM @ECHO OFF
 
 REM
 REM   AcrobatReader
@@ -25,8 +24,10 @@ REM https://silentinstallhq.com/adobe-reader-silent-uninstall-strings-master-lis
 ECHO Uninstall %softname% Silent
 ScriptRunner.exe -appvscript MsiExec.exe /x {AC76BA86-7AD7-1033-7B44-AC0F074E4100} /qn -appvscriptrunnerparameters -wait -timeout=300
 
+
 ECHO Silent Install %softname%
 ScriptRunner.exe -appvscript AcroRdrDCx64%softversion%_fr_FR.exe /sAll /rs /msi EULA_ACCEPT=YES DISABLEDESKTOPSHORTCUT=1 /L*V "%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=300
+
 
 ECHO Remove desktop shortcut
 IF EXIST "%PUBLIC%\Desktop\Adobe*Reader*.lnk"          DEL /F /Q "%PUBLIC%\Desktop\Adobe*Reader*.lnk"

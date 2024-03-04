@@ -1,4 +1,3 @@
-REM @ECHO OFF
 
 REM
 REM   Tabby
@@ -24,6 +23,7 @@ SET softversion=__VERSION__
 
 ECHO Silent install %softname%
 ScriptRunner.exe -appvscript tabby-%softversion%-setup-x64.exe /S /ALLUSERS -appvscriptrunnerparameters -wait -timeout=300
+
 
 ECHO Remove desktop shortcut
 IF EXIST "%PUBLIC%\Desktop\Tabby Terminal.lnk"          DEL /F /Q "%PUBLIC%\Desktop\Tabby Terminal.lnk"

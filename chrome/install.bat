@@ -1,4 +1,3 @@
-REM @ECHO OFF
 
 REM
 REM   Chrome
@@ -19,6 +18,7 @@ EXIT /B
 ECHO BEGIN %date%-%time%
 
 SET softversion=__VERSION__
+
 
 ECHO Silent install %softname%
 ScriptRunner.exe -appvscript MsiExec.exe /i "googlechromestandaloneenterprise64-%softversion%.msi" /qn /L*V "%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=300

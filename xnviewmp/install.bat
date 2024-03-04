@@ -1,4 +1,3 @@
-REM @ECHO OFF
 
 REM
 REM   XnViewMP
@@ -21,9 +20,9 @@ ECHO BEGIN %date%-%time%
 SET softversion=__VERSION__
 
 
-ECHO Silent Uninstall XnView on 32-bit or 64-bit System
-IF EXIST "%ProgramFiles%\XnView\unins000.exe"      "%ProgramFiles%\XnView\unins000.exe"      /VERYSILENT /NORESTART
-IF EXIST "%ProgramFiles(x86)%\XnView\unins000.exe" "%ProgramFiles(x86)%\XnView\unins000.exe" /VERYSILENT /NORESTART
+ECHO Silent Uninstall %softname% on 32-bit or 64-bit System
+IF EXIST "%ProgramFiles%\XnView\unins000.exe"      ScriptRunner.exe -appvscript "%ProgramFiles%\XnView\unins000.exe"      /VERYSILENT /NORESTART -appvscriptrunnerparameters -wait -timeout=300
+IF EXIST "%ProgramFiles(x86)%\XnView\unins000.exe" ScriptRunner.exe -appvscript "%ProgramFiles(x86)%\XnView\unins000.exe" /VERYSILENT /NORESTART -appvscriptrunnerparameters -wait -timeout=300
 
 
 ECHO Silent install %softname%

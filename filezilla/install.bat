@@ -1,4 +1,3 @@
-REM @ECHO OFF
 
 REM
 REM   Filezilla
@@ -24,20 +23,22 @@ SET softexe=FileZilla_%softversion%_win64-setup.exe
 
 ECHO Uninstall previous version if exist
 IF EXIST "%ProgramFiles%\FileZilla FTP Client\uninstall.exe" (
-  "%ProgramFiles%\FileZilla FTP Client\uninstall.exe" /S
+  ScriptRunner.exe -appvscript "%ProgramFiles%\FileZilla FTP Client\uninstall.exe" /S -appvscriptrunnerparameters -wait -timeout=300
 )
 IF EXIST "%ProgramFiles%\FileZilla FTP Client\uninstall.exe" (
-  "%ProgramFiles%\FileZilla FTP Client\uninstall.exe" /S
+  ScriptRunner.exe -appvscript "%ProgramFiles%\FileZilla FTP Client\uninstall.exe" /S -appvscriptrunnerparameters -wait -timeout=300
 )
 IF EXIST "%ProgramFiles(x86)%\FileZilla FTP Client\uninstall.exe" (
-  "%ProgramFiles(x86)%\FileZilla FTP Client\uninstall.exe" /S
+  ScriptRunner.exe -appvscript "%ProgramFiles(x86)%\FileZilla FTP Client\uninstall.exe" /S -appvscriptrunnerparameters -wait -timeout=300
 )
 IF EXIST "%ProgramFiles(x86)%\FileZilla FTP Client\uninstall.exe" (
-  "%ProgramFiles(x86)%\FileZilla FTP Client\uninstall.exe" /S
+  ScriptRunner.exe -appvscript "%ProgramFiles(x86)%\FileZilla FTP Client\uninstall.exe" /S -appvscriptrunnerparameters -wait -timeout=300
 )
 
+
 ECHO Silent install
-"%softexe%" /user=all /S
+ScriptRunner.exe -appvscript "%softexe%" /user=all /S -appvscriptrunnerparameters -wait -timeout=300
+
 
 ECHO Disable welcome and check update
 IF EXIST "%ProgramFiles%\FileZilla FTP Client" (

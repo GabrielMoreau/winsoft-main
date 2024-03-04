@@ -1,4 +1,3 @@
-REM @ECHO OFF
 
 REM
 REM   DellCmdUpdate
@@ -38,7 +37,7 @@ ECHO Execute pre-install script
 
 
 ECHO Silent install %softname%
-%softexe% /passthrough /S /v/qn
+ScriptRunner.exe -appvscript %softexe% /passthrough /S /v/qn -appvscriptrunnerparameters -wait -timeout=300
 
 
 ECHO Wait 2 minutes

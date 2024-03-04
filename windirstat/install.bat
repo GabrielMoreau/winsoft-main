@@ -1,4 +1,3 @@
-REM @ECHO OFF
 
 REM
 REM   WinDirStat
@@ -25,7 +24,7 @@ SET shortcut=%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\%softname%.
 
 
 ECHO Silent install %softname%
-"%softexec%" /S
+ScriptRunner.exe -appvscript "%softexec%" /S -appvscriptrunnerparameters -wait -timeout=300
 
 
 ECHO Copy uninstall script

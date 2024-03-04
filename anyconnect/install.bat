@@ -1,4 +1,3 @@
-REM @ECHO OFF
 
 REM
 REM   AnyConnect
@@ -25,6 +24,7 @@ ECHO Stop VPN service
 REM Get-Service -Name 'vpnagent'
 REM Get-Service -DisplayName 'Cisco AnyConnect Secure Mobility Agent'
 NET STOP "vpnagent"
+
 
 ECHO Silent install %softname%
 ScriptRunner.exe -appvscript MsiExec.exe /i "anyconnect-win-%softversion%-core-vpn-webdeploy-k9.msi" ALLUSERS=1 /qn /norestart /L*v "%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=300

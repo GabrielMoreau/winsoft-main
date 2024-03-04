@@ -1,4 +1,3 @@
-REM @ECHO OFF
 
 REM
 REM   Recuva
@@ -23,7 +22,8 @@ SET softversion=__VERSION__
 
 
 ECHO Silent install %softname%
-rcsetup%softversion%.exe /S
+ScriptRunner.exe -appvscript rcsetup%softversion%.exe /S -appvscriptrunnerparameters -wait -timeout=300
+
 
 ECHO Remove desktop shortcut
 IF EXIST "%PUBLIC%\Desktop\Recuva.lnk"          DEL /F /Q "%PUBLIC%\Desktop\Recuva.lnk"

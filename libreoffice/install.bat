@@ -1,4 +1,3 @@
-REM @ECHO OFF
 
 REM
 REM   LibreOffice
@@ -22,9 +21,9 @@ SET softversion=__VERSION__
 
 SET process=soffice.bin
 
-REM https://wiki.documentfoundation.org/Deployment_and_Migration
 
 ECHO Silent install %softname%
+REM https://wiki.documentfoundation.org/Deployment_and_Migration
 ScriptRunner.exe -appvscript MsiExec.exe /i "LibreOffice_%softversion%_Win_x86-64.msi" /qn /norestart /l "%logdir%\%softname%-MSI.log" CREATEDESKTOPLINK=0 RebootYesNo=No ISCHECKFORPRODUCTUPDATES=0 REGISTER_NO_MSO_TYPES=1 REMOVE=gm_o_Onlineupdate SELECT_WORD=0 SELECT_EXCEL=0 SELECT_POWERPOINT=0 USERNAME="LEGI" ADDLOCAL=ALL -appvscriptrunnerparameters -wait -timeout=300
 
 ECHO Silent help install

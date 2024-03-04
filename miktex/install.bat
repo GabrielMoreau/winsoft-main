@@ -1,4 +1,3 @@
-REM @ECHO OFF
 
 REM
 REM   MiKTeX
@@ -27,6 +26,7 @@ miktexsetup-standalone-%softversion%.exe --verbose --local-package-repository=%S
 
 ECHO Silent install
 miktexsetup-standalone-%softversion%.exe --verbose --local-package-repository=%SystemDrive%\Temp\MiKTeX --shared=yes --user-config="<APPDATA>\MiKTeX" --user-data="<LOCALAPPDATA>\MiKTeX" --user-install="<APPDATA>\MiKTeX" --package-set=basic install
+
 
 ECHO Wait before Remove
 ping -n 41 127.0.0.1 -w 1000 > nul

@@ -1,4 +1,3 @@
-REM @ECHO OFF
 
 REM
 REM   XournalPP
@@ -25,6 +24,7 @@ SET shortcut=%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\Xournal++.l
 
 ECHO Silent install %softname%
 ScriptRunner.exe -appvscript xournalpp-%softversion%-windows.exe /VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP- /S /quiet -appvscriptrunnerparameters -wait -timeout=300
+
 
 ECHO Copy uninstall script
 COPY /A /Y "uninstall.bat" "%ProgramFiles%\%regkey%\uninstall.bat"

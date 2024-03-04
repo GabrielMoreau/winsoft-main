@@ -1,4 +1,3 @@
-REM @ECHO OFF
 
 REM
 REM   WinSCP
@@ -22,8 +21,9 @@ ECHO BEGIN %date%-%time%
 SET softversion=__VERSION__
 
 
-REM Silent install
+ECHO Silent install %softname%
 ScriptRunner.exe -appvscript WinSCP-%softversion%-Setup.exe /VERYSILENT /NORESTART /ALLUSERS /MERGETASKS=!desktopicon /LOG="%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=300
+
 
 REM Comment beacuse of HKCU reg
 REM Disable WinSCP Check For Updates

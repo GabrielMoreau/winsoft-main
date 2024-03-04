@@ -1,4 +1,3 @@
-REM @ECHO OFF
 
 REM
 REM   Digikam
@@ -22,7 +21,7 @@ SET softversion=__VERSION__
 
 
 ECHO Silent install %softname%
-digiKam-%softversion%-Win64.exe /S
+ScriptRunner.exe -appvscript digiKam-%softversion%-Win64.exe /S -appvscriptrunnerparameters -wait -timeout=300
 
 
 ECHO Search PowerShell

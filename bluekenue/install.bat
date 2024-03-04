@@ -1,4 +1,3 @@
-REM @ECHO OFF
 
 REM
 REM   BlueKenue
@@ -23,7 +22,7 @@ REM https://nrc.canada.ca/fr/recherche-developpement/produits-services/logiciels
 SET softversion=__VERSION__
 
 
-REM Silent install
+ECHO Silent install %softname%
 ScriptRunner.exe -appvscript MsiExec.exe /i "BlueKenue64Installer%softversion%.msi" /quiet /qn /norestart /log "%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=300
 
 

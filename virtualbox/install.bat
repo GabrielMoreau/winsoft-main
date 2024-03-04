@@ -1,4 +1,3 @@
-REM @ECHO OFF
 
 REM
 REM   VirtualBox
@@ -35,8 +34,8 @@ REM Execute
 %pwrsh% -File ".\pre-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
 
 
-REM Silent install
-VirtualBox-%softversion%-Win.exe --silent --extract --path .\
+ECHO Silent install %softname%
+ScriptRunner.exe -appvscript VirtualBox-%softversion%-Win.exe --silent --extract --path .\ -appvscriptrunnerparameters -wait -timeout=300
 FOR %%m IN (*.msi) DO (ScriptRunner.exe -appvscript MsiExec.exe /i "%%m" /qn /norestart /L*v "%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=300)
 
 

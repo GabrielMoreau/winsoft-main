@@ -1,4 +1,3 @@
-REM @ECHO OFF
 
 REM
 REM   RTools
@@ -23,10 +22,11 @@ SET SoftVersionL=__VERSION_L__
 
 
 ECHO Remove RTools if already exists
-If EXIST "%SystemDrive%\rtools%SoftVersionS%\unins000.exe" "%SystemDrive%\rtools%SoftVersionS%\unins000.exe" /VERYSILENT /SUPPRESSMSGBOXES
+If EXIST "%SystemDrive%\rtools%SoftVersionS%\unins000.exe" ScriptRunner.exe -appvscript "%SystemDrive%\rtools%SoftVersionS%\unins000.exe" /VERYSILENT /SUPPRESSMSGBOXES -appvscriptrunnerparameters -wait -timeout=300
+
 
 ECHO Silent install %softname%
-rtools%SoftVersionL%.exe /VERYSILENT /SUPPRESSMSGBOXES /LOG="%logdir%\%softname%-MSI.log"
+ScriptRunner.exe -appvscript rtools%SoftVersionL%.exe /VERYSILENT /SUPPRESSMSGBOXES /LOG="%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=300
 
 
 ECHO END %date%-%time%
