@@ -12,7 +12,7 @@ REVISION:=1
 #VERSION:=$(shell basename $(URL) | cut -f 3- -d '_' | sed -e 's/\.exe//; s/_/./g;')
 #EXE:=prusa3d_win_$(VERSION).exe
 VERSION:=$(shell curl -s -L 'https://github.com/prusa3d/PrusaSlicer/releases/latest' | sed 's/</\n/g;' | grep '^meta property.*og:title'  | cut -f 5 -d ' ')
-URL:=https://github.com$(shell curl -s -L 'https://github.com/prusa3d/PrusaSlicer/releases/expanded_assets/version_$(VERSION)' | sed 's/"/\n/g;' | grep '^/.*/PrusaSlicer-$(VERSION).*_signed.zip')
+URL:=https://github.com$(shell curl -s -L 'https://github.com/prusa3d/PrusaSlicer/releases/expanded_assets/version_$(VERSION)' | sed 's/"/\n/g;' | grep '^/.*/PrusaSlicer-$(VERSION).*win64.*.zip')
 EXE:=PrusaSlicer-$(VERSION).zip
 
 IT_TEAM:=IT Support
@@ -59,7 +59,7 @@ tmp/PrusaSlicer/prusa-slicer.exe: tmp/$(EXE)
 	@(cd tmp ; \
 		rm -rf PrusaSlicer PrusaSlicer-$(VERSION)+* 2>/dev/null ; \
 		unzip -q $(EXE) ; \
-		mv PrusaSlicer-2.7.1+* PrusaSlicer ; \
+		mv PrusaSlicer-$(VERSION)+* PrusaSlicer ; \
 		#which peres >/dev/null && { peres -a 'Telegram/Telegram.exe' | grep -q "^Product Version:[[:space:]]*$(VERSION)" || echo "Error: bad version for binary $(EXE)" ; } ; \
 		)
 
