@@ -1,4 +1,3 @@
-
 REM
 REM   Firefox
 REM
@@ -51,7 +50,7 @@ ScriptRunner.exe -appvscript MsiExec.exe /i "Firefox-Setup-%softversion%-esr.msi
 REM voir https://github.com/mozilla/policy-templates/blob/master/README.md
 ECHO Push policies
 IF EXIST "%ProgramFiles%\Mozilla Firefox" (
-  IF NOT EXIST "%ProgramFiles%\Mozilla Firefox\distribution" MKDIR "%ProgramFiles%s\Mozilla Firefox\distribution"
+  IF NOT EXIST "%ProgramFiles%\Mozilla Firefox\distribution" MKDIR "%ProgramFiles%\Mozilla Firefox\distribution"
   IF EXIST "%ProgramFiles%\Mozilla Firefox\distribution" COPY /y policies.json "%ProgramFiles%\Mozilla Firefox\distribution\policies.json" > NUL
 )
 
