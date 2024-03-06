@@ -56,7 +56,7 @@ tmp/$(EXE):
 		rm -f R-*.exe 2>/dev/null ; \
 		curl -# -o "$(EXE)" -L "$(URL)" ; \
 		file $(EXE) | grep -q "PE32 executable" || echo "Error: bad format for binary $(EXE)" ; \
-		which peres >/dev/null && { peres -a $(EXE) | sed -s 's/\.//g;' | grep -q "^Product Version:[[:space:]]*$(CONCATVERSION)" || echo "Error: bad version for binary $(EXE)" ; } ; \
+		which peres >/dev/null && { peres -v $(EXE) | sed -s 's/\.//g;' | grep -q "^Product Version:[[:space:]]*$(CONCATVERSION)" || echo "Error: bad version for binary $(EXE)" ; } ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
 

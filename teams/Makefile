@@ -50,14 +50,14 @@ tmp/$(EXE):
 		curl -# -o "$(EXE)" -L "$(URL)" ; \
 		file $(EXE) | grep -q "Composite Document File.*Subject: Microsoft Teams" || echo "Error: bad format for binary $(EXE)" ; \
 		which msiextract >/dev/null && { rm -rf 'Program File'; msiextract $(EXE) ; } ; \
-		which peres >/dev/null && { peres -a 'Program Files/Teams Installer/Teams.exe' | grep -q "^Product Version:[[:space:]]*$(SHORTVERSION)" || echo "Error: bad version for binary Program Files/Teams Installer/Teams.exe" ; } ; \
+		which peres >/dev/null && { peres -v 'Program Files/Teams Installer/Teams.exe' | grep -q "^Product Version:[[:space:]]*$(SHORTVERSION)" || echo "Error: bad version for binary Program Files/Teams Installer/Teams.exe" ; } ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
 
 check-exe: tmp/$(EXE)
 	@cd tmp; \
 		file $(EXE) | grep -q "Composite Document File.*Subject: Microsoft Teams" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 1; } ; \
-		which peres >/dev/null && { peres -a 'Program Files/Teams Installer/Teams.exe' | grep -q "^Product Version:[[:space:]]*$(SHORTVERSION)" || { echo "Error: bad version for binary Program Files/Teams Installer/Teams.exe" 1>&2 ; exit 1; } ; }
+		which peres >/dev/null && { peres -v 'Program Files/Teams Installer/Teams.exe' | grep -q "^Product Version:[[:space:]]*$(SHORTVERSION)" || { echo "Error: bad version for binary Program Files/Teams Installer/Teams.exe" 1>&2 ; exit 1; } ; }
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp

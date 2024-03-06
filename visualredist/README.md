@@ -26,7 +26,7 @@ Version 2015-2019 is now replaced by version 2015-2022.
 Have the version of an executable with `sigcheck.exe` or `peres` (natif):
 ```
 Sysinternals\sigcheck.exe -a -h .\vcredist_ia64.exe
-peres -a .\vcredist_ia64.exe | egrep 'Product Version:'
+peres -v .\vcredist_ia64.exe | egrep 'Product Version:'
 ```
 
 Under GNU/Linux amd64
@@ -38,7 +38,7 @@ wine ~/Sysinternals/sigcheck.exe -a -h .\vcredist_ia64.exe
 It's possible to automate
 ```bash
 find tmp/ -name '*.exe' | xargs -r -n 1 wine ~/Sysinternals/sigcheck.exe -a -h | egrep '(Product|Prod version):' | cut -f 2 -d ':'
-find tmp/ -name '*.exe' | xargs -r -n 1 peres -a | egrep 'Product Version:' | awk '{print $3}'
+find tmp/ -name '*.exe' | xargs -r -n 1 peres -v | egrep 'Product Version:' | awk '{print $3}'
 ```
 
 Example of package on a computer
