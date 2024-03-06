@@ -86,9 +86,20 @@ this allows to have the scripts running under GNU/Linux and MacOSX environments.
 Indeed, the packages are currently all built under these environments
 to facilitate automation.
 
-Note the optional use of the `peres` tool (Debian `pev` package)
+* Note the optional use of the `peres` tool (Debian `pev` package)
 which allows to retrieve the version number in a `setup.exe` installation file.
 If this tool is available, a version number check is performed.
+
+* You can use `7z` (Debian `p7zip-full` package)
+or `exiftool` (Debian `libimage-exiftool-perl` package)
+to retrieve the product version number.
+
+Example (same result with the three command)
+```bash
+7z l tmp/Windows11InstallationAssistant.exe | grep '^ProductVersion:' | cut -f 2 -d ' '
+peres -v tmp/Windows11InstallationAssistant.exe | grep '^Product Version:' | awk '{print $3}'
+exiftool -ProductVersion tmp/Windows11InstallationAssistant.exe | awk '{print $4}'
+```
 
 Unfortunately, many installation programs `setup.exe` have no version
 number (Product Version). This is a pity, as there is sometimes some
@@ -101,7 +112,7 @@ this version number. We can sometime use `msiextract` to extract an
 Please devops, put always the version number clearly in the comment...
 
 ```bash
-apt install make curl wget pev msitools
+apt install make curl wget pev msitools p7zip-full libimage-exiftool-perl
 ```
 
 ## List of 96 packages
