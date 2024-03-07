@@ -50,7 +50,6 @@ tmp/$(EXE):
 		curl -# -o "$(EXE)" -L "$(URL)" ; \
 		file $(EXE) | grep -q "Composite Document File.*Subject: Microsoft Teams" || echo "Error: bad format for binary $(EXE)" ; \
 		which msiextract >/dev/null && { rm -rf 'Program File'; msiextract $(EXE) ; } ; \
-		which peres >/dev/null && { peres -v 'Program Files/Teams Installer/Teams.exe' | grep -q "^Product Version:[[:space:]]*$(SHORTVERSION)" || echo "Error: bad version for binary Program Files/Teams Installer/Teams.exe" ; } ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
 
