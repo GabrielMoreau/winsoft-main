@@ -16,7 +16,7 @@ Write-Output "Begin Pre-Install"
 			$Args = '/x "' + $UninstallSplit[1].Trim() + '" /qn /norestart'
 			Write-Output "Info: $DisplayName / $DisplayVersion / $KeyProduct/ $Args"
 
-			$Proc = Start-Process -FilePath "msiexec.exe" -ArgumentList "$Args" -WindowStyle 'Hidden' -ErrorAction 'SilentlyContinue' -PassThru
+			$Proc = Start-Process -FilePath "MsiExec.exe" -ArgumentList "$Args" -WindowStyle 'Hidden' -ErrorAction 'SilentlyContinue' -PassThru
 
 			$Timeouted = $Null # Reset any previously set timeout
 			# Wait up to 180 seconds for normal termination

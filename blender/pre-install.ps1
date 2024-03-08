@@ -30,7 +30,7 @@ Function ToVersion {
 		If ((ToVersion($DisplayVersion)) -ge (ToVersion($RefVersion))) { Return }
 
 		If ($($App.UninstallString) -match 'MsiExec.exe') {
-			$Exe = 'msiexec.exe'
+			$Exe = 'MsiExec.exe'
 			#$UninstallSplit = $App.UninstallString -Split "/I"
 			#$Args = '/x "' + $UninstallSplit[1].Trim() + '" /qn /norestart'
 			$Args = '/x "' + $KeyProduct + '" /qn /norestart'

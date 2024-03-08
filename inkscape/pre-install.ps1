@@ -30,7 +30,7 @@ Function ToVersion {
 		If ((ToVersion($DisplayVersion)) -ge (ToVersion($RefVersion))) { Return }
 
 		If ($($App.UninstallString) -match 'MsiExec.exe') {
-			$Exe = 'msiexec.exe'
+			$Exe = 'MsiExec.exe'
 			$Args = '/x "' + $KeyProduct + '" /qn'
 			Write-Output "Remove MSI: $DisplayName / $DisplayVersion / $KeyProduct / $Exe $Args"
 		} Else {

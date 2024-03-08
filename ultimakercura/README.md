@@ -13,9 +13,9 @@ Fine-tune your 3D model with 400+ settings for the best slicing and printing res
 ```bat
 REM Silent Install (exe or msi)
 Ultimaker_Cura-4.5.0-win64.exe /S
-msiexec /i "UltiMaker-Cura-win64.msi" /qn /norestart
+MsiExec.exe /i "UltiMaker-Cura-win64.msi" /qn /norestart
 
 REM Silent Uninstall (exe or msi)
 "%ProgramW6432%\Ultimaker Cura 4.5\Uninstall.exe" /S
-msiexec.exe /x {GUID} /qn /norestart
+MsiExec.exe /x {GUID} /qn /norestart
 ```

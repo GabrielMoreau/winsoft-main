@@ -19,7 +19,7 @@ $RefVersion = '__VERSION__'
 		If ($DisplayVersion -ge [version]$RefVersion) { Return }
 
 		If ($($App.UninstallString) -match 'MsiExec.exe') {
-			$Exe = 'msiexec.exe'
+			$Exe = 'MsiExec.exe'
 			$Args = '/x "' + $KeyProduct + '" /qn'
 			Write-Output "Remove: $DisplayName / $DisplayVersion / $KeyProduct / $Exe $Args"
 		} Else {
