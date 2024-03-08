@@ -107,8 +107,8 @@ doubt as to the actual version of a program.
 
 Similarly, some MSI packages have the version number in the comment or
 subject line, but not all. It is therefore difficult to always validate
-this version number. We can sometime use `msiextract` to extract an
-`.exe` file and then use `peres` on it!
+this version number. We can sometime use `msiextract` (or `7z`) to
+extract an `.exe` file and then use `peres` on it!
 Please devops, put always the version number clearly in the comment...
 
 ```bash
