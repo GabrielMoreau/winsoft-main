@@ -16,7 +16,6 @@
     "PrimaryPassword": true,
     "DontCheckDefaultBrowser": true,
     "AppAutoUpdate": false,
-    "DisableAppUpdate": false,
     "ManualAppUpdateOnly": true,
     "ExtensionUpdate": true,
     "ExtensionSettings": {
