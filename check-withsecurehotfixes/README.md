@@ -21,4 +21,4 @@ it's fast and doesn't modify the computer's operation in any way.
 * Copyright (C) 2021-2024, LEGI UMR 5519 / CNRS UGA G-INP, Grenoble, France
 * Authors :
     * Gabriel MOREAU <Gabriel.Moreau(A)univ-grenoble-alpes.fr>
-    * David PARYL <david.paryl@lcc-toulouse.fr>
+    * David PARYL <David.Paryl(A)lcc-toulouse.fr>
