@@ -8,6 +8,12 @@ detected in case of error.
 The script can be run many times on a workstation,
 it's fast and doesn't modify the computer's operation in any way.
 
+* Website : https://www.withsecure.com/
+* Wikipedia : https://en.wikipedia.org/wiki/F-Secure
+
+* Download : https://www.withsecure.com/en/support/product-support/business-suite/client-security (Hotfixes - JAR file)
+* WithSecure Business Suite : https://www.withsecure.com/en/support/product-support/business-suite/
+
 
 ## License and Copyright
 
