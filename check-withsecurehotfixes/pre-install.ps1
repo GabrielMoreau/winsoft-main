@@ -1,7 +1,7 @@
 
 # Check WithSecure Hotfixes
 
-$HotfixList = @('WSBS1600-HF01','WSBS1600-HF03','WSBS1600-HF04','WSBS1600-HF05')
+$HotfixList = @('WSBS1600-HF01','WSBS1600-HF03','WSBS1600-HF04','WSBS1600-HF05','WSBS1600-HF06')
 
 $TotalHotfix = $HotfixList.Count
 $HotfixesInstalled = 0

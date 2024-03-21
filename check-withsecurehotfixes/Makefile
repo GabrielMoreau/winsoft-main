@@ -4,7 +4,7 @@
 #
 
 SOFT:=Check-WithSecureHotfixes
-VERSION:=0.4
+VERSION:=16.0.5
 REVISION:=1
 
 
