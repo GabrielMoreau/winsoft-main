@@ -2,8 +2,9 @@
 
 The Check WithSecure Hotfixes is a free and open-source PowerShell script.
 It tests whether all WithSecure hotfixes have been applied to the workstation.
-It returns 0 in case of success (no error) and 100 + the number of hotfixes
-detected in case of error.
+Please note that WithSecure is a proprietary antivirus software and is in no way opensource.
+Only this script is free.
+It returns 0 in case of success (no error) and 100 + the number of hotfixes detected in case of error.
 
 The script can be run many times on a workstation,
 it's fast and doesn't modify the computer's operation in any way.
