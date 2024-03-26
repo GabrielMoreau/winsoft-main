@@ -57,5 +57,5 @@ $RefVersion = '__VERSION__'
 
 		$DisplayVersion = $App.DisplayVersion
 		$KeyProduct = $Key | Split-Path -Leaf
-		Write-Output "Remove: $DisplayName / $DisplayVersion / $KeyProduct / $($App.UninstallString)"
+		Write-Output "Installed: $DisplayName / $DisplayVersion / $KeyProduct / $($App.UninstallString)"
 	}

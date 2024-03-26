@@ -68,7 +68,7 @@ Function ToVersion {
 
 		$DisplayVersion = $App.DisplayVersion
 		$KeyProduct = $Key | Split-Path -Leaf
-		Write-Output "View: $DisplayName / $DisplayVersion / $KeyProduct / $($App.UninstallString)"
+		Write-Output "Installed: $DisplayName / $DisplayVersion / $KeyProduct / $($App.UninstallString)"
 	}
 
 # View: VLC media player / 3.0.20 / VLC media player / "C:\Program Files\VideoLAN\VLC\uninstall.exe"

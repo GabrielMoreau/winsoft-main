@@ -74,7 +74,7 @@ New-PSDrive -PSProvider 'Registry' -Name 'HKU' -Root 'HKEY_USERS' -ErrorAction '
 
 		$DisplayVersion = $App.DisplayVersion
 		$KeyProduct = $Key | Split-Path -Leaf
-		Write-Output "Show: $DisplayName / $DisplayVersion / $KeyProduct / $($App.UninstallString)"
+		Write-Output "Installed: $DisplayName / $DisplayVersion / $KeyProduct / $($App.UninstallString)"
 	}
 
 # HKU	balenaEtcher 1.18.8	Balena Ltd.	1.18.8	d2f3b6c7-6f49-59e2-b8a5-f72e33900c2b	"C:\WINDOWS\system32\config\systemprofile\AppData\Local\Programs\balena-etcher\Uninstall balenaEtcher.exe" /currentuser

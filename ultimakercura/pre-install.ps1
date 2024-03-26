@@ -67,7 +67,7 @@ Function ToVersion {
 
 		$DisplayVersion = $App.DisplayVersion
 		$KeyProduct = $Key | Split-Path -Leaf
-		Write-Output "Show: $DisplayName / $DisplayVersion / $KeyProduct / $($App.UninstallString)"
+		Write-Output "Installed: $DisplayName / $DisplayVersion / $KeyProduct / $($App.UninstallString)"
 	}
 
 # HKLM	UltiMaker Cura	UltiMaker	5.4.0	{7C3B43E0-0A17-4029-9146-19F3E0566B4C}	MsiExec.exe /I{7C3B43E0-0A17-4029-9146-19F3E0566B4C}

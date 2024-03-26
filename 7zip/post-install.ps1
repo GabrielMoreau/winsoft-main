@@ -95,5 +95,5 @@ If ($SoftInstalled -eq $False) {
 
 		$DisplayVersion = $App.DisplayVersion
 		$KeyProduct = $Key | Split-Path -Leaf
-		Write-Output "View: $DisplayName / $DisplayVersion / $KeyProduct / $($App.UninstallString)"
+		Write-Output "Installed: $DisplayName / $DisplayVersion / $KeyProduct / $($App.UninstallString)"
 	}

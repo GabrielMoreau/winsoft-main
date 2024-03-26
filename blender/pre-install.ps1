@@ -65,7 +65,7 @@ Function ToVersion {
 
 		$DisplayVersion = $App.DisplayVersion
 		$KeyProduct = $Key | Split-Path -Leaf
-		Write-Output "Remove: $DisplayName / $DisplayVersion / $KeyProduct / $($App.UninstallString)"
+		Write-Output "Installed: $DisplayName / $DisplayVersion / $KeyProduct / $($App.UninstallString)"
 	}
 
 # HKLM	blender	Blender Foundation	3.6.5	{5E05EA9B-D72D-441C-A8AA-B71339896BDF}	MsiExec.exe /I{5E05EA9B-D72D-441C-A8AA-B71339896BDF}

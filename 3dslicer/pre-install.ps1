@@ -67,7 +67,7 @@ Function ToVersion {
 
 		$DisplayVersion = $App.DisplayVersion
 		$KeyProduct = $Key | Split-Path -Leaf
-		Write-Output "View: $DisplayName / $DisplayVersion / $KeyProduct / $($App.UninstallString)"
+		Write-Output "Installed: $DisplayName / $DisplayVersion / $KeyProduct / $($App.UninstallString)"
 	}
 
 # View: Slicer 5.6.0 / 5.6.0 / Slicer 5.6.0 (Win64) / "C:\ProgramData\Slicer.org\Uninstall.exe"
