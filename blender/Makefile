@@ -47,8 +47,7 @@ tmp/$(EXE):
 	@(cd tmp ; \
 		rm -f *.exe *.msi 2>/dev/null ; \
 		curl -# -o "$(EXE)" -L "$(URL)" ; \
-		file $(EXE) | grep -q "Subject: blender, Author: Blender Foundation" || echo "Error: bad format for binary $(EXE)" ; \
-		# which peres >/dev/null && { peres -v $(EXE) | grep -q "^Product Version:[[:space:]]*$(VERSION)" || echo "Error: bad version for binary $(EXE)" ; } ; \
+		which 7z >/dev/null && { 7z x -y $(EXE) 'CM_FP_Blender.blender_launcher.exe' | grep 'Extracting'; } ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
 
