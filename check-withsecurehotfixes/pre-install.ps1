@@ -7,6 +7,23 @@
 $HotfixList = @('WSBS1600-HF01','WSBS1600-HF03','WSBS1600-HF04','WSBS1600-HF05','WSBS1600-HF06')
 $FwHfList   = @('WithSecure Hotfix2')
 
+$WSVersion = '16.00'
+
+# Transform string to a version object
+Function ToVersion {
+	Param (
+		[Parameter(Mandatory = $true)] [string]$Version
+	)
+
+	$Version = $Version -Replace '[^\d\.].*$', ''
+	$Version = "$Version.0.0.0"
+	$Version = $Version -Replace '\.+',     '.'
+	$Version = $Version -Replace '\.0+',    '.0'
+	$Version = $Version -Replace '\.0(\d)', '.$1'
+	$Version = $Version.Split('.')[0,1,2,3] -Join '.'
+	Return [version]$Version
+}
+
 # Verify if WithSecure is installed
 $IsInstalled = $False
 $RefName = 'WithSecure. Client Security'
@@ -21,6 +38,9 @@ $RefName = 'WithSecure. Client Security'
 			$UninstallString = $App.UninstallString
 			$IsInstalled = $True
 			Write-Output "Info: $DisplayName / $DisplayVersion / $UninstallString"
+			If ((ToVersion($DisplayVersion)) -lt (ToVersion($WSVersion))) {
+				Write-Output "Warning: WithSecure installed version $DisplayVersion is lower than the reference one $WSVersion"
+			}
 			Return
 		}
 	}
@@ -68,6 +88,9 @@ If ($HotfixesInstalled -Eq $TotalHotfix) {
 }
 
 Return
+
+
+# Info: WithSecure™ Client Security Premium / 16.00 / C:\Program Files (x86)\F-Secure\Client Security\fs_uninstall_32.exe
 
 # Get-ItemProperty -Path "HKLM:\SOFTWARE\WOW6432Node\F-Secure\NS\default\BusinessSuite\Hotfixes" | Out-GridView
 #
