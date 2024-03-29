@@ -135,7 +135,6 @@ apt install make curl wget pev msitools p7zip-full libimage-exiftool-perl
  | [Blender](blender/README.md) | 3D computer graphics software (animated films, virtual reality) | [&#127968;](https://www.blender.org/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
  | [BlueKenue](bluekenue/README.md) | Tool for hydraulic modellers | [&#127968;](https://nrc.canada.ca/fr/recherche-developpement/produits-services/logiciels-applications/blue-kenuetm-logiciel-modelisateurs-hydrauliques) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
  | [CCleaner](ccleaner/README.md) | Clean computer files and register keys | [&#127968;](https://www.ccleaner.com/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
- | [Check WithSecure Hotfixes (Action)](check-withsecurehotfixes/README.md) | Test the deployment of updates | [&#127968;](https://www.withsecure.com/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
  | [Chrome](chrome/README.md) | Google Chrome navigator | [&#127968;](https://www.google.com/chrome/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
  | [CitrixWorkspace](citrixworkspace/README.md) | Citrix remote workspace client | [&#127968;](https://www.citrix.com/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
  | [Darktable](darktable/README.md) | Photography application and raw developer | [&#127968;](https://www.darktable.org/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
@@ -145,7 +144,6 @@ apt install make curl wget pev msitools p7zip-full libimage-exiftool-perl
  | [Engauge Digitizer](engaugedigitizer/README.md) | Digitalize curve image to data point | [&#127968;](https://markummitchell.github.io/engauge-digitizer/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
  | [FastStone Image Viewer](fsimageviewer/README.md) | Image browser, converter and editor | [&#127968;](https://www.faststone.org/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
  | [FileZilla](filezilla/README.md) | Graphical two panel FTP/SFTP client | [&#127968;](https://filezilla-project.org/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
- | [FlashPlayer (Uninstall)](flashplayer-uninstall/README.md) | Remove all version of Adobe Flash Player | [&#127968;](https://www.adobe.com/products/flashplayer/end-of-life.html) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
  | [FreeCAD](freecad/README.md) | Parametric 3D modeler (CAD) | [&#127968;](https://www.freecad.org/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
  | [Gimp](gimp/README.md) | Image graphics editor | [&#127968;](https://www.gimp.org/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
  | [GitForWindows](gitforwindows/README.md) | Git for the Windows OS | [&#127968;](https://gitforwindows.org/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
@@ -155,7 +153,6 @@ apt install make curl wget pev msitools p7zip-full libimage-exiftool-perl
  | [HP Support Assistant](hpsupportassist/README.md) | Assist for computer maintenance, software upgrades, troubleshooting problems | [&#127968;](https://support.hp.com/us-en/help/hp-support-assistant) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
  | [ImageJ](imagej/README.md) | Image processing program (Fiji Distribution) | [&#127968;](https://imagej.net/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
  | [Inkscape](inkscape/README.md) | Vector graphics editor | [&#127968;](https://inkscape.org/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
- | [Kaspersky Endpoint (Uninstall)](kaspersky-uninstall/README.md) | Silent remove Kaspersky Endpoint | [&#127968;](https://gitlab.in2p3.fr/resinfo-gt/swmb/resinfo-swmb/-/tree/master/dists/uninstall-kaspersky) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
  | [KeepassXC](keepassxc/README.md) | Free and open-source password manager. | [&#127968;](https://keepassxc.org/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
  | [KiCad](kicad/README.md) | Electronic design automation | [&#127968;](https://www.kicad.org) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
  | [LibreOffice](libreoffice/README.md) | Libre Office suite based on the OpenDocument standard | [&#127968;](https://www.libreoffice.org/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
@@ -166,14 +163,12 @@ apt install make curl wget pev msitools p7zip-full libimage-exiftool-perl
  | [Mozilla Thunderbird](thunderbird/README.md) | Mail reader | [&#127968;](https://www.thunderbird.net/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
  | [MS Edge](msedge/README.md) | Microsoft Edge (Chrome) navigator | [&#127968;](https://www.microsoft.com/en-us/edge/business) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
  | [MS Teams](teams/README.md) | Microsoft Videoconferencing and communication platform | [&#127968;](https://www.microsoft.com/fr-fr/microsoft-teams/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
- | [MS VisualRedist (Action)](visualredist/README.md) | Microsoft Visual C++ Redistributable Library update for all version | [&#127968;](https://learn.microsoft.com/fr-fr/cpp/windows/latest-supported-vc-redist) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
  | [MS VSCode](vscode/README.md) | Microsoft Source-code editor | [&#127968;](https://code.visualstudio.com/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
  | [Nextcloud](nextcloud/README.md) | Cloud Suite agent | [&#127968;](https://nextcloud.com/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
  | [Notepad++](notepadpp/README.md) | Text editor | [&#127968;](https://notepad-plus-plus.org) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
  | [OBS Studio](obsstudio/README.md) | Screencasting and streaming application | [&#127968;](https://obsproject.com/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
  | [OCSInventory-Agent](ocsinventory-agent/README.md) | Windows Agent for OCS-Inventory | [&#127968;](https://ocsinventory-ng.org) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
  | [OpenShot](openshot/README.md) | Open-source video editor | [&#127968;](https://www.openshot.org/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
- | [OSBIOSUpdateNow (Action)](osbiosupdatenow/README.md) | Force Windows and DELL/HP BIOS to update now |  | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
  | [ParaView](paraview/README.md) | Vector graphics editor | [&#127968;](https://www.paraview.org/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
  | [PDFCreator](pdfcreator/README.md) | Create PDF file | [&#127968;](https://www.pdfforge.org/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
  | [PDFsam Basic](pdfsam/README.md) | Split, merge, extract PDF files | [&#127968;](https://pdfsam.org/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
@@ -186,7 +181,6 @@ apt install make curl wget pev msitools p7zip-full libimage-exiftool-perl
  | [RocketChat](rocketchat/README.md) | Chat desktop client for RocketChat servers | [&#127968;](https://www.rocket.chat/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
  | [RStudio](rstudio/README.md) | Integrated development environment for R (include R) | [&#127968;](https://github.com/rstudio/rstudio,) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
  | [RTools](rtools/README.md) | Extend R language from source packages | [&#127968;](https://cran.r-project.org/bin/windows/Rtools/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
- | [Shutdown (Action)](shutdown/README.md) | Poweroff the computer |  | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
  | [Signal-Desktop](signal-desktop/README.md) | Encrypted instant messaging, voice, and video calls | [&#127968;](https://signal-desktop.org/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
  | [SimpleTruss](simpletruss/README.md) | Drawing and calculating simple lattices | [&#127968;](http://www.apartmina.cz/simpletruss/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
  | [Skype](skype/README.md) | VoIP and Videoconferencing Client | [&#127968;](https://www.skype.com/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
@@ -219,7 +213,7 @@ apt install make curl wget pev msitools p7zip-full libimage-exiftool-perl
  | [Zoom](zoom/README.md) | Web Conference Client | [&#127968;](https://zoom.us/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
  | [Zotero](zotero/README.md) | Manage bibliographic data | [&#127968;](https://www.zotero.org/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
 
- | Action   | Detail | &#127968; |   |
+ | Action / Uninstall | Detail | &#127968; |   |
  | -------- | ------ | --------- | - |
  | [Check WithSecure Hotfixes (Action)](check-withsecurehotfixes/README.md) | Test the deployment of updates | [&#127968;](https://www.withsecure.com/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
  | [FlashPlayer (Uninstall)](flashplayer-uninstall/README.md) | Remove all version of Adobe Flash Player | [&#127968;](https://www.adobe.com/products/flashplayer/end-of-life.html) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
