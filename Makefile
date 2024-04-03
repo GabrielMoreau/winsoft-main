@@ -6,7 +6,7 @@ SHELL:=/bin/bash
 
 sinclude ../winsoft-conf/_common/main.mk
 
-.PHONY: help build-all clean-all list-pkg list-version list-md space version
+.PHONY: help build-all clean-all checksum-all last-checksum unrealized-updates list-pkg list-version list-md space version
 .ONESHELL:
 
 help:
@@ -73,6 +73,13 @@ last-checksum:
 		echo "#=== $$folder ===#"
 		(cd $$folder; grep -q '^checksum:' Makefile && make checksum)
 	done < <(LANG=C find . -maxdepth 2 -name '*.zip' -a -mtime -1.25 -not -path '*/tmp/*' -print | xargs -r dirname  | sort -u)
+
+unrealized-updates:
+	while read folder
+	do
+		echo "#=== $$folder ===#"
+		(cd $$folder; grep -q '^check-unrealized:' Makefile && make check-unrealized)
+	done < <(LANG=C find . -maxdepth 2 -name '*.zip' -a -mtime -90 -not -path '*/tmp/*' -print | xargs -r dirname  | sort -u)
 
 list-pkg:
 	@
