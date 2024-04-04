@@ -18,4 +18,6 @@ CISCO_VPN_SERVER:=vpn.example.com
 
 
 # Include your local parameter if exists
-sinclude ../../winsoft-conf/_common/conf.mk
+SELF_MAKEDIR:=$(dir $(lastword $(MAKEFILE_LIST)))
+sinclude $(SELF_MAKEDIR)../../winsoft-conf/_common/conf.mk
+#sinclude ../../winsoft-conf/_common/conf.mk
