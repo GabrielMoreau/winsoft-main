@@ -75,6 +75,7 @@ last-checksum:
 	done < <(LANG=C find . -maxdepth 2 -name '*.zip' -a -mtime -1.25 -not -path '*/tmp/*' -print | xargs -r dirname  | sort -u)
 
 unrealized-updates:
+	@
 	while read folder
 	do
 		echo "#=== $$folder ===#"
