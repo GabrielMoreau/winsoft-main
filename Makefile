@@ -3,6 +3,8 @@
 PKGDIR:=$(dir $(wildcard */Makefile))
 KEEP:=2
 SHELL:=/bin/bash
+#PKGLEN:=$(shell LANG=C find . -maxdepth 2 -name '*.zip' -a -mtime -90 -not -path '*/tmp/*' -print | xargs -r dirname | xargs -r -n 1 basename | sort -u | wc --max-line-length)
+PKGLEN:=$(shell echo $(PKGDIR) | sed -e 's/[[:space:]]/\n/g;' | wc --max-line-length)
 
 sinclude ../winsoft-conf/_common/main.mk
 
@@ -24,10 +26,10 @@ build-all:
 		#echo ''
 		if [ -f "$$d/.noauto" ] || grep -q "^$$d" ./_common/noauto.conf ../winsoft-conf/_common/noauto.conf 2> /dev/null
 		then
-			printf "#--- %-25s ---#\n" pass:$${d%/}
+			printf "#--- %-$(PKGLEN)s ---#\n" pass:$${d%/}
 			continue
 		fi
-		printf "#=== %-25s ===#\n" $${d%/}
+		printf "#=== %-$(PKGLEN)s ===#\n" $${d%/}
 		(cd $$d; \
 			make > .make.log; \
 			[ $$(LANG=C find . -maxdepth 1 -name '*.zip' -a -mtime -0.5 -not -path '*/tmp/*' -print | wc -l) -gt 0 ] && cat .make.log; \
@@ -70,14 +72,15 @@ last-checksum:
 	@
 	while read folder
 	do
-		echo "#=== $$folder ===#"
+		printf "#=== %-$(PKGLEN)s ===#\n" $$folder
 		(cd $$folder; grep -q '^checksum:' Makefile && make checksum)
-	done < <(LANG=C find . -maxdepth 2 -name '*.zip' -a -mtime -1.25 -not -path '*/tmp/*' -print | xargs -r dirname  | sort -u)
+	done < <(LANG=C find . -maxdepth 2 -name '*.zip' -a -mtime -1.25 -not -path '*/tmp/*' -print | xargs -r dirname | xargs -r -n 1 basename | sort -u)
 
 unrealized-updates:
+	@
 	while read folder
 	do
-		printf "#=== %-25s ===# " $$folder
+		printf "#=== %-$(PKGLEN)s ===# " $$folder
 		RESULT=$$(cd $$folder; grep -q '^check-unrealized:' Makefile && make check-unrealized)
 		if [ -n "$${RESULT}" ] ; then echo "$${RESULT}"; else echo ''; fi
 	done < <(LANG=C find . -maxdepth 2 -name '*.zip' -a -mtime -90 -not -path '*/tmp/*' -print | xargs -r dirname | xargs -r -n 1 basename | sort -u)
