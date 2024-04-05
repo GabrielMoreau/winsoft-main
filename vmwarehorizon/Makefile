@@ -15,7 +15,7 @@ IT_TEAM:=IT Support
 LOGDIR:=%WINDIR%\\Logs
 
 
-.PHONY: all check-version check-exe clean control next ocs version wget checksum check-update
+.PHONY: all check-version check-unrealized check-exe clean control next ocs version wget checksum check-update
 
 all: check-update check-version check-exe $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
 
@@ -23,6 +23,9 @@ sinclude ../_common/conf.mk
 
 check-version:
 	@echo $(VERSION) | egrep -q '^[[:digit:]][\.[:digit:]]*$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
+
+check-unrealized:
+	@if grep -q '[[:space:]]$(EXE)$$' checksum.txt; then echo 'Ok'; else echo 'Warning: Updates not performed for $(SOFT) version $(VERSION)'; fi
 
 clean:
 	rm -rf $(SOFT)_$(VERSION)-$(REVISION)_x64.zip tmp resources
@@ -51,8 +54,6 @@ tmp/$(EXE):
 	@(cd tmp ; \
 		rm -f *.exe *.msi 2>/dev/null ; \
 		curl -# -o "$(EXE)" -L "$(URL)" ; \
-		#file $(EXE) | grep -q "PE32 executable" || echo "Error: bad format for binary $(EXE)" ; \
-		#which peres >/dev/null && { peres -v $(EXE) | grep -q "^Product Version:[[:space:]]*$(VERSION)" || echo "Error: bad version for binary $(EXE)" ; } ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
 
