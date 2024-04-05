@@ -21,13 +21,13 @@ build-all:
 	@
 	for d in $(PKGDIR)
 	do
-		echo ''
+		#echo ''
 		if [ -f "$$d/.noauto" ] || grep -q "^$$d" ./_common/noauto.conf ../winsoft-conf/_common/noauto.conf 2> /dev/null
 		then
-			echo "#=== pass:$$d"
+			printf "#--- %-25s ---#\n" pass:$${d%/}
 			continue
 		fi
-		echo "#=== $$d ===#"
+		printf "#=== %-25s ===#\n" $${d%/}
 		(cd $$d; \
 			make > .make.log; \
 			[ $$(LANG=C find . -maxdepth 1 -name '*.zip' -a -mtime -0.5 -not -path '*/tmp/*' -print | wc -l) -gt 0 ] && cat .make.log; \
@@ -75,12 +75,12 @@ last-checksum:
 	done < <(LANG=C find . -maxdepth 2 -name '*.zip' -a -mtime -1.25 -not -path '*/tmp/*' -print | xargs -r dirname  | sort -u)
 
 unrealized-updates:
-	@
 	while read folder
 	do
-		echo "#=== $$folder ===#"
-		(cd $$folder; grep -q '^check-unrealized:' Makefile && make check-unrealized)
-	done < <(LANG=C find . -maxdepth 2 -name '*.zip' -a -mtime -90 -not -path '*/tmp/*' -print | xargs -r dirname  | sort -u)
+		printf "#=== %-25s ===# " $$folder
+		RESULT=$$(cd $$folder; grep -q '^check-unrealized:' Makefile && make check-unrealized)
+		if [ -n "$${RESULT}" ] ; then echo "$${RESULT}"; else echo ''; fi
+	done < <(LANG=C find . -maxdepth 2 -name '*.zip' -a -mtime -90 -not -path '*/tmp/*' -print | xargs -r dirname | xargs -r -n 1 basename | sort -u)
 
 list-pkg:
 	@
