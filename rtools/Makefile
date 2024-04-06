@@ -5,9 +5,11 @@
 
 SOFT:=RTools
 
-SHORTVERSION:=$(shell curl -s -L 'https://cran.r-project.org/bin/windows/Rtools/' | grep -B 1 'for R ' | sed -e 's/"/\n/g;' | grep '^rtools' | head -1 | xargs -r dirname | sed -e 's/^rtools//;')
-DOTVERSION:=$(shell curl -s -L 'https://cran.r-project.org/bin/windows/Rtools/' | grep -B 1 'for R ' | sed -e 's/=/\n/g; s/</ /g;' | grep 'rtools$(SHORTVERSION)/rtools.html' | head -1 | cut -f 2 -d ' ')
-LONGVERSION:=$(shell curl -s -L 'https://cran.r-project.org/bin/windows/Rtools/rtools$(SHORTVERSION)/rtools.html' | sed -e 's/"/\n/g;' | grep '^files/rtools.*exe$$' | sed -e 's#files/rtools##; s/\.exe//;')
+RVERSION:=$(shell grep '[[:space:]]R-' ../rstudio/checksum.txt | awk '{print $$2}' | cut -f 2 -d '-' | cut -f 1,2 -d '.' | tail -1)
+
+SHORTVERSION:=$(shell curl -s -L 'https://cran.r-project.org/bin/windows/Rtools/' | grep -B 1 'for R .* $(RVERSION)\.' | sed -e 's/"/\n/g;' | grep '^rtools' | head -1 | xargs -r dirname | sed -e 's/^rtools//;')
+DOTVERSION:=$(shell curl -s -L 'https://cran.r-project.org/bin/windows/Rtools/' | grep -B 1 'for R .* $(RVERSION)\.' | sed -e 's/=/\n/g; s/</ /g;' | grep 'rtools$(SHORTVERSION)/rtools.html' | head -1 | cut -f 2 -d ' ')
+LONGVERSION:=$(shell curl -s -L 'https://cran.r-project.org/bin/windows/Rtools/rtools$(SHORTVERSION)/rtools.html' | sed -e 's/"/\n/g;' | grep '^files/rtools.*exe$$' | sed -e 's#files/rtools##; s/\.exe//;' | head -1)
 CONCATVERSION:=$(shell echo $(LONGVERSION) | sed -e 's/[-\.]//g;')
 URL:=https://cran.r-project.org/bin/windows/Rtools/rtools$(SHORTVERSION)/files/rtools$(LONGVERSION).exe
 EXE:=rtools$(LONGVERSION).exe
@@ -20,20 +22,24 @@ IT_TEAM:=IT Support
 LOGDIR:=%WINDIR%\\Logs
 
 
-.PHONY: all check-version clean control next ocs version wget checksum
+.PHONY: all check-version check-unrealized check-exe clean control next ocs version wget checksum
 
-all: check-version $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
+all: check-version check-exe $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
 
 sinclude ../_common/conf.mk
 
 check-version:
 	@echo $(VERSION) | egrep -q '^[[:digit:]][\.[:digit:]]*$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
 
+check-unrealized:
+	@if grep -q '[[:space:]]$(EXE)$$' checksum.txt; then echo 'Ok'; else echo 'Warning: Updates not performed for $(SOFT) version $(VERSION)'; fi
+
 clean:
 	rm -rf $(SOFT)_$(VERSION)-$(REVISION)_x64.zip tmp
 
 version:
 	@echo "VERSION: $(VERSION)"
+	@echo "RVERSION: $(RVERSION)"
 	@echo "SHORTVERSION: $(SHORTVERSION)"
 	@echo "DOTVERSION:   $(DOTVERSION)"
 	@echo "LONGVERSION: $(LONGVERSION)"
@@ -55,9 +61,15 @@ tmp/$(EXE):
 	@(cd tmp ; \
 		rm -f R-*.exe 2>/dev/null ; \
 		curl -# -o "$(EXE)" -L "$(URL)" ; \
-		file $(EXE) | grep -q "PE32 executable" || echo "Error: bad format for binary $(EXE)" ; \
-		which peres >/dev/null && { peres -v $(EXE) | sed -s 's/\.//g;' | grep -q "^Product Version:[[:space:]]*$(CONCATVERSION)" || echo "Error: bad version for binary $(EXE)" ; } ; \
+		#file $(EXE) | grep -q "PE32 executable" || echo "Error: bad format for binary $(EXE)" ; \
+		#which peres >/dev/null && { peres -v $(EXE) | sed -s 's/\.//g;' | grep -q "^Product Version:[[:space:]]*$(CONCATVERSION)" || echo "Error: bad version for binary $(EXE)" ; } ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
+		)
+
+check-exe: tmp/$(EXE)
+	@(cd tmp ; \
+		file $(EXE) | grep -q "PE32 executable"  || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 1; } ; \
+		which peres >/dev/null && { peres -v $(EXE) | sed -s 's/\.//g;' | grep -q "^Product Version:[[:space:]]*$(CONCATVERSION)" || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 1; } ; } ;\
 		)
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE)
