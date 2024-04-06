@@ -6,12 +6,6 @@
 SOFT:=Chrome
 $(shell mkdir -p tmp; cd tmp; curl -s --time-cond 'googlechromestandaloneenterprise64.msi' -o 'googlechromestandaloneenterprise64.msi' -L 'https://dl.google.com/chrome/install/googlechromestandaloneenterprise64.msi')
 VERSION:=$(shell file tmp/googlechromestandaloneenterprise64.msi | sed -e 's/.*Comments:\s\([[:digit:]][[:digit:]\.]*\).*/\1/;')
-# curl -s -L 'https://versionhistory.googleapis.com/v1/chrome/platforms/win64/channels/extended/versions/all/releases?filter=endtime=none'
-# curl -s -L 'https://versionhistory.googleapis.com/v1/chrome/platforms/win64/channels/stable/versions/all/releases?filter=endtime=none'
-# VERSION:=$(shell curl -s -L 'https://versionhistory.googleapis.com/v1/chrome/platforms/win64/channels/extended/versions/all/releases?filter=endtime=none' | grep '"version":' | cut -f 4 -d '"' | sort -V | tail -1)
-# VERSION:=$(shell curl -s -L 'https://versionhistory.googleapis.com/v1/chrome/platforms/win64/channels/stable/versions/all/releases?filter=endtime=none' | grep '"version":' | cut -f 4 -d '"' | sort -V | tail -1)
-# Many times, version is increment by one in the MSI...
-# VERSION_NEXT:=$(shell echo $(VERSION) | cut -f 1-3 -d '.').$(shell echo $$(( $$(echo $(VERSION) | cut -f 4 -d '.') + 1 )) )
 REVISION:=1
 URL:=https://dl.google.com/chrome/install/googlechromestandaloneenterprise64.msi
 EXE:=googlechromestandaloneenterprise64-$(VERSION).msi
@@ -37,7 +31,6 @@ clean:
 
 version:
 	@echo "VERSION: $(VERSION)"
-#	@echo "VERSION_NEXT: $(VERSION_NEXT)"
 	@echo "URL: $(URL)"
 	@echo "EXE: $(EXE)"
 	@echo "ZIP: $(SOFT)_$(VERSION)-$(REVISION)_x64.zip"
@@ -58,8 +51,6 @@ tmp/$(EXE):
 		rm -f googlechromestandaloneenterprise64-*.msi 2>/dev/null ; \
 		ln -f googlechromestandaloneenterprise64.msi "$(EXE)" ; \
 		printf '#%.0s' $$(seq 1 $$(( $$(tput cols) - 10 ))); echo ' 100% #' ; \
-		#curl -# -o "$(EXE)" -L "$(URL)" ; \
-		#file $(EXE) | grep -q "Subject: Google Chrome Installer.*Comments: $(VERSION) Copyright" || echo "Error: bad format or version for binary $(EXE)" ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
 
@@ -67,7 +58,6 @@ check-exe: tmp/$(EXE)
 	@(cd tmp ; \
 		file $(EXE) | grep -q "Subject: Google Chrome Installer" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 1; } ; \
 		file $(EXE) | grep -q "Comments: $(VERSION) Copyright" || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 1; } ; \
-		#file $(EXE) | grep -Eq "Comments: ($(VERSION)|$(VERSION_NEXT)) Copyright" || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 1; } ; \
 		)
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE)
