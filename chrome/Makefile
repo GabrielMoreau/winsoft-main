@@ -4,7 +4,7 @@
 #
 
 SOFT:=Chrome
-$(shell mkdir -p tmp; cd tmp; curl -# --time-cond 'googlechromestandaloneenterprise64.msi' -o 'googlechromestandaloneenterprise64.msi' -L 'https://dl.google.com/chrome/install/googlechromestandaloneenterprise64.msi')
+$(shell mkdir -p tmp; cd tmp; curl -s --time-cond 'googlechromestandaloneenterprise64.msi' -o 'googlechromestandaloneenterprise64.msi' -L 'https://dl.google.com/chrome/install/googlechromestandaloneenterprise64.msi')
 VERSION:=$(shell file tmp/googlechromestandaloneenterprise64.msi | sed -e 's/.*Comments:\s\([[:digit:]][[:digit:]\.]*\).*/\1/;')
 # curl -s -L 'https://versionhistory.googleapis.com/v1/chrome/platforms/win64/channels/extended/versions/all/releases?filter=endtime=none'
 # curl -s -L 'https://versionhistory.googleapis.com/v1/chrome/platforms/win64/channels/stable/versions/all/releases?filter=endtime=none'
@@ -57,6 +57,7 @@ tmp/$(EXE):
 	@(cd tmp ; \
 		rm -f googlechromestandaloneenterprise64-*.msi 2>/dev/null ; \
 		ln -f googlechromestandaloneenterprise64.msi "$(EXE)" ; \
+		printf '#%.0s' $$(seq 1 $$(( $$(tput cols) - 10 ))); echo ' 100% #' ; \
 		#curl -# -o "$(EXE)" -L "$(URL)" ; \
 		#file $(EXE) | grep -q "Subject: Google Chrome Installer.*Comments: $(VERSION) Copyright" || echo "Error: bad format or version for binary $(EXE)" ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
