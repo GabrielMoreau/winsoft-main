@@ -15,15 +15,18 @@ IT_TEAM:=IT Support
 LOGDIR:=%WINDIR%\\Logs
 
 
-.PHONY: all check-version clean control next ocs version wget checksum
+.PHONY: all check-version check-unrealized check-exe clean next ocs version wget checksum
 
-all: check-version control $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
+all: check-version check-exe $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
 
 sinclude ../_common/conf.mk
 
 check-version:
 	@echo $(VERSION) | egrep -q '^[[:digit:]][\.[:digit:]]*$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
 	@if [ "$(VERSION)" != "$(VERSIONONLINE)" ]; then echo '#'; echo "# Warning: a new version $(VERSIONONLINE) exist on Cisco website!"; echo '#'; fi
+
+check-unrealized:
+	@if grep -q '[[:space:]]$(EXE)$$' checksum.txt; then echo 'Ok'; else echo 'Warning: Updates not performed for $(SOFT) version $(VERSION)'; fi
 
 clean:
 	rm -rf $(SOFT)_$(VERSION)-$(REVISION)_x64.zip tmp
@@ -41,9 +44,9 @@ checksum:
 		tail -3 ./checksum.txt; \
 		)
 
-control:
-	@file $(EXE) | grep -q "Subject: Cisco AnyConnect Secure Mobility Client" || echo "Error: bad format for binary $(EXE)"
-	@grep -q "^$$(shasum -a 256 $(EXE))$$" ./checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
+check-exe: $(EXE)
+	@file $(EXE) | grep -q "Subject: Cisco AnyConnect Secure Mobility Client" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 1; }
+	@grep -q "^$$(shasum -a 256 $(EXE))$$" ./checksum.txt || echo "Error: bad checksum for binary $(EXE)"
 
 tmp/install.bat: install.bat Makefile $(EXE)
 	@mkdir -p tmp

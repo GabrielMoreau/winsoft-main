@@ -17,14 +17,17 @@ IT_TEAM:=IT Support
 LOGDIR:=%WINDIR%\\Logs
 
 
-.PHONY: all check-version clean control next ocs version wget checksum
+.PHONY: all check-version check-unrealized check-exe clean next ocs version wget checksum
 
-all: check-version $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
+all: check-version check-exe $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
 
 sinclude ../_common/conf.mk
 
 check-version:
 	@echo $(VERSION) | egrep -q '^[[:digit:]][\.[:digit:]]*$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
+
+check-unrealized:
+	@if grep -q '[[:space:]]$(EXE)$$' checksum.txt; then echo 'Ok'; else echo 'Warning: Updates not performed for $(SOFT) version $(VERSION)'; fi
 
 clean:
 	rm -rf $(SOFT)_$(VERSION)-$(REVISION)_x64.zip tmp
@@ -49,28 +52,36 @@ tmp/$(EXE):
 	@(cd tmp ; \
 		rm -f *.exe *.msi 2>/dev/null ; \
 		curl -# -o "$(EXE)" -L "$(URL)" ; \
-		file $(EXE) | grep -q "Subject: Arduino IDE, Author: Arduino SA" || echo "Error: bad format for binary $(EXE)" ; \
+		#file $(EXE) | grep -q "Subject: Arduino IDE, Author: Arduino SA" || echo "Error: bad format for binary $(EXE)" ; \
 		# which peres >/dev/null && { peres -v $(EXE) | grep -q "^Product Version:[[:space:]]*$(VERSION)" || echo "Error: bad version for binary $(EXE)" ; } ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
-
-tmp/install.bat: install.bat Makefile tmp/$(EXE)
-	@mkdir -p tmp
-	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#;' $< > $@
 
 tmp/Adafruit.cer:
 	@(cd tmp ; \
 		rm -f Adafruit.cer ; \
 		curl -# -o "Adafruit.cer" -L "$(Adafruit)" ; \
-		file "Adafruit.cer" | grep -q "Certificate, Version=3" || echo "Error: bad format for certificate Adafruit.cer" ; \
+		#file "Adafruit.cer" | grep -q "Certificate, Version=3" || echo "Error: bad format for certificate Adafruit.cer" ; \
 		)
 
 tmp/Arduino.cer:
 	@(cd tmp ; \
 		rm -f Arduino.cer ; \
 		curl -# -o "Arduino.cer" -L "$(Arduino)" ; \
-		file "Arduino.cer" | grep -q "Certificate, Version=3" || echo "Error: bad format for certificate Arduino.cer" ; \
+		#file "Arduino.cer" | grep -q "Certificate, Version=3" || echo "Error: bad format for certificate Arduino.cer" ; \
 		)
+
+check-exe: tmp/$(EXE) tmp/Adafruit.cer tmp/Arduino.cer
+	@(cd tmp ; \
+		file $(EXE) | grep -q "Subject: Arduino IDE, Author: Arduino SA" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 1; } ; \
+		#which peres >/dev/null && { peres -v $(EXE) | grep -q "^Product Version:[[:space:]]*$(VERSION)" || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 1; }; } ; \
+		file "Adafruit.cer" | grep -q "Certificate, Version=3" || echo "Error: bad format for certificate Adafruit.cer" ; \
+		file "Arduino.cer"  | grep -q "Certificate, Version=3" || echo "Error: bad format for certificate Arduino.cer" ; \
+		)
+
+tmp/install.bat: install.bat Makefile tmp/$(EXE)
+	@mkdir -p tmp
+	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#;' $< > $@
 
 %.zip: Makefile tmp/install.bat tmp/$(EXE) tmp/Adafruit.cer tmp/Arduino.cer
 	@rm -f $@

@@ -4,12 +4,9 @@
 #
 
 SOFT:=Zoom
-#INSTALLER:=ZoomInstallerFull.msi
-#VERSION:=$(shell file tmp/$(INSTALLER) 2> /dev/null | sed -e 's/,[[:space:]]/\n/g;' | grep '^Comments:' | cut -f 2 -d ' ')
 VERSIONLONG:=$(shell curl -s -L 'https://www.zoom.us/rest/download?os=win' | sed -e 's/[,{}]/\n/g;' | grep -A 5 '^"zoomX64"' | grep '^"version"' | cut -f 4 -d '"' | cut -f 1 -d ' ' | head -1)
 VERSION:=$(shell echo $(VERSIONLONG) | cut -f 1-3 -d '.')
 REVISION:=1
-#URL:=https://zoom.us/client/latest/$(INSTALLER)
 URL:=https://cdn.zoom.us/prod/$(VERSIONLONG)/x64/ZoomInstallerFull.msi
 
 ZSSOHOST:=$(shell grep -h '^ZSSOHOST' conf.yml ../../winsoft-conf/zoom/conf.yml 2>/dev/null | cut -f 2 -d ':' | sed -e 's/[[:space:]]//g;' | head -1)
@@ -20,18 +17,17 @@ IT_TEAM:=IT Support
 LOGDIR:=%WINDIR%\\Logs
 
 
-.PHONY: all check-version check-exe clean control next ocs version wget checksum
+.PHONY: all check-version check-unrealized check-exe clean control next ocs version wget checksum
 
 all: check-version check-exe $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
-#	@mkdir -p tmp
-#	@rm -f "tmp/$(INSTALLER)"
-#	@(cd tmp; curl -s -o $(INSTALLER) -L "$(URL)")
-#	@make next
 
 sinclude ../_common/conf.mk
 
 check-version:
 	@echo $(VERSION) | egrep -q '^[[:digit:]][\.[:digit:]]*$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
+
+check-unrealized:
+	@if grep -q '[[:space:]]$(EXE)$$' checksum.txt; then echo 'Ok'; else echo 'Warning: Updates not performed for $(SOFT) version $(VERSION)'; fi
 
 next: check-version check-exe $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
 
@@ -54,11 +50,8 @@ checksum:
 tmp/$(EXE):
 	@mkdir -p tmp
 	@(cd tmp ; \
-		#find ./ -name '*.msi' -a -not -name "$(INSTALLER)" -a -not -name "$(EXE)" -delete ; \
-		#cmp $(INSTALLER) $(EXE) > /dev/null 2>&1 || cp -f $(INSTALLER) $(EXE) ; \
 		rm -f *.exe *.msi 2>/dev/null ; \
 		curl -# -o "$(EXE)" -L "$(URL)" ; \
-		#file $(EXE) | grep -q "Subject: Zoom Meetings.*Comments: $(VERSION)" || echo "Error: bad format or version for binary $(EXE)" ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
 

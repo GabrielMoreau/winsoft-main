@@ -16,7 +16,7 @@ IT_TEAM:=IT Support
 LOGDIR:=%WINDIR%\\Logs
 
 
-.PHONY: all check-version check-exe clean control next ocs version wget checksum check-update
+.PHONY: all check-version check-unrealized check-exe clean control next ocs version wget checksum check-update
 
 all: check-update check-version check-exe $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
 
@@ -24,6 +24,9 @@ sinclude ../_common/conf.mk
 
 check-version:
 	@echo $(VERSION) | egrep -q '^[[:digit:]][\.[:digit:]]*$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
+
+check-unrealized:
+	@if grep -q '[[:space:]]$(EXE)$$' checksum.txt; then echo 'Ok'; else echo 'Warning: Updates not performed for $(SOFT) version $(VERSION)'; fi
 
 clean:
 	rm -rf $(SOFT)_$(VERSION)-$(REVISION)_x64.zip tmp resources
