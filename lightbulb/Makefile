@@ -22,14 +22,17 @@ IT_TEAM:=IT Support
 LOGDIR:=%WINDIR%\\Logs
 
 
-.PHONY: all check-version check-exe1 check-exe2 clean control next ocs VERSION1 wget checksum
+.PHONY: all check-version check-unrealized check-exe clean control next ocs VERSION1 wget checksum
 
-all: check-version check-exe1 check-exe2 $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
+all: check-version check-exe $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
 
 sinclude ../_common/conf.mk
 
 check-version:
 	@echo $(VERSION1) | egrep -q '^[[:digit:]][\.[:digit:]]*$$' || (echo 'VERSION1 is undefined' > /dev/stderr ; exit 1)
+
+check-unrealized:
+	@if grep -q '[[:space:]]$(EXE1)$$' checksum.txt && grep -q '[[:space:]]$(EXE2)$$' checksum.txt; then echo 'Ok'; else echo 'Warning: Updates not performed for $(SOFT) version $(VERSION)'; fi
 
 clean:
 	rm -rf $(SOFT)_$(VERSION)-$(REVISION)_x64.zip tmp resources
@@ -61,12 +64,6 @@ tmp/$(EXE1):
 		grep -q "^$$(shasum -a 256 $(EXE1))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE1)" ; \
 		)
 
-check-exe1: tmp/$(EXE1)
-	@(cd tmp ; \
-		file $(EXE1) | grep -q "PE32 executable" || { echo "Error: bad format for binary $(EXE1)" 1>&2 ; exit 1; } ; \
-		# which peres >/dev/null && { peres -v $(EXE1) | grep -q "^Product Version:[[:space:]]*$(VERSION1)" || { echo "Error: bad version for binary $(EXE1)" 1>&2 ; exit 1; } ; } ;\
-		)
-
 tmp/$(EXE2):
 	@mkdir -p tmp
 	@(cd tmp ; \
@@ -77,7 +74,11 @@ tmp/$(EXE2):
 		grep -q "^$$(shasum -a 256 $(EXE2))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE2)" ; \
 		)
 
-check-exe2: tmp/$(EXE2)
+check-exe: tmp/$(EXE1) tmp/$(EXE2)
+	@(cd tmp ; \
+		file $(EXE1) | grep -q "PE32 executable" || { echo "Error: bad format for binary $(EXE1)" 1>&2 ; exit 1; } ; \
+		# which peres >/dev/null && { peres -v $(EXE1) | grep -q "^Product Version:[[:space:]]*$(VERSION1)" || { echo "Error: bad version for binary $(EXE1)" 1>&2 ; exit 1; } ; } ;\
+		)
 	@(cd tmp ; \
 		file $(EXE2) | grep -q "PE32 executable" || { echo "Error: bad format for binary $(EXE2)" 1>&2 ; exit 1; } ; \
 		which peres >/dev/null && { peres -v $(EXE2) | grep -q "^Product Version:[[:space:]]*$(VERSION2)" || { echo "Error: bad version for binary $(EXE2)" 1>&2 ; exit 1; } ; } ;\
