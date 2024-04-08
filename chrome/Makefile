@@ -4,10 +4,10 @@
 #
 
 SOFT:=Chrome
-$(shell mkdir -p tmp; cd tmp; curl -s --time-cond 'googlechromestandaloneenterprise64.msi' -o 'googlechromestandaloneenterprise64.msi' -L 'https://dl.google.com/chrome/install/googlechromestandaloneenterprise64.msi')
+URL:=https://dl.google.com/chrome/install/googlechromestandaloneenterprise64.msi
+$(shell mkdir -p tmp; cd tmp; curl -s --time-cond 'googlechromestandaloneenterprise64.msi' -o 'googlechromestandaloneenterprise64.msi' -L "$(URL)")
 VERSION:=$(shell file tmp/googlechromestandaloneenterprise64.msi | sed -e 's/.*Comments:\s\([[:digit:]][[:digit:]\.]*\).*/\1/;')
 REVISION:=1
-URL:=https://dl.google.com/chrome/install/googlechromestandaloneenterprise64.msi
 EXE:=googlechromestandaloneenterprise64-$(VERSION).msi
 
 IT_TEAM:=IT Support

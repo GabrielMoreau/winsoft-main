@@ -5,12 +5,9 @@
 
 SOFT:=Windows11Update
 URL:=$(shell curl -s -L 'https://www.microsoft.com/software-download/windows11' | grep 'windows11-upgrade-now' | sed -e 's/"/\n/g;' | grep '^https://go.microsoft.com/fwlink/')
-$(shell mkdir -p tmp; cd tmp; curl -# --time-cond 'Windows11InstallationAssistant.exe' -o 'Windows11InstallationAssistant.exe' -L "$(URL)")
+$(shell mkdir -p tmp; cd tmp; curl -s --time-cond 'Windows11InstallationAssistant.exe' -o 'Windows11InstallationAssistant.exe' -L "$(URL)")
 VERSION:=$(shell peres -v tmp/Windows11InstallationAssistant.exe  | grep '^Product Version:' | awk '{print $$3}')
 REVISION:=1
-#URL:=$(shell curl -s -L 'https://www.microsoft.com/software-download/windows11' | grep 'windows11-upgrade-now' | sed -e 's/"/\n/g;' | grep '^https://go.microsoft.com/fwlink/')
-#VERSION:=$(shell echo $(URL) | cut -f 2 -d '=')
-#REVISION:=3
 
 EXE:=Windows11InstallationAssistant-$(VERSION).exe
 
@@ -55,6 +52,7 @@ tmp/$(EXE):
 		#curl -# -o "$(EXE)" -L "$(URL)" ; \
 		rm -f Windows11InstallationAssistant-*.exe 2>/dev/null ; \
 		ln -f Windows11InstallationAssistant.exe "$(EXE)" ; \
+		printf '#%.0s' $$(seq 1 $$(( $$(tput cols) - 10 ))); echo ' 100% #' ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
 
