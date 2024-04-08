@@ -3,7 +3,6 @@
 PKGDIR:=$(dir $(wildcard */Makefile))
 KEEP:=2
 SHELL:=/bin/bash
-#PKGLEN:=$(shell LANG=C find . -maxdepth 2 -name '*.zip' -a -mtime -90 -not -path '*/tmp/*' -print | xargs -r dirname | xargs -r -n 1 basename | sort -u | wc --max-line-length)
 PKGLEN:=$(shell echo $(PKGDIR) | sed -e 's/[[:space:]]/\n/g;' | wc --max-line-length)
 
 sinclude ../winsoft-conf/_common/main.mk
@@ -23,7 +22,6 @@ build-all:
 	@
 	for d in $(PKGDIR)
 	do
-		#echo ''
 		if [ -f "$$d/.noauto" ] || grep -q "^$$d" ./_common/noauto.conf ../winsoft-conf/_common/noauto.conf 2> /dev/null
 		then
 			printf "#--- %-$(PKGLEN)s ---#\n" pass:$${d%/}
@@ -47,10 +45,10 @@ clean-all:
 		echo ''
 		if [ -f "$$d/.noauto" ] || grep -q "^$$d" ./_common/noauto.conf ../winsoft-conf/_common/noauto.conf 2> /dev/null
 		then
-			echo "#=== pass:$$d"
+			printf "#--- %-$(PKGLEN)s ---#\n" pass:$${d%/}
 			continue
 		fi
-		echo "#=== $$d ===#"
+		printf "#=== %-$(PKGLEN)s ===#\n" $${d%/}
 		(cd $$d; make clean; rm -f .make.log)
 	done
 
@@ -61,10 +59,10 @@ checksum-all:
 		echo ''
 		if [ -f "$$d/.noauto" ] || grep -q "^$$d" ./_common/noauto.conf ../winsoft-conf/_common/noauto.conf 2> /dev/null
 		then
-			echo "#=== pass:$$d"
+			printf "#--- %-$(PKGLEN)s ---#\n" pass:$${d%/}
 			continue
 		fi
-		echo "#=== $$d ===#"
+		printf "#=== %-$(PKGLEN)s ===#\n" $${d%/}
 		(cd $$d; grep -q '^checksum:' Makefile && make checksum)
 	done
 
@@ -91,7 +89,7 @@ list-pkg:
 	do
 		(cd $$d; \
 			echo ''; \
-			echo "#=== $$d ===#"; \
+			printf "#=== %-$(PKGLEN)s ===#\n" $${d%/}; \
 			unzip -t *.zip; \
 		)
 	done
@@ -146,9 +144,9 @@ version:
 		echo ''
 		if [ -f "$$d/.noauto" ] || grep -q "^$$d" ./_common/noauto.conf ../winsoft-conf/_common/noauto.conf 2> /dev/null
 		then
-			echo "#=== pass:$$d"
+			printf "#--- %-$(PKGLEN)s ---#\n" pass:$${d%/}
 			continue
 		fi
-		echo "#=== $$d ===#"
+		printf "#=== %-$(PKGLEN)s ===#\n" $${d%/}
 		(cd $$d; make version) | grep -v '^make'
 	done
