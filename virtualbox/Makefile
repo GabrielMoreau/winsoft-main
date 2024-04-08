@@ -4,7 +4,6 @@
 #
 
 SOFT:=VirtualBox
-#VERSION:=$(shell curl -s -L 'https://www.virtualbox.org/wiki/Downloads' | sed -e 's/>[[:space:]]/>/; s/[<>]/\n/g;' | grep 'platform packages' | cut -f 1 -d ' ')
 REVISION:=1
 URL1:=$(shell curl -s -L 'https://www.virtualbox.org/wiki/Downloads' | sed -e 's/"/\n/g;' | grep '/VirtualBox-.*-Win.exe' | head -1)
 VERSION:=$(shell dirname '$(URL1)' | xargs -r basename)
@@ -20,14 +19,17 @@ IT_TEAM:=IT Support
 LOGDIR:=%WINDIR%\\Logs
 
 
-.PHONY: all check-version clean control next ocs version wget checksum check-exe1 check-exe2
+.PHONY: all check-version check-unrealized check-exe clean control next ocs version wget checksum1 check-exe2
 
-all: check-version check-exe1 check-exe2 $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
+all: check-version check-exe $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
 
 sinclude ../_common/conf.mk
 
 check-version:
 	@echo $(VERSION) | egrep -q '^[[:digit:]][\.[:digit:]]*$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
+
+check-unrealized:
+	@if grep -q '[[:space:]]$(EXE1)$$' checksum.txt && grep -q '[[:space:]]$(EXE2)$$' checksum.txt; then echo 'Ok'; else echo 'Warning: Updates not performed for $(SOFT) version $(VERSION)'; fi
 
 clean:
 	rm -rf $(SOFT)_$(VERSION)-$(REVISION)_x64.zip tmp resources
@@ -54,15 +56,7 @@ tmp/$(EXE1):
 	@(cd tmp ; \
 		rm -f *.exe *.msi 2>/dev/null ; \
 		curl -# -o "$(EXE1)" -L "$(URL1)" ; \
-		#file $(EXE1) | grep -q "PE32 executable" || echo "Error: bad format for binary $(EXE1)" ; \
-		#which peres >/dev/null && { peres -v $(EXE1) | grep -q "^Product Version:[[:space:]]*$(VERSION)" || echo "Error: bad version for binary $(EXE1)" ; } ; \
 		grep -q "^$$(shasum -a 256 $(EXE1))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE1)" ; \
-		)
-
-check-exe1: tmp/$(EXE1)
-	@(cd tmp ; \
-		file $(EXE1) | grep -q "PE32 executable" || { echo "Error: bad format for binary $(EXE1)" 1>&2 ; exit 1; } ; \
-		which peres >/dev/null && { peres -v $(EXE1) | grep -q "^Product Version:[[:space:]]*$(VERSION)" || { echo "Error: bad version for binary $(EXE1)" 1>&2 ; exit 1; }; } ; \
 		)
 
 tmp/$(EXE2):
@@ -70,11 +64,14 @@ tmp/$(EXE2):
 	@(cd tmp ; \
 		rm -f *.vbox-extpack 2>/dev/null ; \
 		curl -# -o "$(EXE2)" -L "$(URL2)" ; \
-		#file $(EXE2) | grep -q "gzip compressed data," || echo "Error: bad format for binary $(EXE2)" ; \
 		grep -q "^$$(shasum -a 256 $(EXE2))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE2)" ; \
 		)
 
-check-exe2: tmp/$(EXE2)
+check-exe: tmp/$(EXE1) tmp/$(EXE2)
+	@(cd tmp ; \
+		file $(EXE1) | grep -q "PE32 executable" || { echo "Error: bad format for binary $(EXE1)" 1>&2 ; exit 1; } ; \
+		which peres >/dev/null && { peres -v $(EXE1) | grep -q "^Product Version:[[:space:]]*$(VERSION)" || { echo "Error: bad version for binary $(EXE1)" 1>&2 ; exit 1; }; } ; \
+		)
 	@(cd tmp ; \
 		file $(EXE2) | grep -q "gzip compressed data," || { echo "Error: bad format for binary $(EXE2)" 1>&2 ; exit 1; } ; \
 		)

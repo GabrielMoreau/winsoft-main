@@ -6,17 +6,12 @@
 SOFT:=Wireshark
 VERSION1:=$(shell curl -s -L 'https://www.wireshark.org/download.html' | sed -e 's/[<>]/\n/g' | grep 'current stable release' | cut -f 8 -d ' ' | sed -e 's/\.$$//;')
 REVISION:=1
-# https://1.eu.dl.wireshark.org/win64/Wireshark-4.2.0-x64.exe
 URL1:=$(shell curl -s -L 'https://www.wireshark.org/download.html' | sed -e 's/"/\n/g;' | egrep "/Wireshark-$(VERSION1)-x64.exe")
 EXE1:=Wireshark-$(VERSION1)-x64.exe
 
-#URL2:=https://npcap.com/$(shell curl -s -L 'https://npcap.com/' | sed -e 's/"/\n/g;' | egrep '^dist/npcap-.*exe')
-#VERSION2:=$(shell echo $(URL2) | sed -e 's/\.exe//;' | cut -f 2 -d '-')
 URL2:=http://www.win10pcap.org/download/$(shell curl -s -L 'http://www.win10pcap.org/download/' | sed -e 's/["<>]/\n/g;' | egrep '^Win10Pcap-v.*msi' | head -1)
 VERSION2:=$(shell echo $(URL2) | sed -e 's/\.msi//; s/-v/-/;' | cut -f 2 -d '-')
 EXE2:=Win10Pcap-v$(VERSION2).msi
-#VERSION2:=$(shell ./nmap4npcap)
-#EXE2:=npcap-$(VERSION2).exe
 
 VERSION:=$(VERSION1).$(shell echo $(VERSION2) | sed -e 's/\.//g;')
 
@@ -24,7 +19,7 @@ IT_TEAM:=IT Support
 LOGDIR:=%WINDIR%\\Logs
 
 
-.PHONY: all check-version check-exe clean control next ocs version wget checksum
+.PHONY: all check-version check-unrealized check-exe clean control next ocs version wget checksum
 
 all: check-version check-exe $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
 
@@ -32,6 +27,9 @@ sinclude ../_common/conf.mk
 
 check-version:
 	@echo $(VERSION1) | egrep -q '^[[:digit:]][\.[:digit:]]*$$' || (echo 'VERSION1 is undefined' > /dev/stderr ; exit 1)
+
+check-unrealized:
+	@if grep -q '[[:space:]]$(EXE1)$$' checksum.txt && grep -q '[[:space:]]$(EXE2)$$' checksum.txt; then echo 'Ok'; else echo 'Warning: Updates not performed for $(SOFT) version $(VERSION)'; fi
 
 clean:
 	rm -rf $(SOFT)_$(VERSION)-$(REVISION)_x64.zip tmp resources
@@ -60,8 +58,6 @@ tmp/$(EXE1):
 	@(cd tmp ; \
 		rm -f Wireshark*.exe ; \
 		curl -# -o "$(EXE1)" -L "$(URL1)" ; \
-		# file $(EXE1) | grep -q "Nullsoft Installer self-extracting archive" || echo "Error: bad format for binary $(EXE1)" ; \
-		# which peres >/dev/null && { peres -v $(EXE1) | grep -q "^Product Version:[[:space:]]*$(VERSION1)" || echo "Error: bad version for binary $(EXE1)" ; } ; \
 		grep -q "^$$(shasum -a 256 $(EXE1))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE1)" ; \
 		)
 
@@ -70,8 +66,6 @@ tmp/$(EXE2):
 	@(cd tmp ; \
 		rm -f Win10Pcap*.msi ; \
 		curl -# -o "$(EXE2)" -L "$(URL2)" ; \
-		# file $(EXE2) | grep -q "MSI Installer.*Subject: Win10Pcap" || echo "Error: bad format for binary $(EXE2)" ; \
-		#which peres >/dev/null && { peres -v $(EXE2) | grep -q "^Product Version:[[:space:]]*$(VERSION2)" || echo "Error: bad version for binary $(EXE2)" ; } ; \
 		grep -q "^$$(shasum -a 256 $(EXE2))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE2)" ; \
 		)
 
