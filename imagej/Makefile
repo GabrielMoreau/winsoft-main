@@ -15,19 +15,26 @@ SUBFOLDER:=Fiji.app-$(VERSION)
 EXE:=$(SUBFOLDER)/ImageJ-win64.exe
 REVISION:=1
 
+#URL2:=http://rsbweb.nih.gov/ij/plugins/ankaphase/ANKAphase.zip
+URL2:=https://web.archive.org/web/20231118133016/http://rsbweb.nih.gov/ij/plugins/ankaphase/ANKAphase.zip
+ZIP2:=ANKAphase.zip
+
 IT_TEAM:=IT Support
 LOGDIR:=%WINDIR%\\Logs
 
 
-.PHONY: all check-version clean control next ocs version wget checksum
+.PHONY: all check-version check-unrealized check-exe clean control next ocs version wget checksum
 .SECONDARY:
 
-all: check-version $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
+all: check-version check-exe $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
 
 sinclude ../_common/conf.mk
 
 check-version:
 	@echo $(VERSION) | egrep -q '^[[:digit:]][\.[:digit:]]*$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
+
+check-unrealized:
+	@if grep -q '[[:space:]]$(EXE)$$' checksum.txt; then echo 'Ok'; else echo 'Warning: Updates not performed for $(SOFT) version $(VERSION)'; fi
 
 clean:
 	@rm -rf tmp resources $(SOFT)_$(VERSION)-$(REVISION)_x64.zip
@@ -46,20 +53,26 @@ checksum:
 		tail -3 ../checksum.txt ; \
 		)
 
-tmp/%.exe:
+tmp/$(EXE):
 	@mkdir -p tmp
 	@(cd tmp ; \
 		rm -rf Fiji.app Fiji.app-* ANKAphase.zip "$(ZIP)" "$(EXE)" 2>/dev/null ; \
 		curl -# -o "$(ZIP)" -L "$(URL)" ; \
 		unzip -q "$(ZIP)" ; \
 		mv Fiji.app "Fiji.app-$(VERSION)" ; \
-		curl -# -o ANKAphase.zip -L 'http://rsbweb.nih.gov/ij/plugins/ankaphase/ANKAphase.zip' ; \
-		unzip -q ANKAphase.zip 'ANKAphase_*.jar' ; \
+		curl -# -o "$(ZIP2)" -L "$(URL2)" ; \
+		unzip -q "$(ZIP2)" 'ANKAphase_*.jar' ; \
 		mv ANKAphase_*.jar "Fiji.app-$(VERSION)/plugins/" ; \
-		file "$(EXE)" | grep -q "x86-64, for MS Windows" || echo "Error: bad format for binary $(EXE)" ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		rm -f "$(ZIP)" ; \
 		touch "$(EXE)" \
+		)
+
+check-exe: tmp/$(EXE)
+	@(cd tmp ; \
+		file $(EXE) | grep -q "x86-64, for MS Windows" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 1; } ; \
+		file $(ZIP2) | grep -q "Zip archive data" || { echo "Error: bad format for binary $(ZIP2)" 1>&2 ; exit 1; } ; \
+		# which peres >/dev/null && { peres -v $(EXE) | grep -q "^Product Version:[[:space:]]*$(VERSION)" || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 1; } ; } ;\
 		)
 
 %.zip: Makefile tmp/$(EXE) install.bat post-install.ps1
