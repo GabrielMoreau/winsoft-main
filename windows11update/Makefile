@@ -52,7 +52,7 @@ tmp/$(EXE):
 		#curl -# -o "$(EXE)" -L "$(URL)" ; \
 		rm -f Windows11InstallationAssistant-*.exe 2>/dev/null ; \
 		ln -f Windows11InstallationAssistant.exe "$(EXE)" ; \
-		printf '#%.0s' $$(seq 1 $$(( $$(tput cols) - 10 ))); echo ' 100% #' ; \
+		printf '#%.0s' $$(seq 1 $$(( $$(tput cols) - 33 ))); echo ' 100.0%' ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
 

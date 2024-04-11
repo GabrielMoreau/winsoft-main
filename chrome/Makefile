@@ -50,7 +50,7 @@ tmp/$(EXE):
 	@(cd tmp ; \
 		rm -f googlechromestandaloneenterprise64-*.msi 2>/dev/null ; \
 		ln -f googlechromestandaloneenterprise64.msi "$(EXE)" ; \
-		printf '#%.0s' $$(seq 1 $$(( $$(tput cols) - 10 ))); echo ' 100% #' ; \
+		printf '#%.0s' $$(seq 1 $$(( $$(tput cols) - 33 ))); echo ' 100.0%' ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
 
