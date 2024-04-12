@@ -1,4 +1,4 @@
-# OpenVPN - Vvirtual Private Network Client
+# OpenVPN Connect - Virtual Private Network (VPN) SSL Client
 
 OpenVPN is a free and open-source virtual private network (VPN) client
 that implements techniques to create secure point-to-point or site-to-site
