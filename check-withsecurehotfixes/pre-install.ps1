@@ -4,8 +4,8 @@
 # WSBS1600-HF       -> HKLM:\SOFTWARE\WOW6432Node\F-Secure\NS\default\BusinessSuite\Hotfixes
 # WithSecure Hotfix -> HKLM:\SYSTEM\ControlSet001\Services\SharedAccess\Parameters\FirewallPolicy\FirewallRules
 
-$HotfixList = @('WSBS1600-HF01','WSBS1600-HF03','WSBS1600-HF04','WSBS1600-HF05','WSBS1600-HF06')
-$FwHfList   = @('WithSecure Hotfix2')
+$HotfixList = @{'WSBS1600-HF01' = 1; 'WSBS1600-HF03' = 4; 'WSBS1600-HF04' = 8; 'WSBS1600-HF05' = 16; 'WSBS1600-HF06' = 32}
+$FwHfList   = @{'WithSecure Hotfix2' = 2}
 
 $WSVersion = '16.00'
 
@@ -48,19 +48,26 @@ $RefName = 'WithSecure. Client Security'
 # Exit now if not installed
 If ($IsInstalled -Eq $False) {
 	Write-Output  "Error: WithSecure is not installed"
-	Exit 200
+	Exit 1024
 }
 
+# Total count values
+$HotfixesSum = 0
+ForEach ($CurrentBit in ($HotfixList.Values + $FwHfList.Values)) {
+	$HotfixesSum += $CurrentBit
+}
 # Verify classic Hotfix
 $TotalHotfix = $HotfixList.Count + $FwHfList.Count
 $HotfixesInstalled = 0
+$HotfixesPartialSum = 0
 @(Get-ItemProperty -Path "HKLM:\SOFTWARE\WOW6432Node\F-Secure\NS\default\BusinessSuite\Hotfixes") |
 	ForEach {
 		$RegisterField = $_
 		#Write-Output "Debug: $RegisterField"
-		ForEach ($HotfixMatch in $HotfixList) {
+		ForEach ($HotfixMatch in $HotfixList.Keys) {
 			If ($RegisterField -match $HotfixMatch) {
 				$HotfixesInstalled++
+				$HotfixesPartialSum += $HotfixList["$HotfixMatch"]
 				Write-Output "Info: hotfixes $HotfixMatch is installed"
 			}
 		}
@@ -70,20 +77,21 @@ $HotfixesInstalled = 0
 Get-NetFirewallRule | ForEach {
 	$FwRuleDescription = $_.DisplayName
 	#Write-Output "Debug: $FwRuleDescription"
-	ForEach ($HotfixMatch in $FwHfList) {
+	ForEach ($HotfixMatch in $FwHfList.Keys) {
 		If ($FwRuleDescription -match "^($HotfixMatch):") {
 			$HotfixesInstalled++
+			$HotfixesPartialSum += $FwHfList["$HotfixMatch"]
 			Write-Output "Info: firewall hotfixes $HotfixMatch is installed"
 		}
 	}
 }
 
-If ($HotfixesInstalled -Eq $TotalHotfix) {
+If ($HotfixesPartialSum -Eq $HotfixesSum) {
 	Write-Output  "Ok: $HotfixesInstalled hotfixes installed"
 	Exit 0
 } Else {
-	$ErrCode = ($HotfixesInstalled + 100)
-	Write-Output  "Warning: only $HotfixesInstalled on $TotalHotfix hotfixes installed"
+	$ErrCode = ($HotfixesSum -Bxor $HotfixesPartialSum)
+	Write-Output  "Warning: only $HotfixesInstalled on $TotalHotfix hotfixes installed, error code $ErrCode"
 	Exit $ErrCode
 }
 
