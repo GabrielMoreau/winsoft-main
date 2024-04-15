@@ -10,14 +10,14 @@ and **1024** if the WithSecure software is **not installed**.
 The error code tells you which hotfixes have not been applied (see example below).
 The hotfixes error mapping table is very simple:
 
- | Hotfixe              | Bit |
- |:-------------------- | ---:|
- | `WSBS1600-HF01`      |   1 |
- | `WithSecure Hotfix2` |   2 |
- | `WSBS1600-HF03`      |   4 |
- | `WSBS1600-HF04`      |   8 |
- | `WSBS1600-HF05`      |  16 |
- | `WSBS1600-HF06`      |  32 |
+ | Hotfixe Match        | Bit | URL                                                                 |
+ |:-------------------- | ---:|:------------------------------------------------------------------- |
+ | `WSBS1600-HF01`      |   1 | https://download.withsecure.com/corpro/cs/cs16.00/WSBS1600-HF01.jar |
+ | `WithSecure Hotfix2` |   2 | https://download.withsecure.com/corpro/cs/cs16.00/WSBS1600-HF02.jar |
+ | `WSBS1600-HF03`      |   4 | https://download.withsecure.com/corpro/cs/cs16.00/WSBS1600-HF03.jar |
+ | `WSBS1600-HF04`      |   8 | https://download.withsecure.com/corpro/cs/cs16.00/WSBS1600-HF04.jar |
+ | `WSBS1600-HF05`      |  16 | https://download.withsecure.com/corpro/cs/cs16.00/WSBS1600-HF05.jar |
+ | `WSBS1600-HF06`      |  32 | https://download.withsecure.com/corpro/cs/cs16.00/WSBS1600-HF06.jar |
 
 Example: if hotfixes 2 and 5 are not applied, the error code is 18.
 You must then go to the WithSecure console and push back again the hotfixes indicated (here 2 and 5) on this computer.
