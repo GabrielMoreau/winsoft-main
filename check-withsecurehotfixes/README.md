@@ -9,14 +9,14 @@ the **number of uninstalled hotfixes bits** in the event of a hotfixe error.
 and **1024** if the WithSecure software is **not installed**.
 The hotfixes error mapping table is very simple:
 
- | Hotfixe             | Bit |
- |:==================== | ==:|
- | `WSBS1600-HF01`      |  1 |
- | `WithSecure Hotfix2` |  2 |
- | `WSBS1600-HF03`      |  4 |
- | `WSBS1600-HF04`      |  8 |
- | `WSBS1600-HF05`      | 16 |
- | `WSBS1600-HF06`      | 32 |
+ | Hotfixe              | Bit |
+ |:-------------------- | ---:|
+ | `WSBS1600-HF01`      |   1 |
+ | `WithSecure Hotfix2` |   2 |
+ | `WSBS1600-HF03`      |   4 |
+ | `WSBS1600-HF04`      |   8 |
+ | `WSBS1600-HF05`      |  16 |
+ | `WSBS1600-HF06`      |  32 |
 
 Example : if hotfixes 2 and 5 are not apply, error code is 18.
 
