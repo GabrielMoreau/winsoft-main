@@ -5,8 +5,20 @@ It tests whether all WithSecure hotfixes have been applied to the workstation.
 Please note that WithSecure is a proprietary antivirus software and is in no way opensource.
 Only this script is free.
 It returns **0** in case of **success** (no error),
-**100 + the number of hotfixes** detected in case of **error on hotfixes**
-and **200** if the WithSecure software is **not installed**.
+the **number of uninstalled hotfixes bits** in the event of a hotfixe error.
+and **1024** if the WithSecure software is **not installed**.
+The hotfixes error mapping table is very simple:
+
+ | Hotfixe             | Bit |
+ |:==================== | ==:|
+ | `WSBS1600-HF01`      |  1 |
+ | `WithSecure Hotfix2` |  2 |
+ | `WSBS1600-HF03`      |  4 |
+ | `WSBS1600-HF04`      |  8 |
+ | `WSBS1600-HF05`      | 16 |
+ | `WSBS1600-HF06`      | 32 |
+
+Example : if hotfixes 2 and 5 are not apply, error code is 18.
 
 The script can be run many times on a workstation,
 it's fast and doesn't modify the computer's operation in any way.
