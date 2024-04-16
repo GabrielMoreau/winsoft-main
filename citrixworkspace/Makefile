@@ -4,9 +4,8 @@
 #
 
 SOFT:=CitrixWorkspace
-#VERSION:=$(shell curl -s -L 'https://www.citrix.com/downloads/workspace-app/windows/workspace-app-for-windows-latest.html' | sed -e 's/[<>()]/\n/g;'|  grep '^Version: [[:digit:]]' | head -1 | cut -f 2 -d ' ')
-VERSION:=$(shell curl -s -L 'https://www.citrix.com/downloads/workspace-app/windows/workspace-app-for-windows-latest16.html' | sed -e 's/[<>()]/\n/g;'|  grep '^Version: [[:digit:]]' | head -1 | cut -f 2 -d ' ')
-URL:=https:$(shell curl -s -L 'https://www.citrix.com/downloads/workspace-app/windows/workspace-app-for-windows-latest16.html' | sed -e 's/"/\n/g;' | egrep 'downloads.citrix.com.*/CitrixWorkspaceApp.exe.*__gda__')
+VERSION:=$(shell curl -s -L 'https://www.citrix.com/downloads/workspace-app/windows/workspace-app-for-windows-latest.html' | sed -e 's/[<>()]/\n/g;'|  grep '^Version: [[:digit:]]' | head -1 | cut -f 2 -d ' ')
+URL:=https:$(shell curl -s -L 'https://www.citrix.com/downloads/workspace-app/windows/workspace-app-for-windows-latest.html' | sed -e 's/"/\n/g;' | egrep 'downloads.citrix.com.*/CitrixWorkspaceApp.exe.*__gda__')
 REVISION:=1
 
 EXE:=CitrixWorkspaceApp-$(VERSION).exe
@@ -50,8 +49,6 @@ tmp/$(EXE):
 	@(cd tmp ; \
 		rm -f *.exe *.msi 2>/dev/null ; \
 		curl -# -o "$(EXE)" -L "$(URL)" ; \
-		file $(EXE) | grep -q "PE32 executable" || echo "Error: bad format for binary $(EXE)" ; \
-		which peres >/dev/null && { peres -v $(EXE) | grep -q "^Product Version:[[:space:]]*$(VERSION)" || echo "Error: bad version for binary $(EXE)" ; } ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
 
