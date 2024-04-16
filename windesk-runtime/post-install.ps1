@@ -40,11 +40,11 @@ Function ToVersion {
 				$Exe = 'windowsdesktop-runtime-__VERSION5__-win-x64.exe'
 				$Args = '/install /quiet /norestart'
 				If (Test-Path -Path "$Exe") {
-					Write-Output "Update $RefName $DisplayVersion to version __VERSION5__"
+					Write-Output "Warn: Update $RefName $DisplayVersion to version __VERSION5__"
 					Start-Process -FilePath "$Exe" -ArgumentList "$Args" -WindowStyle 'Hidden' -ErrorAction 'SilentlyContinue'
 				}
 			} Else {
-				Write-Output "$RefName already at version $DisplayVersion (>= __VERSION5__)"
+				Write-Output "Note: $RefName already at version $DisplayVersion (>= __VERSION5__)"
 			}
 		}
 		ElseIf ($DisplayName -match 'Runtime - 6\..*x64') {
@@ -52,11 +52,11 @@ Function ToVersion {
 				$Exe = 'windowsdesktop-runtime-__VERSION6__-win-x64.exe'
 				$Args = '/install /quiet /norestart'
 				If (Test-Path -Path "$Exe") {
-					Write-Output "Update $RefName $DisplayVersion to version __VERSION6__"
+					Write-Output "Warn: Update $RefName $DisplayVersion to version __VERSION6__"
 					Start-Process -FilePath "$Exe" -ArgumentList "$Args" -WindowStyle 'Hidden' -ErrorAction 'SilentlyContinue'
 				}
 			} Else {
-				Write-Output "$RefName already at version $DisplayVersion (>= __VERSION6__)"
+				Write-Output "Note: $RefName already at version $DisplayVersion (>= __VERSION6__)"
 			}
 		}
 		ElseIf ($DisplayName -match 'Runtime - 7\..*x64') {
@@ -64,11 +64,11 @@ Function ToVersion {
 				$Exe = 'windowsdesktop-runtime-__VERSION7__-win-x64.exe'
 				$Args = '/install /quiet /norestart'
 				If (Test-Path -Path "$Exe") {
-					Write-Output "Update $RefName $DisplayVersion to version __VERSION7__"
+					Write-Output "Warn: Update $RefName $DisplayVersion to version __VERSION7__"
 					Start-Process -FilePath "$Exe" -ArgumentList "$Args" -WindowStyle 'Hidden' -ErrorAction 'SilentlyContinue'
 				}
 			} Else {
-				Write-Output "$RefName already at version $DisplayVersion (>= __VERSION7__)"
+				Write-Output "Note: $RefName already at version $DisplayVersion (>= __VERSION7__)"
 			}
 		}
 		ElseIf ($DisplayName -match 'Runtime - 8\..*x64') {
@@ -76,11 +76,11 @@ Function ToVersion {
 				$Exe = 'windowsdesktop-runtime-__VERSION8__-win-x64.exe'
 				$Args = '/install /quiet /norestart'
 				If (Test-Path -Path "$Exe") {
-					Write-Output "Update $RefName $DisplayVersion to version __VERSION8__"
+					Write-Output "Warn: Update $RefName $DisplayVersion to version __VERSION8__"
 					Start-Process -FilePath "$Exe" -ArgumentList "$Args" -WindowStyle 'Hidden' -ErrorAction 'SilentlyContinue'
 				}
 			} Else {
-				Write-Output "$RefName already at version $DisplayVersion (>= __VERSION8__)"
+				Write-Output "Note: $RefName already at version $DisplayVersion (>= __VERSION8__)"
 			}
 		}
 	}
@@ -97,7 +97,7 @@ Function ToVersion {
 		$DisplayVersion = $App.DisplayVersion
 		$KeyProduct = $Key | Split-Path -Leaf
 		$Exe = $App.UninstallString
-		"# {0,-66} / {1,-14} / {2} / {3}" -F $DisplayName, $DisplayVersion, $KeyProduct, $Exe
+		"View: {0,-56} / {1,-14} / {2} / {3}" -F $DisplayName, $DisplayVersion, $KeyProduct, $Exe
 	} | Sort-Object
 
 
