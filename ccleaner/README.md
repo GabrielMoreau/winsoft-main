@@ -14,7 +14,7 @@ Use only on personnal computer.
 
 ```bat
 .\ccsetup-VERSION.exe /S /L=1036
-%ProgramFiles%\CCleaner\uninst.exe" /S
+"%ProgramFiles%\CCleaner\uninst.exe" /S
 ```
 
 ## Register Key
