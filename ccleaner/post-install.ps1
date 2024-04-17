@@ -1,24 +1,10 @@
 
-#
-# CCleaner
-#
+Write-Output "Begin Post-Install"
 
-$Process = "ccleaner"
-
-# stop processus
-If (Get-Process $Process -ea 0) {
-	Stop-Process -Name $Process
-}
-
-
-# silent install
-.\ccsetup-__VERSION__.exe /S /L=1036 | Out-Null
-
-
-# copy ini file and fix right for all user
+# Copy ini file and fix right for all user
 ForEach ($ProgramPath in "${Env:ProgramFiles}\CCleaner", "${Env:ProgramFiles(x86)}\CCleaner") {
 	If (Test-Path "$ProgramPath") {
-		# Fichier config
+		Write-Output "Copy config file"
 		#Copy-Item "ccleaner-all.ini" -destination "$ProgramPath\CCleaner-all.ini"
 		#Copy-Item "ccleaner-user.ini" -destination  "$ProgramPath\CCleaner-user.ini"
 		Copy-Item "ccleaner.ini" -Destination  "$ProgramPath\CCleaner.ini"
@@ -27,12 +13,13 @@ ForEach ($ProgramPath in "${Env:ProgramFiles}\CCleaner", "${Env:ProgramFiles(x86
 	}
 }
 
-
-# remove desktop shortcuts
+# Remove desktop shortcuts
 If (Test-Path "${Env:USERPROFILE}\Desktop\CCleaner.lnk" -PathType leaf) {
+	Write-Output "Remove desktop shortcuts in USERPROFILE"
 	Remove-Item -Path "${Env:USERPROFILE}\Desktop\CCleaner.lnk"
 }
 
 If (Test-Path "C:\Users\Public\Desktop\CCleaner.lnk" -PathType leaf) {
+	Write-Output "Remove desktop shortcuts in Users/Public"
 	Remove-Item -Path "C:\Users\Public\Desktop\CCleaner.lnk"
 }
