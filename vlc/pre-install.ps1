@@ -4,14 +4,18 @@ Write-Output "Begin Pre-Install"
 $RefName = 'VLC media player'
 $RefVersion = '__VERSION__'
 
+# Transform string to a version object
 Function ToVersion {
 	Param (
 		[Parameter(Mandatory = $true)] [string]$Version
 	)
 
 	$Version = $Version -Replace '[^\d\.].*$', ''
-	$Version = $Version -Replace '\.00?$', ''
-	$Version = $Version -Replace '\.00?$', ''
+	$Version = "$Version.0.0.0"
+	$Version = $Version -Replace '\.+',     '.'
+	$Version = $Version -Replace '\.0+',    '.0'
+	$Version = $Version -Replace '\.0(\d)', '.$1'
+	$Version = $Version.Split('.')[0,1,2,3] -Join '.'
 	Return [version]$Version
 }
 
