@@ -10,4 +10,5 @@ file (CB7, CBR, CBT, CBZ).
 * Wikipedia : https://en.wikipedia.org/wiki/Sumatra_PDF
 
 * Download : https://www.sumatrapdfreader.org/download-free-pdf-viewer
-* Silent Install : https://www.sumatrapdfreader.org/docs/Command-line-arguments
+* Silent Install : https://www.sumatrapdfreader.org/docs/Command-line-arguments,
+	https://silentinstallhq.com/sumatra-pdf-silent-install-how-to-guide/
