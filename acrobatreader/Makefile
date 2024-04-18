@@ -20,7 +20,7 @@ LOGDIR:=%WINDIR%\\Logs
 .PHONY: all check-version check-unrealized check-exe clean control next ocs version wget checksum
 .ONESHELL:
 
-all: check-version check-exe $(SOFT)_$(VERSIONLONG)-$(REVISION)_x64.zip ocs
+all: check-version check-exe $(SOFT)_$(VERSIONLONG)-$(REVISION)_x64.zip Uninstall-$(SOFT)_$(VERSIONLONG)-$(REVISION)_x64.zip ocs
 
 sinclude ../_common/conf.mk
 
@@ -73,14 +73,30 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@sed -e 's/__VERSION__/$(VERSIONCOLLAPSE)/; s#__LOGDIR__#$(LOGDIR)#;' $< > $@
 	@grep -q "softversion=$(VERSIONCOLLAPSE)" $@ || echo "Error: bad version in install.bat"
 
-%.zip: Makefile tmp/install.bat tmp/$(EXE)
+tmp/pre-install.ps1: pre-install.ps1 Makefile tmp/$(EXE)
+	@mkdir -p tmp
+	@sed -e 's/__VERSION__/$(VERSIONLONG)/; s#__LOGDIR__#$(LOGDIR)#;' $< > $@
+
+tmp/uninstall.bat: uninstall.bat Makefile
+	@mkdir -p tmp
+	@sed -e 's/__VERSION__/$(VERSIONLONG)/; s#__LOGDIR__#$(LOGDIR)#;' $< > $@
+
+%.zip: Makefile tmp/install.bat tmp/pre-install.ps1 tmp/$(EXE)
 	@rm -f $@
-	@(cd tmp; zip -r ../$@ install.bat $(EXE))
+	@(cd tmp; zip -r ../$@ install.bat pre-install.ps1 $(EXE))
+	@chmod ugo+rw $@
+
+Uninstall-$(SOFT)_$(VERSIONLONG)-$(REVISION)_x64.zip: Makefile pre-remove.ps1 tmp/uninstall.bat
+	@rm -f $@
+	@zip -r ./$@ pre-remove.ps1
+	@(cd tmp; zip -r ../$@ uninstall.bat)
+	@printf "@ uninstall.bat\n@=install.bat\n" | zipnote -w ./$@
 	@chmod ugo+rw $@
 
 ocs:
 	@echo ""
 	@echo "Name:    $(SOFT)_$(VERSIONLONG)-$(REVISION)_x64"
+	@echo "Name:    Uninstall-$(SOFT)_$(VERSIONLONG)-$(REVISION)_x64"
 	@echo "Launch:  install.bat"
 	@echo "Message: yes"
 	@echo "Delay:   5"

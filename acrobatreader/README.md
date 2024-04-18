@@ -8,3 +8,11 @@ manipulate, print and manage PDF files.
 
 * Download https://get.adobe.com/reader/enterprise/
 * Silent install : https://silentinstallhq.com/adobe-reader-dc-silent-install-how-to-guide/
+
+## Register Key
+
+Example :
+
+ | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
+ |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
+ | HKLM | Adobe Acrobat (64-bit) | Adobe | 24.002.20687 | `{AC76BA86-1036-1033-7760-BC15014EA700}` | `MsiExec.exe /I{AC76BA86-1036-1033-7760-BC15014EA700}` |
