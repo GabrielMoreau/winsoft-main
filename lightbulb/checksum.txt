@@ -10,3 +10,4 @@ c73cb5dc11ee3043b27466a1a446005585a8138c1de4c8b6ae5d6ad91c1b167d  LightBulb-Inst
 7cd7193a6974d2d1e86fef7a5b94370021f7d7cbb16f8b25e00bc590df665ea4  LightBulb-Installer-2.4.10.exe
 9e67dad8898790b8ad800283fb9323591c6e2409bd3b6536e29b18069ff818c1  windowsdesktop-runtime-8.0.4-win-x64.exe
 3d5c91ae1fbbf59af6348b2e7ad509e6479fac777193dd0bafec4cfa11a786a9  LightBulb-Installer-2.4.11.exe
+d81df06f46046e74773eef9ada97755de24a17513a488011c13a4bc35e55ef85  LightBulb-Installer-2.4.12.exe
