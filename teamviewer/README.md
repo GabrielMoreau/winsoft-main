@@ -8,3 +8,12 @@ allowing maintenance of computers and other devices.
 
 * Download : https://www.teamviewer.com/fr/telecharger/windows/
 * Silent install : https://silentinstallhq.com/teamviewer-silent-install-how-to-guide/
+
+
+## Register Key
+
+Example :
+
+ | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
+ |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
+ | HKLM | TeamViewer | TeamViewer | 15.52.4 | `TeamViewer` | `"C:\Program Files\TeamViewer\uninstall.exe"` |
