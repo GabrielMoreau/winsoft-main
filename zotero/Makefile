@@ -4,7 +4,7 @@
 #
 
 SOFT:=Zotero
-VERSION:=$(shell curl -s -L 'https://www.zotero.org/download/' | sed 's/,/\n/g;'| grep win32 |cut -f 4 -d '"')
+VERSION:=$(shell curl -s -L 'https://www.zotero.org/download/' | sed 's/,/\n/g;'| grep win32 | cut -f 4 -d '"' | head -1)
 REVISION:=1
 URL:=https://download.zotero.org/client/release/$(VERSION)/Zotero-$(VERSION)_setup.exe
 
