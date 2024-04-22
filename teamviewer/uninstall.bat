@@ -29,7 +29,7 @@ ECHO unblock
 %pwrsh% "Unblock-File -Path .\*.ps1"
 
 
-ECHO Execute pre-install script
+ECHO Execute pre-remove script
 %pwrsh% -File ".\pre-remove.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
 
 
