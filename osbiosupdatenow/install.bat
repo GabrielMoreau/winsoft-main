@@ -44,6 +44,20 @@ ECHO Wait 30 s
 ping 127.0.0.1 -n 30 > NUL
 
 
+ECHO Search PowerShell
+SET pwrsh=%WINDIR%\System32\WindowsPowerShell\V1.0\powershell.exe
+IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET pwrsh=%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe
+
+ECHO Add rights
+%pwrsh% Set-ExecutionPolicy RemoteSigned -Force -Scope LocalMachine
+
+ECHO unblock
+%pwrsh% "Unblock-File -Path .\*.ps1"
+
+ECHO Execute post-install script
+%pwrsh% -File ".\post-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
+
+
 IF EXIST "%ProgramFiles%\Dell\CommandUpdate\dcu-cli.exe"      GOTO DELL64
 IF EXIST "%ProgramFiles(x86)%\Dell\CommandUpdate\dcu-cli.exe" GOTO DELL86
 IF EXIST "%ProgramFiles%\HP\HPIA\HPImageAssistant.exe         GOTO HP64
