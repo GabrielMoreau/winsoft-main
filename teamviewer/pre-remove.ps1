@@ -3,6 +3,30 @@ Write-Output "Begin Pre-Remove"
 
 $RefName = 'TeamViewer'
 
+Function Run-Exec {
+	Param (
+		[Parameter(Mandatory = $True)] [string]$Name,
+		[Parameter(Mandatory = $True)] [string]$FilePath,
+		[Parameter(Mandatory = $True)] [string]$ArgumentList,
+		[Parameter(Mandatory = $False)] [int]$Timeout = 300
+	)
+
+	$Proc = Start-Process -FilePath "$FilePath" -ArgumentList "$ArgumentList" -WindowStyle 'Hidden' -ErrorAction 'SilentlyContinue' -PassThru
+
+	$Timeouted = $Null # Reset any previously set timeout
+	# Wait up to 180 seconds for normal termination
+	$Proc | Wait-Process -Timeout $Timeout -ErrorAction SilentlyContinue -ErrorVariable Timeouted
+	If ($Timeouted) {
+		# Terminate the process
+		$Proc | Kill
+		Write-Output "Error: kill $Name uninstall exe"
+		Return
+	} ElseIf ($Proc.ExitCode -ne 0) {
+		Write-Output "Error: $Name uninstall return code $($Proc.ExitCode)"
+		Return
+	}
+}
+
 # Remove all version
 @(Get-ChildItem -Recurse 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall';
   Get-ChildItem -Recurse "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall") |
@@ -26,20 +50,7 @@ $RefName = 'TeamViewer'
 			Write-Output "Remove EXE: $DisplayName / $DisplayVersion / $($App.UninstallString) / $Exe $Args"
 		}
 
-		$Proc = Start-Process -FilePath "$Exe" -ArgumentList "$Args" -WindowStyle 'Hidden' -ErrorAction 'SilentlyContinue' -PassThru
-
-		$Timeouted = $Null # Reset any previously set timeout
-		# Wait up to 180 seconds for normal termination
-		$Proc | Wait-Process -Timeout 300 -ErrorAction SilentlyContinue -ErrorVariable Timeouted
-		If ($Timeouted) {
-			# Terminate the process
-			$Proc | Kill
-			Write-Output "Error: kill $RefName uninstall exe"
-			Return
-		} ElseIf ($Proc.ExitCode -ne 0) {
-			Write-Output "Error: $RefName uninstall return code $($Proc.ExitCode)"
-			Return
-		}
+		Run-Exec -FilePath "$Exe" -ArgumentList "$Args" -Name "$RefName"
 	}
 
 
