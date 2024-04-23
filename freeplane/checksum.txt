@@ -1,0 +1,2 @@
+
+2ad1a59d1d63566ca52576dbb64a0c53b7fe97f5499e1740d032507e1239374c  Freeplane-Setup-with-Java-1.11.12.exe
