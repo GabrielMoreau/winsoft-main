@@ -2,3 +2,4 @@ a1badb8b874493f0e6010c0763757f53c04ea7f1e0b0542e62abee8bc1bff4a8  UltiMaker-Cura
 219cb950ce18135f548e35647818e019d5afbd87cf511e520e9e7043d3ad76ba  UltiMaker-Cura-5.5.0-win64.msi
 dcb50a93a3901278ada1213297e4af6f4a7d926e4622fe8dbe543560cce92ed3  UltiMaker-Cura-5.6.0-win64.msi
 03114e8520c19ab918956082deddf459718db85de7fed2c56d98dee8c5ee365c  UltiMaker-Cura-5.7.0-win64.msi
+70144c4c1ee878dd35acdc6e76b2d5e819a57bf7bba44ae1692d71664242b6ab  UltiMaker-Cura-5.7.1-win64.msi
