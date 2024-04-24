@@ -13,6 +13,9 @@ See https://en.wikipedia.org/wiki/Slicer_(3D_printing).
 
 * Download : https://download.slicer.org/
 
+
+## Installer
+
 NSIS installer, the classical `/S` flag could be use for silent install.
 Slicer install in the user Windows HOME (`$HOME\AppData\Local\slicer.org\Slicer 5.4.0\`) and put an uninstall key in `HKU`.
 You can change destination with flag `/D` (last parameter with no quote...).
@@ -28,3 +31,14 @@ To silent uninstall:
 ```
 
 If install with `SYSTEM` account, the installer put a register uninstall key in `HKLM`.
+
+
+## Register Key
+
+Example :
+
+ | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
+ |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
+ | HKLM | Slicer 5.4.0 | slicer.org | 5.4.0 | `Slicer 5.4.0 (Win64)` | `"C:\ProgramData\Slicer.org\Uninstall.exe"` |
+ | HKLM | Slicer 5.6.0 | slicer.org | 5.6.0 | `Slicer 5.6.0 (Win64)` | `"C:\ProgramData\Slicer.org\Uninstall.exe"` |
+ | HKLM | Slicer 5.6.1 | slicer.org | 5.6.1 | `Slicer 5.6.1 (Win64)` | `"C:\ProgramData\Slicer.org\Uninstall.exe"` |

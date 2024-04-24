@@ -39,6 +39,10 @@ ECHO Silent install %softname%
 ScriptRunner.exe -appvscript Slicer-%softversion%-win-amd64.exe /S /D=%ProgramData%\Slicer.org -appvscriptrunnerparameters -wait -timeout=300
 
 
+ECHO Execute post-install script
+%pwrsh% -File ".\post-install.ps1" 1>> "%logdir%\%softname%-PS1.log" 2>&1
+
+
 REM ECHO Remove desktop shortcut
 REM IF EXIST "%PUBLIC%\Desktop\3DSlicer.lnk"          DEL /F /Q "%PUBLIC%\Desktop\3DSlicer.lnk"
 REM IF EXIST "%ALLUSERSPROFILE%\Desktop\3DSlicer.lnk" DEL /F /Q "%ALLUSERSPROFILE%\Desktop\3DSlicer.lnk"
