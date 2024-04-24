@@ -10,6 +10,9 @@ Fine-tune your 3D model with 400+ settings for the best slicing and printing res
 * Silent install : https://www.manageengine.com/eu/products/desktop-central/software-installation/silent_install_UltiMaker-Cura-(5.3.1).html,
 	https://silent-install.net/software/ultimaker/cura/4.5.0
 
+
+## Installer
+
 ```bat
 REM Silent Install (exe or msi)
 Ultimaker_Cura-4.5.0-win64.exe /S
@@ -19,3 +22,12 @@ REM Silent Uninstall (exe or msi)
 "%ProgramW6432%\Ultimaker Cura 4.5\Uninstall.exe" /S
 MsiExec.exe /x {GUID} /qn /norestart
 ```
+
+## Register Key
+
+Example :
+
+ | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
+ |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
+ | HKLM | UltiMaker Cura | UltiMaker | 5.4.0 | `{7C3B43E0-0A17-4029-9146-19F3E0566B4C}` | `MsiExec.exe /I{7C3B43E0-0A17-4029-9146-19F3E0566B4C}` |
+ | HKLM | UltiMaker Cura | UltiMaker | 5.5.0 | `{3AC2EF24-9745-4516-BF41-85F9223E03F7}` | `MsiExec.exe /I{3AC2EF24-9745-4516-BF41-85F9223E03F7}` |
