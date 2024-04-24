@@ -3,6 +3,7 @@ Write-Output "Begin Pre-Remove"
 
 $RefName = 'Skype version'
 
+# Run MSI or EXE with timeout control
 Function Run-Exec {
 	Param (
 		[Parameter(Mandatory = $True)] [string]$Name,

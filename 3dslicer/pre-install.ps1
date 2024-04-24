@@ -19,7 +19,7 @@ Function ToVersion {
 	Return [version]$Version
 }
 
-# Run MSI or EXE
+# Run MSI or EXE with timeout control
 Function Run-Exec {
 	Param (
 		[Parameter(Mandatory = $True)] [string]$Name,
