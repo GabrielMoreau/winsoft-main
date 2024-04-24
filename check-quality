@@ -2,6 +2,8 @@
 #
 # check code quality
 
+# check Windows files with UNIX line terminators
+find . -name '*.ps1' -o -name '*.bat' -exec file {} \+| grep 'ASCII text' | grep -v 'CRLF'
 
 # check unique name in checksum
 for f in $(awk '{print $2}' */checksum.txt | sort | uniq -c  | grep -v '^      1 ' | awk '{print $2}')
