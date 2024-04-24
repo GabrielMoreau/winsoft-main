@@ -12,15 +12,33 @@ and other features.
 * Download : https://www.skype.com/fr/get-skype/
 * Silent install : https://silentinstallhq.com/skype-for-desktop-silent-install-how-to-guide/
 
-Le fichier final n'a pas le même nom que le fichier initial.
-Avec `wget`, il est possible d'avoir directement le fichier final.
-wget --content-disposition  https://go.skype.com/windows.desktop.download
 
-Il est possible d'avoir juste les en-tête et 0 ou 1 redirect afin d'avoir l'URL
-dans laquelle on trouve le numéro de version.
+## Register Key
+
+Example :
+
+ | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
+ |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
+ | HKLM | Skype version 8.118 | Skype Technologies S.A. | 8.118 | `Skype_is1` | `"C:\Program Files (x86)\Microsoft\Skype for Desktop\unins000.exe"` |
+
+
+## Download
+
+The final file does not have the same name as the initial file.
+With `wget`, it is possible to get the final file directly.
+
+```bash
+wget --content-disposition https://go.skype.com/windows.desktop.download
+```
+
+It is possible to have just the header and 0 or 1 redirect in order to
+have the URL where the version number can be found.
+
+```bash
 wget --max-redirect=1 https://go.skype.com/windows.desktop.download 
+```
 
-Il suffit alors de faire la requête `curl` adapté.
+All you need to do is make the appropriate `curl` request.
 
-Rappel : on utilise `curl` de préférence à `wget` afin de pouvoir faire
-les commandes sous Linux ou sous MacOSX.
+Remember: `curl` is preferable to `wget` so that you can run the
+commands under Linux or MacOSX.
