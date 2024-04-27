@@ -3,7 +3,10 @@ Write-Output "Begin Post-Install"
 
 # Clean old duplicate key with Inkscape in the name (same uninstall string)
 
-$RefVersion = '__VERSION__'
+# Get Config: Version
+$Config = Get-Content 'winsoft-config.ini' | Where-Object { $_ -Match '=' } | ForEach-Object { $_ -Replace "#.*", "" } | ForEach-Object { $_ -Replace "\\", "\\" } | ConvertFrom-StringData
+
+$RefVersion = $Config.Version
 $RefUninstallString = ''
 $RefName = 'Inkscape'
 
