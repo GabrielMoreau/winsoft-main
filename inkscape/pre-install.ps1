@@ -52,9 +52,9 @@ Function Run-Exec {
 
 # Get Config: Version
 $Config = GetConfig -FilePath 'winsoft-config.ini'
-
 $RefVersion = $Config.Version
 $RefName = 'Inkscape'
+Write-Output "Config: Version $RefVersion"
 
 # Remove old version
 @(Get-ChildItem -Recurse 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall';

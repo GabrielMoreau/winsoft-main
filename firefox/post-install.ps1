@@ -32,6 +32,7 @@ $Config = GetConfig -FilePath 'winsoft-config.ini'
 $RefVersion = $Config.Version
 $RefUninstallString = ''
 $RefName = 'Firefox'
+Write-Output "Config: Version $RefVersion"
 
 @(Get-ChildItem -Recurse 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall';
   Get-ChildItem -Recurse "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall") |

@@ -32,6 +32,7 @@ $Config = GetConfig -FilePath 'winsoft-config.ini'
 $RefVersion = $Config.Version
 $RefUninstallString = ''
 $RefName = 'Inkscape'
+Write-Output "Config: Version $RefVersion"
 
 # Find last install
 @(Get-ChildItem -Recurse 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall';
