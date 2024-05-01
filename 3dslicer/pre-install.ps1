@@ -1,8 +1,14 @@
 
 Write-Output "Begin Pre-Install"
 
-$RefName = '^Slicer\s[1-9]'
-$RefVersion = '__VERSION__'
+# Get Config from file
+Function GetConfig {
+	Param (
+		[Parameter(Mandatory = $True)] [string]$FilePath
+	)
+
+	Return Get-Content "$FilePath" | Where-Object { $_ -Match '=' } | ForEach-Object { $_ -Replace "#.*", "" } | ForEach-Object { $_ -Replace "\\", "\\" } | ConvertFrom-StringData
+}
 
 # Transform string to a version object
 Function ToVersion {
@@ -43,6 +49,12 @@ Function Run-Exec {
 		Return
 	}
 }
+
+# Get Config: Version
+$Config = GetConfig -FilePath 'winsoft-config.ini'
+$RefVersion = $Config.Version
+$RefName = '^Slicer\s[1-9]'
+Write-Output "Config: Version $RefVersion"
 
 # Remove old version
 @(Get-ChildItem -Recurse 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall';
