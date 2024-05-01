@@ -3,9 +3,14 @@ Write-Output "Begin Post-Install"
 
 # Clean old duplicate key with Firefox in the name (same uninstall string)
 
-$RefVersion = '__VERSION__'
-$RefUninstallString = ''
-$RefName = 'Firefox'
+# Get Config from file
+Function GetConfig {
+	Param (
+		[Parameter(Mandatory = $True)] [string]$FilePath
+	)
+
+	Return Get-Content "$FilePath" | Where-Object { $_ -Match '=' } | ForEach-Object { $_ -Replace "#.*", "" } | ForEach-Object { $_ -Replace "\\", "\\" } | ConvertFrom-StringData
+}
 
 # Transform string to a version object
 Function ToVersion {
@@ -21,6 +26,12 @@ Function ToVersion {
 	$Version = $Version.Split('.')[0,1,2,3] -Join '.'
 	Return [version]$Version
 }
+
+# Get Config: Version
+$Config = GetConfig -FilePath 'winsoft-config.ini'
+$RefVersion = $Config.Version
+$RefUninstallString = ''
+$RefName = 'Firefox'
 
 @(Get-ChildItem -Recurse 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall';
   Get-ChildItem -Recurse "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall") |
