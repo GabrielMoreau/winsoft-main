@@ -3,12 +3,14 @@ Write-Output "Begin Post-Install"
 
 # Clean old duplicate key with Inkscape in the name (same uninstall string)
 
-# Get Config: Version
-$Config = Get-Content 'winsoft-config.ini' | Where-Object { $_ -Match '=' } | ForEach-Object { $_ -Replace "#.*", "" } | ForEach-Object { $_ -Replace "\\", "\\" } | ConvertFrom-StringData
+# Get Config from file
+Function GetConfig {
+	Param (
+		[Parameter(Mandatory = $True)] [string]$FilePath
+	)
 
-$RefVersion = $Config.Version
-$RefUninstallString = ''
-$RefName = 'Inkscape'
+	Return Get-Content "$FilePath" | Where-Object { $_ -Match '=' } | ForEach-Object { $_ -Replace "#.*", "" } | ForEach-Object { $_ -Replace "\\", "\\" } | ConvertFrom-StringData
+}
 
 # Transform string to a version object
 Function ToVersion {
@@ -24,6 +26,12 @@ Function ToVersion {
 	$Version = $Version.Split('.')[0,1,2,3] -Join '.'
 	Return [version]$Version
 }
+
+# Get Config: Version
+$Config = GetConfig -FilePath 'winsoft-config.ini'
+$RefVersion = $Config.Version
+$RefUninstallString = ''
+$RefName = 'Inkscape'
 
 # Find last install
 @(Get-ChildItem -Recurse 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall';

@@ -1,6 +1,7 @@
 
 Write-Output "Begin Pre-Install"
 
+# Get Config from file
 Function GetConfig {
 	Param (
 		[Parameter(Mandatory = $True)] [string]$FilePath
@@ -8,12 +9,6 @@ Function GetConfig {
 
 	Return Get-Content "$FilePath" | Where-Object { $_ -Match '=' } | ForEach-Object { $_ -Replace "#.*", "" } | ForEach-Object { $_ -Replace "\\", "\\" } | ConvertFrom-StringData
 }
-
-# Get Config: Version
-$Config = GetConfig -FilePath 'winsoft-config.ini'
-
-$RefVersion = $Config.Version
-$RefName = 'Inkscape'
 
 # Transform string to a version object
 Function ToVersion {
@@ -54,6 +49,12 @@ Function Run-Exec {
 		Return
 	}
 }
+
+# Get Config: Version
+$Config = GetConfig -FilePath 'winsoft-config.ini'
+
+$RefVersion = $Config.Version
+$RefName = 'Inkscape'
 
 # Remove old version
 @(Get-ChildItem -Recurse 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall';
