@@ -4,7 +4,8 @@
 #
 
 SOFT:=Picocrypt
-VERSION:=$(shell curl -s -L 'https://github.com/HACKERALERT/Picocrypt/releases/latest' | sed -e 's/>/\n/g;' | grep 'Picocrypt.*title' | cut -f 3 -d ' ' | grep '^[[:digit:]]' | head -1)
+#VERSION:=$(shell curl -s -L 'https://github.com/HACKERALERT/Picocrypt/releases/latest' | sed -e 's/>/\n/g;' | grep 'Picocrypt.*title' | cut -f 3 -d ' ' | grep '^[[:digit:]]' | head -1)
+VERSION:=$(shell curl -s -L 'https://github.com/HACKERALERT/Picocrypt/releases' | sed -e 's/[">]/\n/g;' | grep -B 200 '^Picocrypt.exe' | grep 'HACKERALERT/Picocrypt/releases/tag/' | head -1 | xargs -r basename)
 REVISION:=1
 URL:=https://github.com/HACKERALERT/Picocrypt/releases/download/$(VERSION)/Installer.exe
 
