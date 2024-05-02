@@ -3,9 +3,14 @@ Write-Output "Begin Post-Install"
 
 # Clean old duplicate key with FileZilla in the name (same uninstall string)
 
-$RefVersion = '__VERSION__'
-$RefUninstallString = ''
-$RefName = 'FileZilla'
+# Get Config from file
+Function GetConfig {
+	Param (
+		[Parameter(Mandatory = $True)] [string]$FilePath
+	)
+
+	Return Get-Content "$FilePath" | Where-Object { $_ -Match '=' } | ForEach-Object { $_ -Replace "#.*", "" } | ForEach-Object { $_ -Replace "\\", "\\" } | ConvertFrom-StringData
+}
 
 # Transform string to a version object
 Function ToVersion {
@@ -21,6 +26,13 @@ Function ToVersion {
 	$Version = $Version.Split('.')[0,1,2,3] -Join '.'
 	Return [version]$Version
 }
+
+# Get Config: Version
+$Config = GetConfig -FilePath 'winsoft-config.ini'
+$RefVersion = $Config.Version
+$RefUninstallString = ''
+$RefName = 'FileZilla'
+Write-Output "Config: Version $RefVersion"
 
 @(Get-ChildItem -Recurse 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall';
   Get-ChildItem -Recurse "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall") |
@@ -58,3 +70,17 @@ If ($RefUninstallString -ne '') {
 			}
 		}
 }
+
+# View
+@(Get-ChildItem -Recurse 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall';
+  Get-ChildItem -Recurse "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall") |
+	ForEach {
+		$Key = $_
+		$App = (Get-ItemProperty -Path $Key.PSPath)
+		$DisplayName  = $App.DisplayName
+		If (!($DisplayName -match $RefName)) { Return }
+
+		$DisplayVersion = $App.DisplayVersion
+		$KeyProduct = $Key | Split-Path -Leaf
+		Write-Output "Installed: $DisplayName / $DisplayVersion / $KeyProduct / $($App.UninstallString)"
+	}

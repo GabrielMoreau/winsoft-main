@@ -73,17 +73,18 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@sed -e 's/__VERSION__/$(VERSIONCOLLAPSE)/; s#__LOGDIR__#$(LOGDIR)#;' $< > $@
 	@grep -q "softversion=$(VERSIONCOLLAPSE)" $@ || echo "Error: bad version in install.bat"
 
-tmp/pre-install.ps1: pre-install.ps1 Makefile tmp/$(EXE)
+tmp/winsoft-config.ini: winsoft-config.ini Makefile tmp/$(EXE)
 	@mkdir -p tmp
-	@sed -e 's/__VERSION__/$(VERSIONLONG)/; s#__LOGDIR__#$(LOGDIR)#;' $< > $@
+	@sed -e 's/__VERSION__/$(VERSION)/;' $< > $@
 
 tmp/uninstall.bat: uninstall.bat Makefile
 	@mkdir -p tmp
 	@sed -e 's/__VERSION__/$(VERSIONLONG)/; s#__LOGDIR__#$(LOGDIR)#;' $< > $@
 
-%.zip: Makefile tmp/install.bat tmp/pre-install.ps1 tmp/$(EXE)
+%.zip: Makefile tmp/install.bat pre-install.ps1 tmp/winsoft-config.ini tmp/$(EXE)
 	@rm -f $@
-	@(cd tmp; zip -r ../$@ install.bat pre-install.ps1 $(EXE))
+	@zip -r ./$@ pre-install.ps1
+	@(cd tmp; zip -r ../$@ install.bat winsoft-config.ini $(EXE))
 	@chmod ugo+rw $@
 
 Uninstall-$(SOFT)_$(VERSIONLONG)-$(REVISION)_x64.zip: Makefile pre-remove.ps1 tmp/uninstall.bat

@@ -64,14 +64,18 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
 	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#;' $< > $@
 
+tmp/winsoft-config.ini: winsoft-config.ini Makefile tmp/$(EXE)
+	@mkdir -p tmp
+	@sed -e 's/__VERSION__/$(VERSION)/;' $< > $@
+
 tmp/post-install.ps1: post-install.ps1 Makefile tmp/$(EXE)
 	@mkdir -p tmp
 	@sed -e 's/__VERSION__/$(VERSION)/;' $< > $@
 
-%.zip: Makefile pre-install.ps1 tmp/install.bat tmp/post-install.ps1 tmp/$(EXE)
+%.zip: Makefile tmp/install.bat pre-install.ps1 post-install.ps1 tmp/winsoft-config.ini tmp/$(EXE)
 	@rm -f $@
-	@zip -r ./$@ pre-install.ps1
-	@(cd tmp; zip -r ../$@ install.bat post-install.ps1 $(EXE))
+	@zip -r ./$@ pre-install.ps1 post-install.ps1
+	@(cd tmp; zip -r ../$@ install.bat winsoft-config.ini $(EXE))
 	@chmod ugo+rw $@
 
 ocs:

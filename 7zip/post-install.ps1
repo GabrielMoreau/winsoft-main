@@ -3,10 +3,14 @@ Write-Output "Begin Post-Install"
 
 # Clean old duplicate key with 7-Zip in the name (same uninstall string)
 
-$RefVersion = '__VERSION__'
-$RefVersionShort='__VERSIONSHORT__'
-$RefUninstallString = ''
-$RefName = '7-Zip'
+# Get Config from file
+Function GetConfig {
+	Param (
+		[Parameter(Mandatory = $True)] [string]$FilePath
+	)
+
+	Return Get-Content "$FilePath" | Where-Object { $_ -Match '=' } | ForEach-Object { $_ -Replace "#.*", "" } | ForEach-Object { $_ -Replace "\\", "\\" } | ConvertFrom-StringData
+}
 
 # Transform string to a version object
 Function ToVersion {
@@ -22,6 +26,39 @@ Function ToVersion {
 	$Version = $Version.Split('.')[0,1,2,3] -Join '.'
 	Return [version]$Version
 }
+
+# Run MSI or EXE with timeout control
+Function Run-Exec {
+	Param (
+		[Parameter(Mandatory = $True)] [string]$Name,
+		[Parameter(Mandatory = $True)] [string]$FilePath,
+		[Parameter(Mandatory = $True)] [string]$ArgumentList,
+		[Parameter(Mandatory = $False)] [int]$Timeout = 300
+	)
+
+	$Proc = Start-Process -FilePath "$FilePath" -ArgumentList "$ArgumentList" -WindowStyle 'Hidden' -ErrorAction 'SilentlyContinue' -PassThru
+
+	$Timeouted = $Null # Reset any previously set timeout
+	# Wait up to 180 seconds for normal termination
+	$Proc | Wait-Process -Timeout $Timeout -ErrorAction SilentlyContinue -ErrorVariable Timeouted
+	If ($Timeouted) {
+		# Terminate the process
+		$Proc | Kill
+		Write-Output "Error: kill $Name uninstall exe"
+		Return
+	} ElseIf ($Proc.ExitCode -ne 0) {
+		Write-Output "Error: $Name uninstall return code $($Proc.ExitCode)"
+		Return
+	}
+}
+
+# Get Config: Version
+$Config = GetConfig -FilePath 'winsoft-config.ini'
+$RefVersion = $Config.Version
+$RefVersionShort = $Config.VersionShort
+$RefUninstallString = ''
+$RefName = '7-Zip'
+Write-Output "Config: Version $RefVersion"
 
 @(Get-ChildItem -Recurse 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall';
   Get-ChildItem -Recurse "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall") |
@@ -74,18 +111,7 @@ If ($SoftInstalled -eq $False) {
 	$Exe = "7z$RefVersionShort-x64.exe"
 	$Args = "/S"
 	Write-Output "Install Exe: $Exe $Args"
-	$Proc = Start-Process -FilePath "$Exe" -ArgumentList "$Args" -WindowStyle 'Hidden' -ErrorAction 'SilentlyContinue' -PassThru
-
-	$Timeouted = $Null # Reset any previously set timeout
-	# Wait up to 180 seconds for normal termination
-	$Proc | Wait-Process -Timeout 300 -ErrorAction SilentlyContinue -ErrorVariable Timeouted
-	If ($Timeouted) {
-		# Terminate the process
-		$Proc | Kill
-		Write-Output "Error: kill $RefName install"
-	} ElseIf ($Proc.ExitCode -ne 0) {
-		Write-Output "Error: $RefName install return code $($Proc.ExitCode)"
-	}
+	Run-Exec -FilePath "$Exe" -ArgumentList "$Args" -Name "$RefName"
 }
 
 # View
