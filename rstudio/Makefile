@@ -92,13 +92,14 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE) tmp/$(EXE2)
 	@mkdir -p tmp
 	@sed -e 's/__VERSION1__/$(VERSION1)/; s/__VERSION2__/$(VERSION2)/; s#__LOGDIR__#$(LOGDIR)#;' $< > $@
 
-tmp/pre-install.ps1: pre-install.ps1 Makefile tmp/$(EXE) tmp/$(EXE2)
+tmp/winsoft-config.ini: winsoft-config.ini Makefile tmp/$(EXE)
 	@mkdir -p tmp
 	@sed -e 's/__VERSION1__/$(VERSION1)/; s/__VERSION2__/$(VERSION2)/;' $< > $@
 
-%.zip: Makefile tmp/install.bat tmp/pre-install.ps1 tmp/$(EXE) tmp/$(EXE2)
+%.zip: Makefile tmp/install.bat pre-install.ps1 tmp/winsoft-config.ini tmp/$(EXE) tmp/$(EXE2)
 	@rm -f $@
-	@(cd tmp; zip -r ../$@ install.bat pre-install.ps1 $(EXE) $(EXE2))
+	@zip -r ./$@ pre-install.ps1
+	@(cd tmp; zip -r ../$@ install.bat winsoft-config.ini $(EXE) $(EXE2))
 	@chmod ugo+rw $@
 
 ocs:
