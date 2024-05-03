@@ -71,14 +71,14 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
 	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#;' $< > $@
 
-tmp/pre-install.ps1: pre-install.ps1 Makefile tmp/$(EXE)
+tmp/winsoft-config.ini: winsoft-config.ini Makefile tmp/$(EXE)
 	@mkdir -p tmp
 	@sed -e 's/__VERSION__/$(VERSION)/;' $< > $@
 
-%.zip: Makefile tmp/install.bat tmp/pre-install.ps1 tmp/$(EXE) tmp/BalenaEtcher/balenaEtcher.exe
+%.zip: Makefile tmp/install.bat pre-install.ps1 tmp/winsoft-config.ini tmp/$(EXE) uninstall.bat tmp/BalenaEtcher/balenaEtcher.exe
 	@rm -f $@
-	@zip -r $@ uninstall.bat
-	@(cd tmp; zip --quiet -r ../$@ install.bat pre-install.ps1 BalenaEtcher)
+	@zip -r $@ uninstall.bat pre-install.ps1
+	@(cd tmp; zip --quiet -r ../$@ install.bat winsoft-config.ini BalenaEtcher)
 	@chmod ugo+rw $@
 	@echo -n '  Zip / Number of files: '; unzip -t $@ | grep 'OK' | wc -l
 
