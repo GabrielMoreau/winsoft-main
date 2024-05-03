@@ -65,14 +65,14 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
 	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#;' $< > $@
 
-tmp/pre-install.ps1: pre-install.ps1 Makefile tmp/$(EXE)
+tmp/winsoft-config.ini: winsoft-config.ini Makefile tmp/$(EXE)
 	@mkdir -p tmp
-	@sed -e 's/__VERSION__/$(VERSION)/; s/__2015-2022-x64__/14.38.33135.0/' $< > $@
+	@sed -e 's/__VERSION__/$(VERSION)/; s/__2015-2022-x64__/14.38.33135.0/;' $< > $@
 
-%.zip: Makefile global.ini tmp/install.bat tmp/pre-install.ps1 tmp/$(EXE) $(VCREDIST)
+%.zip: Makefile global.ini tmp/install.bat pre-install.ps1 tmp/winsoft-config.ini tmp/$(EXE) $(VCREDIST)
 	@rm -f $@
-	@zip -r ./$@ global.ini
-	@(cd tmp; zip -r ../$@ install.bat pre-install.ps1 $(EXE) 2015-2022)
+	@zip -r ./$@ global.ini pre-install.ps1
+	@(cd tmp; zip -r ../$@ install.bat winsoft-config.ini $(EXE) 2015-2022)
 	@chmod ugo+rw $@
 
 ocs:
