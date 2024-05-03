@@ -1,9 +1,9 @@
 
 #
-# VisualCPPRedistributable
+# Update-VisualCPPRedistributable
 #
 
-SOFT:=VisualCPPRedistributable
+SOFT:=Update-VisualCPPRedistributable
 VERSION:=14.38.8
 REVISION:=1
 

@@ -1,6 +1,6 @@
-# MS VisualRedist (Action) - Microsoft Visual C++ Redistributable Library update for all version
+# Update MS Visual Redistributable (Action) - Microsoft Visual C++ Redistributable Library update for all version
 
-Many applications require redistributable Visual C++ runtime library packages to function correctly.
+Many applications require the redistributable Visual C++ runtime library packages to function correctly.
 These packages are often installed independently of applications,
 allowing multiple applications to make use of the package while only having to install it once. 
 

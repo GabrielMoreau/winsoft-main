@@ -1,9 +1,9 @@
 
 #
-# OSBIOSUpdateNow
+# Update-OSBIOS
 #
 
-SOFT:=OSBIOSUpdateNow
+SOFT:=Update-OSBIOS
 URL11:=$(shell curl -s -L 'https://www.microsoft.com/software-download/windows11' | grep 'windows11-upgrade-now' | sed -e 's/"/\n/g;' | grep '^https://go.microsoft.com/fwlink/')
 VERSION11:=$(shell echo $(URL11) | cut -f 2 -d '=')
 VERSION:=0.9.$(VERSION11)

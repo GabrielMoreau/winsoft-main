@@ -1,10 +1,10 @@
 
 REM
-REM   WindowsDekstop-Runtime
+REM   Update-WindowsDekstopRuntime
 REM
 
 REM Name
-SET softname=WindowsDekstop-Runtime
+SET softname=Update-WindowsDekstopRuntime
 
 SET logdir=__LOGDIR__
 IF NOT EXIST "%logdir%" (

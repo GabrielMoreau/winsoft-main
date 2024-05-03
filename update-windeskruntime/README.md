@@ -1,8 +1,8 @@
-# MS Windows Desktop Runtime (Action) - Runtime engine for Microsoft .NET desktop applications
+# Update MS Windows Desktop Runtime (Action) - Runtime engine for Microsoft .NET desktop applications update for all 64 bits version
 
 The .NET Desktop Runtime enables you to run existing Windows desktop applications.
 
-This package does not install the desktop runtime packages but simply updates them if needed.
+This package does not install the desktop runtime packages but simply updates them if needed (only 64 bits).
 Please note that there are currently several versions, from version 5 to version 8.
 The package scans your installation and updates only the runtimes required.
 
