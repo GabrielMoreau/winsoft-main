@@ -71,7 +71,7 @@ $ToDo = 'unknown'
 			#Write-Output "# $DisplayName / $DisplayVersion / $KeyProduct"
 
 			If ($DisplayName -match '2015-2022.*x64') {
-				If (ToVersion($DisplayVersion) -lt ToVersion($VCR20152022x64)) {
+				If ((ToVersion($DisplayVersion)) -lt (ToVersion($VCR20152022x64))) {
 					If ($ToDo -eq 'unknown') {
 						$ToDo = 'install-2022'
 					}
