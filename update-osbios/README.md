@@ -1,4 +1,4 @@
-# Update-OSBIOS (Action) - Force Windows and DELL/HP BIOS to update now
+# Update OS and BIOS (Action) - Force Windows and DELL/HP BIOS to update now
 
 The Update-OSBIOS package uses a DOS script to execute the
 `wuauclt.exe` command (Windows 10) or `Windows11InstallationAssistant.exe`

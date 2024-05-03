@@ -1,4 +1,4 @@
-# Shutdown (Action) - Poweroff the computer
+# Run Shutdown (Action) - Poweroff the computer
 
 Local deployment of this application allows you to switch off this computer.
 It can be used, for example, to remotely shut down computers
