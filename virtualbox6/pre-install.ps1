@@ -73,10 +73,11 @@ $ToDo = 'unknown'
 			If ($DisplayName -match '2015-2022.*x64') {
 				If ((ToVersion($DisplayVersion)) -lt (ToVersion($VCR20152022x64))) {
 					If ($ToDo -eq 'unknown') {
+						Write-Output "Warning: Microsoft Visual C++ 2015-2022 (x64) Redistributable already installed but too old"
 						$ToDo = 'install-2022'
 					}
 				} Else {
-					Write-Output "Installed: Microsoft Visual C++ 2015-2022 (x64) redistributable $DisplayVersion"
+					Write-Output "Info: Microsoft Visual C++ 2015-2022 (x64) Redistributable already setup $DisplayVersion"
 					$ToDo = 'already-setup'
 				}
 			}
@@ -84,6 +85,7 @@ $ToDo = 'unknown'
 	}
 
 If ($ToDo -eq 'unknown') {
+	Write-Output "Warning: Microsoft Visual C++ 2015-2022 (x64) Redistributable not pre-installed"
 	$ToDo = 'install-2022'
 }
 
@@ -91,7 +93,7 @@ If ($ToDo -eq 'install-2022') {
 	$Exe = '2015-2022\vc_redist.x64.exe'
 	$Args = '/install /quiet /norestart'
 	If (Test-Path -Path "$Exe") {
-		Write-Output "Update Microsoft Visual C++ 2015-2022 (x64) redistributable"
+		Write-Output "Info: Update (or install) Microsoft Visual C++ 2015-2022 (x64) Redistributable"
 		Run-Exec -FilePath "$Exe" -ArgumentList "$Args" -Name "VCR 2015-2022 x64"
 	}
 }
