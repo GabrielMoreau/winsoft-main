@@ -4,10 +4,10 @@
 #
 
 SOFT:=VirtualBox
+REVISION:=1
 URL1:=$(shell curl -s -L 'https://www.virtualbox.org/wiki/Download_Old_Builds_6_1' | sed -e 's/"/\n/g;' | grep '^https://.*/.*-Win.exe' | head -1)
 VERSION:=$(shell dirname '$(URL1)' | xargs -r basename)
 URL2:=$(shell curl -s -L 'https://www.virtualbox.org/wiki/Download_Old_Builds_6_1' | sed -e 's/"/\n/g;' | grep "/$(VERSION)/Oracle_VM_VirtualBox_Extension")
-REVISION:=1
 
 EXE1:=VirtualBox-$(VERSION)-Win.exe
 EXE2:=$(shell basename $(URL2))
@@ -80,13 +80,14 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE1) tmp/$(EXE2)
 	@mkdir -p tmp
 	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#; s/__PACKEXT__/$(EXE2)/;' $< > $@
 
-tmp/pre-install.ps1: pre-install.ps1 Makefile tmp/$(EXE)
+tmp/winsoft-config.ini: winsoft-config.ini Makefile tmp/$(EXE)
 	@mkdir -p tmp
-	@sed -e 's/__VERSION__/$(VERSION)/; s/__2015-2022-x64__/14.38.33135.0/' $< > $@
+	@sed -e 's/__VERSION__/$(VERSION)/; s/__2015-2022-x64__/14.38.33135.0/;' $< > $@
 
-%.zip: Makefile tmp/install.bat tmp/pre-install.ps1 tmp/$(EXE1) tmp/$(EXE2) $(VCREDIST)
+%.zip: Makefile tmp/install.bat pre-install.ps1 tmp/winsoft-config.ini tmp/$(EXE1) tmp/$(EXE2) $(VCREDIST)
 	@rm -f $@
-	@(cd tmp; zip -r ../$@ install.bat pre-install.ps1 $(EXE1) $(EXE2) 2015-2022)
+	@zip -r ./$@ pre-install.ps1
+	@(cd tmp; zip -r ../$@ install.bat winsoft-config.ini $(EXE1) $(EXE2) 2015-2022)
 	@chmod ugo+rw $@
 
 ocs:
