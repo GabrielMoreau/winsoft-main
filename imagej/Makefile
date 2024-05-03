@@ -75,15 +75,19 @@ check-exe: tmp/$(EXE)
 		# which peres >/dev/null && { peres -v $(EXE) | grep -q "^Product Version:[[:space:]]*$(VERSION)" || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 1; } ; } ;\
 		)
 
-%.zip: Makefile tmp/$(EXE) install.bat post-install.ps1
+tmp/winsoft-config.ini: winsoft-config.ini Makefile tmp/$(EXE)
+	@mkdir -p tmp
+	@sed -e 's/__VERSION__/$(VERSION)/;' $< > $@
+
+%.zip: Makefile tmp/$(EXE) install.bat post-install.ps1 tmp/winsoft-config.ini
 	@mkdir -p tmp
 	@IVERSION=$$(zgrep 'plugin update-site.*filename="jars/ij-[[:digit:]]' tmp/$(SUBFOLDER)/db.xml.gz  | cut -f 4 -d '"' | cut -f 2 -d '-' | sed -e 's/.jar$$//;') ; \
 	NVERSION=$$(echo $${IVERSION} | sed -e 's/\w$$//;') ; \
-	sed -e "s/__VERSION__/$(VERSION)/; s/__REVISION__/$(REVISION)/; s/__IVERSION__/$${IVERSION}/; s/__NVERSION__/$${NVERSION}/;" install.bat | sed -e 's#__LOGDIR__#$(LOGDIR)#;' > tmp/$(SUBFOLDER)/install.bat ; \
-	sed -e "s/__VERSION__/$(VERSION)/; s/__REVISION__/$(REVISION)/; s/__IVERSION__/$${IVERSION}/; s/__NVERSION__/$${NVERSION}/;" post-install.ps1 > tmp/$(SUBFOLDER)/post-install.ps1
+	sed -e "s/__VERSION__/$(VERSION)/; s/__REVISION__/$(REVISION)/; s/__IVERSION__/$${IVERSION}/; s/__NVERSION__/$${NVERSION}/;" install.bat | sed -e 's#__LOGDIR__#$(LOGDIR)#;' > tmp/install.bat
 	@rm -f $@
-	@zip -r $@  uninstall.bat
-	@(cd tmp/$(SUBFOLDER); zip -r ../../$@ install.bat post-install.ps1 db.xml.gz ImageJ-win64.exe README.md WELCOME.md)
+	@zip -r ./$@ uninstall.bat post-install.ps1
+	@(cd tmp; zip -r ../$@ install.bat winsoft-config.ini)
+	@(cd tmp/$(SUBFOLDER); zip -r ../../$@ db.xml.gz ImageJ-win64.exe README.md WELCOME.md)
 	(cd tmp/$(SUBFOLDER); zip --quiet -r ../../$@ Contents images jars java lib licenses luts macros plugins retro scripts)
 	@chmod ugo+rw $@
 

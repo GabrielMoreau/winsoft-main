@@ -10,11 +10,23 @@ Write-Output "Begin Post-Install"
 # New-Item -ItemType directory -path "C:\Program Files\ImageJ" -name "print"
 # }
 
-$ImageJVersion = "__VERSION__"
+# Get Config from file
+Function GetConfig {
+	Param (
+		[Parameter(Mandatory = $True)] [string]$FilePath
+	)
+
+	Return Get-Content "$FilePath" | Where-Object { $_ -Match '=' } | ForEach-Object { $_ -Replace "#.*", "" } | ForEach-Object { $_ -Replace "\\", "\\" } | ConvertFrom-StringData
+}
+
+# Get Config: Version
+$Config = GetConfig -FilePath 'winsoft-config.ini'
+$RefVersion = $Config.Version
+Write-Output "Config: Version $RefVersion"
 
 If (Test-Path "${Env:ProgramData}\ImageJ\version.txt" -PathType Leaf) {
-	$ImageJVersionOld = Get-Content -Path "${Env:ProgramData}\ImageJ\version.txt"
-	# $ImageJVersionOld_number = [float]$ImageJVersionOld
+	$RefVersionOld = Get-Content -Path "${Env:ProgramData}\ImageJ\version.txt"
+	# $RefVersionOld_number = [float]$RefVersionOld
 }
 
 # Install files and folders
@@ -43,4 +55,4 @@ If ((Test-Path -LiteralPath $StartMenu) -And (Test-Path -LiteralPath "${Env:Prog
 
 # Creation of the version file with the version number
 New-Item -Path "${Env:ProgramData}\ImageJ\version.txt" -Type File -Force
-$ImageJVersion | Set-Content -LiteralPath "${Env:ProgramData}\ImageJ\version.txt"
+$RefVersion | Set-Content -LiteralPath "${Env:ProgramData}\ImageJ\version.txt"
