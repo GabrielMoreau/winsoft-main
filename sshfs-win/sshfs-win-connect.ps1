@@ -5,20 +5,33 @@ Write-Output   "   This script uses the Winfsp driver and the SSHFS-Win program.
 Write-Output   "   This very simple script was written by Gabriel Moreau"
 Write-Output   "   Copyright (C) 2022, LEGI, CNRS, France`n"
 
-$Server = "__SERVER_SFTP__"
+# Get Config from file
+Function GetConfig {
+	Param (
+		[Parameter(Mandatory = $True)] [string]$FilePath
+	)
+
+	Return Get-Content "$FilePath" | Where-Object { $_ -Match '=' } | ForEach-Object { $_ -Replace "#.*", "" } | ForEach-Object { $_ -Replace "\\", "\\" } | ConvertFrom-StringData
+}
+
+# Get Config: Version
+$Config = GetConfig -FilePath "$Env:ProgramFiles\SSHFS-Win\sshfs-win-connect.ini"
+$Server = $Config.ServerSFTP
+$DefaultLetter = $Config.NetworkDrive
+
 $GetServer = Read-Host -Prompt "Enter the remote server [$Server]"
 If ($GetServer.ToLower() -ne '') {
 	$Server = $GetServer
 }
 
-$User = $env:UserName
+$User = $Env:UserName
 $GetUser = Read-Host -Prompt "Enter the remote user login [$User]"
 If ($GetUser.ToLower() -ne '') {
 	$User = $GetUser
 }
 
 Do {
-	$Letter = "__NetworkDrive__"
+	$Letter = $DefaultLetter
 	$GetLetter = Read-Host -Prompt "Enter the local letter to use [$Letter]"
 	If ($GetLetter.ToLower() -ne '') {
 		$Letter = $GetLetter

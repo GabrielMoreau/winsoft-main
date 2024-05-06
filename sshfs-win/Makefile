@@ -69,18 +69,18 @@ tmp/$(SSHFS_EXE):
 		grep -q "^$$(shasum -a 256 $(SSHFS_EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(SSHFS_EXE)" ; \
 		)
 
-tmp/sshfs-win-connect.ps1: sshfs-win-connect.ps1 ../../winsoft-conf/sshfs-win/conf.yml
+tmp/sshfs-win-connect.ini: sshfs-win-connect.ini ../../winsoft-conf/sshfs-win/conf.yml
 	@mkdir -p tmp
-	@sed -e 's/__SERVER_SFTP__/$(ServerSFTP)/g; s/__NetworkDrive__/$(NetworkDrive)/g;' sshfs-win-connect.ps1 > tmp/sshfs-win-connect.ps1
+	@sed -e 's/__SERVER_SFTP__/$(ServerSFTP)/g; s/__NetworkDrive__/$(NetworkDrive)/g;' $< > $@
 
 tmp/install.bat: install.bat Makefile tmp/$(WINFSP_EXE) tmp/$(SSHFS_EXE)
 	@mkdir -p tmp
 	@sed -e 's/__WINFSP_VERSION__/$(WINFSP_VERSION)/; s/__SSHFS_VERSION__/$(SSHFS_VERSION)/; s#__LOGDIR__#$(LOGDIR)#;' $< > $@
 
-%.zip: ../../winsoft-conf/sshfs-win/conf.yml tmp/install.bat pre-install.ps1 post-install.ps1 tmp/sshfs-win-connect.ps1 sshfs-win.ico README.md tmp/winfsp-$(WINFSP_VERSION).msi tmp/sshfs-win-$(SSHFS_VERSION)-x64.msi
+%.zip: ../../winsoft-conf/sshfs-win/conf.yml tmp/install.bat pre-install.ps1 post-install.ps1 sshfs-win-connect.ps1 tmp/sshfs-win-connect.ini sshfs-win.ico README.md tmp/winfsp-$(WINFSP_VERSION).msi tmp/sshfs-win-$(SSHFS_VERSION)-x64.msi
 	@mkdir -p tmp
-	@zip -r $@ pre-install.ps1 post-install.ps1 sshfs-win.ico README.md
-	@(cd tmp; zip -r ../$@ install.bat sshfs-win-connect.ps1 winfsp-$(WINFSP_VERSION).msi sshfs-win-$(SSHFS_VERSION)-x64.msi)
+	@zip -r $@ pre-install.ps1 post-install.ps1 sshfs-win.ico README.md sshfs-win-connect.ps1
+	@(cd tmp; zip -r ../$@ install.bat sshfs-win-connect.ini winfsp-$(WINFSP_VERSION).msi sshfs-win-$(SSHFS_VERSION)-x64.msi)
 
 ocs:
 	@echo ""
