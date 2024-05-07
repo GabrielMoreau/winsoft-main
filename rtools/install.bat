@@ -22,11 +22,11 @@ SET SoftVersionL=__VERSION_L__
 
 
 ECHO Remove RTools if already exists
-If EXIST "%SystemDrive%\rtools%SoftVersionS%\unins000.exe" ScriptRunner.exe -appvscript "%SystemDrive%\rtools%SoftVersionS%\unins000.exe" /VERYSILENT /SUPPRESSMSGBOXES -appvscriptrunnerparameters -wait -timeout=300
+If EXIST "%SystemDrive%\rtools%SoftVersionS%\unins000.exe" ScriptRunner.exe -appvscript "%SystemDrive%\rtools%SoftVersionS%\unins000.exe" /VERYSILENT /SUPPRESSMSGBOXES -appvscriptrunnerparameters -wait -timeout=600
 
 
 ECHO Silent install %softname%
-ScriptRunner.exe -appvscript rtools%SoftVersionL%.exe /VERYSILENT /SUPPRESSMSGBOXES /LOG="%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=300
+ScriptRunner.exe -appvscript rtools%SoftVersionL%.exe /VERYSILENT /SUPPRESSMSGBOXES /LOG="%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=600
 
 
 ECHO END %date%-%time%

@@ -37,7 +37,7 @@ ECHO Execute pre-install script
 
 
 ECHO Silent Install %softname%
-ScriptRunner.exe -appvscript AcroRdrDCx64%softversion%_fr_FR.exe /sAll /rs /msi EULA_ACCEPT=YES DISABLEDESKTOPSHORTCUT=1 /L*V "%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=300
+ScriptRunner.exe -appvscript AcroRdrDCx64%softversion%_fr_FR.exe /sAll /rs /msi EULA_ACCEPT=YES DISABLEDESKTOPSHORTCUT=1 /L*V "%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=600
 
 
 ECHO Remove desktop shortcut

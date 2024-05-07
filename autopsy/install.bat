@@ -21,7 +21,7 @@ SET softversion=__VERSION__
 
 
 ECHO Silent install %softname%
-ScriptRunner.exe -appvscript MsiExec.exe /i "autopsy-%softversion%-64bit.msi" /qn /norestart /L*v "%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=300
+ScriptRunner.exe -appvscript MsiExec.exe /i "autopsy-%softversion%-64bit.msi" /qn /norestart /L*v "%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=900
 
 
 REM ECHO Remove desktop shortcut

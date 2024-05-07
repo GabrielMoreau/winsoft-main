@@ -36,7 +36,7 @@ ECHO Execute pre-install script
 
 
 ECHO Silent install %softname%
-ScriptRunner.exe -appvscript MsiExec.exe /i "UltiMaker-Cura-%softversion%-win64.msi" /qn /norestart /l*v "%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=300
+ScriptRunner.exe -appvscript MsiExec.exe /i "UltiMaker-Cura-%softversion%-win64.msi" /qn /norestart /l*v "%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=600
 
 
 ECHO END %date%-%time%

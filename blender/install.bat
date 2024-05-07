@@ -36,7 +36,7 @@ ECHO Execute pre-install script
 
 
 ECHO Silent install %softname%
-ScriptRunner.exe -appvscript MsiExec.exe /i "blender-%softversion%-windows-x64.msi" ALLUSERS=1 /qn /L*v "%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=300
+ScriptRunner.exe -appvscript MsiExec.exe /i "blender-%softversion%-windows-x64.msi" ALLUSERS=1 /qn /L*v "%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=600
 
 
 ECHO Remove desktop shortcut
