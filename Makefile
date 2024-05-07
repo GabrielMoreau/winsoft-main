@@ -82,6 +82,8 @@ unrealized-updates:
 		RESULT=$$(cd $$folder; grep -q '^check-unrealized:' Makefile && make check-unrealized)
 		if [ -n "$${RESULT}" ] ; then echo "$${RESULT}"; else echo ''; fi
 	done < <(LANG=C find . -maxdepth 2 -name '*.zip' -a -mtime -90 -not -path '*/tmp/*' -print | xargs -r dirname | xargs -r -n 1 basename | sort -u)
+	echo '#===================================================================#'
+	echo '#=== Summary: this check was performed on '$$(date '+%Y-%m-%d %H:%M')'       ===#'
 
 list-pkg:
 	@
