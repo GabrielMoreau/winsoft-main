@@ -26,9 +26,12 @@ ScriptRunner.exe -appvscript octave-%softversion%-w64-installer.exe /AllUsers /S
 
 IF EXIST "%AppData%\octave\" COPY /A /Y "octave-gui.ini" "%AppData%\octave\octave-gui.ini"
 
-REM ECHO Remove desktop shortcut
-REM IF EXIST "%PUBLIC%\Desktop\Octave.lnk"          DEL /F /Q "%PUBLIC%\Desktop\Octave.lnk"
-REM IF EXIST "%ALLUSERSPROFILE%\Desktop\Octave.lnk" DEL /F /Q "%ALLUSERSPROFILE%\Desktop\Octave.lnk"
+
+ECHO Remove desktop shortcut
+IF EXIST "%PUBLIC%\Desktop\GNU Octave (CLI).lnk"          DEL /F /Q "%PUBLIC%\Desktop\GNU Octave (CLI).lnk"
+IF EXIST "%PUBLIC%\Desktop\GNU Octave (GUI).lnk"          DEL /F /Q "%PUBLIC%\Desktop\GNU Octave (GUI).lnk"
+IF EXIST "%ALLUSERSPROFILE%\Desktop\GNU Octave (CLI).lnk" DEL /F /Q "%ALLUSERSPROFILE%\Desktop\GNU Octave (CLI).lnk"
+IF EXIST "%ALLUSERSPROFILE%\Desktop\GNU Octave (GUI).lnk" DEL /F /Q "%ALLUSERSPROFILE%\Desktop\GNU Octave (GUI).lnk"
 
 
 ECHO END %date%-%time%
