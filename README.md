@@ -115,7 +115,7 @@ Please devops, put always the version number clearly in the comment...
 apt install make curl wget pev msitools p7zip-full libimage-exiftool-perl
 ```
 
-## List of 108 packages
+## List of 109 packages
 
  | Software | Detail | &#127968; |   |
  | -------- | ------ | --------- | - |
@@ -223,6 +223,7 @@ apt install make curl wget pev msitools p7zip-full libimage-exiftool-perl
  | [Check WithSecure Hotfixes (Action)](check-withsecurehotfixes/README.md) | Test the deployment of updates | [&#127968;](https://www.withsecure.com/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
  | [FlashPlayer (Uninstall)](flashplayer-uninstall/README.md) | Remove all version of Adobe Flash Player | [&#127968;](https://www.adobe.com/products/flashplayer/end-of-life.html) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
  | [Gwyddion (Uninstall)](gwyddion/README.md) | Data visualization and analysis for SPM | [&#127968;](http://gwyddion.net/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
+ | [Java JRE (Uninstall)](javajre8-uninstall/README.md) | Remove version 7 and 8 of Java Runtime Environment | [&#127968;](https://www.oracle.com/java/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
  | [Kaspersky Endpoint (Uninstall)](kaspersky-uninstall/README.md) | Silent remove Kaspersky Endpoint | [&#127968;](https://gitlab.in2p3.fr/resinfo-gt/swmb/resinfo-swmb/-/tree/master/dists/uninstall-kaspersky) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
  | [Run Shutdown (Action)](action-shutdown/README.md) | Poweroff the computer |  | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
  | [Skype (Uninstall)](skype/README.md) | VoIP and Videoconferencing Client | [&#127968;](https://www.skype.com/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
