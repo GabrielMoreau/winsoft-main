@@ -1,9 +1,11 @@
 # FlashPlayer (Uninstall) - Remove all version of Adobe Flash Player
 
 Adobe Flash Player (known in Internet Explorer, Firefox, and Google
-Chrome as Shockwave Flash)[10] is computer software for viewing
+Chrome as Shockwave Flash) is computer software for viewing
 multimedia contents, executing rich Internet applications, and
 streaming audio and video content created on the Adobe Flash platform.
+
+**This software is out of date and must be removed from all computers.**
 
 * Website : https://www.adobe.com/products/flashplayer/end-of-life.html
 * Wikipedia : https://www.hp.com/us-en/solutions/client-management-solutions.html
