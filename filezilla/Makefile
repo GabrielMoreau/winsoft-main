@@ -3,7 +3,8 @@
 # FileZilla
 #
 
-URL:=$(shell curl -s -L 'https://filezilla-project.org/download.php?show_all=1' | sed -e 's/"/\n/g;' | grep '^https://' | grep -- '_win64-setup.exe' | head -1)
+USERAGENT:=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:122.0) Gecko/20100101 Firefox/122.0
+URL:=$(shell curl -s -L 'https://filezilla-project.org/download.php?show_all=1' --user-agent "$(USERAGENT)" | sed -e 's/"/\n/g;' | grep '^https://' | grep -- '_win64-setup.exe' | head -1)
 
 SOFT:=FileZilla
 VERSION:=$(shell echo "$(URL)" | cut -f 2 -d '_')
