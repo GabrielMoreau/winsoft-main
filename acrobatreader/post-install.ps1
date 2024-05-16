@@ -1,12 +1,23 @@
 
 Write-Output "Begin Post-Install"
 
-Write-Output "Stop Adobe Update Service"
+$ServiceName = "AdobeARMservice"
+Write-Output "Stop $ServiceName (Adobe Update) Service"
 # Status  | Name            | DisplayName
 # Running | AdobeARMservice | Adobe Acrobat Update Service
-Get-Service -Name "AdobeARMservice" -ErrorAction SilentlyContinue | Stop-Service
-Get-Service -Name "AdobeARMservice" -ErrorAction SilentlyContinue | Set-Service -StartupType Disabled
-Get-Service -Name "AdobeARMservice" -ErrorAction SilentlyContinue | Select-Object Name, StartType, Status
+Get-Service -Name "$ServiceName" -ErrorAction SilentlyContinue | Stop-Service
+Get-Service -Name "$ServiceName" -ErrorAction SilentlyContinue | Set-Service -StartupType Disabled
+Get-Service -Name "$ServiceName" -ErrorAction SilentlyContinue | Select-Object Name, StartType, Status
+#Try {
+#	Write-Output "Remove Service $ServiceName"
+#	If ((Get-Host | Select-Object -ExpandProperty Version).Major -ge 6) {
+#		Remove-Service -Name "$ServiceName"
+#	} Else {
+#		sc.exe delete "$ServiceName"
+#	}
+#} Catch {
+#	Write-Output "Error: $($_.exception.message)"
+#}
 
 $RefName = 'Adobe Acrobat .64-bit'
 # View
