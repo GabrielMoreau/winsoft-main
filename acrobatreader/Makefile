@@ -4,8 +4,8 @@
 #
 
 SOFT:=AcrobatReader
-VERSIONLONG:=$(shell curl -s 'https://helpx.adobe.com/acrobat/release-note/release-notes-acrobat-reader.html' | grep 'disablelinktracking="false">DC ' | cut -f 2 -d '(' | cut -f 1 -d ')' | head -1)
-URLTRANSIT:=$(shell curl -s 'https://helpx.adobe.com/acrobat/release-note/release-notes-acrobat-reader.html' | grep "$(VERSIONLONG)" | sed -e 's/"/\n/g;' | grep '^https')
+VERSION:=$(shell curl -s 'https://helpx.adobe.com/acrobat/release-note/release-notes-acrobat-reader.html' | grep 'disablelinktracking="false">DC ' | cut -f 2 -d '(' | cut -f 1 -d ')' | head -1)
+URLTRANSIT:=$(shell curl -s 'https://helpx.adobe.com/acrobat/release-note/release-notes-acrobat-reader.html' | grep "$(VERSION)" | sed -e 's/"/\n/g;' | grep '^https')
 VERSIONCOLLAPSE:=$(shell curl -s "$(URLTRANSIT)" |grep AcroRdrDCx64Upd | sed -e 's/"/\n/g;' | grep '^https' | cut -f 9 -d '/' | head -1)
 VERSIONSHORT:=$(shell echo $(VERSIONCOLLAPSE) | sed -e 's/[\.0[:space:]]//g;')
 REVISION:=1
@@ -20,22 +20,22 @@ LOGDIR:=%WINDIR%\\Logs
 .PHONY: all check-version check-unrealized check-exe clean control next ocs version wget checksum
 .ONESHELL:
 
-all: check-version check-exe $(SOFT)_$(VERSIONLONG)-$(REVISION)_x64.zip Uninstall-$(SOFT)_$(VERSIONLONG)-$(REVISION)_x64.zip ocs
+all: check-version check-exe $(SOFT)_$(VERSION)-$(REVISION)_x64.zip Uninstall-$(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
 
 sinclude ../_common/conf.mk
 
 check-version:
-	@echo $(VERSIONLONG) | egrep -q '^[[:digit:]][\.[:digit:]]*[[[:alnum:]]$$' || (echo 'VERSIONLONG is undefined' > /dev/stderr ; exit 1)
+	@echo $(VERSION) | egrep -q '^[[:digit:]][\.[:digit:]]*[[[:alnum:]]$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
 
 check-unrealized:
 	@if grep -q '[[:space:]]$(EXE)$$' checksum.txt; then echo 'Ok'; else echo 'Warning: Updates not performed for $(SOFT) version $(VERSION)'; fi
 
 clean:
-	rm -rf $(SOFT)_$(VERSIONLONG)-$(REVISION)_x64.zip tmp resources
+	rm -rf $(SOFT)_$(VERSION)-$(REVISION)_x64.zip tmp resources
 
 version:
-	@echo "VERSION:         $(VERSIONLONG)"
-	@echo "VERSIONLONG:     $(VERSIONLONG)"
+	@echo "VERSION:         $(VERSION)"
+	@echo "VERSION:     $(VERSION)"
 	@echo "VERSIONCOLLAPSE: $(VERSIONCOLLAPSE)"
 	@echo "VERSIONSHORT:    $(VERSIONSHORT)"
 	@echo "URLTRANSIT: $(URLTRANSIT)"
@@ -79,15 +79,15 @@ tmp/winsoft-config.ini: winsoft-config.ini Makefile tmp/$(EXE)
 
 tmp/uninstall.bat: uninstall.bat Makefile
 	@mkdir -p tmp
-	@sed -e 's/__VERSION__/$(VERSIONLONG)/; s#__LOGDIR__#$(LOGDIR)#;' $< > $@
+	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#;' $< > $@
 
-%.zip: Makefile tmp/install.bat pre-install.ps1 tmp/winsoft-config.ini tmp/$(EXE)
+%.zip: Makefile tmp/install.bat pre-install.ps1 post-install.ps1 tmp/winsoft-config.ini tmp/$(EXE)
 	@rm -f $@
-	@zip -r ./$@ pre-install.ps1
+	@zip -r ./$@ pre-install.ps1 post-install.ps1
 	@(cd tmp; zip -r ../$@ install.bat winsoft-config.ini $(EXE))
 	@chmod ugo+rw $@
 
-Uninstall-$(SOFT)_$(VERSIONLONG)-$(REVISION)_x64.zip: Makefile pre-remove.ps1 tmp/uninstall.bat
+Uninstall-$(SOFT)_$(VERSION)-$(REVISION)_x64.zip: Makefile pre-remove.ps1 tmp/uninstall.bat
 	@rm -f $@
 	@zip -r ./$@ pre-remove.ps1
 	@(cd tmp; zip -r ../$@ uninstall.bat)
@@ -96,8 +96,8 @@ Uninstall-$(SOFT)_$(VERSIONLONG)-$(REVISION)_x64.zip: Makefile pre-remove.ps1 tm
 
 ocs:
 	@echo ""
-	@echo "Name:    $(SOFT)_$(VERSIONLONG)-$(REVISION)_x64"
-	@echo "Name:    Uninstall-$(SOFT)_$(VERSIONLONG)-$(REVISION)_x64"
+	@echo "Name:    $(SOFT)_$(VERSION)-$(REVISION)_x64"
+	@echo "Name:    Uninstall-$(SOFT)_$(VERSION)-$(REVISION)_x64"
 	@echo "Launch:  install.bat"
 	@echo "Message: yes"
 	@echo "Delay:   5"
@@ -106,5 +106,5 @@ ocs:
 	@echo ""
 	@echo "$(IT_TEAM)"
 	@echo " --- "
-	@echo "Install and/or Update: $(SOFT) ($(VERSIONLONG))"
+	@echo "Install and/or Update: $(SOFT) ($(VERSION))"
 	@echo ""
