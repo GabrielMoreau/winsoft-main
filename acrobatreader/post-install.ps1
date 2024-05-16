@@ -5,7 +5,7 @@ Write-Output "Stop Adobe Update Service"
 # Status  | Name            | DisplayName
 # Running | AdobeARMservice | Adobe Acrobat Update Service
 Get-Service -Name "AdobeARMservice" -ErrorAction SilentlyContinue | Stop-Service
-Get-Service -Name "AdobeARMservice" -ErrorAction SilentlyContinue | Set-Service -StartupType Manual
+Get-Service -Name "AdobeARMservice" -ErrorAction SilentlyContinue | Set-Service -StartupType Disabled
 Get-Service -Name "AdobeARMservice" -ErrorAction SilentlyContinue | Select-Object Name, StartType, Status
 
 $RefName = 'Adobe Acrobat .64-bit'
