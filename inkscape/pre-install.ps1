@@ -1,15 +1,6 @@
 
 Write-Output "Begin Pre-Install"
 
-# Get Config from file
-Function GetConfig {
-	Param (
-		[Parameter(Mandatory = $True)] [string]$FilePath
-	)
-
-	Return Get-Content "$FilePath" | Where-Object { $_ -Match '=' } | ForEach-Object { $_ -Replace "#.*", "" } | ForEach-Object { $_ -Replace "\\", "\\" } | ConvertFrom-StringData
-}
-
 # Transform string to a version object
 Function ToVersion {
 	Param (
@@ -51,7 +42,7 @@ Function Run-Exec {
 }
 
 # Get Config: Version
-$Config = GetConfig -FilePath 'winsoft-config.ini'
+$Config = Import-PowerShellDataFile -LiteralPath '.\winsoft-config.psd1'
 $RefVersion = $Config.Version
 $RefName = 'Inkscape'
 Write-Output "Config: Version $RefVersion"

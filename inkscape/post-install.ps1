@@ -3,15 +3,6 @@ Write-Output "Begin Post-Install"
 
 # Clean old duplicate key with Inkscape in the name (same uninstall string)
 
-# Get Config from file
-Function GetConfig {
-	Param (
-		[Parameter(Mandatory = $True)] [string]$FilePath
-	)
-
-	Return Get-Content "$FilePath" | Where-Object { $_ -Match '=' } | ForEach-Object { $_ -Replace "#.*", "" } | ForEach-Object { $_ -Replace "\\", "\\" } | ConvertFrom-StringData
-}
-
 # Transform string to a version object
 Function ToVersion {
 	Param (
@@ -28,7 +19,7 @@ Function ToVersion {
 }
 
 # Get Config: Version
-$Config = GetConfig -FilePath 'winsoft-config.ini'
+$Config = Import-PowerShellDataFile -LiteralPath '.\winsoft-config.psd1'
 $RefVersion = $Config.Version
 $RefUninstallString = ''
 $RefName = 'Inkscape'
