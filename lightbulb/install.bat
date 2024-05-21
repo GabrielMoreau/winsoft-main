@@ -26,7 +26,7 @@ ScriptRunner.exe -appvscript windowsdesktop-runtime-%softruntimever%-win-x64.exe
 
 
 ECHO Silent install %softname%
-ScriptRunner.exe -appvscript LightBulb-Installer-%softversion%.exe /VERYSILENT /LOG="%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=300
+ScriptRunner.exe -appvscript LightBulb-Installer-%softversion%-x64.exe /VERYSILENT /LOG="%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=300
 
 
 ECHO END %date%-%time%
