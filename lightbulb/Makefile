@@ -14,7 +14,7 @@ VERSION2:=$(shell basename $(URL2) | cut -f 3 -d '-')
 EXE1:=LightBulb-Installer-$(VERSION1)-x64.exe
 EXE2:=windowsdesktop-runtime-$(VERSION2)-win-x64.exe
 
-VERSION:=$(VERSION1).$(shell echo $(VERSION2) | sed 's/\.//g;')
+VERSION:=$(shell echo "$(VERSION1).0.0" | cut -f 1,2,3 -d '.').$(shell echo $(VERSION2) | sed 's/\.//g;')
 
 IT_TEAM:=IT Support
 LOGDIR:=%WINDIR%\\Logs
