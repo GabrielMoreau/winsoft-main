@@ -4,3 +4,4 @@
 18d5ef2f125c211304bd1fd227c4c0edbf8b1b0e2037a44acc85fe8cda9f77aa  bandicut-setup-3.8.0.819.exe
 9ae68a79af13d5961c5e6ccf75c7a7092c3729a093f8fc84266c7c545e72e444  bandicut-setup-3.8.0.825.exe
 71db906b0fab8cf45565bccc6eea94849c31d16adbfc4af101da36e69667b9e3  bandicut-setup-3.8.1.855.exe
+a78efa91dbb7a7f831f7bb1bde60381f2730c453c3d620ef8fae434599c49e7f  bandicut-setup-3.8.2.862.exe
