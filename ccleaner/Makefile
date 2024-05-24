@@ -4,8 +4,10 @@
 #
 
 SOFT:=CCleaner
-VERSION:=$(shell curl -s -L 'https://www.ccleaner.com/ccleaner/version-history' | grep 'version-history__latest-version' | sed 's/^.*>v\([[:digit:]][[:digit:]]*\)\.\([[:digit:]][[:digit:]]*\)\.\([[:digit:]][[:digit:]]*\).*/\1\.\2.\3/;')
-PVERSION:=$(shell curl -s -L 'https://www.ccleaner.com/ccleaner/version-history' | grep 'version-history__latest-version' | sed 's/^.*>v\([[:digit:]][[:digit:]]*\)\.0*\([[:digit:]][[:digit:]]*\)\.\([[:digit:]][[:digit:]]*\).*/\1.\2\.*\3/;')
+USERAGENT:=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:122.0) Gecko/20100101 Firefox/122.0
+LASTEST_VERSION:=$(shell curl -s -L 'https://www.ccleaner.com/ccleaner/version-history' --user-agent "$(USERAGENT)" | grep 'version-history__latest-version')
+VERSION:=$(shell echo "$(LASTEST_VERSION)" | sed 's/^.*>v\([[:digit:]][[:digit:]]*\)\.\([[:digit:]][[:digit:]]*\)\.\([[:digit:]][[:digit:]]*\).*/\1\.\2.\3/;')
+PVERSION:=$(shell echo "$(LASTEST_VERSION)" | sed 's/^.*>v\([[:digit:]][[:digit:]]*\)\.0*\([[:digit:]][[:digit:]]*\)\.\([[:digit:]][[:digit:]]*\).*/\1.\2\.*\3/;')
 REVISION:=1
 URL:=$(shell curl -s -L 'https://www.ccleaner.com/ccleaner/download/slim' | egrep 'data-download-url=' | cut -f 2 -d '"')
 
