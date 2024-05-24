@@ -5,10 +5,11 @@
 
 SOFT:=Speccy
 USERAGENT:=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:122.0) Gecko/20100101 Firefox/122.0
-URL:=$(shell curl -s -L 'https://www.ccleaner.com/fr-fr/speccy/download/standard' --user-agent "$(USERAGENT)" | sed -e 's/[[:space:]]/\n/g;' | grep data-download-url  | cut -f 2 -d '"')
+#URL:=$(shell curl -s -L 'https://www.ccleaner.com/fr-fr/speccy/download/standard' --user-agent "$(USERAGENT)" | sed -e 's/[[:space:]]/\n/g;' | grep data-download-url  | cut -f 2 -d '"')
 LASTEST_VERSION:=$(shell curl -s -L 'https://www.ccleaner.com/speccy/version-history' --user-agent "$(USERAGENT)" | grep 'version-history__latest-version')
 VERSION:=$(shell echo "$(LASTEST_VERSION)" | sed 's/^.*>v\([[:digit:]][[:digit:]]*\)\.\([[:digit:]][[:digit:]]*\)\.\([[:digit:]][[:digit:]]*\).*/\1\.\2.\3/;')
 PVERSION:=$(shell echo "$(LASTEST_VERSION)" | grep 'version-history__latest-version' | sed 's/^.*>v\([[:digit:]][[:digit:]]*\)\.0*\([[:digit:]][[:digit:]]*\)\.\([[:digit:]][[:digit:]]*\).*/\1.\2\.*\3/;')
+URL:=https://download.ccleaner.com/spsetup$(shell echo $(VERSION) | cut -f 1,2 -d '.' | sed -e 's/\.//;').exe
 REVISION:=1
 
 EXE:=spsetup$(VERSION).exe

@@ -4,10 +4,11 @@
 #
 
 SOFT:=Recuva
-URL:=$(shell curl -s -L 'https://www.ccleaner.com/fr-fr/recuva/download/standard' | sed -e 's/[[:space:]]/\n/g;' | grep data-download-url  | cut -f 2 -d '"')
-#VERSION:=$(shell basename "$(URL)" | sed -e 's/rcsetup//; s/\.exe//;')
-VERSION:=$(shell curl -s -L 'https://www.ccleaner.com/recuva/version-history' | grep 'version-history__latest-version' | sed 's/^.*>v\([[:digit:]][[:digit:]]*\)\.\([[:digit:]][[:digit:]]*\)\.\([[:digit:]][[:digit:]]*\).*/\1\.\2.\3/;')
-PVERSION:=$(shell curl -s -L 'https://www.ccleaner.com/recuva/version-history' | grep 'version-history__latest-version' | sed 's/^.*>v\([[:digit:]][[:digit:]]*\)\.0*\([[:digit:]][[:digit:]]*\)\.\([[:digit:]][[:digit:]]*\).*/\1.\2\.*\3/;')
+#URL:=$(shell curl -s -L 'https://www.ccleaner.com/fr-fr/recuva/download/standard' | sed -e 's/[[:space:]]/\n/g;' | grep data-download-url  | cut -f 2 -d '"')
+LASTEST_VERSION:=$(shell curl -s -L 'https://www.ccleaner.com/recuva/version-history' --user-agent "$(USERAGENT)" | grep 'version-history__latest-version')
+VERSION:=$(shell echo "$(LASTEST_VERSION)" | sed 's/^.*>v\([[:digit:]][[:digit:]]*\)\.\([[:digit:]][[:digit:]]*\)\.\([[:digit:]][[:digit:]]*\).*/\1\.\2.\3/;')
+PVERSION:=$(shell echo "$(LASTEST_VERSION)" | sed 's/^.*>v\([[:digit:]][[:digit:]]*\)\.0*\([[:digit:]][[:digit:]]*\)\.\([[:digit:]][[:digit:]]*\).*/\1.\2\.*\3/;')
+URL:=https://download.ccleaner.com/rcsetup$(shell echo $(VERSION) | cut -f 1,2 -d '.' | sed -e 's/\.//;').exe
 REVISION:=1
 
 EXE:=rcsetup$(VERSION).exe
