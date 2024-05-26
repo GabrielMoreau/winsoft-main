@@ -41,15 +41,19 @@ find tmp/ -name '*.exe' | xargs -r -n 1 wine ~/Sysinternals/sigcheck.exe -a -h |
 find tmp/ -name '*.exe' | xargs -r -n 1 peres -v | egrep 'Product Version:' | awk '{print $3}'
 ```
 
-Example of package on a computer
-```
-# Microsoft Visual C++ 2008 Redistributable - x64 9.0.30729.6161     / 9.0.30729.6161 / {5FCE6D76-F5DC-37AB-B2B8-22AB8CEDB1D4}
-# Microsoft Visual C++ 2008 Redistributable - x86 9.0.30729.6161     / 9.0.30729.6161 / {9BE518E6-ECC6-35A9-88E4-87755C07200F}
-# Microsoft Visual C++ 2010  x86 Redistributable - 10.0.40219        / 10.0.40219     / {F0C3E5D1-1ADE-321E-8167-68EF0DE699A5}
-# Microsoft Visual C++ 2010  x64 Redistributable - 10.0.40219        / 10.0.40219     / {1D8E6291-B0D5-35EC-8441-6616F567A0F7}
-# Microsoft VC++ redistributables repacked.                          / 12.0.0.0       / {847625FA-89A7-4EE0-8494-68A49BF977D6}
-# Microsoft VC++ redistributables repacked.                          / 12.0.0.0       / {F0C8928A-BF8F-4AAF-B8BF-9CE865DBC711}
-# Microsoft Visual C++ 2015-2019 Redistributable (x86) - 14.29.30139 / 14.29.30139.0  / {8d5fdf81-7022-423f-bd8b-b513a1050ae1}
-# Microsoft Visual C++ 2015-2022 Redistributable (x64) - 14.31.31103 / 14.31.31103.0  / {2aaf1df0-eb13-4099-9992-962bb4e596d1}
-# Microsoft Visual C++ 2017 Redistributable (x64) - 14.14.26429      / 14.14.26429.4
-```
+## Register Key
+
+Example :
+
+ | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
+ |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
+ | HKLM | Microsoft VC++ redistributables repacked. | Intel Corporation | 12.0.0.0 | `{31D92EF6-075E-4BC8-8C0C-9265FD3EC624}` | `MsiExec.exe /I{31D92EF6-075E-4BC8-8C0C-9265FD3EC624}` |
+ | HKLM | Microsoft VC++ redistributables repacked. | Intel Corporation | 12.0.0.0 | `{80BA3AFA-05DE-4771-AF68-A762E19E49DA}` | `MsiExec.exe /I{80BA3AFA-05DE-4771-AF68-A762E19E49DA}` |
+ | HKLM | Microsoft Visual C++ 2005 Redistributable (x64) | Microsoft Corporation | 8.0.61000 | `{ad8a2fa1-06e7-4b0d-927d-6e54b3d31028}` | `MsiExec.exe /X{ad8a2fa1-06e7-4b0d-927d-6e54b3d31028}` |
+ | HKLM | Microsoft Visual C++ 2008 Redistributable - x64 9.0.30729.17 | Microsoft Corporation | 9.0.30729 | `{8220EEFE-38CD-377E-8595-13398D740ACE}` | `MsiExec.exe /X{8220EEFE-38CD-377E-8595-13398D740ACE}` |
+ | HKLM | Microsoft Visual C++ 2008 Redistributable - x64 9.0.30729.6161 | Microsoft Corporation | 9.0.30729.6161 | `{5FCE6D76-F5DC-37AB-B2B8-22AB8CEDB1D4}` | `MsiExec.exe /X{5FCE6D76-F5DC-37AB-B2B8-22AB8CEDB1D4}` |
+ | HKLM | Microsoft Visual C++ 2008 Redistributable - x86 9.0.30729.6161 | Microsoft Corporation | 9.0.30729.6161 | `{9BE518E6-ECC6-35A9-88E4-87755C07200F}` | `MsiExec.exe /X{9BE518E6-ECC6-35A9-88E4-87755C07200F}` |
+ | HKLM | Microsoft Visual C++ 2010  x64 Redistributable - 10.0.40219 | Microsoft Corporation | 10.0.40219 | `{1D8E6291-B0D5-35EC-8441-6616F567A0F7}` | `MsiExec.exe /X{1D8E6291-B0D5-35EC-8441-6616F567A0F7}` |
+ | HKLM | Microsoft Visual C++ 2010  x86 Redistributable - 10.0.40219 | Microsoft Corporation | 10.0.40219 | `{F0C3E5D1-1ADE-321E-8167-68EF0DE699A5}` | `MsiExec.exe /X{F0C3E5D1-1ADE-321E-8167-68EF0DE699A5}` |
+ | HKLM | Microsoft Visual C++ 2015-2022 Redistributable (x64) - 14.40.33810 | Microsoft Corporation | 14.40.33810.0 | `{5af95fd8-a22e-458f-acee-c61bd787178e}` | `"C:\ProgramData\Package Cache\{5af95fd8-a22e-458f-acee-c61bd787178e}\VC_redist.x64.exe"  /uninstall` |
+ | HKLM | Microsoft Visual C++ 2015-2022 Redistributable (x86) - 14.40.33810 | Microsoft Corporation | 14.40.33810.0 | `{47109d57-d746-4f8b-9618-ed6a17cc922b}` | `"C:\ProgramData\Package Cache\{47109d57-d746-4f8b-9618-ed6a17cc922b}\VC_redist.x86.exe"  /uninstall` |
