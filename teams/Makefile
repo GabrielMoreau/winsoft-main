@@ -4,7 +4,7 @@
 #
 
 SOFT:=Teams
-VERSION:=$(shell curl -s -L 'https://learn.microsoft.com/en-us/officeupdates/teams-app-versioning' | grep -A 30 'windows-version-history-1' | paste -sd '' | sed -e s'#<tr>#\n#g;' | grep -Ev '(windows-version-history|Slimcore version|Rolling out)' | sed -e 's/[<>]/\n/g;' | egrep '^[[:digit:]][[:digit:]]?\.[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+$$' | head -1)
+VERSION:=$(shell curl -s -L 'https://learn.microsoft.com/en-us/officeupdates/teams-app-versioning' | grep -A 30 'windows-version-history-1' | paste -sd '' | sed -e s'#<tr>#\n#g;' | grep -Ev '(windows-version-history|Slimcore version)' | sed -e 's/[<>]/\n/g;' | egrep '^[[:digit:]][[:digit:]]?\.[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+$$' | head -1)
 SHORTVERSION:=$(shell echo $(VERSION) | sed -e 's/00/0/g;')
 URL:=https://teams.microsoft.com/downloads/desktopurl?env=production&plat=windows&arch=x64&managedInstaller=true&download=true
 REVISION:=1
