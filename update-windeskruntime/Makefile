@@ -55,7 +55,7 @@ version:
 	@echo "URL8: $(URL8)"
 	@echo "EXE8: $(EXE8)"
 
-checksum:
+checksum: tmp/$(EXE5) tmp/$(EXE6) tmp/$(EXE7) tmp/$(EXE8)
 	@mkdir -p tmp
 	@(cd tmp ; \
 		grep -q "^$$(shasum -a 256 $(EXE5))$$" ../checksum.txt || { shasum -a 256 "$(EXE5)" | sed -e 's#tmp/##;' >> ../checksum.txt ; } ; \
@@ -95,7 +95,7 @@ tmp/$(EXE7):
 	@(cd tmp ; \
 		rm -f windowsdesktop-runtime-7.*.exe 2>/dev/null ; \
 		curl -# -o "$(EXE7)" -L "$(URL7)" ; \
-		grep -q "^$$(shasum -a 257 $(EXE7))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE7)" ; \
+		grep -q "^$$(shasum -a 256 $(EXE7))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE7)" ; \
 		)
 
 tmp/$(EXE8):
@@ -103,7 +103,7 @@ tmp/$(EXE8):
 	@(cd tmp ; \
 		rm -f windowsdesktop-runtime-8.*.exe 2>/dev/null ; \
 		curl -# -o "$(EXE8)" -L "$(URL8)" ; \
-		grep -q "^$$(shasum -a 258 $(EXE8))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE8)" ; \
+		grep -q "^$$(shasum -a 256 $(EXE8))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE8)" ; \
 		)
 
 check-exe: tmp/$(EXE5) tmp/$(EXE6) tmp/$(EXE7) tmp/$(EXE8)
