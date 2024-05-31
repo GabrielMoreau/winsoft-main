@@ -57,7 +57,8 @@ tmp/$(EXE):
 tmp/BalenaEtcher/balenaEtcher.exe: tmp/$(EXE)
 	@rm -rf tmp/BalenaEtcher 2>/dev/null
 	@mkdir -p tmp/BalenaEtcher
-	@unzip -q tmp/$(EXE) -d tmp/BalenaEtcher || echo "Warning: strange thing in $(EXE)"
+	@file "tmp/$(EXE)" | grep -q 'Zip archive data' || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 1; }
+	@unzip -q "tmp/$(EXE)" -d tmp/BalenaEtcher || echo "Warning: strange thing in $(EXE)"
 	@touch "tmp/BalenaEtcher/balenaEtcher.exe"
 
 check-exe: tmp/BalenaEtcher/balenaEtcher.exe
