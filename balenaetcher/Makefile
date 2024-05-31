@@ -4,11 +4,12 @@
 #
 
 SOFT:=BalenaEtcher
-VERSION:=$(shell curl -s -L 'https://github.com/balena-io/etcher/releases/latest' | sed 's/</\n/g;'| grep '^meta property.*og:title' | cut -f 4 -d ' ' | sed -e 's/^v//;')
+USERAGENT:=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:122.0) Gecko/20100101 Firefox/122.0
+VERSION:=$(shell curl -s -L 'https://github.com/balena-io/etcher/releases/latest' --user-agent "$(USERAGENT)" | sed 's/</\n/g;' | grep '^meta property.*og:title' | cut -f 4 -d ' ' | sed -e 's/^v//;')
 REVISION:=1
-URL:=https://github.com/balena-io/etcher/releases/download/v$(VERSION)/balenaEtcher-$(VERSION)-win.zip
+URL:=https://github.com/balena-io/etcher/releases/download/v$(VERSION)/balenaEtcher-win32-x64-$(VERSION).zip
 
-EXE:=balenaEtcher-$(VERSION)-win.zip
+EXE:=balenaEtcher-win32-x64-$(VERSION).zip
 
 IT_TEAM:=IT Support
 LOGDIR:=%WINDIR%\\Logs
@@ -54,11 +55,10 @@ tmp/$(EXE):
 		)
 
 tmp/BalenaEtcher/balenaEtcher.exe: tmp/$(EXE)
-	@rm -rf   tmp/BalenaEtcher 2>/dev/null
+	@rm -rf tmp/BalenaEtcher 2>/dev/null
 	@mkdir -p tmp/BalenaEtcher
-	@(cd tmp/BalenaEtcher ; \
-		unzip -q ../$(EXE) ; \
-		)
+	@unzip -q tmp/$(EXE) -d tmp/BalenaEtcher || echo "Warning: strange thing in $(EXE)"
+	@touch "tmp/BalenaEtcher/balenaEtcher.exe"
 
 check-exe: tmp/BalenaEtcher/balenaEtcher.exe
 	@(cd tmp; \
