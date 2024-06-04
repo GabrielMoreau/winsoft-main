@@ -3,7 +3,7 @@
 #
 
 SOFT:=UltiMakerCura
-VERSION:=$(shell curl -s -L 'https://github.com/Ultimaker/Cura/releases/latest' | sed -e 's/[[:space:]]/\n/g;' | grep 'href="/Ultimaker/Cura/releases/tag/' | cut -f 6 -d '/' | cut -f 1 -d '"')
+VERSION:=$(shell curl -s -L 'https://github.com/Ultimaker/Cura/releases' | sed -e 's/[[:space:]]/\n/g;' | grep 'href="/Ultimaker/Cura/releases/tag/' | grep -Ev -- '-(RC|alpha|beta)' | head -1 | cut -f 6 -d '/' | cut -f 1 -d '"')
 REVISION:=1
 URL:=https://github.com/Ultimaker/Cura/releases/download/$(VERSION)/UltiMaker-Cura-$(VERSION)-win64-X64.msi
 
