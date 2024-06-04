@@ -38,7 +38,7 @@ version:
 	@echo "URL: $(URL)"
 	@echo "EXE: $(EXE)"
 
-checksum:
+checksum: check-version
 	@mkdir -p tmp
 	@(cd tmp ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt && exit ; \

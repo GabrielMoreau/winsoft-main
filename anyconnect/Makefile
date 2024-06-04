@@ -25,7 +25,7 @@ check-version:
 	@echo $(VERSION) | egrep -q '^[[:digit:]][\.[:digit:]]*$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
 	@if [ "$(VERSION)" != "$(VERSIONONLINE)" ]; then echo '#'; echo "# Warning: a new version $(VERSIONONLINE) exist on Cisco website!"; echo '#'; fi
 
-check-unrealized:
+check-unrealized: check-version
 	@if grep -q '[[:space:]]$(EXE)$$' checksum.txt; then echo 'Ok'; else echo 'Warning: Updates not performed for $(SOFT) version $(VERSION)'; fi
 
 clean:
@@ -37,7 +37,7 @@ version:
 	@echo "EXE: $(EXE)"
 	@echo "VERSIONONLINE: $(VERSIONONLINE)"
 
-checksum:
+checksum: check-version
 	@( \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ./checksum.txt && exit; \
 		shasum -a 256 "$(EXE)" | sed -e 's#tmp/##;' >> ./checksum.txt; \

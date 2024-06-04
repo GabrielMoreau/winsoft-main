@@ -26,7 +26,7 @@ clean:
 version:
 	@echo "VERSION: $(VERSION)"
 
-checksum:
+checksum: check-version
 
 wget: tmp/$(EXE1)
 

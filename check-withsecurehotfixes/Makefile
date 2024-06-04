@@ -27,7 +27,7 @@ clean:
 version:
 	@echo "VERSION: $(VERSION)"
 
-checksum:
+checksum: check-version
 
 check-exe:
 

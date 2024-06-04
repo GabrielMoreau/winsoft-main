@@ -41,7 +41,7 @@ version:
 	@echo "SSHFS_URL:      $(SSHFS_URL)"
 	@echo "SSHFS_EXE:      $(SSHFS_EXE)"
 
-checksum:
+checksum: check-version
 	@mkdir -p tmp
 	@(cd tmp ; \
 		grep -q "^$$(shasum -a 256 $(WINFSP_EXE))$$" ../checksum.txt || { shasum -a 256 "$(WINFSP_EXE)" | sed -e 's#tmp/##;' >> ../checksum.txt ; } ; \

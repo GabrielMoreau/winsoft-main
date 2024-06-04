@@ -27,7 +27,7 @@ sinclude ../_common/conf.mk
 check-version:
 	@echo $(VERSION) | egrep -q '^[[:digit:]][\.[:digit:]]*$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
 
-check-unrealized:
+check-unrealized: check-version
 	@if grep -q '[[:space:]]$(EXE)$$' checksum.txt; then echo 'Ok'; else echo 'Warning: Updates not performed for $(SOFT) version $(VERSION)'; fi
 
 clean:
@@ -39,7 +39,7 @@ version:
 	@echo "EXE: $(EXE)"
 	@echo "PVERSION: $(PVERSION)"
 
-checksum:
+checksum: check-version
 	@mkdir -p tmp
 	@(cd tmp ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt && exit ; \
