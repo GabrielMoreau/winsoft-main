@@ -25,6 +25,8 @@ IF EXIST "%ProgramFiles%\XnView\unins000.exe"        ScriptRunner.exe -appvscrip
 IF EXIST "%ProgramFiles(x86)%\XnView\unins000.exe"   ScriptRunner.exe -appvscript "%ProgramFiles(x86)%\XnView\unins000.exe"   /VERYSILENT /NORESTART -appvscriptrunnerparameters -wait -timeout=300
 IF EXIST "%ProgramFiles%\XnViewMP\unins000.exe"      ScriptRunner.exe -appvscript "%ProgramFiles%\XnViewMP\unins000.exe"      /VERYSILENT /NORESTART -appvscriptrunnerparameters -wait -timeout=300
 IF EXIST "%ProgramFiles(x86)%\XnViewMP\unins000.exe" ScriptRunner.exe -appvscript "%ProgramFiles(x86)%\XnViewMP\unins000.exe" /VERYSILENT /NORESTART -appvscriptrunnerparameters -wait -timeout=300
+IF EXIST "%ProgramFiles%\XnViewMP\unins001.exe"      ScriptRunner.exe -appvscript "%ProgramFiles%\XnViewMP\unins001.exe"      /VERYSILENT /NORESTART -appvscriptrunnerparameters -wait -timeout=300
+IF EXIST "%ProgramFiles(x86)%\XnViewMP\unins001.exe" ScriptRunner.exe -appvscript "%ProgramFiles(x86)%\XnViewMP\unins001.exe" /VERYSILENT /NORESTART -appvscriptrunnerparameters -wait -timeout=300
 
 
 ECHO Silent install %softname%
