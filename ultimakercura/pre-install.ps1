@@ -74,8 +74,8 @@ Write-Output "Config: Version $RefVersion"
 			$Exe = 'MsiExec.exe'
 			$Args = '/x "' + $KeyProduct + '" /qn /norestart'
 		} ElseIf ($DisplayName -match 'Uninstall.exe') {
-			$UninstallSplit = $App.UninstallString -Split "exe"
-			$Exe = $UninstallSplit[0] + 'exe"'
+			$UninstallSplit = ($App.UninstallString -Split "exe")[0] -Replace '"', ''
+			$Exe = $UninstallSplit + 'exe'
 			$Args = '/S'
 		} Else { Return }
 

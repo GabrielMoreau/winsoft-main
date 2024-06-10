@@ -75,8 +75,8 @@ Write-Output "Config: Version $RefVersion"
 			$Args = '/x "' + $KeyProduct + '" /qn'
 			Write-Output "Remove MSI: $DisplayName / $DisplayVersion / $KeyProduct / $Exe $Args"
 		} Else {
-			$UninstallSplit = $App.UninstallString -Split "exe"
-			$Exe = $UninstallSplit[0] + 'exe"'
+			$UninstallSplit = ($App.UninstallString -Split "exe")[0] -Replace '"', ''
+			$Exe = $UninstallSplit + 'exe'
 			$Args = '/S'
 			Write-Output "Remove EXE: $DisplayName / $DisplayVersion / $($App.UninstallString) / $Exe $Args"
 		}

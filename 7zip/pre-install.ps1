@@ -45,8 +45,8 @@ Function Run-Exec {
 			$UninstallSplit = $UninstallString -Split "/I"
 			$Args = '/x "' + $UninstallSplit[1].Trim() + '" /qn /norestart'
 		} Else {
-			$UninstallSplit = $UninstallString -Split "exe"
-			$Exe = $UninstallSplit[0] + 'exe"'
+			$UninstallSplit = ($UninstallString -Split "exe")[0] -Replace '"', ''
+			$Exe = $UninstallSplit + 'exe'
 			$Args = '/S'
 			If (!(Test-Path -Path "$Exe")) {
 				Write-Output "Error: executable not exists $Exe"

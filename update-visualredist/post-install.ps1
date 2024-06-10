@@ -275,8 +275,8 @@ Function ToVersion {
 				Return
 			}
 
-			$UninstallSplit = $App.UninstallString -Split "exe"
-			$Exe = $UninstallSplit[0] + 'exe"'
+			$UninstallSplit = ($App.UninstallString -Split "exe")[0] -Replace '"', ''
+			$Exe = $UninstallSplit + 'exe'
 			$Args = '/uninstall /quiet /norestart'
 			Write-Output "Remove: $DisplayName / $DisplayVersion / $Exe / $Args"
 

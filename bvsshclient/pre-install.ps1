@@ -76,8 +76,8 @@ Write-Output "Config: Version $RefVersion"
 			Write-Output "Could-Remove: $DisplayName / $DisplayVersion / $KeyProduct / $Exe $Args"
 			Return
 		} Else {
-			$UninstallSplit = $App.UninstallString -Split "exe"
-			$Exe = $UninstallSplit[0] + 'exe"'
+			$UninstallSplit = ($App.UninstallString -Split "exe")[0] -Replace '"', ''
+			$Exe = $UninstallSplit + 'exe'
 			$Args = '-unat "BvSshClient"'
 			Write-Output "Try-Remove: $DisplayName / $DisplayVersion / $($App.UninstallString) / $Exe $Args"
 		}
