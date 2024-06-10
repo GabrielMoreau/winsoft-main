@@ -23,4 +23,5 @@ Example :
 
  | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
- | HKLM | Octave 9.1.0 | GNU Octave | 9.1.0 | `Octave-9.1.0` | `"C:\Program Files\GNU Octave\Octave-9.1.0\uninstall.exe" /AllUsers` | 
+ | HKLM | Octave 9.1.0 | GNU Octave | 9.1.0 | `Octave-9.1.0` | `"C:\Program Files\GNU Octave\Octave-9.1.0\uninstall.exe" /AllUsers` |
+ | HKLM | Octave 9.2.0 | GNU Octave | 9.2.0 | `Octave-9.2.0` | `"C:\Program Files\GNU Octave\Octave-9.2.0\uninstall.exe" /AllUsers` |

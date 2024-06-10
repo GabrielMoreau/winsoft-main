@@ -62,9 +62,9 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
 	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#;' $< > $@
 
-%.zip: Makefile tmp/install.bat octave-gui.ini tmp/$(EXE)
+%.zip: Makefile tmp/install.bat octave-gui.ini pre-install.ps1 tmp/$(EXE)
 	@rm -f $@
-	@zip -r ./$@ octave-gui.ini
+	@zip -r ./$@ octave-gui.ini pre-install.ps1
 	@(cd tmp; zip -r ../$@ install.bat $(EXE))
 	@chmod ugo+rw $@
 
