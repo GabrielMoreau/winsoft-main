@@ -7,19 +7,19 @@ SOFT:=Update-WindowsDekstopRuntime
 REVISION:=1
 
 URL5:=$(shell curl -s -L https://dotnet.microsoft.com/$(shell curl -s -L 'https://dotnet.microsoft.com/en-us/download/dotnet/5.0' | sed -e 's/"/\n/g;' | grep 'thank-you/runtime-desktop.*windows-x64-installer'  | head -1) | sed -e 's/"/\n/g;' | grep '^https.*windowsdesktop-runtime-.*-win-x64.exe' | head -1)
-VERSION5:=$(shell basename $(URL5) | cut -f 3 -d '-')
+VERSION5:=$(shell basename $(URL5) 2>/dev/null | cut -f 3 -d '-')
 EXE5:=windowsdesktop-runtime-$(VERSION5)-win-x64.exe
 
 URL6:=$(shell curl -s -L https://dotnet.microsoft.com/$(shell curl -s -L 'https://dotnet.microsoft.com/en-us/download/dotnet/6.0' | sed -e 's/"/\n/g;' | grep 'thank-you/runtime-desktop.*windows-x64-installer'  | head -1) | sed -e 's/"/\n/g;' | grep '^https.*windowsdesktop-runtime-.*-win-x64.exe' | head -1)
-VERSION6:=$(shell basename $(URL6) | cut -f 3 -d '-')
+VERSION6:=$(shell basename $(URL6) 2>/dev/null | cut -f 3 -d '-')
 EXE6:=windowsdesktop-runtime-$(VERSION6)-win-x64.exe
 
 URL7:=$(shell curl -s -L https://dotnet.microsoft.com/$(shell curl -s -L 'https://dotnet.microsoft.com/en-us/download/dotnet/7.0' | sed -e 's/"/\n/g;' | grep 'thank-you/runtime-desktop.*windows-x64-installer'  | head -1) | sed -e 's/"/\n/g;' | grep '^https.*windowsdesktop-runtime-.*-win-x64.exe' | head -1)
-VERSION7:=$(shell basename $(URL7) | cut -f 3 -d '-')
+VERSION7:=$(shell basename $(URL7) 2>/dev/null | cut -f 3 -d '-')
 EXE7:=windowsdesktop-runtime-$(VERSION7)-win-x64.exe
 
 URL8:=$(shell curl -s -L https://dotnet.microsoft.com/$(shell curl -s -L 'https://dotnet.microsoft.com/en-us/download/dotnet/8.0' | sed -e 's/"/\n/g;' | grep 'thank-you/runtime-desktop.*windows-x64-installer'  | head -1) | sed -e 's/"/\n/g;' | grep '^https.*windowsdesktop-runtime-.*-win-x64.exe' | head -1)
-VERSION8:=$(shell basename $(URL8) | cut -f 3 -d '-')
+VERSION8:=$(shell basename $(URL8) 2>/dev/null | cut -f 3 -d '-')
 EXE8:=windowsdesktop-runtime-$(VERSION8)-win-x64.exe
 
 VERSION:=$(shell ./sum-versions $(VERSION5) $(VERSION6) $(VERSION7) $(VERSION8))
@@ -35,7 +35,10 @@ all: check-version check-exe $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
 sinclude ../_common/conf.mk
 
 check-version:
-	@echo $(VERSION) | egrep -q '^[[:digit:]][\.[:digit:]]*$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
+	@echo $(VERSION5) | grep -Eq '^[[:digit:]][\.[:digit:]]+[[:digit:]]$$' || (echo 'VERSION5 is undefined' > /dev/stderr ; exit 1)
+	@echo $(VERSION6) | grep -Eq '^[[:digit:]][\.[:digit:]]+[[:digit:]]$$' || (echo 'VERSION6 is undefined' > /dev/stderr ; exit 1)
+	@echo $(VERSION7) | grep -Eq '^[[:digit:]][\.[:digit:]]+[[:digit:]]$$' || (echo 'VERSION7 is undefined' > /dev/stderr ; exit 1)
+	@echo $(VERSION8) | grep -Eq '^[[:digit:]][\.[:digit:]]+[[:digit:]]$$' || (echo 'VERSION8 is undefined' > /dev/stderr ; exit 1)
 
 clean:
 	rm -rf $(SOFT)_$(VERSION)-$(REVISION)_x64.zip tmp resources
@@ -55,7 +58,7 @@ version:
 	@echo "URL8: $(URL8)"
 	@echo "EXE8: $(EXE8)"
 
-checksum: tmp/$(EXE5) tmp/$(EXE6) tmp/$(EXE7) tmp/$(EXE8)
+checksum: check-version tmp/$(EXE5) tmp/$(EXE6) tmp/$(EXE7) tmp/$(EXE8)
 	@mkdir -p tmp
 	@(cd tmp ; \
 		grep -q "^$$(shasum -a 256 $(EXE5))$$" ../checksum.txt || { shasum -a 256 "$(EXE5)" | sed -e 's#tmp/##;' >> ../checksum.txt ; } ; \
