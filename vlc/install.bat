@@ -50,6 +50,10 @@ ECHO Remove old key Comments
 REG QUERY "HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\VLC media player" /v "Comments"
 IF %ERRORLEVEL% EQU 0 (
   REG DELETE "HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\VLC media player" /v "Comments" /F
+) ELSE (
+  ECHO Reset ERRORLEVEL variable with the VER command
+  ECHO Good code script must finish with EXIT 0
+  VER
 )
 
 
