@@ -13,6 +13,8 @@ You need a license for professional use.
   https://docs.vmware.com/en/Horizon-FLEX/1.12/com.vmware.horizon.flex.admin.doc/GUID-000C012F-CBF6-4F63-A721-80D553F89CC1.html,
   https://docs.vmware.com/en/Horizon-FLEX/1.12/com.vmware.horizon.flex.admin.doc/GUID-000C012F-CBF6-4F63-A721-80D553F89CC1.html
 
+Since Broadcom's acquisition of VMware, the product no longer appears to be available for free download. We strongly advise you to stop using it.
+
 To uninstall silently
 ```bat
 MsiExec.exe /x {XXXXXXXXXXXXXXXXXXX} /qn REBOOT=ReallySuppress REMOVE=ALL
