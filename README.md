@@ -115,7 +115,7 @@ Please devops, put always the version number clearly in the comment...
 apt install make curl wget pev msitools p7zip-full libimage-exiftool-perl
 ```
 
-## List of 109 packages
+## List of 112 packages
 
  | Software | Detail | &#127968; |   |
  | -------- | ------ | --------- | - |
@@ -221,11 +221,14 @@ apt install make curl wget pev msitools p7zip-full libimage-exiftool-perl
  | [AcrobatReader (Uninstall)](acrobatreader/README.md) | Adobe PDF reader | [&#127968;](https://www.adobe.com/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
  | [CCleaner (Uninstall)](ccleaner/README.md) | Clean computer files and register keys | [&#127968;](https://www.ccleaner.com/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
  | [Check WithSecure Hotfixes (Action)](check-withsecurehotfixes/README.md) | Test the deployment of updates | [&#127968;](https://www.withsecure.com/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
+ | [Chrome (Uninstall)](chrome/README.md) | Google Chrome navigator | [&#127968;](https://www.google.com/chrome/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
  | [FlashPlayer (Uninstall)](flashplayer-uninstall/README.md) | Remove all version of Adobe Flash Player | [&#127968;](https://www.adobe.com/products/flashplayer/end-of-life.html) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
  | [Gwyddion (Uninstall)](gwyddion/README.md) | Data visualization and analysis for SPM | [&#127968;](http://gwyddion.net/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
  | [Java JRE (Uninstall)](javajre8-uninstall/README.md) | Remove version 7 and 8 of Java Runtime Environment | [&#127968;](https://www.oracle.com/java/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
  | [Kaspersky Endpoint (Uninstall)](kaspersky-uninstall/README.md) | Silent remove Kaspersky Endpoint | [&#127968;](https://gitlab.in2p3.fr/resinfo-gt/swmb/resinfo-swmb/-/tree/master/dists/uninstall-kaspersky) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
- | [Run Shutdown (Action)](action-shutdown/README.md) | Poweroff the computer |  | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
+ | [MS VSCode (Uninstall)](vscode/README.md) | Microsoft Source-code editor | [&#127968;](https://code.visualstudio.com/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
+ | [Run Reboot (Action)](action-reboot/README.md) | Restart the computer |  | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
+ | [Run Shutdown (Action)](action-shutdown/README.md) | Poweroff the computer |  | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
  | [Skype (Uninstall)](skype/README.md) | VoIP and Videoconferencing Client | [&#127968;](https://www.skype.com/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
  | [TeamViewer (Uninstall)](teamviewer/README.md) | Remote access and remote control | [&#127968;](https://www.teamviewer.com) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
  | [Update MS Visual Redistributable (Action)](update-visualredist/README.md) | Microsoft Visual C++ Redistributable Library update for all version | [&#127968;](https://learn.microsoft.com/fr-fr/cpp/windows/latest-supported-vc-redist) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
