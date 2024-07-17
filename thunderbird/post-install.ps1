@@ -31,7 +31,7 @@ Function ToVersion {
 $Config = GetConfig -FilePath 'winsoft-config.ini'
 $RefVersion = $Config.Version
 $RefUninstallString = ''
-$RefName = 'Thunderbird'
+$RefName = 'Mozilla Thunderbird'
 Write-Output "Config: Version $RefVersion"
 
 @(Get-ChildItem -Recurse 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall';

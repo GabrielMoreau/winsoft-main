@@ -26,8 +26,8 @@ TASKKILL /T /F /IM %process%
 
 
 ECHO Silent install %softname%
+REM TASKBAR_SHORTCUT=false DESKTOP_SHORTCUT=false INSTALL_MAINTENANCE_SERVICE=false
 ScriptRunner.exe -appvscript MsiExec.exe /i "Thunderbird-Setup-%softversion%.msi" INSTALL_MAINTENANCE_SERVICE=false DESKTOP_SHORTCUT=true /q /norestart /L*v "%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=300
-
 
 ECHO Wait and remove unused service
 ping 127.0.0.1 -n 2 > NUL

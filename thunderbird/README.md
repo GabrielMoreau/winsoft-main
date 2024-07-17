@@ -26,3 +26,12 @@ cat policies.json | jq empty
 ```
 
 You can see the deployed policies by using the URL about:policies
+
+
+## Register Key
+
+Example :
+
+ | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
+ |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
+ | HKLM | Mozilla Thunderbird (x64 fr) | Mozilla | 128.0 | `Mozilla Thunderbird 128.0 (x64 fr)` | `"C:\Program Files\Mozilla Thunderbird\uninstall\helper.exe"` |
