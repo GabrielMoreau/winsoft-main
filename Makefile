@@ -123,9 +123,18 @@ list-md:
 		head -1 $${pkg}/README.md | perl -p -e "s{^#\s(.*)\s-\s(.*)}{ | $${sindex} | [\\1]($${pkg}/README.md) | \\2 | [&#127968;]($${url}) | $${lic} |};" | sed -e 's/\[&#127968;\]()//;'
 	done | sort | grep -Ev '\([[:alpha:]][[:alpha:]]*\)\]\('
 	echo ''
-	echo ' | Action / Uninstall | Detail | &#127968; |   |'
+	echo ' | Uninstall | Detail | &#127968; |   |'
 	echo ' | -------- | ------ | --------- | - |'
-	for pkg in $$(git ls-files | grep '^[[:alpha:][:digit:]-]*/README.md' | xargs -r grep -l '^#[[:space:]].*(.*)[[:space:]]-' | xargs -r dirname | grep -v '/'; grep -l '^Uninstall-.*.zip:' */Makefile | xargs -r dirname)
+	for pkg in $$(git ls-files | grep '^[[:alpha:][:digit:]-]*/README.md' | xargs -r grep -l '^#[[:space:]].*(.*)[[:space:]]-' | xargs -r dirname | grep -v '/' | grep 'uninstall'; grep -l '^Uninstall-.*.zip:' */Makefile | xargs -r dirname)
+	do
+		lic=$$(grep -q 'open-source' $${pkg}/README.md && echo '[🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software")' || echo '[©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software")')
+		url=$$(grep '* Website : ' $${pkg}/README.md | cut -f 4 -d ' ')
+		head -1 $${pkg}/README.md |perl -p -e "s{^#\s(.*)\s-\s(.*)}{ | [\\1]($${pkg}/README.md) | \\2 | [&#127968;]($${url}) | $${lic} |}; s/(\w)\]\(/\\1 (Uninstall)](/;" | sed -e 's/\[&#127968;\]()//;'
+	done | sort
+	echo ''
+	echo ' | Action | Detail | &#127968; |   |'
+	echo ' | -------- | ------ | --------- | - |'
+	for pkg in $$(git ls-files | grep '^[[:alpha:][:digit:]-]*/README.md' | xargs -r grep -l '^#[[:space:]].*(.*)[[:space:]]-' | xargs -r dirname | grep -v '/' | grep -v 'uninstall')
 	do
 		lic=$$(grep -q 'open-source' $${pkg}/README.md && echo '[🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software")' || echo '[©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software")')
 		url=$$(grep '* Website : ' $${pkg}/README.md | cut -f 4 -d ' ')

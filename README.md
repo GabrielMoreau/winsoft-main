@@ -216,11 +216,10 @@ apt install make curl wget pev msitools p7zip-full libimage-exiftool-perl
  | 104 | [Zoom](zoom/README.md) | Web Conference Client | [&#127968;](https://zoom.us/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
  | 105 | [Zotero](zotero/README.md) | Manage bibliographic data | [&#127968;](https://www.zotero.org/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
 
- | Action / Uninstall | Detail | &#127968; |   |
+ | Uninstall | Detail | &#127968; |   |
  | -------- | ------ | --------- | - |
  | [AcrobatReader (Uninstall)](acrobatreader/README.md) | Adobe PDF reader | [&#127968;](https://www.adobe.com/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
  | [CCleaner (Uninstall)](ccleaner/README.md) | Clean computer files and register keys | [&#127968;](https://www.ccleaner.com/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
- | [Check WithSecure Hotfixes (Action)](check-withsecurehotfixes/README.md) | Test the deployment of updates | [&#127968;](https://www.withsecure.com/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
  | [Chrome (Uninstall)](chrome/README.md) | Google Chrome navigator | [&#127968;](https://www.google.com/chrome/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
  | [FlashPlayer (Uninstall)](flashplayer-uninstall/README.md) | Remove all version of Adobe Flash Player | [&#127968;](https://www.adobe.com/products/flashplayer/end-of-life.html) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
  | [Gwyddion (Uninstall)](gwyddion/README.md) | Data visualization and analysis for SPM | [&#127968;](http://gwyddion.net/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
@@ -228,10 +227,14 @@ apt install make curl wget pev msitools p7zip-full libimage-exiftool-perl
  | [Kaspersky Endpoint (Uninstall)](kaspersky-uninstall/README.md) | Silent remove Kaspersky Endpoint | [&#127968;](https://gitlab.in2p3.fr/resinfo-gt/swmb/resinfo-swmb/-/tree/master/dists/uninstall-kaspersky) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
  | [Mozilla Thunderbird (Uninstall)](thunderbird/README.md) | Mail reader | [&#127968;](https://www.thunderbird.net/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
  | [MS VSCode (Uninstall)](vscode/README.md) | Microsoft Source-code editor | [&#127968;](https://code.visualstudio.com/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
- | [Run Reboot (Action)](action-reboot/README.md) | Restart the computer |  | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
- | [Run Shutdown (Action)](action-shutdown/README.md) | Poweroff the computer |  | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
  | [Skype (Uninstall)](skype/README.md) | VoIP and Videoconferencing Client | [&#127968;](https://www.skype.com/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
  | [TeamViewer (Uninstall)](teamviewer/README.md) | Remote access and remote control | [&#127968;](https://www.teamviewer.com) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
+
+ | Action | Detail | &#127968; |   |
+ | -------- | ------ | --------- | - |
+ | [Check WithSecure Hotfixes (Action)](check-withsecurehotfixes/README.md) | Test the deployment of updates | [&#127968;](https://www.withsecure.com/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
+ | [Run Reboot (Action)](action-reboot/README.md) | Restart the computer |  | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
+ | [Run Shutdown (Action)](action-shutdown/README.md) | Poweroff the computer |  | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
  | [Update MS Visual Redistributable (Action)](update-visualredist/README.md) | Microsoft Visual C++ Redistributable Library update for all version | [&#127968;](https://learn.microsoft.com/fr-fr/cpp/windows/latest-supported-vc-redist) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
  | [Update MS Windows Desktop Runtime (Action)](update-windeskruntime/README.md) | Runtime engine for Microsoft .NET desktop applications update for all 64 bits version | [&#127968;](https://dotnet.microsoft.com/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
  | [Update OS and BIOS (Action)](update-osbios/README.md) | Force Windows and DELL/HP BIOS to update now |  | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
