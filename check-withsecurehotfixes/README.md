@@ -12,16 +12,16 @@ Only this script is free.
 The error code tells you which hotfixes have not been applied (see example below).
 The hotfixes error mapping table is very simple:
 
- | Hotfixe Match        | Bit | URL                                                                 |
- |:-------------------- | ---:|:------------------------------------------------------------------- |
- | `WSBS1600-HF01`      |   1 | https://download.withsecure.com/corpro/cs/cs16.00/WSBS1600-HF01.jar |
- | `WithSecure Hotfix2` |   2 | https://download.withsecure.com/corpro/cs/cs16.00/WSBS1600-HF02.jar |
- | `WSBS1600-HF03`      |   4 | https://download.withsecure.com/corpro/cs/cs16.00/WSBS1600-HF03.jar |
- | `WSBS1600-HF04`      |   8 | https://download.withsecure.com/corpro/cs/cs16.00/WSBS1600-HF04.jar |
- | `WSBS1600-HF05`      |  16 | https://download.withsecure.com/corpro/cs/cs16.00/WSBS1600-HF05.jar |
- | `WSBS1600-HF06`      |  32 | https://download.withsecure.com/corpro/cs/cs16.00/WSBS1600-HF06.jar |
+ | Id | Hotfixe Match        | Bit | URL                                                                 |
+ | --:|:-------------------- | ---:|:------------------------------------------------------------------- |
+ |  1 | `WSBS1600-HF01`      |   1 | https://download.withsecure.com/corpro/cs/cs16.00/WSBS1600-HF01.jar |
+ |  2 | `WithSecure Hotfix2` |   2 | https://download.withsecure.com/corpro/cs/cs16.00/WSBS1600-HF02.jar |
+ |  3 | `WSBS1600-HF03`      |   4 | https://download.withsecure.com/corpro/cs/cs16.00/WSBS1600-HF03.jar |
+ |  4 | `WSBS1600-HF04`      |   8 | https://download.withsecure.com/corpro/cs/cs16.00/WSBS1600-HF04.jar |
+ |  5 | `WSBS1600-HF05`      |  16 | https://download.withsecure.com/corpro/cs/cs16.00/WSBS1600-HF05.jar |
+ |  6 | `WSBS1600-HF06`      |  32 | https://download.withsecure.com/corpro/cs/cs16.00/WSBS1600-HF06.jar |
 
-Example: if hotfixes 2 and 5 are not applied, the error code is 18.
+Example: if hotfixes 2 and 5 are not applied, the error code is 18 (2+16).
 You must then go to the WithSecure console and push back again the hotfixes indicated (here 2 and 5) on this computer.
 
 The script can be run many times on a workstation,
