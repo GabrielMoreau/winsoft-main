@@ -4,9 +4,11 @@ The Check WithSecure Hotfixes is a free and open-source PowerShell script.
 It tests whether all WithSecure hotfixes have been applied to the workstation.
 Please note that WithSecure is a proprietary antivirus software and is in no way opensource.
 Only this script is free.
-It returns **0** in case of **success** (no error),
-the **number of uninstalled hotfixes bits** in the event of a hotfixe error,
-and **1024** if the WithSecure software is **not installed**.
+
+* It returns **0** in case of **success** (no error),
+* the **number of uninstalled hotfixes bits** in the event of a hotfixe error,
+* and **1024** if the WithSecure software is **not installed**.
+
 The error code tells you which hotfixes have not been applied (see example below).
 The hotfixes error mapping table is very simple:
 
@@ -24,6 +26,7 @@ You must then go to the WithSecure console and push back again the hotfixes indi
 
 The script can be run many times on a workstation,
 it's fast and doesn't modify the computer's operation in any way.
+All it does (not completely) is read registry keys.
 
 * Website : https://www.withsecure.com/
 * Wikipedia : https://en.wikipedia.org/wiki/F-Secure
@@ -31,6 +34,19 @@ it's fast and doesn't modify the computer's operation in any way.
 * Download : https://www.withsecure.com/en/support/product-support/business-suite/client-security (Hotfixes - JAR file)
 * WithSecure Business Suite : https://www.withsecure.com/en/support/product-support/business-suite/
 
+## Adding hotfixes to your console
+
+Once you've downloaded the hotfixes from the publisher's website (see link above), you need to import them into the server via the console.
+In the `root` folder of all machines (regardless of OS), go to the `installations` tab.
+Then click on `Installation packages`, and you'll see a window with an `import` button.
+
+To push one or more hotfixes onto a machine or the whole park, go back to the `installations` tab, selecting either the `root` folder or the machine(s), and click `Install`.
+You must then select a hotfix and confirm with `Ok`.
+This step must be repeated for each hotfix! Fortunately, there are a maximum of 6.
+Once you've finished, remember to `Distribute strategies` on the park (or machine).
+
+If a hotfix turns out not to have been pushed on a machine, it must be pushed again.
+The software has no problem with this.
 
 ## License and Copyright
 
