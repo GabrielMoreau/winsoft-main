@@ -13,3 +13,12 @@ HURUKAI_SERVER:=hurukai.example.com
 HURUKAI_SIG:=blabla
 HURUKAI_PASSWORD:=youragentpass
 ```
+
+
+## Register Key
+
+Example :
+
+ | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
+ |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
+ | HKLM | HarfangLab Hurukai agent | HarfangLab | 3.10.3 | `{B671C117-C0D7-494C-850B-C4A1D9E18E5C}` | `MsiExec.exe /X{B671C117-C0D7-494C-850B-C4A1D9E18E5C}` |
