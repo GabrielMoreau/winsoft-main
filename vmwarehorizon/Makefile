@@ -7,7 +7,7 @@ SOFT:=VMwareHorizon
 VERSION:=$(shell sort -V url.txt | tail -1 | awk '{print $$1}')
 REVISION:=1
 URL:=$(shell grep '^$(VERSION)[[:space:]]' url.txt | awk '{print $$2}')
-VERSIONLONG:=$(shell basename $(URL) | cut -f 4-6 -d '-' |sed -e 's/\.exe//;')
+VERSIONLONG:=$(shell basename '$(URL)' 2> /dev/null | cut -f 4-6 -d '-' |sed -e 's/\.exe//;')
 
 EXE:=VMware-Horizon-Client-$(VERSIONLONG).exe
 

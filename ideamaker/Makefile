@@ -6,7 +6,7 @@ SOFT:=IdeaMaker
 REVISION:=1
 #URL:=$(shell curl -s -L 'https://www.raise3d.eu/download/' | grep -A2 '<h4>Windows</h4>' | grep 'href=.*/release/.*/install_ideaMaker_.*[[:digit:]]\.exe' | cut -f 2 -d '"')
 URL:=$(shell curl -s -L 'https://www.raise3d.eu/download/ideamaker-all-versions/'| sed -e 's/[[:space:]>]/\n/g;' | grep '^href=.*/release/.*/install_ideaMaker_.*[[:digit:]]\.exe' | head -1 | cut -f 2 -d '"')
-VERSION:=$(shell basename "$(URL)" | cut -f 3 -d '_' | sed -e 's/\.exe//;')
+VERSION:=$(shell basename '$(URL)' 2> /dev/null | cut -f 3 -d '_' | sed -e 's/\.exe//;')
 REVISION:=1
 EXE:=install_ideaMaker_$(VERSION).exe
 

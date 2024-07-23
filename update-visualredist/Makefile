@@ -105,9 +105,9 @@ checksum: $(VCREDIST)
 	@for exe in $(VCREDIST); \
 	do \
 		grep -q "^$$(shasum -a 256 $${exe})$$" ./checksum.txt || { shasum -a 256 "$(exe)"  >> ./checksum.txt ; }; \
-		ver=$$(peres -v $${exe} | grep "^Product Version:[[:space:]]" | awk '{print $$3}'); \
-		year=$$(dirname $${exe} | xargs -r basename); \
-		arch=$$(basename $${exe} | cut -f 2 -d '.'); \
+		ver=$$(peres -v "$${exe}" | grep "^Product Version:[[:space:]]" | awk '{print $$3}'); \
+		year=$$(dirname "$${exe}" | xargs -r basename); \
+		arch=$$(basename "$${exe}" 2> /dev/null | cut -f 2 -d '.'); \
 		grep -q "$${year}-.* $${ver}" ./version.txt || { echo " * $${year}-$${arch} $${ver}" >> ./version.txt; }; \
 	done
 	@if [ $$(( $$(date '+%s') - $$(stat -c '%Y' checksum.txt) )) -lt 60 ]; then tail -6 checksum.txt; fi

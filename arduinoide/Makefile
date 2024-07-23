@@ -5,7 +5,7 @@
 
 SOFT:=ArduinoIDE
 URL:=$(shell curl -s -L 'https://www.arduino.cc/en/software' | sed -e 's/>/\n/g;' | sed -e 's/>/\n/g;' | grep 'Windows MSI installer' | cut -f 6 -d '"')
-VERSION:=$(shell basename $(URL) | cut -f 2 -d '_')
+VERSION:=$(shell basename '$(URL)' 2> /dev/null | cut -f 2 -d '_')
 REVISION:=1
 
 Adafruit:=https://raw.githubusercontent.com/basictheprogram/chocolatey-cura-new/4.10/tools/Adafruit.cer

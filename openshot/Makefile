@@ -5,7 +5,7 @@
 
 SOFT:=OpenShot
 URL:=https:$(shell curl -s -L 'https://www.openshot.org/download/'| sed -e 's/"/\n/g;' | egrep -i 'openshot-qt/releases/.*/OpenShot-v.*-x86_64.exe$$' | grep -v '/daily/' | head -1)
-VERSION:=$(shell basename $(URL) | cut -f 2 -d '-' | sed -e 's/^v//;')
+VERSION:=$(shell basename '$(URL)' 2> /dev/null | cut -f 2 -d '-' | sed -e 's/^v//;')
 REVISION:=1
 
 EXE:=OpenShot-v$(VERSION)-x86_64.exe

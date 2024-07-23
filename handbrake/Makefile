@@ -9,7 +9,7 @@ VERSION1:=$(shell curl -s -L 'https://github.com/HandBrake/HandBrake/releases/la
 URL1:=https://github.com/HandBrake/HandBrake/releases/download/$(VERSION1)/HandBrake-$(VERSION1)-x86_64-Win_GUI.exe
 
 URL2:=$(shell curl -s -L https://dotnet.microsoft.com/$(shell curl -s -L 'https://dotnet.microsoft.com/en-us/download/dotnet/6.0' | sed -e 's/"/\n/g;' | grep 'thank-you/runtime-desktop.*windows-x64-installer'  | head -1) | sed -e 's/"/\n/g;' | grep '^https.*windowsdesktop-runtime-.*-win-x64.exe' | head -1)
-VERSION2:=$(shell basename $(URL2) | cut -f 3 -d '-')
+VERSION2:=$(shell basename '$(URL2)' 2> /dev/null | cut -f 3 -d '-')
 
 EXE1:=HandBrake-$(VERSION1)-x86_64-Win_GUI.exe
 EXE2:=windowsdesktop-runtime-$(VERSION2)-win-x64.exe

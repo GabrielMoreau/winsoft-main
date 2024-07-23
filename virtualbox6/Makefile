@@ -10,7 +10,7 @@ VERSION:=$(shell dirname '$(URL1)' | xargs -r basename)
 URL2:=$(shell curl -s -L 'https://www.virtualbox.org/wiki/Download_Old_Builds_6_1' | sed -e 's/"/\n/g;' | grep "/$(VERSION)/Oracle_VM_VirtualBox_Extension")
 
 EXE1:=VirtualBox-$(VERSION)-Win.exe
-EXE2:=$(shell basename $(URL2))
+EXE2:=$(shell basename '$(URL2)' 2> /dev/null)
 
 VCREDIST:=
 VCREDIST+=tmp/2015-2022/vc_redist.x64.exe

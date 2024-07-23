@@ -5,7 +5,7 @@
 
 SOFT:=Autopsy
 URL:=$(shell curl -s -L 'https://www.autopsy.com/download/' | sed -e 's/"/\n/g;' | grep '^https://.*/autopsy-.*64bit.msi' | head -1)
-VERSION:=$(shell basename $(URL) | cut -f 2 -d '-')
+VERSION:=$(shell basename '$(URL)' 2> /dev/null | cut -f 2 -d '-')
 REVISION:=1
 
 EXE:=autopsy-$(VERSION)-64bit.msi

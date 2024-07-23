@@ -7,7 +7,7 @@ SOFT:=ImageJ
 
 # ImageJ1
 #URL:=$(shell curl -s -L 'https://imagej.net/ij/download.html' | sed -e 's/"/\n/g;' | grep 'https:.*/distros/win/ij')
-#VERSION:=$(shell basename $(URL) | sed -e 's/^ij//; s/-.*//;')
+#VERSION:=$(shell basename '$(URL)' 2> /dev/null | sed -e 's/^ij//; s/-.*//;')
 VERSION:=$(shell curl -s -L 'https://maven.scijava.org/content/groups/public/sc/fiji/fiji/maven-metadata.xml' | grep '<release>' | cut -f 2 -d '>' | cut -f 1 -d '<')
 URL:=https://downloads.micron.ox.ac.uk/fiji_update/mirrors/fiji-latest/fiji-win64.zip
 ZIP:=fiji-win64.zip

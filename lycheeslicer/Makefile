@@ -6,7 +6,7 @@
 SOFT:=LycheeSlicer
 REVISION:=1
 URL:=$(shell curl -s -L 'https://mango3d.io/downloads/'| sed -e 's/"/\n/g;' | grep '^https://.*/LycheeSlicer-.*.exe' | head -1)
-VERSION:=$(shell basename $(URL) | cut -f 2- -d '-' | sed -e 's/\.exe//;')
+VERSION:=$(shell basename '$(URL)' 2> /dev/null | cut -f 2- -d '-' | sed -e 's/\.exe//;')
 EXE:=LycheeSlicer-$(VERSION).exe
 
 IT_TEAM:=IT Support

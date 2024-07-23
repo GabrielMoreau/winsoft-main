@@ -10,7 +10,7 @@ URL:=$(shell grep '^$(VERSION)[[:space:]]' url.txt | awk '{print $$2}')
 VERSION_LOW:=$(shell echo "$(VERSION)" | sed -e 's/\./_/g;')
 USERAGENT:=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:122.0) Gecko/20100101 Firefox/122.0
 
-EXE:=$(shell basename "$(URL)")
+EXE:=$(shell basename '$(URL)' 2> /dev/null)
 
 IT_TEAM:=IT Support
 LOGDIR:=%WINDIR%\\Logs

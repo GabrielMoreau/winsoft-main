@@ -6,8 +6,8 @@
 SOFT:=MiKTeX
 # VERSION:=$(shell curl -s -L 'https://github.com/MiKTeX/miktex/releases/latest' | sed -e 's/[[:space:]"]/\n/g;' | grep '^/MiKTeX/miktex/releases/tag/' | head -1 | xargs -r basename)
 URL:=https://miktex.org/$(shell curl -s -L 'https://miktex.org/download' | sed -e "s/'/\n/g;" | grep '^/download/.*\.zip$$' | sed -e 's#^/##; s/&#x2B;/+/g;' | head -1)
-VERSIONSHORT:=$(shell basename '$(URL)' | cut -f 2 -d '-' | cut -f 1 -d '+')
-VERSION:=$(shell basename '$(URL)' | cut -f 2 -d '-' | sed -e 's/+/./g;')
+VERSIONSHORT:=$(shell basename '$(URL)' 2> /dev/null | cut -f 2 -d '-' | cut -f 1 -d '+')
+VERSION:=$(shell basename '$(URL)' 2> /dev/null | cut -f 2 -d '-' | sed -e 's/+/./g;')
 REVISION:=1
 # https://miktex.org/download/ctan/systems/win32/miktex/setup/windows-x64/miktexsetup-5.5.0+1763023-x64.zip
 # https://ctan.tetaneutral.net/systems/win32/miktex/setup/windows-x64/miktexsetup-5.5.0+1763023-x64.zip

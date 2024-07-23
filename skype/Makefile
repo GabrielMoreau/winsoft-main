@@ -5,7 +5,7 @@
 
 SOFT:=Skype
 URL:=$(shell curl 'https://get.skype.com/go/getskype-skypeforwindows' -s -L -I -o /dev/null -w '%{url_effective}')
-VERSION:=$(shell basename $(URL) .exe | cut -f 2 -d '-')
+VERSION:=$(shell basename '$(URL)' .exe 2> /dev/null | cut -f 2 -d '-')
 REVISION:=1
 
 EXE:=Skype-$(VERSION).exe
