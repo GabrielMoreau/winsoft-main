@@ -14,6 +14,11 @@ HURUKAI_SIG:=blabla
 HURUKAI_PASSWORD:=youragentpass
 ```
 
+In parallel, you need to put the `agent-X.Y.Z_x64.msi` installation MSI in this `hurukai` folder.
+Be careful not to archive this MSI on a forge like GitLab.
+It is proprietary software.
+Under no circumstances should you publish a version on the Internet. 
+
 
 ## Register Key
 
