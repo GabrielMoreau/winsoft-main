@@ -16,6 +16,10 @@ OCS_SSL:=1
 # Cisco AnyConnect (anyconnect package)
 CISCO_VPN_SERVER:=vpn.example.com
 
+# Hurukai Server (HarfangLab)
+HURUKAI_SERVER:=hurukai.example.com
+HURUKAI_SIG:=blabla
+HURUKAI_PASSWORD:=youragentpass
 
 # Include your local parameter if exists
 SELF_MAKEDIR:=$(dir $(lastword $(MAKEFILE_LIST)))
