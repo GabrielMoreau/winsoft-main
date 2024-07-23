@@ -17,7 +17,7 @@ IT_TEAM:=IT Support
 LOGDIR:=%WINDIR%\\Logs
 
 
-.PHONY: all check-version check-unrealized check-exe clean control next ocs version wget checksum
+.PHONY: all check-version check-unrealized check-exe clean control ocs version wget checksum
 
 all: check-version check-exe $(SOFT)_$(VERSION)-$(REVISION)_x64.zip Uninstall-$(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
 
@@ -28,8 +28,6 @@ check-version:
 
 check-unrealized: check-version
 	@if grep -q '[[:space:]]$(EXE)$$' checksum.txt; then echo 'Ok'; else echo 'Warning: Updates not performed for $(SOFT) version $(VERSION)'; fi
-
-next: check-version check-exe $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
 
 clean:
 	rm -rf $(SOFT)_$(VERSION)-$(REVISION)_x64.zip tmp
