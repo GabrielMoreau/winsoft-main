@@ -33,13 +33,10 @@ version:
 	@echo "URL: $(URL)"
 	@echo "EXE: $(EXE)"
 
-checksum: check-version
-	@mkdir -p tmp
-	@(cd tmp ; \
-		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt && exit ; \
-		shasum -a 256 "$(EXE)" | sed -e 's#tmp/##;' >> ../checksum.txt ; \
-		tail -3 ../checksum.txt ; \
-		)
+checksum: check-version $(EXE)
+	@grep -q "^$$(shasum -a 256 $(EXE))$$" ./checksum.txt && exit ; \
+		shasum -a 256 "$(EXE)" | sed -e 's#tmp/##;' >> ./checksum.txt ; \
+		tail -3 ./checksum.txt
 
 check-exe: $(EXE)
 	@file $(EXE) | grep -q "Composite Document File.*Subject: HarfangLab Hurukai agent" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 1; } ; \
