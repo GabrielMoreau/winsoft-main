@@ -7,19 +7,19 @@ SOFT:=Update-WindowsDekstopRuntime
 REVISION:=1
 
 URL5:=$(shell curl -s -L https://dotnet.microsoft.com/$(shell curl -s -L 'https://dotnet.microsoft.com/en-us/download/dotnet/5.0' | sed -e 's/"/\n/g;' | grep 'thank-you/runtime-desktop.*windows-x64-installer'  | head -1) | sed -e 's/"/\n/g;' | grep '^https.*windowsdesktop-runtime-.*-win-x64.exe' | head -1)
-VERSION5:=$(shell basename $(URL5) 2>/dev/null | cut -f 3 -d '-')
+VERSION5:=5.$(shell basename '$(URL5)' 2>/dev/null | cut -f 3 -d '-' | cut -f 2- -d '.')
 EXE5:=windowsdesktop-runtime-$(VERSION5)-win-x64.exe
 
 URL6:=$(shell curl -s -L https://dotnet.microsoft.com/$(shell curl -s -L 'https://dotnet.microsoft.com/en-us/download/dotnet/6.0' | sed -e 's/"/\n/g;' | grep 'thank-you/runtime-desktop.*windows-x64-installer'  | head -1) | sed -e 's/"/\n/g;' | grep '^https.*windowsdesktop-runtime-.*-win-x64.exe' | head -1)
-VERSION6:=$(shell basename $(URL6) 2>/dev/null | cut -f 3 -d '-')
+VERSION6:=6.$(shell basename '$(URL6)' 2>/dev/null | cut -f 3 -d '-' | cut -f 2- -d '.')
 EXE6:=windowsdesktop-runtime-$(VERSION6)-win-x64.exe
 
 URL7:=$(shell curl -s -L https://dotnet.microsoft.com/$(shell curl -s -L 'https://dotnet.microsoft.com/en-us/download/dotnet/7.0' | sed -e 's/"/\n/g;' | grep 'thank-you/runtime-desktop.*windows-x64-installer'  | head -1) | sed -e 's/"/\n/g;' | grep '^https.*windowsdesktop-runtime-.*-win-x64.exe' | head -1)
-VERSION7:=$(shell basename $(URL7) 2>/dev/null | cut -f 3 -d '-')
+VERSION7:=7.$(shell basename '$(URL7)' 2>/dev/null | cut -f 3 -d '-' | cut -f 2- -d '.')
 EXE7:=windowsdesktop-runtime-$(VERSION7)-win-x64.exe
 
 URL8:=$(shell curl -s -L https://dotnet.microsoft.com/$(shell curl -s -L 'https://dotnet.microsoft.com/en-us/download/dotnet/8.0' | sed -e 's/"/\n/g;' | grep 'thank-you/runtime-desktop.*windows-x64-installer'  | head -1) | sed -e 's/"/\n/g;' | grep '^https.*windowsdesktop-runtime-.*-win-x64.exe' | head -1)
-VERSION8:=$(shell basename $(URL8) 2>/dev/null | cut -f 3 -d '-')
+VERSION8:=8.$(shell basename '$(URL8)' 2>/dev/null | cut -f 3 -d '-' | cut -f 2- -d '.')
 EXE8:=windowsdesktop-runtime-$(VERSION8)-win-x64.exe
 
 VERSION:=$(shell ./sum-versions $(VERSION5) $(VERSION6) $(VERSION7) $(VERSION8))
