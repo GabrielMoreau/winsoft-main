@@ -3,10 +3,12 @@
 # Inkscape
 #
 
+sinclude ../_common/flag.mk
+
 SOFT:=Inkscape
-VERSION:=$(shell curl -s -L 'https://inkscape.org/en/release/' | sed -e 's/>/\n/g;' | grep 'Inkscape.*title' | cut -f 3 -d ' ' | grep '^[[:digit:]]' | head -1)
+VERSION:=$(shell curl $(CURLFLAGS) -s -L 'https://inkscape.org/en/release/' | sed -e 's/>/\n/g;' | grep 'Inkscape.*title' | cut -f 3 -d ' ' | grep '^[[:digit:]]' | head -1)
 REVISION:=1
-URL:=https://inkscape.org/$(shell curl -s -L  'https://inkscape.org/release/inkscape-$(VERSION)/windows/64-bit/msi/dl' |  sed -e 's/\s/\n/g; s/"/=/g;' | grep '^url=' | cut -f 2 -d '=')
+URL:=https://inkscape.org/$(shell curl $(CURLFLAGS) -s -L  'https://inkscape.org/release/inkscape-$(VERSION)/windows/64-bit/msi/dl' |  sed -e 's/\s/\n/g; s/"/=/g;' | grep '^url=' | cut -f 2 -d '=')
 
 EXE:=inkscape-$(VERSION)-x64.msi
 
@@ -33,6 +35,7 @@ version:
 	@echo "VERSION: $(VERSION)"
 	@echo "URL: $(URL)"
 	@echo "EXE: $(EXE)"
+	@echo "CURL: $(CURLFLAGS)"
 
 checksum: check-version
 	@mkdir -p tmp
@@ -48,7 +51,7 @@ tmp/$(EXE):
 	@mkdir -p tmp
 	@(cd tmp ; \
 		rm -f *.exe *.msi 2>/dev/null ; \
-		curl -# -o "$(EXE)" -L "$(URL)" ; \
+		curl $(CURLFLAGS) -# -o "$(EXE)" -L "$(URL)" ; \
 		file $(EXE) | grep -q "Subject: Inkscape" || echo "Error: bad format for binary $(EXE)" ; \
 		# which peres >/dev/null && { peres -v $(EXE) | grep -q "^Product Version:[[:space:]]*$(VERSION)" || echo "Error: bad version for binary $(EXE)" ; } ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
