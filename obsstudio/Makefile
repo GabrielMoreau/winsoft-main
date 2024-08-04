@@ -3,12 +3,14 @@
 # OBS-Studio
 #
 
+sinclude ../_common/flag.mk
+
 SOFT:=OBS-Studio
-URL:=$(shell curl -s -L 'https://obsproject.com/fr/download' | sed -e 's/>/\n/g;' | sed -e 's/"/\n/g;' | egrep '^https://.*/OBS-Studio-.*-Full-Installer-x64.exe$$')
+URL:=$(shell curl $(CURLFLAGS) -s -L 'https://obsproject.com/fr/download' | sed -e 's/>/\n/g;' | sed -e 's/"/\n/g;' | egrep '^https://.*/OBS-Studio-.*-Installer.exe$$')
 VERSION:=$(shell basename $(URL) 2> /dev/null | cut -f 3 -d '-')
 REVISION:=1
 
-EXE:=OBS-Studio-$(VERSION)-Full-Installer-x64.exe
+EXE:=OBS-Studio-$(VERSION)-Installer.exe
 
 VCREDIST:=
 VCREDIST+=tmp/2015-2022/vc_redist.x64.exe
@@ -51,7 +53,7 @@ tmp/$(EXE):
 	@mkdir -p tmp
 	@(cd tmp ; \
 		rm -f *.exe *.msi 2>/dev/null ; \
-		curl -# -o "$(EXE)" -L "$(URL)" ; \
+		curl $(CURLFLAGS) -# -o "$(EXE)" -L "$(URL)" ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
 
@@ -92,12 +94,12 @@ ocs:
 
 tmp/2015-2022/vc_redist.x64.exe:
 	@mkdir -p tmp/2015-2022
-	@curl -s -o $@ -L https://aka.ms/vs/17/release/vc_redist.x64.exe
+	@curl $(CURLFLAGS) -s -o $@ -L https://aka.ms/vs/17/release/vc_redist.x64.exe
 	@file $@ | grep -q "PE32 executable" || echo "Error: bad format for binary $@"
 	@grep -q "^$$(shasum -a 256 $@)$$" checksum.txt || echo "Error: bad checksum for binary $@"
 
 tmp/2015-2022/vc_redist.x86.exe:
 	@mkdir -p tmp/2015-2022
-	@curl -s -o $@ -L https://aka.ms/vs/17/release/vc_redist.x86.exe
+	@curl $(CURLFLAGS) -s -o $@ -L https://aka.ms/vs/17/release/vc_redist.x86.exe
 	@file $@ | grep -q "PE32 executable" || echo "Error: bad format for binary $@"
 	@grep -q "^$$(shasum -a 256 $@)$$" checksum.txt || echo "Error: bad checksum for binary $@"

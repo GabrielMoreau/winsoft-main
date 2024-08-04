@@ -40,7 +40,7 @@ ScriptRunner.exe -appvscript VC_redist.x64.exe /install /quiet /norestart -appvs
 
 
 ECHO Silent install %softname%
-ScriptRunner.exe -appvscript OBS-Studio-%softversion%-Full-Installer-x64.exe /S -appvscriptrunnerparameters -wait -timeout=300
+ScriptRunner.exe -appvscript OBS-Studio-%softversion%-Installer.exe /S -appvscriptrunnerparameters -wait -timeout=300
 
 
 ECHO Remove desktop shortcut
