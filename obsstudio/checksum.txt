@@ -8,3 +8,4 @@ f5d429b2f75e85a7fb3e8dc84613fa362ab10276e4679b19f57dcae86569536b  OBS-Studio-29.
 16d89425adafa0c750d005b3075511aed3403bf71fe5fba3dac5e38ce4a29f8f  OBS-Studio-30.1-Full-Installer-x64.exe
 37c0626f3b192de362223e1a800592e90c826a3936937c93aee69aaea6122be9  OBS-Studio-30.1.1-Full-Installer-x64.exe
 0626384e8aa11211e77f11cc068cfedd0af043ebc71304ad7f8092173632121d  OBS-Studio-30.1.2-Full-Installer-x64.exe
+c11eb303330b9638936bad26cf02b8313ca43557d2a63f5e5c00d1eab2a9682e  OBS-Studio-30.2.2-Installer.exe
