@@ -2,3 +2,4 @@
 2ad1a59d1d63566ca52576dbb64a0c53b7fe97f5499e1740d032507e1239374c  Freeplane-Setup-with-Java-1.11.12.exe
 d200e482fbc9c32b5ce307eb93364d015c92c801c66b0215c894bf772f6d8daa  Freeplane-Setup-with-Java-1.11.13.exe
 39a0b50bd905d1c1b4190a19e54c17423e390217159afebf79a2988572f49c51  Freeplane-Setup-with-Java-1.11.14.exe
+32b5d7de7e22692134a0ec3f284579a8d0fd87faa21d103ad5fd24a742f35215  Freeplane-Setup-with-Java-1.12.2.exe
