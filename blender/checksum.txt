@@ -10,3 +10,4 @@ c1b8bb8907a329da200bf0d457748f3da86c2d1a204bbcd0be3bccde7e056ef0  blender-4.0.0-
 38485adda7cc076ebbfa5017ffab214a6dd6290bf183f87d0b1c14aab68ee68b  blender-4.0.2-windows-x64.msi
 d53c619e9af77d0e4f360559a481f70b93e37fb12dafc482deeeb6cbb7aa5ec7  blender-4.1.1-windows-x64.msi
 d53c619e9af77d0e4f360559a481f70b93e37fb12dafc482deeeb6cbb7aa5ec7  blender-4.2.0-windows-x64.msi
+518abf8497dae701d80f4769ab6c668690cd39d82da164bf4bd0c06ca24264ec  blender-4.2.1-windows-x64.msi
