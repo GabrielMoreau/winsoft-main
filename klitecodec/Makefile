@@ -1,16 +1,16 @@
 
 #
-# K-Lite-CodecPackFull
+# K-Lite-CodecPackStandard
 #
 
 #sinclude ../_common/flag.mk
 
-SOFT:=K-Lite-CodecPackFull
-VERSION:=$(shell curl $(CURLFLAGS) -s -L 'https://codecguide.com/download_k-lite_codec_pack_full.htm' | sed -e 's/>/\n/g;' | grep  '^Version' | cut -f 2 -d ' ')
-URL:=$(shell curl $(CURLFLAGS) -s -L 'https://codecguide.com/download_k-lite_codec_pack_full.htm' | sed -e 's/"/\n/g;' | grep  'https://.*Full.exe' | head -1)
+SOFT:=K-Lite-CodecPackStandard
+VERSION:=$(shell curl $(CURLFLAGS) -s -L 'https://codecguide.com/download_k-lite_codec_pack_standard.htm' | sed -e 's/>/\n/g;' | grep  '^Version' | cut -f 2 -d ' ' | head -1)
+URL:=$(shell curl $(CURLFLAGS) -s -L 'https://codecguide.com/download_k-lite_codec_pack_standard.htm' | sed -e 's/"/\n/g;' | grep  '^https://.*/K-Lite_Codec_Pack_.*exe'  | sort -R | head -1)
 REVISION:=1
 
-EXE:=K-Lite_Codec_Pack_$(VERSION)_Full.exe
+EXE:=K-Lite_Codec_Pack_$(VERSION)_Standard.exe
 
 IT_TEAM:=IT Support
 LOGDIR:=%WINDIR%\\Logs
