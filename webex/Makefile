@@ -4,8 +4,7 @@
 #
 
 SOFT:=Webex
-#VERSION:=$(shell curl -s -L 'https://help.webex.com/fr-fr/article/mqkve8/Application-Webex|-Notes-de-version'| sed -e 's/[<>[:space:]]/\n/g; s/—/-/g;' | grep '^Windows-[[:digit:]]' | head -1 | cut -f 2 -d '-')
-VERSION:=$(shell curl -s -L 'https://help.webex.com/article/mqkve8'| sed -e 's/[<>[:space:]]/\n/g; s/—/-/g;' | grep '^Windows-[[:digit:]]' | head -1 | cut -f 2 -d '-')
+VERSION:=$(shell curl -s -L 'https://help.webex.com/article/mqkve8' | sed -e 's/[<>[:space:]]/\n/g; s/—/-/g;' | grep '^Windows-[[:digit:]]' | head -1 | cut -f 2 -d '-')
 REVISION:=1
 URL:=https://binaries.webex.com/WebexTeamsDesktop-Windows-Gold/Webex.msi
 
@@ -53,12 +52,14 @@ tmp/$(EXE):
 		# file $(EXE) | grep -q "Subject: Webex" || echo "Error: bad format for binary $(EXE)" ; \
 		# which peres >/dev/null && { peres -v $(EXE) | grep -q "^Product Version:[[:space:]]*$(VERSION)" || echo "Error: bad version for binary $(EXE)" ; } ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
+		grep $$(shasum -a 256 "$(EXE)" | cut -f 1 -d ' ') ../checksum.txt | grep -qv "$(EXE)" && { echo "Error: another version of Webex-XXXX.msi exists with the same checksum" 1>&2 ; rm -f "$(EXE)" ; exit 1; } ; \
 		)
 
 check-exe: tmp/$(EXE)
 	@(cd tmp ; \
 		file $(EXE) | grep -q "Subject: Webex Teams" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 1; } ; \
 		# which peres >/dev/null && { peres -v $(EXE) | grep -q "^Product Version:[[:space:]]*$(VERSION)" || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 1; } ; } ;\
+		grep $$(shasum -a 256 "$(EXE)" | cut -f 1 -d ' ') ../checksum.txt | grep -qv "$(EXE)" && { echo "Error: two binary Webex-XXXX.msi version exists with same checksum" 1>&2 ; exit 1; } ; \
 		)
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE)
