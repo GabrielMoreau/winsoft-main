@@ -6,9 +6,9 @@
 SOFT:=Zotero
 VERSION:=$(shell curl -s -L 'https://www.zotero.org/download/' | sed 's/,/\n/g;'| grep win32 | cut -f 4 -d '"' | head -1)
 REVISION:=1
-URL:=https://download.zotero.org/client/release/$(VERSION)/Zotero-$(VERSION)_setup.exe
+URL:=https://download.zotero.org/client/release/$(VERSION)/Zotero-$(VERSION)_x64_setup.exe
 
-EXE:=Zotero-$(VERSION)_setup.exe
+EXE:=Zotero-$(VERSION)_x64_setup.exe
 
 IT_TEAM:=IT Support
 LOGDIR:=%WINDIR%\\Logs
@@ -49,8 +49,6 @@ tmp/$(EXE):
 	@(cd tmp ; \
 		rm -f *.exe *.msi 2>/dev/null ; \
 		curl -# -o "$(EXE)" -L "$(URL)" ; \
-		#file $(EXE) | grep -q "PE32 executable" || echo "Error: bad format for binary $(EXE)" ; \
-		#which peres >/dev/null && { peres -v $(EXE) | grep -q "^Product Version:[[:space:]]*" || echo "Error: bad version for binary $(EXE)" ; } ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
 

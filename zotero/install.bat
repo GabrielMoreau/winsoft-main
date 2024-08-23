@@ -21,7 +21,7 @@ SET softversion=__VERSION__
 
 
 ECHO Silent install %softname%
-ScriptRunner.exe -appvscript Zotero-%softversion%_setup.exe /S -appvscriptrunnerparameters -wait -timeout=300
+ScriptRunner.exe -appvscript Zotero-%softversion%_x64_setup.exe /S -appvscriptrunnerparameters -wait -timeout=300
 
 
 ECHO Remove desktop shortcut
