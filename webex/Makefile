@@ -4,8 +4,9 @@
 #
 
 SOFT:=Webex
+INSTALLER:=Webex.msi
 URL:=https://binaries.webex.com/WebexTeamsDesktop-Windows-Gold/Webex.msi
-$(shell mkdir -p tmp; cd tmp; curl -s --time-cond 'Webex.msi' -o 'Webex.msi' -L $(URL))
+$(shell mkdir -p tmp; cd tmp; curl -s --time-cond "$(INSTALLER)" -o "$(INSTALLER)" -L "$(URL)")
 VERSION:=$(shell curl -s -L 'https://help.webex.com/article/mqkve8' | sed -e 's/[<>[:space:]]/\n/g; s/—/-/g;' | grep '^Windows-[[:digit:]]' | head -1 | cut -f 2 -d '-')
 REVISION:=1
 
@@ -48,8 +49,9 @@ wget: tmp/$(EXE)
 tmp/$(EXE):
 	@mkdir -p tmp
 	@(cd tmp ; \
-		rm -f *.exe *.msi 2>/dev/null ; \
-		curl -# -o "$(EXE)" -L "$(URL)" ; \
+		rm -f *-*.exe *-*.msi 2>/dev/null ; \
+		ln -f "$(INSTALLER)" "$(EXE)" ; \
+		printf '#%.0s' $$(seq 1 $$(( $$(tput cols) - 33 ))); echo ' 100.0%' ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		grep $$(shasum -a 256 "$(EXE)" | cut -f 1 -d ' ') ../checksum.txt | grep -qv "$(EXE)" && { echo "Error: another version of Webex-XXXX.msi exists with the same checksum" 1>&2 ; rm -f "$(EXE)" ; exit 1; } ; \
 		)
