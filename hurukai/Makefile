@@ -39,6 +39,7 @@ checksum: check-version $(EXE)
 		tail -3 ./checksum.txt
 
 check-exe: $(EXE)
+	@grep -q "^$$(shasum -a 256 $(EXE))$$" ./checksum.txt || echo "Error: bad checksum for binary $(EXE)"
 	@file $(EXE) | grep -q "Composite Document File.*Subject: HarfangLab Hurukai agent" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 1; } ; \
 	# which peres >/dev/null && { peres -v $(EXE) | grep -q "^Product Version:[[:space:]]*$(VERSION)" || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 1; } ; } ;\
 
