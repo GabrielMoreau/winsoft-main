@@ -19,6 +19,8 @@ Be careful not to archive this MSI on a forge like GitLab.
 It is proprietary software.
 Under no circumstances should you publish a version on the Internet. 
 
+Please note that the Key Product in the registry changes with each version.
+
 
 ## Register Key
 
@@ -27,3 +29,4 @@ Example :
  | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
  | HKLM | HarfangLab Hurukai agent | HarfangLab | 3.10.3 | `{B671C117-C0D7-494C-850B-C4A1D9E18E5C}` | `MsiExec.exe /X{B671C117-C0D7-494C-850B-C4A1D9E18E5C}` |
+ | HKLM | HarfangLab Hurukai agent | HarfangLab | 3.11.6 | `{0311C5BF-D71D-4F48-AE2B-83187706B792}` | `MsiExec.exe /X{0311C5BF-D71D-4F48-AE2B-83187706B792}` |
