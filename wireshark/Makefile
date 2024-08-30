@@ -4,9 +4,9 @@
 #
 
 SOFT:=Wireshark
-VERSION1:=$(shell curl -s -L 'https://www.wireshark.org/download.html' | sed -e 's/[<>]/\n/g' | grep 'current stable release' | cut -f 8 -d ' ' | sed -e 's/\.$$//;')
+VERSION1:=$(shell curl -s -L 'https://www.wireshark.org/download.html' | sed -e 's/[<>]/\n/g' | grep 'current stable release' | cut -f 8 -d ' ' | sed -e 's/\.$$//;' | head -1)
 REVISION:=1
-URL1:=$(shell curl -s -L 'https://www.wireshark.org/download.html' | sed -e 's/"/\n/g;' | egrep "/Wireshark-$(VERSION1)-x64.exe")
+URL1:=$(shell curl -s -L 'https://www.wireshark.org/download.html' | sed -e 's/"/\n/g;' | egrep "/Wireshark-$(VERSION1)-x64.exe" | head -1)
 EXE1:=Wireshark-$(VERSION1)-x64.exe
 
 URL2:=http://www.win10pcap.org/download/$(shell curl -s -L 'http://www.win10pcap.org/download/' | sed -e 's/["<>]/\n/g;' | egrep '^Win10Pcap-v.*msi' | head -1)
