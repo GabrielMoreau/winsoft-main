@@ -10,3 +10,12 @@ regular disk but within a file. It can also encrypt a partition or
 
 * Download : https://www.veracrypt.fr/en/Downloads.html
 * Silent install : https://silentinstallhq.com/veracrypt-silent-install-how-to-guide/
+
+
+## Register Key
+
+Example :
+
+ | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
+ |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
+ | HKLM | VeraCrypt 1.26.14 | IDRIX | 1.26.14 | `{7207FED4-7243-4657-A542-60A50F2B722F}` | `MsiExec.exe /X{7207FED4-7243-4657-A542-60A50F2B722F}` |
