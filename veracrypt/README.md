@@ -11,6 +11,10 @@ regular disk but within a file. It can also encrypt a partition or
 * Download : https://www.veracrypt.fr/en/Downloads.html
 * Silent install : https://silentinstallhq.com/veracrypt-silent-install-how-to-guide/
 
+Warning: despite the command-line parameters, the installation may put a link on the desktop and reboot the computer.
+It depends on the version...
+Be sure to check on a few workstations before deploying intensively across your entire IT estate.
+
 
 ## Register Key
 
