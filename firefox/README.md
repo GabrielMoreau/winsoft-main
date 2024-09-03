@@ -11,6 +11,16 @@ Firefox is a free and open-source web browser developed by the Mozilla Foundatio
 	https://silentinstallhq.com/mozilla-firefox-100-silent-install-how-to-guide/
 
 
+## Register Key
+
+Example :
+
+ | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
+ |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
+ | HKLM | Mozilla Firefox ESR (x64 fr) | Mozilla | 115.14.0 | `Mozilla Firefox 115.14.0 ESR (x64 fr)` | `"C:\Program Files\Mozilla Firefox\uninstall\helper.exe"` |
+ | HKLM | Mozilla Firefox ESR (x64 fr) | Mozilla | 115.15.0 | `Mozilla Firefox 115.15.0 ESR (x64 fr)` | `"C:\Program Files\Mozilla Firefox\uninstall\helper.exe"` |
+
+
 ## Policies
 
 Policies can be specified by creating a file called policies.json.
