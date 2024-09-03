@@ -36,13 +36,14 @@ ECHO Execute pre-install script
 
 
 ECHO Silent install %softname%
-ScriptRunner.exe -appvscript MsiExec.exe /i AnyDesk-%softversion%.msi /qn /L*v "%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=300
+REM ScriptRunner.exe -appvscript MsiExec.exe /i AnyDesk-%softversion%.msi /qn /L*v "%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=300
 REM ScriptRunner.exe -appvscript AnyDesk-%softversion%.exe --start-with-win --create-shortcuts --remove-first --update-disabled --silent -appvscriptrunnerparameters -wait -timeout=300
+ScriptRunner.exe -appvscript AnyDesk-%softversion%.exe --silent --start-with-win --create-shortcuts --remove-first --update-disabled --install "%ProgramFiles(x86)%\AnyDesk" -appvscriptrunnerparameters -wait -timeout=300
 
 
 ECHO Remove desktop shortcut
-IF EXIST "%PUBLIC%\Desktop\AnyDesk MSI.lnk"          DEL /F /Q "%PUBLIC%\Desktop\AnyDesk MSI.lnk"
-IF EXIST "%ALLUSERSPROFILE%\Desktop\AnyDesk MSI.lnk" DEL /F /Q "%ALLUSERSPROFILE%\Desktop\AnyDesk MSI.lnk"
+IF EXIST "%PUBLIC%\Desktop\AnyDesk*.lnk"          DEL /F /Q "%PUBLIC%\Desktop\AnyDesk*.lnk"
+IF EXIST "%ALLUSERSPROFILE%\Desktop\AnyDesk*.lnk" DEL /F /Q "%ALLUSERSPROFILE%\Desktop\AnyDesk*.lnk"
 
 
 ECHO END %date%-%time%

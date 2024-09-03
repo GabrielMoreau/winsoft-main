@@ -6,10 +6,12 @@
 SOFT:=AnyDesk
 VERSION:=$(shell curl -s -L 'https://anydesk.com/en-au/downloads/windows' | sed -e 's/[>[:space:]]/\n/g;' | grep -E '^v[[:digit:]][[:digit:]\.]+$$' | sed -e 's/^v//;' | head -1)
 REVISION:=1
-URL:=https://download.anydesk.com/AnyDesk.msi
+URL:=https://download.anydesk.com/AnyDesk.exe
+#URL:=https://download.anydesk.com/AnyDesk.msi
 
-EXE:=AnyDesk-$(VERSION).msi
-EXE2:=Program Files/AnyDeskMSI/AnyDeskMSI.exe
+EXE:=AnyDesk-$(VERSION).exe
+#EXE:=AnyDesk-$(VERSION).msi
+#EXE2:=Program Files/AnyDeskMSI/AnyDeskMSI.exe
 
 IT_TEAM:=IT Support
 LOGDIR:=%WINDIR%\\Logs
@@ -50,14 +52,16 @@ tmp/$(EXE):
 	@(cd tmp ; \
 		rm -f *.exe *.msi 2>/dev/null ; \
 		curl -# -o "$(EXE)" -L "$(URL)" ; \
-		which msiextract >/dev/null && { rm -rf 'Program File'; msiextract $(EXE) ; } ; \
+		#which msiextract >/dev/null && { rm -rf 'Program File'; msiextract $(EXE) ; } ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
 
 check-exe: tmp/$(EXE)
 	@(cd tmp ; \
-		file $(EXE) | grep -q "Subject: AnyDesk MSI" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 1; } ; \
-		which peres >/dev/null && { peres -v '$(EXE2)' | grep -q "^Product Version:[[:space:]]*$(VERSION)" || { echo "Error: bad version for binary $(EXE2)" 1>&2 ; exit 1; } ; } ;\
+		file $(EXE) | grep -q "PE32 executable" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 1; } ; \
+		which peres >/dev/null && { peres -v '$(EXE)' | grep -q "^Product Version:[[:space:]]*$(VERSION)" || { echo "Error: bad version for binary $(EXE2)" 1>&2 ; exit 1; } ; } ;\
+		#file $(EXE) | grep -q "Subject: AnyDesk MSI" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 1; } ; \
+		#which peres >/dev/null && { peres -v '$(EXE2)' | grep -q "^Product Version:[[:space:]]*$(VERSION)" || { echo "Error: bad version for binary $(EXE2)" 1>&2 ; exit 1; } ; } ;\
 		)
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE)
