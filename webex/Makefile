@@ -6,8 +6,10 @@
 SOFT:=Webex
 INSTALLER:=Webex.msi
 #URL:=https://binaries.webex.com/WebexTeamsDesktop-Windows-Gold/Webex.msi
+#URL:=https://binaries.webex.com/WebexTeamsDesktop-Windows-Web-Installer/Webex.exe
 URL:=https://binaries.webex.com/WebexOfclDesktop-Win-64-Gold/Webex.msi
 $(shell mkdir -p tmp; cd tmp; curl -s --time-cond "$(INSTALLER)" -o "$(INSTALLER)" -L "$(URL)")
+#VERSION:=$(shell curl -s -L 'https://help.webex.com/article/mqkve8' | sed -e 's/[<>[:space:]]/\n/g; s/—/-/g;' | grep -m 1 -A 500 'stack-container' | grep '^Windows-[[:digit:]]' | head -1 | cut -f 2 -d '-')
 VERSION:=$(shell curl -s -L 'https://help.webex.com/article/mqkve8' | sed -e 's/[<>[:space:]]/\n/g; s/—/-/g;' | grep '^Windows-[[:digit:]]' | head -1 | cut -f 2 -d '-')
 REVISION:=1
 
