@@ -6,7 +6,7 @@
 sinclude ../_common/flag.mk
 
 SOFT:=Inkscape
-VERSION:=$(shell curl $(CURLFLAGS) -s -L 'https://inkscape.org/en/release/' | sed -e 's/>/\n/g;' | grep 'Inkscape.*title' | cut -f 3 -d ' ' | grep '^[[:digit:]]' | head -1)
+VERSION:=$(shell curl $(CURLFLAGS) -s -L 'https://inkscape.org/en/release/' | sed -e 's/>/\n/g;' | grep 'selected.*/en/release/inkscape-' | cut -f 2 -d '-' | cut -f 1 -d '/' | grep '^[[:digit:]]' | head -1)
 REVISION:=1
 URL:=https://inkscape.org/$(shell curl $(CURLFLAGS) -s -L  'https://inkscape.org/release/inkscape-$(VERSION)/windows/64-bit/msi/dl' |  sed -e 's/\s/\n/g; s/"/=/g;' | grep '^url=' | cut -f 2 -d '=')
 
