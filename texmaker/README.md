@@ -10,6 +10,7 @@ continuous view mode.
 * Website : https://www.xm1math.net/texmaker/
 * Wikipedia : https://en.wikipedia.org/wiki/Texmaker
 * Download : https://www.xm1math.net/texmaker/download.html
+* ChangeLog : https://www.xm1math.net/texmaker/log.html
 
 By default, the program is installed in the `C:\Program Files (x86)\Texmaker` folder.
 Upgrading from version 5 to version 6, for example, poses a few problems, as it is done in the same folder.
