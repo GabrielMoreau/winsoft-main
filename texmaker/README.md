@@ -13,7 +13,8 @@ continuous view mode.
 
 By default, the program is installed in the `C:\Program Files (x86)\Texmaker` folder.
 Upgrading from version 5 to version 6, for example, poses a few problems, as it is done in the same folder.
-So the choice is made to delete the previous version before upgrading.
+So the choice is made to delete all the previous version before upgrading.
+
 
 ## Register Key
 
