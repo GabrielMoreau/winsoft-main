@@ -1,14 +1,16 @@
 
 #
-# AnyConnect
+# CiscoAnyConnect
 #
 
-SOFT:=AnyConnect
-VERSION:=4.10.07061
+SOFT:=CiscoAnyConnect
+#VERSION:=4.10.07061
+VERSION:=5.1.5.65
 REVISION:=1
-VERSIONONLINE:=$(shell curl -s 'https://www.cisco.com/c/en/us/td/docs/security/vpn_client/anyconnect/anyconnect410/release/notes/release-notes-anyconnect-4-10.html' | sed -e 's/[<>]/\n/g;' | grep '^AnyConnect [[:digit:]].* New Features' | head -1 | cut -f 2 -d ' ')
+VERSIONONLINE:=$(shell curl -s 'https://www.cisco.com/c/en/us/td/docs/security/vpn_client/anyconnect/Cisco-Secure-Client-5/release/notes/release-notes-cisco-secure-client-5-1.html' | sed -e 's/[<>]/\n/g;' | grep '^Cisco Secure Client [[:digit:]].* New Features' | head -1 | cut -f 4 -d ' ')
 
-EXE:=anyconnect-win-$(VERSION)-core-vpn-webdeploy-k9.msi
+#EXE:=anyconnect-win-$(VERSION)-core-vpn-webdeploy-k9.msi
+EXE:=cisco-secure-client-win-$(VERSION)-core-vpn-webdeploy-k9.msi
 
 CISCO_VPN_SERVER:=vpn.example.com
 IT_TEAM:=IT Support
@@ -45,7 +47,8 @@ checksum: check-version
 		)
 
 check-exe: $(EXE)
-	@file $(EXE) | grep -q "Subject: Cisco AnyConnect Secure Mobility Client" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 1; }
+	@#file $(EXE) | grep -q "Subject: Cisco AnyConnect Secure Mobility Client" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 1; }
+	@file $(EXE) | grep -q "Subject: Cisco Secure Client - AnyConnect VPN" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 1; }
 	@grep -q "^$$(shasum -a 256 $(EXE))$$" ./checksum.txt || echo "Error: bad checksum for binary $(EXE)"
 
 tmp/install.bat: install.bat Makefile $(EXE)
