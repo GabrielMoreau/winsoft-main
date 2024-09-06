@@ -115,7 +115,7 @@ Please devops, put always the version number clearly in the comment...
 apt install make curl wget pev msitools p7zip-full libimage-exiftool-perl
 ```
 
-## List of 117 packages
+## List of 118 packages
 
  |   | Software | Detail | &#127968; |   |
  | - | -------- | ------ | --------- | - |
@@ -123,20 +123,20 @@ apt install make curl wget pev msitools p7zip-full libimage-exiftool-perl
  | 002 | [7-Zip](7zip/README.md) | File archiver with a high compression ratio | [&#127968;](https://www.7-zip.org/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
  | 003 | [AcrobatReader](acrobatreader/README.md) | Adobe PDF reader | [&#127968;](https://www.adobe.com/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
  | 004 | [Advanced Renamer](advancedrenamer/README.md) | Rename multiple files and folders at once | [&#127968;](https://www.advancedrenamer.com/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
- | 005 | [AnyConnect](anyconnect/README.md) | Cisco AnyConnect VPN | [&#127968;](https://www.cisco.com/c/en/us/security/vpn-endpoint-security-clients/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
- | 006 | [AnyDesk](anydesk/README.md) | Remote desktop application | [&#127968;](https://anydesk.com/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
- | 007 | [Arduino IDE](arduinoide/README.md) | Integrated Development Environment for Arduino | [&#127968;](https://www.arduino.cc/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
- | 008 | [Audacity](audacity/README.md) | Digital Audio Editor | [&#127968;](https://wiki.audacityteam.org/wiki/Audacity_Wiki_Home_Page) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
- | 009 | [Autopsy](autopsy/README.md) | Digital forensics and recover platform | [&#127968;](https://www.autopsy.com/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
- | 010 | [Avidemux](avidemux/README.md) | Video editor designed for simple cutting, filtering and encoding tasks | [&#127968;](http://fixounet.free.fr/avidemux/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
- | 011 | [Balena Etcher](balenaetcher/README.md) | Flash OS images to SD cards & USB drives, safely and easily | [&#127968;](https://etcher.balena.io/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
- | 012 | [Bandicut](bandicut/README.md) | Join and cut video | [&#127968;](https://www.bandicam.com/bandicut-video-cutter/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
- | 013 | [Bitvise SSH Client](bvsshclient/README.md) | Graphical SSH client | [&#127968;](https://www.bitvise.com/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
- | 014 | [BleachBit](bleachbit/README.md) | Clean computer files and privacy manager | [&#127968;](https://www.bleachbit.org/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
- | 015 | [Blender](blender/README.md) | 3D computer graphics software (animated films, virtual reality) | [&#127968;](https://www.blender.org/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
- | 016 | [BlueKenue](bluekenue/README.md) | Tool for hydraulic modellers | [&#127968;](https://nrc.canada.ca/fr/recherche-developpement/produits-services/logiciels-applications/blue-kenuetm-logiciel-modelisateurs-hydrauliques) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
- | 017 | [CCleaner](ccleaner/README.md) | Clean computer files and register keys | [&#127968;](https://www.ccleaner.com/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
- | 019 | [Chrome](chrome/README.md) | Google Chrome navigator | [&#127968;](https://www.google.com/chrome/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
+ | 005 | [AnyDesk](anydesk/README.md) | Remote desktop application | [&#127968;](https://anydesk.com/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
+ | 006 | [Arduino IDE](arduinoide/README.md) | Integrated Development Environment for Arduino | [&#127968;](https://www.arduino.cc/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
+ | 007 | [Audacity](audacity/README.md) | Digital Audio Editor | [&#127968;](https://wiki.audacityteam.org/wiki/Audacity_Wiki_Home_Page) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
+ | 008 | [Autopsy](autopsy/README.md) | Digital forensics and recover platform | [&#127968;](https://www.autopsy.com/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
+ | 009 | [Avidemux](avidemux/README.md) | Video editor designed for simple cutting, filtering and encoding tasks | [&#127968;](http://fixounet.free.fr/avidemux/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
+ | 010 | [Balena Etcher](balenaetcher/README.md) | Flash OS images to SD cards & USB drives, safely and easily | [&#127968;](https://etcher.balena.io/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
+ | 011 | [Bandicut](bandicut/README.md) | Join and cut video | [&#127968;](https://www.bandicam.com/bandicut-video-cutter/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
+ | 012 | [Bitvise SSH Client](bvsshclient/README.md) | Graphical SSH client | [&#127968;](https://www.bitvise.com/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
+ | 013 | [BleachBit](bleachbit/README.md) | Clean computer files and privacy manager | [&#127968;](https://www.bleachbit.org/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
+ | 014 | [Blender](blender/README.md) | 3D computer graphics software (animated films, virtual reality) | [&#127968;](https://www.blender.org/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
+ | 015 | [BlueKenue](bluekenue/README.md) | Tool for hydraulic modellers | [&#127968;](https://nrc.canada.ca/fr/recherche-developpement/produits-services/logiciels-applications/blue-kenuetm-logiciel-modelisateurs-hydrauliques) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
+ | 016 | [CCleaner](ccleaner/README.md) | Clean computer files and register keys | [&#127968;](https://www.ccleaner.com/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
+ | 018 | [Chrome](chrome/README.md) | Google Chrome navigator | [&#127968;](https://www.google.com/chrome/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
+ | 019 | [Cisco AnyConnect](anyconnect/README.md) | Secure Client AnyConnect VPN suite | [&#127968;](https://www.cisco.com/c/en/us/security/vpn-endpoint-security-clients/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
  | 020 | [CitrixWorkspace](citrixworkspace/README.md) | Citrix remote workspace client | [&#127968;](https://www.citrix.com/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
  | 021 | [Darktable](darktable/README.md) | Photography application and raw developer | [&#127968;](https://www.darktable.org/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
  | 022 | [Defraggler](defraggler/README.md) | Hard disk defragmentation utility | [&#127968;](https://www.ccleaner.com/defraggler) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
@@ -222,6 +222,7 @@ apt install make curl wget pev msitools p7zip-full libimage-exiftool-perl
  | Uninstall | Detail | &#127968; |   |
  | -------- | ------ | --------- | - |
  | [AcrobatReader (Uninstall)](acrobatreader/README.md) | Adobe PDF reader | [&#127968;](https://www.adobe.com/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
+ | [AnyDesk (Uninstall)](anydesk/README.md) | Remote desktop application | [&#127968;](https://anydesk.com/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
  | [CCleaner (Uninstall)](ccleaner/README.md) | Clean computer files and register keys | [&#127968;](https://www.ccleaner.com/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
  | [Chrome (Uninstall)](chrome/README.md) | Google Chrome navigator | [&#127968;](https://www.google.com/chrome/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
  | [FlashPlayer (Uninstall)](flashplayer-uninstall/README.md) | Remove all version of Adobe Flash Player | [&#127968;](https://www.adobe.com/products/flashplayer/end-of-life.html) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
