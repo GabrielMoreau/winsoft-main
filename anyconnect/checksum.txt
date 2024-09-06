@@ -1,3 +1,4 @@
 331566b04dc33d2117948145344601dbf1a6c27c9c4430614fa6ed4f6fb1b02b  anyconnect-win-4.10.04071-core-vpn-webdeploy-k9.msi
 16a9a70db73d0aad60ed35adf7a1cce9b28c3213a70d86b5981ac4c6f3fb632e  anyconnect-win-4.10.05111-core-vpn-webdeploy-k9.msi
 2f6694e8c737410041becd5aea4e93d3aabd81a6d9842396c9419c1fd92761d2  anyconnect-win-4.10.07061-core-vpn-webdeploy-k9.msi
+0c18820e670d0709d39fb4a809f0309b413441048a16efdd9b0efe8f6ee2cbab  cisco-secure-client-win-5.1.5.65-core-vpn-webdeploy-k9.msi
