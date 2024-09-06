@@ -4,8 +4,9 @@
 #
 
 SOFT:=TexMaker
-VERSION:=$(shell curl -s -L 'https://www.xm1math.net/texmaker/' | sed -e 's/[<>]/\n/g;' | grep 'DOWNLOAD version' | cut -f 3 -d ' ')
-URL:=https://www.xm1math.net/texmaker/assets/files/Texmaker_$(VERSION)_Win_x64.msi
+# https://www.xm1math.net/texmaker/assets/files/Texmaker_6.0.0_Win_x64.msi
+URL:=https://www.xm1math.net/texmaker/$(shell curl -s -L 'https://www.xm1math.net/texmaker/download.html' | sed -e 's/"/\n/g;' | grep '/Texmaker_.*_Win_x64.msi' | head -1)
+VERSION:=$(shell basename "$(URL)" | cut -f 2 -d '_')
 REVISION:=1
 
 EXE:=Texmaker_$(VERSION)_Win_x64.msi
