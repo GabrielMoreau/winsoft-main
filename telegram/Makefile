@@ -4,8 +4,8 @@
 #
 
 SOFT:=Telegram
-URL:=https://github.com$(shell curl -s  -L 'https://github.com/telegramdesktop/tdesktop/releases' |sed 's/"/\n/g;' | grep '^https://github.com/telegramdesktop/tdesktop/releases/expanded_assets' | xargs -r -n 1 curl -s  -L | sed 's/"/\n/g;' | grep '/tportable-x64.*zip' | head -1)
-VERSION:=$(shell echo $(URL) | cut -f 8	 -d '/' | sed -s 's/^v//;')
+URL:=https://github.com$(shell curl -s  -L 'https://github.com/telegramdesktop/tdesktop/releases' | sed 's/"/\n/g;' | grep '^https://github.com/telegramdesktop/tdesktop/releases/expanded_assets' | xargs -r -n 1 curl -s -L | sed 's/"/\n/g;' | grep '/tportable-x64.*zip' | head -1)
+VERSION:=$(shell echo $(URL) | cut -f 8 -d '/' | sed -s 's/^v//;')
 REVISION:=1
 
 EXE:=tportable-x64.$(VERSION).zip
