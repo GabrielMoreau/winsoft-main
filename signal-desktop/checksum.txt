@@ -39,3 +39,4 @@ d929961fda3599bff78f71a7d791ece1af4b47fac978d1947ca2eb755d33f32b  signal-desktop
 1a3cc97985e47e856526b32a82014b6cc284132806c69f3ec0a86943aebf7fe7  signal-desktop-win-7.22.0.exe
 d7d2366edb9e61f2ca109170d6dd4d3ec2327cff7ded6b669c1324eff397ab40  signal-desktop-win-7.22.2.exe
 64ec342952a351e94f9c2aa7408ad6ce84d78b51817d2a8c53bcaa9097233767  signal-desktop-win-7.23.0.exe
+eb43dddec630a03df1d3343c05ac102bfd6be7c8546dbbdd55334ad4f825dcf9  signal-desktop-win-7.24.0.exe
