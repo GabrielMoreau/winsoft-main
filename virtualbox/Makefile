@@ -7,7 +7,10 @@ SOFT:=VirtualBox
 REVISION:=1
 URL1:=$(shell curl -s -L 'https://www.virtualbox.org/wiki/Downloads' | sed -e 's/"/\n/g;' | grep '/VirtualBox-.*-Win.exe' | head -1)
 VERSION:=$(shell dirname '$(URL1)' | xargs -r basename)
-URL2:=$(shell curl -s -L 'https://www.virtualbox.org/wiki/Downloads' | sed -e 's/[<>"]/\n/g;' | grep "/$(VERSION)/Oracle_VM_VirtualBox_Extension")
+URL2:=$(shell curl -s -L 'https://www.virtualbox.org/wiki/Downloads' | sed -e 's/[<>"]/\n/g;' | grep "/$(VERSION)/Oracle_VirtualBox_Extension_Pack")
+
+#https://download.virtualbox.org/virtualbox/7.1.0/VirtualBox-7.1.0-164728-Win.exe
+#https://download.virtualbox.org/virtualbox/7.1.0/Oracle_VirtualBox_Extension_Pack-7.1.0.vbox-extpack
 
 EXE1:=VirtualBox-$(VERSION)-Win.exe
 EXE2:=$(shell basename '$(URL2)' 2> /dev/null)
