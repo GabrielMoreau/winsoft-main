@@ -5,8 +5,8 @@
 
 SOFT:=AcrobatReader
 VERSION:=$(shell curl -s 'https://helpx.adobe.com/acrobat/release-note/release-notes-acrobat-reader.html' | grep 'disablelinktracking="false">DC ' | cut -f 2 -d '(' | cut -f 1 -d ')' | head -1)
-URLTRANSIT:=$(shell curl -s 'https://helpx.adobe.com/acrobat/release-note/release-notes-acrobat-reader.html' | grep "$(VERSION)" | sed -e 's/"/\n/g;' | grep '^https')
-VERSIONCOLLAPSE:=$(shell curl -s "$(URLTRANSIT)" |grep AcroRdrDCx64Upd | sed -e 's/"/\n/g;' | grep '^https' | cut -f 9 -d '/' | head -1)
+URLTRANSIT:=$(shell curl -s 'https://helpx.adobe.com/acrobat/release-note/release-notes-acrobat-reader.html' | grep "$(VERSION)" | sed -e 's/"/\n/g;' | grep '^https' | head -1)
+VERSIONCOLLAPSE:=$(shell curl -s "$(URLTRANSIT)" | grep AcroRdrDCx64Upd | sed -e 's/"/\n/g;' | grep '^https' | cut -f 9 -d '/' | head -1)
 VERSIONSHORT:=$(shell echo $(VERSIONCOLLAPSE) | sed -e 's/[\.0[:space:]]//g;')
 REVISION:=1
 URL:=https://ardownload2.adobe.com/pub/adobe/acrobat/win/AcrobatDC/$(VERSIONCOLLAPSE)/AcroRdrDCx64$(VERSIONCOLLAPSE)_fr_FR.exe
@@ -35,12 +35,11 @@ clean:
 
 version:
 	@echo "VERSION:         $(VERSION)"
-	@echo "VERSION:     $(VERSION)"
 	@echo "VERSIONCOLLAPSE: $(VERSIONCOLLAPSE)"
 	@echo "VERSIONSHORT:    $(VERSIONSHORT)"
-	@echo "URLTRANSIT: $(URLTRANSIT)"
-	@echo "URL: $(URL)"
-	@echo "EXE: $(EXE)"
+	@echo "URLTRANSIT:      $(URLTRANSIT)"
+	@echo "URL:             $(URL)"
+	@echo "EXE:             $(EXE)"
 
 checksum: check-version
 	@mkdir -p tmp
