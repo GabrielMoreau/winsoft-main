@@ -5,3 +5,4 @@
 3873928c602cf3df2c74f9a8a0145e12a063dcac2d24a0ff989e636fa182fd63  arduino-ide_2.3.0_Windows_64bit.msi
 359d2d57db407bb14db18d3878d3f79004388ecbf7d0006a5fbdf198533e121a  arduino-ide_2.3.1_Windows_64bit.msi
 a409e36fd0a66538f63bc0d70810126ed4c721fb69db8b5b3eeba5f5ab52a0f0  arduino-ide_2.3.2_Windows_64bit.msi
+1c84682c7c13786e71ddc17cc539aa30088d85dbf3d8d319ad93048d2f68ce38  arduino-ide_2.3.3_Windows_64bit.msi
