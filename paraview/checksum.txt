@@ -4,3 +4,4 @@
 7fd0936a38cb62db888197e8cb740ab3f01c03f6324d5a0ecb3114e6adcdb40a  ParaView-5.12.0-Windows-Python3.10-msvc2017-AMD64.msi
 a99bd3d95a0a0eb5e955c82014ef4be3fe5d1625a4d605eccb4a199d4693ea0f  ParaView-5.12.1-Windows-Python3.10-msvc2017-AMD64.msi
 3b75d7dba7902eba8a783a23d42a31b1b358c3362337edac0978a81cb6a56e83  ParaView-5.13.0-Windows-Python3.10-msvc2017-AMD64.msi
+28b2aae8ecccaf4466a71a92e613f674d0ff5fcbd9ce1a06fae51fe4e1809efe  ParaView-5.13.1-Windows-Python3.10-msvc2017-AMD64.msi
