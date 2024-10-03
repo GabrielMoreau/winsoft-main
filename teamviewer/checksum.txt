@@ -48,3 +48,4 @@ d3b1d36acc6c8776f71497823c490ca995c7d6d493f552c3de54c66eefd05432  TeamViewer-15.
 16bc5b424a94b8fe398a820b87b474660ff53892ad58e30f590cb275c5748051  TeamViewer-15.57.3-Setup-x64.exe
 dc205bbeb2e98ac474e816ae99ff993e263d8b7680777ad95dfb0eddaf38cfc4  TeamViewer-15.57.5-Setup-x64.exe
 87b5be586bd03f9e2033a8f03fe852dbc697d267f7c6b2a4996b548b02bfc9c7  TeamViewer-15.58.4-Setup-x64.exe
+4dcfcb445e1adaad0164cc0e01aff2e9785bb151ce4a90ebce41b4827fc5bddd  TeamViewer-15.58.5-Setup-x64.exe
