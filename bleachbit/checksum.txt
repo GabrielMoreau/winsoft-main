@@ -1,2 +1,3 @@
 5e1e6e2e269216a8c40ab1dbba26b1b7d53f1f9f106cb94abbe7a4d1f38eb460  BleachBit-4.4.2-setup.exe
 4be77c019328203bc16fcd6ab62b41e26e14edfdc4572448d0ddb101ba796ec9  BleachBit-4.6.0-setup.exe
+43bc44163015e62c32a344f354d5d16ce3e3d45d402e9d52b79079cc7d9b4d05  BleachBit-4.6.2-setup.exe
