@@ -16,3 +16,5 @@ cc133394781be375aca692e3255c52b839f68c525dba627cf5ccf60bf36c7430  windowsdesktop
 622e3d046852caae4c28a71be174020dabbc6b21f2a1a320ac0c41c701a6a52c  windowsdesktop-runtime-8.0.7-win-x64.exe
 6b1b7bffe4024d86c4feb6e881648de557c6bff2e16e867e3ce1a2ed39489a53  windowsdesktop-runtime-6.0.33-win-x64.exe
 1d8fc3eaad1285d701a77216e923c8be404dc2254d51779503828a3b3e1cdeb1  windowsdesktop-runtime-8.0.8-win-x64.exe
+1818e82a54c9c33fc3a56cbfd77dc12b5f0202427793a65e1976ff5a79cd6528  windowsdesktop-runtime-6.0.35-win-x64.exe
+5ff2aa4a8161382b991a91949992fed15cfeecf2ae4b8c55254733e5ef4c9fe8  windowsdesktop-runtime-8.0.10-win-x64.exe
