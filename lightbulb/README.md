@@ -14,3 +14,12 @@ Alternatives :
 * SunsetScreen (shareware) - https://www.skytopia.com/software/sunsetscreen/
 * F.lux (no-free) - https://justgetflux.com/
 * Use Windows 10's Night light - https://www.windowscentral.com/12-days-tech-tips-use-windows-10s-night-light-improve-sleep-quality-and-reduce-eye-strain
+
+
+## Register Key
+
+Example :
+
+ | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
+ |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
+ | HKLM | LightBulb 2.4.11 | Tyrrrz | 2.4.11 | `{892F745F-A497-42ED-B503-8D74936D0BEB}_is1` | `"C:\Program Files (x86)\LightBulb\unins000.exe"` |
