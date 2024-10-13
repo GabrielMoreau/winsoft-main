@@ -97,9 +97,3 @@ tmp/2015-2022/vc_redist.x64.exe:
 	@curl $(CURLFLAGS) -s -o $@ -L https://aka.ms/vs/17/release/vc_redist.x64.exe
 	@file $@ | grep -q "PE32 executable" || echo "Error: bad format for binary $@"
 	@grep -q "^$$(shasum -a 256 $@)$$" checksum.txt || echo "Error: bad checksum for binary $@"
-
-tmp/2015-2022/vc_redist.x86.exe:
-	@mkdir -p tmp/2015-2022
-	@curl $(CURLFLAGS) -s -o $@ -L https://aka.ms/vs/17/release/vc_redist.x86.exe
-	@file $@ | grep -q "PE32 executable" || echo "Error: bad format for binary $@"
-	@grep -q "^$$(shasum -a 256 $@)$$" checksum.txt || echo "Error: bad checksum for binary $@"
