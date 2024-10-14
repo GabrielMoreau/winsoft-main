@@ -22,3 +22,6 @@ The TPM chip should therefore not block the computer.
 1. `HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Auto Update\PostRebootReporting`
 1. `HKLM:\SOFTWARE\Microsoft\Updates`
 1. `HKLM:\SOFTWARE\Microsoft\ServerManager\CurrentRebootAttemps`
+
+
+If you use OCS Inventory to manage your machines, the [pendingreboot](https://github.com/PluginsOCSInventory-NG/pendingreboot/) module may be complementary.
