@@ -15,7 +15,5 @@ The list below gives a simplified view:
 1. `HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Auto Update\RebootRequired`
 1. `HKLM:\Software\Microsoft\Windows\CurrentVersion\Component Based Servicing\PackagesPending`
 1. `HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Auto Update\PostRebootReporting`
-1. `HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\PendingFileRenameOperations`
-1. `HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\PendingFileRenameOperations2`
 1. `HKLM:\SOFTWARE\Microsoft\Updates`
 1. `HKLM:\SOFTWARE\Microsoft\ServerManager\CurrentRebootAttemps`
