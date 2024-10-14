@@ -76,9 +76,9 @@ $VerbosePreference = "Continue"
 $Count = 0
 foreach ($Test in $PendingTest) {
 	$Count++
-	Write-Verbose "Running scriptblock $Count: [$($Test.ToString())]"
+	Write-Verbose "Running scriptblock ${Count}: [$($Test.ToString())]"
 	If (& $Test) {
-		Write-Verbose "Warning: Need to reboot said the test $Count"
+		Write-Verbose "Warning: Need to reboot machine according to ${Count} test"
 		Exit $Count
 		Break
 	}
