@@ -32,21 +32,22 @@ ECHO unblock
 ECHO Execute pre-install script
 %pwrsh% -File ".\pre-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
 
-
-ECHO Bitlocker state before
+REM https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/manage-bde-status
+ECHO Bitlocker state
 manage-bde -status %SystemDrive%
 
-IF %ERRORLEVEL% EQU 0 (
+IF %ERRORLEVEL% NEQ 0 (
   REM https://techwiser.com/ways-to-disable-and-suspend-bitlocker-on-windows-10-11/
+  REM https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/manage-bde-protectors
   ECHO Suspend bitlocker
-  manage-bde -protectors -Disable %SystemDrive%
+  manage-bde -protectors -disable %SystemDrive%
 
   ECHO Force Reboot Computer
   shutdown /r /t 300 /c "Force Reboot in 5 min by __IT_TEAM__"
-)
 
-ECHO Bitlocker state before
-manage-bde -status %SystemDrive%
+  ECHO Bitlocker state after sending reboot trigger
+  manage-bde -status %SystemDrive%
+)
 
 
 ECHO END %date%-%time%

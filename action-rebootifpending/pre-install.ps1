@@ -57,31 +57,32 @@ $PendingTest= @(
 	}
 	# { Test-RegistryValue -Key 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce' -Value 'DVDRebootSignal' }
 	{ Test-RegistryKey -Key 'HKLM:\SOFTWARE\Microsoft\ServerManager\CurrentRebootAttemps' }
-	{ Test-RegistryValue -Key 'HKLM:\SYSTEM\CurrentControlSet\Services\Netlogon' -Value 'JoinDomain' }
-	{ Test-RegistryValue -Key 'HKLM:\SYSTEM\CurrentControlSet\Services\Netlogon' -Value 'AvoidSpnSet' }
-	{
-		# Added test to check first if keys exists, if not each group will return $Null
-		# May need to evaluate what it means if one or both of these keys do not exist
-		( 'HKLM:\SYSTEM\CurrentControlSet\Control\ComputerName\ActiveComputerName' | Where-Object { Test-path $_ } | %{ (Get-ItemProperty -Path $_ ).ComputerName } ) -ne 
-		( 'HKLM:\SYSTEM\CurrentControlSet\Control\ComputerName\ComputerName' | Where-Object { Test-Path $_ } | %{ (Get-ItemProperty -Path $_ ).ComputerName } )
-	}
-	{
-		# Added test to check first if key exists
-		'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Services\Pending' | Where-Object { 
-			(Test-Path $_) -and (Get-ChildItem -Path $_) } | ForEach-Object { $True }
-	}
+	#{ Test-RegistryValue -Key 'HKLM:\SYSTEM\CurrentControlSet\Services\Netlogon' -Value 'JoinDomain' }
+	#{ Test-RegistryValue -Key 'HKLM:\SYSTEM\CurrentControlSet\Services\Netlogon' -Value 'AvoidSpnSet' }
+	#{
+	#	# Added test to check first if keys exists, if not each group will return $Null
+	#	# May need to evaluate what it means if one or both of these keys do not exist
+	#	( 'HKLM:\SYSTEM\CurrentControlSet\Control\ComputerName\ActiveComputerName' | Where-Object { Test-path $_ } | %{ (Get-ItemProperty -Path $_ ).ComputerName } ) -ne 
+	#	( 'HKLM:\SYSTEM\CurrentControlSet\Control\ComputerName\ComputerName' | Where-Object { Test-Path $_ } | %{ (Get-ItemProperty -Path $_ ).ComputerName } )
+	#}
+	#{
+	#	# Added test to check first if key exists
+	#	'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Services\Pending' | Where-Object { 
+	#		(Test-Path $_) -and (Get-ChildItem -Path $_) } | ForEach-Object { $True }
+	#}
 )
 
 $VerbosePreference = "Continue"
+$Count = 0
 foreach ($Test in $PendingTest) {
-	Write-Verbose "Running scriptblock: [$($Test.ToString())]"
+	$Count++
+	Write-Verbose "Running scriptblock $Count: [$($Test.ToString())]"
 	If (& $Test) {
-		# Need to reboot
-		$True
-		Exit 0
+		Write-Verbose "Warning: Need to reboot said the test $Count"
+		Exit $Count
 		Break
 	}
 }
 
-# No pending Reboot
-Exit 1
+Write-Verbose "No pending Reboot"
+Exit 0
