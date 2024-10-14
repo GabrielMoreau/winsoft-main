@@ -10,6 +10,16 @@ If the workstation is rebooted, bitlocker is temporarily deactivated on the syst
 There are 7 tests to determine whether or not to reboot the computer.
 The list below gives a simplified view:
 
+Warning: the application returns a zero error code (0) if the workstation is not restarted.
+If the workstation is restarted, the error code is non-zero.
+If your deployment tool for this package indicates an error, this is normal.
+
+The error code corresponds to the number of the test performed in the [pre-install](./pre-install.ps1) script (i.e. between 1 and 7).
+In fact, there are 7 tests to determine whether or not to restart the computer.
+The list below gives a simplified view.
+Note that in this case, bitlocker encryption is temporarily deactivated on the system partition for a single reboot.
+The TPM chip should therefore not block the computer.
+
 1. `HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\RebootPending`
 1. `HKLM:\Software\Microsoft\Windows\CurrentVersion\Component Based Servicing\RebootInProgress`
 1. `HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Auto Update\RebootRequired`
