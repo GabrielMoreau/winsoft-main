@@ -1,4 +1,6 @@
 
+Write-Output "Begin Pre-Install"
+
 # See https://adamtheautomator.com/pending-reboot-registry/
 
 Function Test-RegistryKey {
@@ -39,7 +41,7 @@ Function Test-RegistryValueNotNull {
 	Return $False
 }
 
-# Added "test-path" to each test that did not leverage a custom Function from above since
+# Added "Test-Path" to each test that did not leverage a custom Function from above since
 # an exception is thrown when Get-ItemProperty or Get-ChildItem are passed a nonexistant key path
 $PendingTest= @(
 	{ Test-RegistryKey -Key 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\RebootPending' }
@@ -72,17 +74,16 @@ $PendingTest= @(
 	#}
 )
 
-$VerbosePreference = "Continue"
 $Count = 0
 foreach ($Test in $PendingTest) {
 	$Count++
-	Write-Verbose "Running scriptblock ${Count}: [$($Test.ToString())]"
+	Write-Output "Running scriptblock ${Count}: [$($Test.ToString())]"
 	If (& $Test) {
-		Write-Verbose "Warning: Need to reboot machine according to ${Count} test"
+		Write-Output "Warning: Need to reboot machine according to ${Count} test"
 		Exit $Count
 		Break
 	}
 }
 
-Write-Verbose "No pending Reboot"
+Write-Output "No pending Reboot"
 Exit 0
