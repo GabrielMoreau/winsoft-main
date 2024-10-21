@@ -3,3 +3,4 @@
 5eb0a0bcb45825e4bc4dc3ac516caff2a6d1a285c3c7494ccdc05d7ec41262f6  xournalpp-1.2.1-windows.exe
 8762619cde6a070d6406ef22797c5b7239c8af52714a4e92caf0d60bf6b3ff78  xournalpp-1.2.2-windows.exe
 e49c0da26ea2b35b743d51e1624e6d9b2b26e54efaa17ac29125ad02763a7866  xournalpp-1.2.3-windows.exe
+d03e87c2e34996f6a3f07bb34b477d5d8269b353cf70207a9d147f0c5a526539  xournalpp-1.2.4-windows.exe
