@@ -18,3 +18,13 @@ Because we're installing this software under the SYSTEM account, which
 doesn't really have a profile, we need to manually create a shortcut in
 the global menu and add a registry key to uninstall Xournal++
 (see https://github.com/xournalpp/xournalpp/issues/4445).
+
+
+## Register Key
+
+Example :
+
+ | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
+ |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
+ | HKU | Xournal++ | The Xournal++ Team | 1.2.3 | `Xournal++` | `"C:\Program Files\Xournal++\Uninstall.exe"` |
+ | HKU | Xournal++ | The Xournal++ Team | 1.2.4 | `Xournal++` | `"C:\Program Files\Xournal++\Uninstall.exe"` |
