@@ -9,3 +9,13 @@ It supersedes SuperCopier.
 * Download : https://ultracopier.herman-brule.com/#download
 * Git : https://github.com/alphaonex86/Ultracopier
 * Chocolatey : https://community.chocolatey.org/packages/ultracopier
+
+
+## Register Key
+
+Example :
+
+ | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
+ |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
+ | HKLM | Ultracopier 2.2.7.1 | Ultracopier | 2.2.7.1 | `Ultracopier` | `C:\Program Files\Ultracopier\uninst.exe` |
+ | HKLM | Ultracopier 3.0.0.0 | Ultracopier | 3.0.0.0 | `Ultracopier` | `C:\Program Files\Ultracopier\uninst.exe` |
