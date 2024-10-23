@@ -20,7 +20,7 @@ LOGDIR:=%WINDIR%\\Logs
 .PHONY: all check-version check-unrealized check-exe clean control next ocs version wget checksum
 .ONESHELL:
 
-all: check-version check-exe $(SOFT)_$(VERSION)-$(REVISION)_x64.zip Uninstall-$(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
+all: check-version check-exe Uninstall-$(SOFT)_$(VERSION)-$(REVISION)_x64.zip $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
 
 sinclude ../_common/conf.mk
 
