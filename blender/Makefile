@@ -4,9 +4,9 @@
 #
 
 SOFT:=Blender
-VERSION:=$(shell curl -s -L 'https://api.github.com/repos/blender/blender/tags' | grep '"name":' | head -1 | cut -f 4 -d '"' | sed -e 's/^v//;')
+#VERSION:=$(shell curl -s -L 'https://api.github.com/repos/blender/blender/tags' | grep '"name":' | head -1 | cut -f 4 -d '"' | sed -e 's/^v//;')
 URL:=$(shell curl -s -L 'https://www.blender.org/download/' | sed -e 's/"/\n/g;' | egrep '^https://www.blender.org/.*/.*windows-x64.msi' | head -1 | xargs -r curl -s -L | sed -e 's/"/\n/g;' | egrep '^https://.*/blender-.*windows-x64.msi' | sort -r | head -1 | sed -e 's#/$$##;')
-#VERSION:=$(shell basename '$(URL)' 2> /dev/null | cut -f 2 -d '-')
+VERSION:=$(shell basename '$(URL)' 2> /dev/null | cut -f 2 -d '-')
 REVISION:=1
 
 EXE:=blender-$(VERSION)-windows-x64.msi
@@ -50,12 +50,18 @@ tmp/$(EXE):
 	@(cd tmp ; \
 		rm -f *.exe *.msi 2>/dev/null ; \
 		curl -# -o "$(EXE)" -L "$(URL)" ; \
-		which 7z >/dev/null && { 7z x -y $(EXE) 'CM_FP_Blender.blender_launcher.exe' | grep 'Extracting'; } ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
 
-check-exe: tmp/$(EXE)
-	@cd tmp; file $(EXE) | grep -q "Subject: blender, Author: Blender Foundation" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 1; }
+tmp/CM_FP_Blender.blender_launcher.exe: tmp/$(EXE)
+	@mkdir -p tmp
+	@(cd tmp ; \
+		which 7z >/dev/null && { 7z x -y $(EXE) 'CM_FP_Blender.blender_launcher.exe' | grep 'Extracting'; } ; \
+		)
+
+check-exe: tmp/$(EXE) tmp/CM_FP_Blender.blender_launcher.exe
+	@cd tmp; file $(EXE) | grep -q 'Subject: Blender, Author: Blender Foundation' || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 1; }
+	@cd tmp; file 'CM_FP_Blender.blender_launcher.exe' | grep -q 'PE32. executable (GUI) x86-64, for MS Windows' || { echo "Error: bad format for binary CM_FP_Blender.blender_launcher.exe" 1>&2 ; exit 1; }
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
