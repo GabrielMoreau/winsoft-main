@@ -29,12 +29,13 @@ ECHO unblock
 %pwrsh% "Unblock-File -Path .\*.ps1"
 
 
-ECHO Execute pre-install script
-%pwrsh% -File ".\pre-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
-
 REM https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/manage-bde-status
 ECHO Bitlocker state
 manage-bde -status %SystemDrive%
+
+
+ECHO Execute pre-install script
+%pwrsh% -File ".\pre-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
 
 IF %ERRORLEVEL% NEQ 0 (
   REM https://techwiser.com/ways-to-disable-and-suspend-bitlocker-on-windows-10-11/
