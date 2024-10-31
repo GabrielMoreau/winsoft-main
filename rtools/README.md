@@ -13,3 +13,12 @@ To silent uninstall RTools (for example version 4.3)
 ```bat
 C:\rtools43\unins000.exe /VERYSILENT /SUPPRESSMSGBOXES
 ```
+
+
+## Register Key
+
+Example :
+
+ | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
+ |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
+ | HKLM | Rtools 4.3 (5958-5975) | The R Foundation | 4.3.5958 | `Rtools43_is1` | `"C:\rtools43\unins000.exe"` |

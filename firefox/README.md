@@ -19,6 +19,7 @@ Example :
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
  | HKLM | Mozilla Firefox ESR (x64 fr) | Mozilla | 115.14.0 | `Mozilla Firefox 115.14.0 ESR (x64 fr)` | `"C:\Program Files\Mozilla Firefox\uninstall\helper.exe"` |
  | HKLM | Mozilla Firefox ESR (x64 fr) | Mozilla | 115.15.0 | `Mozilla Firefox 115.15.0 ESR (x64 fr)` | `"C:\Program Files\Mozilla Firefox\uninstall\helper.exe"` |
+ | HKLM | Mozilla Firefox ESR (x64 fr) | Mozilla | 128.4.0 | `Mozilla Firefox 128.4.0 ESR (x64 fr)` | `"C:\Program Files\Mozilla Firefox\uninstall\helper.exe"` |
 
 
 ## Policies

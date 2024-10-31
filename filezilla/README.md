@@ -8,3 +8,12 @@ It is open-source software distributed free of charge under the terms of the GNU
 
 * Silent install : https://wiki.filezilla-project.org/Silent_Setup
 * Disable Welcome Dialog Popup and Update Check : https://silentinstallhq.com/filezilla-client-silent-install-how-to-guide/
+
+
+## Register Key
+
+Example :
+
+ | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
+ |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
+ | HKLM | FileZilla 3.68.0 | Tim Kosse | 3.68.0 | `FileZilla Client` | `"C:\Program Files\FileZilla FTP Client\uninstall.exe"` |

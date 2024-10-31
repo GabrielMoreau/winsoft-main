@@ -13,3 +13,12 @@ extensions that add functionality.
 * Download : https://code.visualstudio.com/Download
 * Forge : https://github.com/microsoft/vscode/
 * Silent install : https://silentinstallhq.com/visual-studio-code-silent-install-how-to-guide/
+
+
+## Register Key
+
+Example :
+
+ | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
+ |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
+ | HKLM | Microsoft Visual Studio Code | Microsoft Corporation | 1.95.0 | `{EA457B21-F73E-494C-ACAB-524FDE069978}_is1` | `"C:\Program Files\Microsoft VS Code\unins000.exe"` |

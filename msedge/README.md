@@ -25,3 +25,12 @@ Is there a link to get the latest Microsoft Edge version number?
 See https://stackoverflow.com/questions/71620168/is-there-a-link-to-get-the-latest-microsoft-edge-version-number/71644819#71644819
 
 You can have a JSON with the entreprise version here https://edgeupdates.microsoft.com/api/products?view=enterprise
+
+
+## Register Key
+
+Example :
+
+ | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
+ |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
+ | HKLM | Microsoft Edge | Microsoft Corporation | 130.0.2849.56 | `{6DDFB051-34E1-39F4-8885-0E2990A86A5B}` | `MsiExec.exe /X{6DDFB051-34E1-39F4-8885-0E2990A86A5B}` |

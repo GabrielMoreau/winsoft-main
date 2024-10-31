@@ -7,3 +7,12 @@ bibliographic data and related research materials.
 * Wikipedia : https://www.wikipedia.org/wiki/Zotero
 
 * Download : https://www.zotero.org/download/
+
+
+## Register Key
+
+Example :
+
+ | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
+ |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
+ | HKLM | Zotero | Corporation for Digital Scholarship | 7.0.9 | `Zotero 7.0.9 (x64 en-US)` | `C:\Program Files\Zotero\uninstall\helper.exe` |

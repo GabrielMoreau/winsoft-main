@@ -22,3 +22,4 @@ Example :
  | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
  | HKLM | Audacity 3.4.2 | Audacity Team | 3.4.2 | `Audacity_is1` | `"C:\Program Files\Audacity\unins000.exe"` |
+ | HKLM | Audacity 3.7.0 | Audacity Team | 3.7.0 | `Audacity_is1` | `"C:\Program Files\Audacity\unins000.exe"` |
