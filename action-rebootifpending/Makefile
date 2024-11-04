@@ -4,7 +4,7 @@
 #
 
 SOFT:=Action-RebootIfPending
-VERSION:=0.8
+VERSION:=0.9
 REVISION:=1
 
 IT_TEAM:=IT Support
