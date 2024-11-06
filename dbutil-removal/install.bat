@@ -21,7 +21,7 @@ SET softversion=__VERSION__
 
 
 ECHO Silent install %softname%
-ScriptRunner.exe -appvscript DBUtilRemovalTool.exe /s /l="%logdir%\%softname%-msi.log" -appvscriptrunnerparameters -wait -timeout=300
+ScriptRunner.exe -appvscript DBUtilRemovalTool-%softversion%.exe /s /l="%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=300
 
 
 ECHO END %date%-%time%

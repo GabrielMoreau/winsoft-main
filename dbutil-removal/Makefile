@@ -1,6 +1,6 @@
 
 #
-# CloudCompare
+# DBUtilRemovalTool
 #
 
 sinclude ../_common/flag.mk
@@ -9,9 +9,9 @@ SOFT:=DBUtilRemovalTool
 REVISION:=1
 
 URL:=https://dl.dell.com/FOLDER07604649M/3/DBUtil-Removal-Utility_8GG09_WIN_2.5.0_A03_02.EXE
-VERSION:=2.5.0
+VERSION:=$(shell basename "$(URL)" | cut -f 4 -d '_')
 
-EXE:=DBUtilRemovalTool.exe
+EXE:=DBUtilRemovalTool-$(VERSION).exe
 
 IT_TEAM:=IT Support
 LOGDIR:=%WINDIR%\\Logs
@@ -52,13 +52,13 @@ tmp/$(EXE):
 	@mkdir -p tmp
 	@(cd tmp ; \
 		rm -f *.exe *.msi 2>/dev/null ; \
-		cp  ../$(EXE) .; \
+		curl -# $(CURLFLAGS) -o "$(EXE)" -L "$(URL)" ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
 
 check-exe: tmp/$(EXE)
 	@(cd tmp ; \
-		file $(EXE) | grep -q "PE32 executable*" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 1; } ; \
+		file $(EXE) | grep -q "PE32 executable" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 1; } ; \
 		# which peres >/dev/null && { peres -v $(EXE) | grep -q "^Product Version:[[:space:]]*$(VERSION)" || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 1; } ; } ;\
 		)
 
@@ -76,7 +76,7 @@ ocs:
 	@echo "Name:    $(SOFT)_$(VERSION)-$(REVISION)_x64"
 	@echo "Launch:  install.bat"
 	@echo "Message: yes"
-	@echo "Delay:   5"
+	@echo "Delay:   6"
 	@echo "Cancel:  no"
 	@echo "Report:  yes"
 	@echo ""
