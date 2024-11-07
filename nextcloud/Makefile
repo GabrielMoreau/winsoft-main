@@ -4,9 +4,11 @@
 #
 
 SOFT:=Nextcloud
-VERSION:=$(shell curl -s -L 'https://download.nextcloud.com/desktop/releases/Windows/' | sed -e 's/>/\n/g;' | grep 'href="Nextcloud-.*-x64.msi"' | tail -1 | cut -f 2 -d '-')
+URL:=$(shell curl -s -L 'https://nextcloud.com/install/' | sed -e 's/"/\n/g;' | grep '^https://.*/Nextcloud-.*-x64.msi' | tail -1)
+VERSION:=$(shell basename "$(URL)" | cut -f 2 -d '-')
 REVISION:=1
-URL:=https://download.nextcloud.com/desktop/releases/Windows/Nextcloud-$(VERSION)-x64.msi
+# VERSION:=$(shell curl -s -L 'https://download.nextcloud.com/desktop/releases/Windows/' | sed -e 's/>/\n/g;' | grep 'href="Nextcloud-.*-x64.msi"' | tail -1 | cut -f 2 -d '-')
+# URL:=https://download.nextcloud.com/desktop/releases/Windows/Nextcloud-$(VERSION)-x64.msi
 
 EXE:=Nextcloud-$(VERSION)-x64.msi
 
