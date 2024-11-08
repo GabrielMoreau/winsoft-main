@@ -78,9 +78,9 @@ tmp/pre-remove.ps1: pre-install.ps1 Makefile tmp/$(EXE)
 	@mkdir -p tmp
 	@sed -e 's/Begin Pre-Install/Begin Pre-Remove/;' $< > $@
 
-%.zip: Makefile tmp/install.bat pre-install.ps1 tmp/$(EXE)
+%.zip: Makefile tmp/install.bat pre-install.ps1 post-install.ps1 tmp/$(EXE)
 	@rm -f $@
-	@zip -r $@ pre-install.ps1
+	@zip -r $@ pre-install.ps1 post-install.ps1
 	@(cd tmp; zip -r ../$@ install.bat $(EXE))
 	@chmod ugo+rw $@
 
