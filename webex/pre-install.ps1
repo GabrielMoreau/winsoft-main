@@ -40,6 +40,7 @@ Function Run-Exec {
 		$DisplayVersion = $App.DisplayVersion
 		$KeyProduct = $Key | Split-Path -Leaf
 
+		$Exe = 'MsiExec.exe'
 		$Args = '/x "' + $KeyProduct + '" /qn'
 		Write-Output "Remove: $DisplayName / $DisplayVersion / $KeyProduct / $($App.UninstallString)"
 		Run-Exec -FilePath "$Exe" -ArgumentList "$Args" -Name "$RefName"
