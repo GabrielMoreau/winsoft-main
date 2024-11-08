@@ -18,4 +18,6 @@ Example :
  | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
  | HKLM | Webex | Cisco Systems, Inc | 44.7.0.30285 | `{13E7AACC-0865-4F9B-8384-6B0424CBE06E}` | `MsiExec.exe /X{13E7AACC-0865-4F9B-8384-6B0424CBE06E}` |
- | HKLM | Webex | Cisco Systems, Inc | 44.8.0.30404 | `{13E7AACC-0865-4F9B-8384-6B0424CBE06E}` | `MsiExec.exe /X{13E7AACC-0865-4F9B-8384-6B0424CBE06E}` | 
+ | HKLM | Webex | Cisco Systems, Inc | 44.8.0.30404 | `{13E7AACC-0865-4F9B-8384-6B0424CBE06E}` | `MsiExec.exe /X{13E7AACC-0865-4F9B-8384-6B0424CBE06E}` |
+ | HKLM | Webex | Cisco Systems, Inc | 44.10.1.31028 | `{13E7AACC-0865-4F9B-8384-6B0424CBE06E}` | `MsiExec.exe /X{13E7AACC-0865-4F9B-8384-6B0424CBE06E}` |
+ | HKLM | Webex | Cisco Systems, Inc | 44.11.0.31172 | `{13E7AACC-0865-4F9B-8384-6B0424CBE06E}` | `MsiExec.exe /X{13E7AACC-0865-4F9B-8384-6B0424CBE06E}` |
