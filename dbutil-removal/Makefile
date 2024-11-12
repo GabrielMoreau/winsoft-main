@@ -6,7 +6,7 @@
 sinclude ../_common/flag.mk
 
 SOFT:=DBUtilRemovalTool
-REVISION:=1
+REVISION:=2
 
 URL:=https://dl.dell.com/FOLDER07604649M/3/DBUtil-Removal-Utility_8GG09_WIN_2.5.0_A03_02.EXE
 VERSION:=$(shell basename "$(URL)" | cut -f 4 -d '_')
