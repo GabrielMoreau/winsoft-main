@@ -4,10 +4,15 @@
 # WSBS1600-HF       -> HKLM:\SOFTWARE\WOW6432Node\F-Secure\NS\default\BusinessSuite\Hotfixes
 # WithSecure Hotfix -> HKLM:\SYSTEM\ControlSet001\Services\SharedAccess\Parameters\FirewallPolicy\FirewallRules
 
-$HotfixList = @{'WSBS1600-HF01' = 1; 'WSBS1600-HF03' = 4; 'WSBS1600-HF04' = 8; 'WSBS1600-HF05' = 16; 'WSBS1600-HF06' = 32}
-$FwHfList   = @{'WithSecure Hotfix2' = 2}
+# Version 16.00
+# $HotfixList = @{'WSBS1600-HF01' = 1; 'WSBS1600-HF03' = 4; 'WSBS1600-HF04' = 8; 'WSBS1600-HF05' = 16; 'WSBS1600-HF06' = 32}
+# $FwHfList   = @{'WithSecure Hotfix2' = 2}
 
-$WSVersion = '16.00'
+# Version 16.01
+$HotfixList = @{'WSBS1601-HF01' = 1}
+$FwHfList   = @{}
+
+$WSVersion = '16.01'
 
 # Transform string to a version object
 Function ToVersion {

@@ -12,6 +12,14 @@ Only this script is free.
 The error code tells you which hotfixes have not been applied (see example below).
 The hotfixes error mapping table is very simple:
 
+Version 16.01
+
+ | Id | Hotfixe Match        | Bit | URL                                                                 | Date       |
+ | --:|:-------------------- | ---:|:------------------------------------------------------------------- |:---------- |
+ |  1 | `WSBS1601-HF01`      |   1 | https://download.withsecure.com/corpro/cs/cs16.01/WSBS1601-HF01.jar | 2024/11/08 |
+
+Version 16.00 (expired)
+
  | Id | Hotfixe Match        | Bit | URL                                                                 | Date       |
  | --:|:-------------------- | ---:|:------------------------------------------------------------------- |:---------- |
  |  1 | `WSBS1600-HF01`      |   1 | https://download.withsecure.com/corpro/cs/cs16.00/WSBS1600-HF01.jar | 2023/10/18 |
