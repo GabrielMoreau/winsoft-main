@@ -15,3 +15,4 @@ cf3dde2a44ff7ee07bef74bcada5efc99a6bebdb31f2ab6ff4dc339b25d260e3  XnViewMP-win-1
 03e9d9794ab3dff3485ce8a0f9406f744e4bd2f7a43b5b135f5e8c9fb791faa5  XnViewMP-win-1.7.2-x64.exe
 f5129f3977449a37d5bd83bf04784eda8f239e96dfc2a7ab84647a7dc9abeddb  XnViewMP-win-1.8.0-x64.exe
 957892de2a7e5ed941964a6693ba69edc6961ba00f10bd86eccab1cf6b4c4839  XnViewMP-win-1.8.2-x64.exe
+3dfc70d0e54640f553a5e9cf7e863f60a029723b6df2bc2f901924cc3b6a93d4  XnViewMP-win-1.8.3-x64.exe
