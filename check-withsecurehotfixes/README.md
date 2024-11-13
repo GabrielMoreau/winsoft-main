@@ -42,6 +42,15 @@ All it does (not completely) is read registry keys.
 * Download : https://www.withsecure.com/en/support/product-support/business-suite/client-security (Hotfixes - JAR file)
 * WithSecure Business Suite : https://www.withsecure.com/en/support/product-support/business-suite/
 
+## WithSecure Register Key
+
+Example :
+
+ | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
+ |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
+ | HKLM | WithSecure™ Client Security Premium | WithSecure Corporation | 16.00 | `{21DA04CE-58E6-44F5-8DBA-392E09185CBB}` | `C:\Program Files (x86)\F-Secure\Client Security\fs_uninstall_32.exe` |
+ | HKLM | WithSecure™ Client Security Premium | WithSecure Corporation | 16.01 | `{845D91D2-CD97-4D59-8E47-651F4E36A296}` | `C:\Program Files (x86)\F-Secure\Client Security\fs_uninstall_32.exe` |
+
 ## Adding hotfixes to your console
 
 Once you've downloaded the hotfixes from the publisher's website (see link above), you need to import them into the server via the console.
