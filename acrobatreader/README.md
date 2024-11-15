@@ -17,3 +17,4 @@ Example :
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
  | HKLM | Adobe Acrobat (64-bit) | Adobe | 24.002.20687 | `{AC76BA86-1036-1033-7760-BC15014EA700}` | `MsiExec.exe /I{AC76BA86-1036-1033-7760-BC15014EA700}` |
  | HKLM | Adobe Acrobat (64-bit) | Adobe | 24.002.20759 | `{AC76BA86-1036-1033-7760-BC15014EA700}` | `MsiExec.exe /I{AC76BA86-1036-1033-7760-BC15014EA700}` |
+ | HKLM | Adobe Acrobat (64-bit) | Adobe | 24.004.20243 | `{AC76BA86-1036-1033-7760-BC15014EA700}` | `MsiExec.exe /I{AC76BA86-1036-1033-7760-BC15014EA700}` |
