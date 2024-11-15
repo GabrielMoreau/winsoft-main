@@ -21,3 +21,5 @@ Example :
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
  | HKLM | ideaMaker 5.0.6.8380 | Raise3D | 5.0.6.8380 | `ideaMaker` | `C:\Program Files\Raise3D\ideaMaker\uninstall.bat` |
  | HKLM | ideaMaker 5.0.6.8380 | Raise3D | 5.0.6.8380 | `ideaMaker-App` | `"C:\Program Files\Raise3D\ideaMaker-App\uninstall.exe"` |
+ | HKLM | ideaMaker 5.1.2.8460 | Raise3D | 5.1.2.8460 | ideaMaker | `C:\Program Files\Raise3D\ideaMaker\uninstall.bat` |
+ | HKLM | ideaMaker 5.1.2.8460 | Raise3D | 5.1.2.8460 | ideaMaker-App | `"C:\Program Files\Raise3D\ideaMaker-App\uninstall.exe"` |
