@@ -1,10 +1,10 @@
 
 REM
-REM   DBUtilRemovalTool
+REM   Uninstall-DellBiosUtil
 REM
 
 REM Name
-SET softname=DBUtilRemovalTool
+SET softname=Uninstall-DellBiosUtil
 
 SET logdir=__LOGDIR__
 IF NOT EXIST "%logdir%" (

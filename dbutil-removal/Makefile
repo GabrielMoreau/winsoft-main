@@ -1,15 +1,14 @@
 
 #
-# DBUtilRemovalTool
+# Uninstall-DellBiosUtil
 #
 
 sinclude ../_common/flag.mk
 
-SOFT:=DBUtilRemovalTool
-REVISION:=2
-
-URL:=https://dl.dell.com/FOLDER07604649M/3/DBUtil-Removal-Utility_8GG09_WIN_2.5.0_A03_02.EXE
-VERSION:=$(shell basename "$(URL)" | cut -f 4 -d '_')
+SOFT:=Uninstall-DellBiosUtil
+VERSION:=$(shell grep '^[[:digit:]]' url.txt | sort --version-sort -k 1 | tail -1 | awk '{print $$1}')
+REVISION:=1
+URL:=$(shell grep '^$(VERSION)[[:space:]]' url.txt | awk '{print $$2}')
 
 EXE:=DBUtilRemovalTool-$(VERSION).exe
 
