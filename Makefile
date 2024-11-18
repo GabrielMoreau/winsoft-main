@@ -114,7 +114,7 @@ list-md:
 	echo ' |   | Software | Detail | &#127968; |   |'
 	echo ' | - | -------- | ------ | --------- | - |'
 	index=0
-	for pkg in $$(git ls-files | grep '^[[:alpha:][:digit:]-]*/README.md' | grep -v '\\$$' | xargs -I {} sh -c "(head -1 '{}' ; dirname '{}') | paste -sd '#'"  | sort | cut -f 3 -d '#')
+	for pkg in $$(git ls-files | grep '^[[:alpha:][:digit:]-]*/README.md' | grep -v '\\$$' | xargs -I {} sh -c "(head -1 '{}' ; dirname '{}') | paste -sd '#'"  | sort | cut -f 3 -d '#' | grep -v -- '-uninstall')
 	do
 		index=$$(($${index} + 1))
 		sindex=$$(printf '%03i' $${index})
