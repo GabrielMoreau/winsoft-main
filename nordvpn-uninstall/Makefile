@@ -1,0 +1,69 @@
+
+#
+# Uninstall-NordVPN
+#
+
+sinclude ../_common/flag.mk
+
+SOFT:=Uninstall-NordVPN
+VERSION:=$(shell grep '^[[:digit:]]' url.txt | sort --version-sort -k 1 | tail -1 | awk '{print $$1}')
+REVISION:=1
+URL:=$(shell grep '^$(VERSION)[[:space:]]' url.txt | awk '{print $$2}')
+
+EXE:=DBUtilRemovalTool-$(VERSION).exe
+
+IT_TEAM:=IT Support
+LOGDIR:=%WINDIR%\\Logs
+
+
+.PHONY: all check-version check-unrealized check-exe clean control next ocs version wget checksum
+
+all: check-version $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
+
+sinclude ../_common/conf.mk
+
+check-version:
+	@echo $(VERSION) | grep -Eq '^[[:digit:]][\.[:digit:]]+[[:digit:]]$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
+
+check-unrealized: check-version
+	@if grep -q '[[:space:]]$(EXE)$$' checksum.txt; then echo 'Ok'; else echo 'Warning: Updates not performed for $(SOFT) version $(VERSION)'; fi
+
+clean:
+	rm -rf $(SOFT)_$(VERSION)-$(REVISION)_x64.zip tmp resources
+
+version:
+	@echo "VERSION: $(VERSION)"
+	@echo "URL: $(URL)"
+	@echo "EXE: $(EXE)"
+	@echo "CURL: $(CURLFLAGS)"
+
+checksum: check-version
+	@mkdir -p tmp
+	@(cd tmp ; \
+		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt && exit ; \
+		shasum -a 256 "$(EXE)" | sed -e 's#tmp/##;' >> ../checksum.txt ; \
+		tail -3 ../checksum.txt ; \
+		)
+
+tmp/install.bat: install.bat Makefile
+	@mkdir -p tmp
+	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#;' $< > $@
+
+%.zip: Makefile tmp/install.bat
+	@rm -f $@
+	@(cd tmp; zip -r ../$@ install.bat)
+	@chmod ugo+rw $@
+
+ocs:
+	@echo ""
+	@echo "Name:    $(SOFT)_$(VERSION)-$(REVISION)_x64"
+	@echo "Launch:  install.bat"
+	@echo "Message: yes"
+	@echo "Delay:   6"
+	@echo "Cancel:  no"
+	@echo "Report:  yes"
+	@echo ""
+	@echo "$(IT_TEAM)"
+	@echo " --- "
+	@echo "Install and/or Update: $(SOFT) ($(VERSION))"
+	@echo ""
