@@ -38,12 +38,6 @@ version:
 	@echo "CURL: $(CURLFLAGS)"
 
 checksum: check-version
-	@mkdir -p tmp
-	@(cd tmp ; \
-		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt && exit ; \
-		shasum -a 256 "$(EXE)" | sed -e 's#tmp/##;' >> ../checksum.txt ; \
-		tail -3 ../checksum.txt ; \
-		)
 
 tmp/install.bat: install.bat Makefile
 	@mkdir -p tmp
