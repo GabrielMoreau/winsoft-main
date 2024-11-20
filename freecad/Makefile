@@ -4,13 +4,12 @@
 #
 
 SOFT:=FreeCAD
-PATCHVERSION:=$(shell (echo 0 ; curl -s -L 'https://github.com/FreeCAD/FreeCAD/releases' | sed -e 's/"/\n/g;' | egrep '/FreeCAD-.*-WIN-x64-installer-[[:digit:]][[:digit:]]*\.exe$$' | cut -f 6 -d '-' | cut -f 1 -d '.' ) | sort | tail -1)
-SHORTVERSION:=$(shell curl -s -L 'https://github.com/FreeCAD/FreeCAD/releases/latest' | sed 's/</\n/g;' | grep '^meta property.*og:title' | cut -f 5 -d ' ')
-VERSION:=$(SHORTVERSION).$(PATCHVERSION)
+# https://github.com/FreeCAD/FreeCAD/releases/download/1.0.0/FreeCAD_1.0.0-conda-Windows-x86_64-installer-1.exe
+URL:=$(shell curl -s -L 'https://api.github.com/repos/FreeCAD/FreeCAD/releases/latest' | grep 'browser_download_url.*x86_64.*exe"' | cut -f 4 -d '"' | head -1)
+VERSION:=$(shell basename "$(URL)" | cut -f 2 -d '_' | cut -f 1 -d '-')
 REVISION:=1
-URL:=https://github.com/FreeCAD/FreeCAD/releases/download/$(SHORTVERSION)/FreeCAD-$(SHORTVERSION)-WIN-x64-installer-$(PATCHVERSION).exe
 
-EXE:=FreeCAD-WIN-x64-installer-$(VERSION).exe
+EXE:=FreeCAD_$(VERSION)-conda-Windows-x86_64-installer.exe
 
 IT_TEAM:=IT Support
 LOGDIR:=%WINDIR%\\Logs
@@ -33,7 +32,6 @@ clean:
 
 version:
 	@echo "VERSION: $(VERSION)"
-	@echo "PATCHVERSION: $(PATCHVERSION)"
 	@echo "URL: $(URL)"
 	@echo "EXE: $(EXE)"
 

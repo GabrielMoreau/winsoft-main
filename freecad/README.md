@@ -15,3 +15,12 @@ around engineering, such as architecture or electrical engineering.
 
 To conserve space on user workstation disks, the installation of a new
 version deletes older versions.
+
+
+## Register Key
+
+Example :
+
+ | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
+ |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
+ | HKLM | FreeCAD 0.21.2 | FreeCAD Team | 0.21.2 | `FreeCAD0212` | `"C:\Program Files\FreeCAD 0.21\Uninstall-FreeCAD.exe"` |
