@@ -1,6 +1,6 @@
-# NordVPN (Uninstall) - DBUtil Removal Utility following Dell Security Advisory DSA-2021-088 and DSA-2021-152
+# NordVPN (Uninstall) - Lithuanian VPN service
 
-TNordVPN is a Lithuanian VPN service with applications for Microsoft Windows, macOS, Linux, Android, iOS, Android TV, and tvOS.
+NordVPN is a Lithuanian VPN service with applications for Microsoft Windows, macOS, Linux, Android, iOS, Android TV, and tvOS.
 Manual setup is available for wireless routers, NAS devices, and other platforms.
 
 * Website : https://nordvpn.com/
