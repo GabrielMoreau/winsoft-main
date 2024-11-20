@@ -24,3 +24,4 @@ Example :
  | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
  | HKLM | FreeCAD 0.21.2 | FreeCAD Team | 0.21.2 | `FreeCAD0212` | `"C:\Program Files\FreeCAD 0.21\Uninstall-FreeCAD.exe"` |
+ | HKLM | FreeCAD 1.0.0 | FreeCAD Team | 1.0.0 | `FreeCAD100` | `"C:\Program Files\FreeCAD 1.0\Uninstall-FreeCAD.exe"` |
