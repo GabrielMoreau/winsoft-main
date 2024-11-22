@@ -11,7 +11,7 @@ IT_TEAM:=IT Support
 LOGDIR:=%WINDIR%\\Logs
 
 
-.PHONY: all check-version clean control next ocs version wget checksum
+.PHONY: all check-version check-unrealized checksum clean control next ocs version wget checksum
 
 all: check-version $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
 
@@ -20,11 +20,17 @@ sinclude ../_common/conf.mk
 check-version:
 	@echo $(VERSION) | grep -Eq '^[[:digit:]][\.[:digit:]]+[[:digit:]]$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
 
+check-unrealized:
+	@echo 'Ok'
+
 clean:
 	rm -rf $(SOFT)_$(VERSION)-$(REVISION)_x64.zip tmp resources
 
 version:
 	@echo "VERSION: $(VERSION)"
+
+checksum:
+	@echo -n ''
 
 tmp/install.bat: install.bat Makefile
 	@mkdir -p tmp

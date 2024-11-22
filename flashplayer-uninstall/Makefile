@@ -15,7 +15,7 @@ IT_TEAM:=IT Support
 LOGDIR:=%WINDIR%\\Logs
 
 
-.PHONY: all check-version clean control next ocs version wget checksum
+.PHONY: all check-version check-unrealized checksum clean control next ocs version wget checksum
 
 all:
 	@mkdir -p tmp
@@ -27,6 +27,9 @@ sinclude ../_common/conf.mk
 
 check-version:
 	@echo $(VERSION) | grep -Eq '^[[:digit:]][\.[:digit:]]+[[:digit:]]$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
+
+check-unrealized:
+	@echo 'Ok'
 
 next: check-version $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
 
