@@ -9,3 +9,13 @@ protocol (SCP) client for Microsoft Windows.
 
 * Download : https://winscp.net/eng/download.php
 * Silent install : https://silentinstallhq.com/winscp-silent-install-how-to-guide/
+
+
+## Register Key
+
+Example :
+
+ | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
+ |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
+ | HKLM | WinSCP 6.3.5 | Martin Prikryl | 6.3.5 | `winscp3_is1` | `"C:\Program Files (x86)\WinSCP\unins000.exe"` | 
+ | HKLM | WinSCP 6.3.6 | Martin Prikryl | 6.3.6 | `winscp3_is1` | `"C:\Program Files (x86)\WinSCP\unins000.exe"` |
