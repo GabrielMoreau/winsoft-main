@@ -5,6 +5,9 @@ WinDirStat is a free and open-source graphical disk usage analyzer for Microsoft
 * Website : https://windirstat.net/
 * Wikipedia : https://en.wikipedia.org/wiki/WinDirStat
 
+* Forge : https://github.com/windirstat/windirstat
+* Download : https://github.com/windirstat/windirstat/releases/latest
+
 Please note that the uninstall key is not at a standard path
 ```ini
 [HKEY_USERS\.DEFAULT\Software\Microsoft\Windows\CurrentVersion\Uninstall\WinDirStat]
@@ -37,3 +40,14 @@ $RefName = 'WinDirStat'
 		Echo "Ref Key $DisplayName / $DisplayVersion / $Exe / $KeyPath"
 	}
 ```
+
+
+## Register Key
+
+Example :
+
+ | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
+ |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
+ | HKLM | WinDirStat 1.1.2 | The authors of WinDirStat | 1.1.2 | `windirstat` | `C:\Program Files (x86)\WinDirStat\uninstall.bat` |
+ | HKU | WinDirStat 1.1.2 |  |  | `WinDirStat` | `"C:\Program Files (x86)\WinDirStat\Uninstall.exe"` |
+ | HKLM | WinDirStat | WinDirStat Team | 2.0.3.832 | `{A5AEAE5C-1EDA-41FA-A90B-D62AF6B99BE1}` | `MsiExec.exe /I{A5AEAE5C-1EDA-41FA-A90B-D62AF6B99BE1}` |
