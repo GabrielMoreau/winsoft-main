@@ -24,11 +24,11 @@ If (!(Get-Tpm).TpmReady) {
 # Bypass TPM
 $CheckTPM_Version = (Get-Tpm).ManufacturerVersionFull20
 If (($CheckTPM_Version -like '*not supported*') -Or ($CheckTPM_Version -like '*non pris*')) {
-	Write-Output 'Warning: TPM not 2.0 - Registry bypass'
+	Write-Output 'Warning: TPM not 2.0 - Registry bypass before install'
 	If (!(Test-Path 'HKLM:\SYSTEM\Setup\MoSetup')) {
 		New-Item -Path 'HKLM:\SYSTEM\Setup\MoSetup' -Force | Out-Null
 	}
 	Set-ItemProperty -Path 'HKLM:\SYSTEM\Setup\MoSetup' -Name 'AllowUpgradesWithUnsupportedTPMOrCPU' -Type DWord -Value  1
 } Else {
-	Write-Output "TPM >= 2.0 - Install Continue"
+	Write-Output "TPM >= 2.0 - Normal install Continue"
 }
