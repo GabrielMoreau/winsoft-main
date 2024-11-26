@@ -5,8 +5,8 @@ So far, it's worked every time, and compatible computers have ended up running W
 Don't run this script without warning the person...
 It's much better if they don't work on the computer during the update.
 
-To build the package, just type `make` in a terminal (preferably under Linux).
-To build the package under Linux Debian (this is the easiest), you need the following package:
+To build the package, just type `make` in a terminal.
+If you're building the package under Linux Debian (this is the easiest), you'll need the following packages:
 
 ```bash
 apt install coreutils grep sed gawk file perl make curl zip pev
