@@ -3,3 +3,4 @@
 dc877e07e81c61f4cf49be4c3effeafaeeaa9044936ef7dcfb1d7a9bde52d9cc  K-Lite_Codec_Pack_18.5.5_Standard.exe
 22206b90b0632ccbef3b96dbc27282275e185621504f7b7efccb655031088448  K-Lite_Codec_Pack_18.6.0_Standard.exe
 f015d367db83cfa27eab1aa2e0e6c6e076ddd26741b7fd512470778cab88849b  K-Lite_Codec_Pack_18.6.5_Standard.exe
+cbd1d41c922e38c6bfce6aa3aaa48db1ebc7a891a9d1e73ae0892aeaa1030df8  K-Lite_Codec_Pack_18.7.0_Standard.exe
