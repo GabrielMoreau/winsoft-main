@@ -24,3 +24,4 @@ e4c3c965ed05492f73fa261d2e2560ed9f0506474956eefab176c44ee709a1ab  HandBrake-1.8.
 6b1b7bffe4024d86c4feb6e881648de557c6bff2e16e867e3ce1a2ed39489a53  windowsdesktop-runtime-6.0.33-win-x64.exe
 1818e82a54c9c33fc3a56cbfd77dc12b5f0202427793a65e1976ff5a79cd6528  windowsdesktop-runtime-6.0.35-win-x64.exe
 0d20debb26fc8b2bc84f25fbd9d4596a6364af8517ebf012e8b871127b798941  windowsdesktop-runtime-6.0.36-win-x64.exe
+f2ca6408b3db51ab441ca8652d54c31aac0cf50804c12d5b406e04fef740b3ef  HandBrake-1.9.0-x86_64-Win_GUI.exe
