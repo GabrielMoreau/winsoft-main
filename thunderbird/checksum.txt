@@ -79,3 +79,4 @@ fb6862a60fd8b68d6755c38df334ca97d291c3b93b93e8ae822fe13351c06c9c  Thunderbird-Se
 6316546411ea5f8b6d911aa88c7c37ab0f158860d7d88cc1b16de794d2d23ff3  Thunderbird-Setup-128.4.3.msi
 9fdc33de8fac2f5c8d8981401ec87c5c2bb513c76ac6fc4fdf4bad281fcd0b6d  Thunderbird-Setup-128.4.4.msi
 c096c5f36907f8f1cd1ca37de5b5b58abdcacb6fed2e8bdecec7ac72324cc7d6  Thunderbird-Setup-128.5.0.msi
+c2534f3c776b0e068eb10e118ba3cd1908234ca01924d20b50fc78a9c3936f51  Thunderbird-Setup-128.5.1.msi
