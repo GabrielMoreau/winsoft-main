@@ -5,8 +5,9 @@
 
 SOFT:=Chrome
 URL:=https://dl.google.com/chrome/install/googlechromestandaloneenterprise64.msi
-$(shell mkdir -p tmp; cd tmp; curl -s --time-cond 'googlechromestandaloneenterprise64.msi' -o 'googlechromestandaloneenterprise64.msi' -L "$(URL)")
-VERSION:=$(shell file tmp/googlechromestandaloneenterprise64.msi | sed -e 's/.*Comments:\s\([[:digit:]][[:digit:]\.]*\).*/\1/;')
+VERSION:=$(shell ./get-version "$(URL)")
+#$(shell mkdir -p tmp; cd tmp; curl -s --time-cond 'googlechromestandaloneenterprise64.msi' -o 'googlechromestandaloneenterprise64.msi' -L "$(URL)")
+#VERSION:=$(shell file tmp/googlechromestandaloneenterprise64.msi | sed -e 's/.*Comments:\s\([[:digit:]][[:digit:]\.]*\).*/\1/; s/[[:space:]:].*//;')
 REVISION:=1
 EXE:=googlechromestandaloneenterprise64-$(VERSION).msi
 
@@ -21,7 +22,7 @@ all: check-version check-exe Uninstall-$(SOFT)_$(VERSION)-$(REVISION)_x64.zip $(
 sinclude ../_common/conf.mk
 
 check-version:
-	@echo $(VERSION) | grep -Eq '^[[:digit:]][\.[:digit:]]+[[:digit:]]$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
+	@echo "$(VERSION)" | grep -Eq '^[[:digit:]][\.[:digit:]]+[[:digit:]]$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
 
 check-unrealized: check-version
 	@if grep -q '[[:space:]]$(EXE)$$' checksum.txt; then echo 'Ok'; else echo 'Warning: Updates not performed for $(SOFT) version $(VERSION)'; fi
