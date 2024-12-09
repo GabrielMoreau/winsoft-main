@@ -16,3 +16,4 @@ Example :
  | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
  | HKLM | Zotero | Corporation for Digital Scholarship | 7.0.9 | `Zotero 7.0.9 (x64 en-US)` | `C:\Program Files\Zotero\uninstall\helper.exe` |
+ | HKLM | Zotero | Corporation for Digital Scholarship | 7.0.11 | `Zotero 7.0.11 (x64 en-US)` | `C:\Program Files\Zotero\uninstall\helper.exe` |
