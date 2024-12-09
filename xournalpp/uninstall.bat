@@ -1,6 +1,6 @@
 @ECHO OFF
 
-SET softname=Telegram
+SET softname=XournalPP
 SET regkey=Xournal++
 SET shortcut=%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\Xournal++.lnk
 

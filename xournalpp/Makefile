@@ -6,10 +6,11 @@
 SOFT:=XournalPP
 VERSION:=$(shell curl -s -L 'https://github.com/xournalpp/xournalpp/releases/latest' | sed 's/</\n/g;' | grep '^meta property.*og:title' | cut -f 5 -d ' ')
 REVISION:=1
-URL:=https://github.com/xournalpp/xournalpp/releases/download/v$(VERSION)/xournalpp-$(VERSION)-windows.zip
+# https://github.com/xournalpp/xournalpp/releases/download/v1.2.5/xournalpp-1.2.5-windows-setup-x86_64.exe
+URL:=https://github.com/xournalpp/xournalpp/releases/download/v$(VERSION)/xournalpp-$(VERSION)-windows-setup-x86_64.exe
 
-ZIP:=xournalpp-$(VERSION)-windows.zip
-EXE:=xournalpp-$(VERSION)-windows.exe
+#ZIP:=xournalpp-$(VERSION)-windows.zip
+EXE:=xournalpp-$(VERSION)-windows-setup-x86_64.exe
 
 IT_TEAM:=IT Support
 LOGDIR:=%WINDIR%\\Logs
@@ -49,9 +50,9 @@ tmp/$(EXE):
 	@mkdir -p tmp
 	@(cd tmp ; \
 		rm -f *.exe *.msi "$(ZIP)" 2>/dev/null ; \
-		curl -# -o "$(ZIP)" -L "$(URL)" ; \
-		unzip -q "$(ZIP)" ; \
-		rm -f "$(ZIP)" ; \
+		curl -# -o "$(EXE)" -L "$(URL)" ; \
+		#unzip -q "$(ZIP)" ; \
+		#rm -f "$(ZIP)" ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
 
