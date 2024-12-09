@@ -16,3 +16,5 @@ Example :
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
  | HKLM | LycheeSlicer 5.4.3 | Mango3D | 5.4.3 | `8a7f68fc-0ecf-58b3-94e0-fb6e1ea8d905` | `"C:\Program Files\LycheeSlicer\Uninstall LycheeSlicer.exe" /allusers` |
  | HKLM | LycheeSlicer - 7.1.1 | Mango 3D | 7.1.1.0 | `LycheeSlicer` | `"C:\Program Files\LycheeSlicer\uninstall.exe"` |
+ | HKLM | LycheeSlicer - 7.1.2 | Mango 3D | 7.1.2.2 | `LycheeSlicer` | `"C:\Program Files\LycheeSlicer\uninstall.exe"` |
+ | HKLM | LycheeSlicer - 7.1.3 | Mango 3D | 7.1.3.0 | `LycheeSlicer` | `"C:\Program Files\LycheeSlicer\uninstall.exe"` |
