@@ -1,2 +1,3 @@
 b85dc3f9f0f42473be780a00fdf06112ecd262b7de5ea1043aa318fa74893b36  octave-9.1.0-w64-installer.exe
 130d13400940de2c21a1e9be6da9456ab437655493ba82c093efb2f91ac4efff  octave-9.2.0-w64-installer.exe
+4a011bc89391e9bd20951aecbea7aca77efc58c37843ef20ba8b318d9babfdf1  octave-9.3.0-w64-installer.exe
