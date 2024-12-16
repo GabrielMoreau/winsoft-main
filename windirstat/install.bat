@@ -40,6 +40,12 @@ ECHO Silent install %softname%
 REM ScriptRunner.exe -appvscript "%softexec%" /S -appvscriptrunnerparameters -wait -timeout=300
 ScriptRunner.exe -appvscript MsiExec.exe /i WinDirStat-%softversion%-x64.msi /qn /norestart DESKTOP_SHORTCUT=0 STARTMENU_SHORTCUT=1 REBOOT=ReallySuppress /L*v "%logdir%\%softname%-MSI.log"  -appvscriptrunnerparameters -wait -timeout=300
 
+
+ECHO Remove desktop shortcut
+IF EXIST "%PUBLIC%\Desktop\%softname%.lnk"          DEL /F /Q "%PUBLIC%\Desktop\%softname%.lnk"
+IF EXIST "%ALLUSERSPROFILE%\Desktop\%softname%.lnk" DEL /F /Q "%ALLUSERSPROFILE%\Desktop\%softname%.lnk"
+
+
 REM ECHO Copy uninstall script
 REM IF EXIST "%ProgramFiles(x86)%\WinDirStat\Uninstall.exe" (
 REM   COPY /A /Y "uninstall.bat" "%ProgramFiles(x86)%\WinDirStat\uninstall.bat"
