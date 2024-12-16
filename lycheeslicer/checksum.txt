@@ -3,3 +3,4 @@
 0e945edbbb030801dcb44a0fcb125f4805b9820252ecb829c20b012390cb5b78  LycheeSlicer-7.1.1.exe
 870eef3f41dc9dc5c66681c3ecd22a118b8d09fe249e955bd49dbf1f52f5acb9  LycheeSlicer-7.1.2.exe
 2be76e7748b8b8bb2e3fa8ef00674fa7cd60c14bc67703968d7dac42e9110a64  LycheeSlicer-7.1.3.exe
+fb25258c45ce71ac74c6d201183e1028e97338a9c24aadc3ebebb005e46ccbd8  LycheeSlicer-7.2.0.exe
