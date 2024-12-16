@@ -30,17 +30,22 @@ mkdir -p tmp
 
 if [ -s "tmp/${EXE}" ]
 then
-  HASHEXE=$(cd tmp; shasum -a 256 "${EXE}")
-
-  # get new version from chocolatey
-  grep -q "^${HASHEXE}" 'checksum.txt' || update_version "${CHOCO}"
-
-  VERSION=$(grep "^${HASHEXE}" 'checksum.txt' | cut -f 2 -d '-' | sed 's/\.msi//;')
-  if echo ${VERSION} | grep -q '[[:digit:]][[:digit:]\.]*'
+  VERSION=$(file "tmp/${EXE}" | sed -e 's/.*Comments:\s\([[:digit:]][[:digit:]\.]*\).*/\1/; s/[[:space:]:].*//;')
+  if echo ${VERSION} | grep -q '^[[:digit:]][[:digit:]\.]*'
   then
     echo ${VERSION}
   else
-    echo ''
+    HASHEXE=$(cd tmp; shasum -a 256 "${EXE}" | cut -f 1 -d ' ')
+    # get new version from chocolatey
+    grep -q "^${HASHEXE}" 'checksum.txt' || update_version "${CHOCO}"
+
+    VERSION=$(grep "^${HASHEXE}" 'checksum.txt' | cut -f 2 -d '-' | sed 's/\.msi//;')
+    if echo ${VERSION} | grep -q '^[[:digit:]][[:digit:]\.]*'
+    then
+      echo ${VERSION}
+    else
+      echo ''
+    fi
   fi
 else
   echo ''
