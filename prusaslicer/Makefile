@@ -52,7 +52,7 @@ wget: tmp/$(EXE)
 tmp/$(EXE):
 	@mkdir -p tmp
 	@(cd tmp ; \
-		rm -f *.exe *.msi 2>/dev/null ; \
+		rm -rf *.zip 2>/dev/null ; \
 		curl -# -o "$(EXE)" -L "$(URL)" ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
@@ -60,9 +60,9 @@ tmp/$(EXE):
 tmp/PrusaSlicer/prusa-slicer.exe: tmp/$(EXE)
 	@mkdir -p tmp
 	@(cd tmp ; \
-		rm -rf PrusaSlicer PrusaSlicer-$(VERSION)+* 2>/dev/null ; \
+		rm -rf PrusaSlicer PrusaSlicer-$(VERSION) 2>/dev/null ; \
 		unzip -q $(EXE) ; \
-		mv PrusaSlicer-$(VERSION)+* PrusaSlicer ; \
+		mv PrusaSlicer-$(VERSION) PrusaSlicer ; \
 		#which peres >/dev/null && { peres -v 'Telegram/Telegram.exe' | grep -q "^Product Version:[[:space:]]*$(VERSION)" || echo "Error: bad version for binary $(EXE)" ; } ; \
 		)
 
