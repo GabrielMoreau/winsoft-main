@@ -9,3 +9,12 @@ It use Full Unicode support including double-width characters.
 
 * Download : https://github.com/Eugeny/tabby/releases/latest
 * Silent install : https://community.chocolatey.org/packages/tabby#files
+
+
+## Register Key
+
+Example :
+
+ | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
+ |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
+ | HKLM | Tabby 1.0.216 | Eugene Pankov | 1.0.216 | `71445fac-d6ef-5436-9da7-5a323762d7f5` | `"C:\Program Files\Tabby\Uninstall Tabby.exe" /allusers` | 

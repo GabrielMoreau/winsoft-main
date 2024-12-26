@@ -12,3 +12,14 @@ VisIt was designed to handle big data set sizes in the terascale range and small
 * Category : imaging
 
 * Download : https://visit-dav.github.io/visit-website/releases-as-tables/
+
+
+## Register Key
+
+Example :
+
+ | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
+ |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
+ | HKLM | VisIt3.3.3_x64 | LLNL | 3.3.3 | `VisIt3.3.3` | `C:\Program Files\LLNL\VisIt3.3.3\uninstall_visit.exe` |
+ | HKLM | VisIt3.4.1_x64 | LLNL | 3.4.1 | `VisIt3.4.1` | `C:\Program Files\LLNL\VisIt3.4.1\uninstall_visit.exe` |
+ | HKLM | VisIt3.4.2_x64 | LLNL | 3.4.2 | `VisIt3.4.2` | `C:\Program Files\LLNL\VisIt3.4.2\uninstall_visit.exe` |

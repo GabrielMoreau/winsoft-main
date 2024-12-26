@@ -7,3 +7,13 @@ It supports several network protocols, including SCP, SSH, Telnet, rlogin, and r
 * Wikipedia : https://en.wikipedia.org/wiki/PuTTY
 
 * Silent install : https://silentinstallhq.com/putty-0-77-silent-install-how-to-guide/
+
+
+## Register Key
+
+Example :
+
+ | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
+ |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
+ | HKLM | PuTTY version 0.60 | Simon Tatham | 0.60 | `PuTTY_is1` | `"C:\Program Files (x86)\PuTTY\unins000.exe"` |
+ | HKLM | PuTTY release 0.82 (64-bit) | Simon Tatham | 0.82.0.0 | `{A2B01D7C-F700-4ECC-8C7F-79C597CC7628}` | `MsiExec.exe /X{A2B01D7C-F700-4ECC-8C7F-79C597CC7628}` | 

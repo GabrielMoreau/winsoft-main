@@ -14,3 +14,12 @@ chat and videoconferencing, file storage, and application integration.
 
 The installation creates a directory in `C:\Program Files (x86)\Teams Installer` with an installer and a config file in JSON format.
 Then for each new session, the Teams program is in the user's home in `C:\Users\login\ApplData\Local\Microsoft\Teams`.
+
+
+## Register Key
+
+Example :
+
+ | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
+ |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
+ | HKLM | Teams Machine-Wide Installer | Microsoft Corporation | 1.7.0.33761 | `{731F6BAA-A986-45A4-8936-7C3AAAAA760B}` | `MsiExec.exe /I{731F6BAA-A986-45A4-8936-7C3AAAAA760B}` |

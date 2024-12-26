@@ -17,3 +17,12 @@ See https://en.wikipedia.org/wiki/Slicer_(3D_printing).
 * License : GNU-AGPL
 
 * Download : https://www.prusa3d.com/en/page/prusaslicer_424/
+
+
+## Register Key
+
+Example :
+
+ | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
+ |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
+ | HKLM | PrusaSlicer version 2.9.0 | Prusa Research s.r.o. | 2.9.0 | `PrusaSlicer_is1` | `C:\Program Files\Prusa3D\PrusaSlicer\uninstall.bat` |

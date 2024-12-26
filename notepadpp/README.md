@@ -8,3 +8,12 @@ for use with Microsoft Windows.
 
 About silent installation and automatic updates
 https://www.get-itsolutions.com/notepad-silent-install-exe-msi-version/
+
+
+## Register Key
+
+Example :
+
+ | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
+ |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
+ | HKLM | Notepad++ (64-bit x64) | Notepad++ Team | 8.7.5 | `Notepad++` | `"C:\Program Files\Notepad++\uninstall.exe"` |
