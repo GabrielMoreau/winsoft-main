@@ -40,13 +40,31 @@ Function Run-Exec {
 		$DisplayVersion = $App.DisplayVersion
 		$KeyProduct = $Key | Split-Path -Leaf
 
-		$Args = '/x "' + $KeyProduct + '" /qn'
-		Write-Output "Remove: $DisplayName / $DisplayVersion / $KeyProduct / $($App.UninstallString)"
+		If ($($App.UninstallString) -match 'MsiExec.exe') {
+			$Exe = 'MsiExec.exe'
+			$Args = '/x "' + $KeyProduct + '" /qn /norestart'
+			Write-Output "Remove MSI: $DisplayName / $DisplayVersion / $KeyProduct / $Exe $Args"
+		} Else {
+			$UninstallSplit = ($App.UninstallString -Split "exe")[0] -Replace '"', ''
+			$Exe = $UninstallSplit + 'exe'
+			$Args = '/SILENT'
+			If (!(Test-Path -LiteralPath "$Exe")) { Return }
+			Write-Output "Remove EXE: $DisplayName / $DisplayVersion / $($App.UninstallString) / $Exe $Args"
+		}
 
 		Run-Exec -FilePath "$Exe" -ArgumentList "$Args" -Name "$RefName"
 	}
 
-# View
+# Delete folder if still exists
+ForEach ($SoftPath in "${Env:ProgramFiles}\PuTTY", "${Env:ProgramFiles(x86)}\PuTTY") {
+	If (Test-Path -LiteralPath "$SoftPath\putty.exe") {
+		Write-Output "Force Deleting $SoftPath\putty.exe..."
+		Stop-Process -Name "putty" -Force
+		Remove-Item -Path "$SoftPath\putty.exe" -Force -ErrorAction SilentlyContinue
+	}
+}
+
+# View and Delete
 @(Get-ChildItem -Recurse 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall';
   Get-ChildItem -Recurse "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall") |
 	ForEach {
@@ -58,4 +76,9 @@ Function Run-Exec {
 		$DisplayVersion = $App.DisplayVersion
 		$KeyProduct = $Key | Split-Path -Leaf
 		Write-Output "Installed: $DisplayName / $DisplayVersion / $KeyProduct / $($App.UninstallString)"
+
+		If (Test-Path $Key.PSPath) {
+			Remove-Item -Path $Key.PSPath -Force -ErrorAction SilentlyContinue
+			Write-Output "Registry key $Key deleted"
+		}
 	}
