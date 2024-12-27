@@ -6,8 +6,8 @@ It supports several network protocols, including SCP, SSH, Telnet, rlogin, and r
 * Website : https://www.chiark.greenend.org.uk/~sgtatham/putty/
 * Wikipedia : https://en.wikipedia.org/wiki/PuTTY
 
-* Silent install : https://silentinstallhq.com/putty-0-77-silent-install-how-to-guide/
-
+* Silent install : https://silentinstallhq.com/putty-0-77-silent-install-how-to-guide/,
+	https://www.pdq.com/blog/how-silently-uninstall-putty/
 
 ## Register Key
 
