@@ -10,7 +10,7 @@ VERSION:=$(shell grep '^[[:digit:]]' url.txt | sort --version-sort -k 1 | tail -
 REVISION:=1
 URL:=$(shell grep '^$(VERSION)[[:space:]]' url.txt | awk '{print $$2}')
 
-EXE:=DBUtilRemovalTool-$(VERSION).exe
+EXE:=NordVPNSetup-$(VERSION).exe
 
 IT_TEAM:=IT Support
 LOGDIR:=%WINDIR%\\Logs
