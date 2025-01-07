@@ -8,5 +8,6 @@ and many other options.
 
 * Download : https://support.hp.com/us-en/help/hp-support-assistant
 	https://www.filehorse.com/download-hp-support-assistant/download/
-* Silent install : https://silentinstallhq.com/hp-support-assistant-silent-install-how-to-guide/
-	https://h30434.www3.hp.com/t5/Notebook-Software-and-How-To-Questions/How-to-silently-install-and-uni-nstall-HP-Support-Assistant/td-p/8022433
+* Silent install : https://silentinstallhq.com/hp-support-assistant-silent-install-how-to-guide/,
+	https://h30434.www3.hp.com/t5/Notebook-Software-and-How-To-Questions/How-to-silently-install-and-uni-nstall-HP-Support-Assistant/td-p/8022433,
+	https://community.chocolatey.org/packages/hpsupportassistant
