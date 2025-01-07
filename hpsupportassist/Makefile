@@ -16,9 +16,9 @@ IT_TEAM:=IT Support
 LOGDIR:=%WINDIR%\\Logs
 
 
-.PHONY: all check-version check-unrealized check-exe clean control next ocs version wget checksum
+.PHONY: all check-version check-unrealized check-exe clean control next ocs version wget checksum check-update
 
-all: check-version check-exe $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
+all:  check-update check-version check-exe $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
 
 sinclude ../_common/conf.mk
 
@@ -46,6 +46,9 @@ checksum: check-version
 		)
 
 wget: tmp/$(EXE)
+
+check-update:
+	@./check4new-version || { echo "Error: there is probably a new version online" 1>&2 ; exit 1; }
 
 tmp/$(EXE):
 	@mkdir -p tmp

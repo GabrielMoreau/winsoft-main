@@ -1,0 +1,9 @@
+#/bin/bash
+#
+# 2025/01/07 Gabriel Moreau <Gabriel.Moreau(A)univ-grenoble-alpes.fr>
+
+url1=$(curl -s -L 'https://community.chocolatey.org/packages/hpsupportassistant' | sed -e 's/[;&]/\n/g;' | grep '^https://.*/sp.*exe')
+if [ -n "${url1}" ]
+then
+	grep -q "${url1}" url.txt || { echo "New version probably online: ${url1}"; exit 1; }
+fi
