@@ -63,7 +63,6 @@ tmp/setup/InstallHPSA.exe: tmp/$(EXE)
 		cd setup ; \
 		7z x ../$(EXE) -y >/dev/null ; \
 		)
-	#@which peres >/dev/null && { peres -v $@ | grep -q "^Product Version:[[:space:]]*$(VERSION)" || echo "Error: bad version for binary $@" ; }
 
 check-exe: tmp/$(EXE) tmp/setup/InstallHPSA.exe
 	@(cd tmp ; \
