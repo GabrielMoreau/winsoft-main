@@ -1,1 +1,2 @@
 9.28.34.0	https://ftp.hp.com/pub/softpaq/sp148501-149000/sp148716.exe
+9.39.17.0	https://ftp.hp.com/pub/softpaq/sp155001-155500/sp155262.exe
