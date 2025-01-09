@@ -3,7 +3,7 @@
 # PuTTY
 #
 
-SOFT:=Putty
+SOFT:=PuTTY
 VERSION:=$(shell curl -s -L 'https://www.chiark.greenend.org.uk/~sgtatham/putty/' | grep 'The latest version is' | cut -f 5 -d ' ' | cut -f 1,2 -d '.')
 REVISION:=1
 URL:=https://the.earth.li/~sgtatham/putty/latest/w64/putty-64bit-$(VERSION)-installer.msi

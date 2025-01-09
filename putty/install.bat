@@ -46,7 +46,7 @@ ECHO Execute post-install script
 ECHO END %date%-%time%
 
 REM IF %ERRORLEVEL% EQU 1603 (
-REM   REM 0 or 1603 are good exit code for Putty MSI installer!
+REM   REM 0 or 1603 are good exit code for PuTTY MSI installer!
 REM   EXIT 0
 REM )
 EXIT

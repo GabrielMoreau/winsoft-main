@@ -1,7 +1,7 @@
 
 Write-Output "Begin Post-Install"
 
-# Clean old duplicate key with Putty in the name (same uninstall string)
+# Clean old duplicate key with PuTTY in the name (same uninstall string)
 
 # Get Config from file
 Function GetConfig {
