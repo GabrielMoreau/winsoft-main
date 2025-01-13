@@ -22,7 +22,7 @@ SET softversion=__VERSION__
 
 
 ECHO Silent install %softname%
-ScriptRunner.exe -appvscript KopiaUI-%softversion%.exe /S /allusers /disableAutoUpdates -appvscriptrunnerparameters -wait -timeout=300
+ScriptRunner.exe -appvscript KopiaUI-Setup-%softversion%.exe /S /allusers /disableAutoUpdates -appvscriptrunnerparameters -wait -timeout=300
 
 
 
