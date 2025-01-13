@@ -6,6 +6,7 @@
 SOFT:=Kopia
 VERSION:=$(shell curl -s -L 'https://github.com/kopia/kopia/releases/latest' | sed 's/</\n/g;'| grep '^meta property.*og:title' | cut -f 4 -d ' ' | sed -e 's/^v//;')
 REVISION:=1
+# https://github.com/kopia/kopia/releases/download/v0.18.2/KopiaUI-Setup-0.18.2.exe
 URL:=https://github.com/kopia/kopia/releases/download/v$(VERSION)/KopiaUI-Setup-$(VERSION).exe
 
 EXE:=KopiaUI-Setup-$(VERSION).exe
@@ -49,14 +50,12 @@ tmp/$(EXE):
 	@(cd tmp ; \
 		rm -f *.exe *.msi 2>/dev/null ; \
 		curl -# -o "$(EXE)" -L "$(URL)" ; \
-		#file $(EXE) | grep -q "PE32 executable" || echo "Error: bad format for binary $(EXE)" ; \
-		#which peres >/dev/null && { peres -v $(EXE) | grep -q "^Product Version:[[:space:]]*$(VERSION)" || echo "Error: bad version for binary $(EXE)" ; } ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
 
 check-exe: tmp/$(EXE)
 	@(cd tmp ; \
-		file $(EXE) | grep -q "PE32 executable" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 1; } ; \
+		file $(EXE) | grep -q "PE32 executable.*Nullsoft Installer" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 1; } ; \
 		which peres >/dev/null && { peres -v $(EXE) | grep -q "^Product Version:[[:space:]]*$(VERSION)" || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 1; } ; } ;\
 		)
 

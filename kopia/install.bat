@@ -17,13 +17,16 @@ EXIT /B
 
 ECHO BEGIN %date%-%time%
 
-
 SET softversion=__VERSION__
 
 
 ECHO Silent install %softname%
 ScriptRunner.exe -appvscript KopiaUI-Setup-%softversion%.exe /S /allusers /disableAutoUpdates -appvscriptrunnerparameters -wait -timeout=300
 
+
+ECHO Remove desktop shortcut
+IF EXIST "%PUBLIC%\Desktop\KopiaUI.lnk"          DEL /F /Q "%PUBLIC%\Desktop\KopiaUI.lnk"
+IF EXIST "%ALLUSERSPROFILE%\Desktop\KopiaUI.lnk" DEL /F /Q "%ALLUSERSPROFILE%\Desktop\KopiaUI.lnk"
 
 
 ECHO END %date%-%time%
