@@ -1,9 +1,9 @@
 
 #
-# Update-WindowsDekstopRuntime
+# Update-WindowsDesktopRuntime
 #
 
-SOFT:=Update-WindowsDekstopRuntime
+SOFT:=Update-WindowsDesktopRuntime
 REVISION:=1
 
 URL5:=$(shell curl -s -L https://dotnet.microsoft.com/$(shell curl -s -L 'https://dotnet.microsoft.com/en-us/download/dotnet/5.0' | sed -e 's/"/\n/g;' | grep 'thank-you/runtime-desktop.*windows-x64-installer'  | head -1) | sed -e 's/"/\n/g;' | grep '^https.*windowsdesktop-runtime-.*-win-x64.exe' | head -1)
