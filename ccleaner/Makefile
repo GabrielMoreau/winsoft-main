@@ -4,12 +4,10 @@
 #
 
 SOFT:=CCleaner
-USERAGENT:=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:122.0) Gecko/20100101 Firefox/122.0
-LASTEST_VERSION:=$(shell curl -s -L 'https://www.ccleaner.com/ccleaner/version-history' --user-agent "$(USERAGENT)" | grep 'version-history__latest-version')
-VERSION:=$(shell echo "$(LASTEST_VERSION)" | sed 's/^.*>v\([[:digit:]][[:digit:]]*\)\.\([[:digit:]][[:digit:]]*\)\.\([[:digit:]][[:digit:]]*\).*/\1\.\2.\3/;')
-PVERSION:=$(shell echo "$(LASTEST_VERSION)" | sed 's/^.*>v\([[:digit:]][[:digit:]]*\)\.0*\([[:digit:]][[:digit:]]*\)\.\([[:digit:]][[:digit:]]*\).*/\1.\2\.*\3/;')
+URL:=https://bits.avcdn.net/productfamily_CCLEANER/insttype_SLIM/platform_WIN_PIR/installertype_ONLINE/build_RELEASE
+PVERSION:=$(shell ./get-version "$(URL)")
+VERSION:=$(shell echo "$(PVERSION)" | sed 's/\.0\././;')
 REVISION:=1
-URL:=$(shell curl -s -L 'https://www.ccleaner.com/ccleaner/download/slim' | egrep 'data-download-url=' | cut -f 2 -d '"')
 
 EXE:=ccsetup-$(VERSION).exe
 
@@ -50,8 +48,11 @@ checksum: check-version
 tmp/$(EXE):
 	@mkdir -p tmp
 	@(cd tmp ; \
-		rm -f *.exe *.msi 2>/dev/null ; \
-		curl -# -o "$(EXE)"  -L "$(URL)" ; \
+		#rm -f *.exe *.msi 2>/dev/null ; \
+		#curl -# -o "$(EXE)"  -L "$(URL)" ; \
+		rm -f ccsetup-*.exe 2>/dev/null ; \
+		ln -f ccleaner.exe "$(EXE)" ; \
+		printf '#%.0s' $$(seq 1 $$(( $$(tput cols) - 33 ))); echo ' 100.0%' ; \
 		#file $(EXE) | grep -q 'PE32 executable' || echo "Error: bad format for binary $(EXE)" ; \
 		#which peres >/dev/null && { peres -v $(EXE) | grep -q "^Product Version:[[:space:]]*$(PVERSION)" || echo "Error: bad version for binary $(EXE)" ; } ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
