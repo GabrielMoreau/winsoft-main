@@ -6,7 +6,8 @@
 SOFT:=PDFsamBasic
 VERSION:=$(shell curl -s -L 'https://github.com/torakiki/pdfsam/releases/latest' | sed 's/</\n/g;'| grep '^meta property.*og:title' | cut -f 4 -d ' ' | sed -e 's/^v//;')
 REVISION:=1
-URL:=https://github.com/torakiki/pdfsam/releases/download/v$(VERSION)/pdfsam-$(VERSION).msi
+URL:=https://github.com/torakiki/pdfsam/releases/download/v$(VERSION)/pdfsam-basic-$(VERSION)-windows-x64.msi
+# https://github.com/torakiki/pdfsam/releases/download/v5.3.0/pdfsam-basic-5.3.0-windows-x64.msi
 
 EXE:=pdfsam-$(VERSION).msi
 
