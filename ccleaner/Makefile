@@ -16,14 +16,13 @@ LOGDIR:=%WINDIR%\\Logs
 
 
 .PHONY: all check-version check-unrealized check-exe clean control next ocs version wget checksum
-.ONESHELL:
 
 all: check-version check-exe Uninstall-$(SOFT)_$(VERSION)-$(REVISION)_x64.zip $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
 
 sinclude ../_common/conf.mk
 
 check-version:
-	@echo $(VERSION) | grep -Eq '^[[:digit:]][\.[:digit:]]+[[:digit:]]$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
+	@echo "$(VERSION)" | grep -Eq '^[[:digit:]][\.[:digit:]]+[[:digit:]]$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
 
 check-unrealized: check-version
 	@if grep -q '[[:space:]]$(EXE)$$' checksum.txt; then echo 'Ok'; else echo 'Warning: Updates not performed for $(SOFT) version $(VERSION)'; fi
@@ -48,13 +47,9 @@ checksum: check-version
 tmp/$(EXE):
 	@mkdir -p tmp
 	@(cd tmp ; \
-		#rm -f *.exe *.msi 2>/dev/null ; \
-		#curl -# -o "$(EXE)"  -L "$(URL)" ; \
 		rm -f ccsetup-*.exe 2>/dev/null ; \
 		ln -f ccleaner.exe "$(EXE)" ; \
 		printf '#%.0s' $$(seq 1 $$(( $$(tput cols) - 33 ))); echo ' 100.0%' ; \
-		#file $(EXE) | grep -q 'PE32 executable' || echo "Error: bad format for binary $(EXE)" ; \
-		#which peres >/dev/null && { peres -v $(EXE) | grep -q "^Product Version:[[:space:]]*$(PVERSION)" || echo "Error: bad version for binary $(EXE)" ; } ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
 
