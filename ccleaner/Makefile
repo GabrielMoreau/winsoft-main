@@ -48,7 +48,8 @@ tmp/$(EXE):
 	@mkdir -p tmp
 	@(cd tmp ; \
 		rm -f ccsetup-*.exe 2>/dev/null ; \
-		ln -f ccleaner.exe "$(EXE)" ; \
+		cp -f ccleaner.exe "$(EXE)" ; \
+		# (cd tmp/; ../smart-link ccleaner.exe ccsetup-6.32.11432.exe ) ; \
 		printf '#%.0s' $$(seq 1 $$(( $$(tput cols) - 33 ))); echo ' 100.0%' ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
