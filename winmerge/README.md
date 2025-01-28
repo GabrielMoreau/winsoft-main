@@ -11,3 +11,12 @@ and then merging changes between versions.
 
 * Download : https://winmerge.org/downloads/?lang=fr
 * Silent install : https://silentinstallhq.com/winmerge-silent-install-how-to-guide/
+
+
+## Register Key
+
+Example :
+
+ | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
+ |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
+ | HKLM | WinMerge 2.16.46.0 x64 | Thingamahoochie Software | 2.16.46.0 | `WinMerge_is1` | `"C:\Program Files\WinMerge\unins000.exe"` |
