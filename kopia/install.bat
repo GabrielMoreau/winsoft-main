@@ -19,8 +19,10 @@ ECHO BEGIN %date%-%time%
 
 SET softversion=__VERSION__
 
-ECHO kill Process
-taskkill /IM KopiaUI.exe /IM Kopia.exe /F
+
+ECHO Kill running process
+TASKKILL /IM KopiaUI.exe /IM Kopia.exe /F
+
 
 ECHO Silent install %softname%
 ScriptRunner.exe -appvscript KopiaUI-Setup-%softversion%.exe /S /allusers /disableAutoUpdates -appvscriptrunnerparameters -wait -timeout=300
