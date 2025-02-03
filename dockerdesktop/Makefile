@@ -7,10 +7,13 @@ sinclude ../_common/flag.mk
 
 SOFT:=DockerDesktop
 INSTALLER:=DockerDesktopInstaller.exe
-URL:=https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64
+#URL:=https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64
+VSUM:=$(shell curl -s -l 'https://docs.docker.com/desktop/release-notes/' | sed -e 's/[<=>]/\n/g;' | grep '^https://desktop.docker.com/win/main/amd64/.*/checksums.txt' | head -1 | cut -f 7 -d '/')
+URL:=https://desktop.docker.com/win/main/amd64/$(VSUM)/Docker%20Desktop%20Installer.exe
 $(shell mkdir -p tmp; cd tmp; curl $(CURLFLAGS) -s --time-cond "$(INSTALLER)" -o "$(INSTALLER)" -L "$(URL)")
 VERSION:=$(shell peres -v tmp/$(INSTALLER) 2> /dev/null | grep '^Product Version' | awk '{print $$3}')
 REVISION:=1
+# https://desktop.docker.com/win/main/amd64/181591/Docker%20Desktop%20Installer.exe
 
 EXE:=DockerDesktopInstaller-$(VERSION).exe
 
@@ -58,7 +61,7 @@ tmp/$(EXE):
 	@mkdir -p tmp
 	@(cd tmp ; \
 		rm -f *-*.exe *-*.msi 2>/dev/null ; \
-		ln -f "$(INSTALLER)" "$(EXE)" ; \
+		cp "$(INSTALLER)" "$(EXE)" ; \
 		printf '#%.0s' $$(seq 1 $$(( $$(tput cols) - 33 ))); echo ' 100.0%' ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		if grep $$(shasum -a 256 "$(EXE)" | cut -f 1 -d ' ') ../checksum.txt | grep -qv "$(EXE)"; then echo "Error: another version of DockerDesktop-XXXX.exe exists with the same checksum" 1>&2 ; rm -f "$(EXE)" ; exit 1; fi; \
