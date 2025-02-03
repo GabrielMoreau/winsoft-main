@@ -58,3 +58,4 @@ cd068133f5b1d796c1cc2323cd69cc9cc376dce36feef237400b3238cebea2f3  signal-desktop
 aadb9657dff8fba8b448209af226abfff28ab501891af7a148e1d73b90e790ea  signal-desktop-win-x64-7.38.0.exe
 0bffda0b40324c005b0e9a3b1a0a1d291db5c6378536ac40ab7b413288e791e5  signal-desktop-win-x64-7.39.0.exe
 971a0e5f6df00473d6a786aff49f90e64c72283d1f26f5faf72255daa9c73468  signal-desktop-win-x64-7.40.0.exe
+720642dbc2be5208acf054a0548771cf958b90c8e9d517c70b139ec07d44e228  signal-desktop-win-x64-7.40.1.exe
