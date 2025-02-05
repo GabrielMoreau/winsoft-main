@@ -21,8 +21,19 @@ SET SoftVersionS=__VERSION_S__
 SET SoftVersionL=__VERSION_L__
 
 
-ECHO Remove RTools if already exists
-If EXIST "%SystemDrive%\rtools%SoftVersionS%\unins000.exe" ScriptRunner.exe -appvscript "%SystemDrive%\rtools%SoftVersionS%\unins000.exe" /VERYSILENT /SUPPRESSMSGBOXES -appvscriptrunnerparameters -wait -timeout=600
+ECHO Search PowerShell
+SET pwrsh=%WINDIR%\System32\WindowsPowerShell\V1.0\powershell.exe
+IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET pwrsh=%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe
+
+ECHO Add rights
+%pwrsh% Set-ExecutionPolicy RemoteSigned -Force -Scope LocalMachine
+
+ECHO unblock
+%pwrsh% "Unblock-File -Path .\*.ps1"
+
+
+ECHO Execute pre-install script
+%pwrsh% -File ".\pre-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
 
 
 ECHO Silent install %softname%
