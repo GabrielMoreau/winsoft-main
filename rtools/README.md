@@ -22,3 +22,5 @@ Example :
  | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
  | HKLM | Rtools 4.3 (5958-5975) | The R Foundation | 4.3.5958 | `Rtools43_is1` | `"C:\rtools43\unins000.exe"` |
+ | HKLM | Rtools 4.4 (6335-6327) | The R Foundation | 4.4.6335 | `Rtools44_is1` | `"C:\rtools44\unins000.exe"` |
+ | HKLM | Rtools 4.4 (6414-6401) | The R Foundation | 4.4.6414 | `Rtools44_is1` | `"C:\rtools44\unins000.exe"` |
