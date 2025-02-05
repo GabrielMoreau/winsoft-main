@@ -15,3 +15,14 @@ version of the software on the DELL website. In principle, all DELL
 computers use the same version of the software, so why isn't the
 software freely downloadable with its version number clearly displayed?
 That's another debate...
+
+The search `DisplayName` key install the register is: `Dell Command | Update`.
+
+
+## Register Key
+
+Example :
+
+ | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
+ |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
+ | HKLM | Dell Command \| Update | Dell Inc. | 5.4.0 | `{AD1F63E4-F31F-48A2-BB8D-CF7B96CC46A0}` | `MsiExec.exe /X{AD1F63E4-F31F-48A2-BB8D-CF7B96CC46A0}` |
