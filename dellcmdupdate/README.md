@@ -16,7 +16,8 @@ computers use the same version of the software, so why isn't the
 software freely downloadable with its version number clearly displayed?
 That's another debate...
 
-The search `DisplayName` key install the register is: `Dell Command | Update`.
+The search `DisplayName` key install the register is: `Dell Command | Update`
+(it's pretty stupid to have put the pipe character in the full name of the software).
 
 
 ## Register Key
