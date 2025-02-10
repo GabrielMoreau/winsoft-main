@@ -21,3 +21,5 @@ Example :
  | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
  | HKLM | Freeplane | Open source | 1.11.12 | `{D3941722-C4DD-4509-88C4-0E87F675A859}_is1` | `"C:\Program Files\Freeplane\unins000.exe"` |
+ | HKLM | Freeplane | Open source | 1.12.6 | `{D3941722-C4DD-4509-88C4-0E87F675A859}_is1` | `"C:\Program Files\Freeplane\unins000.exe"` |
+ | HKLM | Freeplane | Open source | 1.12.9 | `{D3941722-C4DD-4509-88C4-0E87F675A859}_is1` | `"C:\Program Files\Freeplane\unins000.exe"` |
