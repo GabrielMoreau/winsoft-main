@@ -3,12 +3,14 @@
 # Freeplane
 #
 
+sinclude ../_common/flag.mk
+
 SOFT:=Freeplane
-URL:=$(shell curl -s -L 'https://sourceforge.net/projects/freeplane/files/freeplane%20stable/' | sed -e 's/"/\n/g;' | grep '^https://.*stable/Freeplane-Setup-with-Java-.*.exe' | head -1)
-VERSION:=$(shell dirname "$(URL)" | xargs -r basename | cut -f 5 -d '-' | sed -e 's/\.exe//;')
+URL:=$(shell curl $(CURLFLAGS) -s -L 'https://sourceforge.net/projects/freeplane/files/freeplane%20stable/' | sed -e 's/"/\n/g;' | grep '^https://.*stable/Freeplane-Setup-[[:digit:]].*.exe' | head -1)
+VERSION:=$(shell dirname "$(URL)" | xargs -r basename | cut -f 3 -d '-' | sed -e 's/\.exe//;')
 REVISION:=1
 
-EXE:=Freeplane-Setup-with-Java-$(VERSION).exe
+EXE:=Freeplane-Setup-$(VERSION).exe
 
 IT_TEAM:=IT Support
 LOGDIR:=%WINDIR%\\Logs
