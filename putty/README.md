@@ -9,6 +9,7 @@ It supports several network protocols, including SCP, SSH, Telnet, rlogin, and r
 * Silent install : https://silentinstallhq.com/putty-0-77-silent-install-how-to-guide/,
 	https://www.pdq.com/blog/how-silently-uninstall-putty/
 
+
 ## Register Key
 
 Example :
