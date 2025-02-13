@@ -104,11 +104,11 @@ version: tmp/version-replace.txt
 checksum: $(VCREDIST)
 	@for exe in $(VCREDIST); \
 	do \
-		grep -q "^$$(shasum -a 256 $${exe})$$" ./checksum.txt || { shasum -a 256 "$(exe)"  >> ./checksum.txt ; }; \
+		grep -q "^$$(shasum -a 256 $${exe})$$" ./checksum.txt || { shasum -a 256 "$${exe}"  >> ./checksum.txt ; }; \
 		ver=$$(peres -v "$${exe}" | grep "^Product Version:[[:space:]]" | awk '{print $$3}'); \
 		year=$$(dirname "$${exe}" | xargs -r basename); \
 		arch=$$(basename "$${exe}" 2> /dev/null | cut -f 2 -d '.'); \
-		grep -q "$${year}-.* $${ver}" ./version.txt || { echo " * $${year}-$${arch} $${ver}" >> ./version.txt; }; \
+		grep -q "$${year}-.* $${ver}" ./version.txt || { echo " * $${year}-$${arch} $${ver}" >> ./version.txt ; }; \
 	done
 	@if [ $$(( $$(date '+%s') - $$(stat -c '%Y' checksum.txt) )) -lt 60 ]; then tail -6 checksum.txt; fi
 	@if [ $$(( $$(date '+%s') - $$(stat -c '%Y' version.txt) )) -lt 60 ]; then tail -6 version.txt; fi
@@ -117,6 +117,7 @@ check-exe: $(VCREDIST)
 	@for exe in $(VCREDIST); \
 	do \
 		file $${exe} | grep -q "PE32 executable" || { echo "Error: bad format for binary $${exe}" 1>&2 ; exit 1; } ; \
+		grep -q "^$$(shasum -a 256 $${exe})$$" checksum.txt || { echo "Error: bad checksum for binary $${exe}" ; exit 1; } ; \
 		which peres >/dev/null && { grep -q $$(peres -v $${exe} | grep "^Product Version:[[:space:]]" | awk '{print $$3}') version.txt || { echo "Error: bad version for binary $${exe}" 1>&2 ; exit 1; } ; } ;\
 	done
 
