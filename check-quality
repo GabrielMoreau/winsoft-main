@@ -15,30 +15,31 @@ function pipe_if_not_empty {
   fi
 }
 
-# check Windows files with UNIX line terminators
-find . -name '*.ps1' -o -name '*.bat' -exec file {} \+| grep 'ASCII text' | grep -v 'CRLF'
+echo "Check Windows files with UNIX line terminators"
+find . -name '*.ps1' -o -name '*.bat' -o -name '*.reg' -exec file {} \+| grep 'ASCII text' | grep -v 'CRLF' | pipe_if_not_empty "" cat | sed 's/^/ /;'
 
-# check unique name in checksum
+echo "Check unique name in checksum"
 for f in $(awk '{print $2}' */checksum.txt | sort | uniq -c  | grep -v '^      1 ' | awk '{print $2}')
 do
   if [ $(grep -h  $f */checksum.txt | sort -u | wc -l) -ne 1 ]
   then grep $f */checksum.txt
   fi
-done
+done | pipe_if_not_empty "" cat | sed 's/^/ /;'
 
-# check unique hash in checksum
+echo "Check unique hash in checksum"
 for f in $(awk '{print $1}' */checksum.txt | sort | uniq -c  | grep -v '^      1 ' | awk '{print $2}')
 do
   if [ $(grep -h  $f */checksum.txt | sort -u | wc -l) -ne 1 ]
   then grep $f */checksum.txt
   fi
-done
+done | pipe_if_not_empty "" cat | sed 's/^/ /;'
 
+echo "Check Makefile"
 for m in */Makefile
 do
   grep -q '^sinclude ../_common/conf.mk' "${m}" || echo "Makefile ${m} not include conf.mk"
   grep -q '^IT_TEAM:=' "${m}" || echo "Makefile ${m} not include IT_TEAM variable"
-done
+done | pipe_if_not_empty "" cat | sed 's/^/ /;'
 
 
 echo "Check for unnecessary spaces at the end of lines for UNIX files"
