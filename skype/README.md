@@ -4,7 +4,7 @@ Skype is a proprietary telecommunications application, best known for
 VoIP-based videotelephony, videoconferencing and voice calls.
 It also has instant messaging, file transfer, debit-based calls to
 landline and mobile telephones (over traditional telephone networks),
-and other features. 
+and other features.
 
 * Website : https://www.skype.com/
 * Wikipedia : https://en.wikipedia.org/wiki/Skype
@@ -35,7 +35,7 @@ It is possible to have just the header and 0 or 1 redirect in order to
 have the URL where the version number can be found.
 
 ```bash
-wget --max-redirect=1 https://go.skype.com/windows.desktop.download 
+wget --max-redirect=1 https://go.skype.com/windows.desktop.download
 ```
 
 All you need to do is make the appropriate `curl` request.

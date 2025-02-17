@@ -31,4 +31,4 @@ Bonus plugin
 
 * ANKAphase : https://imagej.nih.gov/ij/plugins/ankaphase/ -
   ANKAphase processes X-ray inline phase-contrast radiographs by
-  reconstructing the projected thickness of the object(s) imaged. 
+  reconstructing the projected thickness of the object(s) imaged.

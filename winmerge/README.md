@@ -3,7 +3,7 @@
 WinMerge is a free and open-source software tool for data comparison
 and merging of text-like files.
 It is useful for determining what has changed between versions,
-and then merging changes between versions. 
+and then merging changes between versions.
 
 * Website : https://winmerge.org/
 * Wikipedia : https://en.wikipedia.org/wiki/WinMerge

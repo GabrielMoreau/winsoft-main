@@ -2,6 +2,19 @@
 #
 # check code quality
 
+function pipe_if_not_empty {
+  local title=$1
+  shift
+
+  head=$(dd bs=1 count=1 2>/dev/null; echo a)
+  head=${head%a}
+
+  if [ "x${head}" != x"" ]
+  then
+    { [ -n "$title" ] && echo "$title"; printf %s "${head}"; cat; } | "$@"
+  fi
+}
+
 # check Windows files with UNIX line terminators
 find . -name '*.ps1' -o -name '*.bat' -exec file {} \+| grep 'ASCII text' | grep -v 'CRLF'
 
@@ -26,3 +39,9 @@ do
   grep -q '^sinclude ../_common/conf.mk' "${m}" || echo "Makefile ${m} not include conf.mk"
   grep -q '^IT_TEAM:=' "${m}" || echo "Makefile ${m} not include IT_TEAM variable"
 done
+
+
+echo "Check for unnecessary spaces at the end of lines for UNIX files"
+ack -l --no-recurse --ignore-dir=tmp --ignore-file=ext:bat --ignore-file=ext:reg --ignore-file=ext:ps1 --ignore-file=ext:psm1 --ignore-file=ext:psd1 --ignore-file=ext:log --ignore-file=ext:xml  '\s+$' ./ ./*/ | pipe_if_not_empty "" cat | sed 's/^/ /;'
+echo "Check for unnecessary spaces at the end of lines for Windows files"
+ack -l --ignore-dir=tmp '\s+\r$' | pipe_if_not_empty "" cat | sed 's/^/ /;'

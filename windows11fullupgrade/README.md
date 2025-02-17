@@ -14,13 +14,13 @@ apt install coreutils grep sed gawk file perl make curl zip pev
 
 The Windows11FullUpgrade package uses a DOS script `install.bat` to execute the `Windows11InstallationAssistant.exe` command.
 This command installs the latest version of Windows 11 if the workstation is compatible.
-The user has no interaction, however, at the end of the process, the workstation will not be rebooted automatically. 
+The user has no interaction, however, at the end of the process, the workstation will not be rebooted automatically.
 
 If the TPM chip is present, but not perfectly compatible,
 the script uses the `AllowUpgradesWithUnsupportedTPMOrCPU` registry key to force installation of Windows 11.
 
 ```dos
-Windows11InstallationAssistant.exe /QuietInstall /SkipEULA /NoRestartUI 
+Windows11InstallationAssistant.exe /QuietInstall /SkipEULA /NoRestartUI
 ```
 
 After the first reboot made by the user, Windows 11 will automatically reboot several times.
@@ -30,7 +30,7 @@ After the first reboot made by the user, Windows 11 will automatically reboot se
 
 * See Also : https://learn.microsoft.com/en-us/answers/questions/1020951/upgrading-w10-to-w11-with-windows11installationass?page=1#answer-1021082
 
-If you want to make Windows 11 a little more secure, 
+If you want to make Windows 11 a little more secure,
 take a look at the dedicated tweaks (GPOs) on the [SWMB](https://gitlab.in2p3.fr/resinfo-gt/swmb/resinfo-swmb) website
 (see [NEWS](https://gitlab.in2p3.fr/resinfo-gt/swmb/resinfo-swmb/-/blob/master/NEWS.md) file).
 By the way, most of the keys useful for Windows 10 are still valid under Windows 11.

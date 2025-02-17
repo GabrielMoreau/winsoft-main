@@ -16,4 +16,4 @@ Example :
 
  | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
- | HKLM | OBS Studio | OBS Project | 31.0.0 | `OBS Studio` | `"C:\Program Files\obs-studio\uninstall.exe"` | 
+ | HKLM | OBS Studio | OBS Project | 31.0.0 | `OBS Studio` | `"C:\Program Files\obs-studio\uninstall.exe"` |

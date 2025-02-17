@@ -2,7 +2,7 @@
 
 The Java Runtime Environment, or JRE, is a software layer that runs on
 top of a computer’s operating system software and provides the class
-libraries and other resources that a specific Java program needs to run. 
+libraries and other resources that a specific Java program needs to run.
 
 **This software is out of date and must be removed from all computers.**
 

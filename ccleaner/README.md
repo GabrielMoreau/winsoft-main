@@ -24,4 +24,4 @@ Example :
 
  | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
- | HKLM | CCleaner | Piriform | 6.22 | `CCleaner` | `"C:\Program Files\CCleaner\uninst.exe"` | 
+ | HKLM | CCleaner | Piriform | 6.22 | `CCleaner` | `"C:\Program Files\CCleaner\uninst.exe"` |

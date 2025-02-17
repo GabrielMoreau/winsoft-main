@@ -2,7 +2,7 @@
 
 Signal-Desktop is a free and open-source encrypted messaging service for instant messaging, voice, and video calls.
 The instant messaging function includes sending text, voice notes, images, videos, and other files.
-Communication may be one-to-one between users or may involve group messaging. 
+Communication may be one-to-one between users or may involve group messaging.
 
 * Website : https://signal-desktop.org/
 * Wikipedia : https://en.wikipedia.org/wiki/Signal_(software)

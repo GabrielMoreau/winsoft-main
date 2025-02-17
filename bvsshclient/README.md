@@ -1,7 +1,7 @@
 # Bitvise SSH Client - Graphical SSH client
 
 Bitvise is a SSH Client for Windows includes terminal emulation,
-graphical and command-line SFTP support, tunneling features. 
+graphical and command-line SFTP support, tunneling features.
 
 * Website : https://www.bitvise.com/
 * Wikipedia : https://en.wikipedia.org/wiki/Bitvise

@@ -60,7 +60,7 @@ IF EXIST "%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs" (
 )
 
 
-REM HKLM	PrusaSlicer version 2.7.1	Prusa Research s.r.o.	2.7.1	PrusaSlicer_is1	"C:\Program Files\Prusa3D\PrusaSlicer\unins000.exe"	
+REM HKLM	PrusaSlicer version 2.7.1	Prusa Research s.r.o.	2.7.1	PrusaSlicer_is1	"C:\Program Files\Prusa3D\PrusaSlicer\unins000.exe"
 ECHO Better reg uninstall key
  > tmp_install.reg ECHO Windows Registry Editor Version 5.00
 >> tmp_install.reg ECHO.

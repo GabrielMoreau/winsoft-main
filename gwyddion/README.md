@@ -1,6 +1,6 @@
 # Gwyddion - Data visualization and analysis for SPM
 
-Gwyddion is a free and open-source modular program for SPM 
+Gwyddion is a free and open-source modular program for SPM
 (scanning probe microscopy) data visualization and analysis.
 Primarily it is intended for the analysis of height fields obtained by
 scanning probe microscopy techniques (AFM, MFM, STM, SNOM/NSOM)

@@ -1,7 +1,7 @@
 # KiCad - Electronic design automation
 
 KiCad is a free and open-source software suite for electronic design automation (EDA).
-It facilitates the design and simulation of electronic hardware. 
+It facilitates the design and simulation of electronic hardware.
 It features an integrated environment for schematic capture, PCB layout, manufacturing file viewing, ngspice-provided SPICE simulation, and engineering calculation.
 
 * Website : https://www.kicad.org

@@ -16,7 +16,7 @@ REM Windows 10
 wuauclt /detectnow /updatenow
 
 REM Windows 11
-Windows11InstallationAssistant.exe /QuietInstall /SkipEULA /NoRestartUI 
+Windows11InstallationAssistant.exe /QuietInstall /SkipEULA /NoRestartUI
 ```
 
 * See Also : https://www.minitool.com/backup-tips/windows-update-command-line-021.html,

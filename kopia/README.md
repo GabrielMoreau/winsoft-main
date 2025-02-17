@@ -17,4 +17,4 @@ Example :
 
  | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
- | HKLM | KopiaUI 0.18.2 | Kopia Authors | 0.18.2 | `7b332f95-7538-5e20-9252-40d703baa034` | `"C:\Program Files\KopiaUI\Uninstall KopiaUI.exe" /allusers` | 
+ | HKLM | KopiaUI 0.18.2 | Kopia Authors | 0.18.2 | `7b332f95-7538-5e20-9252-40d703baa034` | `"C:\Program Files\KopiaUI\Uninstall KopiaUI.exe" /allusers` |

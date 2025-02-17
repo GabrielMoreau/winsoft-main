@@ -17,4 +17,4 @@ Example :
 
  | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
- | HKLM | Tabby 1.0.216 | Eugene Pankov | 1.0.216 | `71445fac-d6ef-5436-9da7-5a323762d7f5` | `"C:\Program Files\Tabby\Uninstall Tabby.exe" /allusers` | 
+ | HKLM | Tabby 1.0.216 | Eugene Pankov | 1.0.216 | `71445fac-d6ef-5436-9da7-5a323762d7f5` | `"C:\Program Files\Tabby\Uninstall Tabby.exe" /allusers` |

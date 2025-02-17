@@ -2,7 +2,7 @@
 
 Many applications require the redistributable Visual C++ runtime library packages to function correctly.
 These packages are often installed independently of applications,
-allowing multiple applications to make use of the package while only having to install it once. 
+allowing multiple applications to make use of the package while only having to install it once.
 
 This package does not install the redistributable visual C++ packages but simply updates them if needed.
 

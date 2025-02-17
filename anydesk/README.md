@@ -29,4 +29,4 @@ Example :
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
  | HKLM | AnyDesk MSI | AnyDesk Software GmbH | 8.0.5     | `{62853EBF-E9DD-4AA5-B20A-5A6C3DD74FF3}` | `MsiExec.exe /X{62853EBF-E9DD-4AA5-B20A-5A6C3DD74FF3}` |
  | HKLM | AnyDesk MSI | AnyDesk Software GmbH | 8.0.13    | `{62853EBF-E9DD-4AA5-B20A-5A6C3DD74FF3}` | `MsiExec.exe /X{62853EBF-E9DD-4AA5-B20A-5A6C3DD74FF3}` |
- | HKLM | AnyDesk     | AnyDesk Software GmbH | ad 8.0.14 | `AnyDesk` | `"C:\Program Files (x86)\AnyDesk\AnyDesk.exe" --uninstall` | 
+ | HKLM | AnyDesk     | AnyDesk Software GmbH | ad 8.0.14 | `AnyDesk` | `"C:\Program Files (x86)\AnyDesk\AnyDesk.exe" --uninstall` |

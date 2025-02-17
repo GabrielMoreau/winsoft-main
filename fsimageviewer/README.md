@@ -2,7 +2,7 @@
 
 FastStone Image Viewer is an image browser, converter and editor that
 supports all major graphic formats including BMP, JPEG, JPEG 2000, GIF,
-PNG, PCX, TIFF, WMF, ICO, TGA and camera raw files. 
+PNG, PCX, TIFF, WMF, ICO, TGA and camera raw files.
 
 * Website : https://www.faststone.org/
 * Wikipedia : https://en.wikipedia.org/wiki/FastStone_Image_Viewer

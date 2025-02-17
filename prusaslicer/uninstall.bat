@@ -4,7 +4,7 @@ SET regkey=PrusaSlicer_is1
 SET shortcut=%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\PrusaSlicer.lnk
 
 
-REM HKLM	PrusaSlicer version 2.7.1	Prusa Research s.r.o.	2.7.1	PrusaSlicer_is1	"C:\Program Files\Prusa3D\PrusaSlicer\unins000.exe"	
+REM HKLM	PrusaSlicer version 2.7.1	Prusa Research s.r.o.	2.7.1	PrusaSlicer_is1	"C:\Program Files\Prusa3D\PrusaSlicer\unins000.exe"
 
 REM Clean reg uninstall key
 reg query "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\%regkey%"
