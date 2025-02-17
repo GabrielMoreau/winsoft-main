@@ -3,7 +3,7 @@
 WinSoft is the acronym for Windows Software.
 WinSoft-Main helps you create packages
 (Zip archives with a built-in silent installer)
-of the latest versions of many standard Windows software. 
+of the latest versions of many standard Windows software.
 A better name could be Windows AutoBuild Silent Package Software.
 The main repository contains the most common software packages,
 and you can (and should) associate it with a conf repository containing
