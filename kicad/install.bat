@@ -20,7 +20,7 @@ SET softversion=__VERSION__
 
 
 ECHO Silent install %softname%
-ScriptRunner.exe -appvscript kicad-%softversion%-x86_64.exe /S -appvscriptrunnerparameters -wait -timeout=900
+ScriptRunner.exe -appvscript kicad-%softversion%-x86_64.exe /S /allusers -appvscriptrunnerparameters -wait -timeout=900
 
 
 REM ECHO Remove desktop shortcut
