@@ -11,3 +11,12 @@ It features an integrated environment for schematic capture, PCB layout, manufac
 
 * Download : https://www.kicad.org/download/windows/
 * Silent install : https://silentinstallhq.com/kicad-silent-install-how-to-guide/
+
+
+## Register Key
+
+Example :
+
+ | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
+ |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
+ | HKLM | KiCad 9.0 | KiCad | 9.0.0 | `KiCad 9.0` | `"C:\Program Files\KiCad\9.0\uninstall.exe" /allusers` |
