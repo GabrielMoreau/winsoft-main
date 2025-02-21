@@ -10,10 +10,13 @@ Communication may be one-to-one between users or may involve group messaging.
 
 * Download : https://signal.org/fr/download/windows/
 * Silent install : https://silentinstallhq.com/signal-silent-install-how-to-guide/,
- | http://wapt.tranquil.it/store/fr/tis-signal-desktop/,
- | https://www.reddit.com/r/SCCM/comments/tmh5g7/has_anyone_found_a_way_to_deploy_signal_for/
+	http://wapt.tranquil.it/store/fr/tis-signal-desktop/,
+	https://www.reddit.com/r/SCCM/comments/tmh5g7/has_anyone_found_a_way_to_deploy_signal_for/
 
-Example of default installation
+
+## Register Key
+
+Example :
 
  | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |

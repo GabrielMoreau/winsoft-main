@@ -23,6 +23,7 @@ REM Silent Uninstall (exe or msi)
 MsiExec.exe /x {GUID} /qn /norestart
 ```
 
+
 ## Register Key
 
 Example :

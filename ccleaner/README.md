@@ -18,6 +18,7 @@ Use only on personnal computer.
 "%ProgramFiles%\CCleaner\uninst.exe" /S
 ```
 
+
 ## Register Key
 
 Example :
