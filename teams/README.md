@@ -5,7 +5,9 @@ part of the Microsoft 365 family of products. Teams offering workspace
 chat and videoconferencing, file storage, and application integration.
 
 * Website : https://www.microsoft.com/fr-fr/microsoft-teams/
-* Deployment : https://learn.microsoft.com/en-us/microsoftteams/msi-deployment
+* Deployment : https://learn.microsoft.com/en-us/microsoftteams/msi-deployment,
+	https://learn.microsoft.com/fr-fr/microsoftteams/msi-deployment (fr)
+* Download : https://teams.microsoft.com/downloads/desktopurl?env=production&plat=windows&arch=x64&managedInstaller=true&download=true
 
 * Configure by GPO : https://www.it-connect.fr/deployer-et-configurer-teams-par-gpo/
 * Deploy by Office : https://learn.microsoft.com/en-us/deployoffice/teams-install
@@ -25,3 +27,4 @@ Example :
  | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
  | HKLM | Teams Machine-Wide Installer | Microsoft Corporation | 1.7.0.33761 | `{731F6BAA-A986-45A4-8936-7C3AAAAA760B}` | `MsiExec.exe /I{731F6BAA-A986-45A4-8936-7C3AAAAA760B}` |
+ | HKLM | Teams Machine-Wide Installer | Microsoft Corporation | 1.8.0.1362 | `{731F6BAA-A986-45A4-8936-7C3AAAAA760B}` | `MsiExec.exe /I{731F6BAA-A986-45A4-8936-7C3AAAAA760B}` |
