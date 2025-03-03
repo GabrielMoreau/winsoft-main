@@ -22,6 +22,28 @@ The installation creates a directory in `C:\Program Files (x86)\Teams Installer`
 Then for each new session, the Teams program is in the user's home in `C:\Users\login\ApplData\Local\Microsoft\Teams`.
 
 
+## 2025/03/03 From Teams Classic to new Microsoft Teams client
+
+Removing Teams Machine-Wide (Teams Classic) (https://learn.microsoft.com/en-us/microsoftteams/teams-classic-client-uninstall):
+```
+MsiExec.exe /X {731F6BAA-A986-45A4-8936-7C3AAAAA760B} /quiet
+```
+
+Installing new Teams client (https://learn.microsoft.com/en-us/microsoftteams/new-teams-bulk-install-client):
+```
+wget https://statics.teams.cdn.office.net/production-teamsprovision/lkg/teamsbootstrapper.exe
+wget https://statics.teams.cdn.office.net/production-windows-x64/enterprise/webview2/lkg/MSTeams-x64.msix
+.\teamsbootstrapper.exe -p -o ".\MSTeams-x64.msix"
+
+wegt https://statics.teams.cdn.office.net/evergreen-assets/DesktopClient/MSTeamsSetup.exe
+MSTeamsSetup.exe /S
+```
+Remove new Teams
+```ps1
+Get-AppxPackage -Name MSTeams -AllUsers | Remove-AppxPackage -AllUsers
+```
+
+
 ## Register Key
 
 Example :
@@ -30,3 +52,4 @@ Example :
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
  | HKLM | Teams Machine-Wide Installer | Microsoft Corporation | 1.7.0.33761 | `{731F6BAA-A986-45A4-8936-7C3AAAAA760B}` | `MsiExec.exe /I{731F6BAA-A986-45A4-8936-7C3AAAAA760B}` |
  | HKLM | Teams Machine-Wide Installer | Microsoft Corporation | 1.8.0.1362 | `{731F6BAA-A986-45A4-8936-7C3AAAAA760B}` | `MsiExec.exe /I{731F6BAA-A986-45A4-8936-7C3AAAAA760B}` |
+ | HKLM | Microsoft Teams Meeting Add-in for Microsoft Office | Microsoft | 1.24.31301 | `{A7AB73A3-CB10-4AA5-9D38-6AEFFBDE4C91}` | `MsiExec.exe /I{A7AB73A3-CB10-4AA5-9D38-6AEFFBDE4C91}` |

@@ -3,13 +3,13 @@
 # Microsoft Teams
 #
 
-SOFT:=Teams
-VERSION:=$(shell curl -s -L 'https://learn.microsoft.com/en-us/officeupdates/teams-app-versioning' | grep -A 30 'windows-version-history-1' | paste -sd '' | sed -e s'#<tr>#\n#g;' | grep -Ev '(windows-version-history|Slimcore version)' | sed -e 's/[<>]/\n/g;' | egrep '^[[:digit:]][[:digit:]]?\.[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+$$' | head -1)
-SHORTVERSION:=$(shell echo $(VERSION) | sed -e 's/00/0/g;')
-URL:=https://teams.microsoft.com/downloads/desktopurl?env=production&plat=windows&arch=x64&managedInstaller=true&download=true
+SOFT:=MSTeams
+VERSION:=$(shell curl -s -L 'https://learn.microsoft.com/en-us/officeupdates/teams-app-versioning' | grep -A 30 '"windows-gcc-version-history"' | paste -sd '' | sed -e s'#<tr>#\n#g;' | grep -Ev '(windows-gcc-version-history|Slimcore version)' | sed -e 's/[<>]/\n/g;' | grep -E '^[[:digit:]][[:digit:]]*\.[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+$$' | head -1)
+#SHORTVERSION:=$(shell echo $(VERSION) | sed -e 's/00/0/g;')
+URL:=https://statics.teams.cdn.office.net/evergreen-assets/DesktopClient/MSTeamsSetup.exe
 REVISION:=1
 
-EXE:=Teams_$(VERSION)_windows_x64.msi
+EXE:=MSTeamsSetup-$(VERSION).exe
 
 IT_TEAM:=IT Support
 LOGDIR:=%WINDIR%\\Logs
@@ -32,7 +32,7 @@ clean:
 
 version:
 	@echo "VERSION: $(VERSION)"
-	@echo "SHORTVERSION: $(SHORTVERSION)"
+#	@echo "SHORTVERSION: $(SHORTVERSION)"
 	@echo "URL: $(URL)"
 	@echo "EXE: $(EXE)"
 
@@ -51,15 +51,15 @@ tmp/$(EXE):
 	@(cd tmp ; \
 		rm -f *.exe *.msi 2>/dev/null ; \
 		curl -# -o "$(EXE)" -L "$(URL)" ; \
-		file $(EXE) | grep -q "Composite Document File.*Subject: Microsoft Teams" || echo "Error: bad format for binary $(EXE)" ; \
-		which msiextract >/dev/null && { rm -rf 'Program File'; msiextract $(EXE) ; } ; \
+		file $(EXE) | grep -q "PE32 executable" || echo "Error: bad format for binary $(EXE)" ; \
+		# which msiextract >/dev/null && { rm -rf 'Program File'; msiextract $(EXE) ; } ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
 
 check-exe: tmp/$(EXE)
 	@cd tmp; \
-		file $(EXE) | grep -q "Composite Document File.*Subject: Microsoft Teams" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 1; } ; \
-		which peres >/dev/null && { peres -v 'Program Files/Teams Installer/Teams.exe' | grep -q "^Product Version:[[:space:]]*$(SHORTVERSION)" || { echo "Error: bad version for binary Program Files/Teams Installer/Teams.exe" 1>&2 ; exit 1; } ; }
+		file $(EXE) | grep -q "PE32 executable" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 1; } ; \
+		#which peres >/dev/null && { peres -v 'Program Files/Teams Installer/Teams.exe' | grep -q "^Product Version:[[:space:]]*$(SHORTVERSION)" || { echo "Error: bad version for binary Program Files/Teams Installer/Teams.exe" 1>&2 ; exit 1; } ; }
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp

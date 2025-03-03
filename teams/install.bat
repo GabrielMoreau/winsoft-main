@@ -4,7 +4,7 @@ REM   Microsoft Teams
 REM
 
 REM Name
-SET softname=Teams
+SET softname=MSTeams
 
 SET logdir=__LOGDIR__
 IF NOT EXIST "%logdir%" (
@@ -35,7 +35,7 @@ ECHO Execute pre-install
 
 
 ECHO Silent install %softname%
-ScriptRunner.exe -appvscript MsiExec.exe /i "Teams_%softversion%_windows_x64.msi" OPTIONS="noAutoStart=true" ALLUSERS=1 /qn /log "%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=300
+ScriptRunner.exe -appvscript "MSTeamsSetup-%softversion%.exe" /S "%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=300
 
 
 ECHO END %date%-%time%
