@@ -81,6 +81,7 @@ ocs:
 	@echo "Delay:   5"
 	@echo "Cancel:  no"
 	@echo "Report:  yes"
+	@echo "Search-Like: Slicer 5"
 	@echo ""
 	@echo "$(IT_TEAM)"
 	@echo " --- "
