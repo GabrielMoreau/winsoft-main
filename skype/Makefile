@@ -88,6 +88,7 @@ ocs:
 	@echo "Delay:   5"
 	@echo "Cancel:  no"
 	@echo "Report:  yes"
+	@echo "Search-Like: Skype version"
 	@echo ""
 	@echo "$(IT_TEAM)"
 	@echo " --- "
