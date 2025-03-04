@@ -20,6 +20,8 @@ Example :
  | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
  | HKLM | Skype version 8.118 | Skype Technologies S.A. | 8.118 | `Skype_is1` | `"C:\Program Files (x86)\Microsoft\Skype for Desktop\unins000.exe"` |
+ | HKLM | Skype version 8.136 | Skype Technologies S.A. | 8.136 | `Skype_is1` | `"C:\Program Files (x86)\Microsoft\Skype for Desktop\unins000.exe"` |
+ | HKLM | Skype version 8.137 | Skype Technologies S.A. | 8.137 | `Skype_is1` | `"C:\Program Files (x86)\Microsoft\Skype for Desktop\unins000.exe"` |
 
 
 ## Download

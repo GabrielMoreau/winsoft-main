@@ -10,3 +10,13 @@ subscriptions. Your passwords will be auto-fill into your favorite apps.
 * Wikipedia : https://en.wikipedia.org/wiki/KeePassXC
 
 * Download : https://github.com/keepassxreboot/keepassxc/releases/latest
+
+
+## Register Key
+
+Example :
+
+ | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
+ |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
+ | HKLM | KeePassXC | KeePassXC Team | 2.7.9 | `{4D0AFBD7-7864-4FF3-A481-513DEBFAB175}` | `MsiExec.exe /X{4D0AFBD7-7864-4FF3-A481-513DEBFAB175}` |
+ | HKLM | KeePassXC | KeePassXC Team | 2.7.10 | `{E86A6926-F1BD-42B8-BE36-12E8A3A052AC}` | `MsiExec.exe /X{E86A6926-F1BD-42B8-BE36-12E8A3A052AC}` |
