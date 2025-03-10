@@ -15,3 +15,13 @@ We use the portable version, which we install in `ProgramFiles` in
 order to have a global installation for all users. The official setup
 installs the software under the user's profile and sets a key in the
 user's registry. This is not what we want.
+
+
+## Register Key
+
+Example :
+
+ | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
+ |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
+ | HKLM | Telegram Desktop 5.11.1 | Telegram FZ-LLC | 5.11.1 | `Telegram Desktop` | `C:\Program Files\Telegram Desktop\uninstall.bat` |
+ | HKLM | Telegram Desktop 5.12.3 | Telegram FZ-LLC | 5.12.3 | `Telegram Desktop` | `C:\Program Files\Telegram Desktop\uninstall.bat` |
