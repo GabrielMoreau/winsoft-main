@@ -8,3 +8,12 @@ Autopsy is a fast, thorough, and efficient hard drive investigation solution tha
 
 * Download : https://www.autopsy.com/download/
 * Silent install : https://community.chocolatey.org/packages/autopsy#files
+
+
+## Register Key
+
+Example :
+
+ | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
+ |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
+ | HKLM | Autopsy | The Sleuth Kit | 4.22.0 | `{7E2967DC-AA09-47A9-B2D7-AF308C52BBE3}` | `MsiExec.exe /I{7E2967DC-AA09-47A9-B2D7-AF308C52BBE3}` |
