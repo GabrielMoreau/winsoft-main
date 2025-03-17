@@ -34,10 +34,15 @@ ECHO Search PowerShell
 SET pwrsh=%WINDIR%\System32\WindowsPowerShell\V1.0\powershell.exe
 IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET pwrsh=%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe
 
-ECHO Create shortcut
-IF EXIST "%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs" (
-  %pwrsh% -Command "$WS = New-Object -ComObject WScript.Shell; $SC = $WS.CreateShortcut('%shortcut%'); $SC.TargetPath = '%ProgramData%\signal-desktop\Signal.exe'; $SC.Save();" -ExecutionPolicy Bypass -NoLogo -NonInteractive -NoProfile
-  )
+REM ECHO Create shortcut
+REM IF EXIST "%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs" (
+REM  %pwrsh% -Command "$WS = New-Object -ComObject WScript.Shell; $SC = $WS.CreateShortcut('%shortcut%'); $SC.TargetPath = '%ProgramData%\signal-desktop\Signal.exe'; $SC.Save();" -ExecutionPolicy Bypass -NoLogo -NonInteractive -NoProfile
+REM  )
+
+ECHO Remove desktop shortcut
+IF EXIST "%PUBLIC%\Desktop\Signal.lnk"          DEL /F /Q "%PUBLIC%\Desktop\Signal.lnk"
+IF EXIST "%ALLUSERSPROFILE%\Desktop\Signal.lnk" DEL /F /Q "%ALLUSERSPROFILE%\Desktop\Signal.lnk"
+IF EXIST "%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\Signal-Desktop.lnk" DEL /F /Q "%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\Signal-Desktop.lnk"
 
 
 ECHO Better reg uninstall key

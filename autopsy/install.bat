@@ -24,9 +24,9 @@ ECHO Silent install %softname%
 ScriptRunner.exe -appvscript MsiExec.exe /i "autopsy-%softversion%-64bit.msi" /qn /norestart /L*v "%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=900
 
 
-REM ECHO Remove desktop shortcut
-REM IF EXIST "%PUBLIC%\Desktop\Autopsy.lnk"          DEL /F /Q "%PUBLIC%\Desktop\Autopsy.lnk"
-REM IF EXIST "%ALLUSERSPROFILE%\Desktop\Autopsy.lnk" DEL /F /Q "%ALLUSERSPROFILE%\Desktop\Autopsy.lnk"
+ECHO Remove desktop shortcut
+IF EXIST "%PUBLIC%\Desktop\Autopsy *.lnk"          DEL /F /Q "%PUBLIC%\Desktop\Autopsy *.lnk"
+IF EXIST "%ALLUSERSPROFILE%\Desktop\Autopsy *.lnk" DEL /F /Q "%ALLUSERSPROFILE%\Desktop\Autopsy *.lnk"
 
 
 ECHO END %date%-%time%

@@ -23,9 +23,9 @@ ECHO Silent install %softname%
 ScriptRunner.exe -appvscript kicad-%softversion%-x86_64.exe /S /allusers -appvscriptrunnerparameters -wait -timeout=900
 
 
-REM ECHO Remove desktop shortcut
-REM IF EXIST "%PUBLIC%\Desktop\KiCad.lnk"          DEL /F /Q "%PUBLIC%\Desktop\KiCad.lnk"
-REM IF EXIST "%ALLUSERSPROFILE%\Desktop\KiCad.lnk" DEL /F /Q "%ALLUSERSPROFILE%\Desktop\KiCad.lnk"
+ECHO Remove desktop shortcut
+IF EXIST "%PUBLIC%\Desktop\KiCad *.lnk"          DEL /F /Q "%PUBLIC%\Desktop\KiCad *.lnk"
+IF EXIST "%ALLUSERSPROFILE%\Desktop\KiCad *.lnk" DEL /F /Q "%ALLUSERSPROFILE%\Desktop\KiCad *.lnk"
 
 
 ECHO END %date%-%time%
