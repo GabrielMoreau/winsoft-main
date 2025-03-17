@@ -13,3 +13,13 @@ search through them and save searches for later use.
 
 * Download : https://www.digikam.org/download/
 * Silent install : https://silent-install.net/software/the_digikam_team/digikam/5.8.0
+
+
+## Register Key
+
+Example :
+
+ | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
+ |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
+ | HKLM | digiKam 8.5.0 | The digiKam team | 8.5.0 | `digiKam` | `"C:\Program Files\digiKam\Uninstall.exe"` |
+ | HKLM | digiKam 8.6.0 | The digiKam team | 8.6.0 | `digiKam` | `"C:\Program Files\digiKam\Uninstall.exe"` |

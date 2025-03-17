@@ -9,3 +9,12 @@ used as input to other software applications.
 
 * Download : https://github.com/markummitchell/engauge-digitizer/releases/latest
 * Silent install : https://www.manageengine.com/products/desktop-central/software-installation/silent_install_Engauge-Digitizer-(12.1).html
+
+
+## Register Key
+
+Example :
+
+ | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
+ |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
+ | HKLM | Engauge Digitizer | Engauge Open Source Developers | 12.1 | `{BD41327E-EB4B-4BEE-A93E-DC8B8D41F840}` | `MsiExec.exe /X{BD41327E-EB4B-4BEE-A93E-DC8B8D41F840}` |
