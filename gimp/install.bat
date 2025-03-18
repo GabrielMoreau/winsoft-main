@@ -25,5 +25,10 @@ ECHO Silent install %softname%
 ScriptRunner.exe -appvscript gimp-%softversion%-setup.exe /VERYSILENT /NORESTART /ALLUSERS /LOG="%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=600
 
 
+ECHO Remove desktop shortcut
+IF EXIST "%PUBLIC%\Desktop\GIMP *.lnk"          DEL /F /Q "%PUBLIC%\Desktop\GIMP *.lnk"
+IF EXIST "%ALLUSERSPROFILE%\Desktop\GIMP *.lnk" DEL /F /Q "%ALLUSERSPROFILE%\Desktop\GIMP *.lnk"
+
+
 ECHO END %date%-%time%
 EXIT

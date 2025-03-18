@@ -42,6 +42,7 @@ REM  )
 ECHO Remove desktop shortcut
 IF EXIST "%PUBLIC%\Desktop\Signal.lnk"          DEL /F /Q "%PUBLIC%\Desktop\Signal.lnk"
 IF EXIST "%ALLUSERSPROFILE%\Desktop\Signal.lnk" DEL /F /Q "%ALLUSERSPROFILE%\Desktop\Signal.lnk"
+IF EXIST "%USERPROFILE%\Desktop\Signal.lnk"     DEL /F /Q "%USERPROFILE%\Desktop\Signal.lnk"
 IF EXIST "%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\Signal-Desktop.lnk" DEL /F /Q "%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\Signal-Desktop.lnk"
 
 
