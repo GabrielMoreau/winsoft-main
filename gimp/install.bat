@@ -37,7 +37,7 @@ ECHO Execute pre-install script
 
 
 ECHO Silent install %softname%
-ScriptRunner.exe -appvscript gimp-%softversion%-setup.exe /VERYSILENT /NORESTART /ALLUSERS /LOG="%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=600
+ScriptRunner.exe -appvscript gimp-%softversion%-setup.exe /VERYSILENT /NORESTART /ALLUSERS /MERGETASKS=!desktopicon /LOG="%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=600
 
 
 ECHO Remove desktop shortcut

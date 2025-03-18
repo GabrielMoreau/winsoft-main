@@ -68,11 +68,11 @@ Write-Output "Config: Version $RefVersion"
 		} Else {
 			$UninstallSplit = ($App.UninstallString -Split "exe")[0] -Replace '"', ''
 			$Exe = $UninstallSplit + 'exe'
-			$Args = '/S'
+			$Args = '/VERYSILENT /NORESTART'
 			Write-Output "Remove EXE: $DisplayName / $DisplayVersion / $($App.UninstallString) / $Exe $Args"
 		}
 
-		Run-Exec -FilePath "$Exe" -ArgumentList "$Args" -Name "$RefName"
+		Run-Exec -FilePath "$Exe" -ArgumentList "$Args" -Name "$RefName" -Timeout 600
 	}
 
 
