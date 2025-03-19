@@ -46,7 +46,7 @@ check-exe: $(EXE)
 
 tmp/install.bat: install.bat Makefile $(EXE)
 	@mkdir -p tmp
-	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#; s/__HURUKAI_SERVER__/$(HURUKAI_SERVER)/; s/__HURUKAI_SIG__/$(HURUKAI_SIG)/; s/__HURUKAI_PASSWORD__/$(HURUKAI_PASSWORD)/;' $< > $@
+	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#; s/__HURUKAI_SERVER__/$(HURUKAI_SERVER)/; s/__HURUKAI_SIG__/$(HURUKAI_SIG)/; s/__HURUKAI_TOKEN__/$(HURUKAI_TOKEN)/;' $< > $@
 
 %.zip: Makefile tmp/install.bat $(EXE)
 	@rm -f $@
