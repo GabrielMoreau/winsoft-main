@@ -19,3 +19,5 @@ Example :
  | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
  | HKLM | blender | Blender Foundation | 4.2.2 | `{863071B2-E24C-409B-A398-B27660B5AA0A}` | `MsiExec.exe /I{863071B2-E24C-409B-A398-B27660B5AA0A}` |
+ | HKLM | Blender | Blender Foundation | 4.3.2 | `{DE735DFE-88BD-4470-A889-605A6D86B037}` | `MsiExec.exe /I{DE735DFE-88BD-4470-A889-605A6D86B037}` |
+ | HKLM | Blender | Blender Foundation | 4.4.0 | `{884D3EFF-5207-454F-8EC9-C54FC86F7594}` | `MsiExec.exe /X{884D3EFF-5207-454F-8EC9-C54FC86F7594}` |
