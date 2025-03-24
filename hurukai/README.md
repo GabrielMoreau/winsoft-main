@@ -32,4 +32,4 @@ Example :
  | HKLM | HarfangLab Hurukai agent | HarfangLab | 3.10.3 | `{B671C117-C0D7-494C-850B-C4A1D9E18E5C}` | `MsiExec.exe /X{B671C117-C0D7-494C-850B-C4A1D9E18E5C}` |
  | HKLM | HarfangLab Hurukai agent | HarfangLab | 3.11.6 | `{0311C5BF-D71D-4F48-AE2B-83187706B792}` | `MsiExec.exe /X{0311C5BF-D71D-4F48-AE2B-83187706B792}` |
  | HKLM | HarfangLab Hurukai agent | HarfangLab | 4.2.10 | `{2D3D78FF-E722-46E4-9C5F-64A9A49B7ACD}` | `MsiExec.exe /X{2D3D78FF-E722-46E4-9C5F-64A9A49B7ACD}` |
- | HKLM | HarfangLab Hurukai agent | HarfangLab | 4.6.12 | `{326BC5CC-A91D-4E99-A5CD-FD8041C91F8B}` | `MsiExec.exe /X{326BC5CC-A91D-4E99-A5CD-FD8041C91F8B}` | 
+ | HKLM | HarfangLab Hurukai agent | HarfangLab | 4.6.12 | `{326BC5CC-A91D-4E99-A5CD-FD8041C91F8B}` | `MsiExec.exe /X{326BC5CC-A91D-4E99-A5CD-FD8041C91F8B}` |

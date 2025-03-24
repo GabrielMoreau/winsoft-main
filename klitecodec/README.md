@@ -23,3 +23,4 @@ Example :
  | HKLM | K-Lite Codec Pack 18.6.5 Standard | KLCP | 18.6.5 | `KLiteCodecPack_is1` | `"C:\Program Files (x86)\K-Lite Codec Pack\unins000.exe"` |
  | HKLM | K-Lite Codec Pack 18.7.5 Standard | KLCP | 18.7.5 | `KLiteCodecPack_is1` | `"C:\Program Files (x86)\K-Lite Codec Pack\unins000.exe"` |
  | HKLM | K-Lite Codec Pack 18.8.0 Standard | KLCP | 18.8.0 | `KLiteCodecPack_is1` | `"C:\Program Files (x86)\K-Lite Codec Pack\unins000.exe"` |
+ | HKLM | K-Lite Codec Pack 18.8.5 Standard | KLCP | 18.8.5 | `KLiteCodecPack_is1` | `"C:\Program Files (x86)\K-Lite Codec Pack\unins000.exe"` |
