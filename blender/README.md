@@ -8,7 +8,7 @@ and, formerly, video games.
 * Website : https://www.blender.org/
 * Wikipedia : https://en.wikipedia.org/wiki/Blender_(software)
 
-* Download : https://inkscape.org/release/inkscape-dev/?latest=1
+* Download : https://www.blender.org/download/
 * Silent install : https://silentinstallhq.com/blender-silent-install-how-to-guide/
 
 
