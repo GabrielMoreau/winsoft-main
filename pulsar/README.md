@@ -19,3 +19,4 @@ Example :
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
  | HKLM | Pulsar | Pulsar-Edit | 1.125.0 | `0949b555-c22c-56b7-873a-a960bdefa81f` | `"C:\Program Files\Pulsar\Uninstall Pulsar.exe" /allusers` | 
  | HKLM | Pulsar | Pulsar-Edit | 1.126.0 | `0949b555-c22c-56b7-873a-a960bdefa81f` | `"C:\Program Files\Pulsar\Uninstall Pulsar.exe" /allusers` |
+ | HKLM | Pulsar | Pulsar-Edit | 1.127.1 | `0949b555-c22c-56b7-873a-a960bdefa81f` | `"C:\Program Files\Pulsar\Uninstall Pulsar.exe" /allusers` |
