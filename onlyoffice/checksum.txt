@@ -1,2 +1,3 @@
 4962810570a66f97ef3295119e0e4bc6f1681aa4c0092f9760446eb5da9fecc0  DesktopEditors-8.3.1-x64.msi
 6720beaf1f70d88bab8c10310c8fdb92e8742a1fcd2513ce2d4c17b525397d7f  DesktopEditors-8.3.2-x64.msi
+8a37561feeb702cf8e5dcf97a0eeacc4c7d53b193e6798adcae337bd9cf2008c  DesktopEditors-8.3.3-x64.msi
