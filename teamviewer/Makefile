@@ -4,9 +4,9 @@
 #
 
 SOFT:=TeamViewer
-VERSION:=$(shell curl -s -L 'https://www.teamviewer.com/en/download/windows/' | sed -e 's/[[:space:]]/\n/g; s/[<>]/ /g;' | grep 'data-dl-version-label' | cut -f 2 -d ' ' | head -1)
-REVISION:=1
 URL:=https://download.teamviewer.com/download/TeamViewer_Setup_x64.exe
+VERSION:=$(shell ./get-version "$(URL)")
+REVISION:=1
 
 EXE:=TeamViewer-$(VERSION)-Setup-x64.exe
 
@@ -27,7 +27,7 @@ check-unrealized: check-version
 	@if grep -q '[[:space:]]$(EXE)$$' checksum.txt; then echo 'Ok'; else echo 'Warning: Updates not performed for $(SOFT) version $(VERSION)'; fi
 
 clean:
-	rm -rf $(SOFT)_$(VERSION)-$(REVISION)_x64.zip tmp resources
+	rm -rf $(SOFT)_$(VERSION)-$(REVISION)_x64.zip Uninstall-$(SOFT)_$(VERSION)-$(REVISION)_x64.zip tmp resources
 
 version:
 	@echo "VERSION: $(VERSION)"
@@ -47,10 +47,9 @@ wget: tmp/$(EXE)
 tmp/$(EXE):
 	@mkdir -p tmp
 	@(cd tmp ; \
-		rm -f *.exe *.msi 2>/dev/null ; \
-		curl -# -o "$(EXE)" -L "$(URL)" ; \
-		#file $(EXE) | grep -q "PE32 executable" || echo "Error: bad format for binary $(EXE)" ; \
-		#which peres >/dev/null && { peres -v $(EXE) | grep -q "^Product Version:[[:space:]]*$(VERSION)" || echo "Error: bad version for binary $(EXE)" ; } ; \
+		rm -f TeamViewer-*.exe 2>/dev/null ; \
+		ln -f TeamViewer_Setup_x64.exe "$(EXE)" ; \
+		printf '#%.0s' $$(seq 1 $$(( $$(tput cols) - 33 ))); echo ' 100.0%' ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
 
