@@ -24,3 +24,4 @@ Example :
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
  | HKLM | Docker Desktop | Docker Inc. | 4.15.0 | `Docker Desktop` | `"C:\Program Files\Docker\Docker\Docker Desktop Installer.exe" "uninstall"` |
  | HKLM | Docker Desktop | Docker Inc. | 4.37.1 | `Docker Desktop` | `"C:\Program Files\Docker\Docker\Docker Desktop Installer.exe" "uninstall"` |
+ | HKLM | Docker Desktop | Docker Inc. | 4.41.0 | `Docker Desktop` | `"C:\Program Files\Docker\Docker\Docker Desktop Installer.exe" "uninstall"` |
