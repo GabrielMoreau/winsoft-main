@@ -1,35 +1,72 @@
 #!/usr/bin/pwsh
+#
+# check PowerShell script syntax
 
 Param (
-	[Parameter(Mandatory = $true)][string]$Path
+	[Parameter(Mandatory = $True, ValueFromRemainingArguments = $True)]
+	[String[]]$Paths
 )
 
-# Vérifier que le fichier existe
-if (!(Test-Path -Path $Path)) {
-	Write-Error "Le fichier '$Path' n'existe pas."
+Function Test-Syntax {
+	Param (
+		[String]$FilePath
+	)
+
+	$Errors = $Null
+	$Tokens = $Null
+
+	$ResolvedPath = (Resolve-Path -Path $FilePath -ErrorAction SilentlyContinue).Path
+	If (-Not $ResolvedPath) {
+		Write-Host "⚠️ File not found: '$FilePath'" -ForegroundColor DarkGray
+		Return 1
+	}
+
+	$AST = [System.Management.Automation.Language.Parser]::ParseFile(
+		$ResolvedPath,
+		[Ref]$Tokens,
+		[Ref]$Errors
+	)
+
+	If ($Errors.Count -eq 0) {
+		Write-Host "✅ OK: $FilePath" -ForegroundColor Green
+		Return 0
+	} Else {
+		Write-Host "❌ Error: $FilePath" -ForegroundColor Red
+		ForEach ($Error in $Errors) {
+			$Line = $Error.Extent.StartLineNumber
+			$Col = $Error.Extent.StartColumnNumber
+			$Msg = $Error.Message
+			Write-Host "   → Line $Line, Col $Col : $Msg" -ForegroundColor Yellow
+		}
+		Return 2
+	}
+}
+
+# Also analyzes files in a folder
+$AllFiles = @()
+ForEach ($Path in $Paths) {
+	If (Test-Path $Path -PathType Container) {
+		$PsFiles = Get-ChildItem -Path $Path -Filter *.ps1 -Recurse | Select-Object -ExpandProperty FullName
+		$AllFiles += $PsFiles
+	} ElseIf (Test-Path $Path -PathType Leaf) {
+		$AllFiles += (Resolve-Path $Path).Path
+	} Else {
+		Write-Host "❓ Path invalid or not found: $Path" -ForegroundColor DarkGray
+	}
+}
+
+If ($AllFiles.Count -eq 0) {
+	Write-Host "No .ps1 files found to analyze" -ForegroundColor Magenta
 	Exit 1
 }
 
-# Analyse du fichier
-$Errors = $Null
-$Tokens = $Null
-
-$AST = [System.Management.Automation.Language.Parser]::ParseFile(
-	(Resolve-Path -Path $Path).Path,
-	[ref]$Tokens,
-	[ref]$Errors
-)
-
-If ($Errors.Count -eq 0) {
-	Write-Host "✅ Syntaxe correcte pour '$Path'." -ForegroundColor Green
-	Exit 0
-} Else {
-	Write-Host "❌ Erreurs de syntaxe trouvées dans '$Path' :" -ForegroundColor Red
-	ForEach ($Error in $Errors) {
-		$Position = $Error.Extent.StartLineNumber
-		$Column   = $Error.Extent.StartColumnNumber
-		$Message  = $Error.Message
-		Write-Host "Ligne $Position, Colonne $Column : $Message" -ForegroundColor Yellow
+# Analysis of all files
+$GlobalStatus = 0
+ForEach ($File in $AllFiles | Sort-Object) {
+	$Result = Test-Syntax -FilePath $File
+	If ($Result -ne 0) {
+		$GlobalStatus = $Result
 	}
-	Exit 2
 }
+
+Exit $GlobalStatus

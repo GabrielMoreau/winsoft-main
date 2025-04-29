@@ -48,4 +48,4 @@ echo "Check for unnecessary spaces at the end of lines for Windows files"
 ack -l --ignore-dir=tmp --ignore-dir=resources '\s+\r$' ./ ./*/ | pipe_if_not_empty "" cat | sed 's/^/ /;'
 
 echo "Check PowerShell script syntax"
-find . -maxdepth 2  -name '*.ps1' -exec ./check-syntax.ps1 {} \; | grep -v 'Syntaxe correcte pour'
+find . -maxdepth 2  -name '*.ps1' | xargs -r ./check-syntax.ps1  | grep -v '^✅ OK:'
