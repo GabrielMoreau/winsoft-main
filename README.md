@@ -45,9 +45,11 @@ so that the installation is silent, for example.
 Depending on the tool used to create the executable (EXE or MSI), there
 are a number of standard flags for silent installation.
 However, in some cases, no flag will work...
-The [advancedinstaller](https://www.advancedinstaller.com/silent-install-exe-msi-applications.html)
-website provides a list of most flags, depending on the type of tool
-used to create the installer.
+
+* The [advancedinstaller](https://www.advancedinstaller.com/silent-install-exe-msi-applications.html)
+  website provides a list of most flags, depending on the type of tool
+  used to create the installer.
+* A nice documentation is also on the [Inno Setup](https://jrsoftware.org/ishelp/index.php?topic=setupcmdline) installer.
 
 Here are just a few of these projects or websites with information
 that is often relevant:
