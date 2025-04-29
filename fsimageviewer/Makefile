@@ -75,6 +75,7 @@ ocs:
 	@echo "Delay:   5"
 	@echo "Cancel:  no"
 	@echo "Report:  yes"
+	@echo "Search:  FastStone Image Viewer"
 	@echo ""
 	@echo "$(IT_TEAM)"
 	@echo " --- "
