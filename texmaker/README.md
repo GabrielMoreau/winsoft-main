@@ -25,3 +25,4 @@ Example :
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
  | HKLM | Texmaker 5.1.4 (64-bit) | Texmaker | 5.1.4.0 | `{C6FAECAD-6A8B-40FE-AC0F-6DCCE870A729}` | `MsiExec.exe /I{C6FAECAD-6A8B-40FE-AC0F-6DCCE870A729}` |
  | HKLM | Texmaker 6.0.0 (64-bit) | Texmaker | 6.0.0.0 | `{BDB36DD0-C209-4716-A9AD-8EAC74C31716}` | `MsiExec.exe /I{BDB36DD0-C209-4716-A9AD-8EAC74C31716}` |
+ | HKLM | Texmaker 6.0.1 (64-bit) | Texmaker | 6.0.1.0 | `{A815F197-B240-414D-9715-D1DF58149FB3}` | `MsiExec.exe /I{A815F197-B240-414D-9715-D1DF58149FB3}` |
