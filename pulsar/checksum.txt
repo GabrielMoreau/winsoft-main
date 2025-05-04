@@ -1,3 +1,4 @@
 927e7851b4c8358962039cc4a08b12f0033fc4e8f1f1e01dd0ff61e2d25dbe71  Windows.Pulsar.Setup.1.126.0.exe
 e82d72719ffa565933cec05c2309bbf9f9ce84b20d7ffe6cd9f28855d2a90c03  Windows.Pulsar.Setup.1.127.0.exe
 438a2367cce1f4be3e94c61198e1788fe1cee2d1c25bc94eb6098a0908740831  Windows.Pulsar.Setup.1.127.1.exe
+018e779b3f2dfdd83afde0a2121aed2ad8273fd255e44aa81ccd6001e93c004f  Windows.Pulsar.Setup.1.128.0.exe
