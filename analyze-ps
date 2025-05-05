@@ -5,9 +5,6 @@
 #
 # 2025/04/29 Gabriel Moreau <Gabriel.Moreau@univ-grenoble-alpes.fr>
 
-# Add a timeout to limit OS terminal blocking to a maximum of 15 seconds
-# exec timeout -k 2s 13 pwsh -NoLogo << 'EOF'
-
 Param (
 	[Parameter(Mandatory = $True, ValueFromRemainingArguments = $True)]
 	[String[]]$Paths
