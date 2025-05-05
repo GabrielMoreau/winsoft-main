@@ -4,7 +4,7 @@
 #
 
 SOFT:=AcrobatReader
-$(shell mkdir -p tmp; cd tmp; curl -s --time-cond 'release-notes-acrobat-reader.html' -o 'release-notes-acrobat-reader.html' -L "https://helpx.adobe.com/acrobat/release-note/release-notes-acrobat-reader.html")
+$(shell mkdir -p tmp; curl -s -L "https://helpx.adobe.com/acrobat/release-note/release-notes-acrobat-reader.html" > tmp/release-notes-acrobat-reader.html)
 VERSION:=$(shell grep 'disablelinktracking="false">DC ' tmp/release-notes-acrobat-reader.html | cut -f 2 -d '(' | cut -f 1 -d ')' | head -1)
 URLTRANSIT:=$(shell grep "$(VERSION)" tmp/release-notes-acrobat-reader.html | sed -e 's/"/\n/g;' | grep '^https' | head -1)
 VERSIONCOLLAPSE:=$(shell curl -s "$(URLTRANSIT)" | grep AcroRdrDCx64Upd | sed -e 's/"/\n/g;' | grep '^https' | cut -f 9 -d '/' | head -1)
