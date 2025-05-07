@@ -13,3 +13,12 @@ thickness maps from imaging spectrophotometry.
 * Wikipedia : https://en.wikipedia.org/wiki/Gwyddion_(software)
 
 * Download : http://gwyddion.net/download.php
+
+
+## Register Key
+
+Example :
+
+ | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
+ |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
+ | HKLM | Gwyddion | Gwyddion developers | 2.68.win64 | `Gwyddion` | `C:\Program Files\Gwyddion\uninstall.exe` |

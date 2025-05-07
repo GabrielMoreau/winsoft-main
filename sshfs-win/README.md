@@ -41,3 +41,14 @@ wget https://github.com/billziss-gh/sshfs-win/releases/download/v3.5.20357/sshfs
 wget https://github.com/evsar3/sshfs-win-manager/releases/download/v1.3.1/sshfs-win-manager-setup-v1.3.1.exe
 wget https://github.com/mhogomchungu/sirikali/releases/download/1.4.8/SiriKali-1.4.8.setup.exe
 ```
+
+
+## Register Key
+
+Example :
+
+ | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
+ |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
+ | HKLM | SSHFS-Win 2021 (x64) | Navimatics LLC | 3.5.20357 | `{746A1587-C9D1-4026-97DB-058CF3952711}` | `MsiExec.exe /I{746A1587-C9D1-4026-97DB-058CF3952711}` |
+ | HKU | SSHFS-Win Manager | Evandro Araujo | 1.3.1 | `b80d7a5d-eddb-5e4e-8e85-79b3a698e983` | `"C:\WINDOWS\system32\config\systemprofile\AppData\Local\Programs\sshfs-win-manager\Uninstall SSHFS-Win Manager.exe" /currentuser` |
+ | HKLM | WinFsp 2023 | Navimatics LLC | 2.0.23075 | `{E4C768C9-0ED1-4E8D-9B05-CC533F7D1B1A}` | `MsiExec.exe /I{E4C768C9-0ED1-4E8D-9B05-CC533F7D1B1A}` |
