@@ -13,3 +13,12 @@ Use only on personnal computer.
 
 * Download : https://www.ccleaner.com/fr-fr/speccy/download
 * Silent install : https://silentinstallhq.com/speccy-silent-install-how-to-guide/
+
+
+## Register Key
+
+Example :
+
+ | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
+ |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
+ | HKLM | Speccy | Piriform | 1.33 | `Speccy` | `"C:\Program Files\Speccy\uninst.exe"` |

@@ -7,3 +7,12 @@ portable, cross-platform media player software and streaming media server develo
 * Wikipedia : https://en.wikipedia.org/wiki/VLC_media_player
 
 * Download : https://www.videolan.org/vlc/download-windows.html
+
+
+## Register Key
+
+Example :
+
+ | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
+ |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
+ | HKLM | VLC media player | VideoLAN | 3.0.21 | `VLC media player` | `"C:\Program Files\VideoLAN\VLC\uninstall.exe"` |

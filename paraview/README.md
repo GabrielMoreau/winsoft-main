@@ -10,10 +10,10 @@ primarily in Scalable Vector Graphics (SVG) format.
 * Download : https://www.paraview.org/download/
 
 
+## Register Key
 
-wget https://www.paraview.org/files/listing.txt
+Example :
 
-EXE:=$(https://www.paraview.org/files/listing.txt | grep '\.msi[[:space:]]' | egrep -v -- '-(RC[[:digit:]]*|MPI)-' | awk '{print $1}' | sort | head -1)
-
-
-VERSION:=$(cat listing.txt | cut -f 2 -d '/' | grep '^v' | sed -e 's/^v//;' | uniq | sort  -V | tail -1)
+ | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
+ |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
+ | HKLM | ParaView | Kitware, Inc. | 5.13.3 | `{44856EA5-E919-4924-BA79-7E9C63C4F24C}` | `MsiExec.exe /X{44856EA5-E919-4924-BA79-7E9C63C4F24C}` |

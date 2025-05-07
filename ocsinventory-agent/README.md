@@ -9,3 +9,12 @@ machines running the OCS agent program.
 * Wikipedia : https://en.wikipedia.org/wiki/OCS_Inventory
 
 * Download : https://github.com/OCSInventory-NG/WindowsAgent/releases
+
+
+## Register Key
+
+Example :
+
+ | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
+ |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
+ | HKLM | OCS Inventory NG Agent 2.11.0.0 | OCS Inventory NG Team | 2.11.0.0 | `OCS Inventory NG Agent` | `C:\Program Files\OCS Inventory Agent\uninst.exe` |

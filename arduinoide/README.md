@@ -12,3 +12,12 @@ that is written in the Java programming language.
 * Wikipedia : https://en.wikipedia.org/wiki/Arduino
 
 * Download : https://www.arduino.cc/en/software
+
+
+## Register Key
+
+Example :
+
+ | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
+ |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
+ | HKLM | Arduino IDE | Arduino SA | 2.3.6.0 | `{E99ACD8F-B19E-42F7-8045-524D4650CF31}` | `MsiExec.exe /I{E99ACD8F-B19E-42F7-8045-524D4650CF31}` |

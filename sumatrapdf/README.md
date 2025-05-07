@@ -12,3 +12,12 @@ file (CB7, CBR, CBT, CBZ).
 * Download : https://www.sumatrapdfreader.org/download-free-pdf-viewer
 * Silent Install : https://www.sumatrapdfreader.org/docs/Command-line-arguments,
 	https://silentinstallhq.com/sumatra-pdf-silent-install-how-to-guide/
+
+
+## Register Key
+
+Example :
+
+ | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
+ |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
+ | HKLM | SumatraPDF | Krzysztof Kowalczyk | 3.5.2 | `SumatraPDF` | `"C:\Program Files\SumatraPDF\SumatraPDF.exe" -uninstall` |

@@ -11,3 +11,12 @@ Use only on personnal computer.
 
 * Download : https://www.ccleaner.com/fr-fr/defraggler/download
 * Silent install : https://silentinstallhq.com/defraggler-silent-install-how-to-guide/
+
+
+## Register Key
+
+Example :
+
+ | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
+ |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
+ | HKLM | Defraggler | Piriform | 2.22 | `Defraggler` | `"C:\Program Files\Defraggler\uninst.exe"` |
