@@ -19,3 +19,12 @@ To uninstall silently
 ```bat
 MsiExec.exe /x {XXXXXXXXXXXXXXXXXXX} /qn REBOOT=ReallySuppress REMOVE=ALL
 ```
+
+
+## Register Key
+
+Example :
+
+ | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
+ |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
+ | HKLM | VMware Player | VMware, Inc. | 17.5.1 | `{3157CAD1-F5B9-43CF-BE51-FAE72E7A576D}` | `` |
