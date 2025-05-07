@@ -1,10 +1,10 @@
 
 REM
-REM   Windows11FullUpgrade
+REM   Action-Windows11FullUpgrade
 REM
 
 REM Name
-SET softname=Windows11FullUpgrade
+SET softname=Action-Windows11FullUpgrade
 
 SET logdir=__LOGDIR__
 IF NOT EXIST "%logdir%" (

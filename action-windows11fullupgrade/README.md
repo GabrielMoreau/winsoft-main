@@ -1,4 +1,4 @@
-# Windows11FullUpgrade - Full Upgrade Windows 10 or 11 to the last version of Windows 11
+# Windows11FullUpgrade (Action) - Full Upgrade Windows 10 or 11 to the last version of Windows 11
 
 **Warning:** this package (script) has been tested on a few computers!
 So far, it's worked every time, and compatible computers have ended up running Windows 11.
