@@ -16,3 +16,4 @@ Example :
 
  | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
+ | HKLM | TeXnicCenter Version 2.02 Stable | The TeXnicCenter Team | 2.02 Stable | `TeXnicCenter_is1` | `"C:\Program Files\TeXnicCenter\unins000.exe"` |

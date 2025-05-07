@@ -9,6 +9,7 @@ TeX/LaTeX markup language, as well as a simple TeX editor: [TeXworks](https://fr
 * Deploy : https://miktex.org/howto/deploy-miktex and https://docs.miktex.org/manual/miktexsetup.html
 * Wikipedia: https://en.wikipedia.org/wiki/MiKTeX
 
+
 ## Command line
 
 https://docs.miktex.org/manual/miktex-packages.html
@@ -18,3 +19,12 @@ C:\Program Files\MiKTeX\miktex\bin\x64\miktex.exe --admin  packages update-packa
 C:\Program Files\MiKTeX\miktex\bin\x64\miktex.exe --admin  packages check-update
 C:\Program Files\MiKTeX\miktex\bin\x64\miktex.exe --admin  packages update
 ```
+
+
+## Register Key
+
+Example :
+
+ | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
+ |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
+ | HKLM | MiKTeX | MiKTeX.org | 23.4 | `MiKTeX` | `"C:\Program Files\MiKTeX\miktex/bin/x64\miktex-console_admin.exe" --admin --start-page cleanup` |

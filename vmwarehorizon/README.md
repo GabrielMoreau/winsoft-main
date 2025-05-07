@@ -18,7 +18,6 @@ and copy the link of the last Horizon client into the file [url.txt](./url.txt).
 If you have a script to get the URL of the latest client version, please share it.
 
 
-
 ## Register Key
 
 Example :
