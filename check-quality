@@ -51,4 +51,13 @@ echo "Check PowerShell script syntax"
 find . -maxdepth 2  -name '*.ps1' | xargs -r timeout -k 2s 13 ./analyze-ps | grep -v '^✅ OK:'
 
 echo "Check HKLM register key in README files"
-grep -L HKLM */README.md | grep -Ev '^(_|action-|update-|.*-uninstall/|'$(grep -l uninstall.bat */install.bat | xargs -r dirname | sed 's#$#/#;' | paste -sd '|')')' | sed 's/^/ /;'
+FOLDER_NOGIT=$(
+  find . -maxdepth 1 -type d ! -path '*/.*' | while read dir
+  do
+    if [ -z "$(git ls-files "${dir}" --error-unmatch 2>/dev/null)" ]
+    then
+      echo "${dir}"
+    fi
+  done | sed 's#^\./##; s#$#/#;' | paste -sd '|'
+)
+grep -L HKLM */README.md | grep -Ev '^(_|action-|update-|.*-uninstall/|'$(grep -l uninstall.bat */install.bat | xargs -r dirname | sed 's#$#/#;' | paste -sd '|')"|${FOLDER_NOGIT})" | sed 's/^/ /;'
