@@ -4,7 +4,7 @@
 #
 
 SOFT:=Action-Windows11FullUpgrade
-URL:=$(shell curl -s -L 'https://www.microsoft.com/software-download/windows11' | grep 'windows11-upgrade-now' | sed -e 's/"/\n/g;' | grep '^https://go.microsoft.com/fwlink/' | head -1)
+URL:=$(shell curl -s -L 'https://www.microsoft.com/software-download/windows11' | sed -e 's/"/\n/g;' | grep '^https://go.microsoft.com/fwlink/' | sed -e 's/&#61;/=/;' | head -1)
 $(shell mkdir -p tmp; cd tmp; curl -s --time-cond 'Windows11InstallationAssistant.exe' -o 'Windows11InstallationAssistant.exe' -L "$(URL)")
 VERSION:=$(shell peres -v tmp/Windows11InstallationAssistant.exe  | grep '^Product Version:' | awk '{print $$3}' | head -1)
 REVISION:=1
