@@ -1,5 +1,9 @@
 # VirtualBox6 - Oracle Hypervisor for virtual machines
 
+:warning: This is an obsolete package that is no longer supported.
+
+* Obsolete : 2024/01
+
 VirtualBox supports the creation and management of guest virtual machines
 running Windows, Linux.
 
