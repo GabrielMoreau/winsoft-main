@@ -123,6 +123,8 @@ list-md:
 		head -1 $${pkg}/README.md | perl -p -e "s{^#\s(.*)\s-\s(.*)}{ | $${sindex} | [\\1]($${pkg}/README.md) | \\2 | [&#127968;]($${url}) | $${lic} |};" | sed -e 's/\[&#127968;\]()//;'
 	done | sort | grep -Ev '\([[:alpha:]][[:alpha:]]*\)\]\('
 	echo ''
+	echo '### Uninstall packages'
+	echo ''
 	echo ' | Uninstall | Detail | &#127968; |   |'
 	echo ' | -------- | ------ | --------- | - |'
 	for pkg in $$(git ls-files | grep '^[[:alpha:][:digit:]-]*/README.md' | xargs -r grep -l '^#[[:space:]].*(.*)[[:space:]]-' | xargs -r dirname | grep -v '/' | grep 'uninstall'; grep -l '^Uninstall-.*.zip:' */Makefile | xargs -r dirname)
@@ -132,6 +134,8 @@ list-md:
 		head -1 $${pkg}/README.md |perl -p -e "s{^#\s(.*)\s-\s(.*)}{ | [\\1]($${pkg}/README.md) | \\2 | [&#127968;]($${url}) | $${lic} |}; s/(\w)\]\(/\\1 (Uninstall)](/;" | sed -e 's/\[&#127968;\]()//;'
 	done | sort
 	echo ''
+	echo '### Action packages'
+	echo ''
 	echo ' | Action | Detail | &#127968; |   |'
 	echo ' | -------- | ------ | --------- | - |'
 	for pkg in $$(git ls-files | grep '^[[:alpha:][:digit:]-]*/README.md' | xargs -r grep -l '^#[[:space:]].*(.*)[[:space:]]-' | xargs -r dirname | grep -v '/' | grep -v 'uninstall')
@@ -140,6 +144,19 @@ list-md:
 		url=$$(grep '* Website : ' $${pkg}/README.md | cut -f 4 -d ' ')
 		head -1 $${pkg}/README.md |perl -p -e "s{^#\s(.*)\s-\s(.*)}{ | [\\1]($${pkg}/README.md) | \\2 | [&#127968;]($${url}) | $${lic} |}; s/(\w)\]\(/\\1 (Uninstall)](/;" | sed -e 's/\[&#127968;\]()//;'
 	done | sort
+	echo ''
+	echo '### List of '$$((dirname $$(git ls-files | grep '^_obsolete/[[:alpha:][:digit:]-]*/README.md'; grep -l '^Uninstall-.*.zip:' _obsolete/*/Makefile)) | sort -u | wc -l)' obsolete packages'
+	echo ''
+	echo ' |   | Software | Detail | Date |'
+	echo ' | - | -------- | ------ | ---- |'
+	index=0
+	for pkg in $$(git ls-files | grep '^_obsolete/[[:alpha:][:digit:]-]*/README.md' | grep -v '\\$$' | xargs -I {} sh -c "(head -1 '{}' ; dirname '{}') | paste -sd '#'"  | sort | cut -f 3 -d '#' | grep -v -- '-uninstall')
+	do
+		index=$$(($${index} + 1))
+		sindex=$$(printf '%03i' $${index})
+		obsolete=$$(grep '* Obsolete : ' $${pkg}/README.md | cut -f 4 -d ' ')
+		head -1 $${pkg}/README.md | perl -p -e "s{^#\s(.*)\s-\s(.*)}{ | $${sindex} | [\\1]($${pkg}/README.md) | \\2 | $${obsolete} |};"
+	done | sort | grep -Ev '\([[:alpha:]][[:alpha:]]*\)\]\('
 
 space:
 	@
