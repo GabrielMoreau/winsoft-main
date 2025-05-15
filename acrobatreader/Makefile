@@ -28,7 +28,7 @@ sinclude ../_common/conf.mk
 
 check-version:
 	@echo $(VERSION) | egrep -q '^[[:digit:]][\.[:digit:]]*[[[:alnum:]]*$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
-	@if [ "$$( (echo 100000 ; grep -n "x64$(VERSIONCOLLAPSE)_" checksum.txt | cut -f 1 -d ':') | tail -1)" -lt "$$(wc -l < checksum.txt)" ]; then echo 'VERSION $(VERSION) is older then last one' > /dev/stderr ; exit 1; fi
+	@if [ "$$( (echo 100000; grep -n "x64$(VERSIONCOLLAPSE)_" checksum.txt | cut -f 1 -d ':') | tail -1)" -lt "$$( (echo 100000; wc -l < checksum.txt) | tail -1)" ]; then echo 'VERSION $(VERSION) is older then last one' > /dev/stderr ; exit 1; fi
 
 check-unrealized: check-version
 	@if grep -q '[[:space:]]$(EXE)$$' checksum.txt; then echo 'Ok'; else echo 'Warning: Updates not performed for $(SOFT) version $(VERSION)'; fi
