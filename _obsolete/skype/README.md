@@ -1,5 +1,9 @@
 # Skype - VoIP and Videoconferencing Client
 
+:warning: This is an obsolete package that is no longer supported.
+
+* Obsolete : 2025/05
+
 Skype is a proprietary telecommunications application, best known for
 VoIP-based videotelephony, videoconferencing and voice calls.
 It also has instant messaging, file transfer, debit-based calls to
