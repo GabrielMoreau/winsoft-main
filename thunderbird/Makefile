@@ -4,10 +4,12 @@
 #
 
 SOFT:=Thunderbird
-VERSION_LONG:=$(shell curl -s -L 'https://www.thunderbird.net/en-US/thunderbird/all/' | sed -e 's/[[:space:]]/\n/g;' | grep 'data-thunderbird-version' | cut -f 2 -d '"')
-VERSION:=$(shell echo $(VERSION_LONG) | sed -e 's/esr//;')
+#VERSION_LONG:=$(shell curl -s -L 'https://www.thunderbird.net/en-US/thunderbird/all/' | sed -e 's/[[:space:]]/\n/g;' | grep 'data-thunderbird-version' | cut -f 2 -d '"')
+VERSION_ESR:=$(shell curl -s -L 'https://releases.mozilla.org/pub/thunderbird/releases/' | sed -e 's/"/\n/g;' | grep '^/pub/thunderbird/releases/' | cut -f 5 -d '/' | grep '^[[:digit:]][[:digit:]\.]*esr$$' | sort -V | tail -1)
+#VERSION:=$(shell echo $(VERSION_ESR) | sed -e 's/esr//;')
+VERSION:=$(shell curl -s -L 'https://releases.mozilla.org/pub/thunderbird/releases/' | sed -e 's/"/\n/g;' | grep '^/pub/thunderbird/releases/' | cut -f 5 -d '/' | grep '^[[:digit:]][[:digit:]\.]*$$' | sort -V | tail -1)
 REVISION:=1
-URL:=https://download.mozilla.org/?product=thunderbird-$(VERSION_LONG)-msi-SSL&os=win64&lang=fr
+URL:=https://download.mozilla.org/?product=thunderbird-$(VERSION)-msi-SSL&os=win64&lang=fr
 # curl -s -L 'https://www.thunderbird.net/en-US/thunderbird/all/' | grep -E 'https://.*/.product=thunderbird.*msi-SSL.os=win64.lang=fr' | cut -f 2 -d '"' | head -1
 
 EXE:=Thunderbird-Setup-$(VERSION).msi
@@ -33,7 +35,7 @@ clean:
 
 version:
 	@echo "VERSION: $(VERSION)"
-	@echo "VERSION_LONG: $(VERSION_LONG)"
+	@echo "VERSION_ESR: $(VERSION_ESR)"
 	@echo "URL: $(URL)"
 	@echo "EXE: $(EXE)"
 
@@ -58,7 +60,7 @@ tmp/$(EXE):
 check-exe: tmp/$(EXE)
 	@(cd tmp ; \
 		file $(EXE) | grep -q "Composite Document File.*, MSI Installer" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 1; } ; \
-		file $(EXE) | grep -q "Subject: Mozilla Thunderbird $(VERSION_LONG) x64" || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 1; } ; \
+		file $(EXE) | grep -q "Subject: Mozilla Thunderbird $(VERSION) x64" || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 1; } ; \
 		)
 	@which jq >/dev/null && { if [ $$(cat policies.json | jq empty 2>&1 | wc -l) -ne 0 ]; then echo "Error: bad json file policies.json" 1>&2 ; exit 1; fi }
 
