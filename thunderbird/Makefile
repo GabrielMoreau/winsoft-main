@@ -4,10 +4,13 @@
 #
 
 SOFT:=Thunderbird
+WLINES:=$(shell curl -s -L 'https://releases.mozilla.org/pub/thunderbird/releases/' | sed -e 's/"/\n/g;' | grep '^/pub/thunderbird/releases/' | cut -f 5 -d '/' | grep -E '^[[:digit:]][[:digit:]][[:digit:]][[:digit:]\.]*(esr)?$$' | paste -sd ',' )
+VERSION_ESR:=$(shell echo "$(WLINES)" | sed -e 's/,/\n/g;' | grep '^[[:digit:]][[:digit:]\.]*esr$$' | sort -V | tail -1)
+VERSION:=$(shell     echo "$(WLINES)" | sed -e 's/,/\n/g;' | grep '^[[:digit:]][[:digit:]\.]*$$'    | sort -V | tail -1)
 #VERSION_LONG:=$(shell curl -s -L 'https://www.thunderbird.net/en-US/thunderbird/all/' | sed -e 's/[[:space:]]/\n/g;' | grep 'data-thunderbird-version' | cut -f 2 -d '"')
-VERSION_ESR:=$(shell curl -s -L 'https://releases.mozilla.org/pub/thunderbird/releases/' | sed -e 's/"/\n/g;' | grep '^/pub/thunderbird/releases/' | cut -f 5 -d '/' | grep '^[[:digit:]][[:digit:]\.]*esr$$' | sort -V | tail -1)
+#VERSION_ESR:=$(shell curl -s -L 'https://releases.mozilla.org/pub/thunderbird/releases/' | sed -e 's/"/\n/g;' | grep '^/pub/thunderbird/releases/' | cut -f 5 -d '/' | grep '^[[:digit:]][[:digit:]\.]*esr$$' | sort -V | tail -1)
 #VERSION:=$(shell echo $(VERSION_ESR) | sed -e 's/esr//;')
-VERSION:=$(shell curl -s -L 'https://releases.mozilla.org/pub/thunderbird/releases/' | sed -e 's/"/\n/g;' | grep '^/pub/thunderbird/releases/' | cut -f 5 -d '/' | grep '^[[:digit:]][[:digit:]\.]*$$' | sort -V | tail -1)
+#VERSION:=$(shell curl -s -L 'https://releases.mozilla.org/pub/thunderbird/releases/' | sed -e 's/"/\n/g;' | grep '^/pub/thunderbird/releases/' | cut -f 5 -d '/' | grep '^[[:digit:]][[:digit:]\.]*$$' | sort -V | tail -1)
 REVISION:=1
 URL:=https://download.mozilla.org/?product=thunderbird-$(VERSION)-msi-SSL&os=win64&lang=fr
 # curl -s -L 'https://www.thunderbird.net/en-US/thunderbird/all/' | grep -E 'https://.*/.product=thunderbird.*msi-SSL.os=win64.lang=fr' | cut -f 2 -d '"' | head -1
