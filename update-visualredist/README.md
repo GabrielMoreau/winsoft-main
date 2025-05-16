@@ -19,18 +19,18 @@ Last versions :
 * folder 2012      - 11.0.61030.0
 * folder 2013      - 12.0.40664.0
 * folder 2015-2019 - 14.29.30153.0
-* folder 2015-2022 - 14.38.33135.0
+* folder 2015-2022 - 14.44.35112.1
 
 Version 2015-2019 is now replaced by version 2015-2022.
 
 Have the version of an executable with `sigcheck.exe` or `peres` (natif):
 ```
 Sysinternals\sigcheck.exe -a -h .\vcredist_ia64.exe
-peres -v .\vcredist_ia64.exe | egrep 'Product Version:'
+peres -v .\vcredist_ia64.exe | grep '^Product Version:'
 ```
 
 Under GNU/Linux amd64
-```
+```bash
 sudo dpkg --add-architecture i386 && sudo apt-get update && sudo apt-get install wine32
 wine ~/Sysinternals/sigcheck.exe -a -h .\vcredist_ia64.exe
 ```
@@ -38,7 +38,13 @@ wine ~/Sysinternals/sigcheck.exe -a -h .\vcredist_ia64.exe
 It's possible to automate
 ```bash
 find tmp/ -name '*.exe' | xargs -r -n 1 wine ~/Sysinternals/sigcheck.exe -a -h | egrep '(Product|Prod version):' | cut -f 2 -d ':'
-find tmp/ -name '*.exe' | xargs -r -n 1 peres -v | egrep 'Product Version:' | awk '{print $3}'
+find tmp/ -name '*.exe' | xargs -r -n 1 peres -v | grep '^Product Version:' | awk '{print $3}'
+
+find tmp/ -name '*.exe' | xargs -r  -I {} echo " \
+		echo -n ' * '\$(echo {} | cut -f 2,3 -d '/' | sed -e \"s#/vc_*redist[_\.]#-#; s/.exe//;\")' ' ;
+		echo \$(peres -v {} | grep '^Product Version:' | awk '{print \$3}')
+		" \
+	| bash
 ```
 
 ## Register Key
