@@ -9,6 +9,11 @@ Thunderbird is a free and open-source email reader developed by the Mozilla Foun
 * Silent install : https://enterprise.thunderbird.net/deploy/deploy-thunderbird-with-msi-installers
 
 
+## Installer Command Line Options
+
+https://firefox-source-docs.mozilla.org/browser/installer/windows/installer/FullConfig.html
+
+
 ## Policies
 
 Policies can be specified by creating a file called policies.json.
