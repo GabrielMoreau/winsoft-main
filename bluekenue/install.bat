@@ -26,5 +26,10 @@ ECHO Silent install %softname%
 ScriptRunner.exe -appvscript MsiExec.exe /i "BlueKenue64Installer%softversion%.msi" /quiet /qn /norestart /log "%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=300
 
 
+ECHO Remove desktop shortcut
+IF EXIST "%PUBLIC%\Desktop\BlueKenue 64.lnk"          DEL /F /Q "%PUBLIC%\Desktop\BlueKenue 64.lnk"
+IF EXIST "%ALLUSERSPROFILE%\Desktop\BlueKenue 64.lnk" DEL /F /Q "%ALLUSERSPROFILE%\Desktop\BlueKenue 64.lnk"
+
+
 ECHO END %date%-%time%
 EXIT
