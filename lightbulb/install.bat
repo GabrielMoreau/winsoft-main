@@ -19,6 +19,11 @@ ECHO BEGIN %date%-%time%
 
 SET softversion=__VERSION1__
 SET softruntimever=__VERSION2__
+SET process=LightBulb.exe
+
+
+ECHO Kill the current process
+TASKKILL /IM LightBulb.exe /T /F /IM %process%
 
 
 Echo Silent install WindowsDesktop-Runtime
