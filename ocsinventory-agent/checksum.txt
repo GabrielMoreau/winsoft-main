@@ -1,2 +1,3 @@
 4771d82f59c8a59f581d47cf8373f4a199526c19f61edc5169257bdf058599be  OCS-Windows-Agent-Setup-2.10.1.0-x64.exe
 8a3e93e74ee285f54946597127babd38f27873ae66a3720fe40e8bc17388b9aa  OCS-Windows-Agent-Setup-2.11.0.0-x64.exe
+6dd18e9a9a922a5a40df6ff1b7a851bf012d2ab5c3dbe556732fffb20b069018  OCS-Windows-Agent-Setup-2.11.0.1-x64.exe
