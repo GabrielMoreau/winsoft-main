@@ -69,6 +69,7 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 %.zip: Makefile pre-install.ps1 tmp/install.bat tmp/$(EXE)
 	@rm -f $@
 	@zip -r $@ pre-install.ps1
+	@zip -r $@ HardwareReadiness
 	@(cd tmp; zip -r ../$@ install.bat $(EXE))
 	@chmod ugo+rw $@
 
