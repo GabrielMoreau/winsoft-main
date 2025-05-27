@@ -1,10 +1,10 @@
 
 REM
-REM   VMwareHorizon
+REM   OmnissaHorizon
 REM
 
 REM Name
-SET softname=VMwareHorizon
+SET softname=OmnissaHorizon
 
 SET logdir=__LOGDIR__
 IF NOT EXIST "%logdir%" (
@@ -21,7 +21,7 @@ SET softversion=__VERSIONLONG__
 
 
 ECHO Silent install %softname%
-ScriptRunner.exe -appvscript VMware-Horizon-Client-%softversion%.exe /silent /install /norestart /log "%logdir%\%softname%-MSI.log" DESKTOP_SHORTCUT=0 -appvscriptrunnerparameters -wait -timeout=300
+ScriptRunner.exe -appvscript Omnissa-Horizon-Client-%softversion%.exe /silent /install /norestart /log "%logdir%\%softname%-MSI.log" DESKTOP_SHORTCUT=0 -appvscriptrunnerparameters -wait -timeout=300
 
 
 ECHO END %date%-%time%
