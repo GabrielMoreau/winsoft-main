@@ -80,5 +80,62 @@ Write-Output "Config: Version $RefVersion"
 
 		$DisplayVersion = $App.DisplayVersion
 		$KeyProduct = $Key | Split-Path -Leaf
-		Write-Output "Installed: $DisplayName / $DisplayVersion / $KeyProduct / $($App.UninstallString)"
+		"Installed: {0,-56} / {1,-14} / {2} / {3}" -F $DisplayName, $DisplayVersion, $KeyProduct, $($App.UninstallString)
 	}
+
+
+################################################################
+
+# Microsoft Windows Desktop Runtime
+$RefName = 'Microsoft Windows Desktop Runtime'
+$WindowsDesktopRuntime = $True
+
+@(Get-ChildItem -Recurse 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall';
+  Get-ChildItem -Recurse "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall") |
+	ForEach {
+		$Key = $_
+		$App = (Get-ItemProperty -Path $Key.PSPath)
+		$DisplayName  = $App.DisplayName
+		If (!($DisplayName -match $RefName)) { Return }
+
+		$DisplayVersion = $App.DisplayVersion
+		$KeyProduct = $Key | Split-Path -Leaf
+		$Uninstall = $App.UninstallString
+		"Info: {0,-56} / {1,-14} / {2} / {3}" -F $DisplayName, $DisplayVersion, $KeyProduct, $Uninstall
+
+		# Only register Key with nice version number
+		If ($Uninstall -match '^MsiExec.exe') { Return }
+
+		If ($DisplayName -match 'Runtime - 8\..*x64') {
+			If ((ToVersion($DisplayVersion)) -lt (ToVersion('__VERSION8__'))) {
+				$WindowsDesktopRuntime = $True
+			} Else {
+				$WindowsDesktopRuntime = $False
+				Write-Output "Note: $RefName already at version $DisplayVersion (>= __VERSION8__)"
+			}
+		}
+	}
+
+If ($WindowsDesktopRuntime == $True) {
+	$Exe = 'windowsdesktop-runtime-__VERSION8__-win-x64.exe'
+	$Args = '/install /quiet /norestart'
+	If (Test-Path -Path "$Exe") {
+		Write-Output "Warn: Update $RefName $DisplayVersion to version __VERSION8__"
+		Run-Exec -FilePath "$Exe" -ArgumentList "$Args" -Name "$RefName"
+	}
+}
+
+# View all version
+@(Get-ChildItem -Recurse 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall';
+  Get-ChildItem -Recurse "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall") |
+	ForEach {
+		$Key = $_
+		$App = (Get-ItemProperty -Path $Key.PSPath)
+		$DisplayName  = $App.DisplayName
+		If (!($DisplayName -match $RefName)) { Return }
+
+		$DisplayVersion = $App.DisplayVersion
+		$KeyProduct = $Key | Split-Path -Leaf
+		$Exe = $App.UninstallString
+		"Installed: {0,-56} / {1,-14} / {2} / {3}" -F $DisplayName, $DisplayVersion, $KeyProduct, $Exe
+	} | Sort-Object

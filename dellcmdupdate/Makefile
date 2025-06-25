@@ -12,6 +12,10 @@ USERAGENT:=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:122.0) Gecko/20100101 Fi
 
 EXE:=$(shell basename '$(URL)' 2> /dev/null)
 
+URL8:=$(shell curl -s -L https://dotnet.microsoft.com/$(shell curl -s -L 'https://dotnet.microsoft.com/en-us/download/dotnet/8.0' | sed -e 's/"/\n/g;' | grep 'thank-you/runtime-desktop.*windows-x64-installer'  | head -1) | sed -e 's/"/\n/g;' | grep '^https.*windowsdesktop-runtime-.*-win-x64.exe' | head -1)
+VERSION8:=8.$(shell basename '$(URL8)' 2>/dev/null | cut -f 3 -d '-' | cut -f 2- -d '.')
+EXE8:=windowsdesktop-runtime-$(VERSION8)-win-x64.exe
+
 IT_TEAM:=IT Support
 LOGDIR:=%WINDIR%\\Logs
 
@@ -44,6 +48,16 @@ checksum: check-version
 		shasum -a 256 "$(EXE)" | sed -e 's#tmp/##;' >> ../checksum.txt ; \
 		tail -3 ../checksum.txt ; \
 		)
+	@(cd tmp ; \
+		grep -q "^$$(shasum -a 256 $(EXE))$$"  ../checksum.txt || { shasum -a 256 "$(EXE)"  | sed -e 's#tmp/##;' >> ../checksum.txt ; } ; \
+		grep -q "^$$(shasum -a 256 $(EXE8))$$" ../checksum.txt || { shasum -a 256 "$(EXE8)" | sed -e 's#tmp/##;' >> ../checksum.txt ; } ; \
+		)
+	@if [ $$(( $$(date '+%s') - $$(stat -c '%Y' checksum.txt) )) -lt 60 ]; then tail -6 checksum.txt; fi
+	@(cd tmp ; \
+		grep -q "^$(VERSION8)[[:space:]]" ../version.txt || { (echo -n '$(VERSION8) ' ; peres -v $(EXE8) | grep '^Product Version' | awk '{print $$3}') >> ../version.txt ; } ; \
+		)
+	@if [ $$(( $$(date '+%s') - $$(stat -c '%Y' version.txt) )) -lt 60 ]; then tail -6 version.txt; fi
+
 
 wget: tmp/$(EXE)
 
@@ -61,24 +75,39 @@ tmp/$(EXE):
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
 
-check-exe: tmp/$(EXE)
+tmp/$(EXE8):
+	@mkdir -p tmp
+	@(cd tmp ; \
+		rm -f windowsdesktop-runtime-8.*.exe 2>/dev/null ; \
+		curl -# -o "$(EXE8)" -L "$(URL8)" ; \
+		grep -q "^$$(shasum -a 256 $(EXE8))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE8)" ; \
+		)
+
+check-exe: tmp/$(EXE) tmp/$(EXE8)
 	@(cd tmp ; \
 		file $(EXE) | grep -Eq "PE32.? executable" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 1; } ; \
 		#which peres >/dev/null && { peres -v $(EXE) | grep -q "^Product Version:[[:space:]]*$(VERSION)" || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 1; } ; } ; \
 		)
+	@(cd tmp ; \
+		file $(EXE8) | grep -q "PE32 executable" || { echo "Error: bad format for binary $(EXE8)" 1>&2 ; exit 1; } ; \
+		which peres >/dev/null && { peres -v $(EXE8) | grep -q "^Product Version:[[:space:]]*$(VERSION8)" || { echo "Error: bad version for binary $(EXE8)" 1>&2 ; exit 1; } ; } ;\
+		)
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
-	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#; s/__EXE__/$(EXE)/; s/__VERSION_LOW__/$(VERSION_LOW)/;' $< > $@
+	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#; s/__EXE__/$(EXE)/; s/__VERSION_LOW__/$(VERSION_LOW)/; s/__VERSION8__/$(VERSION8)/;' $< > $@
+
+tmp/pre-install.ps1: pre-install.ps1 Makefile tmp/$(EXE8)
+	@mkdir -p tmp
+	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#; s/__EXE__/$(EXE)/; s/__VERSION_LOW__/$(VERSION_LOW)/; s/__VERSION8__/$(VERSION8)/;' $< > $@
 
 tmp/winsoft-config.ini: winsoft-config.ini Makefile tmp/$(EXE)
 	@mkdir -p tmp
 	@sed -e 's/__VERSION__/$(VERSION)/;' $< > $@
 
-%.zip: Makefile tmp/install.bat pre-install.ps1 tmp/winsoft-config.ini tmp/$(EXE)
+%.zip: Makefile tmp/install.bat pre-install.ps1 tmp/pre-install.ps1 tmp/winsoft-config.ini tmp/$(EXE) tmp/$(EXE8)
 	@rm -f $@
-	@zip -r ./$@ pre-install.ps1
-	@(cd tmp; zip -r ../$@ install.bat winsoft-config.ini $(EXE))
+	@(cd tmp; zip -r ../$@ install.bat pre-install.ps1 winsoft-config.ini $(EXE) $(EXE8))
 	@chmod ugo+rw $@
 
 ocs:
