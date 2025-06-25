@@ -120,7 +120,7 @@ If ($WindowsDesktopRuntime == $True) {
 	$Exe = 'windowsdesktop-runtime-__VERSION8__-win-x64.exe'
 	$Args = '/install /quiet /norestart'
 	If (Test-Path -Path "$Exe") {
-		Write-Output "Warn: Update $RefName $DisplayVersion to version __VERSION8__"
+		Write-Output "TryInstall: $RefName at version __VERSION8__"
 		Run-Exec -FilePath "$Exe" -ArgumentList "$Args" -Name "$RefName"
 	}
 }
