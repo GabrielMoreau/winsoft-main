@@ -4,7 +4,7 @@
 #
 
 SOFT:=XnViewMP
-VERSION:=$(shell curl -s -L 'https://www.xnview.com/en/xnviewmp/' | sed -e 's/[<>]/\n/g;'  | grep '^XnView MP[[:space:]][[:digit:]]' | cut -f 3 -d ' ')
+VERSION:=$(shell curl -s -L 'https://www.xnview.com/en/xnviewmp/' | sed -e 's/[<>]/\n/g;'  | sed -e 's/^[[:space:]]*//;' | grep '^XnView MP[[:space:]][[:digit:]]' | cut -f 3 -d ' ')
 REVISION:=1
 URL:=https://download.xnview.com/XnViewMP-win-x64.exe
 
