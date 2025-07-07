@@ -99,6 +99,7 @@ ocs:
 	@echo "Delay:   20"
 	@echo "Cancel:  no"
 	@echo "Report:  yes"
+	@echo "Search:  7-Zip"
 	@echo ""
 	@echo "$(IT_TEAM)"
 	@echo " --- "
