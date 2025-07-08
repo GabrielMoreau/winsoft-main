@@ -3,8 +3,11 @@
 # FileZilla
 #
 
-USERAGENT:=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:122.0) Gecko/20100101 Firefox/122.0
-URL:=$(shell curl -s -L 'https://filezilla-project.org/download.php?show_all=1' --user-agent "$(USERAGENT)" | sed -e 's/"/\n/g;' | grep '^https://' | grep -- '_win64-setup.exe' | head -1)
+USERAGENT:=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36
+URL:=$(shell chromium --headless --dump-dom 'https://filezilla-project.org/download.php?platform=win64' --user-agent="$(USERAGENT)" | sed -e 's/"/\n/g;' | grep '^https://' | grep -- '_win64.*-setup.exe' | head -1)
+#VERSION:=$(shell curl -s -L 'https://filezilla-project.org/download.php?platform=win64' --user-agent "$(USERAGENT)" | sed -e 's/"/\n/g;' | grep '^Download FileZilla Client [[:digit:]]' | cut -f 4 -d ' ' | head -1)
+#URL:=https://download.filezilla-project.org/client/FileZilla_$(VERSION)_win64-setup.exe
+#URL:=https://dl2.cdn.filezilla-project.org/client/FileZilla_$(VERSION)_win64-setup.exe?h=ZWrQJU0jtdhcynRcNqy3Gw&x=1751651770
 
 SOFT:=FileZilla
 VERSION:=$(shell echo "$(URL)" | cut -f 2 -d '_')
