@@ -3,6 +3,8 @@
 # VirtualBox
 #
 
+sinclude ../_common/flag.mk
+
 SOFT:=VirtualBox
 REVISION:=1
 URL1:=$(shell curl -s -L 'https://www.virtualbox.org/wiki/Downloads' | sed -e 's/"/\n/g;' | grep '/VirtualBox-.*-Win.exe' | head -1)
@@ -83,9 +85,9 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE1) tmp/$(EXE2)
 	@mkdir -p tmp
 	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#; s/__PACKEXT__/$(EXE2)/;' $< > $@
 
-tmp/winsoft-config.ini: winsoft-config.ini Makefile tmp/$(EXE)
+tmp/winsoft-config.ini: winsoft-config.ini Makefile tmp/$(EXE) ../update-visualredist/version.txt
 	@mkdir -p tmp
-	@sed -e 's/__VERSION__/$(VERSION)/; s/__2015-2022-x64__/14.38.33135.0/;' $< > $@
+	@sed -e "s/__VERSION__/$(VERSION)/; s/__2015-2022-x64__/$$(grep ' 2015-2022-x64 ' ../update-visualredist/version.txt | cut -f 4 -d ' ')/;" $< > $@
 
 %.zip: Makefile tmp/install.bat pre-install.ps1 tmp/winsoft-config.ini tmp/$(EXE1) tmp/$(EXE2) $(VCREDIST)
 	@rm -f $@
@@ -108,8 +110,8 @@ ocs:
 	@echo ""
 
 
-tmp/2015-2022/vc_redist.x64.exe:
+tmp/2015-2022/vc_redist.x64.exe: ../update-visualredist/version.txt ../update-visualredist/checksum.txt
 	@mkdir -p tmp/2015-2022
-	@curl -# -o $@ -L https://aka.ms/vs/17/release/vc_redist.x64.exe
+	@curl $(CURLFLAGS) -# -o $@ -L https://aka.ms/vs/17/release/vc_redist.x64.exe
 	@file $@ | grep -q "PE32 executable" || echo "Error: bad format for binary $@"
-	@grep -q "^$$(shasum -a 256 $@)$$" checksum.txt || echo "Error: bad checksum for binary $@"
+	@grep -q "^$$(shasum -a 256 $@)$$" ../update-visualredist/checksum.txt || echo "Error: bad checksum for binary $@"
