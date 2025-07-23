@@ -19,21 +19,23 @@ function pipe_if_not_empty {
 }
 
 echo "Check Windows files with UNIX line terminators"
-find . -name '*.ps1' -o -name '*.bat' -o -name '*.reg' -exec file {} \+| grep 'ASCII text' | grep -v 'CRLF' | pipe_if_not_empty "" cat | sed 's/^/ /;'
+find . \( -name '*.ps1' -o -name '*.bat' -o -name '*.reg' \) -exec file {} \+ | grep 'ASCII text' | grep -v 'CRLF' | pipe_if_not_empty "" cat | sed 's/^/ /;'
 
 echo "Check unique name in checksum"
-for f in $(awk '{print $2}' */checksum.txt | sort | uniq -c  | grep -v '^      1 ' | awk '{print $2}')
+for f in $(awk '{print $2}' ./*/checksum.txt | sort | uniq -c  | grep -v '^      1 ' | awk '{print $2}')
 do
-  if [ $(grep -h  $f */checksum.txt | sort -u | wc -l) -ne 1 ]
-  then grep $f */checksum.txt
+  if [ "$(grep -h "$f" -- */checksum.txt | sort -u | wc -l)" -ne 1 ]
+  then
+    grep "$f" -- */checksum.txt
   fi
 done | pipe_if_not_empty "" cat | sed 's/^/ /;'
 
 echo "Check unique hash in checksum"
-for f in $(awk '{print $1}' */checksum.txt | sort | uniq -c  | grep -v '^      1 ' | awk '{print $2}')
+for f in $(awk '{print $1}' ./*/checksum.txt | sort | uniq -c  | grep -v '^      1 ' | awk '{print $2}')
 do
-  if [ $(grep -h  $f */checksum.txt | sort -u | wc -l) -ne 1 ]
-  then grep $f */checksum.txt
+  if [ "$(grep -h "$f" -- */checksum.txt | sort -u | wc -l)" -ne 1 ]
+  then
+    grep "$f" -- */checksum.txt
   fi
 done | pipe_if_not_empty "" cat | sed 's/^/ /;'
 
@@ -51,11 +53,11 @@ echo "Check for unnecessary spaces at the end of lines for Windows files"
 ack -l --ignore-dir=tmp --ignore-dir=resources '\s+\r$' ./ ./*/ | pipe_if_not_empty "" cat | sed 's/^/ /;'
 
 echo "Check PowerShell script syntax"
-find . -maxdepth 2  -name '*.ps1' | xargs -r timeout -k 2s 13 ./analyze-ps | grep -v '^✅ OK:'
+find . -maxdepth 2  -name '*.ps1' -print0 | xargs -r -0 timeout -k 2s 13 ./analyze-ps | grep -v '^✅ OK:'
 
 echo "Check HKLM register key in README files"
 FOLDER_NOGIT=$(
-  find . -maxdepth 1 -type d ! -path '*/.*' | while read dir
+  find . -maxdepth 1 -type d ! -path '*/.*' | while read -r dir
   do
     if [ -z "$(git ls-files "${dir}" --error-unmatch 2>/dev/null)" ]
     then
@@ -63,4 +65,4 @@ FOLDER_NOGIT=$(
     fi
   done | sed 's#^\./##; s#$#/#;' | paste -sd '|'
 )
-grep -L HKLM */README.md | grep -Ev '^(_|action-|update-|.*-uninstall/|'$(grep -l uninstall.bat */install.bat | xargs -r dirname | sed 's#$#/#;' | paste -sd '|')"|${FOLDER_NOGIT})" | sed 's/^/ /;'
+grep -L HKLM -- */README.md | grep -Ev '^(_|action-|update-|.*-uninstall/|'"$(grep -l uninstall.bat -- */install.bat | xargs -r dirname | sed 's#$#/#;' | paste -sd '|')""|${FOLDER_NOGIT})" | sed 's/^/ /;'
