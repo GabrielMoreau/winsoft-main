@@ -1,6 +1,8 @@
 #!/bin/bash
 #
 # check code quality
+#
+# 2024/01/04 Gabriel Moreau <Gabriel.Moreau@univ-grenoble-alpes.fr>
 
 function pipe_if_not_empty {
   local title=$1
