@@ -1,6 +1,7 @@
 #!/bin/bash
 #
-# check code quality
+# Script: check-quality
+# Description: check code quality
 #
 # 2024/01/04 Gabriel Moreau <Gabriel.Moreau@univ-grenoble-alpes.fr>
 
