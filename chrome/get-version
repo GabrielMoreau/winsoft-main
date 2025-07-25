@@ -2,10 +2,27 @@
 #
 # 2024/12/05 Gabriel Moreau <Gabriel.Moreau@univ-grenoble-alpes.fr>
 
+export LANG=C
+
 url=$1
 
 EXE=googlechromestandaloneenterprise64.msi
 CHOCO=https://community.chocolatey.org/packages/GoogleChrome
+
+################################################################
+
+function usage() {
+   cat <<END_USAGE
+get-version - download and get software version
+
+  -e|--exe EXE          executable to download (mandatory)
+  -u|--url URL          URL (mandatory)
+  -c|--choco CHOCO-URL  chocolatey URL (mandatory)
+  -h|--help             help
+END_USAGE
+}
+
+################################################################
 
 function update_version () {
   local choco_url=$1
@@ -23,15 +40,85 @@ function update_version () {
   done < <(curl -s -L "${choco_url}" | grep -E '^(\$version|\s\schecksum64)' | cut -f 2 -d ';' | cut -f 1 -d '&' | paste -sd ' ')
 }
 
+################################################################
+################################################################
+
+# Command line
+#action=$1; shift
+OPT_SHORT=e:u:c:h
+OPT_LONG=exe:,url:,choco:,help
+OPT_PARSED=$(getopt --options $OPT_SHORT --longoptions $OPT_LONG --name "$0" -- "$@")
+eval set -- "${OPT_PARSED}"
+
+export rsync_opt="--archive"
+export sort_opt=''
+export sleep_opt=0
+
+# get options
+while true
+do
+  case "$1" in
+    -e|--exe)
+      if [ -n "$2" ]
+      then
+        export EXE="$2"
+        shift 2
+      else
+        usage
+        exit 1
+      fi
+      ;;
+    -u|--url)
+      if [ -n "$2" ]
+      then
+        export URL="$2"
+        shift 2
+      else
+        usage
+        exit 2
+      fi
+      ;;
+    -c|--choco)
+      if [ -n "$2" ]
+      then
+        export CHOCO="$2"
+        shift 2
+      else
+        usage
+        exit 3
+      fi
+      ;;
+    -h|--help)
+      usage
+      exit
+      ;;
+    --)
+      shift
+      break
+      ;;
+  esac
+done
+shift $(($OPTIND -1))
+
+################################################################
+
+[ -z "${EXE}" ]   && { usage; exit 11; }
+[ -z "${URL}" ]   && { usage; exit 12; }
+[ -z "${CHOCO}" ] && { usage; exit 13; }
+
+
+################################################################
+
+# Download
 mkdir -p tmp
 (cd tmp;
   [ -e "timestamp.sig" ] \
     || touch -t $(date +%Y)01010000 timestamp.sig
 
-  curl -s --time-cond "${EXE}" -o "${EXE}" -L "${url}"
+  curl -s --time-cond "${EXE}" -o "${EXE}" -L "${URL}"
 
   newsha=$(shasum -a 256 "${EXE}" | cut -f 1 -d ' ')
-  if [ -e "../checksum.txt" ] && grep -q "^${newsha}[[:space:]]" ../checksum.txt
+  if [ -s "../checksum.txt" ] && grep -q "^${newsha}[[:space:]]" ../checksum.txt
   then
     touch --reference timestamp.sig "${EXE}"
   else
@@ -39,21 +126,22 @@ mkdir -p tmp
   fi
   )
 
+# Verify
 if [ -s "tmp/${EXE}" ]
 then
   VERSION=$(file "tmp/${EXE}" | sed -e 's/.*Comments:\s\([[:digit:]][[:digit:]\.]*\).*/\1/; s/[[:space:]:].*//;')
-  if echo ${VERSION} | grep -q '^[[:digit:]][[:digit:]\.]*'
+  if echo "${VERSION}" | grep -q '^[[:digit:]][[:digit:]\.]*'
   then
-    echo ${VERSION}
+    echo "${VERSION}"
   else
     HASHEXE=$(cd tmp; shasum -a 256 "${EXE}" | cut -f 1 -d ' ')
     # get new version from chocolatey
     grep -q "^${HASHEXE}" 'checksum.txt' || update_version "${CHOCO}"
 
     VERSION=$(grep "^${HASHEXE}" 'checksum.txt' | cut -f 2 -d '-' | sed 's/\.msi//;')
-    if echo ${VERSION} | grep -q '^[[:digit:]][[:digit:]\.]*'
+    if echo "${VERSION}" | grep -q '^[[:digit:]][[:digit:]\.]*'
     then
-      echo ${VERSION}
+      echo "${VERSION}"
     else
       echo ''
     fi

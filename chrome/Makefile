@@ -5,7 +5,7 @@
 
 SOFT:=Chrome
 URL:=https://dl.google.com/chrome/install/googlechromestandaloneenterprise64.msi
-VERSION:=$(shell ./get-version "$(URL)")
+VERSION:=$(shell ./get-version --url "$(URL)" -exe "googlechromestandaloneenterprise64.msi" --choco "https://community.chocolatey.org/packages/GoogleChrome")
 #$(shell mkdir -p tmp; cd tmp; curl -s --time-cond 'googlechromestandaloneenterprise64.msi' -o 'googlechromestandaloneenterprise64.msi' -L "$(URL)")
 #VERSION:=$(shell file tmp/googlechromestandaloneenterprise64.msi | sed -e 's/.*Comments:\s\([[:digit:]][[:digit:]\.]*\).*/\1/; s/[[:space:]:].*//;')
 REVISION:=1
