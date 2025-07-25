@@ -4,11 +4,6 @@
 
 export LANG=C
 
-url=$1
-
-EXE=googlechromestandaloneenterprise64.msi
-CHOCO=https://community.chocolatey.org/packages/GoogleChrome
-
 ################################################################
 
 function usage() {
@@ -27,7 +22,7 @@ END_USAGE
 function update_version () {
   local choco_url=$1
 
-  while read version hash
+  while read -r version hash
   do
     if [ -s 'checksum.txt' ] && grep -q "^${hash}" 'checksum.txt'
     then
@@ -98,7 +93,7 @@ do
       ;;
   esac
 done
-shift $(($OPTIND -1))
+shift $((OPTIND -1))
 
 ################################################################
 
@@ -111,9 +106,9 @@ shift $(($OPTIND -1))
 
 # Download
 mkdir -p tmp
-(cd tmp;
+(cd tmp || exit 20;
   [ -e "timestamp.sig" ] \
-    || touch -t $(date +%Y)01010000 timestamp.sig
+    || touch -t "$(date +%Y)01010000" timestamp.sig
 
   curl -s --time-cond "${EXE}" -o "${EXE}" -L "${URL}"
 
@@ -134,7 +129,7 @@ then
   then
     echo "${VERSION}"
   else
-    HASHEXE=$(cd tmp; shasum -a 256 "${EXE}" | cut -f 1 -d ' ')
+    HASHEXE=$(cd tmp || exit 20; shasum -a 256 "${EXE}" | cut -f 1 -d ' ')
     # get new version from chocolatey
     grep -q "^${HASHEXE}" 'checksum.txt' || update_version "${CHOCO}"
 
