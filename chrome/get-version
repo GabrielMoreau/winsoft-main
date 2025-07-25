@@ -25,8 +25,19 @@ function update_version () {
 
 mkdir -p tmp
 (cd tmp;
-  # echo curl --time-cond "${EXE}" -o "${EXE}" -L "${url}" 1>&2;
-  curl -s --time-cond "${EXE}" -o "${EXE}" -L "${url}")
+  [ -e "timestamp.sig" ] \
+    || touch -t $(date +%Y)01010000 timestamp.sig
+
+  curl -s --time-cond "${EXE}" -o "${EXE}" -L "${url}"
+
+  newsha=$(shasum -a 256 "${EXE}" | cut -f 1 -d ' ')
+  if [ -e "../checksum.txt" ] && grep -q "^${newsha}[[:space:]]" ../checksum.txt
+  then
+    touch --reference timestamp.sig "${EXE}"
+  else
+    touch --reference "${EXE}" timestamp.sig
+  fi
+  )
 
 if [ -s "tmp/${EXE}" ]
 then
