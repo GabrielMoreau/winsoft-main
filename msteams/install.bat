@@ -30,13 +30,26 @@ ECHO Add rights
 ECHO Unblock PowerShell Script
 %pwrsh% "Unblock-File -Path .\*.ps1"
 
-ECHO Execute pre-install
+ECHO Execute pre-install script
 %pwrsh% -File ".\pre-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
 
 
+REM ECHO Prepare install %softname%
+REM ScriptRunner.exe -appvscript "teamsbootstrapper.exe" -p -o "teams-%softversion%-x64.msix" -appvscriptrunnerparameters -wait -timeout=300
+
+
 ECHO Silent install %softname%
-ScriptRunner.exe -appvscript "MSTeamsSetup-%softversion%.exe" /S "%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=300
+ScriptRunner.exe -appvscript DISM /Online /Add-ProvisionedAppxPackage /PackagePath:"teams-%softversion%-x64.msix" /SkipLicense -appvscriptrunnerparameters -wait -timeout=300
+
+
+ECHO Execute post-install script
+%pwrsh% -File ".\post-install.ps1" 1>> "%logdir%\%softname%-PS1.log" 2>&1
 
 
 ECHO END %date%-%time%
-EXIT
+IF %ERRORLEVEL% EQU 0 (
+    ECHO %softname% is installed
+) ELSE (
+    ECHO %softname% is not installed!
+)
+EXIT %ERRORLEVEL%

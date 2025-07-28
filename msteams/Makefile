@@ -5,17 +5,16 @@
 
 SOFT:=MSTeams
 VERSION:=$(shell curl -s -L 'https://learn.microsoft.com/en-us/officeupdates/teams-app-versioning' | grep -A 30 '"windows-gcc-version-history"' | paste -sd '' | sed -e s'#<tr>#\n#g;' | grep -Ev '(windows-gcc-version-history|Slimcore version)' | sed -e 's/[<>]/\n/g;' | grep -E '^[[:digit:]][[:digit:]]*\.[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+$$' | head -1)
-#SHORTVERSION:=$(shell echo $(VERSION) | sed -e 's/00/0/g;')
-URL:=https://statics.teams.cdn.office.net/evergreen-assets/DesktopClient/MSTeamsSetup.exe
 REVISION:=1
 
-EXE:=MSTeamsSetup-$(VERSION).exe
+EXE:=teams-$(VERSION)-x64.msix
+XML:=AppxManifest.xml
 
 IT_TEAM:=IT Support
 LOGDIR:=%WINDIR%\\Logs
 
 
-.PHONY: all check-version check-unrealized check-exe clean control next ocs version wget checksum
+.PHONY: all check-version check-unrealized check-exe clean control next ocs version checksum
 
 all: check-version check-exe $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
 
@@ -32,43 +31,47 @@ clean:
 
 version:
 	@echo "VERSION: $(VERSION)"
-#	@echo "SHORTVERSION: $(SHORTVERSION)"
-	@echo "URL: $(URL)"
 	@echo "EXE: $(EXE)"
 
 checksum: check-version
 	@mkdir -p tmp
 	@(cd tmp ; \
-		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt && exit ; \
-		shasum -a 256 "$(EXE)" | sed -e 's#tmp/##;' >> ../checksum.txt ; \
-		tail -3 ../checksum.txt ; \
+		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || { shasum -a 256 "$(EXE)" | sed -e 's#tmp/##;' >> ../checksum.txt ; } ; \
 		)
+	@if [ $$(( $$(date '+%s') - $$(stat -c '%Y' checksum.txt) )) -lt 60 ]; then tail -3 checksum.txt; fi
 
-wget: $(EXE)
-
-tmp/$(EXE):
+tmp/$(EXE): tmp/$(XML)
 	@mkdir -p tmp
 	@(cd tmp ; \
-		rm -f *.exe *.msi 2>/dev/null ; \
-		curl -# -o "$(EXE)" -L "$(URL)" ; \
-		file $(EXE) | grep -q "PE32 executable" || echo "Error: bad format for binary $(EXE)" ; \
-		# which msiextract >/dev/null && { rm -rf 'Program File'; msiextract $(EXE) ; } ; \
+		file $(EXE) | grep -q "Zip archive data" || echo "Error: bad format for binary $(EXE)" ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
+		)
+
+tmp/$(XML):
+	@mkdir -p tmp
+	@./get-msi "$(VERSION)"
+	@(cd tmp ; \
+		file $(XML) | grep -q "XML 1.0 document" || echo "Error: bad format for document $(XML)" ; \
 		)
 
 check-exe: tmp/$(EXE)
 	@cd tmp; \
-		file $(EXE) | grep -q "PE32 executable" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 1; } ; \
-		#which peres >/dev/null && { peres -v 'Program Files/Teams Installer/Teams.exe' | grep -q "^Product Version:[[:space:]]*$(SHORTVERSION)" || { echo "Error: bad version for binary Program Files/Teams Installer/Teams.exe" 1>&2 ; exit 1; } ; }
+		file $(EXE) | grep -q "Zip archive data" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 1; } ; \
+		file $(XML) | grep -q "XML 1.0 document" || { echo "Error: bad format for document $(XML)" 1>&2 ; exit 1; } ; \
+		grep -q "[[:space:]]Version=\"$(VERSION)\"[[:space:]]" $(XML) || { echo "Error: bad version for document $(XML)" 1>&2 ; exit 1; }
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
 	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#;' $< > $@
 
-%.zip: Makefile pre-install.ps1 tmp/install.bat tmp/$(EXE)
+tmp/pre-install.ps1: pre-install.ps1 Makefile tmp/$(EXE)
+	@mkdir -p tmp
+	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#; s/%ProgramData%/$${Env:ProgramData}/;' $< > $@
+
+%.zip: Makefile post-install.ps1 tmp/install.bat tmp/pre-install.ps1 tmp/$(EXE)
 	@rm -f $@
-	@zip -r $@ pre-install.ps1
-	@(cd tmp; zip -r ../$@ install.bat $(EXE))
+	@zip -r $@ post-install.ps1
+	@(cd tmp; zip -r ../$@ install.bat pre-install.ps1 $(EXE))
 	@chmod ugo+rw $@
 
 ocs:

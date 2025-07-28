@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+MSI_VERSION=$1
+TMP='tmp'
+ARCH='x64'
+
+mkdir -p "${TMP}"
+rm -f "${TMP}/AppxManifest.xml" "${TMP}/teams-${MSI_VERSION}-x64.msix" "${TMP}/teamsbootstrapper.exe"
+
+# URL bootstrapper
+# BOOT_URL="https://statics.teams.cdn.office.net/production-teamsprovision/lkg/teamsbootstrapper.exe"
+# BOOT_EXE="${TMP}/teamsbootstrapper.exe"
+# curl -sSL "${BOOT_URL}" -o "${BOOT_EXE}"
+
+# URL MSIX
+MSIX_URL="https://statics.teams.cdn.office.net/production-windows-${ARCH}/enterprise/webview2/lkg/MSTeams-${ARCH}.msix"
+MSIX_FILE="teams-${MSI_VERSION}-${ARCH}.msix"
+if curl --head --fail --silent "${MSIX_URL}" >/dev/null
+then
+	(cd "${TMP}" || exit
+		curl -sSL "${MSIX_URL}" -o "${MSIX_FILE}"
+		rm -f 'AppxManifest.xml'
+		unzip "${MSIX_FILE}" 'AppxManifest.xml'
+	)
+fi

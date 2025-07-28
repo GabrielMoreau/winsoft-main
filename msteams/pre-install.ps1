@@ -14,7 +14,7 @@ Write-Output "Begin Pre-Install"
 			#$UninstallString = $App.UninstallString
 			$UninstallSplit = $App.UninstallString -Split "/I"
 			$Args = '/x "' + $UninstallSplit[1].Trim() + '" /qn /norestart'
-			Write-Output "Info: $DisplayName / $DisplayVersion / $KeyProduct/ $Args"
+			Write-Output "Info1: $DisplayName / $DisplayVersion / $KeyProduct/ $Args"
 
 			$Proc = Start-Process -FilePath "MsiExec.exe" -ArgumentList "$Args" -WindowStyle 'Hidden' -ErrorAction 'SilentlyContinue' -PassThru
 
@@ -33,6 +33,9 @@ Write-Output "Begin Pre-Install"
 		}
 	}
 
+$LogDir = "__LOGDIR__"
+Write-Output "Info: Log dir $LogDir"
+
 # Remove Microsoft Teams Meeting Add-in for Microsoft Office
 @(Get-ChildItem -Recurse 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall';
   Get-ChildItem -Recurse "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall") |
@@ -45,8 +48,8 @@ Write-Output "Begin Pre-Install"
 			$KeyProduct = $Key | Split-Path -Leaf
 			#$UninstallString = $App.UninstallString
 			$UninstallSplit = $App.UninstallString -Split "/I"
-			$Args = '/x "' + $UninstallSplit[1].Trim() + '" /qn /norestart'
-			Write-Output "Info: $DisplayName / $DisplayVersion / $KeyProduct/ $Args"
+			$Args = '/x "' + $UninstallSplit[1].Trim() + '" /quiet InstallerVersion=v3 /l "$LogDir\MSTeams-PreInstall-MSI.log"'
+			Write-Output "Info2: $DisplayName / $DisplayVersion / $KeyProduct/ $Args"
 
 			$Proc = Start-Process -FilePath "MsiExec.exe" -ArgumentList "$Args" -WindowStyle 'Hidden' -ErrorAction 'SilentlyContinue' -PassThru
 
@@ -102,3 +105,18 @@ ForEach ($User in (Get-ChildItem C:\Users)) {
 		}
 	}
 }
+
+$RefName = 'Teams'
+# View all Zoom
+@(Get-ChildItem -Recurse 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall';
+  Get-ChildItem -Recurse "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall") |
+	ForEach {
+		$Key = $_
+		$App = (Get-ItemProperty -Path $Key.PSPath)
+		$DisplayName  = $App.DisplayName
+		If (!($DisplayName -match $RefName)) { Return }
+
+		$DisplayVersion = $App.DisplayVersion
+		$KeyProduct = $Key | Split-Path -Leaf
+		Write-Output "Installed: $DisplayName / $DisplayVersion / $KeyProduct / $($App.UninstallString)"
+	}
