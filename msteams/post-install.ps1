@@ -1,33 +1,33 @@
 Write-Output "Begin Post-Install"
 
-Write-Host "`nChecking for Microsoft Teams (MSIX version) installation..."
+Write-Host "`nChecking For Microsoft Teams (MSIX Version) Installation..."
 
-$installed = $false
+$IsInstalled = $False
 
-# Check if installed for current user
-$userPackages = Get-AppxPackage -Name "*Teams*" -ErrorAction SilentlyContinue
-if ($userPackages) {
-	Write-Host "Teams is installed for the current user:"
-	$userPackages | Format-Table Name, Version -AutoSize
-	$installed = $true
-} else {
-	Write-Host "Teams is NOT installed for the current user."
+# Check If Installed For Current User
+$UserPackages = Get-AppxPackage -Name "*Teams*" -ErrorAction SilentlyContinue
+If ($UserPackages) {
+	Write-Host "Teams Is Installed For The Current User:"
+	$UserPackages | Format-Table Name, Version -AutoSize
+	$IsInstalled = $True
+} Else {
+	Write-Host "Teams Is NOT Installed For The Current User."
 }
 
-# Check for provisioned packages (system-wide)
-$globalPackages = Get-ProvisionedAppxPackage -Online | Where-Object DisplayName -like "*Teams*"
-if ($globalPackages) {
-	Write-Host "`nTeams is provisioned system-wide:"
-	$globalPackages | Format-Table DisplayName, Version -AutoSize
-	$installed = $true
-} else {
-	Write-Host "`nTeams is NOT provisioned system-wide."
+# Check For Provisioned Packages (System-Wide)
+$GlobalPackages = Get-ProvisionedAppxPackage -Online | Where-Object DisplayName -Like "*Teams*"
+If ($GlobalPackages) {
+	Write-Host "`nTeams Is Provisioned System-Wide:"
+	$GlobalPackages | Format-Table DisplayName, Version -AutoSize
+	$IsInstalled = $True
+} Else {
+	Write-Host "`nTeams Is NOT Provisioned System-Wide."
 }
 
-if ($installed) {
-	Write-Host "`nResult: Microsoft Teams is installed or available for automatic installation."
-	exit 0
-} else {
-	Write-Host "`nResult: Microsoft Teams (MSIX version) is NOT detected."
-	exit 1
+If ($IsInstalled) {
+	Write-Host "`nResult: Microsoft Teams Is Installed Or Available For Automatic Installation."
+	Exit 0
+} Else {
+	Write-Host "`nResult: Microsoft Teams (MSIX Version) Is NOT Detected."
+	Exit 1
 }
