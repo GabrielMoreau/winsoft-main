@@ -38,8 +38,10 @@ REM ECHO Prepare install %softname%
 REM ScriptRunner.exe -appvscript "teamsbootstrapper.exe" -p -o "teams-%softversion%-x64.msix" -appvscriptrunnerparameters -wait -timeout=300
 
 
-ECHO Silent install %softname%
-ScriptRunner.exe -appvscript DISM /Online /Add-ProvisionedAppxPackage /PackagePath:"teams-%softversion%-x64.msix" /SkipLicense -appvscriptrunnerparameters -wait -timeout=300
+IF %ERRORLEVEL% NEQ 0 (
+    ECHO Silent install %softname%
+    ScriptRunner.exe -appvscript DISM /Online /Add-ProvisionedAppxPackage /PackagePath:"teams-%softversion%-x64.msix" /SkipLicense -appvscriptrunnerparameters -wait -timeout=300
+)
 
 
 ECHO Execute post-install script

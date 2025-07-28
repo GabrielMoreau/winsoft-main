@@ -120,3 +120,37 @@ $RefName = 'Teams'
 		$KeyProduct = $Key | Split-Path -Leaf
 		Write-Output "Installed: $DisplayName / $DisplayVersion / $KeyProduct / $($App.UninstallString)"
 	}
+
+
+Write-Output "Checking For Global Installation Of Microsoft Teams..."
+
+# Minimum Required Version
+$MinVersion = [Version]"__VERSION__"
+$Found = $False
+
+# Only Check For Exact DisplayName "MSTeams"
+$GlobalPackages = Get-ProvisionedAppxPackage -Online | Where-Object DisplayName -Eq "MSTeams"
+ForEach ($Pkg In $GlobalPackages) {
+	Try {
+		$CurrentVersion = [Version]$Pkg.Version
+		If ($CurrentVersion -Ge $MinVersion) {
+			Write-Output "Found MSTeams Version $($Pkg.Version) (>= $MinVersion)"
+			$Found = $True
+		}
+		Else {
+			Write-Output "Found MSTeams Version $($Pkg.Version), But It's Too Old."
+		}
+	}
+	Catch {
+		Write-Output "Could Not Parse Version: $($Pkg.Version)"
+	}
+}
+
+If ($Found) {
+	Write-Output "MSTeams Is Installed Globally And Up-To-Date."
+	Exit 0
+}
+Else {
+	Write-Output "MSTeams Is Not Installed Globally Or Version Is Too Old."
+	Exit 1
+}
