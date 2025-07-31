@@ -10,10 +10,11 @@ function usage() {
    cat <<END_USAGE
 get-version - download and get software version
 
-  -e|--exe EXE          executable to download (mandatory)
-  -u|--url URL          URL (mandatory)
-  -c|--choco CHOCO-URL  chocolatey URL (mandatory)
-  -h|--help             help
+  -e|--exe EXE                 executable to download (mandatory)
+  -u|--url URL                 URL (mandatory)
+  -c|--choco CHOCO-URL         chocolatey URL (mandatory)
+  -s|--shape SoftShape-%v.exe  soft shape in checksum file (mandatory)
+ -h|--help                     help
 END_USAGE
 }
 
@@ -21,6 +22,7 @@ END_USAGE
 
 function update_version () {
   local choco_url=$1
+  local soft_shape=$2
 
   while read -r version hash
   do
@@ -31,7 +33,7 @@ function update_version () {
 
     # 131.0.6778.86 9fcf15cb2390b84887b94e8e2f41d01eff325eccdac405e4f9a156dbc209689d
     # 9fcf15cb2390b84887b94e8e2f41d01eff325eccdac405e4f9a156dbc209689d  googlechromestandaloneenterprise64-131.0.6778.86.msi
-    echo "${hash}  googlechromestandaloneenterprise64-${version}.msi" >> 'checksum.txt'
+    echo "${hash}  ${soft_shape/%v/${version}}.msi" >> 'checksum.txt'
   done < <(curl -s -L "${choco_url}" | grep -E '^(\$version|\s\schecksum64)' | cut -f 2 -d ';' | cut -f 1 -d '&' | paste -sd ' ')
 }
 
@@ -40,14 +42,10 @@ function update_version () {
 
 # Command line
 #action=$1; shift
-OPT_SHORT=e:u:c:h
-OPT_LONG=exe:,url:,choco:,help
+OPT_SHORT=e:u:c:s:h
+OPT_LONG=exe:,url:,choco:,shape:,help
 OPT_PARSED=$(getopt --options $OPT_SHORT --longoptions $OPT_LONG --name "$0" -- "$@")
 eval set -- "${OPT_PARSED}"
-
-export rsync_opt="--archive"
-export sort_opt=''
-export sleep_opt=0
 
 # get options
 while true
@@ -83,6 +81,16 @@ do
         exit 3
       fi
       ;;
+    -s|--shape)
+      if [ -n "$2" ]
+      then
+        export SHAPE="$2"
+        shift 2
+      else
+        usage
+        exit 4
+      fi
+      ;;
     -h|--help)
       usage
       exit
@@ -100,6 +108,7 @@ shift $((OPTIND -1))
 [ -z "${EXE}" ]   && { usage; exit 11; }
 [ -z "${URL}" ]   && { usage; exit 12; }
 [ -z "${CHOCO}" ] && { usage; exit 13; }
+[ -z "${SHAPE}" ] && { usage; exit 14; }
 
 
 ################################################################
@@ -131,7 +140,7 @@ then
   else
     HASHEXE=$(cd tmp || exit 20; shasum -a 256 "${EXE}" | cut -f 1 -d ' ')
     # get new version from chocolatey
-    grep -q "^${HASHEXE}" 'checksum.txt' || update_version "${CHOCO}"
+    grep -q "^${HASHEXE}" 'checksum.txt' || update_version "${CHOCO}" "${SHAPE}"
 
     VERSION=$(grep "^${HASHEXE}" 'checksum.txt' | cut -f 2 -d '-' | sed 's/\.msi//;')
     if echo "${VERSION}" | grep -q '^[[:digit:]][[:digit:]\.]*'
