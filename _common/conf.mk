@@ -10,6 +10,7 @@ IT_TEAM:=IT Team
 LOGDIR:=%WINDIR%\\Logs
 
 # OCS Inventory Agent (ocsinventory-agent package)
+OCS_URL:=https://ocs-server.example.com
 OCS_SERVER:=https://ocs-server.example.com/ocsinventory
 OCS_SSL:=1
 

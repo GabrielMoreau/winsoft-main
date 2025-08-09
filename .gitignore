@@ -6,3 +6,4 @@ tmp
 ._*
 .make.log
 .noauto
+tmp_*.png
