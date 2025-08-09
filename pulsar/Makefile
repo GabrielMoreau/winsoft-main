@@ -16,7 +16,7 @@ IT_TEAM:=IT Support
 LOGDIR:=%WINDIR%\\Logs
 
 
-.PHONY: all check-version check-unrealized check-exe clean control next ocs version wget checksum
+.PHONY: all check-version check-unrealized check-exe clean control next ocs ocs-push version wget checksum
 
 all: check-version check-exe $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
 
@@ -83,3 +83,13 @@ ocs:
 	@echo " --- "
 	@echo "Install and/or Update: $(SOFT) ($(VERSION))"
 	@echo ""
+
+ocs-push:
+	ocs-pkgpush --url "$(OCS_URL)/ocsreports" \
+		--name "$(SOFT)_$(VERSION)-$(REVISION)_x64" \
+		--description "$(SOFT)_$(VERSION)-$(REVISION)_x64" \
+		--priority 5 \
+		--notif-text "$(IT_TEAM)\r\n---\r\nInstall and/or Update: $(SOFT) ($(VERSION))" \
+		--notif-delay 5 \
+		--file "./$(SOFT)_$(VERSION)-$(REVISION)_x64.zip" \
+		--headless

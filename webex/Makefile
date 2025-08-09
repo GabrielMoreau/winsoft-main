@@ -19,7 +19,7 @@ IT_TEAM:=IT Support
 LOGDIR:=%WINDIR%\\Logs
 
 
-.PHONY: all check-version check-unrealized check-exe clean control next ocs version wget checksum
+.PHONY: all check-version check-unrealized check-exe clean control next ocs ocs-push version wget checksum
 
 all: check-version check-exe Uninstall-$(SOFT)_$(VERSION)-$(REVISION)_x64.zip $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
 
@@ -108,3 +108,13 @@ ocs:
 	@echo "The software will be stopped during the installation,"
 	@echo "make a quick save or postpone the update."
 	@echo ""
+
+ocs-push:
+	ocs-pkgpush --url "$(OCS_URL)/ocsreports" \
+		--name "$(SOFT)_$(VERSION)-$(REVISION)_x64" \
+		--description "$(SOFT)_$(VERSION)-$(REVISION)_x64" \
+		--priority 5 \
+		--notif-text "$(IT_TEAM)\r\n---\r\nInstall and/or Update: $(SOFT) ($(VERSION))\r\n---\r\nThe software will be stopped during the installation,\r\nmake a quick save or postpone the update." \
+		--notif-delay 20 \
+		--file "./$(SOFT)_$(VERSION)-$(REVISION)_x64.zip" \
+		--headless
