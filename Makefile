@@ -7,7 +7,7 @@ PKGLEN:=$(shell echo $(PKGDIR) | sed -e 's/[[:space:]]/\n/g;' | wc --max-line-le
 
 sinclude ../winsoft-conf/_common/main.mk
 
-.PHONY: help build-all clean-all checksum-all last-checksum unrealized-updates list-pkg list-version list-md space version
+.PHONY: help build-all clean-all checksum-all last-checksum unrealized-updates list-pkg list-version list-md space version ocs-asifpushed
 .ONESHELL:
 
 help:
@@ -180,4 +180,21 @@ version:
 		fi
 		printf "#=== %-$(PKGLEN)s ===#\n" $${d%/}
 		(cd $$d; make version) | grep -v '^make'
+	done
+
+ocs-push: ## Push last package like make last checksum (see target last-checksum)
+	@
+	while read folder
+	do
+		printf "#=== %-$(PKGLEN)s ===#\n" $$folder
+		(cd $$folder; grep -q '^ocs-push:' Makefile && make ocs-push)
+	done < <(LANG=C find . -maxdepth 2 -name '*.zip' -a -mtime -1.25 -not -path '*/tmp/*' -print | xargs -r dirname | xargs -r -n 1 basename | sort -u)
+
+ocs-asifpushed: ## Say that all package are already upload on OCS server
+	@for d in $$(ls -1d *); \
+	do \
+		[ -d "$$d" ] || continue; \
+		sha=$$(cd "$$d" ; ls -1t *.zip 2> /dev/null  | sort -V | head  -1); \
+		[ -n "$$sha" ] || continue; \
+		grep -q "$$sha" "$$d/tmp/ocs-pkgpush.txt" 2> /dev/null || { mkdir -p "$$d/tmp" ; echo "$$sha" >> "$$d/tmp/ocs-pkgpush.txt" ; } ; \
 	done
