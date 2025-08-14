@@ -6,4 +6,5 @@ tmp
 ._*
 .make.log
 .noauto
+.no-ocs-pkgpush
 tmp_*.png

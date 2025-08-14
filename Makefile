@@ -186,6 +186,11 @@ ocs-push: ## Push last package like make last checksum (see target last-checksum
 	@
 	while read folder
 	do
+		if [ -f "$$d/.no-ocs-pkgpush" ] || grep -q "^$$d" ./_common/no-ocs-pkgpush.conf ../winsoft-conf/_common/no-ocs-pkgpush.conf 2> /dev/null
+		then
+			printf "#--- %-$(PKGLEN)s ---#\n" pass:$${d%/}
+			continue
+		fi
 		printf "#=== %-$(PKGLEN)s ===#\n" $$folder
 		(cd $$folder; grep -q '^ocs-push:' Makefile && make ocs-push)
 	done < <(LANG=C find . -maxdepth 2 -name '*.zip' -a -mtime -1.25 -not -path '*/tmp/*' -print | xargs -r dirname | xargs -r -n 1 basename | sort -u)
