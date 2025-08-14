@@ -196,10 +196,14 @@ ocs-push: ## Push last package like make last checksum (see target last-checksum
 	done < <(LANG=C find . -maxdepth 2 -name '*.zip' -a -mtime -1.25 -not -path '*/tmp/*' -print | xargs -r dirname | xargs -r -n 1 basename | sort -u)
 
 ocs-asifpushed: ## Say that all package are already upload on OCS server
-	@for d in $$(ls -1d *); \
-	do \
-		[ -d "$$d" ] || continue; \
-		sha=$$(cd "$$d" ; ls -1t *.zip 2> /dev/null  | sort -V | head  -1); \
-		[ -n "$$sha" ] || continue; \
-		grep -q "$$sha" "$$d/tmp/ocs-pkgpush.txt" 2> /dev/null || { mkdir -p "$$d/tmp" ; echo "$$sha" >> "$$d/tmp/ocs-pkgpush.txt" ; } ; \
+	@
+	for d in $$(ls -1d *)
+	do
+		[ -d "$$d" ] || continue
+		(cd "$$d"
+			for z in $$(ls -1 *.zip 2> /dev/null)
+			do
+				grep -q "$$z" "tmp/ocs-pkgpush.txt" 2> /dev/null || { mkdir -p "tmp" ; echo "$$z" >> "tmp/ocs-pkgpush.txt" ; }
+			done
+		)
 	done
