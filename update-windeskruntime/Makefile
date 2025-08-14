@@ -142,12 +142,13 @@ tmp/post-install.ps1: post-install.ps1 Makefile tmp/$(EXE5) tmp/$(EXE6) tmp/$(EX
 
 ocs:
 	@echo ""
-	@echo "Name:    $(SOFT)_$(VERSION)-$(REVISION)_x64"
-	@echo "Launch:  install.bat"
-	@echo "Message: yes"
-	@echo "Delay:   6"
-	@echo "Cancel:  no"
-	@echo "Report:  yes"
+	@echo "Name:     $(SOFT)_$(VERSION)-$(REVISION)_x64"
+	@echo "Launch:   install.bat"
+	@echo "Priority: *6*"
+	@echo "Message:  yes"
+	@echo "Delay:    5"
+	@echo "Cancel:   no"
+	@echo "Report:   yes"
 	@echo ""
 	@echo "$(IT_TEAM)"
 	@echo " --- "
@@ -155,6 +156,9 @@ ocs:
 	@echo ""
 
 ocs-push:
+	@[ -s "./$(SOFT)_$(VERSION)-$(REVISION)_x64.zip" ] || (echo 'Zip archive not exists: $(SOFT)_$(VERSION)-$(REVISION)_x64.zip' > /dev/stderr ; exit 1)
+	@sha=$$(shasum -a 256 "$(SOFT)_$(VERSION)-$(REVISION)_x64.zip"); \
+	! grep -q "^$(SOFT)_$(VERSION)-$(REVISION)_x64.zip$$" tmp/ocs-pkgpush.txt > /dev/null 2>&1 || { echo 'Package already upload: $(SOFT)_$(VERSION)-$(REVISION)_x64.zip' > /dev/stderr ; exit 1 ; } ;\
 	ocs-pkgpush --url "$(OCS_URL)/ocsreports" \
 		--name "$(SOFT)_$(VERSION)-$(REVISION)_x64" \
 		--description "$(SOFT)_$(VERSION)-$(REVISION)_x64" \
@@ -162,4 +166,5 @@ ocs-push:
 		--notif-text "$(IT_TEAM)\r\n---\r\nInstall and/or Update: $(SOFT) ($(VERSION))" \
 		--notif-delay 5 \
 		--file "./$(SOFT)_$(VERSION)-$(REVISION)_x64.zip" \
-		--headless
+		--capture-dir tmp \
+		--headless && echo "$(SOFT)_$(VERSION)-$(REVISION)_x64.zip" >> tmp/ocs-pkgpush.txt

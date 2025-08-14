@@ -69,12 +69,12 @@ tmp/uninstall.bat: uninstall.bat Makefile
 
 %.zip: Makefile tmp/install.bat tmp/$(EXE)
 	@rm -f $@
-	@(cd tmp; zip -r ../$@ install.bat $(EXE))
+	@(cd tmp; zip -Xr ../$@ install.bat $(EXE))
 	@chmod ugo+rw $@
 
 Uninstall-$(SOFT)_$(VERSION)-$(REVISION)_x64.zip: Makefile tmp/uninstall.bat
 	@rm -f $@
-	@(cd tmp; zip -r ../$@ uninstall.bat)
+	@(cd tmp; zip -Xr ../$@ uninstall.bat)
 	@printf "@ uninstall.bat\n@=install.bat\n" | zipnote -w ./$@
 	@chmod ugo+rw $@
 
@@ -94,6 +94,9 @@ ocs:
 	@echo ""
 
 ocs-push:
+	@[ -s "./$(SOFT)_$(VERSION)-$(REVISION)_x64.zip" ] || (echo 'Zip archive not exists: $(SOFT)_$(VERSION)-$(REVISION)_x64.zip' > /dev/stderr ; exit 1)
+	@sha=$$(shasum -a 256 "$(SOFT)_$(VERSION)-$(REVISION)_x64.zip"); \
+	! grep -q "^$(SOFT)_$(VERSION)-$(REVISION)_x64.zip$$" tmp/ocs-pkgpush.txt > /dev/null 2>&1 || { echo 'Package already upload: $(SOFT)_$(VERSION)-$(REVISION)_x64.zip' > /dev/stderr ; exit 1 ; } ;\
 	ocs-pkgpush --url "$(OCS_URL)/ocsreports" \
 		--name "$(SOFT)_$(VERSION)-$(REVISION)_x64" \
 		--description "$(SOFT)_$(VERSION)-$(REVISION)_x64" \
@@ -101,4 +104,5 @@ ocs-push:
 		--notif-text "$(IT_TEAM)\r\n---\r\nInstall and/or Update: $(SOFT) ($(VERSION))" \
 		--notif-delay 5 \
 		--file "./$(SOFT)_$(VERSION)-$(REVISION)_x64.zip" \
-		--headless
+		--capture-dir tmp \
+		--headless && echo "$(SOFT)_$(VERSION)-$(REVISION)_x64.zip" >> tmp/ocs-pkgpush.txt
