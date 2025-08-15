@@ -36,3 +36,33 @@ HURUKAI_PASSWORD:=youragentpass
 SELF_MAKEDIR:=$(dir $(lastword $(MAKEFILE_LIST)))
 sinclude $(SELF_MAKEDIR)../../winsoft-conf/_common/conf.mk
 #sinclude ../../winsoft-conf/_common/conf.mk
+
+
+# OCS part
+.PHONY: ocs ocs-push
+
+ocs:
+	@echo ""
+	@echo "Name:    $(OCS_NAME)"
+	@echo "Launch:  install.bat"
+	@echo "Notify:  $(OCS_NOTIFY)"
+	@echo "Delay:   $(OCS_DELAY)"
+	@echo "Cancel:  $(OCS_CANCEL)"
+	@echo "Report:  $(OCS_REPORT)"
+	@[ -z "$(OCS_SEARCH)" ] || echo "Search:  $(OCS_SEARCH)"
+	@echo "Message: $(OCS_MESSAGE)"
+	@echo ""
+
+ocs-push:
+	@[ -s "./$(OCS_NAME).zip" ] || (echo 'Zip archive not exists: $(OCS_NAME).zip' > /dev/stderr ; exit 1)
+	@sha=$$(shasum -a 256 "$(SOFT)_$(VERSION)-$(REVISION)_x64.zip"); \
+	! grep -q "^$(OCS_NAME).zip$$" tmp/ocs-pkgpush.txt > /dev/null 2>&1 || { echo 'Package already upload: $(OCS_NAME).zip' > /dev/stderr ; exit 1 ; } ;\
+	echo ocs-pkgpush --url "$(OCS_URL)/ocsreports" \
+		--name "$(OCS_NAME)" \
+		--description "$(OCS_NAME)" \
+		--priority "$(OCS_PRIORITY)" \
+		--notif-text '"$(OCS_MESSAGE)"' \
+		--notif-delay "$(OCS_DELAY)" \
+		--file "./$(OCS_NAME).zip" \
+		--capture-dir tmp \
+		--headless && echo "$(OCS_NAME).zip" >> tmp/ocs-pkgpush.txt
