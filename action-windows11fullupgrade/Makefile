@@ -21,6 +21,10 @@ all: check-version check-exe $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
 
 sinclude ../_common/conf.mk
 
+# OCS configuration
+OCS_DELAY:=$(OCS_DELAY_LONG)
+OCS_MESSAGE:=$(OCS_MESSAGE) --- This command installs the latest version of Windows 11. After the next reboot, Windows 11 will automatically reboot several times...
+
 check-version:
 	@echo $(VERSION) | grep -Eq '^[[:digit:]][\.[:digit:]]+[[:digit:]]$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
 
@@ -72,20 +76,3 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@zip -r $@ HardwareReadiness
 	@(cd tmp; zip -r ../$@ install.bat $(EXE))
 	@chmod ugo+rw $@
-
-ocs:
-	@echo ""
-	@echo "Name:    $(SOFT)_$(VERSION)-$(REVISION)_x64"
-	@echo "Launch:  install.bat"
-	@echo "Message: yes"
-	@echo "Delay:   5"
-	@echo "Cancel:  no"
-	@echo "Report:  yes"
-	@echo ""
-	@echo "$(IT_TEAM)"
-	@echo " --- "
-	@echo "Install and/or Update: $(SOFT) ($(VERSION))"
-	@echo " --- "
-	@echo "This command installs the latest version of Windows 11."
-	@echo "After the next reboot, Windows 11 will automatically reboot several times..."
-	@echo ""
