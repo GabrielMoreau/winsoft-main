@@ -88,21 +88,5 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE1) tmp/$(EXE2)
 	@(cd tmp; zip -r ../$@ install.bat $(EXE1) $(EXE2))
 	@chmod ugo+rw $@
 
-ocs:
-	@echo ""
-	@echo "Name:    $(SOFT)_$(VERSION)-$(REVISION)_x64"
-	@echo "Launch:  install.bat"
-	@echo "Message: yes"
-	@echo "Delay:   5"
-	@echo "Cancel:  no"
-	@echo "Report:  yes"
-	@echo ""
-	@echo "$(IT_TEAM)"
-	@echo " --- "
-	@echo "Install and update: $(SOFT) ($(VERSION))"
-	@echo ""
-
-
 # 7z l nmap-7.12-setup.exe  | grep winpcap | awk '{print $5}'
 # 7z -y e nmap-7.12-setup.exe winpcap-nmap-4.13.exe  > /dev/null
-

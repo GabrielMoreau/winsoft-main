@@ -90,18 +90,3 @@ tmp/winsoft-config.ini: winsoft-config.ini Makefile tmp/$(EXE)
 	@(cd tmp/$(SUBFOLDER); zip -r ../../$@ db.xml.gz ImageJ-win64.exe README.md WELCOME.md)
 	(cd tmp/$(SUBFOLDER); zip --quiet -r ../../$@ Contents images jars java lib licenses luts macros plugins retro scripts)
 	@chmod ugo+rw $@
-
-
-ocs: $(SOFT)_$(VERSION)-$(REVISION)_x64.zip
-	@echo ""
-	@echo "Name:    $(SOFT)_$(VERSION)-$(REVISION)_x64"
-	@echo "Launch:  install.bat"
-	@echo "Message: yes"
-	@echo "Delay:   5"
-	@echo "Cancel:  no"
-	@echo "Report:  yes"
-	@echo ""
-	@echo "$(IT_TEAM)"
-	@echo " --- "
-	@echo "Install and/or Update: $(SOFT) ($(VERSION))"
-	@echo ""
