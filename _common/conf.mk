@@ -44,6 +44,7 @@ sinclude $(SELF_MAKEDIR)../../winsoft-conf/_common/conf.mk
 ocs:
 	@echo ""
 	@echo "Name:     $(OCS_NAME)"
+	@[ ! -s "Uninstall-$(OCS_NAME).zip" ] || echo "Name:     Uninstall-$(OCS_NAME)"
 	@[ "$(OCS_PRIORITY)" -eq 5 ] || echo "Priority: *$(OCS_PRIORITY)*"
 	@echo "Launch:   install.bat"
 	@echo "Notify:   $(OCS_NOTIFY)"
