@@ -34,6 +34,9 @@ all: check-version check-exe $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
 
 sinclude ../_common/conf.mk
 
+# OCS configuration
+OCS_PRIORITY:=$(shell expr $(OCS_PRIORITY) + 1)
+
 check-version:
 	@echo $(VERSION5) | grep -Eq '^[[:digit:]][\.[:digit:]]+[[:digit:]]$$' || (echo 'VERSION5 is undefined' > /dev/stderr ; exit 1)
 	@echo $(VERSION6) | grep -Eq '^[[:digit:]][\.[:digit:]]+[[:digit:]]$$' || (echo 'VERSION6 is undefined' > /dev/stderr ; exit 1)
@@ -139,32 +142,3 @@ tmp/post-install.ps1: post-install.ps1 Makefile tmp/$(EXE5) tmp/$(EXE6) tmp/$(EX
 	@rm -f $@
 	@(cd tmp; zip -r ../$@ install.bat post-install.ps1 $(EXE5) $(EXE6) $(EXE7) $(EXE8))
 	@chmod ugo+rw $@
-
-ocs:
-	@echo ""
-	@echo "Name:     $(SOFT)_$(VERSION)-$(REVISION)_x64"
-	@echo "Launch:   install.bat"
-	@echo "Priority: *6*"
-	@echo "Message:  yes"
-	@echo "Delay:    5"
-	@echo "Cancel:   no"
-	@echo "Report:   yes"
-	@echo ""
-	@echo "$(IT_TEAM)"
-	@echo " --- "
-	@echo "Install and/or Update: $(SOFT) ($(VERSION))"
-	@echo ""
-
-ocs-push:
-	@[ -s "./$(SOFT)_$(VERSION)-$(REVISION)_x64.zip" ] || (echo 'Zip archive not exists: $(SOFT)_$(VERSION)-$(REVISION)_x64.zip' > /dev/stderr ; exit 1)
-	@sha=$$(shasum -a 256 "$(SOFT)_$(VERSION)-$(REVISION)_x64.zip"); \
-	! grep -q "^$(SOFT)_$(VERSION)-$(REVISION)_x64.zip$$" tmp/ocs-pkgpush.txt > /dev/null 2>&1 || { echo 'Package already upload: $(SOFT)_$(VERSION)-$(REVISION)_x64.zip' > /dev/stderr ; exit 1 ; } ;\
-	ocs-pkgpush --url "$(OCS_URL)/ocsreports" \
-		--name "$(SOFT)_$(VERSION)-$(REVISION)_x64" \
-		--description "$(SOFT)_$(VERSION)-$(REVISION)_x64" \
-		--priority 6 \
-		--notif-text "$(IT_TEAM)\r\n---\r\nInstall and/or Update: $(SOFT) ($(VERSION))" \
-		--notif-delay 5 \
-		--file "./$(SOFT)_$(VERSION)-$(REVISION)_x64.zip" \
-		--capture-dir tmp \
-		--headless && echo "$(SOFT)_$(VERSION)-$(REVISION)_x64.zip" >> tmp/ocs-pkgpush.txt

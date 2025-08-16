@@ -92,6 +92,9 @@ all: check-version check-exe $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
 
 sinclude ../_common/conf.mk
 
+# OCS configuration
+OCS_PRIORITY:=$(shell expr $(OCS_PRIORITY) + 1)
+
 check-version:
 	@echo $(VERSION) | grep -Eq '^[[:digit:]][\.[:digit:]]+[[:digit:]]$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
 
@@ -161,21 +164,6 @@ tmp/post-install.ps1: post-install.ps1 tmp/version-replace.txt Makefile
 	@zip -r $@ view.ps1
 	@(cd tmp; zip -r ../$@ install.bat post-install.ps1 2005 2008 2010 2012 2013 2015-2022) # 2015-2019
 	@chmod ugo+rw $@
-
-ocs:
-	@echo ""
-	@echo "Name:     $(SOFT)_$(VERSION)-$(REVISION)_x64"
-	@echo "Launch:   install.bat"
-	@echo "Priority: *6*"
-	@echo "Message:  yes"
-	@echo "Delay:    5"
-	@echo "Cancel:   no"
-	@echo "Report:   yes"
-	@echo ""
-	@echo "$(IT_TEAM)"
-	@echo " --- "
-	@echo "Install and/or Update: $(SOFT) ($(VERSION))"
-	@echo ""
 
 
 tmp/2005/vcredist_x64.EXE: url.txt
