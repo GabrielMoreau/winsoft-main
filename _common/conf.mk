@@ -16,11 +16,11 @@ OCS_SSL:=1
 OCS_NAME=$(SOFT)_$(VERSION)-$(REVISION)_x64
 OCS_PRIORITY:=5
 OCS_LAUNCH:=install.bat
-OCS_NOTIFY:=yes
+OCS_NOTIFY:=YES
 OCS_DELAY:=5
 OCS_MESSAGE=$(IT_TEAM) --- Install and/or Update: $(SOFT) ($(VERSION))
-OCS_CANCEL:=no
-OCS_REPORT:=yes
+OCS_CANCEL:=NO
+OCS_REPORT:=YES
 OCS_DELAY_LONG:=20
 OCS_MESSAGE_LONG=$(OCS_MESSAGE) --- The software will be stopped during the installation --- Make a quick save or postpone the update.
 
@@ -57,14 +57,16 @@ ocs:
 
 ocs-push:
 	@[ -s "./$(OCS_NAME).zip" ] || (echo 'Zip archive not exists: $(OCS_NAME).zip' > /dev/stderr ; exit 1)
-	@sha=$$(shasum -a 256 "$(SOFT)_$(VERSION)-$(REVISION)_x64.zip"); \
+	sha=$$(shasum -a 256 "$(SOFT)_$(VERSION)-$(REVISION)_x64.zip"); \
 	! grep -q "^$(OCS_NAME).zip$$" tmp/ocs-pkgpush.txt > /dev/null 2>&1 || { echo 'Package already upload: $(OCS_NAME).zip' > /dev/stderr ; exit 1 ; } ;\
-	echo ocs-pkgpush --url "$(OCS_URL)/ocsreports" \
+	ocs-pkgpush --url "$(OCS_URL)/ocsreports" \
 		--name "$(OCS_NAME)" \
 		--description "$(OCS_NAME)" \
 		--priority "$(OCS_PRIORITY)" \
 		--notif-text '"$(OCS_MESSAGE)"' \
 		--notif-delay "$(OCS_DELAY)" \
+		--can-cancel "$(OCS_CANCEL)" \
+		--can-report "$(OCS_REPORT)" \
 		--file "./$(OCS_NAME).zip" \
 		--capture-dir tmp \
 		--headless && echo "$(OCS_NAME).zip" >> tmp/ocs-pkgpush.txt
