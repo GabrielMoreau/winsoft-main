@@ -192,7 +192,7 @@ ocs-push: ## Push last package like make last checksum (see target last-checksum
 			continue
 		fi
 		printf "#=== %-$(PKGLEN)s ===#\n" $$folder
-		(cd $$folder; grep -q '^ocs-push:' Makefile && make ocs-push)
+		(cd $$folder; make ocs-push)
 	done < <(LANG=C find . -maxdepth 2 -name '*.zip' -a -mtime -1.25 -not -path '*/tmp/*' -print | xargs -r dirname | xargs -r -n 1 basename | sort -u)
 
 ocs-asifpushed: ## Say that all package are already upload on OCS server
