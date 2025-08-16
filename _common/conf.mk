@@ -43,14 +43,15 @@ sinclude $(SELF_MAKEDIR)../../winsoft-conf/_common/conf.mk
 
 ocs:
 	@echo ""
-	@echo "Name:    $(OCS_NAME)"
-	@echo "Launch:  install.bat"
-	@echo "Notify:  $(OCS_NOTIFY)"
-	@echo "Delay:   $(OCS_DELAY)"
-	@echo "Cancel:  $(OCS_CANCEL)"
-	@echo "Report:  $(OCS_REPORT)"
-	@[ -z "$(OCS_SEARCH)" ] || echo "Search:  $(OCS_SEARCH)"
-	@echo "Message: $(OCS_MESSAGE)"
+	@echo "Name:     $(OCS_NAME)"
+	@[ "$(OCS_PRIORITY)" -eq 5 ] || echo "Priority: *$(OCS_PRIORITY)*"
+	@echo "Launch:   install.bat"
+	@echo "Notify:   $(OCS_NOTIFY)"
+	@echo "Delay:    $(OCS_DELAY)"
+	@echo "Cancel:   $(OCS_CANCEL)"
+	@echo "Report:   $(OCS_REPORT)"
+	@[ -z "$(OCS_SEARCH)" ] || echo "Search:   $(OCS_SEARCH)"
+	@echo "Message:  $(OCS_MESSAGE)"
 	@echo ""
 
 ocs-push:
