@@ -20,6 +20,10 @@ all: check-version check-exe $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
 
 sinclude ../_common/conf.mk
 
+# OCS configuration
+OCS_DELAY:=$(OCS_DELAY_LONG)
+OCS_MESSAGE:=$(OCS_MESSAGE_LONG)
+
 check-version:
 	@echo $(VERSION) | grep -Eq '^[[:digit:]][\.[:digit:]]+[[:digit:]]$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
 
@@ -72,20 +76,3 @@ tmp/winsoft-config.ini: winsoft-config.ini Makefile tmp/$(EXE)
 	@zip -r $@ policies.json pre-install.ps1 post-install.ps1
 	@(cd tmp; zip -r ../$@ install.bat winsoft-config.ini $(EXE))
 	@chmod ugo+rw $@
-
-ocs:
-	@echo ""
-	@echo "Name:    $(SOFT)_$(VERSION)-$(REVISION)_x64"
-	@echo "Launch:  install.bat"
-	@echo "Message: yes"
-	@echo "Delay:   20"
-	@echo "Cancel:  no"
-	@echo "Report:  yes"
-	@echo ""
-	@echo "$(IT_TEAM)"
-	@echo " --- "
-	@echo "Install and/or Update: $(SOFT) ($(VERSION))"
-	@echo " --- "
-	@echo "The software will be stopped during the installation,"
-	@echo "make a quick save or postpone the update."
-	@echo ""

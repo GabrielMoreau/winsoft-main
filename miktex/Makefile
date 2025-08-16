@@ -25,6 +25,10 @@ all: check-version check-exe check-exe2 $(SOFT)_$(VERSION)-$(REVISION)_x64.zip o
 
 sinclude ../_common/conf.mk
 
+# OCS configuration
+OCS_DELAY:=$(OCS_DELAY_LONG)
+OCS_MESSAGE:=$(OCS_MESSAGE_LONG)
+
 check-version:
 	@echo $(VERSION) | grep -Eq '^[[:digit:]][\.[:digit:]]+[[:digit:]]$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
 
@@ -88,20 +92,3 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@rm -f $@
 	@(cd tmp; zip -r ../$@ install.bat $(EXE))
 	@chmod ugo+rw $@
-
-ocs:
-	@echo ""
-	@echo "Name:    $(SOFT)_$(VERSION)-$(REVISION)_x64"
-	@echo "Launch:  install.bat"
-	@echo "Message: yes"
-	@echo "Delay:   20"
-	@echo "Cancel:  no"
-	@echo "Report:  yes"
-	@echo ""
-	@echo "$(IT_TEAM)"
-	@echo " --- "
-	@echo "Install and/or Update: $(SOFT) ($(VERSION))"
-	@echo " --- "
-	@echo "The software will be stopped during the installation,"
-	@echo "make a quick save or postpone the update."
-	@echo ""
