@@ -40,18 +40,3 @@ tmp/install.bat: install.bat Makefile
 	zip -r ./$@ pre-install.ps1
 	@(cd tmp; zip -r ../$@ install.bat)
 	@chmod ugo+rw $@
-
-ocs:
-	@echo ""
-	@echo "Name:     $(SOFT)_$(VERSION)-$(REVISION)_x64"
-	@echo "Launch:   install.bat"
-	@echo "Priority: 5"
-	@echo "Message:  yes"
-	@echo "Delay:    5"
-	@echo "Cancel:   no"
-	@echo "Report:   yes"
-	@echo ""
-	@echo "$(IT_TEAM)"
-	@echo " --- "
-	@echo "Install and/or Update: $(SOFT) ($(VERSION))"
-	@echo ""

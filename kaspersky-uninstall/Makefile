@@ -23,6 +23,9 @@ all: check-version $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
 
 sinclude ../_common/conf.mk
 
+# OCS configuration
+OCS_PRIORITY:=2
+
 check-version:
 	@echo $(VERSION) | grep -Eq '^[[:digit:]][\.[:digit:]]+[[:digit:]]$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
 
@@ -56,18 +59,3 @@ tmp/install.bat: install.bat Makefile
 	@sed -e "s/XXXXXXXXX/$(KesSecureString)/;" Custom-VarAutodel.psm1 > ./tmp/Custom-VarAutodel.psm1
 	@(cd tmp; zip -r ../$@ install.bat *.psm1 *.ps1 aes-kaspersky.key README.md LICENSE.md)
 	@chmod ugo+rw $@
-
-ocs:
-	@echo ""
-	@echo "Name:    $(SOFT)_$(VERSION)-$(REVISION)_x64"
-	@echo "Launch:  install.bat"
-	@echo "Priority: 2"
-	@echo "Message: yes"
-	@echo "Delay:   5"
-	@echo "Cancel:  no"
-	@echo "Report:  yes"
-	@echo ""
-	@echo "$(IT_TEAM)"
-	@echo " --- "
-	@echo "Uninstall: $(SOFT)"
-	@echo ""
