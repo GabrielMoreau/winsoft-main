@@ -20,7 +20,7 @@ IT_TEAM:=IT Support
 LOGDIR:=%WINDIR%\\Logs
 
 
-.PHONY: all check-version clean control next ocs version wget
+.PHONY: all check-version clean control next version wget
 
 all: check-version $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
 

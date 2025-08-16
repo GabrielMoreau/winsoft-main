@@ -15,7 +15,7 @@ IT_TEAM:=IT Support
 LOGDIR:=%WINDIR%\\Logs
 
 
-.PHONY: all check-version check-unrealized checksum clean control next ocs version wget checksum
+.PHONY: all check-version check-unrealized checksum clean control next version wget checksum
 
 all:
 	@mkdir -p tmp

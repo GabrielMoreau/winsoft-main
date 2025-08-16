@@ -24,7 +24,7 @@ IT_TEAM:=IT Support
 LOGDIR:=%WINDIR%\\Logs
 
 
-.PHONY: all check-version check-unrealized check-exe clean control next ocs ocs-push version wget checksum1 check-exe2
+.PHONY: all check-version check-unrealized check-exe clean control next version wget checksum1 check-exe2
 
 all: check-version check-exe $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
 

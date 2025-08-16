@@ -19,7 +19,7 @@ IT_TEAM:=IT Support
 LOGDIR:=%WINDIR%\\Logs
 
 
-.PHONY: all check-version check-unrealized check-exe clean control next ocs ocs-push version wget checksum
+.PHONY: all check-version check-unrealized check-exe clean control next version wget checksum
 .ONESHELL:
 
 all: check-version check-exe Uninstall-$(SOFT)_$(VERSION)-$(REVISION)_x64.zip $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
