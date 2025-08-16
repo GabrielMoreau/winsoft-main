@@ -25,6 +25,10 @@ all: check-version check-exe Uninstall-$(SOFT)_$(VERSION)-$(REVISION)_x64.zip $(
 
 sinclude ../_common/conf.mk
 
+# OCS configuration
+OCS_DELAY:=$(OCS_DELAY_LONG)
+OCS_MESSAGE:=$(OCS_MESSAGE_LONG)
+
 check-version:
 	@echo $(VERSION) | grep -Eq '^[[:digit:]][\.[:digit:]]+[[:digit:]]$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
 
@@ -90,35 +94,3 @@ Uninstall-$(SOFT)_$(VERSION)-$(REVISION)_x64.zip: Makefile tmp/pre-remove.ps1 tm
 	@(cd tmp; zip -r ../$@ uninstall.bat pre-remove.ps1)
 	@printf "@ uninstall.bat\n@=install.bat\n" | zipnote -w ./$@
 	@chmod ugo+rw $@
-
-ocs:
-	@echo ""
-	@echo "Name:    $(SOFT)_$(VERSION)-$(REVISION)_x64"
-	@echo "Name:    Uninstall-$(SOFT)_$(VERSION)-$(REVISION)_x64"
-	@echo "Launch:  install.bat"
-	@echo "Message: yes"
-	@echo "Delay:   20"
-	@echo "Cancel:  no"
-	@echo "Report:  yes"
-	@echo ""
-	@echo "$(IT_TEAM)"
-	@echo " --- "
-	@echo "Install and/or Update: $(SOFT) ($(VERSION))"
-	@echo " --- "
-	@echo "The software will be stopped during the installation,"
-	@echo "make a quick save or postpone the update."
-	@echo ""
-
-ocs-push:
-	@[ -s "./$(SOFT)_$(VERSION)-$(REVISION)_x64.zip" ] || (echo 'Zip archive not exists: $(SOFT)_$(VERSION)-$(REVISION)_x64.zip' > /dev/stderr ; exit 1)
-	@sha=$$(shasum -a 256 "$(SOFT)_$(VERSION)-$(REVISION)_x64.zip"); \
-	! grep -q "^$(SOFT)_$(VERSION)-$(REVISION)_x64.zip$$" tmp/ocs-pkgpush.txt > /dev/null 2>&1 || { echo 'Package already upload: $(SOFT)_$(VERSION)-$(REVISION)_x64.zip' > /dev/stderr ; exit 1 ; } ;\
-	ocs-pkgpush --url "$(OCS_URL)/ocsreports" \
-		--name "$(SOFT)_$(VERSION)-$(REVISION)_x64" \
-		--description "$(SOFT)_$(VERSION)-$(REVISION)_x64" \
-		--priority 5 \
-		--notif-text "$(IT_TEAM)\r\n---\r\nInstall and/or Update: $(SOFT) ($(VERSION))\r\n---\r\nThe software will be stopped during the installation,\r\nmake a quick save or postpone the update." \
-		--notif-delay 20 \
-		--file "./$(SOFT)_$(VERSION)-$(REVISION)_x64.zip" \
-		--capture-dir tmp \
-		--headless && echo "$(SOFT)_$(VERSION)-$(REVISION)_x64.zip" >> tmp/ocs-pkgpush.txt
