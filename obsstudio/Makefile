@@ -77,20 +77,6 @@ tmp/winsoft-config.ini: winsoft-config.ini Makefile tmp/$(EXE) ../update-visualr
 	@(cd tmp; zip -r ../$@ install.bat winsoft-config.ini $(EXE) 2015-2022)
 	@chmod ugo+rw $@
 
-ocs:
-	@echo ""
-	@echo "Name:    $(SOFT)_$(VERSION)-$(REVISION)_x64"
-	@echo "Launch:  install.bat"
-	@echo "Message: yes"
-	@echo "Delay:   5"
-	@echo "Cancel:  no"
-	@echo "Report:  yes"
-	@echo ""
-	@echo "$(IT_TEAM)"
-	@echo " --- "
-	@echo "Install and/or Update: $(SOFT) ($(VERSION))"
-	@echo ""
-
 
 tmp/2015-2022/vc_redist.x64.exe: ../update-visualredist/version.txt ../update-visualredist/checksum.txt
 	@mkdir -p tmp/2015-2022

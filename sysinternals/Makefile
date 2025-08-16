@@ -71,17 +71,3 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@(cd tmp; zip --quiet -r ../$@ install.bat SysinternalsSuite)
 	@echo -n '  Zip / Number of files: '; unzip -t $@ | grep 'OK' | wc -l
 	@chmod ugo+rw $@
-
-ocs:
-	@echo ""
-	@echo "Name:    $(SOFT)_$(VERSION)-$(REVISION)_x64"
-	@echo "Launch:  install.bat"
-	@echo "Message: yes"
-	@echo "Delay:   5"
-	@echo "Cancel:  no"
-	@echo "Report:  yes"
-	@echo ""
-	@echo "$(IT_TEAM)"
-	@echo " --- "
-	@echo "Install and/or Update: $(SOFT) ($(VERSION))"
-	@echo ""

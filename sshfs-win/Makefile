@@ -81,17 +81,3 @@ tmp/install.bat: install.bat Makefile tmp/$(WINFSP_EXE) tmp/$(SSHFS_EXE)
 	@mkdir -p tmp
 	@zip -r $@ pre-install.ps1 post-install.ps1 sshfs-win.ico README.md sshfs-win-connect.ps1
 	@(cd tmp; zip -r ../$@ install.bat sshfs-win-connect.ini winfsp-$(WINFSP_VERSION).msi sshfs-win-$(SSHFS_VERSION)-x64.msi)
-
-ocs:
-	@echo ""
-	@echo "Name:    $(SOFT)_$(VERSION)-$(REVISION)_x64"
-	@echo "Launch:  install.bat"
-	@echo "Message: yes"
-	@echo "Delay:   5"
-	@echo "Cancel:  no"
-	@echo "Report:  yes"
-	@echo ""
-	@echo "$(IT_TEAM)"
-	@echo " --- "
-	@echo "Install and/or Update: $(SOFT) ($(VERSION))"
-	@echo ""

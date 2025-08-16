@@ -65,17 +65,3 @@ tmp/Profile_VPN_Default.xml: Profile_VPN_Default.xml Makefile
 	@zip -r $@ $(EXE)
 	@(cd tmp; zip -r ../$@ install.bat $(EXE) Profile_VPN_Default.xml)
 	@chmod ugo+rw $@
-
-ocs:
-	@echo ""
-	@echo "Name:    $(SOFT)_$(VERSION)-$(REVISION)_x64"
-	@echo "Launch:  install.bat"
-	@echo "Message: yes"
-	@echo "Delay:   5"
-	@echo "Cancel:  no"
-	@echo "Report:  yes"
-	@echo ""
-	@echo "$(IT_TEAM)"
-	@echo " --- "
-	@echo "Install and/or Update: $(SOFT) ($(VERSION))"
-	@echo ""

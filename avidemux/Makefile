@@ -75,17 +75,3 @@ tmp/uninstall.bat: uninstall.bat Makefile tmp/$(EXE)
 	@zip -r $@ avidemux.qs
 	@(cd tmp; zip -r ../$@ install.bat uninstall.bat $(EXE))
 	@chmod ugo+rw $@
-
-ocs:
-	@echo ""
-	@echo "Name:    $(SOFT)_$(VERSION)-$(REVISION)_x64"
-	@echo "Launch:  install.bat"
-	@echo "Message: yes"
-	@echo "Delay:   5"
-	@echo "Cancel:  no"
-	@echo "Report:  yes"
-	@echo ""
-	@echo "$(IT_TEAM)"
-	@echo " --- "
-	@echo "Install and/or Update: $(SOFT) ($(VERSION))"
-	@echo ""
