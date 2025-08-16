@@ -19,7 +19,7 @@ sinclude ../_common/conf.mk
 
 # OCS configuration
 OCS_PRIORITY:=$(shell expr $(OCS_PRIORITY) + 1)
-OCS_DELAY:=$(OCS_DELAY_LONG)
+OCS_DURATION:=$(OCS_DURATION_LONG)
 OCS_CANCEL:=YES
 
 check-version:

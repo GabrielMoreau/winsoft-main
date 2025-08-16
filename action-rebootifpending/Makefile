@@ -19,7 +19,7 @@ sinclude ../_common/conf.mk
 
 # OCS configuration
 OCS_PRIORITY:=$(shell expr $(OCS_PRIORITY) + 1)
-OCS_DELAY:=$(OCS_DELAY_LONG)
+OCS_DURATION:=$(OCS_DURATION_LONG)
 
 check-version:
 	@echo $(VERSION) | grep -Eq '^[[:digit:]][\.[:digit:]]+[[:digit:]]$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)

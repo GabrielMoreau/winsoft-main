@@ -24,7 +24,7 @@ all: check-version check-exe check-exe2 $(SOFT)_$(VERSION)-$(REVISION)_x64.zip o
 sinclude ../_common/conf.mk
 
 # OCS configuration
-OCS_DELAY:=$(OCS_DELAY_LONG)
+OCS_DURATION:=$(OCS_DURATION_LONG)
 OCS_MESSAGE:=$(OCS_MESSAGE_LONG)
 OCS_SEARCH:=7-Zip
 
