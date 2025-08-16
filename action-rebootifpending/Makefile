@@ -11,11 +11,15 @@ IT_TEAM:=IT Support
 LOGDIR:=%WINDIR%\\Logs
 
 
-.PHONY: all check-version check-unrealized checksum clean control next ocs version wget checksum
+.PHONY: all check-version check-unrealized checksum clean control next version wget checksum
 
 all: check-version $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
 
 sinclude ../_common/conf.mk
+
+# OCS configuration
+OCS_PRIORITY:=$(shell expr $(OCS_PRIORITY) + 1)
+OCS_DELAY:=$(OCS_DELAY_LONG)
 
 check-version:
 	@echo $(VERSION) | grep -Eq '^[[:digit:]][\.[:digit:]]+[[:digit:]]$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
@@ -41,18 +45,3 @@ tmp/install.bat: install.bat Makefile
 	zip -r ./$@ pre-install.ps1
 	@(cd tmp; zip -r ../$@ install.bat)
 	@chmod ugo+rw $@
-
-ocs:
-	@echo ""
-	@echo "Name:     $(SOFT)_$(VERSION)-$(REVISION)_x64"
-	@echo "Launch:   install.bat"
-	@echo "Priority: 6"
-	@echo "Message:  yes"
-	@echo "Delay:    *20*"
-	@echo "Cancel:   yes"
-	@echo "Report:   yes"
-	@echo ""
-	@echo "$(IT_TEAM)"
-	@echo " --- "
-	@echo "Install and/or Update: $(SOFT) ($(VERSION))"
-	@echo ""
