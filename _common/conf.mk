@@ -57,16 +57,23 @@ ocs:
 
 ocs-push:
 	@[ -s "./$(OCS_NAME).zip" ] || (echo 'Zip archive not exists: $(OCS_NAME).zip' > /dev/stderr ; exit 1)
-	@sha=$$(shasum -a 256 "$(SOFT)_$(VERSION)-$(REVISION)_x64.zip"); \
-	! grep -q "^$(OCS_NAME).zip$$" tmp/ocs-pkgpush.txt > /dev/null 2>&1 || { echo 'Package already upload: $(OCS_NAME).zip' > /dev/stderr ; exit 1 ; } ;\
+	@! grep -q "^$(OCS_NAME).zip$$" tmp/ocs-pkgpush.txt > /dev/null 2>&1 || { echo 'Package already upload: $(OCS_NAME).zip' > /dev/stderr ; exit 1 ; }
 	ocs-pkgpush --url "$(OCS_URL)/ocsreports" \
 		--name "$(OCS_NAME)" \
 		--description "$(OCS_NAME)" \
 		--priority "$(OCS_PRIORITY)" \
+		--file "./$(OCS_NAME).zip" \
+		--notify 'YES' \
 		--notif-text '"$(OCS_MESSAGE)"' \
 		--notif-duration "$(OCS_DURATION)" \
 		--can-cancel "$(OCS_CANCEL)" \
 		--can-report "$(OCS_REPORT)" \
-		--file "./$(OCS_NAME).zip" \
 		--capture-dir tmp \
-		--headless && echo "$(OCS_NAME).zip" >> tmp/ocs-pkgpush.txt
+		--headless --timeout 600 && echo "$(OCS_NAME).zip" >> tmp/ocs-pkgpush.txt
+	@[ ! -s "Uninstall-$(OCS_NAME).zip" ] || echo ocs-pkgpush --url "$(OCS_URL)/ocsreports" \
+		--name "Uninstall-$(OCS_NAME)" \
+		--description "Uninstall-$(OCS_NAME)" \
+		--priority "$$(($(OCS_PRIORITY) + 1))" \
+		--file "./Uninstall-$(OCS_NAME).zip" \
+		--notify 'NO' \
+		--headless --timeout 60
