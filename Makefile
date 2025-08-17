@@ -195,7 +195,7 @@ ocs-push: ## Push last package like make last checksum (see target last-checksum
 		(cd $$folder; make ocs-push)
 	done < <(LANG=C find . -maxdepth 2 -name '*.zip' -a -mtime -1.25 -not -path '*/tmp/*' -print | xargs -r dirname | xargs -r -n 1 basename | sort -u)
 
-ocs-asifpushed: ## Say that all package are already upload on OCS server
+ocs-pretend-pushed: ## Act as if all packages have already been downloaded to the OCS server
 	@
 	for d in $$(ls -1d *)
 	do
