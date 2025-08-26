@@ -20,15 +20,15 @@ help:
 
 build-all:
 	@
-	for d in $(PKGDIR)
+	for pkgfolder in $(PKGDIR)
 	do
-		if [ -f "$$d/.noauto" ] || grep -q "^$$d" ./_common/noauto.conf ../winsoft-conf/_common/noauto.conf 2> /dev/null
+		if [ -f "$${pkgfolder}/.noauto" ] || grep -q "^$${pkgfolder}" ./_common/noauto.conf ../winsoft-conf/_common/noauto.conf 2> /dev/null
 		then
-			printf "#--- %-$(PKGLEN)s ---#\n" pass:$${d%/}
+			printf "#--- %-$(PKGLEN)s ---#\n" pass:$${pkgfolder%/}
 			continue
 		fi
-		printf "#=== %-$(PKGLEN)s ===#\n" $${d%/}
-		(cd $$d; \
+		printf "#=== %-$(PKGLEN)s ===#\n" $${pkgfolder%/}
+		(cd $${pkgfolder}; \
 			make > .make.log; \
 			[ $$(LANG=C find . -maxdepth 1 -name '*.zip' -a -mtime -0.5 -not -path '*/tmp/*' -print | wc -l) -gt 0 ] && cat .make.log; \
 		)
@@ -40,46 +40,46 @@ build-all:
 
 clean-all:
 	@
-	for d in $(PKGDIR)
+	for pkgfolder in $(PKGDIR)
 	do
 		echo ''
-		if [ -f "$$d/.noauto" ] || grep -q "^$$d" ./_common/noauto.conf ../winsoft-conf/_common/noauto.conf 2> /dev/null
+		if [ -f "$${pkgfolder}/.noauto" ] || grep -q "^$${pkgfolder}" ./_common/noauto.conf ../winsoft-conf/_common/noauto.conf 2> /dev/null
 		then
-			printf "#--- %-$(PKGLEN)s ---#\n" pass:$${d%/}
+			printf "#--- %-$(PKGLEN)s ---#\n" pass:$${pkgfolder%/}
 			continue
 		fi
-		printf "#=== %-$(PKGLEN)s ===#\n" $${d%/}
-		(cd $$d; make clean; rm -f .make.log)
+		printf "#=== %-$(PKGLEN)s ===#\n" $${pkgfolder%/}
+		(cd $${pkgfolder}; make clean; rm -f .make.log)
 	done
 
 checksum-all:
 	@
-	for d in $(PKGDIR)
+	for pkgfolder in $(PKGDIR)
 	do
 		echo ''
-		if [ -f "$$d/.noauto" ] || grep -q "^$$d" ./_common/noauto.conf ../winsoft-conf/_common/noauto.conf 2> /dev/null
+		if [ -f "$${pkgfolder}/.noauto" ] || grep -q "^$${pkgfolder}" ./_common/noauto.conf ../winsoft-conf/_common/noauto.conf 2> /dev/null
 		then
-			printf "#--- %-$(PKGLEN)s ---#\n" pass:$${d%/}
+			printf "#--- %-$(PKGLEN)s ---#\n" pass:$${pkgfolder%/}
 			continue
 		fi
-		printf "#=== %-$(PKGLEN)s ===#\n" $${d%/}
-		(cd $$d; grep -q '^checksum:' Makefile && make checksum)
+		printf "#=== %-$(PKGLEN)s ===#\n" $${pkgfolder%/}
+		(cd $${pkgfolder}; grep -q '^checksum:' Makefile && make checksum)
 	done
 
 last-checksum:
 	@
-	while read folder
+	while read -r pkgfolder
 	do
-		printf "#=== %-$(PKGLEN)s ===#\n" $$folder
-		(cd $$folder; grep -q '^checksum:' Makefile && make checksum)
+		printf "#=== %-$(PKGLEN)s ===#\n" $${pkgfolder}
+		(cd $${pkgfolder}; grep -q '^checksum:' Makefile && make checksum)
 	done < <(LANG=C find . -maxdepth 2 -name '*.zip' -a -mtime -1.25 -not -path '*/tmp/*' -print | xargs -r dirname | xargs -r -n 1 basename | sort -u)
 
 unrealized-updates:
 	@
-	while read folder
+	while read -r pkgfolder
 	do
-		printf "#=== %-$(PKGLEN)s ===# " $$folder
-		RESULT=$$(cd $$folder; grep -q '^check-unrealized:' Makefile && make check-unrealized)
+		printf "#=== %-$(PKGLEN)s ===# " $${pkgfolder}
+		RESULT=$$(cd $${pkgfolder}; grep -q '^check-unrealized:' Makefile && make check-unrealized)
 		if [ -n "$${RESULT}" ] ; then echo "$${RESULT}"; else echo ''; fi
 	done < <(LANG=C find . -maxdepth 2 -name '*.zip' -a -mtime -180 -not -path '*/tmp/*' -print | xargs -r dirname | xargs -r -n 1 basename | sort -u)
 	echo '#===================================================================#'
@@ -87,24 +87,24 @@ unrealized-updates:
 
 list-pkg:
 	@
-	for d in $(PKGDIR)
+	for pkgfolder in $(PKGDIR)
 	do
-		(cd $$d; \
+		(cd $${pkgfolder}; \
 			echo ''; \
-			printf "#=== %-$(PKGLEN)s ===#\n" $${d%/}; \
+			printf "#=== %-$(PKGLEN)s ===#\n" $${pkgfolder%/}; \
 			unzip -t *.zip; \
 		)
 	done
 
 list-version:
 	@
-	for d in $(PKGDIR)
+	for pkgfolder in $(PKGDIR)
 	do
-		if [ -f "$$d/.noauto" ] || grep -q "^$$d" ./_common/noauto.conf ../winsoft-conf/_common/noauto.conf 2> /dev/null
+		if [ -f "$${pkgfolder}/.noauto" ] || grep -q "^$${pkgfolder}" ./_common/noauto.conf ../winsoft-conf/_common/noauto.conf 2> /dev/null
 		then
 			continue
 		fi
-		printf "%25s %s\n" "$${d%/}" $$(cd $$d; make version | grep '^VERSION:' | awk '{print $$2}')
+		printf "%25s %s\n" "$${pkgfolder%/}" $$(cd $${pkgfolder}; make version | grep '^VERSION:' | awk '{print $$2}')
 	done
 
 list-md:
@@ -160,9 +160,9 @@ list-md:
 
 space:
 	@
-	for d in $(PKGDIR)
+	for pkgfolder in $(PKGDIR)
 	do
-		(cd $$d; \
+		(cd $${pkgfolder}; \
 			ls -t *.zip 2>/dev/null | grep -v 'Uninstall' | tail -n +$$(($(KEEP) + 1)) | xargs -r rm -vf; \
 			ls -t *.zip 2>/dev/null | grep    'Uninstall' | tail -n +$$(($(KEEP) + 1)) | xargs -r rm -vf; \
 		)
@@ -170,41 +170,41 @@ space:
 
 version:
 	@
-	for d in $(PKGDIR)
+	for pkgfolder in $(PKGDIR)
 	do
 		echo ''
-		if [ -f "$$d/.noauto" ] || grep -q "^$$d" ./_common/noauto.conf ../winsoft-conf/_common/noauto.conf 2> /dev/null
+		if [ -f "$${pkgfolder}/.noauto" ] || grep -q "^$${pkgfolder}" ./_common/noauto.conf ../winsoft-conf/_common/noauto.conf 2> /dev/null
 		then
-			printf "#--- %-$(PKGLEN)s ---#\n" pass:$${d%/}
+			printf "#--- %-$(PKGLEN)s ---#\n" pass:$${pkgfolder%/}
 			continue
 		fi
-		printf "#=== %-$(PKGLEN)s ===#\n" $${d%/}
-		(cd $$d; make version) | grep -v '^make'
+		printf "#=== %-$(PKGLEN)s ===#\n" $${pkgfolder%/}
+		(cd $${pkgfolder}; make version) | grep -v '^make'
 	done
 
 ocs-push: ## Push last package like make last checksum (see target last-checksum)
 	@
-	while read folder
+	while read -r pkgfolder
 	do
-		if [ -f "$$folder/.no-ocs-pkgpush" ] || grep -q "^$$folder" ./_common/no-ocs-pkgpush.conf ../winsoft-conf/_common/no-ocs-pkgpush.conf 2> /dev/null
+		if [ -f "$${pkgfolder}/.no-ocs-pkgpush" ] || grep -q "^$${pkgfolder}" ./_common/no-ocs-pkgpush.conf ../winsoft-conf/_common/no-ocs-pkgpush.conf 2> /dev/null
 		then
-			printf "#--- %-$(PKGLEN)s ---#\n" pass:$${d%/}
+			printf "#--- %-$(PKGLEN)s ---#\n" pass:$${pkgfolder%/}
 			continue
 		fi
-		printf "#=== %-$(PKGLEN)s ===#\n" $$folder
-		(cd $$folder; make ocs-push)
+		printf "#=== %-$(PKGLEN)s ===#\n" $${pkgfolder}
+		(cd $${pkgfolder}; make ocs-push)
 	done < <(LANG=C find . -maxdepth 2 -name '*.zip' -a -mtime -1.25 -not -path '*/tmp/*' -print | xargs -r dirname | xargs -r -n 1 basename | sort -u)
 
 ocs-pretend-pushed: ## Act as if all packages have already been downloaded to the OCS server
 	@
-	for d in $$(ls -1d *)
+	for pkgfolder in $$(ls -1d *)
 	do
-		[ -d "$$d" ] || continue
-		if [ -f "$$d/.no-ocs-pkgpush" ] || grep -q "^$$d" ./_common/no-ocs-pkgpush.conf ../winsoft-conf/_common/no-ocs-pkgpush.conf 2> /dev/null
+		[ -d "$${pkgfolder}" ] || continue
+		if [ -f "$${pkgfolder}/.no-ocs-pkgpush" ] || grep -q "^$${pkgfolder}" ./_common/no-ocs-pkgpush.conf ../winsoft-conf/_common/no-ocs-pkgpush.conf 2> /dev/null
 		then
 			continue
 		fi
-		(cd "$$d"
+		(cd "$${pkgfolder}"
 			for z in $$(ls -1 *.zip 2> /dev/null)
 			do
 				grep -q "$$z" "tmp/ocs-pkgpush.txt" 2> /dev/null || { mkdir -p "tmp" ; echo "$$z" >> "tmp/ocs-pkgpush.txt" ; }
