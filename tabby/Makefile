@@ -16,7 +16,7 @@ LOGDIR:=%WINDIR%\\Logs
 
 .PHONY: all check-version check-unrealized check-exe clean control next version wget checksum
 
-all: check-version check-exe $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
+all: check-version check-exe Uninstall-$(SOFT)_$(VERSION)-$(REVISION)_x64.zip $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
 
 sinclude ../_common/conf.mk
 
@@ -64,7 +64,17 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
 	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#;' $< > $@
 
+tmp/uninstall.bat: uninstall.bat Makefile tmp/$(EXE)
+	@mkdir -p tmp
+	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#;' $< > $@
+
 %.zip: Makefile tmp/install.bat tmp/$(EXE)
 	@rm -f $@
 	@(cd tmp; zip -r ../$@ install.bat $(EXE))
+	@chmod ugo+rw $@
+
+Uninstall-$(SOFT)_$(VERSION)-$(REVISION)_x64.zip: Makefile tmp/uninstall.bat
+	@rm -f $@
+	@(cd tmp; zip -r ../$@ uninstall.bat)
+	@printf "@ uninstall.bat\n@=install.bat\n" | zipnote -w ./$@
 	@chmod ugo+rw $@
