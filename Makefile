@@ -186,7 +186,7 @@ ocs-push: ## Push last package like make last checksum (see target last-checksum
 	@
 	while read folder
 	do
-		if [ -f "$$d/.no-ocs-pkgpush" ] || grep -q "^$$d" ./_common/no-ocs-pkgpush.conf ../winsoft-conf/_common/no-ocs-pkgpush.conf 2> /dev/null
+		if [ -f "$$folder/.no-ocs-pkgpush" ] || grep -q "^$$folder" ./_common/no-ocs-pkgpush.conf ../winsoft-conf/_common/no-ocs-pkgpush.conf 2> /dev/null
 		then
 			printf "#--- %-$(PKGLEN)s ---#\n" pass:$${d%/}
 			continue
@@ -200,6 +200,10 @@ ocs-pretend-pushed: ## Act as if all packages have already been downloaded to th
 	for d in $$(ls -1d *)
 	do
 		[ -d "$$d" ] || continue
+		if [ -f "$$d/.no-ocs-pkgpush" ] || grep -q "^$$d" ./_common/no-ocs-pkgpush.conf ../winsoft-conf/_common/no-ocs-pkgpush.conf 2> /dev/null
+		then
+			continue
+		fi
 		(cd "$$d"
 			for z in $$(ls -1 *.zip 2> /dev/null)
 			do
