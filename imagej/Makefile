@@ -9,14 +9,14 @@ SOFT:=ImageJ
 #URL:=$(shell curl -s -L 'https://imagej.net/ij/download.html' | sed -e 's/"/\n/g;' | grep 'https:.*/distros/win/ij')
 #VERSION:=$(shell basename '$(URL)' 2> /dev/null | sed -e 's/^ij//; s/-.*//;')
 VERSION:=$(shell curl -s -L 'https://maven.scijava.org/content/groups/public/sc/fiji/fiji/maven-metadata.xml' | grep '<release>' | cut -f 2 -d '>' | cut -f 1 -d '<')
-URL:=https://downloads.micron.ox.ac.uk/fiji_update/mirrors/fiji-latest/fiji-win64.zip
+URL:=https://downloads.micron.ox.ac.uk/fiji_update/mirrors/fiji-latest/fiji-latest-win64-jdk.zip
 ZIP:=fiji-win64.zip
 SUBFOLDER:=Fiji.app-$(VERSION)
 EXE:=$(SUBFOLDER)/ImageJ-win64.exe
 REVISION:=1
 
 #URL2:=http://rsbweb.nih.gov/ij/plugins/ankaphase/ANKAphase.zip
-URL2:=https://web.archive.org/web/20231118133016/http://rsbweb.nih.gov/ij/plugins/ankaphase/ANKAphase.zip
+URL2:=https://imagej.net/ij/plugins/ankaphase/ANKAphase.zip
 ZIP2:=ANKAphase.zip
 
 IT_TEAM:=IT Support
@@ -56,13 +56,14 @@ checksum: check-version
 tmp/$(EXE):
 	@mkdir -p tmp
 	@(cd tmp ; \
-		rm -rf Fiji.app Fiji.app-* ANKAphase.zip "$(ZIP)" "$(EXE)" 2>/dev/null ; \
+		rm -rf Fiji Fiji.app-* ANKAphase.zip "$(ZIP)" "$(EXE)" 2>/dev/null ; \
 		curl -# -o "$(ZIP)" -L "$(URL)" ; \
 		unzip -q "$(ZIP)" ; \
-		mv Fiji.app "Fiji.app-$(VERSION)" ; \
+		[ ! -e Fiji/fiji-windows-x64.exe ] || mv Fiji/fiji-windows-x64.exe Fiji/ImageJ-win64.exe ; \
+		mv Fiji "Fiji.app-$(VERSION)" ; \
 		curl -# -o "$(ZIP2)" -L "$(URL2)" ; \
-		unzip -q "$(ZIP2)" 'ANKAphase_*.jar' ; \
-		mv ANKAphase_*.jar "Fiji.app-$(VERSION)/plugins/" ; \
+		unzip -q "$(ZIP2)" 'ANKAphase*/ANKAphase_*.jar' ; \
+		mv ANKAphase*/ANKAphase_*.jar "Fiji.app-$(VERSION)/plugins/" ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		rm -f "$(ZIP)" ; \
 		touch "$(EXE)" \
