@@ -22,7 +22,7 @@ SET softversion=__VERSION__
 
 
 @ECHO Silent install %softname%
-ScriptRunner.exe -appvscript WinMerge-%softversion%-x64-Setup.exe /VERYSILENT /SP- /NORESTART /LOG="%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=300 > "%logdir%\%softname%-SR.log" 2>&1
+ScriptRunner.exe -appvscript WinMerge-%softversion%-x64-Setup.exe /VERYSILENT /SP- /NORESTART /SUPPRESSMSGBOXES /FORCECLOSEAPPLICATIONS /NOCANCEL /LOG="%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=300 > "%logdir%\%softname%-SR.log" 2>&1
 set SR_EXITCODE=%ERRORLEVEL%
 
 FINDSTR /C:"Terminating process on timeout." "%logdir%\%softname%-SR.log" > NUL
