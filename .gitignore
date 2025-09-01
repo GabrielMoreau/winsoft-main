@@ -5,6 +5,6 @@ tmp
 .AppleDouble
 ._*
 .make.log
-.noauto
+.no-auto-update
 .no-ocs-pkgpush
 tmp_*.png

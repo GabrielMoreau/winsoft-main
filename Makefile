@@ -12,8 +12,8 @@ sinclude ../winsoft-conf/_common/main.mk
 
 help:
 	@
-	echo "* \`build-all\`  build all package except if \`.noauto\` file"
-	echo "* \`clean-all\`  clean all package except if \`.noauto\` file"
+	echo "* \`build-all\`  build all package except if \`.no-auto-update\` file"
+	echo "* \`clean-all\`  clean all package except if \`.no-auto-update\` file"
 	echo "* \`list-pkg\`   list all package"
 	echo "* \`space\`      clean old package"
 	echo "* \`version\`    get all package version"
@@ -22,7 +22,7 @@ build-all:
 	@
 	for pkgfolder in $(PKGDIR)
 	do
-		if [ -f "$${pkgfolder}/.noauto" ] || grep -q "^$${pkgfolder}" ./_common/noauto.conf ../winsoft-conf/_common/noauto.conf 2> /dev/null
+		if [ -f "$${pkgfolder}/.no-auto-update" ] || grep -q "^$${pkgfolder}" ./_common/no-auto-update.conf ../winsoft-conf/_common/no-auto-update.conf 2> /dev/null
 		then
 			printf "#--- %-$(PKGLEN)s ---#\n" pass:$${pkgfolder%/}
 			continue
@@ -43,7 +43,7 @@ clean-all:
 	for pkgfolder in $(PKGDIR)
 	do
 		echo ''
-		if [ -f "$${pkgfolder}/.noauto" ] || grep -q "^$${pkgfolder}" ./_common/noauto.conf ../winsoft-conf/_common/noauto.conf 2> /dev/null
+		if [ -f "$${pkgfolder}/.no-auto-update" ] || grep -q "^$${pkgfolder}" ./_common/no-auto-update.conf ../winsoft-conf/_common/no-auto-update.conf 2> /dev/null
 		then
 			printf "#--- %-$(PKGLEN)s ---#\n" pass:$${pkgfolder%/}
 			continue
@@ -57,7 +57,7 @@ checksum-all:
 	for pkgfolder in $(PKGDIR)
 	do
 		echo ''
-		if [ -f "$${pkgfolder}/.noauto" ] || grep -q "^$${pkgfolder}" ./_common/noauto.conf ../winsoft-conf/_common/noauto.conf 2> /dev/null
+		if [ -f "$${pkgfolder}/.no-auto-update" ] || grep -q "^$${pkgfolder}" ./_common/no-auto-update.conf ../winsoft-conf/_common/no-auto-update.conf 2> /dev/null
 		then
 			printf "#--- %-$(PKGLEN)s ---#\n" pass:$${pkgfolder%/}
 			continue
@@ -100,7 +100,7 @@ list-version:
 	@
 	for pkgfolder in $(PKGDIR)
 	do
-		if [ -f "$${pkgfolder}/.noauto" ] || grep -q "^$${pkgfolder}" ./_common/noauto.conf ../winsoft-conf/_common/noauto.conf 2> /dev/null
+		if [ -f "$${pkgfolder}/.no-auto-update" ] || grep -q "^$${pkgfolder}" ./_common/no-auto-update.conf ../winsoft-conf/_common/no-auto-update.conf 2> /dev/null
 		then
 			continue
 		fi
@@ -173,7 +173,7 @@ version:
 	for pkgfolder in $(PKGDIR)
 	do
 		echo ''
-		if [ -f "$${pkgfolder}/.noauto" ] || grep -q "^$${pkgfolder}" ./_common/noauto.conf ../winsoft-conf/_common/noauto.conf 2> /dev/null
+		if [ -f "$${pkgfolder}/.no-auto-update" ] || grep -q "^$${pkgfolder}" ./_common/no-auto-update.conf ../winsoft-conf/_common/no-auto-update.conf 2> /dev/null
 		then
 			printf "#--- %-$(PKGLEN)s ---#\n" pass:$${pkgfolder%/}
 			continue

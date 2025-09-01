@@ -67,12 +67,12 @@ on [Wikipedia](https://en.wikipedia.org).
 ## Master Target
 
 A master `Makefile` at the root of the project allows all packages to
-be built automatically. It is possible to put a `.noauto` file in each
+be built automatically. It is possible to put a `.no-auto-update` file in each
 folder to avoid this construction.
 There are other possible targets. Look at the `Makefile` source.
 
-* `build-all`  build all package except if `.noauto` file
-* `clean-all`  clean all package except if `.noauto` file
+* `build-all`  build all package except if `.no-auto-update` file
+* `clean-all`  clean all package except if `.no-auto-update` file
 * `list-pkg`   list all package
 * `space`      clean old package
 
