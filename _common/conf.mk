@@ -64,7 +64,7 @@ ocs-push:
 		--priority "$(OCS_PRIORITY)" \
 		--file "./$(OCS_NAME).zip" \
 		--notify 'YES' \
-		--notif-text '"$(OCS_MESSAGE)"' \
+		--notif-text "$(OCS_MESSAGE)" \
 		--notif-duration "$(OCS_DURATION)" \
 		--can-cancel "$(OCS_CANCEL)" \
 		--can-report "$(OCS_REPORT)" \
