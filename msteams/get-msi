@@ -2,12 +2,13 @@
 
 set -euo pipefail
 
-MSI_VERSION=$1
+# MSI_VERSION=$1
 TMP='tmp'
 ARCH='x64'
 
 mkdir -p "${TMP}"
-rm -f "${TMP}/AppxManifest.xml" "${TMP}/teams-${MSI_VERSION}-x64.msix" "${TMP}/teamsbootstrapper.exe"
+# rm -f "${TMP}/AppxManifest.xml" "${TMP}/teams-${MSI_VERSION}-x64.msix" "${TMP}/teamsbootstrapper.exe"
+rm -f "${TMP}/teamsbootstrapper.exe"
 
 # URL bootstrapper
 # BOOT_URL="https://statics.teams.cdn.office.net/production-teamsprovision/lkg/teamsbootstrapper.exe"
@@ -16,12 +17,18 @@ rm -f "${TMP}/AppxManifest.xml" "${TMP}/teams-${MSI_VERSION}-x64.msix" "${TMP}/t
 
 # URL MSIX
 MSIX_URL="https://statics.teams.cdn.office.net/production-windows-${ARCH}/enterprise/webview2/lkg/MSTeams-${ARCH}.msix"
-MSIX_FILE="teams-${MSI_VERSION}-${ARCH}.msix"
+MSIX_FILE="teams-${ARCH}.msix"
 if curl --head --fail --silent "${MSIX_URL}" >/dev/null
 then
 	(cd "${TMP}" || exit
-		curl -sSL "${MSIX_URL}" -o "${MSIX_FILE}"
+		curl -#SL "${MSIX_URL}" -o "${MSIX_FILE}" --time-cond "${MSIX_FILE}" >/dev/null
 		rm -f 'AppxManifest.xml'
-		unzip "${MSIX_FILE}" 'AppxManifest.xml'
+		unzip "${MSIX_FILE}" 'AppxManifest.xml' >/dev/null
+		if [ -s 'AppxManifest.xml' ]
+		then
+			version=$(grep ' Version="' 'AppxManifest.xml' | grep ' Name="MSTeams"' | sed -e 's/"/\n/g;' | grep '^[[:digit:]][[:digit:]\.]*$')
+			# ln -f "${MSIX_FILE}" "teams-${version}-${ARCH}.msix"
+			echo ${version}
+		fi
 	)
 fi

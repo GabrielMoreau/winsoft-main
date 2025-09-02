@@ -4,7 +4,7 @@
 #
 
 SOFT:=MSTeams
-VERSION:=$(shell curl -s -L 'https://learn.microsoft.com/en-us/officeupdates/teams-app-versioning' | grep -A 30 '"windows-gcc-version-history"' | paste -sd '' | sed -e s'#<tr>#\n#g;' | grep -Ev '(windows-gcc-version-history|Slimcore version)' | sed -e 's/[<>]/\n/g;' | grep -E '^[[:digit:]][[:digit:]]*\.[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+$$' | head -1)
+VERSION:=$(shell ./get-msi)
 REVISION:=1
 
 EXE:=teams-$(VERSION)-x64.msix
@@ -43,13 +43,13 @@ checksum: check-version
 tmp/$(EXE): tmp/$(XML)
 	@mkdir -p tmp
 	@(cd tmp ; \
+		ln -f "teams-x64.msix" "$(EXE)" ; \
 		file $(EXE) | grep -q "Zip archive data" || echo "Error: bad format for binary $(EXE)" ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
 
 tmp/$(XML):
 	@mkdir -p tmp
-	@./get-msi "$(VERSION)"
 	@(cd tmp ; \
 		file $(XML) | grep -q "XML 1.0 document" || echo "Error: bad format for document $(XML)" ; \
 		)
