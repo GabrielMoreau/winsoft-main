@@ -7,10 +7,11 @@ SOFT:=XournalPP
 VERSION:=$(shell curl -s -L 'https://github.com/xournalpp/xournalpp/releases/latest' | sed 's/</\n/g;' | grep '^meta property.*og:title' | cut -f 5 -d ' ')
 REVISION:=1
 # https://github.com/xournalpp/xournalpp/releases/download/v1.2.5/xournalpp-1.2.5-windows-setup-x86_64.exe
-URL:=https://github.com/xournalpp/xournalpp/releases/download/v$(VERSION)/xournalpp-$(VERSION)-windows-setup-x86_64.exe
+# https://github.com/xournalpp/xournalpp/releases/download/v1.2.8/xournalpp-1.2.8-windows-setup-AMD64.exe
+URL:=https://github.com/xournalpp/xournalpp/releases/download/v$(VERSION)/xournalpp-$(VERSION)-windows-setup-AMD64.exe
 
 #ZIP:=xournalpp-$(VERSION)-windows.zip
-EXE:=xournalpp-$(VERSION)-windows-setup-x86_64.exe
+EXE:=xournalpp-$(VERSION)-windows-setup-amd64.exe
 
 IT_TEAM:=IT Support
 LOGDIR:=%WINDIR%\\Logs
