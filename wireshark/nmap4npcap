@@ -1,10 +1,10 @@
 #!/bin/bash
 
 mkdir -p tmp
-cd tmp
+cd tmp || exit
 
-URL=$(curl -s -L 'https://nmap.org/download.html' | sed -e 's/"/\n/g;' | egrep '^https://.*/nmap-.*-setup.exe')
-NMAP_EXE=$(basename ${URL})
+URL=$(curl -s -L 'https://nmap.org/download.html' | sed -e 's/"/\n/g;' | grep -E '^https://.*/nmap-.*-setup.exe')
+NMAP_EXE=$(basename "${URL}")
 
 if [ ! -e "${NMAP_EXE}" ]
 then
@@ -13,12 +13,12 @@ then
   curl -s -L "${URL}" -o "${NMAP_EXE}"
 fi
 
-if [ $(ls -1 npcap-*.exe 2> /dev/null | wc -l) -lt 1 ]
+if [ "$(ls -1 npcap-*.exe 2> /dev/null | wc -l)" -lt 1 ]
 then
-  NPCAP=$(7z l "${NMAP_EXE}" | egrep -i 'npcap-.*exe' | awk '{print $5}')
+  NPCAP=$(7z l "${NMAP_EXE}" | grep -Ei 'npcap-.*exe' | awk '{print $5}')
 fi
 
-VERSION=$((basename "${NPCAP}"; basename npcap-*.exe) | sed -e 's/\.exe$//;' | cut -f 2 -d '-' | grep '^[[:digit:]]')
+VERSION=$( (basename "${NPCAP}"; basename npcap-*.exe) | sed -e 's/\.exe$//;' | cut -f 2 -d '-' | grep '^[[:digit:]]')
 if [ ! -e "npcap-${VERSION}.exe" ]
 then
   7z -y e "${NMAP_EXE}" "${NPCAP}" > /dev/null

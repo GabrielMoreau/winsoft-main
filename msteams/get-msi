@@ -28,7 +28,7 @@ then
 		then
 			version=$(grep ' Version="' 'AppxManifest.xml' | grep ' Name="MSTeams"' | sed -e 's/"/\n/g;' | grep '^[[:digit:]][[:digit:]\.]*$')
 			# ln -f "${MSIX_FILE}" "teams-${version}-${ARCH}.msix"
-			echo ${version}
+			echo "${version}"
 		fi
 	)
 fi

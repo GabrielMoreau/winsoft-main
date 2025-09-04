@@ -9,14 +9,14 @@ sum_versions() {
 	for index in 1 2 3 4
 	do
 		totalfield=0
-		for version in $*
+		for version in "$@"
 		do
 			field=$(echo "${version}" | cut -f ${index} -d '.' | sed -e 's/^00*//;' | grep '[[:digit:]]' || echo '0')
-			totalfield=$((${totalfield} + ${field}))
+			totalfield=$((totalfield + field))
 		done
 		result="${result}.${totalfield}"
 	done
 	echo "${result}" | sed -e 's/^\.//;'
 }
 
-sum_versions $*
+sum_versions "$@"

@@ -10,19 +10,19 @@ CHOCO=https://community.chocolatey.org/packages/teamviewer
 function update_version () {
   local choco_url=$1
 
-  while read version hash
+  while read -r version hash
   do
     if [ -s 'checksum.txt' ] && grep -q "^${hash}" 'checksum.txt'
     then
       return
     fi
 
-    echo "${hash}  TeamViewer-$(version)-Setup-x64.exe" >> 'checksum.txt'
+    echo "${hash}  TeamViewer-${version}-Setup-x64.exe" >> 'checksum.txt'
   done < <(curl -s -L "${choco_url}" | grep -E '^(\$version|\s\schecksum64)' | cut -f 2 -d ';' | cut -f 1 -d '&' | paste -sd ' ')
 }
 
 mkdir -p tmp
-(cd tmp;
+(cd tmp || exit;
   # echo curl --time-cond "${EXE}" -o "${EXE}" -L "${url}" 1>&2;
   curl -s --time-cond "${EXE}" -o "${EXE}" -L "${url}")
 
@@ -30,18 +30,18 @@ if [ -s "tmp/${EXE}" ]
 then
   #VERSION=$(file "tmp/${EXE}" | sed -e 's/.*Comments:\s\([[:digit:]][[:digit:]\.]*\).*/\1/; s/[[:space:]:].*//;')
   VERSION=$(peres -v "tmp/${EXE}" | grep 'Product Version:' | awk '{print $3}')
-  if echo ${VERSION} | grep -q '^[[:digit:]][[:digit:]\.]*'
+  if echo "${VERSION}" | grep -q '^[[:digit:]][[:digit:]\.]*'
   then
-    echo ${VERSION}
+    echo "${VERSION}"
   else
-    HASHEXE=$(cd tmp; shasum -a 256 "${EXE}" | cut -f 1 -d ' ')
+    HASHEXE=$(cd tmp || exit; shasum -a 256 "${EXE}" | cut -f 1 -d ' ')
     # get new version from chocolatey
     grep -q "^${HASHEXE}" 'checksum.txt' || update_version "${CHOCO}"
 
     VERSION=$(grep "^${HASHEXE}" 'checksum.txt' | cut -f 2 -d '-' | sed 's/\.msi//;')
-    if echo ${VERSION} | grep -q '^[[:digit:]][[:digit:]\.]*'
+    if echo "${VERSION}" | grep -q '^[[:digit:]][[:digit:]\.]*'
     then
-      echo ${VERSION}
+      echo "${VERSION}"
     else
       echo ''
     fi

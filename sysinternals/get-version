@@ -6,16 +6,16 @@ url=$1
 
 mkdir -p tmp/SysinternalsSuite
 
-(cd tmp
+(cd tmp || exit
 	curl -s --time-cond 'SysinternalsSuite.zip' -o 'SysinternalsSuite.zip' -L "${url}"
 	)
 
 if [ $(( $(date '+%s') - $(stat -c '%Y' tmp/SysinternalsSuite.zip) )) -lt 60 ] || [ ! -s "tmp/SysinternalsSuite/PsExec.exe" ]
 then
 	rm -rf tmp/SysinternalsSuite/*
-	(cd tmp/SysinternalsSuite; unzip -qq "../SysinternalsSuite.zip" > /dev/null)
+	(cd tmp/SysinternalsSuite || exit; unzip -qq "../SysinternalsSuite.zip" > /dev/null)
 fi
 
-(cd tmp/SysinternalsSuite
-	date --reference $(ls -1tr | tail -1) "+%y.%m.%d.%H%M"
+(cd tmp/SysinternalsSuite || exit
+	date --reference "$(ls -1tr | tail -1)" "+%y.%m.%d.%H%M"
 	)

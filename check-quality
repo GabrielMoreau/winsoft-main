@@ -55,6 +55,9 @@ ack -l --ignore-dir=tmp --ignore-dir=resources '\s+\r$' ./ ./*/ | pipe_if_not_em
 echo "Check PowerShell script syntax"
 find . -maxdepth 2  -name '*.ps1' -print0 | xargs -r -0 timeout -k 2s 13 ./analyze-ps | grep -v '^✅ OK:'
 
+echo "Check Bash script quality"
+find . -maxdepth 2  -perm /0100 -type f -print0 | xargs -r -0 -I {} bash -c "file {} | grep -q 'shell scrip' && shellcheck -e SC2012,SC2016,SC2001 {}" 
+
 echo "Check HKLM register key in README files"
 FOLDER_NOGIT=$(
   find . -maxdepth 1 -type d ! -path '*/.*' | while read -r dir
