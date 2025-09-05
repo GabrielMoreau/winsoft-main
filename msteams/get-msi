@@ -21,7 +21,7 @@ MSIX_FILE="teams-${ARCH}.msix"
 if curl --head --fail --silent "${MSIX_URL}" >/dev/null
 then
 	(cd "${TMP}" || exit
-		curl -#SL "${MSIX_URL}" -o "${MSIX_FILE}" --time-cond "${MSIX_FILE}" >/dev/null
+		curl -sSL "${MSIX_URL}" -o "${MSIX_FILE}" --time-cond "${MSIX_FILE}" >/dev/null 2>&1
 		rm -f 'AppxManifest.xml'
 		unzip "${MSIX_FILE}" 'AppxManifest.xml' >/dev/null
 		if [ -s 'AppxManifest.xml' ]

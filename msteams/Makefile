@@ -44,6 +44,7 @@ tmp/$(EXE): tmp/$(XML)
 	@mkdir -p tmp
 	@(cd tmp ; \
 		ln -f "teams-x64.msix" "$(EXE)" ; \
+		printf '#%.0s' $$(seq 1 $$(( $$(tput cols) - 33 ))); echo ' 100.0%' ; \
 		file $(EXE) | grep -q "Zip archive data" || echo "Error: bad format for binary $(EXE)" ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
