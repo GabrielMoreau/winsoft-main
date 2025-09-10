@@ -12,3 +12,4 @@ aee4c562d0f46af849876f518198299523c734506c7e54e1b3cf1f193a01ef4c  Dell-Command-U
 2ef7c16b285c67fc971919320308f02a39aa5c0ef0f242c3f1edc364da65a0e7  windowsdesktop-runtime-8.0.17-win-x64.exe
 e80d51abc9e8171bb30a5b6e992c3bd860dfe877cafcd99c077bab922349048c  Dell-Command-Update-Application_PPWHH_WIN64_5.5.0_A00.EXE
 eba7f11215b22ced419ab7e080fadd0f3bc21431f588f27f4cc7ed32c9d4a12a  windowsdesktop-runtime-8.0.19-win-x64.exe
+713e77616f7af4adc3e76eb6daa1ac97ced643ecb36bae474c7e2dd79b81dfff  windowsdesktop-runtime-8.0.20-win-x64.exe
