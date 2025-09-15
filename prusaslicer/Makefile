@@ -12,7 +12,7 @@ REVISION:=1
 #VERSION:=$(shell basename '$(URL)' 2> /dev/null | cut -f 3- -d '_' | sed -e 's/\.exe//; s/_/./g;')
 #EXE:=prusa3d_win_$(VERSION).exe
 VERSION:=$(shell curl -s -L 'https://github.com/prusa3d/PrusaSlicer/releases/latest' | sed 's/</\n/g;' | grep '^meta property.*og:title'  | cut -f 5 -d ' ')
-URL:=https://github.com$(shell curl -s -L 'https://github.com/prusa3d/PrusaSlicer/releases/expanded_assets/version_$(VERSION)' | sed 's/"/\n/g;' | grep '^/.*/PrusaSlicer-$(VERSION).*win64.*.zip')
+URL:=https://github.com$(shell curl -s -L 'https://github.com/prusa3d/PrusaSlicer/releases/expanded_assets/version_$(VERSION)' | sed 's/"/\n/g;' | grep '^/.*/PrusaSlicer-$(VERSION).zip')
 EXE:=PrusaSlicer-$(VERSION).zip
 
 IT_TEAM:=IT Support
