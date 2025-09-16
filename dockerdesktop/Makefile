@@ -7,10 +7,12 @@ sinclude ../_common/flag.mk
 
 SOFT:=DockerDesktop
 INSTALLER:=DockerDesktopInstaller.exe
-#URL:=https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64
-VSUM:=$(shell curl -s -l 'https://docs.docker.com/desktop/release-notes/' | sed -e 's/[<=>]/\n/g;' | grep '^https://desktop.docker.com/win/main/amd64/.*/checksums.txt' | head -1 | cut -f 7 -d '/')
-URL:=https://desktop.docker.com/win/main/amd64/$(VSUM)/Docker%20Desktop%20Installer.exe
-$(shell mkdir -p tmp; cd tmp; curl $(CURLFLAGS) -s --time-cond "$(INSTALLER)" -o "$(INSTALLER)" -L "$(URL)")
+URL:=https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe
+#VSUM:=$(shell curl -s -l 'https://docs.docker.com/desktop/release-notes/' | sed -e 's/[<=>]/\n/g;' | grep '^https://desktop.docker.com/win/main/amd64/.*/checksums.txt' | head -1 | cut -f 7 -d '/')
+$(shell ./get-version --url '$(URL)' --shape 'DockerDesktopInstaller-%v.exe' --exe '$(INSTALLER)' > /dev/null)
+#    https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe
+#URL:=https://desktop.docker.com/win/main/amd64/$(VSUM)/Docker%20Desktop%20Installer.exe
+#$(shell mkdir -p tmp; cd tmp; curl $(CURLFLAGS) -s --time-cond "$(INSTALLER)" -o "$(INSTALLER)" -L "$(URL)")
 VERSION:=$(shell peres -v tmp/$(INSTALLER) 2> /dev/null | grep '^Product Version' | awk '{print $$3}')
 REVISION:=1
 # https://desktop.docker.com/win/main/amd64/181591/Docker%20Desktop%20Installer.exe
