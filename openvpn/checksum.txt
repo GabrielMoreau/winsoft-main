@@ -5,3 +5,4 @@ ffd922b8afbcaf62079131d663e3eefb63ef173ad6cee6877b9d4945db43a7cf  openvpn-connec
 46c1cd678fa12475e69e3f367ece629bff835c96e9d358788b284b01c3ab43de  openvpn-connect-3.7.1.4243_signed.msi
 225947d09a706aacfe865b1ac03d58752cf584214552696152e164ce2d936084  openvpn-connect-3.7.2.4253_signed.msi
 239ea016de7bd6bbcbb06727c9b0df5929f26d566ec53c09991c32d59ebadfc8  openvpn-connect-3.7.3.4351_signed.msi
+cc741664d07fd4eedc98103edb86b791d290640a969c288c3d1cb2d0b6de98ce  openvpn-connect-3.8.0.4528_signed.msi
