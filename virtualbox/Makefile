@@ -45,6 +45,7 @@ version:
 	@echo "EXE1: $(EXE1)"
 	@echo "URL2: $(URL2)"
 	@echo "EXE2: $(EXE2)"
+	@echo "VCREDIST: $(VCREDIST)"
 
 checksum: check-version
 	@mkdir -p tmp
@@ -94,3 +95,9 @@ tmp/winsoft-config.ini: winsoft-config.ini Makefile tmp/$(EXE) ../update-visualr
 	@zip -r ./$@ pre-install.ps1
 	@(cd tmp; zip -r ../$@ install.bat winsoft-config.ini $(EXE1) $(EXE2) 2015-2022)
 	@chmod ugo+rw $@
+
+tmp/2015-2022/vc_redist.x64.exe: ../update-visualredist/version.txt ../update-visualredist/checksum.txt
+	@mkdir -p tmp/2015-2022
+	@curl $(CURLFLAGS) -# -o $@ -L https://aka.ms/vs/17/release/vc_redist.x64.exe
+	@file $@ | grep -q "PE32 executable" || echo "Error: bad format for binary $@"
+	@grep -q "^$$(shasum -a 256 $@)$$" ../update-visualredist/checksum.txt || echo "Error: bad checksum for binary $@"
