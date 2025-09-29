@@ -6,7 +6,7 @@
 sinclude ../_common/flag.mk
 
 SOFT:=Inkscape
-VERSION:=$(shell curl $(CURLFLAGS) -s -L 'https://inkscape.org/en/release/' | sed -e 's/>/\n/g;' | grep 'selected.*/en/release/inkscape-' | cut -f 2 -d '-' | cut -f 1 -d '/' | grep '^[[:digit:]]' | head -1)
+VERSION:=$(shell curl $(CURLFLAGS) -s -L 'https://inkscape.org/en/release/' | sed -e 's/"/\n/g;' | grep '^http.*/release/inkscape-' | cut -f 2 -d '-' | cut -f 1 -d '/' | grep '^[[:digit:]]' | head -1)
 REVISION:=1
 URL:=https://inkscape.org/$(shell curl $(CURLFLAGS) -s -L  'https://inkscape.org/release/inkscape-$(VERSION)/windows/64-bit/msi/dl' |  sed -e 's/\s/\n/g; s/"/=/g;' | grep '^url=' | cut -f 2 -d '=')
 
@@ -52,14 +52,16 @@ tmp/$(EXE):
 	@(cd tmp ; \
 		rm -f *.exe *.msi 2>/dev/null ; \
 		curl $(CURLFLAGS) -# -o "$(EXE)" -L "$(URL)" ; \
-		file $(EXE) | grep -q "Subject: Inkscape" || echo "Error: bad format for binary $(EXE)" ; \
+		# file $(EXE) | grep -q "Subject: Inkscape" || echo "Error: bad format for binary $(EXE)" ; \
 		# which peres >/dev/null && { peres -v $(EXE) | grep -q "^Product Version:[[:space:]]*$(VERSION)" || echo "Error: bad version for binary $(EXE)" ; } ; \
+		which 7z >/dev/null && { rm -f 'CM_FP_inkscape.bin.inkscape.exe'; 7z x -y "$(EXE)" 'CM_FP_inkscape.bin.inkscape.exe' | grep 'Extracting'; } ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
 
 check-exe: tmp/$(EXE)
 	@(cd tmp ; \
 		file $(EXE) | grep -q "Subject: Inkscape" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 1; } ; \
+		which peres >/dev/null && { peres -v 'CM_FP_inkscape.bin.inkscape.exe' | grep -q "^Product Version:[[:space:]]*$(VERSION)" || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 1; } ; } ;\
 		# which peres >/dev/null && { peres -v $(EXE) | grep -q "^Product Version:[[:space:]]*$(VERSION)" || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 1; } ; } ;\
 		)
 
