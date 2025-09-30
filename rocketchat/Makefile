@@ -22,6 +22,7 @@ sinclude ../_common/conf.mk
 # OCS configuration
 OCS_DURATION:=$(OCS_DURATION_LONG)
 OCS_MESSAGE:=$(OCS_MESSAGE_LONG)
+OCS_SEARCH:=Rocket.Chat
 
 check-version:
 	@echo $(VERSION) | grep -Eq '^[[:digit:]][\.[:digit:]]+[[:digit:]]$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
