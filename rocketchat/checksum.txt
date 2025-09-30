@@ -26,3 +26,4 @@ f83467e6c914ee4dc089cae2e99219ada2c8666cb50e565e0897b6ded1856de9  rocketchat-4.7
 fae7478d4c3d1711c9f8253df34e610d521a6175b4ce3cfb2de3e66ef1f57f3a  rocketchat-4.8.0-win-x64.msi
 da94f5e8d408c6ed802dec791746c94b7eed98141d1666d6548bac5d776cced5  rocketchat-4.8.1-win-x64.msi
 e14a488ad442fab1c2191273be1dd9feb5e3334184c45630afe67a26dee4b8b5  rocketchat-4.9.0-win-x64.msi
+c8fac1e3252ee9e4a7bf20c515ab8b3f53b3cb0adc7c953d647f633afe4c59f9  rocketchat-4.9.1-win-x64.msi
