@@ -51,7 +51,8 @@ ocs:
 	@echo "Duration: $(OCS_DURATION)"
 	@echo "Cancel:   $(OCS_CANCEL)"
 	@echo "Report:   $(OCS_REPORT)"
-	@[ -z "$(OCS_SEARCH)" ] || echo "Search:   $(OCS_SEARCH)"
+	@[ -z "$(OCS_SEARCH_OP)" ] || echo "SearchOp: $(OCS_SEARCH_OP)"
+	@[ -z "$(OCS_SEARCH)" ]    || echo "Search:   $(OCS_SEARCH)"
 	@echo "Message:  $(OCS_MESSAGE)"
 	@echo ""
 
