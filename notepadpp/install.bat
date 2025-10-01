@@ -24,7 +24,7 @@ SET regkey=Notepad++
 
 
 ECHO Kill running process
-TASKKILL /IM notepad++.exe /F
+TASKKILL /T /F /IM notepad++.exe
 
 
 ECHO Uninstall previous version

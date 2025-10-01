@@ -21,7 +21,7 @@ SET softversion=__VERSION__
 
 
 ECHO Kill running process
-TASKKILL /IM KopiaUI.exe /IM Kopia.exe /F
+TASKKILL /T /F /IM KopiaUI.exe /IM Kopia.exe
 
 
 ECHO Silent install %softname%

@@ -23,7 +23,7 @@ SET process=LightBulb.exe
 
 
 ECHO Kill the current process
-TASKKILL /IM LightBulb.exe /T /F /IM %process%
+TASKKILL /T /F /IM LightBulb.exe /IM %process%
 
 
 Echo Silent install WindowsDesktop-Runtime
