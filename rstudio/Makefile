@@ -26,6 +26,9 @@ all: check-version check-exe check-exe2 $(SOFT)_$(VERSION)-$(REVISION)_x64.zip o
 
 sinclude ../_common/conf.mk
 
+# OCS configuration
+OCS_SEARCH:=RStudio
+
 check-version:
 	@echo $(VERSION) | grep -Eq '^[[:digit:]][\.[:digit:]]+[[:digit:]]$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
 
