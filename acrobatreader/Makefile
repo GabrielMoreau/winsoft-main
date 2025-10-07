@@ -27,9 +27,9 @@ all: check-version check-exe Uninstall-$(SOFT)_$(VERSION)-$(REVISION)_x64.zip $(
 sinclude ../_common/conf.mk
 
 # OCS configuration
+OCS_SEARCH:=Adobe Acrobat
 OCS_DURATION:=$(OCS_DURATION_LONG)
 OCS_MESSAGE:=$(OCS_MESSAGE_LONG)
-OCS_SEARCH:=Adobe Acrobat
 
 check-version:
 	@echo $(VERSION) | egrep -q '^[[:digit:]][\.[:digit:]]*[[[:alnum:]]*$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)

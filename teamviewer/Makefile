@@ -21,7 +21,7 @@ all: check-version check-exe Uninstall-$(SOFT)_$(VERSION)-$(REVISION)_x64.zip $(
 sinclude ../_common/conf.mk
 
 # OCS configuration
-OCS_SEARCH:=TeamViewer
+OCS_SEARCH:=$(SOFT)
 
 check-version:
 	@echo $(VERSION) | grep -Eq '^[[:digit:]][\.[:digit:]]+[[:digit:]]$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)

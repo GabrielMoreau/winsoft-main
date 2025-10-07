@@ -21,7 +21,7 @@ all: check-version check-exe $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
 sinclude ../_common/conf.mk
 
 # OCS configuration
-OCS_SEARCH:=KiCad
+OCS_SEARCH:=$(SOFT)
 
 check-version:
 	@echo $(VERSION) | grep -Eq '^[[:digit:]][\.[:digit:]]+[[:digit:]]$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
