@@ -23,6 +23,7 @@ all: check-version $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
 sinclude ../_common/conf.mk
 
 # OCS configuration
+OCS_SEARCH:=Nord
 OCS_PRIORITY:=$(shell expr $(OCS_PRIORITY) + 1)
 
 check-version:

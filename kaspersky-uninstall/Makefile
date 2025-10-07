@@ -24,6 +24,7 @@ all: check-version $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
 sinclude ../_common/conf.mk
 
 # OCS configuration
+OCS_SEARCH:=Kaspersky
 OCS_PRIORITY:=2
 
 check-version:
