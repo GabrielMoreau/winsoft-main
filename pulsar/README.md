@@ -7,7 +7,7 @@ It's a community-driven, hyper-packable text editor derived from Atom and built 
 * Wikipedia : https://en.wikipedia.org/wiki/Atom_(text_editor)
 
 * Download : https://pulsar-edit.dev/download.html,
-	https://github.com/pulsar-edit/pulsar/releases
+  https://github.com/pulsar-edit/pulsar/releases
 * Forge : https://github.com/pulsar-edit
 
 

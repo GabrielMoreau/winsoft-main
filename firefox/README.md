@@ -8,7 +8,7 @@ Firefox is a free and open-source web browser developed by the Mozilla Foundatio
 * Download ESR : https://www.mozilla.org/fr/firefox/enterprise/#download
 * Policies templates : https://github.com/mozilla/policy-templates/releases
 * Silent install : https://support.mozilla.org/en-US/kb/deploy-firefox-msi-installers,
-	https://silentinstallhq.com/mozilla-firefox-100-silent-install-how-to-guide/
+  https://silentinstallhq.com/mozilla-firefox-100-silent-install-how-to-guide/
 
 
 ## Register Key

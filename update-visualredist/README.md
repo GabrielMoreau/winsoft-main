@@ -41,10 +41,10 @@ find tmp/ -name '*.exe' | xargs -r -n 1 wine ~/Sysinternals/sigcheck.exe -a -h |
 find tmp/ -name '*.exe' | xargs -r -n 1 peres -v | grep '^Product Version:' | awk '{print $3}'
 
 find tmp/ -name '*.exe' | xargs -r  -I {} echo " \
-		echo -n ' * '\$(echo {} | cut -f 2,3 -d '/' | sed -e \"s#/vc_*redist[_\.]#-#; s/.exe//;\")' ' ;
-		echo \$(peres -v {} | grep '^Product Version:' | awk '{print \$3}')
-		" \
-	| bash
+    echo -n ' * '\$(echo {} | cut -f 2,3 -d '/' | sed -e \"s#/vc_*redist[_\.]#-#; s/.exe//;\")' ' ;
+    echo \$(peres -v {} | grep '^Product Version:' | awk '{print \$3}')
+    " \
+  | bash
 ```
 
 ## Register Key

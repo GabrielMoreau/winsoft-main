@@ -11,8 +11,8 @@ Zoom Meetings is a proprietary video teleconferencing software program.
 
 Your need a configuration file `conf.yml` to specify your default zoom server at the installation.
 
-See also for version number : https://www.zoom.us/rest/download?os=win,
-	https://github.com/ScoopInstaller/Extras/blob/master/bucket/zoom.json
+* See also for version number : https://www.zoom.us/rest/download?os=win,
+  https://github.com/ScoopInstaller/Extras/blob/master/bucket/zoom.json
 
 
 ## Register Key

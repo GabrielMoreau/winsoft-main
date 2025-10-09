@@ -30,15 +30,15 @@ $RefName = 'WinDirStat'
 
 @(Get-ChildItem -Recurse 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall';
   Get-ChildItem -Recurse "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall") |
-	ForEach {
-		$App = (Get-ItemProperty -Path $_.PSPath)
-		$DisplayName = $App.DisplayName
-		If (!($DisplayName -match $RefName)) { Return }
-		$DisplayVersion = $App.DisplayVersion
-		$Exe = $App.UninstallString
-		$KeyPath = $App.PSPath
-		Echo "Ref Key $DisplayName / $DisplayVersion / $Exe / $KeyPath"
-	}
+    ForEach {
+      $App = (Get-ItemProperty -Path $_.PSPath)
+      $DisplayName = $App.DisplayName
+      If (!($DisplayName -match $RefName)) { Return }
+      $DisplayVersion = $App.DisplayVersion
+      $Exe = $App.UninstallString
+      $KeyPath = $App.PSPath
+      Echo "Ref Key $DisplayName / $DisplayVersion / $Exe / $KeyPath"
+    }
 ```
 
 

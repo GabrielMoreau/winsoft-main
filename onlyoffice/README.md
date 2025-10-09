@@ -11,7 +11,7 @@ The desktop editors are cross-platform.
 * Wikipedia : https://en.wikipedia.org/wiki/OnlyOffice
 
 * Download : https://github.com/ONLYOFFICE/DesktopEditors/releases,
-	https://www.onlyoffice.com/download-desktop.aspx
+  https://www.onlyoffice.com/download-desktop.aspx
 * Silent install : https://silentinstallhq.com/onlyoffice-desktop-editors-install-and-uninstall-powershell/
 
 

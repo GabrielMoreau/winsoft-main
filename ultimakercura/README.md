@@ -8,7 +8,7 @@ Fine-tune your 3D model with 400+ settings for the best slicing and printing res
 
 * Download : https://github.com/Ultimaker/Cura/releases/latest
 * Silent install : https://www.manageengine.com/eu/products/desktop-central/software-installation/silent_install_UltiMaker-Cura-(5.3.1).html,
-	https://silent-install.net/software/ultimaker/cura/4.5.0
+  https://silent-install.net/software/ultimaker/cura/4.5.0
 
 
 ## Installer

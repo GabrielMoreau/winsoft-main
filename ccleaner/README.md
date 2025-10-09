@@ -11,7 +11,7 @@ Use only on personnal computer.
 
 * Download : https://www.ccleaner.com/ccleaner/download
 * Silent install : https://silentinstallhq.com/ccleaner-silent-install-how-to-guide/,
-	https://community.chocolatey.org/packages/ccleaner
+  https://community.chocolatey.org/packages/ccleaner
 
 ```bat
 .\ccsetup-VERSION.exe /S /L=1036
