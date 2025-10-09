@@ -16,5 +16,6 @@ Example :
 
  | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
- | HKLM | Git | The Git Development Community | 2.48.1 | `Git_is1` | `"C:\Program Files\Git\unins000.exe"` |
- | HKLM | Git | The Git Development Community | 2.49.0 | `Git_is1` | `"C:\Program Files\Git\unins001.exe"` |
+ | HKLM | Git | The Git Development Community | 2.48.1   | `Git_is1` | `"C:\Program Files\Git\unins000.exe"` |
+ | HKLM | Git | The Git Development Community | 2.49.0   | `Git_is1` | `"C:\Program Files\Git\unins001.exe"` |
+ | HKLM | Git | The Git Development Community | 2.51.0.2 | `Git_is1` | `"C:\Program Files\Git\unins000.exe"` |

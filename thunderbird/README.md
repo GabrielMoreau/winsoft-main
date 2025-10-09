@@ -39,4 +39,5 @@ Example :
 
  | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
- | HKLM | Mozilla Thunderbird (x64 fr) | Mozilla | 128.0 | `Mozilla Thunderbird 128.0 (x64 fr)` | `"C:\Program Files\Mozilla Thunderbird\uninstall\helper.exe"` |
+ | HKLM | Mozilla Thunderbird (x64 fr) | Mozilla | 128.0   | `Mozilla Thunderbird 128.0 (x64 fr)`   | `"C:\Program Files\Mozilla Thunderbird\uninstall\helper.exe"` |
+ | HKLM | Mozilla Thunderbird (x64 fr) | Mozilla | 143.0.1 | `Mozilla Thunderbird 143.0.1 (x64 fr)` | `"C:\Program Files\Mozilla Thunderbird\uninstall\helper.exe"` |

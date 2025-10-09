@@ -20,3 +20,4 @@ Example :
  | HKLM | Notepad++ (64-bit x64) | Notepad++ Team | 8.7.6 | `Notepad++` | `"C:\Program Files\Notepad++\uninstall.exe"` |
  | HKLM | Notepad++ (64-bit x64) | Notepad++ Team | 8.7.8 | `Notepad++` | `"C:\Program Files\Notepad++\uninstall.exe"` |
  | HKLM | Notepad++ (64-bit x64) | Notepad++ Team | 8.8   | `Notepad++` | `"C:\Program Files\Notepad++\uninstall.exe"` |
+ | HKLM | Notepad++ (64-bit x64) | Notepad++ Team | 8.8.6 | `Notepad++` | `"C:\Program Files\Notepad++\uninstall.exe"` |

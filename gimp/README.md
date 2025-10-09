@@ -18,4 +18,5 @@ Example :
  | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
  | HKLM | GIMP 2.10.38-1 | The GIMP Team | 2.10.38 | `GIMP-2_is1` | `"C:\Program Files\GIMP 2\uninst\unins000.exe"` |
- | HKLM | GIMP 3.0.0 | The GIMP Team | 3.0.0.0 | `GIMP-3_is1` | `"C:\Program Files\GIMP 3\uninst\unins000.exe"` |
+ | HKLM | GIMP 3.0.0     | The GIMP Team | 3.0.0.0 | `GIMP-3_is1` | `"C:\Program Files\GIMP 3\uninst\unins000.exe"` |
+ | HKLM | GIMP 3.0.6-1   | The GIMP Team | 3.0.6.1 | `GIMP-3_is1` | `"C:\Program Files\GIMP 3\uninst\unins000.exe"` |

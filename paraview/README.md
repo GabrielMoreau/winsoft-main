@@ -17,3 +17,4 @@ Example :
  | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
  | HKLM | ParaView | Kitware, Inc. | 5.13.3 | `{44856EA5-E919-4924-BA79-7E9C63C4F24C}` | `MsiExec.exe /X{44856EA5-E919-4924-BA79-7E9C63C4F24C}` |
+ | HKLM | ParaView | Kitware, Inc. | 6.0.1  | `{7182C24C-06E5-4DA6-AA2A-2A1F6E2F4FAF}` | `MsiExec.exe /X{7182C24C-06E5-4DA6-AA2A-2A1F6E2F4FAF}` |

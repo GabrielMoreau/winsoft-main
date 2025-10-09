@@ -18,3 +18,4 @@ Example :
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
  | HKLM | Inkscape | Inkscape | 1.3.2 | `{2AB0D298-5B41-4C70-BB32-46F153F7A1BF}` | `MsiExec.exe /I{2AB0D298-5B41-4C70-BB32-46F153F7A1BF}` |
  | HKLM | Inkscape | Inkscape | 1.4.0 | `{4E9A1766-6BA4-4015-BA8D-05A268638587}` | `MsiExec.exe /I{4E9A1766-6BA4-4015-BA8D-05A268638587}` |
+ | HKLM | Inkscape | Inkscape | 1.4.2 | `{00512908-13E3-4B23-9EC7-7EB30E0A904E}` | `MsiExec.exe /I{00512908-13E3-4B23-9EC7-7EB30E0A904E}` |

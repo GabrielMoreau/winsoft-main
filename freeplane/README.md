@@ -11,7 +11,7 @@ mapping or information mapping) and navigating the mapped information.
 
 * Download : https://sourceforge.net/projects/freeplane/files/freeplane%20stable/
 * Silent install : https://www.manageengine.com/products/desktop-central/software-installation/silent_install_Freeplane-(1.10.4).html,
-	https://silentinstallhq.com/freeplane-silent-install-how-to-guide/
+  https://silentinstallhq.com/freeplane-silent-install-how-to-guide/
 
 
 ## Register Key
@@ -21,5 +21,6 @@ Example :
  | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
  | HKLM | Freeplane | Open source | 1.11.12 | `{D3941722-C4DD-4509-88C4-0E87F675A859}_is1` | `"C:\Program Files\Freeplane\unins000.exe"` |
- | HKLM | Freeplane | Open source | 1.12.6 | `{D3941722-C4DD-4509-88C4-0E87F675A859}_is1` | `"C:\Program Files\Freeplane\unins000.exe"` |
- | HKLM | Freeplane | Open source | 1.12.9 | `{D3941722-C4DD-4509-88C4-0E87F675A859}_is1` | `"C:\Program Files\Freeplane\unins000.exe"` |
+ | HKLM | Freeplane | Open source | 1.12.6  | `{D3941722-C4DD-4509-88C4-0E87F675A859}_is1` | `"C:\Program Files\Freeplane\unins000.exe"` |
+ | HKLM | Freeplane | Open source | 1.12.9  | `{D3941722-C4DD-4509-88C4-0E87F675A859}_is1` | `"C:\Program Files\Freeplane\unins000.exe"` |
+ | HKLM | Freeplane | Open source | 1.12.14 | `{D3941722-C4DD-4509-88C4-0E87F675A859}_is1` | `"C:\Program Files\Freeplane\unins000.exe"` |

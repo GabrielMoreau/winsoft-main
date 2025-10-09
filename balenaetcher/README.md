@@ -16,3 +16,12 @@ every byte of data was written correctly, and much more.
 By default, balenaEtcher is installed in the current user's folder.
 The installation suggested here installs in the system folder and adds
 the correct uninstall key.
+
+
+## Register Key
+
+Example :
+
+ | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
+ |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
+ | HKLM | balenaEtcher 2.1.0 | Balena Ltd. | 2.1.0 | `balena-etcher` | `C:\Program Files\balena-etcher\uninstall.bat` |

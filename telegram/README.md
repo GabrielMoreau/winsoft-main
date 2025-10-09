@@ -25,3 +25,4 @@ Example :
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
  | HKLM | Telegram Desktop 5.11.1 | Telegram FZ-LLC | 5.11.1 | `Telegram Desktop` | `C:\Program Files\Telegram Desktop\uninstall.bat` |
  | HKLM | Telegram Desktop 5.12.3 | Telegram FZ-LLC | 5.12.3 | `Telegram Desktop` | `C:\Program Files\Telegram Desktop\uninstall.bat` |
+ | HKLM | Telegram Desktop 6.1.4  | Telegram FZ-LLC | 6.1.4  | `Telegram Desktop` | `C:\Program Files\Telegram Desktop\uninstall.bat` |

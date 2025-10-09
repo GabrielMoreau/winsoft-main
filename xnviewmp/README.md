@@ -22,5 +22,6 @@ Example :
 
  | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
+ | HKLM | XnViewMP 1.5.5  | Gougelet Pierre-e | 1.5.5   | `XnViewMP_is1`        | `"C:\Program Files\XnViewMP\unins000.exe"` |
  | HKLM | XnView MP (x64) | Pierre-e Gougelet | 1.7.2.0 | `XnView MP (x64)_is1` | `"C:\Program Files\XnViewMP\unins001.exe"` |
- | HKLM | XnViewMP 1.5.5 | Gougelet Pierre-e | 1.5.5 | `XnViewMP_is1` | `"C:\Program Files\XnViewMP\unins000.exe"` |
+ | HKLM | XnView MP (x64) | Pierre-e Gougelet | 1.9.4.0 | `XnView MP (x64)_is1` | `"C:\Program Files\XnViewMP\unins000.exe"` |

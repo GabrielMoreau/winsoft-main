@@ -18,3 +18,4 @@ Example :
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
  | HKLM | OBS Studio | OBS Project | 31.0.0 | `OBS Studio` | `"C:\Program Files\obs-studio\uninstall.exe"` |
  | HKLM | OBS Studio | OBS Project | 31.0.2 | `OBS Studio` | `"C:\Program Files\obs-studio\uninstall.exe"` |
+ | HKLM | OBS Studio | OBS Project | 32.0.1 | `OBS Studio` | `"C:\Program Files\obs-studio\uninstall.exe"` |

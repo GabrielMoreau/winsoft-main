@@ -16,3 +16,4 @@ Example :
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
  | HKLM | Npcap | Nmap Project | 1.75 | `NpcapInst` | `"C:\Program Files\Npcap\uninstall.exe"` |
  | HKLM | Wireshark 4.4.4 x64 | The Wireshark developer community, https://www.wireshark.org | 4.4.4 | `Wireshark` | `"C:\Program Files\Wireshark\uninstall-wireshark.exe"` |
+ | HKLM | Wireshark 4.6.0 x64 | The Wireshark developer community, https://www.wireshark.org | 4.6.0 | `Wireshark` | `"C:\Program Files\Wireshark\uninstall-wireshark.exe"` |

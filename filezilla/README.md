@@ -17,3 +17,4 @@ Example :
  | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
  | HKLM | FileZilla 3.68.0 | Tim Kosse | 3.68.0 | `FileZilla Client` | `"C:\Program Files\FileZilla FTP Client\uninstall.exe"` |
+ | HKLM | FileZilla 3.69.3 | Tim Kosse | 3.69.3 | `FileZilla Client` | `"C:\Program Files\FileZilla FTP Client\uninstall.exe"` |

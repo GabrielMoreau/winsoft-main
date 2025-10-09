@@ -15,4 +15,5 @@ Example :
  | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
  | HKLM | 7-Zip 18.05 (x64 edition) | Igor Pavlov | 18.05.00.0 | `{23170F69-40C1-2702-1805-000001000000}` | `MsiExec.exe /I{23170F69-40C1-2702-1805-000001000000}` |
- | HKLM | 7-Zip 23.01 (x64) | Igor Pavlov | 23.01 | `7-Zip` | `"C:\Program Files\7-Zip\Uninstall.exe"` |
+ | HKLM | 7-Zip 23.01 (x64)         | Igor Pavlov | 23.01      | `7-Zip`                                  | `"C:\Program Files\7-Zip\Uninstall.exe"` |
+ | HKLM | 7-Zip 25.01 (x64 edition) | Igor Pavlov | 25.01.00.0 | `{23170F69-40C1-2702-2501-000001000000}` | `MsiExec.exe /I{23170F69-40C1-2702-2501-000001000000}` |

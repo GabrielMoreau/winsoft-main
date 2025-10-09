@@ -23,3 +23,4 @@ Example :
  | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
  | HKLM | LightBulb 2.4.11 | Tyrrrz | 2.4.11 | `{892F745F-A497-42ED-B503-8D74936D0BEB}_is1` | `"C:\Program Files (x86)\LightBulb\unins000.exe"` |
+ | HKLM | LightBulb 2.6.3  | Tyrrrz | 2.6.3  | `{892F745F-A497-42ED-B503-8D74936D0BEB}_is1` | `"C:\Program Files (x86)\LightBulb\unins000.exe"` |

@@ -22,3 +22,4 @@ Example :
  | HKLM | KiCad 9.0 | KiCad | 9.0.0 | `KiCad 9.0` | `"C:\Program Files\KiCad\9.0\uninstall.exe" /allusers` |
  | HKLM | KiCad 9.0 | KiCad | 9.0.1 | `KiCad 9.0` | `"C:\Program Files\KiCad\9.0\uninstall.exe" /allusers` |
  | HKLM | KiCad 9.0 | KiCad | 9.0.2 | `KiCad 9.0` | `"C:\Program Files\KiCad\9.0\uninstall.exe" /allusers` |
+ | HKLM | KiCad 9.0 | KiCad | 9.0.5 | `KiCad 9.0` | `"C:\Program Files\KiCad\9.0\uninstall.exe" /allusers` |

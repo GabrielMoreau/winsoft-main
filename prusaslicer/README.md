@@ -27,3 +27,4 @@ Example :
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
  | HKLM | PrusaSlicer version 2.9.0 | Prusa Research s.r.o. | 2.9.0 | `PrusaSlicer_is1` | `C:\Program Files\Prusa3D\PrusaSlicer\uninstall.bat` |
  | HKLM | PrusaSlicer version 2.9.1 | Prusa Research s.r.o. | 2.9.1 | `PrusaSlicer_is1` | `C:\Program Files\Prusa3D\PrusaSlicer\uninstall.bat` |
+ | HKLM | PrusaSlicer version 2.9.3 | Prusa Research s.r.o. | 2.9.3 | `PrusaSlicer_is1` | `C:\Program Files\Prusa3D\PrusaSlicer\uninstall.bat` |

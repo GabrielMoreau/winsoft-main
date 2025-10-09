@@ -34,3 +34,4 @@ Example :
  | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
  | HKLM | Microsoft Edge | Microsoft Corporation | 130.0.2849.56 | `{6DDFB051-34E1-39F4-8885-0E2990A86A5B}` | `MsiExec.exe /X{6DDFB051-34E1-39F4-8885-0E2990A86A5B}` |
+ | HKLM | Microsoft Edge | Microsoft Corporation | 141.0.3537.57 | `{A346E7BE-EEF3-3F5A-BC54-24BEBC18FCB8}` | `MsiExec.exe /X{A346E7BE-EEF3-3F5A-BC54-24BEBC18FCB8}` |
