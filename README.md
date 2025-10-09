@@ -88,6 +88,19 @@ To find out which parameters you can adapt to your site, the `_common`
 folder, whose main file is `conf.mk`, lists these parameters with
 default values (which don't always work).
 
+## Extend
+
+WinSoft-Main may not contain your software.
+You can make suggestions via PR (Pull Request), email, or any other means.
+However, you probably have internal software that you don't want to share publicly.
+That's perfectly natural.
+
+You can therefore create a local repository with software that will follow the same structure as `winsoft-main`.
+You can call it `winsoft-local` or `winsoft-close`, for example.
+In order to manage all these repositories with a single `Makefile`, there is the `winsoft-loop` project, which allows you to execute all useful targets from a single folder.
+
+See [winsoft-loop](https://gricad-gitlab.univ-grenoble-alpes.fr/legi/soft/trokata/winsoft-loop).
+
 ## How it works
 
 Most of the downloads use the `curl` tool and not `wget`,
