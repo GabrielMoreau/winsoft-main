@@ -10,15 +10,10 @@ sinclude ../winsoft-conf/_common/main.mk
 .PHONY: help build-all clean-all checksum-all last-checksum unrealized-updates list-pkg list-version list-md space version ocs-asifpushed
 .ONESHELL:
 
-help:
-	@
-	echo "* \`build-all\`  build all package except if \`.no-auto-update\` file"
-	echo "* \`clean-all\`  clean all package except if \`.no-auto-update\` file"
-	echo "* \`list-pkg\`   list all package"
-	echo "* \`space\`      clean old package"
-	echo "* \`version\`    get all package version"
+help: ## show this help
+	@awk 'BEGIN {FS = ":.*##"; printf "Usage:\n"} /^[a-zA-Z_-]+:.*?##/ { printf " \033[36mmake %-19s\033[0m #%s\n", $$1, $$2 } /^##@/ { printf "\n\033[1m%s\033[0m\n", substr($$0, 5) } ' $(MAKEFILE_LIST)
 
-build-all:
+build-all: ## build all package except if `.no-auto-update` file
 	@
 	for pkgfolder in $(PKGDIR)
 	do
@@ -37,8 +32,9 @@ build-all:
 	echo '#===================================================================#'
 	echo '#=== Summary: packages created since 12 hours ('$$(date '+%Y-%m-%d %H:%M')') ===#'
 	LANG=C find . -maxdepth 2 -name '*.zip' -a -mtime -0.5 -not -path '*/tmp/*' -exec ls -ltr {} \+
+	exit 0
 
-clean-all:
+clean-all: ## clean all package except if `.no-auto-update` file
 	@
 	for pkgfolder in $(PKGDIR)
 	do
@@ -51,8 +47,9 @@ clean-all:
 		printf "#=== %-$(PKGLEN)s ===#\n" $${pkgfolder%/}
 		(cd $${pkgfolder}; make clean; rm -f .make.log)
 	done
+	exit 0
 
-checksum-all:
+checksum-all: ## make all package checksum files except if `.no-auto-update` file
 	@
 	for pkgfolder in $(PKGDIR)
 	do
@@ -65,16 +62,18 @@ checksum-all:
 		printf "#=== %-$(PKGLEN)s ===#\n" $${pkgfolder%/}
 		(cd $${pkgfolder}; grep -q '^checksum:' Makefile && make checksum)
 	done
+	exit 0
 
-last-checksum:
+last-checksum: ## make package checksum file if version have changed
 	@
 	while read -r pkgfolder
 	do
 		printf "#=== %-$(PKGLEN)s ===#\n" $${pkgfolder}
 		(cd $${pkgfolder}; grep -q '^checksum:' Makefile && make checksum)
 	done < <(LANG=C find . -maxdepth 2 -name '*.zip' -a -mtime -1.25 -not -path '*/tmp/*' -print | xargs -r dirname | xargs -r -n 1 basename | sort -u)
+	exit 0
 
-unrealized-updates:
+unrealized-updates: ## try to find packages that are not uptodate
 	@
 	while read -r pkgfolder
 	do
@@ -84,8 +83,9 @@ unrealized-updates:
 	done < <(LANG=C find . -maxdepth 2 -name '*.zip' -a -mtime -180 -not -path '*/tmp/*' -print | xargs -r dirname | xargs -r -n 1 basename | sort -u)
 	echo '#===================================================================#'
 	echo '#=== Summary: this check was performed on '$$(date '+%Y-%m-%d %H:%M')'       ===#'
+	exit 0
 
-list-pkg:
+list-pkg: ## list all package
 	@
 	for pkgfolder in $(PKGDIR)
 	do
@@ -95,8 +95,9 @@ list-pkg:
 			unzip -t *.zip; \
 		)
 	done
+	exit 0
 
-list-version:
+list-version: ## list all version package except if `.no-auto-update` file
 	@
 	for pkgfolder in $(PKGDIR)
 	do
@@ -106,8 +107,9 @@ list-version:
 		fi
 		printf "%25s %s\n" "$${pkgfolder%/}" $$(cd $${pkgfolder}; make version | grep '^VERSION:' | awk '{print $$2}')
 	done
+	exit 0
 
-list-md:
+list-md: ## list all package in markdown format
 	@
 	echo '## List of '$$((git ls-files | grep '^[[:alpha:][:digit:]-]*/README.md'; grep -l '^Uninstall-.*.zip:' */Makefile) | wc -l)' packages'
 	echo ''
@@ -157,8 +159,9 @@ list-md:
 		obsolete=$$(grep '* Obsolete : ' $${pkg}/README.md | cut -f 4 -d ' ')
 		head -1 $${pkg}/README.md | perl -p -e "s{^#\s(.*)\s-\s(.*)}{ | $${sindex} | [\\1]($${pkg}/README.md) | \\2 | $${obsolete} |};"
 	done | sort | grep -Ev '\([[:alpha:]][[:alpha:]]*\)\]\('
+	exit 0
 
-space:
+space: ## clean (remove) old package to get disk space
 	@
 	for pkgfolder in $(PKGDIR)
 	do
@@ -167,8 +170,9 @@ space:
 			ls -t *.zip 2>/dev/null | grep    'Uninstall' | tail -n +$$(($(KEEP) + 1)) | xargs -r rm -vf; \
 		)
 	done
+	exit 0
 
-version:
+version: ## get all package version except if `.no-auto-update` file
 	@
 	for pkgfolder in $(PKGDIR)
 	do
@@ -181,8 +185,9 @@ version:
 		printf "#=== %-$(PKGLEN)s ===#\n" $${pkgfolder%/}
 		(cd $${pkgfolder}; make version) | grep -v '^make'
 	done
+	exit 0
 
-ocs-push: ## Push last package like make last checksum (see target last-checksum)
+ocs-push: ## push last packages (see target last-checksum) on your OCS server except if `.no-ocs-pkgpush` file
 	@
 	while read -r pkgfolder
 	do
@@ -194,8 +199,9 @@ ocs-push: ## Push last package like make last checksum (see target last-checksum
 		printf "#=== %-$(PKGLEN)s ===#\n" $${pkgfolder}
 		(cd $${pkgfolder}; make ocs-push)
 	done < <(LANG=C find . -maxdepth 2 -name '*.zip' -a -mtime -1.25 -not -path '*/tmp/*' -print | xargs -r dirname | xargs -r -n 1 basename | sort -u)
+	exit 0
 
-ocs-pretend-pushed: ## Act as if all packages have already been downloaded to the OCS server
+ocs-pretend-pushed: ## act as if all packages have already been downloaded to the OCS server
 	@
 	for pkgfolder in $$(ls -1d *)
 	do
@@ -211,3 +217,4 @@ ocs-pretend-pushed: ## Act as if all packages have already been downloaded to th
 			done
 		)
 	done
+	exit 0
