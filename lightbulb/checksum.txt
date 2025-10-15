@@ -34,3 +34,4 @@ dc89611cf32f102866a73e7fce764d2bbe0b9276fbcab6784afbebbe7af8d40a  LightBulb-Inst
 69e5c0a91f8e3ffba8e715038d482d8a38d3a6f8c3b2e977e3dcc955e176bd52  windowsdesktop-runtime-8.0.18-win-x64.exe
 eba7f11215b22ced419ab7e080fadd0f3bc21431f588f27f4cc7ed32c9d4a12a  windowsdesktop-runtime-8.0.19-win-x64.exe
 713e77616f7af4adc3e76eb6daa1ac97ced643ecb36bae474c7e2dd79b81dfff  windowsdesktop-runtime-8.0.20-win-x64.exe
+f551625bad9adabba3269457240b8dc9448715bcdff0c7ac5e7f8c05cbc7de04  windowsdesktop-runtime-8.0.21-win-x64.exe
