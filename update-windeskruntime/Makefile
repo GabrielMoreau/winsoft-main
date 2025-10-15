@@ -35,6 +35,7 @@ all: check-version check-exe $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
 sinclude ../_common/conf.mk
 
 # OCS configuration
+OCS_SEARCH:=Microsoft Windows Desktop Runtime
 OCS_PRIORITY:=$(shell expr $(OCS_PRIORITY) + 1)
 
 check-version:

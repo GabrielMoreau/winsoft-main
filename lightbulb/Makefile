@@ -26,6 +26,9 @@ all: check-version check-exe $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
 
 sinclude ../_common/conf.mk
 
+# OCS configuration
+OCS_SEARCH:=$(SOFT)
+
 check-version:
 	@echo $(VERSION1) | grep -Eq '^[[:digit:]][\.[:digit:]]+[[:digit:]]$$' || (echo 'VERSION1 (LightBulb) is undefined' > /dev/stderr ; exit 1)
 	@echo $(VERSION2) | grep -Eq '^[[:digit:]][\.[:digit:]]+[[:digit:]]$$' || (echo 'VERSION2 (WindowsDesktop-Runtime) is undefined' > /dev/stderr ; exit 1)
