@@ -29,4 +29,5 @@ Example :
  | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
  | HKLM | Google Chrome | Google LLC | 125.0.6422.142 | `{9113689C-73CB-3186-A887-E2631880E11F}` | `MsiExec.exe /X{9113689C-73CB-3186-A887-E2631880E11F}` |
- | HKLM | Google Chrome | Google LLC | 141.0.7390.66 | `{25CA3DD2-ABE2-3644-9BB1-653047FE4EA2}` | `MsiExec.exe /X{25CA3DD2-ABE2-3644-9BB1-653047FE4EA2}` |
+ | HKLM | Google Chrome | Google LLC | 141.0.7390.66  | `{25CA3DD2-ABE2-3644-9BB1-653047FE4EA2}` | `MsiExec.exe /X{25CA3DD2-ABE2-3644-9BB1-653047FE4EA2}` |
+ | HKLM | Google Chrome | Google LLC | 141.0.7390.108 | `{F0E131DE-2158-352E-90D4-7B523C706959}` | `MsiExec.exe /X{F0E131DE-2158-352E-90D4-7B523C706959}` |
