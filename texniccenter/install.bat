@@ -23,10 +23,10 @@ SET softversion=__VERSION__
 ECHO Silent install %softname%
 "TXCSetup_%softversion%Stable_x64.exe" /VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-
 
-REM IF EXIST "%PROGRAMFILES%\TeXnicCenter\Language" COPY /Y fr_FR.aff "%PROGRAMFILES%\TeXnicCenter\Language"
-REM IF EXIST "%PROGRAMFILES%\TeXnicCenter\Language" COPY /Y fr_FR.dic "%PROGRAMFILES%\TeXnicCenter\Language"
-REM IF EXIST "%PROGRAMFILES(x86)%\TeXnicCenter\Language" COPY /Y fr_FR.aff "%PROGRAMFILES(x86)%\TeXnicCenter\Language"
-REM IF EXIST "%PROGRAMFILES(x86)%\TeXnicCenter\Language" COPY /Y fr_FR.dic "%PROGRAMFILES(x86)%\TeXnicCenter\Language"
+REM IF EXIST "%ProgramFiles%\TeXnicCenter\Language" COPY /Y fr_FR.aff "%ProgramFiles%\TeXnicCenter\Language"
+REM IF EXIST "%ProgramFiles%\TeXnicCenter\Language" COPY /Y fr_FR.dic "%ProgramFiles%\TeXnicCenter\Language"
+REM IF EXIST "%ProgramFiles(x86)%\TeXnicCenter\Language" COPY /Y fr_FR.aff "%ProgramFiles(x86)%\TeXnicCenter\Language"
+REM IF EXIST "%ProgramFiles(x86)%\TeXnicCenter\Language" COPY /Y fr_FR.dic "%ProgramFiles(x86)%\TeXnicCenter\Language"
 
 
 

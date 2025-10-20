@@ -21,8 +21,8 @@ SET softversion=__VERSION__
 
 
 ECHO Silent uninstall %softname%
-IF EXIST "%PROGRAMFILES%\Tabby\Uninstall Tabby.exe" (
-  ScriptRunner.exe -appvscript "%PROGRAMFILES%\Tabby\Uninstall Tabby.exe" /S /ALLUSERS -appvscriptrunnerparameters -wait -timeout=300
+IF EXIST "%ProgramFiles%\Tabby\Uninstall Tabby.exe" (
+  ScriptRunner.exe -appvscript "%ProgramFiles%\Tabby\Uninstall Tabby.exe" /S /ALLUSERS -appvscriptrunnerparameters -wait -timeout=300
 )
 
 
