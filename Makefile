@@ -201,6 +201,20 @@ ocs-push: ## push last packages (see target last-checksum) on your OCS server ex
 	done < <(LANG=C find . -maxdepth 2 -name '*.zip' -a -mtime -1.25 -not -path '*/tmp/*' -print | xargs -r dirname | xargs -r -n 1 basename | sort -u)
 	exit 0
 
+ocs-push-all: ## push all packages that have not yet been pushed, unless the `.no-ocs-pkgpush` file exists.
+	@
+	while read -r pkgfolder
+	do
+		if [ -f "$${pkgfolder}/.no-ocs-pkgpush" ] || grep -q "^$${pkgfolder}" ./_common/no-ocs-pkgpush.conf ../winsoft-conf/_common/no-ocs-pkgpush.conf 2> /dev/null
+		then
+			printf "#--- %-$(PKGLEN)s ---#\n" pass:$${pkgfolder%/}
+			continue
+		fi
+		printf "#=== %-$(PKGLEN)s ===#\n" $${pkgfolder}
+		(cd $${pkgfolder}; make ocs-push)
+	done < <(LANG=C find . -maxdepth 2 -name '*.zip' -a -not -path '*/tmp/*' -print | xargs -r dirname | xargs -r -n 1 basename | sort -u)
+	exit 0
+
 ocs-pretend-pushed: ## act as if all packages have already been downloaded to the OCS server
 	@
 	for pkgfolder in $$(ls -1d *)
