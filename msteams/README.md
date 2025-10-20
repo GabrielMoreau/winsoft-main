@@ -19,7 +19,7 @@ chat and videoconferencing, file storage, and application integration.
   https://community.chocolatey.org/packages/microsoft-teams-new-bootstrapper
 
 The installation creates a directory in `C:\Program Files (x86)\Teams Installer` with an installer and a config file in JSON format.
-Then for each new session, the Teams program is in the user's home in `C:\Users\login\ApplData\Local\Microsoft\Teams`.
+Then for each new session, the Teams program is in the user's home in `C:\Users\XXXXX\ApplData\Local\Microsoft\Teams`.
 
 
 ## 2025/03/03 From Teams Classic to new Microsoft Teams client

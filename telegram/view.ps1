@@ -24,4 +24,4 @@ Read-Host “Press ENTER to exit...”
 Return
 
 # Telegram Desktop 4.9.9    / 4.9.9          / Telegram Desktop / C:\Program Files\Telegram Desktop\uninstall.bat (C) Telegram FZ-LLC
-# Telegram Desktop          / 4.9.9          / {53F49750-6209-4FBF-9CA8-7A333C87D1ED}_is1 / "C:\Users\xxxxxxxxx\AppData\Roaming\Telegram Desktop\unins000.exe" (C) Telegram FZ-LLC
+# Telegram Desktop          / 4.9.9          / {53F49750-6209-4FBF-9CA8-7A333C87D1ED}_is1 / "C:\Users\XXXXX\AppData\Roaming\Telegram Desktop\unins000.exe" (C) Telegram FZ-LLC

@@ -26,5 +26,5 @@ Example :
  | HKLM | Signal 7.33.0 | Signal Messenger, LLC | 7.33.0 | `7d96caee-06e6-597c-9f2f-c7bb2e0948b4` | `C:\ProgramData\signal-desktop\uninstall.bat` |
  | HKCU | Signal 7.46.1 | Signal Messenger, LLC | 7.46.1 | `7d96caee-06e6-597c-9f2f-c7bb2e0948b4` | `"C:\Users\XXXXX\AppData\Local\Programs\signal-desktop\Uninstall Signal.exe" /currentuser` |
  | HKLM | Signal 7.46.1 | Signal Messenger, LLC | 7.46.1 | `7d96caee-06e6-597c-9f2f-c7bb2e0948b4` | `C:\ProgramData\signal-desktop\uninstall.bat` |
- | HKCU | Signal 7.74.0 | Signal Messenger, LLC | 7.74.0 | `7d96caee-06e6-597c-9f2f-c7bb2e0948b4` | `"C:\Users\bigsachem-sysadmin\AppData\Local\Programs\signal-desktop\Uninstall Signal.exe" /currentuser` |
+ | HKCU | Signal 7.74.0 | Signal Messenger, LLC | 7.74.0 | `7d96caee-06e6-597c-9f2f-c7bb2e0948b4` | `"C:\Users\XXXXX\AppData\Local\Programs\signal-desktop\Uninstall Signal.exe" /currentuser` |
  | HKLM | Signal 7.74.0 | Signal Messenger, LLC | 7.74.0 | `7d96caee-06e6-597c-9f2f-c7bb2e0948b4` | `C:\ProgramData\signal-desktop\uninstall.bat` |

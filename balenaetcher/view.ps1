@@ -23,5 +23,5 @@ Read-Host “Press ENTER to exit...”
 
 Return
 
-# balenaEtcher 1.18.8  / 1.18.8         / d2f3b6c7-6f49-59e2-b8a5-f72e33900c2b / "C:\Users\xxxxxxxxx\AppData\Local\Programs\balena-etcher\Uninstall balenaEtcher.exe" /currentuser (C) Balena Ltd.
+# balenaEtcher 1.18.8  / 1.18.8         / d2f3b6c7-6f49-59e2-b8a5-f72e33900c2b / "C:\Users\XXXXX\AppData\Local\Programs\balena-etcher\Uninstall balenaEtcher.exe" /currentuser (C) Balena Ltd.
 # balenaEtcher 1.18.11 / 1.18.11        / balena-etcher / C:\Program Files\balena-etcher\uninstall.bat (C) Balena Ltd.

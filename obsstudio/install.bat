@@ -50,7 +50,7 @@ IF EXIST "%ALLUSERSPROFILE%\Desktop\OBS*Studio.lnk" DEL /F /Q "%ALLUSERSPROFILE%
 
 ECHO Disable Auto Updates
 REM Write for system in C:\Windows\System32\config\systemprofile\AppData\Roaming\obs-studio
-REM Write for user in   C:\Users\toto-user\AppData\Roaming\obs-studio
+REM Write for user in   C:\Users\XXXXX\AppData\Roaming\obs-studio
 REM So no work at global configuration...
 REM COPY /A /Y "global.ini" "%AppData%\obs-studio\global.ini"
 REM Just copy in install folder, user have to copy it in their app data folder
