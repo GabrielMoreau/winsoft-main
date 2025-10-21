@@ -1,0 +1,15 @@
+#!/bin/bash
+
+setup=$1
+
+[ -s "${setup}" ] || exit 10
+
+rm -rf extract pkg
+mkdir -p pkg
+7z -y x "${setup}" -oextract > /dev/null
+
+
+cd pkg || exit 11
+7z -y x ../extract/\$PLUGINSDIR/app-64.7z > /dev/null
+mv      ../extract/resources/* resources/
+mv      ../extract/\$R0/*      ./
