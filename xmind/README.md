@@ -24,5 +24,5 @@ Example :
  | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
  | HKU  | Xmind 26.1.3145 | XMIND LTD. | 26.1.3145 | `fbd30ee5-8150-549e-9aed-fd9d444364fb` | `"C:\WINDOWS\system32\config\systemprofile\AppData\Local\Programs\Xmind\Uninstall Xmind.exe" /currentuser` |
- | HKCU | Xmind 26.1.3145 | XMIND LTD. | 26.1.3145 | `fbd30ee5-8150-549e-9aed-fd9d444364fb` | `"C:\Users\XXXXX\AppData\Local\Programs\Xmind\Uninstall Xmind.exe" /currentuser` | 
+ | HKCU | Xmind 26.1.3145 | XMIND LTD. | 26.1.3145 | `fbd30ee5-8150-549e-9aed-fd9d444364fb` | `"C:\Users\XXXXX\AppData\Local\Programs\Xmind\Uninstall Xmind.exe" /currentuser` |
  | HKLM | Xmind 26.1.3145.63716 | XMIND LTD. | 26.1.3145.63716 | `Xmind_is1` | `C:\Program Files\Xmind\Uninstall Xmind.exe` |
