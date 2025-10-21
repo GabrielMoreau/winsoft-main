@@ -137,7 +137,7 @@ Please devops, put always the version number clearly in the comment...
 apt install make curl wget pev msitools p7zip-full libimage-exiftool-perl
 ```
 
-## List of 127 packages
+## List of 129 packages
 
  |   | Software | Detail | &#127968; |   |
  | - | -------- | ------ | --------- | - |
@@ -240,10 +240,11 @@ apt install make curl wget pev msitools p7zip-full libimage-exiftool-perl
  | 105 | [WinSCP](winscp/README.md) | SCP and SFTP file transfert | [&#127968;](https://winscp.net/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
  | 106 | [Wireshark](wireshark/README.md) | Network Packet Analyser | [&#127968;](https://wireshark.org/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
  | 107 | [X2GoClient](x2goclient/README.md) | Client Windows for X2GO (NX) Linux remote desktop | [&#127968;](https://wiki.x2go.org/doku.php/start) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
- | 108 | [XnViewMP](xnviewmp/README.md) | Image viewer, browser and converter | [&#127968;](https://www.xnview.com) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
- | 109 | [Xournal++](xournalpp/README.md) | PDF annotate and hand note-taking software | [&#127968;](https://github.com/xournalpp/xournalpp) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
- | 110 | [Zoom](zoom/README.md) | Web Conference Client | [&#127968;](https://zoom.us/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
- | 111 | [Zotero](zotero/README.md) | Manage bibliographic data | [&#127968;](https://www.zotero.org/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
+ | 108 | [XMind](xmind/README.md) | Mind mapping and collaboration application | [&#127968;](https://xmind.com/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
+ | 109 | [XnViewMP](xnviewmp/README.md) | Image viewer, browser and converter | [&#127968;](https://www.xnview.com) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
+ | 110 | [Xournal++](xournalpp/README.md) | PDF annotate and hand note-taking software | [&#127968;](https://github.com/xournalpp/xournalpp) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
+ | 111 | [Zoom](zoom/README.md) | Web Conference Client | [&#127968;](https://zoom.us/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
+ | 112 | [Zotero](zotero/README.md) | Manage bibliographic data | [&#127968;](https://www.zotero.org/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
 
 ### Uninstall packages
 
@@ -264,6 +265,7 @@ apt install make curl wget pev msitools p7zip-full libimage-exiftool-perl
  | [Tabby (Uninstall)](tabby/README.md) | Modern terminal for local shells, SSH, etc | [&#127968;](https://tabby.sh/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
  | [TeamViewer (Uninstall)](teamviewer/README.md) | Remote access and remote control | [&#127968;](https://www.teamviewer.com) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
  | [Webex (Uninstall)](webex/README.md) | Cisco Web conferencing and videoconferencing Client | [&#127968;](https://www.webex.com/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
+ | [XMind (Uninstall)](xmind/README.md) | Mind mapping and collaboration application | [&#127968;](https://xmind.com/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
  | [Zoom (Uninstall)](zoom/README.md) | Web Conference Client | [&#127968;](https://zoom.us/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
 
 ### Action packages
