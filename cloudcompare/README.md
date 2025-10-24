@@ -9,7 +9,7 @@ Afterwards, it has been extended to a more generic point cloud processing softwa
 * Wikipedia : https://en.wikipedia.org/wiki/CloudCompare
 
 * Download : https://cloudcompare.org/release/index.html
-* Git : https://github.com/CloudCompare/CloudCompare
+* Forge : https://github.com/CloudCompare/CloudCompare
 * Silent install : https://www.manageengine.com/products/desktop-central/software-installation/silent_install_CloudCompare-(x64)-(2.13.1).html
 
 

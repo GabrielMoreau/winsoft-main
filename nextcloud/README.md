@@ -5,7 +5,7 @@ for creating and using file hosting services.
 
 * Website : https://nextcloud.com/
 * Wikipedia : https://en.wikipedia.org/wiki/Nextcloud
-* Git : https://github.com/nextcloud-releases/desktop/
+* Forge : https://github.com/nextcloud-releases/desktop/
 
 * Download : https://download.nextcloud.com/desktop/releases/Windows/
 

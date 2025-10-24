@@ -7,7 +7,7 @@ It supersedes SuperCopier.
 * Wikipedia : https://en.wikipedia.org/wiki/Ultracopier
 
 * Download : https://ultracopier.herman-brule.com/#download
-* Git : https://github.com/alphaonex86/Ultracopier
+* Forge : https://github.com/alphaonex86/Ultracopier
 * Chocolatey : https://community.chocolatey.org/packages/ultracopier
 
 

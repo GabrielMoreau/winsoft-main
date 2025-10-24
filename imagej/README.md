@@ -24,7 +24,7 @@ image analysis.
 * Presentations : https://imagej.net/events/presentations
 
 * Download : https://imagej.net/software/fiji/
-* Git : https://github.com/fiji/fiji
+* Forge : https://github.com/fiji/fiji
 
 
 Bonus plugin
