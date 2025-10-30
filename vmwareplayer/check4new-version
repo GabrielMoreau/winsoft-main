@@ -1,17 +1,19 @@
 #!/bin/bash
 #
+# check4new-version
+#
 # 2024/02/13 Gabriel Moreau <Gabriel.Moreau(A)univ-grenoble-alpes.fr>
 
 # https://download3.vmware.com/software/CART24FQ4_WIN_2312/VMware-Horizon-Client-2312-8.12.0-23149293.exe
 url1=$(curl -s -L --connect-timeout 10 'https://community.chocolatey.org/packages/vmware-workstation-player' | sed -e 's/[;&]/\n/g;' | grep '^https://download3.vmware.com')
 if [ -n "${url1}" ]
 then
-	grep -q "${url1}" url.txt || { echo "New version probably online: ${url1}"; exit 12; }
+	grep -q "${url1}" url.txt || { echo "New version probably online: ${url1}"; exit 13; }
 fi
 
 # https://en.wikipedia.org/wiki/VMware_Horizon
 version2=$(curl -s -L --connect-timeout 10 'https://en.wikipedia.org/wiki/VMware_Workstation_Player' | sed -e 's/>/\n/g;' | grep -A 10  'Stable release' | grep '^[[:digit:]]' | head -1 | cut -f 1 -d '<')
 if [ -n "${version2}" ]
 then
-	grep -q -- "^${version2}" url.txt || { echo "New version probably online: ${version2}"; exit 2; }
+	grep -q -- "^${version2}" url.txt || { echo "New version probably online: ${version2}"; exit 13; }
 fi

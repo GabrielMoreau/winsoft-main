@@ -94,7 +94,7 @@ Here are some error exit code use in `Makefile`:
 
 * Error 11: Version is undefined
 * Error 12: Bad version or format for uploaded file
-* Error 13: New version exist online
+* Error 13: New version probably exist online
 * Error 14: Two uploaded files (binaries) with same checksum
 * Error 15: Same version, but with different checksum
 * Error 16: Return back to an old version

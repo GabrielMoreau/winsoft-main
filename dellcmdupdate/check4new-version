@@ -1,10 +1,12 @@
 #!/bin/bash
 #
+# check4new-version
+#
 # 2024/02/08 Gabriel Moreau <Gabriel.Moreau(A)univ-grenoble-alpes.fr>
 
 # https://download3.vmware.com/software/CART24FQ4_WIN_2312/VMware-Horizon-Client-2312-8.12.0-23149293.exe
 url1=$(curl -s -L --connect-timeout 10 'https://community.chocolatey.org/packages/DellCommandUpdate' | sed -e 's/[;&]/\n/g;' | grep '^https://dl.dell.com/.*EXE')
 if [ -n "${url1}" ]
 then
-	grep -q "${url1}" url.txt || { echo "New version probably online: ${url1}"; exit 12; }
+	grep -q "${url1}" url.txt || { echo "New version probably online: ${url1}"; exit 13; }
 fi
