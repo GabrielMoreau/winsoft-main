@@ -27,7 +27,7 @@ all: check-version $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
 sinclude ../_common/conf.mk
 
 check-version:
-	@echo $(VERSION) | grep -Eq '^[[:digit:]][\.[:digit:]]+[[:digit:]]$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
+	@echo $(VERSION) | grep -Eq '^[[:digit:]][\.[:digit:]]+[[:digit:]]$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 11)
 
 clean:
 	@rm -rf tmp sshfswin*.zip tmp

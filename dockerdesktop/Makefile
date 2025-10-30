@@ -33,7 +33,7 @@ sinclude ../_common/conf.mk
 OCS_SEARCH:=Docker
 
 check-version:
-	@echo $(VERSION) | grep -Eq '^[[:digit:]][\.[:digit:]]+[[:digit:]]$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
+	@echo $(VERSION) | grep -Eq '^[[:digit:]][\.[:digit:]]+[[:digit:]]$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 11)
 
 check-unrealized: check-version
 	@( grep -q '[[:space:]]$(EXE)$$' checksum.txt || { echo 'Warning: Updates not performed for $(SOFT) version $(VERSION)' ; exit ; } ; \

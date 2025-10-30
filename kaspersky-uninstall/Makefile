@@ -28,7 +28,7 @@ OCS_SEARCH:=Kaspersky
 OCS_PRIORITY:=2
 
 check-version:
-	@echo $(VERSION) | grep -Eq '^[[:digit:]][\.[:digit:]]+[[:digit:]]$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
+	@echo $(VERSION) | grep -Eq '^[[:digit:]][\.[:digit:]]+[[:digit:]]$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 11)
 
 clean:
 	rm -rf $(SOFT)_$(VERSION)-$(REVISION)_x64.zip $(EXE) tmp

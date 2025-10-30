@@ -32,7 +32,7 @@ OCS_DURATION:=$(OCS_DURATION_LONG)
 OCS_MESSAGE:=$(OCS_MESSAGE_LONG)
 
 check-version:
-	@echo $(VERSION) | egrep -q '^[[:digit:]][\.[:digit:]]*[[[:alnum:]]*$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 1)
+	@echo $(VERSION) | egrep -q '^[[:digit:]][\.[:digit:]]*[[[:alnum:]]*$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 11)
 	@if [ "$$( (echo 100000; grep -n "x64$(VERSIONCOLLAPSE)_" checksum.txt | cut -f 1 -d ':') | tail -1)" -lt "$$( (echo 100000; wc -l < checksum.txt) | tail -1)" ]; then echo 'VERSION $(VERSION) is older then last one' > /dev/stderr ; exit 1; fi
 
 check-unrealized: check-version
