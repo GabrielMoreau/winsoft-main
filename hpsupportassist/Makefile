@@ -48,7 +48,7 @@ checksum: check-version
 wget: tmp/$(EXE)
 
 check-update:
-	@./check4new-version || { echo "Error: there is probably a new version online" 1>&2 ; exit 1; }
+	@./check4new-version || { echo "Error: there is probably a new version online" 1>&2 ; exit 13; }
 
 tmp/$(EXE):
 	@mkdir -p tmp
