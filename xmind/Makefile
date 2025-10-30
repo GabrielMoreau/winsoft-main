@@ -57,7 +57,7 @@ tmp/$(EXE):
 		cp "$(INSTALLER)" "$(EXE)" ; \
 		printf '#%.0s' $$(seq 1 $$(( $$(tput cols) - 33 ))); echo ' 100.0%' ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
-		if grep $$(shasum -a 256 "$(EXE)" | cut -f 1 -d ' ') ../checksum.txt | grep -qv "$(EXE)"; then echo "Error: another version of $(EXE) exists with the same checksum" 1>&2 ; rm -f "$(EXE)" ; exit 1; fi; \
+		if grep $$(shasum -a 256 "$(EXE)" | cut -f 1 -d ' ') ../checksum.txt | grep -qv "$(EXE)"; then echo "Error: another version of $(EXE) exists with the same checksum" 1>&2 ; rm -f "$(EXE)" ; exit 14; fi; \
 		)
 
 tmp/pkg/Xmind.exe: tmp/$(EXE)

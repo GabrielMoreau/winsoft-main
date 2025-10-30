@@ -69,14 +69,14 @@ tmp/$(EXE):
 		cp "$(INSTALLER)" "$(EXE)" ; \
 		printf '#%.0s' $$(seq 1 $$(( $$(tput cols) - 33 ))); echo ' 100.0%' ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
-		if grep $$(shasum -a 256 "$(EXE)" | cut -f 1 -d ' ') ../checksum.txt | grep -qv "$(EXE)"; then echo "Error: another version of DockerDesktop-XXXX.exe exists with the same checksum" 1>&2 ; rm -f "$(EXE)" ; exit 1; fi; \
+		if grep $$(shasum -a 256 "$(EXE)" | cut -f 1 -d ' ') ../checksum.txt | grep -qv "$(EXE)"; then echo "Error: another version of DockerDesktop-XXXX.exe exists with the same checksum" 1>&2 ; rm -f "$(EXE)" ; exit 14; fi; \
 		)
 
 check-exe: tmp/$(EXE)
 	@(cd tmp ; \
 		file $(EXE) | grep -q "PE32. executable.*x86-64," || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 1; } ; \
 		which peres >/dev/null && { peres -v $(EXE) | grep -q "^Product Version:[[:space:]]*$(VERSION)" || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 1; } ; } ;\
-		if grep $$(shasum -a 256 "$(EXE)" | cut -f 1 -d ' ') ../checksum.txt | grep -qv "$(EXE)"; then echo "Error: two binary DockerDesktop-XXXX.exe version exists with same checksum" 1>&2 ; exit 1; fi; \
+		if grep $$(shasum -a 256 "$(EXE)" | cut -f 1 -d ' ') ../checksum.txt | grep -qv "$(EXE)"; then echo "Error: two binary DockerDesktop-XXXX.exe version exists with same checksum" 1>&2 ; exit 14; fi; \
 		if grep "$(EXE)" ../checksum.txt | grep -qv "$$(shasum -a 256 "$(EXE)" | cut -f 1 -d ' ')"; then echo "Error: two binary $(EXE) exists with same version and different checksum" 1>&2 ; exit 1; fi; \
 		)
 
