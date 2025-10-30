@@ -5,7 +5,7 @@
 
 SOFT:=BleachBit
 URL:=https://download.bleachbit.org/$(shell curl -s -L --connect-timeout 10 'https://www.bleachbit.org/download/windows' | sed -e 's/"/\n/g;' | grep '^/download/.*=BleachBit-.*-setup.exe' | cut -f 2 -d '=' | head -1 | sed -e 's/[[:space:]].*//;')
-VERSION:=$(shell echo $(URL) | cut -f 2 -d '-' | sed -e 's/[[:space:]]//g;')
+VERSION:=$(shell echo $(URL) | cut -f 2 -d '-' | sed -e 's/[[:space:]]/ERROR/g;')
 REVISION:=1
 EXE:=BleachBit-$(VERSION)-setup.exe
 
