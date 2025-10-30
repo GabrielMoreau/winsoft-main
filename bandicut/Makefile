@@ -4,7 +4,7 @@
 #
 
 SOFT:=Bandicut
-VERSION:=$(shell curl -s -L 'https://www.bandicam.com/bandicut-video-cutter/download/' | egrep '^Bandicut [[:digit:]]' | head -1 | sed -e 's/.*v//; s/[^[:digit:]\.].*//;')
+VERSION:=$(shell curl -s -L --connect-timeout 10 'https://www.bandicam.com/bandicut-video-cutter/download/' | egrep '^Bandicut [[:digit:]]' | head -1 | sed -e 's/.*v//; s/[^[:digit:]\.].*//;')
 REVISION:=1
 URL:=https://dl.bandicam.com/bandicut/bandicut-setup.exe
 

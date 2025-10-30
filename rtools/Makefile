@@ -7,9 +7,9 @@ SOFT:=RTools
 
 RVERSION:=$(shell grep '[[:space:]]R-' ../rstudio/checksum.txt | awk '{print $$2}' | cut -f 2 -d '-' | cut -f 1,2 -d '.' | tail -1)
 
-SHORTVERSION:=$(shell curl -s -L 'https://cran.r-project.org/bin/windows/Rtools/' | grep -B 1 'for R .* $(RVERSION)\.' | sed -e 's/"/\n/g;' | grep '^rtools' | head -1 | xargs -r dirname | sed -e 's/^rtools//;')
-DOTVERSION:=$(shell curl -s -L 'https://cran.r-project.org/bin/windows/Rtools/' | grep -B 1 'for R .* $(RVERSION)\.' | sed -e 's/=/\n/g; s/</ /g;' | grep 'rtools$(SHORTVERSION)/rtools.html' | head -1 | cut -f 2 -d ' ')
-LONGVERSION:=$(shell curl -s -L 'https://cran.r-project.org/bin/windows/Rtools/rtools$(SHORTVERSION)/rtools.html' | sed -e 's/"/\n/g;' | grep '^files/rtools.*exe$$' | sed -e 's#files/rtools##; s/\.exe//;' | head -1)
+SHORTVERSION:=$(shell curl -s -L --connect-timeout 10 'https://cran.r-project.org/bin/windows/Rtools/' | grep -B 1 'for R .* $(RVERSION)\.' | sed -e 's/"/\n/g;' | grep '^rtools' | head -1 | xargs -r dirname | sed -e 's/^rtools//;')
+DOTVERSION:=$(shell curl -s -L --connect-timeout 10 'https://cran.r-project.org/bin/windows/Rtools/' | grep -B 1 'for R .* $(RVERSION)\.' | sed -e 's/=/\n/g; s/</ /g;' | grep 'rtools$(SHORTVERSION)/rtools.html' | head -1 | cut -f 2 -d ' ')
+LONGVERSION:=$(shell curl -s -L --connect-timeout 10 'https://cran.r-project.org/bin/windows/Rtools/rtools$(SHORTVERSION)/rtools.html' | sed -e 's/"/\n/g;' | grep '^files/rtools.*exe$$' | sed -e 's#files/rtools##; s/\.exe//;' | head -1)
 CONCATVERSION:=$(shell echo $(LONGVERSION) | sed -e 's/[-\.]//g;')
 URL:=https://cran.r-project.org/bin/windows/Rtools/rtools$(SHORTVERSION)/files/rtools$(LONGVERSION).exe
 EXE:=rtools$(LONGVERSION).exe

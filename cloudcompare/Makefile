@@ -8,7 +8,7 @@ sinclude ../_common/flag.mk
 SOFT:=CloudCompare
 REVISION:=1
 # https://cloudcompare.org/release/CloudCompare_v2.13.2_setup_x64.exe
-URL:=https://cloudcompare.org/release/$(shell curl -s -L 'https://cloudcompare.org/release/index.html' | sed -e 's/"/\n/g;' | grep -E '[[:digit:]]_setup_x64.exe' | head -1)
+URL:=https://cloudcompare.org/release/$(shell curl -s -L --connect-timeout 10 'https://cloudcompare.org/release/index.html' | sed -e 's/"/\n/g;' | grep -E '[[:digit:]]_setup_x64.exe' | head -1)
 VERSION:=$(shell basename '$(URL)' | cut -f 2 -d '_' | sed -e 's/^v//;')
 
 EXE:=CloudCompare_v$(VERSION)_setup_x64.exe

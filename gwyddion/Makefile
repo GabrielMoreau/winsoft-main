@@ -4,7 +4,7 @@
 #
 
 SOFT:=Gwyddion
-VERSION:=$(shell curl -s -L 'http://gwyddion.net/download.php' | sed -e 's/>/\n/g;' | grep '^Version.*released' | cut -f 1 -d ',' | cut -f 2 -d ' ')
+VERSION:=$(shell curl -s -L --connect-timeout 10 'http://gwyddion.net/download.php' | sed -e 's/>/\n/g;' | grep '^Version.*released' | cut -f 1 -d ',' | cut -f 2 -d ' ')
 REVISION:=1
 URL:=http://sourceforge.net/projects/gwyddion/files/gwyddion/$(VERSION)/Gwyddion-$(VERSION).win64.exe
 

@@ -4,7 +4,7 @@
 #
 
 SOFT:=PDFCreator
-VERSION:=$(shell curl -s -L 'https://download.pdfforge.org/download' | sed -e 's/[<>]/\n/g;' | grep Setup.exe | cut -f 2 -d '-' | sed -e 's/_/./g;')
+VERSION:=$(shell curl -s -L --connect-timeout 10 'https://download.pdfforge.org/download' | sed -e 's/[<>]/\n/g;' | grep Setup.exe | cut -f 2 -d '-' | sed -e 's/_/./g;')
 REVISION:=1
 URL:=https://download.pdfforge.org/download/pdfcreator/PDFCreator-stable?download
 

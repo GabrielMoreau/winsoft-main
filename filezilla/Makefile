@@ -5,7 +5,7 @@
 
 USERAGENT:=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36
 URL:=$(shell chromium --headless --dump-dom 'https://filezilla-project.org/download.php?platform=win64' --user-agent="$(USERAGENT)" 2> /dev/null | sed -e 's/"/\n/g;' | grep '^https://' | grep -- '_win64.*-setup.exe' | head -1)
-#VERSION:=$(shell curl -s -L 'https://filezilla-project.org/download.php?platform=win64' --user-agent "$(USERAGENT)" | sed -e 's/"/\n/g;' | grep '^Download FileZilla Client [[:digit:]]' | cut -f 4 -d ' ' | head -1)
+#VERSION:=$(shell curl -s -L --connect-timeout 10 'https://filezilla-project.org/download.php?platform=win64' --user-agent "$(USERAGENT)" | sed -e 's/"/\n/g;' | grep '^Download FileZilla Client [[:digit:]]' | cut -f 4 -d ' ' | head -1)
 #URL:=https://download.filezilla-project.org/client/FileZilla_$(VERSION)_win64-setup.exe
 #URL:=https://dl2.cdn.filezilla-project.org/client/FileZilla_$(VERSION)_win64-setup.exe?h=ZWrQJU0jtdhcynRcNqy3Gw&x=1751651770
 

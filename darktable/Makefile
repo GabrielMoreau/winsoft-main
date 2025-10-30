@@ -4,7 +4,7 @@
 #
 
 SOFT:=Darktable
-URL:=$(shell curl -s -L 'https://www.darktable.org/install/' | sed -e "s/'/\n/g;" | grep 'https://.*/darktable-.*-win64.exe')
+URL:=$(shell curl -s -L --connect-timeout 10 'https://www.darktable.org/install/' | sed -e "s/'/\n/g;" | grep 'https://.*/darktable-.*-win64.exe')
 VERSION:=$(shell basename '$(URL)' 2> /dev/null | cut -f 2 -d '-')
 REVISION:=1
 

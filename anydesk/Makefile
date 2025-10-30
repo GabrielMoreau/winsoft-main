@@ -4,7 +4,7 @@
 #
 
 SOFT:=AnyDesk
-VERSION:=$(shell curl -s -L 'https://anydesk.com/en-au/downloads/windows' | sed -e 's/[>[:space:]]/\n/g;' | grep -E '^v[[:digit:]][[:digit:]\.]+$$' | sed -e 's/^v//;' | head -1)
+VERSION:=$(shell curl -s -L --connect-timeout 10 'https://anydesk.com/en-au/downloads/windows' | sed -e 's/[>[:space:]]/\n/g;' | grep -E '^v[[:digit:]][[:digit:]\.]+$$' | sed -e 's/^v//;' | head -1)
 REVISION:=1
 URL:=https://download.anydesk.com/AnyDesk.exe
 #URL:=https://download.anydesk.com/AnyDesk.msi

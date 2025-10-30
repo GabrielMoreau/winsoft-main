@@ -4,7 +4,7 @@
 #
 
 SOFT:=WinDirStat
-VERSION:=$(shell curl -s -L 'https://github.com/windirstat/windirstat/releases/latest' | sed 's/</\n/g;' | grep '^meta property.*og:title' | cut -f 5 -d ' ' | head -1)
+VERSION:=$(shell curl -s -L --connect-timeout 10 'https://github.com/windirstat/windirstat/releases/latest' | sed 's/</\n/g;' | grep '^meta property.*og:title' | cut -f 5 -d ' ' | head -1)
 REVISION:=1
 #URL:=https://windirstat.mirror.wearetriple.com//wds_current_setup.exe
 # https://github.com/windirstat/windirstat/releases/download/release%2Fv2.0.3/WinDirStat-x64.msi

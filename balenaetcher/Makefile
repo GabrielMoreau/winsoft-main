@@ -5,7 +5,7 @@
 
 SOFT:=BalenaEtcher
 USERAGENT:=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:122.0) Gecko/20100101 Firefox/122.0
-VERSION:=$(shell curl -s -L 'https://github.com/balena-io/etcher/releases/latest' --user-agent "$(USERAGENT)" | sed 's/</\n/g;' | grep '^meta property.*og:title' | cut -f 4 -d ' ' | sed -e 's/^v//;')
+VERSION:=$(shell curl -s -L --connect-timeout 10 'https://github.com/balena-io/etcher/releases/latest' --user-agent "$(USERAGENT)" | sed 's/</\n/g;' | grep '^meta property.*og:title' | cut -f 4 -d ' ' | sed -e 's/^v//;')
 REVISION:=1
 URL:=https://github.com/balena-io/etcher/releases/download/v$(VERSION)/balenaEtcher-win32-x64-$(VERSION).zip
 

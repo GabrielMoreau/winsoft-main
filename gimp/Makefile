@@ -4,10 +4,10 @@
 #
 
 SOFT:=Gimp
-SHORTVERSION:=$(shell curl -s -L 'https://www.gimp.org/downloads/' | egrep 'SHA256.*code.*gimp-.*setup.*exe' | cut -f 2 -d '-')
-VERSION:=$(shell curl -s -L 'https://www.gimp.org/downloads/' | grep -E 'gimp-.*-setup.*.exe"' | sed -e 's/-setup-\([[:digit:]][[:digit:]]*\)/.0.\1/; s/\.exe/-exe/;' | cut -f 2 -d '"' | xargs -r -n 1 basename | cut -f 2 -d '-')
+SHORTVERSION:=$(shell curl -s -L --connect-timeout 10 'https://www.gimp.org/downloads/' | egrep 'SHA256.*code.*gimp-.*setup.*exe' | cut -f 2 -d '-')
+VERSION:=$(shell curl -s -L --connect-timeout 10 'https://www.gimp.org/downloads/' | grep -E 'gimp-.*-setup.*.exe"' | sed -e 's/-setup-\([[:digit:]][[:digit:]]*\)/.0.\1/; s/\.exe/-exe/;' | cut -f 2 -d '"' | xargs -r -n 1 basename | cut -f 2 -d '-')
 REVISION:=1
-URL:=https:$(shell curl -s -L 'https://www.gimp.org/downloads/' | egrep 'gimp-.*-setup.*.exe"' | cut -f 2 -d '"')
+URL:=https:$(shell curl -s -L --connect-timeout 10 'https://www.gimp.org/downloads/' | egrep 'gimp-.*-setup.*.exe"' | cut -f 2 -d '"')
 
 EXE:=gimp-$(VERSION)-setup.exe
 

@@ -4,7 +4,7 @@
 #
 
 SOFT:=Tabby
-VERSION:=$(shell curl -s -L 'https://github.com/Eugeny/tabby/releases/latest' | sed 's/</\n/g;'| grep '^meta property.*og:url' | cut -f 4 -d '"' | xargs -r basename | sed -e 's/^v//;')
+VERSION:=$(shell curl -s -L --connect-timeout 10 'https://github.com/Eugeny/tabby/releases/latest' | sed 's/</\n/g;'| grep '^meta property.*og:url' | cut -f 4 -d '"' | xargs -r basename | sed -e 's/^v//;')
 REVISION:=1
 URL:=https://github.com/Eugeny/tabby/releases/download/v$(VERSION)/tabby-$(VERSION)-setup-x64.exe
 

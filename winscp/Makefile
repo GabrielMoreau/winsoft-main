@@ -4,9 +4,9 @@
 #
 
 SOFT:=WinSCP
-VERSION:=$(shell curl -s -L 'https://winscp.net/eng/download.php' | sed -e 's/"/\n/g;' | grep '^/download/WinSCP-.*-Setup.exe' | cut -f 2 -d '-')
+VERSION:=$(shell curl -s -L --connect-timeout 10 'https://winscp.net/eng/download.php' | sed -e 's/"/\n/g;' | grep '^/download/WinSCP-.*-Setup.exe' | cut -f 2 -d '-')
 REVISION:=1
-URL:=https://winscp.net$(shell curl -s -L 'https://winscp.net/eng/download.php' | sed -e 's/[[:space:]]/\n/g;' | grep 'href="/download/WinSCP-.*-Setup.exe' | cut -f 2 -d '"')
+URL:=https://winscp.net$(shell curl -s -L --connect-timeout 10 'https://winscp.net/eng/download.php' | sed -e 's/[[:space:]]/\n/g;' | grep 'href="/download/WinSCP-.*-Setup.exe' | cut -f 2 -d '"')
 
 EXE:=WinSCP-$(VERSION)-Setup.exe
 

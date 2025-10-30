@@ -4,7 +4,7 @@
 #
 
 SOFT:=Kopia
-VERSION:=$(shell curl -s -L 'https://github.com/kopia/kopia/releases/latest' | sed 's/</\n/g;'| grep '^meta property.*og:title' | cut -f 4 -d ' ' | sed -e 's/^v//;')
+VERSION:=$(shell curl -s -L --connect-timeout 10 'https://github.com/kopia/kopia/releases/latest' | sed 's/</\n/g;'| grep '^meta property.*og:title' | cut -f 4 -d ' ' | sed -e 's/^v//;')
 REVISION:=1
 # https://github.com/kopia/kopia/releases/download/v0.18.2/KopiaUI-Setup-0.18.2.exe
 URL:=https://github.com/kopia/kopia/releases/download/v$(VERSION)/KopiaUI-Setup-$(VERSION).exe

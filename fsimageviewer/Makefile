@@ -4,9 +4,9 @@
 #
 
 SOFT:=FastStoneImageViewer
-VERSION:=$(shell curl -s -L 'https://www.faststone.org/index.htm' | grep 'Image Viewer [[:digit:]]' |awk '{print $$3}')
+VERSION:=$(shell curl -s -L --connect-timeout 10 'https://www.faststone.org/index.htm' | grep 'Image Viewer [[:digit:]]' |awk '{print $$3}')
 REVISION:=1
-URL:=$(shell curl -s -L 'https://www.faststone.org/FSIVDownload.htm' | sed -e 's/"/\n/g;' | grep 'https://.*/FSViewerSetup.*.exe' | head -1)
+URL:=$(shell curl -s -L --connect-timeout 10 'https://www.faststone.org/FSIVDownload.htm' | sed -e 's/"/\n/g;' | grep 'https://.*/FSViewerSetup.*.exe' | head -1)
 
 EXE:=FSViewerSetup-$(VERSION).exe
 

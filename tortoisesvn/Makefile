@@ -4,9 +4,9 @@
 #
 
 SOFT:=TortoiseSVN
-VERSION:=$(shell curl -s -L 'https://tortoisesvn.net/downloads.html' | sed -e 's/[<>]/\n/g;' | grep 'The current version is' | cut -f 5 -d ' ')
+VERSION:=$(shell curl -s -L --connect-timeout 10 'https://tortoisesvn.net/downloads.html' | sed -e 's/[<>]/\n/g;' | grep 'The current version is' | cut -f 5 -d ' ')
 REVISION:=1
-URL:=$(shell curl -s -L 'https://tortoisesvn.net/downloads.html' | sed -e 's/[<>=[:space:]]/\n/g;' | grep "/$(VERSION)/Application/TortoiseSVN-.*-x64-svn-.*.msi")
+URL:=$(shell curl -s -L --connect-timeout 10 'https://tortoisesvn.net/downloads.html' | sed -e 's/[<>=[:space:]]/\n/g;' | grep "/$(VERSION)/Application/TortoiseSVN-.*-x64-svn-.*.msi")
 
 EXE:=TortoiseSVN-$(VERSION)-x64.msi
 

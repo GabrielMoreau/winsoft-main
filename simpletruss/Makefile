@@ -4,7 +4,7 @@
 #
 
 SOFT:=SimpleTruss
-VERSION:=$(shell curl -s -L 'http://www.apartmina.cz/simpletruss/' | sed -e 's/[<>]/\n/g;' | grep '^version' | cut -f 2 -d ' '| head -1)
+VERSION:=$(shell curl -s -L --connect-timeout 10 'http://www.apartmina.cz/simpletruss/' | sed -e 's/[<>]/\n/g;' | grep '^version' | cut -f 2 -d ' '| head -1)
 REVISION:=1
 URL:=http://simpletruss.apartmina.cz/SimpleTrussSetup.exe
 

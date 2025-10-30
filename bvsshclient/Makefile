@@ -4,7 +4,7 @@
 #
 
 SOFT:=BvSshClient
-VERSION:=$(shell curl -s -L 'https://www.bitvise.com/ssh-client-download' | sed -e 's/[>,]/\n/g;' | grep '^Current version:' | cut -f 3 -d ' ' | head -1)
+VERSION:=$(shell curl -s -L --connect-timeout 10 'https://www.bitvise.com/ssh-client-download' | sed -e 's/[>,]/\n/g;' | grep '^Current version:' | cut -f 3 -d ' ' | head -1)
 REVISION:=1
 URL:=https://dl.bitvise.com/BvSshClient-Inst.exe
 

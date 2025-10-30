@@ -4,10 +4,10 @@
 #
 
 SOFT:=HPSupportAssist
-#VERSION:=$(shell curl -s -L 'https://www.filehorse.com/download-hp-support-assistant/download/' | sed -s 's/</\n/g;' | grep '^title' | awk '{print $$5}')
+#VERSION:=$(shell curl -s -L --connect-timeout 10 'https://www.filehorse.com/download-hp-support-assistant/download/' | sed -s 's/</\n/g;' | grep '^title' | awk '{print $$5}')
 VERSION:=$(shell grep '^[[:digit:]]' url.txt | sort --version-sort -k 1 | tail -1 | awk '{print $$1}')
 REVISION:=1
-#URL:=$(shell curl -s -L 'https://www.filehorse.com/download-hp-support-assistant/download/' | sed -s 's/"/\n/g;'  | grep '^https://www.filehorse.com/download/file')
+#URL:=$(shell curl -s -L --connect-timeout 10 'https://www.filehorse.com/download-hp-support-assistant/download/' | sed -s 's/"/\n/g;'  | grep '^https://www.filehorse.com/download/file')
 URL:=$(shell grep '^$(VERSION)[[:space:]]' url.txt | awk '{print $$2}')
 
 EXE:=hp-support-assist-$(VERSION).exe

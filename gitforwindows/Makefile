@@ -4,9 +4,9 @@
 #
 
 SOFT:=GitForWindows
-VERSION:=$(shell curl -s -L 'https://github.com/git-for-windows/git/releases' | sed -e 's/</\n/g;' | grep '^td>Git-.*-64-bit.exe$$' | grep -v -- '-rc' | head -1 | cut -f 2 -d '-')
+VERSION:=$(shell curl -s -L --connect-timeout 10 'https://github.com/git-for-windows/git/releases' | sed -e 's/</\n/g;' | grep '^td>Git-.*-64-bit.exe$$' | grep -v -- '-rc' | head -1 | cut -f 2 -d '-')
 REVISION:=1
-URL:=https://github.com$(shell curl -s -L 'https://github.com/git-for-windows/git/releases' | sed -e 's/"/\n/g;' | egrep -- '^/.*/Git-.*-64-bit.exe' | grep -v -- '-rc' | head -1)
+URL:=https://github.com$(shell curl -s -L --connect-timeout 10 'https://github.com/git-for-windows/git/releases' | sed -e 's/"/\n/g;' | egrep -- '^/.*/Git-.*-64-bit.exe' | grep -v -- '-rc' | head -1)
 
 EXE:=Git-$(VERSION)-64-bit.exe
 

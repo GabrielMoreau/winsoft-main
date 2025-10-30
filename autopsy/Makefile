@@ -4,7 +4,7 @@
 #
 
 SOFT:=Autopsy
-URL:=$(shell curl -s -L 'https://www.autopsy.com/download/' | sed -e 's/"/\n/g;' | grep '^https://.*/autopsy-.*64bit.msi' | head -1)
+URL:=$(shell curl -s -L --connect-timeout 10 'https://www.autopsy.com/download/' | sed -e 's/"/\n/g;' | grep '^https://.*/autopsy-.*64bit.msi' | head -1)
 VERSION:=$(shell basename '$(URL)' 2> /dev/null | cut -f 2 -d '-')
 REVISION:=1
 

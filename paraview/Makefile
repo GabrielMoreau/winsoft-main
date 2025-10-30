@@ -5,9 +5,9 @@
 
 SOFT:=ParaView
 SHORTVERSION:=$(shell curl -s -L  'https://www.paraview.org/files/listing.txt' | grep "/v.*/ParaView.*\.msi[[:space:]]" | egrep -v -- '-(RC[[:digit:]]*|MPI)-' | cut -f 2 -d '/' | grep '^v' | sed -e 's/^v//;' | uniq | sort -V | tail -1)
-VERSION:=$(shell curl -s -L 'https://www.paraview.org/files/listing.txt' | grep "/v.*/ParaView.*\.msi[[:space:]]" | awk '{print $$1}' | egrep -v -- '-(RC[[:digit:]]*|MPI)-' | xargs -r -n 1 basename | cut -f 2 -d '-' | sort -V  | tail -1)
+VERSION:=$(shell curl -s -L --connect-timeout 10 'https://www.paraview.org/files/listing.txt' | grep "/v.*/ParaView.*\.msi[[:space:]]" | awk '{print $$1}' | egrep -v -- '-(RC[[:digit:]]*|MPI)-' | xargs -r -n 1 basename | cut -f 2 -d '-' | sort -V  | tail -1)
 REVISION:=1
-EXE:=$(shell curl -s -L 'https://www.paraview.org/files/listing.txt' | grep "/v$(SHORTVERSION)/ParaView-$(VERSION)-Windows.*\.msi[[:space:]]" | awk '{print $$1}' | egrep -v -- '-(RC[[:digit:]]*|MPI)-' | sort | head -1 | sed -e 's#[[:space:]]#/#g;' | cut -f 3 -d '/')
+EXE:=$(shell curl -s -L --connect-timeout 10 'https://www.paraview.org/files/listing.txt' | grep "/v$(SHORTVERSION)/ParaView-$(VERSION)-Windows.*\.msi[[:space:]]" | awk '{print $$1}' | egrep -v -- '-(RC[[:digit:]]*|MPI)-' | sort | head -1 | sed -e 's#[[:space:]]#/#g;' | cut -f 3 -d '/')
 URL:=https://www.paraview.org/paraview-downloads/download.php?submit=Download&version=v$(SHORTVERSION)&type=binary&os=Windows&downloadFile=$(EXE)
 
 # https://www.paraview.org/paraview-downloads/download.php?submit=Download&version=v5.11&type=binary&os=Windows&downloadFile=ParaView-5.11.0-Windows-Python3.9-msvc2017-AMD64.msi

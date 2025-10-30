@@ -4,7 +4,7 @@
 #
 
 SOFT:=Zoom
-VERSIONLONG:=$(shell curl -s -L 'https://www.zoom.us/rest/download?os=win' | sed -e 's/[,{}]/\n/g;' | grep -A 5 '^"zoomX64"' | grep '^"version"' | cut -f 4 -d '"' | cut -f 1 -d ' ' | head -1)
+VERSIONLONG:=$(shell curl -s -L --connect-timeout 10 'https://www.zoom.us/rest/download?os=win' | sed -e 's/[,{}]/\n/g;' | grep -A 5 '^"zoomX64"' | grep '^"version"' | cut -f 4 -d '"' | cut -f 1 -d ' ' | head -1)
 VERSION:=$(shell echo $(VERSIONLONG) | cut -f 1-3 -d '.')
 REVISION:=1
 URL:=https://cdn.zoom.us/prod/$(VERSIONLONG)/x64/ZoomInstallerFull.msi

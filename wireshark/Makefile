@@ -5,11 +5,11 @@
 
 SOFT:=Wireshark
 REVISION:=1
-URL1:=$(shell curl -s -L 'https://www.wireshark.org/download.html' | sed -e 's/"/\n/g' | grep '^https://.*win64/Wireshark.*x64.exe' | head -1)
+URL1:=$(shell curl -s -L --connect-timeout 10 'https://www.wireshark.org/download.html' | sed -e 's/"/\n/g' | grep '^https://.*win64/Wireshark.*x64.exe' | head -1)
 VERSION1:=$(shell basename "$(URL1)" | cut -f 2 -d '-')
 EXE1:=Wireshark-$(VERSION1)-x64.exe
 
-URL2:=http://www.win10pcap.org/download/$(shell curl -s -L 'http://www.win10pcap.org/download/' | sed -e 's/["<>]/\n/g;' | egrep '^Win10Pcap-v.*msi' | head -1)
+URL2:=http://www.win10pcap.org/download/$(shell curl -s -L --connect-timeout 10 'http://www.win10pcap.org/download/' | sed -e 's/["<>]/\n/g;' | egrep '^Win10Pcap-v.*msi' | head -1)
 VERSION2:=$(shell echo $(URL2) | sed -e 's/\.msi//; s/-v/-/;' | cut -f 2 -d '-')
 EXE2:=Win10Pcap-v$(VERSION2).msi
 

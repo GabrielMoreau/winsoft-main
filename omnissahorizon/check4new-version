@@ -3,14 +3,14 @@
 # 2024/02/08 Gabriel Moreau <Gabriel.Moreau(A)univ-grenoble-alpes.fr>
 
 # https://download3.vmware.com/software/CART24FQ4_WIN_2312/VMware-Horizon-Client-2312-8.12.0-23149293.exe
-url1=$(curl -s -L 'https://community.chocolatey.org/packages/vmware-horizon-client' | sed -e 's/[;&]/\n/g;' | grep -E '^(https://download3.vmware.com|https://download3.omnissa.com)')
+url1=$(curl -s -L --connect-timeout 10 'https://community.chocolatey.org/packages/vmware-horizon-client' | sed -e 's/[;&]/\n/g;' | grep -E '^(https://download3.vmware.com|https://download3.omnissa.com)')
 if [ -n "${url1}" ]
 then
 	grep -q "${url1}" url.txt || { echo "New version probably online: ${url1}"; exit 1; }
 fi
 
 # https://en.wikipedia.org/wiki/VMware_Horizon
-version2=$(curl -s -L 'https://en.wikipedia.org/wiki/VMware_Horizon' | sed -e 's/>/\n/g;' | grep '^VMware Horizon 8\.[[:digit:]]*[[:space:]][[:digit:]][[:digit:]]*[[:space:]]' | awk '{print $4}' | tail -1)
+version2=$(curl -s -L --connect-timeout 10 'https://en.wikipedia.org/wiki/VMware_Horizon' | sed -e 's/>/\n/g;' | grep '^VMware Horizon 8\.[[:digit:]]*[[:space:]][[:digit:]][[:digit:]]*[[:space:]]' | awk '{print $4}' | tail -1)
 if [ -n "${version2}" ]
 then
 	grep -q -- "-${version2}-" url.txt || { echo "New version probably online: ${version2}"; exit 2; }

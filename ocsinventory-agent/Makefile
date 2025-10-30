@@ -7,7 +7,7 @@ OCS_SERVER:=ocs-server.example.com
 OCS_SSL:=1
 
 SOFT:=OCSInventory-Agent
-VERSION:=$(shell curl -s -L 'https://github.com/OCSInventory-NG/WindowsAgent/releases/latest' | sed 's/</\n/g;'| grep '^meta property.*Release Agent Windows' |cut -f 6 -d ' ')
+VERSION:=$(shell curl -s -L --connect-timeout 10 'https://github.com/OCSInventory-NG/WindowsAgent/releases/latest' | sed 's/</\n/g;'| grep '^meta property.*Release Agent Windows' |cut -f 6 -d ' ')
 REVISION:=1
 URL:=https://github.com/OCSInventory-NG/WindowsAgent/releases/download/$(VERSION)/OCS-Windows-Agent-$(VERSION)_x64.zip
 FOLDER:=OCS-Windows-Agent-$(VERSION)_x64

@@ -5,10 +5,10 @@
 
 SOFT:=LightBulb
 REVISION:=1
-VERSION1:=$(shell curl -s -L 'https://github.com/Tyrrrz/LightBulb/releases/latest'  | sed 's/</\n/g;'| grep '^meta property.*og:title' | cut -f 4 -d ' ')
+VERSION1:=$(shell curl -s -L --connect-timeout 10 'https://github.com/Tyrrrz/LightBulb/releases/latest'  | sed 's/</\n/g;'| grep '^meta property.*og:title' | cut -f 4 -d ' ')
 URL1:=https://github.com/Tyrrrz/LightBulb/releases/download/$(VERSION1)/LightBulb-Installer.win-x64.exe
 
-URL2:=$(shell curl -s -L https://dotnet.microsoft.com/$(shell curl -s -L 'https://dotnet.microsoft.com/en-us/download/dotnet/8.0' | sed -e 's/"/\n/g;' | grep 'thank-you/runtime-desktop.*windows-x64-installer'  | head -1) | sed -e 's/"/\n/g;' | grep '^https.*windowsdesktop-runtime-.*-win-x64.exe' | head -1)
+URL2:=$(shell curl -s -L https://dotnet.microsoft.com/$(shell curl -s -L --connect-timeout 10 'https://dotnet.microsoft.com/en-us/download/dotnet/8.0' | sed -e 's/"/\n/g;' | grep 'thank-you/runtime-desktop.*windows-x64-installer'  | head -1) | sed -e 's/"/\n/g;' | grep '^https.*windowsdesktop-runtime-.*-win-x64.exe' | head -1)
 VERSION2:=$(shell basename '$(URL2)' 2> /dev/null | cut -f 3 -d '-')
 
 EXE1:=LightBulb-Installer-$(VERSION1)-x64.exe

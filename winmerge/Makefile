@@ -4,7 +4,7 @@
 #
 
 SOFT:=WinMerge
-VERSION:=$(shell curl -s -L 'https://github.com/WinMerge/winmerge/releases/latest' | sed 's/</\n/g;'| grep '^meta property.*og:title' | cut -f 4 -d ' ' | sed -e 's/^v//;' | head -1)
+VERSION:=$(shell curl -s -L --connect-timeout 10 'https://github.com/WinMerge/winmerge/releases/latest' | sed 's/</\n/g;'| grep '^meta property.*og:title' | cut -f 4 -d ' ' | sed -e 's/^v//;' | head -1)
 REVISION:=1
 URL:=https://github.com/WinMerge/winmerge/releases/download/v$(VERSION)/WinMerge-$(VERSION)-x64-Setup.exe
 

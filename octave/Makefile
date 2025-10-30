@@ -4,7 +4,7 @@
 #
 
 SOFT:=Octave
-URL:=$(shell curl -s -L 'https://octave.org/download' | sed -e 's/"/\n/g;' | grep '^https://.*/octave-.*-w64-installer.exe$$' | head -1)
+URL:=$(shell curl -s -L --connect-timeout 10 'https://octave.org/download' | sed -e 's/"/\n/g;' | grep '^https://.*/octave-.*-w64-installer.exe$$' | head -1)
 REVISION:=1
 VERSION:=$(shell echo "$(URL)" | xargs -r basename | cut -f 2 -d '-')
 

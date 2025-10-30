@@ -4,7 +4,7 @@
 #
 
 SOFT:=SumatraPDF
-URL:=https://www.sumatrapdfreader.org/$(shell curl -s -L 'https://www.sumatrapdfreader.org/download-free-pdf-viewer' | grep '/SumatraPDF-.*-64-install\.exe' | cut -f 2 -d '"')
+URL:=https://www.sumatrapdfreader.org/$(shell curl -s -L --connect-timeout 10 'https://www.sumatrapdfreader.org/download-free-pdf-viewer' | grep '/SumatraPDF-.*-64-install\.exe' | cut -f 2 -d '"')
 REVISION:=1
 VERSION:=$(shell echo $(URL) | xargs basename | cut -f 2 -d '-')
 

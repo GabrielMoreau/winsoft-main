@@ -4,7 +4,7 @@
 #
 
 SOFT:=Signal-Desktop
-VERSION:=$(shell curl -s -L 'https://api.github.com/repos/signalapp/Signal-Desktop/releases/latest' |  grep '"tag_name":' | cut -f 4 -d '"' | sed -e 's/^v//;' | head -1)
+VERSION:=$(shell curl -s -L --connect-timeout 10 'https://api.github.com/repos/signalapp/Signal-Desktop/releases/latest' |  grep '"tag_name":' | cut -f 4 -d '"' | sed -e 's/^v//;' | head -1)
 REVISION:=1
 URL:=https://updates.signal.org/desktop/signal-desktop-win-x64-$(VERSION).exe
 

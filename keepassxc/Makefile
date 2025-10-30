@@ -3,7 +3,7 @@
 #
 
 SOFT:=KeepassXC
-VERSION:=$(shell curl -s -L 'https://github.com/keepassxreboot/keepassxc/releases/latest' | sed -e 's/[[:space:]]/\n/g;' | grep 'href="/keepassxreboot/keepassxc/releases/tag/' | cut -f 6 -d '/' | cut -f 1 -d '"')
+VERSION:=$(shell curl -s -L --connect-timeout 10 'https://github.com/keepassxreboot/keepassxc/releases/latest' | sed -e 's/[[:space:]]/\n/g;' | grep 'href="/keepassxreboot/keepassxc/releases/tag/' | cut -f 6 -d '/' | cut -f 1 -d '"')
 REVISION:=1
 URL:=https://github.com/keepassxreboot/keepassxc/releases/download/$(VERSION)/KeePassXC-$(VERSION)-Win64.msi
 

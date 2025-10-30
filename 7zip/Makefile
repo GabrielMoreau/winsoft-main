@@ -4,7 +4,7 @@
 #
 
 SOFT:=7-Zip
-VERSION:=$(shell curl -s -L 'https://www.7-zip.org/' | sed -e 's/>/\n/g;' | grep 'Download 7-Zip' | grep -v beta | cut -f 3 -d ' ' | head -1)
+VERSION:=$(shell curl -s -L --connect-timeout 10 'https://www.7-zip.org/' | sed -e 's/>/\n/g;' | grep 'Download 7-Zip' | grep -v beta | cut -f 3 -d ' ' | head -1)
 VERSIONSHORT:=$(shell echo $(VERSION) | sed -e 's/\.//g;')
 VERSIONNUM:=$(shell echo $(VERSION) | sed -e 's/\.0/./g;')
 REVISION:=1

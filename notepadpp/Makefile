@@ -4,7 +4,7 @@
 #
 
 SOFT:=NotepadPP
-VERSION:=$(shell curl -s -L 'https://notepad-plus-plus.org/' | grep '/downloads/v' | cut -f 3 -d '/' | cut -f 2 -d 'v')
+VERSION:=$(shell curl -s -L --connect-timeout 10 'https://notepad-plus-plus.org/' | grep '/downloads/v' | cut -f 3 -d '/' | cut -f 2 -d 'v')
 REVISION:=1
 URL:=https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v$(VERSION)/npp.$(VERSION).Installer.x64.exe
 

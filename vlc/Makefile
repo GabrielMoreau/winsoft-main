@@ -4,7 +4,7 @@
 #
 
 SOFT:=VLC
-VERSION:=$(shell curl -s -L 'https://download.videolan.org/pub/videolan/vlc/' | grep 'href="[[:digit:]]' | cut -f 2 -d '"' | sed -e 's#/##;'  | sort -V | tail -1)
+VERSION:=$(shell curl -s -L --connect-timeout 10 'https://download.videolan.org/pub/videolan/vlc/' | grep 'href="[[:digit:]]' | cut -f 2 -d '"' | sed -e 's#/##;'  | sort -V | tail -1)
 REVISION:=1
 URL:=https://get.videolan.org/vlc/$(VERSION)/win64/vlc-$(VERSION)-win64.exe
 

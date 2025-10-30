@@ -4,7 +4,7 @@
 #
 
 SOFT:=OnlyOffice
-VERSION:=$(shell curl -s -L 'https://github.com/ONLYOFFICE/DesktopEditors/releases/latest' | sed 's/</\n/g;'| grep '^meta property.*og:url' | cut -f 4 -d '"' | xargs -r basename | sed -e 's/^v//;')
+VERSION:=$(shell curl -s -L --connect-timeout 10 'https://github.com/ONLYOFFICE/DesktopEditors/releases/latest' | sed 's/</\n/g;'| grep '^meta property.*og:url' | cut -f 4 -d '"' | xargs -r basename | sed -e 's/^v//;')
 REVISION:=1
 URL:=https://github.com/ONLYOFFICE/DesktopEditors/releases/download/v$(VERSION)/DesktopEditors_x64.msi
 

@@ -6,8 +6,8 @@
 #
 
 SOFT:=EngaugeDigitizer
-#VERSION:=$(shell curl -s -L 'https://github.com/markummitchell/engauge-digitizer/releases/latest' | sed 's/</\n/g;'| grep '^meta property.*og:title' | cut -f 5 -d ' ')
-VERSION:=$(shell curl -s -L 'https://github.com/waternk/engauge-digitizer/tags' | sed 's/"/\n/g;'| grep '/waternk/engauge-digitizer/releases/tag/v' | xargs -r -n 1 basename | sed -e 's/^v//;' | grep '^[[:digit:]]' | head -1)
+#VERSION:=$(shell curl -s -L --connect-timeout 10 'https://github.com/markummitchell/engauge-digitizer/releases/latest' | sed 's/</\n/g;'| grep '^meta property.*og:title' | cut -f 5 -d ' ')
+VERSION:=$(shell curl -s -L --connect-timeout 10 'https://github.com/waternk/engauge-digitizer/tags' | sed 's/"/\n/g;'| grep '/waternk/engauge-digitizer/releases/tag/v' | xargs -r -n 1 basename | sed -e 's/^v//;' | grep '^[[:digit:]]' | head -1)
 REVISION:=1
 URL:=https://github.com/waternk/engauge-digitizer/releases/download/v$(VERSION)/digit-exe-windows10-64-bit-installer-$(VERSION).msi
 

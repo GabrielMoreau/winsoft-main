@@ -3,7 +3,7 @@
 mkdir -p tmp
 cd tmp || exit
 
-URL=$(curl -s -L 'https://nmap.org/download.html' | sed -e 's/"/\n/g;' | grep -E '^https://.*/nmap-.*-setup.exe')
+URL=$(curl -s -L --connect-timeout 10 'https://nmap.org/download.html' | sed -e 's/"/\n/g;' | grep -E '^https://.*/nmap-.*-setup.exe')
 NMAP_EXE=$(basename "${URL}")
 
 if [ ! -e "${NMAP_EXE}" ]

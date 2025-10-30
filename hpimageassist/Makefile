@@ -4,7 +4,7 @@
 #
 
 SOFT:=HPImageAssist
-URL:=$(shell curl -s -L 'https://ftp.ext.hp.com/pub/caps-softpaq/cmit/HPIA.html' | sed -s 's/"/\n/g;'  | grep '^https://hpia.hpcloud.hp.com/')
+URL:=$(shell curl -s -L --connect-timeout 10 'https://ftp.ext.hp.com/pub/caps-softpaq/cmit/HPIA.html' | sed -s 's/"/\n/g;'  | grep '^https://hpia.hpcloud.hp.com/')
 VERSION:=$(shell basename '$(URL)' 2> /dev/null | cut -f 3 -d '-' | sed -e 's/\.exe//;')
 REVISION:=1
 

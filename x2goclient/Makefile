@@ -4,7 +4,7 @@
 #
 
 SOFT:=X2GoClient
-VERSION:=$(shell curl -s -L 'https://code.x2go.org/releases/binary-win32/x2goclient/releases/' | sed -e 's#[</>]#\n#g;' | grep 'a href="[[:digit:]]' | tail -1 | cut -f 2 -d '"')
+VERSION:=$(shell curl -s -L --connect-timeout 10 'https://code.x2go.org/releases/binary-win32/x2goclient/releases/' | sed -e 's#[</>]#\n#g;' | grep 'a href="[[:digit:]]' | tail -1 | cut -f 2 -d '"')
 VERSION_SHORT:=$(shell echo $(VERSION) | cut -f 1 -d '-')
 REVISION:=1
 

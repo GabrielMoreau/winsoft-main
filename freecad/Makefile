@@ -5,7 +5,7 @@
 
 SOFT:=FreeCAD
 # https://github.com/FreeCAD/FreeCAD/releases/download/1.0.0/FreeCAD_1.0.0-conda-Windows-x86_64-installer-1.exe
-URL:=$(shell curl -s -L 'https://api.github.com/repos/FreeCAD/FreeCAD/releases/latest' | grep 'browser_download_url.*x86_64.*exe"' | cut -f 4 -d '"' | head -1)
+URL:=$(shell curl -s -L --connect-timeout 10 'https://api.github.com/repos/FreeCAD/FreeCAD/releases/latest' | grep 'browser_download_url.*x86_64.*exe"' | cut -f 4 -d '"' | head -1)
 VERSION:=$(shell basename "$(URL)" | cut -f 2 -d '_' | cut -f 1 -d '-')
 REVISION:=1
 

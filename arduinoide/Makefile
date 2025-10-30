@@ -6,7 +6,7 @@
 # https://downloads.arduino.cc/arduino-ide/arduino-ide_2.3.6_Windows_64bit.exe
 # https://downloads.arduino.cc/arduino-ide/arduino-ide_2.3.6_Windows_64bit.msi
 SOFT:=ArduinoIDE
-# URL:=$(shell curl -s -L 'https://www.arduino.cc/en/software' | sed -e 's/>/\n/g;' | sed -e 's/>/\n/g;' | grep 'Windows MSI installer' | cut -f 6 -d '"')
+# URL:=$(shell curl -s -L --connect-timeout 10 'https://www.arduino.cc/en/software' | sed -e 's/>/\n/g;' | sed -e 's/>/\n/g;' | grep 'Windows MSI installer' | cut -f 6 -d '"')
 URL:=https:/$(shell curl -s -L https://github.com/arduino/arduino-ide/releases | sed -e 's/"/\n/g;' | grep '^/arduino/arduino-ide/.*/arduino-ide_.*_Windows_64bit.msi' | head -1)
 VERSION:=$(shell basename '$(URL)' 2> /dev/null | cut -f 2 -d '_')
 REVISION:=1

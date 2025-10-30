@@ -4,7 +4,7 @@
 #
 
 SOFT:=ProtonMailBridge
-VERSION:=$(shell curl -s -L 'https://github.com/ProtonMail/proton-bridge/releases/latest' | sed 's/</\n/g;' | grep '^meta property.*og:title' | cut -f 6 -d ' ' | sed -e 's/^v//;')
+VERSION:=$(shell curl -s -L --connect-timeout 10 'https://github.com/ProtonMail/proton-bridge/releases/latest' | sed 's/</\n/g;' | grep '^meta property.*og:title' | cut -f 6 -d ' ' | sed -e 's/^v//;')
 REVISION:=1
 URL:=https://github.com/ProtonMail/proton-bridge/releases/download/v$(VERSION)/Bridge-Installer.exe
 

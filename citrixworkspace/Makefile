@@ -4,8 +4,8 @@
 #
 
 SOFT:=CitrixWorkspace
-VERSION:=$(shell curl -s -L 'https://www.citrix.com/downloads/workspace-app/windows/workspace-app-for-windows-latest.html' | sed -e 's/[<>()]/\n/g;'|  grep '^Version: [[:digit:]]' | head -1 | cut -f 2 -d ' ')
-URL:=https:$(shell curl -s -L 'https://www.citrix.com/downloads/workspace-app/windows/workspace-app-for-windows-latest.html' | sed -e 's/"/\n/g;' | egrep 'downloads.citrix.com.*/CitrixWorkspaceApp.exe.*__gda__')
+VERSION:=$(shell curl -s -L --connect-timeout 10 'https://www.citrix.com/downloads/workspace-app/windows/workspace-app-for-windows-latest.html' | sed -e 's/[<>()]/\n/g;'|  grep '^Version: [[:digit:]]' | head -1 | cut -f 2 -d ' ')
+URL:=https:$(shell curl -s -L --connect-timeout 10 'https://www.citrix.com/downloads/workspace-app/windows/workspace-app-for-windows-latest.html' | sed -e 's/"/\n/g;' | egrep 'downloads.citrix.com.*/CitrixWorkspaceApp.exe.*__gda__')
 REVISION:=1
 
 EXE:=CitrixWorkspaceApp-$(VERSION).exe

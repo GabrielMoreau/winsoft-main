@@ -4,7 +4,7 @@
 #
 
 SOFT:=Advanced-Renamer
-URL:=https://www.advancedrenamer.com/$(shell curl -s -L 'https://www.advancedrenamer.com/download' | sed -e 's/>/\n/g;' | grep 'advanced_renamer_setup_.*btn_download' | grep -v 'btn_download_beta' | cut -f 2 -d '"'  | head -1)
+URL:=https://www.advancedrenamer.com/$(shell curl -s -L --connect-timeout 10 'https://www.advancedrenamer.com/download' | sed -e 's/>/\n/g;' | grep 'advanced_renamer_setup_.*btn_download' | grep -v 'btn_download_beta' | cut -f 2 -d '"'  | head -1)
 REVISION:=1
 VERSION:=$(shell basename '$(URL)' 2> /dev/null | cut -f 4- -d '_' | sed -e 's/_/./g; s/\.exe//;')
 

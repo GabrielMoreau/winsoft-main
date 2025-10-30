@@ -1,9 +1,9 @@
 
-WINFSP_URL:=$(shell curl -s -L 'https://github.com/winfsp/winfsp/releases/latest' | sed 's/"/\n/g;'| grep '^https://github.com/winfsp.*msi' | head -1)
+WINFSP_URL:=$(shell curl -s -L --connect-timeout 10 'https://github.com/winfsp/winfsp/releases/latest' | sed 's/"/\n/g;'| grep '^https://github.com/winfsp.*msi' | head -1)
 WINFSP_VERSION:=$(shell basename '$(WINFSP_URL)' 2> /dev/null | cut -f 2 -d '-' | sed -e 's/\.msi//;')
 WINFSP_EXE:=winfsp-$(WINFSP_VERSION).msi
 
-SSHFS_VERSION:=$(shell curl -s -L 'https://github.com/winfsp/sshfs-win/releases/latest' | sed 's/"/\n/g;' | grep '^/winfsp/sshfs-win/releases/tag/v' | head -1 | xargs -r basename | sed -s 's/^v//;')
+SSHFS_VERSION:=$(shell curl -s -L --connect-timeout 10 'https://github.com/winfsp/sshfs-win/releases/latest' | sed 's/"/\n/g;' | grep '^/winfsp/sshfs-win/releases/tag/v' | head -1 | xargs -r basename | sed -s 's/^v//;')
 SSHFS_URL:=https://github.com/billziss-gh/sshfs-win/releases/download/v$(SSHFS_VERSION)/sshfs-win-$(SSHFS_VERSION)-x64.msi
 SSHFS_EXE:=sshfs-win-$(SSHFS_VERSION)-x64.msi
 

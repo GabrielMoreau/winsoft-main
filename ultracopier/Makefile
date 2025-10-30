@@ -4,7 +4,7 @@
 #
 
 SOFT:=Ultracopier
-URL:=$(shell curl -s -L 'https://ultracopier.herman-brule.com/#download' | sed -e 's/"/\n/g;' | grep 'x86_64.*setup.exe')
+URL:=$(shell curl -s -L --connect-timeout 10 'https://ultracopier.herman-brule.com/#download' | sed -e 's/"/\n/g;' | grep 'x86_64.*setup.exe')
 VERSION:=$(shell echo $(URL) | cut -f 2 -d '_' | cut -f 2 -d '-')
 REVISION:=1
 

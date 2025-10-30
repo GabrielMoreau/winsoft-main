@@ -4,9 +4,9 @@
 #
 
 SOFT:=Digikam
-VERSION:=$(shell curl -s -L 'https://www.digikam.org/download/' | sed -e 's/[<>"=[:space:]]/\n/g;' | egrep '^http.*/digiKam-.*-Win64.exe.mirrorlist' | cut -f 6 -d '/')
+VERSION:=$(shell curl -s -L --connect-timeout 10 'https://www.digikam.org/download/' | sed -e 's/[<>"=[:space:]]/\n/g;' | egrep '^http.*/digiKam-.*-Win64.exe.mirrorlist' | cut -f 6 -d '/')
 REVISION:=1
-MIRROR:=$(shell curl -s -L 'https://www.digikam.org/download/' | sed -e 's/[<>"=[:space:]]/\n/g;' | egrep '^http.*/digiKam-.*-Win64.exe.mirrorlist')
+MIRROR:=$(shell curl -s -L --connect-timeout 10 'https://www.digikam.org/download/' | sed -e 's/[<>"=[:space:]]/\n/g;' | egrep '^http.*/digiKam-.*-Win64.exe.mirrorlist')
 URL:=$(shell curl -s -L "$(MIRROR)" | sed -e 's/"/\n/g;' | egrep '^https://.*/digiKam-.*-Win64.exe' | head -1)
 
 EXE:=digiKam-$(VERSION)-Win64.exe

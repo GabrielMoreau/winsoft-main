@@ -5,7 +5,7 @@
 
 SOFT:=Audacity
 # https://github.com/audacity/audacity/releases/download/Audacity-3.4.0/audacity-win-3.4.0-64bit.exe
-VERSION:=$(shell curl -s -L 'https://github.com/audacity/audacity/releases/latest' | sed 's/</\n/g;' | grep '^meta property.*og:title' | cut -f 5 -d ' ')
+VERSION:=$(shell curl -s -L --connect-timeout 10 'https://github.com/audacity/audacity/releases/latest' | sed 's/</\n/g;' | grep '^meta property.*og:title' | cut -f 5 -d ' ')
 URL:=https://github.com/audacity/audacity/releases/download/Audacity-$(VERSION)/audacity-win-$(VERSION)-64bit.exe
 REVISION:=1
 

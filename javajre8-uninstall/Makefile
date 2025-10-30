@@ -4,7 +4,7 @@
 #
 
 SOFT:=Uninstall-JavaJRE8
-VERSION:=$(shell curl -s -L 'https://www.oracle.com/java/technologies/javase/javase8u211-later-archive-downloads.html' | grep 'Java SE Runtime Environment 8u' | sed -e 's/[<>]/ /g; s/[[:space:]][[:space:]]*/ /g;' | cut -f 7 -d ' ' | sed 's/^8u//;' | head -1 )
+VERSION:=$(shell curl -s -L --connect-timeout 10 'https://www.oracle.com/java/technologies/javase/javase8u211-later-archive-downloads.html' | grep 'Java SE Runtime Environment 8u' | sed -e 's/[<>]/ /g; s/[[:space:]][[:space:]]*/ /g;' | cut -f 7 -d ' ' | sed 's/^8u//;' | head -1 )
 REVISION:=1
 
 IT_TEAM:=IT Support
