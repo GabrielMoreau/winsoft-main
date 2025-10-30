@@ -6,5 +6,5 @@
 url1=$(curl -s -L --connect-timeout 10 'https://community.chocolatey.org/packages/DellCommandUpdate' | sed -e 's/[;&]/\n/g;' | grep '^https://dl.dell.com/.*EXE')
 if [ -n "${url1}" ]
 then
-	grep -q "${url1}" url.txt || { echo "New version probably online: ${url1}"; exit 1; }
+	grep -q "${url1}" url.txt || { echo "New version probably online: ${url1}"; exit 12; }
 fi

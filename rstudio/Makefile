@@ -69,10 +69,10 @@ tmp/$(EXE):
 
 check-exe: tmp/$(EXE)
 	@(cd tmp ; \
-		file $(EXE) | grep -q "PE32 executable.*Nullsoft Installer self-extracting archive" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 1; } ; \
-		#which peres >/dev/null && { peres -v $(EXE) | grep -q "^Product Version:[[:space:]]*$(VERSION)" || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 1; } ; } ; \
+		file $(EXE) | grep -q "PE32 executable.*Nullsoft Installer self-extracting archive" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 12; } ; \
+		#which peres >/dev/null && { peres -v $(EXE) | grep -q "^Product Version:[[:space:]]*$(VERSION)" || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 12; } ; } ; \
 		SHA256=$$(curl -s -L --connect-timeout 10 'https://posit.co/download/rstudio-desktop/' | grep -A1 'body-md-regular.*tabindex=' | grep -v 'body-md-regular' | awk '{print $$1}' | head -1) ; \
-		if [ "$$(shasum -a 256 $(EXE) | cut -f 1 -d ' ')" != "$${SHA256}" ]; then echo "Error: bad checksum for binary $(EXE)" 1>&2 ; exit 1; fi ; \
+		if [ "$$(shasum -a 256 $(EXE) | cut -f 1 -d ' ')" != "$${SHA256}" ]; then echo "Error: bad checksum for binary $(EXE)" 1>&2 ; exit 12; fi ; \
 		)
 
 tmp/$(EXE2):
@@ -87,8 +87,8 @@ tmp/$(EXE2):
 
 check-exe2: tmp/$(EXE2)
 	@(cd tmp ; \
-		file $(EXE2) | grep -q "PE32 executable" || { echo "Error: bad format for binary $(EXE2)" 1>&2 ; exit 1; } ; \
-		which peres >/dev/null && { peres -v $(EXE2) | grep -q "^Product Version:[[:space:]]*$(VERSION2)" || { echo "Error: bad version for binary $(EXE2)" 1>&2 ; exit 1; } ; } ; \
+		file $(EXE2) | grep -q "PE32 executable" || { echo "Error: bad format for binary $(EXE2)" 1>&2 ; exit 12; } ; \
+		which peres >/dev/null && { peres -v $(EXE2) | grep -q "^Product Version:[[:space:]]*$(VERSION2)" || { echo "Error: bad version for binary $(EXE2)" 1>&2 ; exit 12; } ; } ; \
 		)
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE) tmp/$(EXE2)

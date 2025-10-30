@@ -67,10 +67,10 @@ tmp/$(EXE):
 
 check-exe: tmp/$(EXE)
 	@(cd tmp ; \
-		file $(EXE) | grep -q "Composite Document File.*, MSI Installer" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 1; } ; \
-		file $(EXE) | grep -q "Subject: Mozilla Thunderbird $(VERSION) x64" || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 1; } ; \
+		file $(EXE) | grep -q "Composite Document File.*, MSI Installer" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 12; } ; \
+		file $(EXE) | grep -q "Subject: Mozilla Thunderbird $(VERSION) x64" || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 12; } ; \
 		)
-	@which jq >/dev/null && { if [ $$(cat policies.json | jq empty 2>&1 | wc -l) -ne 0 ]; then echo "Error: bad json file policies.json" 1>&2 ; exit 1; fi }
+	@which jq >/dev/null && { if [ $$(cat policies.json | jq empty 2>&1 | wc -l) -ne 0 ]; then echo "Error: bad json file policies.json" 1>&2 ; exit 12; fi }
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp

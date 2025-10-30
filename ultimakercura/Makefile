@@ -57,7 +57,7 @@ tmp/$(EXE):
 
 check-exe: tmp/$(EXE)
 	@(cd tmp ; \
-		file $(EXE) | grep -q "Subject: UltiMaker Cura the most popular 3D printing slicer" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 1; } ; \
+		file $(EXE) | grep -q "Subject: UltiMaker Cura the most popular 3D printing slicer" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 12; } ; \
 		)
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE)

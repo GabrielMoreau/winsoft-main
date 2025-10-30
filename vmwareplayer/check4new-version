@@ -6,7 +6,7 @@
 url1=$(curl -s -L --connect-timeout 10 'https://community.chocolatey.org/packages/vmware-workstation-player' | sed -e 's/[;&]/\n/g;' | grep '^https://download3.vmware.com')
 if [ -n "${url1}" ]
 then
-	grep -q "${url1}" url.txt || { echo "New version probably online: ${url1}"; exit 1; }
+	grep -q "${url1}" url.txt || { echo "New version probably online: ${url1}"; exit 12; }
 fi
 
 # https://en.wikipedia.org/wiki/VMware_Horizon

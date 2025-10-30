@@ -59,7 +59,7 @@ tmp/$(EXE):
 
 check-exe: tmp/$(EXE)
 	@(cd tmp ; \
-		file $(EXE) | grep -q "MSI Installer.*PDF Split And Merge Basic Edition" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 1; } ; \
+		file $(EXE) | grep -q "MSI Installer.*PDF Split And Merge Basic Edition" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 12; } ; \
 		)
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE)

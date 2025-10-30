@@ -76,12 +76,12 @@ tmp/$(EXE2):
 
 check-exe: tmp/$(EXE1) tmp/$(EXE2)
 	@(cd tmp ; \
-		file $(EXE1) | grep -q "PE32 executable.*Nullsoft Installer" || { echo "Error: bad format for binary $(EXE1)" 1>&2 ; exit 1; } ; \
+		file $(EXE1) | grep -q "PE32 executable.*Nullsoft Installer" || { echo "Error: bad format for binary $(EXE1)" 1>&2 ; exit 12; } ; \
 		# which peres >/dev/null && { peres -v $(EXE1) | grep -q "^Product Version:[[:space:]]*$(VERSION1)" || echo "Error: bad version for binary $(EXE1)" ; } ; \
 		)
 	@(cd tmp ; \
-		file $(EXE2) | grep -q "PE32 executable" || { echo "Error: bad format for binary $(EXE2)" 1>&2 ; exit 1; } ; \
-		which peres >/dev/null && { peres -v $(EXE2) | grep -q "^Product Version:[[:space:]]*$(VERSION2)" || { echo "Error: bad version for binary $(EXE2)" 1>&2 ; exit 1; } ; } ;\
+		file $(EXE2) | grep -q "PE32 executable" || { echo "Error: bad format for binary $(EXE2)" 1>&2 ; exit 12; } ; \
+		which peres >/dev/null && { peres -v $(EXE2) | grep -q "^Product Version:[[:space:]]*$(VERSION2)" || { echo "Error: bad version for binary $(EXE2)" 1>&2 ; exit 12; } ; } ;\
 		)
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE1) tmp/$(EXE2)

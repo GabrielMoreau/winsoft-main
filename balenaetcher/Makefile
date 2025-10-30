@@ -62,15 +62,15 @@ tmp/$(EXE):
 tmp/BalenaEtcher/balenaEtcher.exe: tmp/$(EXE)
 	@rm -rf tmp/BalenaEtcher 2>/dev/null
 	@mkdir -p tmp/BalenaEtcher
-	@file "tmp/$(EXE)" | grep -q 'Zip archive data' || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 1; }
+	@file "tmp/$(EXE)" | grep -q 'Zip archive data' || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 12; }
 	@unzip -q "tmp/$(EXE)" -d tmp/BalenaEtcher || echo "Warning: strange thing in $(EXE)"
 	@touch "tmp/BalenaEtcher/balenaEtcher.exe"
 
 check-exe: tmp/BalenaEtcher/balenaEtcher.exe
 	@(cd tmp; \
-		file $(EXE) | grep -q "Zip archive data" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 1; }; \
-		file 'BalenaEtcher/balenaEtcher.exe' | grep -q "PE32+ executable" || { echo "Error: bad format for binary BalenaEtcher/balenaEtcher.exe" 1>&2 ; exit 1; }; \
-		which peres >/dev/null && { peres -v 'BalenaEtcher/balenaEtcher.exe' | grep -q "^Product Version:[[:space:]]*$(VERSION)" || { echo "Error: bad version for binary BalenaEtcher/balenaEtcher.exe" 1>&2 ; exit 1; } ; } ;\
+		file $(EXE) | grep -q "Zip archive data" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 12; }; \
+		file 'BalenaEtcher/balenaEtcher.exe' | grep -q "PE32+ executable" || { echo "Error: bad format for binary BalenaEtcher/balenaEtcher.exe" 1>&2 ; exit 12; }; \
+		which peres >/dev/null && { peres -v 'BalenaEtcher/balenaEtcher.exe' | grep -q "^Product Version:[[:space:]]*$(VERSION)" || { echo "Error: bad version for binary BalenaEtcher/balenaEtcher.exe" 1>&2 ; exit 12; } ; } ;\
 		)
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE)

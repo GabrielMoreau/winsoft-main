@@ -54,8 +54,8 @@ tmp/$(EXE):
 
 check-exe: tmp/$(EXE)
 	@(cd tmp ; \
-		file $(EXE) | grep -q 'Little Endian, Os: Windows, Version 5.0, MSI Installer' || { echo "Error: bad format for binary $(EXE)"  1>&2 ; exit 1; } ; \
-		file $(EXE) | grep -q 'Subject: PuTTY release $(VERSION) installer'            || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 1; } ; \
+		file $(EXE) | grep -q 'Little Endian, Os: Windows, Version 5.0, MSI Installer' || { echo "Error: bad format for binary $(EXE)"  1>&2 ; exit 12; } ; \
+		file $(EXE) | grep -q 'Subject: PuTTY release $(VERSION) installer'            || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 12; } ; \
 		)
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE)

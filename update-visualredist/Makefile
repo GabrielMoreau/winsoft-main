@@ -119,9 +119,9 @@ checksum: $(VCREDIST)
 check-exe: $(VCREDIST)
 	@for exe in $(VCREDIST); \
 	do \
-		file $${exe} | grep -q "PE32 executable" || { echo "Error: bad format for binary $${exe}" 1>&2 ; exit 1; } ; \
-		grep -q "^$$(shasum -a 256 $${exe})$$" checksum.txt || { echo "Error: bad checksum for binary $${exe}" ; exit 1; } ; \
-		which peres >/dev/null && { grep -q $$(peres -v $${exe} | grep "^Product Version:[[:space:]]" | awk '{print $$3}') version.txt || { echo "Error: bad version for binary $${exe}" 1>&2 ; exit 1; } ; } ;\
+		file $${exe} | grep -q "PE32 executable" || { echo "Error: bad format for binary $${exe}" 1>&2 ; exit 12; } ; \
+		grep -q "^$$(shasum -a 256 $${exe})$$" checksum.txt || { echo "Error: bad checksum for binary $${exe}" ; exit 12; } ; \
+		which peres >/dev/null && { grep -q $$(peres -v $${exe} | grep "^Product Version:[[:space:]]" | awk '{print $$3}') version.txt || { echo "Error: bad version for binary $${exe}" 1>&2 ; exit 12; } ; } ;\
 	done
 
 wget: $(VCREDIST)

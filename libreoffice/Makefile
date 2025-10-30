@@ -75,12 +75,12 @@ tmp/$(EXE2):
 
 check-exe: tmp/$(EXE1) tmp/$(EXE2)
 	@(cd tmp ; \
-		file $(EXE1) | grep -q "Composite Document File.*, MSI Installer" || { echo "Error: bad format for binary $(EXE1)" 1>&2 ; exit 1; } ; \
-		file $(EXE1) | grep -q "Author: The Document Foundation.*$(VERSION)" || { echo "Error: bad version for binary $(EXE1)" 1>&2 ; exit 1; } ; \
+		file $(EXE1) | grep -q "Composite Document File.*, MSI Installer" || { echo "Error: bad format for binary $(EXE1)" 1>&2 ; exit 12; } ; \
+		file $(EXE1) | grep -q "Author: The Document Foundation.*$(VERSION)" || { echo "Error: bad version for binary $(EXE1)" 1>&2 ; exit 12; } ; \
 		)
 	@(cd tmp ; \
-		file $(EXE2) | grep -q "Composite Document File.*, MSI Installer" || { echo "Error: bad format for binary $(EXE2)" 1>&2 ; exit 1; } ; \
-		file $(EXE2) | grep -q "Author: The Document Foundation.*$(VERSION)" || { echo "Error: bad version for binary $(EXE2)" 1>&2 ; exit 1; } ; \
+		file $(EXE2) | grep -q "Composite Document File.*, MSI Installer" || { echo "Error: bad format for binary $(EXE2)" 1>&2 ; exit 12; } ; \
+		file $(EXE2) | grep -q "Author: The Document Foundation.*$(VERSION)" || { echo "Error: bad version for binary $(EXE2)" 1>&2 ; exit 12; } ; \
 		)
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE1)

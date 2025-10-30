@@ -71,9 +71,9 @@ tmp/$(EXE):
 
 check-exe: tmp/$(EXE)
 	@(cd tmp ; \
-		file $(EXE) | grep -q "x86-64, for MS Windows" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 1; } ; \
-		file $(ZIP2) | grep -q "Zip archive data" || { echo "Error: bad format for binary $(ZIP2)" 1>&2 ; exit 1; } ; \
-		# which peres >/dev/null && { peres -v $(EXE) | grep -q "^Product Version:[[:space:]]*$(VERSION)" || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 1; } ; } ;\
+		file $(EXE) | grep -q "x86-64, for MS Windows" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 12; } ; \
+		file $(ZIP2) | grep -q "Zip archive data" || { echo "Error: bad format for binary $(ZIP2)" 1>&2 ; exit 12; } ; \
+		# which peres >/dev/null && { peres -v $(EXE) | grep -q "^Product Version:[[:space:]]*$(VERSION)" || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 12; } ; } ;\
 		)
 
 tmp/winsoft-config.ini: winsoft-config.ini Makefile tmp/$(EXE)

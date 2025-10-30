@@ -59,9 +59,9 @@ tmp/$(EXE):
 
 check-exe: tmp/$(EXE)
 	@(cd tmp ; \
-		file $(EXE) | grep -q 'Little Endian, Os: Windows, Version 10.0, MSI Installer' || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 1; } ; \
-		file $(EXE) | grep -q 'Subject: Zoom Meetings.*Comments: $(VERSION)' || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 1; } ; \
-		which peres >/dev/null && { peres -v 'CustomAction.dll' | grep -q "^Product Version:[[:space:]]*$(VERSION)" || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 1; } ; } ;\
+		file $(EXE) | grep -q 'Little Endian, Os: Windows, Version 10.0, MSI Installer' || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 12; } ; \
+		file $(EXE) | grep -q 'Subject: Zoom Meetings.*Comments: $(VERSION)' || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 12; } ; \
+		which peres >/dev/null && { peres -v 'CustomAction.dll' | grep -q "^Product Version:[[:space:]]*$(VERSION)" || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 12; } ; } ;\
 		)
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE)

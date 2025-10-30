@@ -47,8 +47,8 @@ checksum: check-version
 		)
 
 check-exe: $(EXE)
-	@#file $(EXE) | grep -q "Subject: Cisco AnyConnect Secure Mobility Client" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 1; }
-	@file $(EXE) | grep -q "Subject: Cisco Secure Client - AnyConnect VPN" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 1; }
+	@#file $(EXE) | grep -q "Subject: Cisco AnyConnect Secure Mobility Client" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 12; }
+	@file $(EXE) | grep -q "Subject: Cisco Secure Client - AnyConnect VPN" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 12; }
 	@grep -q "^$$(shasum -a 256 $(EXE))$$" ./checksum.txt || echo "Error: bad checksum for binary $(EXE)"
 
 tmp/install.bat: install.bat Makefile $(EXE)

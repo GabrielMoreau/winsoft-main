@@ -115,20 +115,20 @@ tmp/$(EXE8):
 
 check-exe: tmp/$(EXE5) tmp/$(EXE6) tmp/$(EXE7) tmp/$(EXE8)
 	@(cd tmp ; \
-		file $(EXE5) | grep -q "PE32 executable" || { echo "Error: bad format for binary $(EXE5)" 1>&2 ; exit 1; } ; \
-		which peres >/dev/null && { peres -v $(EXE5) | grep -q "^Product Version:[[:space:]]*$(VERSION5)" || { echo "Error: bad version for binary $(EXE6)" 1>&2 ; exit 1; } ; } ;\
+		file $(EXE5) | grep -q "PE32 executable" || { echo "Error: bad format for binary $(EXE5)" 1>&2 ; exit 12; } ; \
+		which peres >/dev/null && { peres -v $(EXE5) | grep -q "^Product Version:[[:space:]]*$(VERSION5)" || { echo "Error: bad version for binary $(EXE6)" 1>&2 ; exit 12; } ; } ;\
 		)
 	@(cd tmp ; \
-		file $(EXE6) | grep -q "PE32 executable" || { echo "Error: bad format for binary $(EXE6)" 1>&2 ; exit 1; } ; \
-		which peres >/dev/null && { peres -v $(EXE6) | grep -q "^Product Version:[[:space:]]*$(VERSION6)" || { echo "Error: bad version for binary $(EXE6)" 1>&2 ; exit 1; } ; } ;\
+		file $(EXE6) | grep -q "PE32 executable" || { echo "Error: bad format for binary $(EXE6)" 1>&2 ; exit 12; } ; \
+		which peres >/dev/null && { peres -v $(EXE6) | grep -q "^Product Version:[[:space:]]*$(VERSION6)" || { echo "Error: bad version for binary $(EXE6)" 1>&2 ; exit 12; } ; } ;\
 		)
 	@(cd tmp ; \
-		file $(EXE7) | grep -q "PE32 executable" || { echo "Error: bad format for binary $(EXE7)" 1>&2 ; exit 1; } ; \
-		which peres >/dev/null && { peres -v $(EXE7) | grep -q "^Product Version:[[:space:]]*$(VERSION7)" || { echo "Error: bad version for binary $(EXE7)" 1>&2 ; exit 1; } ; } ;\
+		file $(EXE7) | grep -q "PE32 executable" || { echo "Error: bad format for binary $(EXE7)" 1>&2 ; exit 12; } ; \
+		which peres >/dev/null && { peres -v $(EXE7) | grep -q "^Product Version:[[:space:]]*$(VERSION7)" || { echo "Error: bad version for binary $(EXE7)" 1>&2 ; exit 12; } ; } ;\
 		)
 	@(cd tmp ; \
-		file $(EXE8) | grep -q "PE32 executable" || { echo "Error: bad format for binary $(EXE8)" 1>&2 ; exit 1; } ; \
-		which peres >/dev/null && { peres -v $(EXE8) | grep -q "^Product Version:[[:space:]]*$(VERSION8)" || { echo "Error: bad version for binary $(EXE8)" 1>&2 ; exit 1; } ; } ;\
+		file $(EXE8) | grep -q "PE32 executable" || { echo "Error: bad format for binary $(EXE8)" 1>&2 ; exit 12; } ; \
+		which peres >/dev/null && { peres -v $(EXE8) | grep -q "^Product Version:[[:space:]]*$(VERSION8)" || { echo "Error: bad version for binary $(EXE8)" 1>&2 ; exit 12; } ; } ;\
 		)
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE5) tmp/$(EXE6) tmp/$(EXE7) tmp/$(EXE8)
