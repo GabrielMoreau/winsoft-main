@@ -52,14 +52,14 @@ shift $((OPTIND -1))
 
 ################################################################
 
-[ -s "${setup_install_archive}" ] || exit 30
+[ -s "${setup_install_archive}" ] || exit 31
 
 rm -rf extract pkg
 mkdir -p pkg
 7z -y x "${setup_install_archive}" -oextract > /dev/null
 
 
-cd pkg || exit 31
+cd pkg || exit 40
 7z -y x ../extract/\$PLUGINSDIR/app-64.7z > /dev/null
 mv      ../extract/resources/* resources/
 mv      ../extract/\$R0/*      ./
