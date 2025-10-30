@@ -1,15 +1,65 @@
 #!/bin/bash
+#
+# extract4exe
+#
+# 2025/10/25/21 Gabriel Moreau <Gabriel.Moreau@univ-grenoble-alpes.fr>
 
-setup=$1
+export LANG=C
 
-[ -s "${setup}" ] || exit 10
+################################################################
+
+function usage() {
+   cat <<END_USAGE
+extract4exe - extract files from setup installer archive
+
+  -s|--setup Setup.exe         soft installer (mandatory)
+  -h|--help                    help
+END_USAGE
+}
+
+################################################################
+
+OPT_SHORT=s:h
+OPT_LONG=setup:,help
+OPT_PARSED=$(getopt --options $OPT_SHORT --longoptions $OPT_LONG --name "$0" -- "$@")
+eval set -- "${OPT_PARSED}"
+
+# get options
+while true
+do
+  case "$1" in
+    -s|--setup)
+      if [ -n "$2" ]
+      then
+        export setup_install_archive="$2"
+        shift 2
+      else
+        usage
+        exit 21
+      fi
+      ;;
+    -h|--help)
+      usage
+      exit
+      ;;
+    --)
+      shift
+      break
+      ;;
+  esac
+done
+shift $((OPTIND -1))
+
+################################################################
+
+[ -s "${setup_install_archive}" ] || exit 30
 
 rm -rf extract pkg
 mkdir -p pkg
-7z -y x "${setup}" -oextract > /dev/null
+7z -y x "${setup_install_archive}" -oextract > /dev/null
 
 
-cd pkg || exit 11
+cd pkg || exit 31
 7z -y x ../extract/\$PLUGINSDIR/app-64.7z > /dev/null
 mv      ../extract/resources/* resources/
 mv      ../extract/\$R0/*      ./

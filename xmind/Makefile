@@ -63,7 +63,7 @@ tmp/$(EXE):
 tmp/pkg/Xmind.exe: tmp/$(EXE)
 	@mkdir -p tmp
 	@(cd tmp ; \
-		../extract4exe "$(EXE)" ; \
+		../extract4exe --setup "$(EXE)" ; \
 		)
 
 check-exe: tmp/$(EXE) tmp/pkg/Xmind.exe
