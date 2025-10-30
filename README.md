@@ -88,6 +88,22 @@ To find out which parameters you can adapt to your site, the `_common`
 folder, whose main file is `conf.mk`, lists these parameters with
 default values (which don't always work).
 
+## Package error code
+
+Here are some error exit code use in `Makefile`:
+
+* Error 11: Version is undefined
+* Error 12: Bad version or format for uploaded file
+* Error 13: New version exist online
+* Error 14: Two uploaded files (binaries) with same checksum
+* Error 15: Same version, but with different checksum
+* Error 16: Return back to an old version
+
+Specific OCS error code:
+
+* Error 50: Zip archive not exists
+* Error 51: Package already upload
+
 ## Extend
 
 WinSoft-Main may not contain your software.
