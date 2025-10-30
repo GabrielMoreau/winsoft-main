@@ -90,19 +90,25 @@ default values (which don't always work).
 
 ## Package error code
 
-Here are some error exit code use in `Makefile`:
+Here are some error exit code used in `Makefile`:
 
 * Error 11: Version is undefined
-* Error 12: Bad version or format for uploaded file
-* Error 13: New version probably exist online
-* Error 14: Two uploaded files (binaries) with same checksum
-* Error 15: Same version, but with different checksum
-* Error 16: Return back to an old version
+* Error 12: Incorrect version or format for the downloaded file
+* Error 13: A new version probably exists online
+* Error 14: Two uploaded files (binaries) with the same checksum
+* Error 15: Same version, but with a different checksum
+* Error 16: Return back to an older version
 
-Specific OCS error code:
+Error codes specific to scripts launched in `Makefile`:
 
-* Error 50: Zip archive not exists
-* Error 51: Package already upload
+* Error 20-29: Incorrect option parameter
+* Error 30-39: Parameter in incorrect format
+* Error 40-49: Error in script execution
+
+Error code in `Makefile` specific to OCS Inventory targets:
+
+* Error 50: Zip archive does not exist
+* Error 51: Package already uploaded
 
 ## Extend
 
