@@ -1,4 +1,4 @@
-# KeepassXC - Free and open-source password manager.
+# KeepassXC - Free and open-source password manager
 
 KeePassXC is a modern, secure, and open-source password manager that
 stores and manages your most sensitive information. Your passwords
