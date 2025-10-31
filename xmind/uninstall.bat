@@ -1,9 +1,10 @@
+@ECHO OFF
+SETLOCAL
 
 REM
 REM   Uninstall-Xmind
 REM
 
-REM Name
 SET softname=Uninstall-Xmind
 
 SET logdir=%ProgramData%\OCS Inventory NG\Agent\DeployLog
@@ -17,7 +18,8 @@ EXIT /B
 
 ECHO BEGIN %date%-%time%
 
-SET softversion=__VERSION__
+SET "softversion=__VERSION__"
+SET "installfolder=Xmind"
 
 
 ECHO Silent uninstall %softname%
@@ -26,4 +28,5 @@ CALL .\pre-install.bat
 
 ECHO Auto Remove (last line)
 ECHO END %date%-%time%
-IF EXIST "%ProgramFiles%\Xmind" RMDIR /S /Q "%ProgramFiles%\Xmind"
+IF EXIST "%ProgramFiles%\%installfolder%" RMDIR /S /Q "%ProgramFiles%\%installfolder%"
+ENDLOCAL

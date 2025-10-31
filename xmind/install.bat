@@ -1,6 +1,6 @@
 
 REM
-REM   Filezilla
+REM   XMind
 REM
 
 REM Name
@@ -17,29 +17,30 @@ EXIT /B
 
 ECHO BEGIN %date%-%time%
 
-REM Version parameter (auto update by Makefile)
-SET softversion=__VERSION__
-SET regkey=Xmind_is1
-SET shortcut=%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\Xmind.lnk
-SET target=%ProgramFiles%\Xmind\Xmind.exe
-SET process=Xmind.exe
+SET "softversion=__VERSION__"
+SET "installfolder=Xmind"
+SET "regkey=Xmind_is1"
+SET "shortcut=%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\Xmind.lnk"
+SET "sc_target=%ProgramFiles%\%installfolder%\Xmind.exe"
+SET "process=Xmind.exe"
 
 
 ECHO Clean old version before install
 CALL .\pre-install.bat
-IF EXIST "%ProgramFiles%\Xmind" RMDIR /S /Q "%ProgramFiles%\Xmind"
+IF EXIST "%ProgramFiles%\%installfolder%" RMDIR /S /Q "%ProgramFiles%\%installfolder%"
 
 
 ECHO Silent install %softname%
-MOVE pkg "%ProgramFiles%\Xmind"
-REM MKDIR "%ProgramFiles%\Xmind\"
-REM XCOPY pkg\* "%ProgramFiles%\Xmind\" /E /I /H /Y
-REM ScriptRunner.exe -appvscript Xmind-for-Windows-x64bit-%softversion%.exe /S /D="%ProgramFiles%\Xmind" -appvscriptrunnerparameters -wait -timeout=300
-IF NOT EXIST "%target%" GOTO FAILED
+MOVE pkg "%ProgramFiles%\%installfolder%"
+IF NOT EXIST "%sc_target%" GOTO FAILED
 
 
 ECHO Copy uninstall script
-COPY /A /Y "uninstall.bat" "%ProgramFiles%\Xmind\uninstall.bat"
+COPY /A /Y "pre-install.bat" "%ProgramFiles%\%installfolder%\pre-install.bat"
+COPY /A /Y "uninstall.bat"   "%ProgramFiles%\%installfolder%\uninstall.bat"
+
+ECHO Proper right to files
+ICACLS "%ProgramFiles%\%installfolder%" /grant *S-1-1-0:(OI)(CI)(RX)
 
 
 ECHO Search PowerShell
@@ -48,31 +49,25 @@ IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET pwrsh=%W
 
 ECHO Create shortcut
 IF EXIST "%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs" (
-  %pwrsh% -Command "$WS = New-Object -ComObject WScript.Shell; $SC = $WS.CreateShortcut('%shortcut%'); $SC.TargetPath = '%target%'; $SC.Save();" -NoLogo -NonInteractive -NoProfile
+  %pwrsh% -Command "$WS = New-Object -ComObject WScript.Shell; $SC = $WS.CreateShortcut('%shortcut%'); $SC.TargetPath = '%sc_target%'; $SC.Save();" -NoLogo -NonInteractive -NoProfile
 )
 
 
-ECHO Remove desktop shortcut
-REM IF EXIST "%PUBLIC%\Desktop\Xmind.lnk"          DEL /F /Q "%PUBLIC%\Desktop\Xmind.lnk"
-REM IF EXIST "%ALLUSERSPROFILE%\Desktop\Xmind.lnk" DEL /F /Q "%ALLUSERSPROFILE%\Desktop\Xmind.lnk"
-
-
-ECHO Better reg uninstall key
+ECHO Reg uninstall key
  > tmp_install.reg ECHO Windows Registry Editor Version 5.00
 >> tmp_install.reg ECHO.
 >> tmp_install.reg ECHO [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\%regkey%]
 >> tmp_install.reg ECHO "DisplayVersion"="%softversion%"
 >> tmp_install.reg ECHO "Comments"="%softname% (%DATE:~-4%/%DATE:~-7,-5%/%DATE:~-10,-8%)"
 >> tmp_install.reg ECHO "DisplayName"="Xmind %softversion%"
->> tmp_install.reg ECHO "UninstallString"="%SystemDrive%\\Program Files\\Xmind\\Uninstall Xmind.exe"
->> tmp_install.reg ECHO "InstallLocation"="%SystemDrive%\\Program Files\\Xmind"
->> tmp_install.reg ECHO "InstallFolder"="%SystemDrive%\\Program Files\\Xmind"
->> tmp_install.reg ECHO "DisplayIcon"="%SystemDrive%\\Program Files\\Xmind\\Xmind.exe,0"
+>> tmp_install.reg ECHO "UninstallString"="%SystemDrive%\\Program Files\\%installfolder%\\uninstall.bat"
+>> tmp_install.reg ECHO "InstallLocation"="%SystemDrive%\\Program Files\\%installfolder%"
+>> tmp_install.reg ECHO "InstallFolder"="%SystemDrive%\\Program Files\\%installfolder%"
+>> tmp_install.reg ECHO "DisplayIcon"="%SystemDrive%\\Program Files\\%installfolder%\\Xmind.exe,0"
 >> tmp_install.reg ECHO "URLInfoAbout"="https://xmind.com/"
 >> tmp_install.reg ECHO "Publisher"="XMIND LTD."
 >> tmp_install.reg ECHO.
 regedit.exe /S "tmp_install.reg"
-)
 
 GOTO END
 

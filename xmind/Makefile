@@ -80,10 +80,10 @@ tmp/uninstall.bat: uninstall.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
 	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#;' $< > $@
 
-%.zip: Makefile pre-install.bat tmp/install.bat tmp/$(EXE) tmp/pkg/Xmind.exe
+%.zip: Makefile pre-install.bat tmp/install.bat tmp/uninstall.bat tmp/$(EXE) tmp/pkg/Xmind.exe
 	@rm -f $@
 	@zip -r $@ pre-install.bat
-	@(cd tmp; zip --quiet -r ../$@ install.bat pkg)
+	@(cd tmp; zip --quiet -r ../$@ install.bat uninstall.bat pkg)
 	@chmod ugo+rw $@
 	@echo -n '  Zip / Number of files: '; unzip -t $@ | grep 'OK' | wc -l
 
