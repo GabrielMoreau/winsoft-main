@@ -1,0 +1,2 @@
+2bbae75bc31a848b7cb5f297270efb7bef9bba0deeec6a671625563dc090ad69  openjdk-25.0.1_windows-x64_bin.zip
+c48522c9ac3e29657f439d01332ea901408dee4c547b9daffb43ee550326fb6c  VOSviewer-1.6.20.jar
