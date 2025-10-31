@@ -159,7 +159,7 @@ Please devops, put always the version number clearly in the comment...
 apt install make curl wget pev msitools p7zip-full libimage-exiftool-perl
 ```
 
-## List of 129 packages
+## List of 130 packages
 
  |   | Software | Detail | &#127968; |   |
  | - | -------- | ------ | --------- | - |
@@ -256,17 +256,18 @@ apt install make curl wget pev msitools p7zip-full libimage-exiftool-perl
  | 098 | [VisIt](visit/README.md) | Interactive, scalable, visualization, animation and analysis tool | [&#127968;](https://visit-dav.github.io/visit-website/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
  | 099 | [VLC](vlc/README.md) | VideoLAN media player Client | [&#127968;](https://www.videolan.org/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
  | 100 | [VMware Workstation Player](vmwareplayer/README.md) | Virtualization software for computers | [&#127968;](https://www.vmware.com/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
- | 101 | [Webex](webex/README.md) | Cisco Web conferencing and videoconferencing Client | [&#127968;](https://www.webex.com/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
- | 102 | [WinDirStat](windirstat/README.md) | Disk usage viewer and cleanup tool | [&#127968;](https://windirstat.net/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
- | 104 | [WinMerge](winmerge/README.md) | Diff between two or three files | [&#127968;](https://winmerge.org/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
- | 105 | [WinSCP](winscp/README.md) | SCP and SFTP file transfert | [&#127968;](https://winscp.net/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
- | 106 | [Wireshark](wireshark/README.md) | Network Packet Analyser | [&#127968;](https://wireshark.org/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
- | 107 | [X2GoClient](x2goclient/README.md) | Client Windows for X2GO (NX) Linux remote desktop | [&#127968;](https://wiki.x2go.org/doku.php/start) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
- | 108 | [XMind](xmind/README.md) | Mind mapping and collaboration application | [&#127968;](https://xmind.com/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
- | 109 | [XnViewMP](xnviewmp/README.md) | Image viewer, browser and converter | [&#127968;](https://www.xnview.com) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
- | 110 | [Xournal++](xournalpp/README.md) | PDF annotate and hand note-taking software | [&#127968;](https://github.com/xournalpp/xournalpp) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
- | 111 | [Zoom](zoom/README.md) | Web Conference Client | [&#127968;](https://zoom.us/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
- | 112 | [Zotero](zotero/README.md) | Manage bibliographic data | [&#127968;](https://www.zotero.org/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
+ | 101 | [VOSviewer](vosviewer/README.md) | Constructing and visualizing bibliometric networks | [&#127968;](https://www.vosviewer.com) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
+ | 102 | [Webex](webex/README.md) | Cisco Web conferencing and videoconferencing Client | [&#127968;](https://www.webex.com/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
+ | 103 | [WinDirStat](windirstat/README.md) | Disk usage viewer and cleanup tool | [&#127968;](https://windirstat.net/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
+ | 105 | [WinMerge](winmerge/README.md) | Diff between two or three files | [&#127968;](https://winmerge.org/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
+ | 106 | [WinSCP](winscp/README.md) | SCP and SFTP file transfert | [&#127968;](https://winscp.net/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
+ | 107 | [Wireshark](wireshark/README.md) | Network Packet Analyser | [&#127968;](https://wireshark.org/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
+ | 108 | [X2GoClient](x2goclient/README.md) | Client Windows for X2GO (NX) Linux remote desktop | [&#127968;](https://wiki.x2go.org/doku.php/start) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
+ | 109 | [XMind](xmind/README.md) | Mind mapping and collaboration application | [&#127968;](https://xmind.com/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
+ | 110 | [XnViewMP](xnviewmp/README.md) | Image viewer, browser and converter | [&#127968;](https://www.xnview.com) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
+ | 111 | [Xournal++](xournalpp/README.md) | PDF annotate and hand note-taking software | [&#127968;](https://github.com/xournalpp/xournalpp) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
+ | 112 | [Zoom](zoom/README.md) | Web Conference Client | [&#127968;](https://zoom.us/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
+ | 113 | [Zotero](zotero/README.md) | Manage bibliographic data | [&#127968;](https://www.zotero.org/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
 
 ### Uninstall packages
 
