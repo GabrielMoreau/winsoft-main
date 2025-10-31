@@ -10,6 +10,9 @@ They can be constructed based on citation, bibliographic coupling, co-citation, 
 * Download : https://www.vosviewer.com/download,
   https://www.vosviewer.com/VOSviewer.jar
 
+We launch the `VOSviewer.jar` file with `javaw.exe` so that no window opens.
+However, in order to be able to easily kill the process, we create a copy of `javaw.exe` with the name `VOSviewer.exe`.
+
 
 ## Register Key
 
