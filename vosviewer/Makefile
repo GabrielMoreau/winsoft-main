@@ -20,7 +20,7 @@ LOGDIR:=%WINDIR%\\Logs
 
 .PHONY: all check-version check-unrealized check-exe clean control next version wget checksum
 
-all: check-version check-exe $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
+all: check-version check-exe Uninstall-$(SOFT)_$(VERSION)-$(REVISION)_x64.zip $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
 
 sinclude ../_common/conf.mk
 
@@ -101,9 +101,20 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
 	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#; s/__JDKVERSION__/$(VERSION2)/g;' $< > $@
 
-%.zip: Makefile uninstall.bat tmp/install.bat tmp/$(SOFT).ico tmp/VOSviewer.license tmp/jdk-$(VERSION2)/bin/javaw.exe tmp/$(EXE)
+tmp/uninstall.bat: uninstall.bat Makefile tmp/$(EXE)
+	@mkdir -p tmp
+	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#;' $< > $@
+
+%.zip: Makefile pre-install.bat tmp/install.bat tmp/uninstall.bat tmp/$(SOFT).ico tmp/VOSviewer.license tmp/jdk-$(VERSION2)/bin/javaw.exe tmp/$(EXE)
 	@rm -f $@
-	@zip -r $@ uninstall.bat
-	@(cd tmp; zip --quiet -r ../$@ install.bat $(SOFT).ico VOSviewer.license jdk-$(VERSION2) $(EXE))
+	@zip -r $@ pre-install.bat
+	@(cd tmp; zip --quiet -r ../$@ install.bat uninstall.bat $(SOFT).ico VOSviewer.license jdk-$(VERSION2) $(EXE))
 	@echo -n '  Zip / Number of files: '; unzip -t $@ | grep 'OK' | wc -l
+	@chmod ugo+rw $@
+
+Uninstall-$(SOFT)_$(VERSION)-$(REVISION)_x64.zip: Makefile pre-install.bat tmp/uninstall.bat
+	@rm -f $@
+	@zip -r $@ pre-install.bat
+	@(cd tmp; zip -r ../$@ uninstall.bat)
+	@printf "@ uninstall.bat\n@=install.bat\n" | zipnote -w ./$@
 	@chmod ugo+rw $@

@@ -1,32 +1,29 @@
 @ECHO OFF
 SETLOCAL
 
-SET softname=VOSviewer
-ECHO Silent uninstall %softname%
+REM
+REM   Uninstall-VOSviewer
+REM
 
-SET "process=VOSviewer.exe"
+SET softname="Uninstall-VOSviewer"
+
+SET logdir=%ProgramData%\OCS Inventory NG\Agent\DeployLog
+IF NOT EXIST "%logdir%" (
+  MKDIR "%logdir%"
+)
+CALL :INSTALL 1> "%logdir%\%softname%.log" 2>&1
+EXIT /B
+
+:INSTALL
+
+ECHO BEGIN %date%-%time%
+
+SET "softversion=__VERSION__"
 SET "installfolder=VOSviewer"
-SET "regkey=VOSviewer_is1"
-SET "shortcut=%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\VOSviewer.lnk"
 
 
-ECHO Kill running process
-TASKKILL /T /F /IM %process%
-
-
-ECHO Clean reg uninstall key
-REG QUERY "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\%regkey%"
-IF %ERRORLEVEL% EQU 0 (
-  REG DELETE "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\%regkey%" /F
-)
-REG QUERY "HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\%regkey%"
-IF %ERRORLEVEL% EQU 0 (
-  REG DELETE "HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\%regkey%" /F
-)
-
-
-ECHO Remove Shortcut
-IF EXIST "%shortcut%" DEL /F /Q "%shortcut%"
+ECHO Silent uninstall %softname%
+CALL .\pre-install.bat
 
 
 ECHO Auto Remove (last line)

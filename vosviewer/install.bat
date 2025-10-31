@@ -22,13 +22,13 @@ SET "process=VOSviewer.exe"
 SET "installfolder=VOSviewer"
 SET "regkey=VOSviewer_is1"
 SET "shortcut=%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\VOSviewer.lnk"
-SET "sc_target=%ProgramFiles%\%installfolder%\jdk-__JDKVERSION__\bin\javaw.exe"
+SET "sc_target=%ProgramFiles%\%installfolder%\jdk-__JDKVERSION__\bin\VOSviewer.exe"
 SET "sc_args=-jar .\VOSviewer-%softversion%.jar"
 SET "sc_icon=%ProgramFiles%\%installfolder%\VOSviewer.ico"
 
 
 ECHO Clean old version before install
-CALL .\uninstall.bat
+CALL .\pre-install.bat
 IF EXIST "%ProgramFiles%\%installfolder%" RMDIR /S /Q "%ProgramFiles%\%installfolder%"
 
 
@@ -38,11 +38,13 @@ XCOPY "jdk-__JDKVERSION__" "%ProgramFiles%\%installfolder%\jdk-__JDKVERSION__" /
 COPY /B /Y VOSviewer-1.6.20.jar "%ProgramFiles%\%installfolder%\
 COPY /B /Y VOSviewer.ico        "%ProgramFiles%\%installfolder%\
 COPY /B /Y VOSviewer.license    "%ProgramFiles%\%installfolder%\
+COPY /B /Y "%ProgramFiles%\%installfolder%\jdk-__JDKVERSION__\bin\javaw.exe" "%ProgramFiles%\%installfolder%\jdk-__JDKVERSION__\bin\VOSviewer.exe"
 
 ECHO Copy uninstall script
-COPY /A /Y "uninstall.bat" "%ProgramFiles%\%installfolder%\uninstall.bat"
+COPY /A /Y "pre-install.bat" "%ProgramFiles%\%installfolder%\pre-install.bat"
+COPY /A /Y "uninstall.bat"   "%ProgramFiles%\%installfolder%\uninstall.bat"
 
-ECHO Good right
+ECHO Proper right to files
 ICACLS "%ProgramFiles%\%installfolder%" /grant *S-1-1-0:(OI)(CI)(RX)
 
 
