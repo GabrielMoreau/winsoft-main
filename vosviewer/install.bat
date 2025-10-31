@@ -38,7 +38,9 @@ XCOPY "jdk-__JDKVERSION__" "%ProgramFiles%\%installfolder%\jdk-__JDKVERSION__" /
 COPY /B /Y VOSviewer-1.6.20.jar "%ProgramFiles%\%installfolder%\
 COPY /B /Y VOSviewer.ico        "%ProgramFiles%\%installfolder%\
 COPY /B /Y VOSviewer.license    "%ProgramFiles%\%installfolder%\
-COPY /B /Y "%ProgramFiles%\%installfolder%\jdk-__JDKVERSION__\bin\javaw.exe" "%ProgramFiles%\%installfolder%\jdk-__JDKVERSION__\bin\VOSviewer.exe"
+COPY /B /Y "%ProgramFiles%\%installfolder%\jdk-__JDKVERSION__\bin\javaw.exe" "%sc_target%"
+IF NOT EXIST "%sc_target%" GOTO FAILED
+
 
 ECHO Copy uninstall script
 COPY /A /Y "pre-install.bat" "%ProgramFiles%\%installfolder%\pre-install.bat"
@@ -62,6 +64,7 @@ IF EXIST "%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs" (
   %pwrsh% -Command "$WS = New-Object -ComObject WScript.Shell; $SC = $WS.CreateShortcut('%shortcut%'); $SC.TargetPath = '%sc_target%'; $SC.Arguments='%sc_args%'; $SC.WorkingDirectory='%ProgramFiles%\%installfolder%'; $SC.IconLocation='%sc_icon%'; $SC.Save();" -NonInteractive -NoProfile
 )
 
+
 ECHO Reg uninstall key
  > tmp_install.reg ECHO Windows Registry Editor Version 5.00
 >> tmp_install.reg ECHO.
@@ -78,7 +81,15 @@ ECHO Reg uninstall key
 >> tmp_install.reg ECHO.
 regedit.exe /S "tmp_install.reg"
 
+GOTO END
 
-:End
+
+:FAILED
+ECHO Failed to install %softname%
+ECHO END %date%-%time%
+EXIT 44
+
+
+:END
 ECHO END %date%-%time%
 EXIT

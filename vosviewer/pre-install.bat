@@ -1,12 +1,12 @@
 SETLOCAL
 
 SET softname=VOSviewer
-ECHO Silent uninstall %softname%
+ECHO Begin pre-install script for %softname%
 
-SET "process=VOSviewer.exe"
 SET "installfolder=VOSviewer"
 SET "regkey=VOSviewer_is1"
 SET "shortcut=%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\VOSviewer.lnk"
+SET "process=VOSviewer.exe"
 
 
 ECHO Kill running process
@@ -26,9 +26,4 @@ IF %ERRORLEVEL% EQU 0 (
 
 ECHO Remove Shortcut
 IF EXIST "%shortcut%" DEL /F /Q "%shortcut%"
-
-
-ECHO Auto Remove (last line)
-ECHO END %date%-%time%
-IF EXIST "%ProgramFiles%\%installfolder%" RMDIR /S /Q "%ProgramFiles%\%installfolder%"
 ENDLOCAL
