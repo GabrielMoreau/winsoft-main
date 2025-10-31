@@ -4,9 +4,14 @@
 #
 
 SOFT:=Blender
-#VERSION:=$(shell curl -s -L --connect-timeout 10 'https://api.github.com/repos/blender/blender/tags' | grep '"name":' | head -1 | cut -f 4 -d '"' | sed -e 's/^v//;')
-URL:=$(shell curl -s -L --connect-timeout 10 'https://www.blender.org/download/' | sed -e 's/"/\n/g;' | egrep '^https://www.blender.org/.*/.*windows-x64.msi' | head -1 | xargs -r curl -s -L | sed -e 's/"/\n/g;' | egrep '^https://.*/blender-.*windows-x64.msi' | sort -r | head -1 | sed -e 's#/$$##;')
-VERSION:=$(shell basename '$(URL)' 2> /dev/null | cut -f 2 -d '-')
+# https://download.blender.org/release/Blender4.5/blender-4.5.4-windows-x64.msi
+# https://ftp.halifax.rwth-aachen.de/blender/release/Blender4.5/blender-4.5.4-windows-x64.msi
+# https://ftp.nluug.nl/pub/graphics/blender/release/Blender4.5/blender-4.5.4-windows-x64.msi
+VERSION:=$(shell curl -s -L --connect-timeout 10 'https://api.github.com/repos/blender/blender/tags' | grep '"name":' | head -1 | cut -f 4 -d '"' | sed -e 's/^v//;')
+VERSION_SHORT:=$(shell echo  '$(VERSION)' | cut -f 1,2 -d '.')
+URL:=$(shell echo 'https://download.blender.org,https://ftp.halifax.rwth-aachen.de/blender,https://ftp.nluug.nl/pub/graphics/blender' | sed -e 's/,/\n/g;' | sort -R | head -1)/release/Blender$(VERSION_SHORT)/blender-$(VERSION)-windows-x64.msi
+#URL:=$(shell curl -s -L --connect-timeout 10 'https://www.blender.org/download/' | sed -e 's/"/\n/g;' | grep -E '^https://www.blender.org/.*/.*windows-x64.msi' | head -1 | xargs -r curl -s -L | sed -e 's/"/\n/g;' | egrep '^https://.*/blender-.*windows-x64.msi' | sort -r | head -1 | sed -e 's#/$$##;')
+#VERSION:=$(shell basename '$(URL)' 2> /dev/null | cut -f 2 -d '-')
 REVISION:=1
 
 EXE:=blender-$(VERSION)-windows-x64.msi
