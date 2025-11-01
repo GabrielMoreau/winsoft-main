@@ -5,10 +5,12 @@
 
 SOFT:=AcrobatReader
 #$(shell mkdir -p tmp; curl -s -L "https://helpx.adobe.com/acrobat/release-note/release-notes-acrobat-reader.html" > tmp/release-notes-acrobat-reader.html)
-WLINE:=$(shell curl -s -L "https://helpx.adobe.com/acrobat/release-note/release-notes-acrobat-reader.html" | grep 'disablelinktracking="false">DC ' | head -1)
-VERSION:=$(shell echo '$(WLINE)' | cut -f 2 -d '(' | cut -f 1 -d ')' | head -1)
-URLTRANSIT:=$(shell echo '$(WLINE)' | sed -e 's/"/\n/g;' | grep '^https' | head -1)
-VERSIONCOLLAPSE:=$(shell curl -s "$(URLTRANSIT)" | grep AcroRdrDCx64Upd | sed -e 's/"/\n/g;' | grep '^https' | cut -f 9 -d '/' | head -1)
+#WLINE:=$(shell curl -s -L "https://helpx.adobe.com/acrobat/release-note/release-notes-acrobat-reader.html" | grep 'disablelinktracking="false">DC ' | head -1)
+#VERSION:=$(shell echo '$(WLINE)' | cut -f 2 -d '(' | cut -f 1 -d ')' | head -1)
+#URLTRANSIT:=$(shell echo '$(WLINE)' | sed -e 's/"/\n/g;' | grep '^https' | head -1)
+#VERSIONCOLLAPSE:=$(shell curl -s "$(URLTRANSIT)" | grep AcroRdrDCx64Upd | sed -e 's/"/\n/g;' | grep '^https' | cut -f 9 -d '/' | head -1)
+VERSION:=$(shell curl -s -L "https://helpx.adobe.com/acrobat/release-note/release-notes-acrobat-reader.html" | grep 'continuous/dccontinuous.*std-ref.*Planned update,' | sed -e 's/"/\n/g;' | grep '^>[[:digit:]]' | cut -f 1 -d ' ' | sed -e 's/^>//;' | head -1)
+VERSIONCOLLAPSE:=$(shell echo '$(VERSION)' | sed -e 's/\.//g;')
 VERSIONSHORT:=$(shell echo $(VERSIONCOLLAPSE) | sed -e 's/[\.0[:space:]]//g;')
 REVISION:=1
 URL:=https://ardownload2.adobe.com/pub/adobe/acrobat/win/AcrobatDC/$(VERSIONCOLLAPSE)/AcroRdrDCx64$(VERSIONCOLLAPSE)_fr_FR.exe
@@ -71,7 +73,7 @@ tmp/$(EXE):
 
 check-exe: tmp/$(EXE)
 	@(cd tmp ; \
-		file $(EXE) | grep -q "PE32 executable" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 12; } ; \
+		file $(EXE) | grep -q "PE32. executable" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 12; } ; \
 		which peres >/dev/null && { peres -v $(EXE) | grep '^Product Version:[[:space:]]' | sed -e 's/[\.0[:space:]]//g;' | cut -f 2 -d ':' | grep -q "^$(VERSIONSHORT)$$" || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 12; }; } ; \
 		)
 
