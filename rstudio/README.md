@@ -22,3 +22,4 @@ Example :
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
  | HKLM | RStudio | Posit Software | 2025.05.0+496 | `RStudio` | `C:\Program Files\RStudio\Uninstall.exe` |
  | HKLM | RStudio | Posit Software | 2025.09.1+401 | `RStudio` | `C:\Program Files\RStudio\Uninstall.exe` |
+ | HKLM | RStudio | Posit Software | 2025.09.2+418 | `RStudio` | `C:\Program Files\RStudio\Uninstall.exe` |
