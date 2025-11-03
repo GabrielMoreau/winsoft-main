@@ -5,9 +5,9 @@
 
 SOFT:=VOSviewer
 URL:=https://www.vosviewer.com/VOSviewer.jar
-VERSION:=$(shell curl -s -L 'https://www.vosviewer.com/download' | sed -e 's/"/\n/g;' | grep -E '_exe.zip$$' | xargs -r basename | cut -f 2 -d '_' | head -1)
+VERSION:=$(shell curl -s -L --connect-timeout 10 'https://www.vosviewer.com/download' | sed -e 's/"/\n/g;' | grep -E '_exe.zip$$' | xargs -r basename | cut -f 2 -d '_' | head -1)
 # https://download.java.net/java/GA/jdk25.0.1/2fbf10d8c78e40bd87641c434705079d/8/GPL/openjdk-25.0.1_windows-x64_bin.zip
-URL2:=$(shell curl -s -L 'https://jdk.java.net/25/' | sed -e 's/"/\n/g;' | grep -E '/openjdk-.*_windows-x64_bin.zip$$' | head -1)
+URL2:=$(shell curl -s -L --connect-timeout 10 'https://jdk.java.net/25/' | sed -e 's/"/\n/g;' | grep -E '/openjdk-.*_windows-x64_bin.zip$$' | head -1)
 VERSION2:=$(shell echo '$(URL2)' | cut -f 2 -d '-' | cut -f 1 -d '_')
 REVISION:=1
 
