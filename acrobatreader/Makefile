@@ -8,7 +8,7 @@ SOFT:=AcrobatReader
 #WLINE:=$(shell curl -s -L --connect-timeout 10 "https://helpx.adobe.com/acrobat/release-note/release-notes-acrobat-reader.html" | grep 'disablelinktracking="false">DC ' | head -1)
 #VERSION:=$(shell echo '$(WLINE)' | cut -f 2 -d '(' | cut -f 1 -d ')' | head -1)
 #URLTRANSIT:=$(shell echo '$(WLINE)' | sed -e 's/"/\n/g;' | grep '^https' | head -1)
-#VERSIONCOLLAPSE:=$(shell curl -s "$(URLTRANSIT)" | grep AcroRdrDCx64Upd | sed -e 's/"/\n/g;' | grep '^https' | cut -f 9 -d '/' | head -1)
+#VERSIONCOLLAPSE:=$(shell curl -s -L --connect-timeout 10 "$(URLTRANSIT)" | grep AcroRdrDCx64Upd | sed -e 's/"/\n/g;' | grep '^https' | cut -f 9 -d '/' | head -1)
 VERSION:=$(shell curl -s -L --connect-timeout 10 'https://helpx.adobe.com/acrobat/release-note/release-notes-acrobat-reader.html' | grep 'continuous/dccontinuous.*std-ref.*Planned update,' | sed -e 's/"/\n/g;' | grep '^>[[:digit:]]' | cut -f 1 -d ' ' | sed -e 's/^>//;' | head -1)
 VERSIONCOLLAPSE:=$(shell echo '$(VERSION)' | sed -e 's/\.//g;')
 VERSIONSHORT:=$(shell echo $(VERSIONCOLLAPSE) | sed -e 's/[\.0[:space:]]//g;')

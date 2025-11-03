@@ -12,10 +12,10 @@ REVISION:=1
 EXE1:=LibreOffice_$(VERSION)_Win_x86-64.msi
 EXE2:=LibreOffice_$(VERSION)_Win_x86-64_helppack_fr.msi
 
-URL1:=$(shell curl -s "https://download.documentfoundation.org/libreoffice/stable/$(VERSION)/win/x86_64/$(EXE1)" \
+URL1:=$(shell curl -s -L --connect-timeout 10 "https://download.documentfoundation.org/libreoffice/stable/$(VERSION)/win/x86_64/$(EXE1)" \
 	| sed -e 's/"/\n/g;' | grep "^https://.*/$(EXE1)$$" | head -1)
 
-URL2:=$(shell curl -s "https://download.documentfoundation.org/libreoffice/stable/$(VERSION)/win/x86_64/$(EXE2)" \
+URL2:=$(shell curl -s -L --connect-timeout 10 "https://download.documentfoundation.org/libreoffice/stable/$(VERSION)/win/x86_64/$(EXE2)" \
 	| sed -e 's/"/\n/g;' | grep "^https://.*/$(EXE2)$$" | head -1)
 
 IT_TEAM:=IT Support
