@@ -9,8 +9,8 @@
 # curl -sL 'https://github.com/nextcloud-releases/desktop/releases' | sed -e 's/"/\n/g;' | grep '/nextcloud-releases/desktop/releases/tag/'  | grep -Ev -- '-(rc|alpha|beta)' | cut -f 6 -d '/' | cut -f 2 -d 'v' | grep . | head -1
 
 SOFT:=Nextcloud
-VERSION:=$(shell curl -sL 'https://github.com/nextcloud-releases/desktop/releases' | sed -e 's/"/\n/g;' | grep '/nextcloud-releases/desktop/releases/tag/'  | grep -Ev -- '-(rc|alpha|beta)' | cut -f 6 -d '/' | cut -f 2 -d 'v' | grep . | head -1)
-URL:=https://github.com/$(shell curl -sL 'https://github.com/nextcloud-releases/desktop/releases/expanded_assets/v$(VERSION)' | sed -e 's/"/\n/g;' | grep '.*/Nextcloud-.*-x64.msi$$' | tail -1 | sed -e 's#^/##;')
+VERSION:=$(shell curl -s -L --connect-timeout 10 'https://github.com/nextcloud-releases/desktop/releases' | sed -e 's/"/\n/g;' | grep '/nextcloud-releases/desktop/releases/tag/'  | grep -Ev -- '-(rc|alpha|beta)' | cut -f 6 -d '/' | cut -f 2 -d 'v' | grep . | head -1)
+URL:=https://github.com/$(shell curl -s -L --connect-timeout 10 'https://github.com/nextcloud-releases/desktop/releases/expanded_assets/v$(VERSION)' | sed -e 's/"/\n/g;' | grep '.*/Nextcloud-.*-x64.msi$$' | tail -1 | sed -e 's#^/##;')
 REVISION:=1
 # VERSION:=$(shell curl -s -L --connect-timeout 10 'https://download.nextcloud.com/desktop/releases/Windows/' | sed -e 's/>/\n/g;' | grep 'href="Nextcloud-.*-x64.msi"' | tail -1 | cut -f 2 -d '-')
 # URL:=https://download.nextcloud.com/desktop/releases/Windows/Nextcloud-$(VERSION)-x64.msi

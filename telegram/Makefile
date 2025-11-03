@@ -4,7 +4,7 @@
 #
 
 SOFT:=Telegram
-URL:=https://github.com$(shell curl -s  -L 'https://github.com/telegramdesktop/tdesktop/releases' | sed 's/"/\n/g;' | grep '^https://github.com/telegramdesktop/tdesktop/releases/expanded_assets' | xargs -r -n 1 curl -s -L | sed 's/"/\n/g;' | grep '/tportable-x64.*zip' | head -1)
+URL:=https://github.com$(shell curl -s -L --connect-timeout 10 'https://github.com/telegramdesktop/tdesktop/releases' | sed 's/"/\n/g;' | grep '^https://github.com/telegramdesktop/tdesktop/releases/expanded_assets' | xargs -r -n 1 curl -s -L | sed 's/"/\n/g;' | grep '/tportable-x64.*zip' | head -1)
 VERSION:=$(shell echo $(URL) | cut -f 8 -d '/' | sed -s 's/^v//;')
 REVISION:=1
 

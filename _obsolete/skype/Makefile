@@ -4,7 +4,7 @@
 #
 
 SOFT:=Skype
-URL:=$(shell curl 'https://get.skype.com/go/getskype-skypeforwindows' -s -L -I -o /dev/null -w '%{url_effective}')
+URL:=$(shell curl -s -L --connect-timeout 10 'https://get.skype.com/go/getskype-skypeforwindows' -I -o /dev/null -w '%{url_effective}')
 VERSION:=$(shell basename '$(URL)' .exe 2> /dev/null | cut -f 2 -d '-')
 REVISION:=1
 

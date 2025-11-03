@@ -5,7 +5,7 @@
 
 SOFT:=RStudio
 URL:=$(shell curl -s -L --connect-timeout 10 'https://posit.co/download/rstudio-desktop/' | sed -e 's/"/\n/g;' | grep '^https://.*/RStudio-.*.exe' | head -1)
-#URL:=$(shell curl -s 'https://www.rstudio.com/wp-content/downloads.json' | grep -A4 '"name".*/RStudio-.*\.exe' | grep '"url"' | cut -f 4 -d '"' | head -1)
+#URL:=$(shell curl -s -L --connect-timeout 10 'https://www.rstudio.com/wp-content/downloads.json' | grep -A4 '"name".*/RStudio-.*\.exe' | grep '"url"' | cut -f 4 -d '"' | head -1)
 VERSION1:=$(shell basename '$(URL)' 2> /dev/null | cut -f 2- -d'-' | sed -e 's/\.exe$$//;')
 URL2:=https://cloud.r-project.org/bin/windows/base/$(shell curl -s -L --connect-timeout 10 'https://cloud.r-project.org/bin/windows/base/' | sed -e 's/"/\n/g;' | egrep '^R-.*-win.exe')
 VERSION2:=$(shell basename '$(URL2)' 2> /dev/null | cut -f 2 -d'-')

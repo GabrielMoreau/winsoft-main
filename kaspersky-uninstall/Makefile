@@ -5,7 +5,7 @@
 
 URL:=https://resinfo-gt.pages.in2p3.fr/swmb/resinfo-swmb/Kasperky-Uninstall-Latest.zip
 SOFT:=Kaspersky-Uninstall
-VERSION:=$(shell curl -s --insecure -L https://resinfo-gt.pages.in2p3.fr/swmb/resinfo-swmb/version.txt)
+VERSION:=$(shell curl -s -L --connect-timeout 10 --insecure 'https://resinfo-gt.pages.in2p3.fr/swmb/resinfo-swmb/version.txt')
 REVISION:=1
 
 ZIP:=Kasperky-Uninstall-$(VERSION).zip

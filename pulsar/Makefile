@@ -7,7 +7,7 @@ sinclude ../_common/flag.mk
 
 SOFT:=Pulsar-Edit
 REVISION:=1
-URL:=$(shell curl -sL 'https://api.github.com/repos/pulsar-edit/pulsar/releases' | grep 'browser_download_url.*Setup.*exe' | cut -f 4 -d '"' | grep -v 'beta' | head -1)
+URL:=$(shell curl -s -L --connect-timeout 10 'https://api.github.com/repos/pulsar-edit/pulsar/releases' | grep 'browser_download_url.*Setup.*exe' | cut -f 4 -d '"' | grep -v 'beta' | head -1)
 VERSION:=$(shell dirname '$(URL)' 2> /dev/null | xargs -r basename | sed -e 's/^v//;')
 
 EXE:=Windows.Pulsar.Setup.$(VERSION).exe

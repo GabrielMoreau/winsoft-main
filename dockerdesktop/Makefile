@@ -8,7 +8,7 @@ sinclude ../_common/flag.mk
 SOFT:=DockerDesktop
 INSTALLER:=DockerDesktopInstaller.exe
 URL:=https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe
-#VSUM:=$(shell curl -s -l 'https://docs.docker.com/desktop/release-notes/' | sed -e 's/[<=>]/\n/g;' | grep '^https://desktop.docker.com/win/main/amd64/.*/checksums.txt' | head -1 | cut -f 7 -d '/')
+#VSUM:=$(shell curl -s -L --connect-timeout 10 'https://docs.docker.com/desktop/release-notes/' | sed -e 's/[<=>]/\n/g;' | grep '^https://desktop.docker.com/win/main/amd64/.*/checksums.txt' | head -1 | cut -f 7 -d '/')
 $(shell ./get-version --url '$(URL)' --shape 'DockerDesktopInstaller-%v.exe' --exe '$(INSTALLER)' > /dev/null)
 #    https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe
 #URL:=https://desktop.docker.com/win/main/amd64/$(VSUM)/Docker%20Desktop%20Installer.exe

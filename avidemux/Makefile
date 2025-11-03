@@ -4,7 +4,7 @@
 #
 
 SOFT:=Avidemux
-URL:=$(shell curl -sL 'https://api.github.com/repos/mean00/avidemux2/releases/latest' | grep 'browser_download_url.*64bits.exe' | cut -f 4 -d '"' | head -1)
+URL:=$(shell curl -s -L --connect-timeout 10 'https://api.github.com/repos/mean00/avidemux2/releases/latest' | grep 'browser_download_url.*64bits.exe' | cut -f 4 -d '"' | head -1)
 VERSION:=$(shell dirname '$(URL)' | xargs -r basename)
 VERSIONSHORT:=$(shell echo '$(VERSION)' | cut -f 1,2 -d '.')
 REVISION:=1

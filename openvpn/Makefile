@@ -4,7 +4,7 @@
 #
 
 SOFT:=OpenVPN
-URL:=$(shell curl --silent --location --head --output /dev/null --write-out '%{url_effective}' -- 'https://openvpn.net/downloads/openvpn-connect-v3-windows.msi')
+URL:=$(shell curl -s -L --connect-timeout 10 --head --output /dev/null --write-out '%{url_effective}' -- 'https://openvpn.net/downloads/openvpn-connect-v3-windows.msi')
 REVISION:=1
 VERSION:=$(shell basename '$(URL)' 2> /dev/null | cut -f 3 -d '-' | cut -f 1 -d '_')
 

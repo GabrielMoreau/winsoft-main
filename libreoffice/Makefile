@@ -4,7 +4,7 @@
 #
 
 SOFT:=LibreOffice
-VERSION:=$(shell curl -s 'https://fr.libreoffice.org/download/telecharger-libreoffice/' \
+VERSION:=$(shell curl -s -L --connect-timeout 10 'https://fr.libreoffice.org/download/telecharger-libreoffice/' \
 	| sed -e 's/[[:space:]"]/\n/g;' | egrep '^https://.*LibreOffice_.*_Win_x86.msi$$' \
 	| head -1 | cut -f 7 -d '/')
 REVISION:=1

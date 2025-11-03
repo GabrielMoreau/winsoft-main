@@ -5,7 +5,7 @@
 
 SOFT:=VSCode
 INSTALLER:=VSCodeSetup-x64.exe
-URL:=$(shell curl -s 'https://code.visualstudio.com/sha?build=stable' | sed -e 's/[,{}]/\n/g;' |  grep '/VSCodeSetup-x64-' | cut -f 4 -d '"' | head -1)
+URL:=$(shell curl -s -L --connect-timeout 10 'https://code.visualstudio.com/sha?build=stable' | sed -e 's/[,{}]/\n/g;' |  grep '/VSCodeSetup-x64-' | cut -f 4 -d '"' | head -1)
 VERSION:=$(shell basename '$(URL)' 2> /dev/null | cut -f 3 -d '-' | sed -e 's/exe/0/;')
 REVISION:=1
 
