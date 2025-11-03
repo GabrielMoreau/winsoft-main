@@ -4,7 +4,7 @@
 #
 
 SOFT:=3DSlicer
-VERSION:=$(shell curl -s -L  'https://download.slicer.org/'| grep -A1 'href="/bitstream/' | head -2 | grep 'header' | cut -f 2 -d '>' | sed -s 's/<.*//;')
+VERSION:=$(shell curl -s -L --connect-timeout 10'https://download.slicer.org/'| grep -A1 'href="/bitstream/' | head -2 | grep 'header' | cut -f 2 -d '>' | sed -s 's/<.*//;')
 REVISION:=1
 URL:=http://download.slicer.org/download?os=win&stability=release&version=$(VERSION)
 
