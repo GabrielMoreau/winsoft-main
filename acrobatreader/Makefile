@@ -38,7 +38,7 @@ OCS_MESSAGE:=$(OCS_MESSAGE_LONG)
 
 check-version:
 	@echo $(VERSION) | egrep -q '^[[:digit:]][\.[:digit:]]*[[[:alnum:]]*$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 11)
-	@if [ "$$( (echo 100000; grep -n "x64$(VERSIONCOLLAPSE)_" checksum.txt | cut -f 1 -d ':') | tail -1)" -lt "$$( (echo 100000; grep 'AcroRdrDCx64[[:digit:]]' < checksum.txt | wc -l) | tail -1)" ]; then echo 'VERSION $(VERSION) is older then last one' > /dev/stderr ; exit 16; fi
+	@if [ "$$( (echo 100000; grep "AcroRdrDCx64[[:digit:]]" checksum.txt | grep -n "x64$(VERSIONCOLLAPSE)_" | cut -f 1 -d ':') | tail -1)" -lt "$$( (echo 100000; grep 'AcroRdrDCx64[[:digit:]]' < checksum.txt | wc -l) | tail -1)" ]; then echo 'VERSION $(VERSION) is older then last one' > /dev/stderr ; exit 16; fi
 
 check-unrealized: check-version
 	@if grep -q '[[:space:]]$(EXE)$$' checksum.txt; then echo 'Ok'; else echo 'Warning: Updates not performed for $(SOFT) version $(VERSION)'; fi
