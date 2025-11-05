@@ -9,6 +9,18 @@ manipulate, print and manage PDF files.
 * Download https://get.adobe.com/reader/enterprise/
 * Silent install : https://silentinstallhq.com/adobe-reader-dc-silent-install-how-to-guide/
 
+The package now includes the latest version of the installer (`AcroRdrDCx64XXXXXXXXXX_MUI.exe`)
+and the update (`AcroRdrDCx64UpdXXXXXXXXXX.msp`),
+where `XXXXXXXXXX` is the version number.
+This makes installation more complex.
+
+* If a newer or identical version is already installed on the computer, nothing is installed.
+* If an older version is installed on the computer, the update is installed.
+* If Acrobat is not installed on the computer, the normal installation is performed.
+
+The package is therefore twice as large, as it contains two installers.
+
+
 ## Register Key
 
 Example :
