@@ -5,7 +5,7 @@ $ServiceName = "AdobeARMservice"
 Write-Output "Stop $ServiceName (Adobe Update) Service"
 # Status  | Name            | DisplayName
 # Running | AdobeARMservice | Adobe Acrobat Update Service
-Get-Service -Name "$ServiceName" -ErrorAction SilentlyContinue | Stop-Service
+Get-Service -Name "$ServiceName" -ErrorAction SilentlyContinue | Stop-Service -Force
 Get-Service -Name "$ServiceName" -ErrorAction SilentlyContinue | Set-Service -StartupType Disabled
 Get-Service -Name "$ServiceName" -ErrorAction SilentlyContinue | Select-Object Name, StartType, Status
 #Try {
