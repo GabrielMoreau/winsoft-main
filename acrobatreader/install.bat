@@ -79,6 +79,10 @@ ECHO Execute post-install script
 %pwrsh% -File ".\post-install.ps1" 1>> "%logdir%\%softname%-PS1.log" 2>&1
 
 
+ECHO Remove AdobeCollabSync
+IF EXIST "%ProgramFiles%\Adobe\Acrobat DC\Acrobat\AdobeCollabSync.exe" RENAME "%ProgramFiles%\Adobe\Acrobat DC\Acrobat\AdobeCollabSync.exe" "%ProgramFiles%\Adobe\Acrobat DC\Acrobat\AdobeCollabSync.exe.org"
+
+
 ECHO Remove desktop shortcut
 IF EXIST "%PUBLIC%\Desktop\Adobe*Reader*.lnk"          DEL /F /Q "%PUBLIC%\Desktop\Adobe*Reader*.lnk"
 IF EXIST "%ALLUSERSPROFILE%\Desktop\Adobe*Reader*.lnk" DEL /F /Q "%ALLUSERSPROFILE%\Desktop\Adobe*Reader*.lnk"

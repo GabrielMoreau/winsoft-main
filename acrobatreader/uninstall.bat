@@ -29,6 +29,10 @@ ECHO unblock
 %pwrsh% "Unblock-File -Path .\*.ps1"
 
 
+ECHO Remove rename AdobeCollabSync
+IF EXIST "%ProgramFiles%\Adobe\Acrobat DC\Acrobat\AdobeCollabSync.exe.org" DEL /F /Q "%ProgramFiles%\Adobe\Acrobat DC\Acrobat\AdobeCollabSync.exe.org"
+
+
 ECHO Execute pre-remove script
 %pwrsh% -File ".\pre-remove.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
 

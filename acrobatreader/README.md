@@ -20,6 +20,11 @@ This makes installation more complex.
 
 The package is therefore twice as large, as it contains two installers.
 
+Please note the following points during installation:
+
+* Automatic updates are disabled and stopped via the `AdobeARMservice` service.
+* Adobe Collaboration is disabled by renaming the `AdobeCollabSync.exe` binary to `AdobeCollabSync.exe.org`.
+
 
 ## Register Key
 
