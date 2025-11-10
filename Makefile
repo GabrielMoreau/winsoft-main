@@ -1,9 +1,12 @@
 # Do not change variable definition here
 # Change in include main.mk sub-makefile.
 PKGDIR:=$(dir $(wildcard */Makefile))
-KEEP:=2
 SHELL:=/bin/bash
 PKGLEN:=$(shell echo $(PKGDIR) | sed -e 's/[[:space:]]/\n/g;' | wc --max-line-length)
+# KEEP : Number of versions of the same package to keep
+KEEP:=2
+# TIMEWINDOW : Time window for taking into account the latest changes
+TIMEWINDOW:=1.25
 
 sinclude ../winsoft-conf/_common/main.mk
 
@@ -25,13 +28,13 @@ build-all: ## build all package except if `.no-auto-update` file
 		printf "#=== %-$(PKGLEN)s ===#\n" $${pkgfolder%/}
 		(cd $${pkgfolder}; \
 			make > .make.log; \
-			[ $$(LANG=C find . -maxdepth 1 -name '*.zip' -a -mtime -0.5 -not -path '*/tmp/*' -print | wc -l) -gt 0 ] && cat .make.log; \
+			[ $$(LANG=C find . -maxdepth 1 -name '*.zip' -a -mtime -$(TIMEWINDOW) -not -path '*/tmp/*' -print | wc -l) -gt 0 ] && cat .make.log; \
 		)
 	done
 	echo ''
 	echo '#===================================================================#'
 	echo '#=== Summary: packages created since 12 hours ('$$(date '+%Y-%m-%d %H:%M')') ===#'
-	LANG=C find . -maxdepth 2 -name '*.zip' -a -mtime -0.5 -not -path '*/tmp/*' -exec ls -ltr {} \+
+	LANG=C find . -maxdepth 2 -name '*.zip' -a -mtime -$(TIMEWINDOW) -not -path '*/tmp/*' -exec ls -ltr {} \+
 	exit 0
 
 clean-all: ## clean all package except if `.no-auto-update` file
@@ -70,7 +73,7 @@ last-checksum: ## make package checksum file if version have changed
 	do
 		printf "#=== %-$(PKGLEN)s ===#\n" $${pkgfolder}
 		(cd $${pkgfolder}; grep -q '^checksum:' Makefile && make checksum)
-	done < <(LANG=C find . -maxdepth 2 -name '*.zip' -a -mtime -1.25 -not -path '*/tmp/*' -print | xargs -r dirname | xargs -r -n 1 basename | sort -u)
+	done < <(LANG=C find . -maxdepth 2 -name '*.zip' -a -mtime -$(TIMEWINDOW) -not -path '*/tmp/*' -print | xargs -r dirname | xargs -r -n 1 basename | sort -u)
 	exit 0
 
 unrealized-updates: ## try to find packages that are not uptodate
@@ -198,7 +201,7 @@ ocs-push: ## push last packages (see target last-checksum) on your OCS server ex
 		fi
 		printf "#=== %-$(PKGLEN)s ===#\n" $${pkgfolder}
 		(cd $${pkgfolder}; make ocs-push)
-	done < <(LANG=C find . -maxdepth 2 -name '*.zip' -a -mtime -1.25 -not -path '*/tmp/*' -print | xargs -r dirname | xargs -r -n 1 basename | sort -u)
+	done < <(LANG=C find . -maxdepth 2 -name '*.zip' -a -mtime -$(TIMEWINDOW) -not -path '*/tmp/*' -print | xargs -r dirname | xargs -r -n 1 basename | sort -u)
 	exit 0
 
 ocs-push-all: ## push all packages that have not yet been pushed, unless the `.no-ocs-pkgpush` file exists.
