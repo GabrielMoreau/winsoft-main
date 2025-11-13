@@ -71,10 +71,29 @@ be built automatically. It is possible to put a `.no-auto-update` file in each
 folder to avoid this construction.
 There are other possible targets. Look at the `Makefile` source.
 
-* `build-all`  build all package except if `.no-auto-update` file
-* `clean-all`  clean all package except if `.no-auto-update` file
-* `list-pkg`   list all package
-* `space`      clean old package
+* `help`               show this help
+* `build-all`          build all package except if `.no-auto-update` file
+* `clean-all`          clean all package except if `.no-auto-update` file
+* `checksum-all`       all package checksum files except if `.no-auto-update` file
+* `last-checksum`      package checksum file if version have changed
+* `unrealized-updates` try to find packages that are not uptodate
+* `list-pkg`           list all package
+* `list-version`       list all version package except if `.no-auto-update` file
+* `list-md`            list all package in markdown format
+* `space`              clean (remove) old package to get disk space
+* `version`            get all package version except if `.no-auto-update` file
+* `ocs-push`           push last packages (see target last-checksum) on your OCS server except if `.no-ocs-pkgpush` file
+* `ocs-push-all`       push all packages that have not yet been pushed, unless the `.no-ocs-pkgpush` file exists.
+* `ocs-pretend-pushed` act as if all packages have already been downloaded to the OCS server
+
+The main Makefile also has two variables: `KEEP` (number of software packages to keep, default 2) and
+`TIMEWINDOW` (time window in which the version to be changed is taken into account, default 1.25 days).
+These two variables can be in the configuration Makefile `../winsoft-conf/_common/main.mk` (see below),
+or on the command line during execution.
+
+```bash
+make TIMEWINDOW=2 ocs-push
+```
 
 ## Configuration
 
