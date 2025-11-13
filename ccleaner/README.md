@@ -23,7 +23,8 @@ Use only on personnal computer.
 
 Example :
 
- | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
- |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
- | HKLM | CCleaner | Piriform | 6.22 | `CCleaner` | `"C:\Program Files\CCleaner\uninst.exe"` |
- | HKLM | CCleaner | Piriform | 6.33 | `CCleaner` | `"C:\Program Files\CCleaner\uninst.exe"` |
+ | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct   | UninstallExe |
+ |:---- |:----------- |:--------- |:-------------- |:------------ |:------------ |
+ | HKLM | CCleaner    | Piriform  | 6.22           | `CCleaner`   | `"C:\Program Files\CCleaner\uninst.exe"` |
+ | HKLM | CCleaner    | Piriform  | 6.33           | `CCleaner`   | `"C:\Program Files\CCleaner\uninst.exe"` |
+ | HKLM | CCleaner 7  | Piriform  | 7.0.1010.1196  | `CCleaner 7` | `"C:\Program Files\Common Files\Piriform\Icarus\piriform-ccl\icarus.exe" /manual_update /uninstall:piriform-ccl` |
