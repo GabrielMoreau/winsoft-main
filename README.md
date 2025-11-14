@@ -221,7 +221,7 @@ apt install make curl wget pev msitools p7zip-full libimage-exiftool-perl
  | 038 | [Hurukai-Agent](hurukai/README.md) | HarfangLab EDR agent | [&#127968;](https://harfanglab.io/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
  | 039 | [ImageJ](imagej/README.md) | Image processing program (Fiji Distribution) | [&#127968;](https://imagej.net/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
  | 040 | [Inkscape](inkscape/README.md) | Vector graphics editor | [&#127968;](https://inkscape.org/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
- | 041 | [KeepassXC](keepassxc/README.md) | Free and open-source password manager. | [&#127968;](https://keepassxc.org/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
+ | 041 | [KeepassXC](keepassxc/README.md) | Free and open-source password manager | [&#127968;](https://keepassxc.org/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
  | 042 | [KiCad](kicad/README.md) | Electronic design automation | [&#127968;](https://www.kicad.org) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
  | 043 | [K-Lite Codec Pack](klitecodec/README.md) | Vector graphics editor | [&#127968;](https://codecguide.com/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
  | 044 | [Kopia](kopia/README.md) | Fast and Secure Open-Source Backup Software | [&#127968;](https://kopia.io/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
@@ -290,39 +290,39 @@ apt install make curl wget pev msitools p7zip-full libimage-exiftool-perl
 
 ### Uninstall packages
 
- | Uninstall | Detail | &#127968; |   |
- | -------- | ------ | --------- | - |
- | [AcrobatReader (Uninstall)](acrobatreader/README.md) | Adobe PDF reader | [&#127968;](https://www.adobe.com/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
- | [AnyDesk (Uninstall)](anydesk/README.md) | Remote desktop application | [&#127968;](https://anydesk.com/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
- | [CCleaner (Uninstall)](ccleaner/README.md) | Clean computer files and register keys | [&#127968;](https://www.ccleaner.com/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
- | [Chrome (Uninstall)](chrome/README.md) | Google Chrome navigator | [&#127968;](https://www.google.com/chrome/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
- | [Dell Bios Utility (Uninstall)](dellbiosutil-uninstall/README.md) | DBUtil Removal Utility following Dell Security Advisory DSA-2021-088 and DSA-2021-152 | [&#127968;](https://www.dell.com/support/home/en-us/drivers/driversdetails?driverid=8gg09&lwp=rt) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
- | [FlashPlayer (Uninstall)](flashplayer-uninstall/README.md) | Remove all version of Adobe Flash Player | [&#127968;](https://www.adobe.com/products/flashplayer/end-of-life.html) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
- | [Gwyddion (Uninstall)](gwyddion/README.md) | Data visualization and analysis for SPM | [&#127968;](http://gwyddion.net/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
- | [Java JRE (Uninstall)](javajre8-uninstall/README.md) | Remove version 7 and 8 of Java Runtime Environment | [&#127968;](https://www.oracle.com/java/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
- | [Kaspersky Endpoint (Uninstall)](kaspersky-uninstall/README.md) | Silent remove Kaspersky Endpoint | [&#127968;](https://gitlab.in2p3.fr/resinfo-gt/swmb/resinfo-swmb/-/tree/master/dists/uninstall-kaspersky) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
- | [Mozilla Thunderbird (Uninstall)](thunderbird/README.md) | Mail reader | [&#127968;](https://www.thunderbird.net/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
- | [MS VSCode (Uninstall)](vscode/README.md) | Microsoft Source-code editor | [&#127968;](https://code.visualstudio.com/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
- | [NordVPN (Uninstall)](nordvpn-uninstall/README.md) | Lithuanian VPN service | [&#127968;](https://nordvpn.com/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
- | [Tabby (Uninstall)](tabby/README.md) | Modern terminal for local shells, SSH, etc | [&#127968;](https://tabby.sh/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
- | [TeamViewer (Uninstall)](teamviewer/README.md) | Remote access and remote control | [&#127968;](https://www.teamviewer.com) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
- | [VOSviewer (Uninstall)](vosviewer/README.md) | Constructing and visualizing bibliometric networks | [&#127968;](https://www.vosviewer.com) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
- | [Webex (Uninstall)](webex/README.md) | Cisco Web conferencing and videoconferencing Client | [&#127968;](https://www.webex.com/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
- | [XMind (Uninstall)](xmind/README.md) | Mind mapping and collaboration application | [&#127968;](https://xmind.com/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
- | [Zoom (Uninstall)](zoom/README.md) | Web Conference Client | [&#127968;](https://zoom.us/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
+ |   | Uninstall | Detail | &#127968; |   |
+ | - | -------- | ------ | --------- | - |
+ | 001 | [AcrobatReader (Uninstall)](acrobatreader/README.md) | Adobe PDF reader | [&#127968;](https://www.adobe.com/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
+ | 002 | [AnyDesk (Uninstall)](anydesk/README.md) | Remote desktop application | [&#127968;](https://anydesk.com/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
+ | 003 | [CCleaner (Uninstall)](ccleaner/README.md) | Clean computer files and register keys | [&#127968;](https://www.ccleaner.com/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
+ | 004 | [Chrome (Uninstall)](chrome/README.md) | Google Chrome navigator | [&#127968;](https://www.google.com/chrome/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
+ | 005 | [Dell Bios Utility (Uninstall)](dellbiosutil-uninstall/README.md) | DBUtil Removal Utility following Dell Security Advisory DSA-2021-088 and DSA-2021-152 | [&#127968;](https://www.dell.com/support/home/en-us/drivers/driversdetails?driverid=8gg09&lwp=rt) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
+ | 006 | [FlashPlayer (Uninstall)](flashplayer-uninstall/README.md) | Remove all version of Adobe Flash Player | [&#127968;](https://www.adobe.com/products/flashplayer/end-of-life.html) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
+ | 007 | [Gwyddion (Uninstall)](gwyddion/README.md) | Data visualization and analysis for SPM | [&#127968;](http://gwyddion.net/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
+ | 008 | [Java JRE (Uninstall)](javajre8-uninstall/README.md) | Remove version 7 and 8 of Java Runtime Environment | [&#127968;](https://www.oracle.com/java/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
+ | 009 | [Kaspersky Endpoint (Uninstall)](kaspersky-uninstall/README.md) | Silent remove Kaspersky Endpoint | [&#127968;](https://gitlab.in2p3.fr/resinfo-gt/swmb/resinfo-swmb/-/tree/master/dists/uninstall-kaspersky) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
+ | 010 | [Mozilla Thunderbird (Uninstall)](thunderbird/README.md) | Mail reader | [&#127968;](https://www.thunderbird.net/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
+ | 011 | [MS VSCode (Uninstall)](vscode/README.md) | Microsoft Source-code editor | [&#127968;](https://code.visualstudio.com/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
+ | 012 | [NordVPN (Uninstall)](nordvpn-uninstall/README.md) | Lithuanian VPN service | [&#127968;](https://nordvpn.com/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
+ | 013 | [Tabby (Uninstall)](tabby/README.md) | Modern terminal for local shells, SSH, etc | [&#127968;](https://tabby.sh/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
+ | 014 | [TeamViewer (Uninstall)](teamviewer/README.md) | Remote access and remote control | [&#127968;](https://www.teamviewer.com) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
+ | 015 | [VOSviewer (Uninstall)](vosviewer/README.md) | Constructing and visualizing bibliometric networks | [&#127968;](https://www.vosviewer.com) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
+ | 016 | [Webex (Uninstall)](webex/README.md) | Cisco Web conferencing and videoconferencing Client | [&#127968;](https://www.webex.com/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
+ | 017 | [XMind (Uninstall)](xmind/README.md) | Mind mapping and collaboration application | [&#127968;](https://xmind.com/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
+ | 018 | [Zoom (Uninstall)](zoom/README.md) | Web Conference Client | [&#127968;](https://zoom.us/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
 
 ### Action packages
 
- | Action | Detail | &#127968; |   |
- | -------- | ------ | --------- | - |
- | [Check WithSecure Hotfixes (Action)](check-withsecurehotfixes/README.md) | Test the deployment of updates | [&#127968;](https://www.withsecure.com/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
- | [Run Reboot (Action)](action-reboot/README.md) | Restart the computer |  | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
- | [Run Reboot if pending (Action)](action-rebootifpending/README.md) | Restart computer if actions in progress remain pending |  | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
- | [Run Shutdown (Action)](action-shutdown/README.md) | Poweroff the computer |  | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
- | [Update MS Visual Redistributable (Action)](update-visualredist/README.md) | Microsoft Visual C++ Redistributable Library update for all version | [&#127968;](https://learn.microsoft.com/fr-fr/cpp/windows/latest-supported-vc-redist) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
- | [Update MS Windows Desktop Runtime (Action)](update-windeskruntime/README.md) | Runtime engine for Microsoft .NET desktop applications update for all 64 bits version | [&#127968;](https://dotnet.microsoft.com/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
- | [Update OS and BIOS (Action)](update-osbios/README.md) | Force Windows and DELL/HP BIOS to update now |  | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
- | [Windows11FullUpgrade (Action)](action-windows11fullupgrade/README.md) | Full Upgrade Windows 10 or 11 to the last version of Windows 11 | [&#127968;](https://www.microsoft.com/software-download/windows11) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
+ |   | Action | Detail | &#127968; |   |
+ | - | -------- | ------ | --------- | - |
+ | 001 | [Check WithSecure Hotfixes (Action)](check-withsecurehotfixes/README.md) | Test the deployment of updates | [&#127968;](https://www.withsecure.com/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
+ | 002 | [Run Reboot (Action)](action-reboot/README.md) | Restart the computer |  | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
+ | 003 | [Run Reboot if pending (Action)](action-rebootifpending/README.md) | Restart computer if actions in progress remain pending |  | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
+ | 004 | [Run Shutdown (Action)](action-shutdown/README.md) | Poweroff the computer |  | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
+ | 005 | [Update MS Visual Redistributable (Action)](update-visualredist/README.md) | Microsoft Visual C++ Redistributable Library update for all version | [&#127968;](https://learn.microsoft.com/fr-fr/cpp/windows/latest-supported-vc-redist) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
+ | 006 | [Update MS Windows Desktop Runtime (Action)](update-windeskruntime/README.md) | Runtime engine for Microsoft .NET desktop applications update for all 64 bits version | [&#127968;](https://dotnet.microsoft.com/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
+ | 007 | [Update OS and BIOS (Action)](update-osbios/README.md) | Force Windows and DELL/HP BIOS to update now |  | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
+ | 008 | [Windows11FullUpgrade (Action)](action-windows11fullupgrade/README.md) | Full Upgrade Windows 10 or 11 to the last version of Windows 11 | [&#127968;](https://www.microsoft.com/software-download/windows11) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
 
 ### List of 1 obsolete packages
 
