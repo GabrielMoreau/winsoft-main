@@ -121,7 +121,7 @@ list-md: ## list all package in markdown format
 	index=0
 	for pkg in $$(git ls-files | grep '^[[:alpha:][:digit:]-]*/README.md' | grep -v '\\$$' | xargs -I {} sh -c "(head -1 '{}' ; dirname '{}') | paste -sd '#'"  | sort | cut -f 3 -d '#' | grep -v -- '-uninstall')
 	do
-		index=$$(($${index} + 1))
+		index=$$((index + 1))
 		sindex=$$(printf '%03i' $${index})
 		lic=$$(grep -q 'open-source' $${pkg}/README.md && echo '[🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software")' || echo '[©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software")')
 		url=$$(grep '* Website : ' $${pkg}/README.md | cut -f 4 -d ' ')
@@ -163,7 +163,7 @@ list-md: ## list all package in markdown format
 	index=0
 	for pkg in $$(git ls-files | grep '^_obsolete/[[:alpha:][:digit:]-]*/README.md' | grep -v '\\$$' | xargs -I {} sh -c "(head -1 '{}' ; dirname '{}') | paste -sd '#'"  | sort | cut -f 3 -d '#' | grep -v -- '-uninstall')
 	do
-		index=$$(($${index} + 1))
+		index=$$((index + 1))
 		sindex=$$(printf '%03i' $${index})
 		obsolete=$$(grep '* Obsolete : ' $${pkg}/README.md | cut -f 4 -d ' ')
 		head -1 $${pkg}/README.md | perl -p -e "s{^#\s(.*)\s-\s(.*)}{ | $${sindex} | [\\1]($${pkg}/README.md) | \\2 | $${obsolete} |};"
