@@ -114,7 +114,7 @@ list-version: ## list all version package except if `.no-auto-update` file
 
 list-md: ## list all package in markdown format
 	@
-	echo '## List of '$$((git ls-files | grep '^[[:alpha:][:digit:]-]*/README.md'; grep -l '^Uninstall-.*.zip:' */Makefile) | wc -l)' packages'
+	echo '## List of '$$( (git ls-files | grep '^[[:alpha:][:digit:]-]*/README.md'; grep -l '^Uninstall-.*.zip:' */Makefile) | wc -l)' packages'
 	echo ''
 	echo ' |   | Software | Detail | &#127968; |   |'
 	echo ' | - | -------- | ------ | --------- | - |'
@@ -133,7 +133,7 @@ list-md: ## list all package in markdown format
 	echo ' |   | Uninstall | Detail | &#127968; |   |'
 	echo ' | - | -------- | ------ | --------- | - |'
 	index=0
-	for pkg in $$(git ls-files | grep '^[[:alpha:][:digit:]-]*/README.md' | xargs -r grep -l '^#[[:space:]].*(.*)[[:space:]]-' | xargs -r dirname | grep -v '/' | grep 'uninstall'; grep -l '^Uninstall-.*.zip:' */Makefile | xargs -r dirname)
+	for pkg in $$( (git ls-files | grep '^[[:alpha:][:digit:]-]*/README.md' | xargs -r grep -l '^#[[:space:]].*(.*)[[:space:]]-' | xargs -r dirname | grep -v '/' | grep 'uninstall'; grep -l '^Uninstall-.*.zip:' */Makefile | xargs -r dirname) | xargs -I {} sh -c "(head -1 '{}/README.md' ; echo '{}') | paste -sd '#'" | sort | cut -f 3 -d '#')
 	do
 		index=$$((index + 1))
 		sindex=$$(printf '%03i' $${index})
@@ -147,7 +147,7 @@ list-md: ## list all package in markdown format
 	echo ' |   | Action | Detail | &#127968; |   |'
 	echo ' | - | -------- | ------ | --------- | - |'
 	index=0
-	for pkg in $$(git ls-files | grep '^[[:alpha:][:digit:]-]*/README.md' | xargs -r grep -l '^#[[:space:]].*(.*)[[:space:]]-' | xargs -r dirname | grep -v '/' | grep -v 'uninstall')
+	for pkg in $$( (git ls-files | grep '^[[:alpha:][:digit:]-]*/README.md' | xargs -r grep -l '^#[[:space:]].*(.*)[[:space:]]-' | xargs -r dirname | grep -v '/' | grep -v 'uninstall') | xargs -I {} sh -c "(head -1 '{}/README.md' ; echo '{}') | paste -sd '#'" | sort | cut -f 3 -d '#')
 	do
 		index=$$((index + 1))
 		sindex=$$(printf '%03i' $${index})
@@ -156,7 +156,7 @@ list-md: ## list all package in markdown format
 		head -1 $${pkg}/README.md | perl -p -e "s{^#\s(.*)\s-\s(.*)}{ | $${sindex} | [\\1]($${pkg}/README.md) | \\2 | [&#127968;]($${url}) | $${lic} |}; s/(\w)\]\(/\\1 (Uninstall)](/;" | sed -e 's/\[&#127968;\]()//;'
 	done | sort
 	echo ''
-	echo '### List of '$$((dirname $$(git ls-files | grep '^_obsolete/[[:alpha:][:digit:]-]*/README.md'; grep -l '^Uninstall-.*.zip:' _obsolete/*/Makefile)) | sort -u | wc -l)' obsolete packages'
+	echo '### List of '$$( (dirname $$(git ls-files | grep '^_obsolete/[[:alpha:][:digit:]-]*/README.md'; grep -l '^Uninstall-.*.zip:' _obsolete/*/Makefile)) | sort -u | wc -l)' obsolete packages'
 	echo ''
 	echo ' |   | Software | Detail | Date |'
 	echo ' | - | -------- | ------ | ---- |'
