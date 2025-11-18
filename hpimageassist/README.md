@@ -9,3 +9,13 @@ problems, and recommending solutions.
 
 * Download : https://ftp.ext.hp.com/pub/caps-softpaq/cmit/HPIA.html
 * Silent install : https://silentinstallhq.com/hp-image-assistant-hpia-install-and-uninstall-powershell/
+
+
+## Register Key
+
+Example :
+
+ | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
+ |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
+ | HKLM | HP Image Assistant 5.3.2 (HPIA) | HP Inc. | 5.3.2 | `HPImageAssist` | `C:\Program Files\HP\HPIA\uninstall.bat` |
+ | HKLM | HP Image Assistant 5.3.3 (HPIA) | HP Inc. | 5.3.3 | `HPImageAssist` | `C:\Program Files\HP\HPIA\uninstall.bat` |
