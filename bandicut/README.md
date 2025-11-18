@@ -16,3 +16,4 @@ Example :
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
  | HKLM | Bandicut | Bandicam.com | 4.0.1.2516 | `Bandicut` | `"C:\Program Files\Bandicut\uninstall.exe"` |
  | HKLM | Bandicut | Bandicam.com | 4.2.1.2539 | `Bandicut` | `"C:\Program Files\Bandicut\uninstall.exe"` |
+ | HKLM | Bandicut | Bandicam.com | 4.2.2.2542 | `Bandicut` | `"C:\Program Files\Bandicut\uninstall.exe"` |
