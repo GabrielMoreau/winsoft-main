@@ -10,3 +10,12 @@ RootkitRevealer (rootkit detection utility), Contig, PageDefrag and a total of 6
 * Download : https://download.sysinternals.com/files/SysinternalsSuite.zip
 * Blog : https://techcommunity.microsoft.com/t5/sysinternals-blog/bg-p/Sysinternals-Blog
 * PsTools : https://www.wikidata.org/wiki/Q4047500
+
+
+## Register Key
+
+Example :
+
+ | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
+ |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
+ | HKLM | Microsoft Sysinternals Suite 25.11.17.2147 | Microsoft Corporation | 25.11.17.2147 | `Sysinternals` | `C:\Program Files\Sysinternals\uninstall.bat` |
