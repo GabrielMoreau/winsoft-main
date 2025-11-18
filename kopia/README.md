@@ -19,3 +19,4 @@ Example :
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
  | HKLM | KopiaUI 0.18.2 | Kopia Authors | 0.18.2 | `7b332f95-7538-5e20-9252-40d703baa034` | `"C:\Program Files\KopiaUI\Uninstall KopiaUI.exe" /allusers` |
  | HKLM | KopiaUI 0.21.1 | Kopia Authors | 0.21.1 | `7b332f95-7538-5e20-9252-40d703baa034` | `"C:\Program Files\KopiaUI\Uninstall KopiaUI.exe" /allusers` |
+ | HKLM | KopiaUI 0.22.0 | Kopia Authors | 0.22.0 | `7b332f95-7538-5e20-9252-40d703baa034` | `"C:\Program Files\KopiaUI\Uninstall KopiaUI.exe" /allusers` |

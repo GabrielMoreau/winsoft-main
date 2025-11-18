@@ -21,9 +21,10 @@ Example :
 
  | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
- | HKLM | Microsoft Visual Studio Code | Microsoft Corporation | 1.95.0 | `{EA457B21-F73E-494C-ACAB-524FDE069978}_is1` | `"C:\Program Files\Microsoft VS Code\unins000.exe"` |
- | HKLM | Microsoft Visual Studio Code | Microsoft Corporation | 1.95.2 | `{EA457B21-F73E-494C-ACAB-524FDE069978}_is1` | `"C:\Program Files\Microsoft VS Code\unins000.exe"` |
- | HKLM | Microsoft Visual Studio Code | Microsoft Corporation | 1.95.3 | `{EA457B21-F73E-494C-ACAB-524FDE069978}_is1` | `"C:\Program Files\Microsoft VS Code\unins000.exe"` |
- | HKLM | Microsoft Visual Studio Code | Microsoft Corporation | 1.97.2 | `{EA457B21-F73E-494C-ACAB-524FDE069978}_is1` | `"C:\Program Files\Microsoft VS Code\unins000.exe"` |
+ | HKLM | Microsoft Visual Studio Code | Microsoft Corporation | 1.95.0  | `{EA457B21-F73E-494C-ACAB-524FDE069978}_is1` | `"C:\Program Files\Microsoft VS Code\unins000.exe"` |
+ | HKLM | Microsoft Visual Studio Code | Microsoft Corporation | 1.95.2  | `{EA457B21-F73E-494C-ACAB-524FDE069978}_is1` | `"C:\Program Files\Microsoft VS Code\unins000.exe"` |
+ | HKLM | Microsoft Visual Studio Code | Microsoft Corporation | 1.95.3  | `{EA457B21-F73E-494C-ACAB-524FDE069978}_is1` | `"C:\Program Files\Microsoft VS Code\unins000.exe"` |
+ | HKLM | Microsoft Visual Studio Code | Microsoft Corporation | 1.97.2  | `{EA457B21-F73E-494C-ACAB-524FDE069978}_is1` | `"C:\Program Files\Microsoft VS Code\unins000.exe"` |
  | HKLM | Microsoft Visual Studio Code | Microsoft Corporation | 1.100.0 | `{EA457B21-F73E-494C-ACAB-524FDE069978}_is1` | `"C:\Program Files\Microsoft VS Code\unins000.exe"` |
  | HKLM | Microsoft Visual Studio Code | Microsoft Corporation | 1.104.3 | `{EA457B21-F73E-494C-ACAB-524FDE069978}_is1` | `"C:\Program Files\Microsoft VS Code\unins000.exe"` |
+ | HKLM | Microsoft Visual Studio Code | Microsoft Corporation | 1.106.1 | `{EA457B21-F73E-494C-ACAB-524FDE069978}_is1` | `"C:\Program Files\Microsoft VS Code\unins000.exe"` |
