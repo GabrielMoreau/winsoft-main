@@ -13,3 +13,4 @@ c5c2cf00a5be0c7ea3611bd409c829e40f4866aeab1ba719a9588bc99d851a80  ultracopier-wi
 82a6c1845763e8573b5e42b9212b8283cdf739fc13598bc7b18b0d83037285ec  ultracopier-windows-x86_64-3.0.0.9-setup.exe
 e4dac636cf90d2741c6f65721018133ac29e3599e1bba3ea8d55418e54917213  ultracopier-windows-x86_64-3.0.1.0-setup.exe
 0a640036e30fea23db03a7ec7a5cbd69c6b34e5e12e124f4fc0244bf686e401b  ultracopier-windows-x86_64-3.0.1.1-setup.exe
+17085e9c4b7890b71d3a7370ddfcb003fa2f20e906ab0983b2d724d9843856a8  ultracopier-windows-x86_64-3.0.1.2-setup.exe
