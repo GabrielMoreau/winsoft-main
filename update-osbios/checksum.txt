@@ -1,1 +1,2 @@
 188698d10b1f7b9710061ec95e0aec55a0cb2239e622fa4f7fdd5d360d00a007  Windows11InstallationAssistant-1.4.19041.5003.exe
+837f97852c2e8f4242cde4dbf863ed0db117082d2eebfb7c3f1f37f9b6e89758  Windows11InstallationAssistant-1.4.19041.6448.exe
