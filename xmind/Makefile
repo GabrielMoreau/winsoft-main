@@ -8,7 +8,7 @@ INSTALLER:=Xmind4WindowsX64bit.exe
 URL:=https://xmind.app/zen/download/win64/
 # https://dl3.xmind.app/Xmind-for-Windows-x64bit-26.01.03145-202510162012.exe
 $(shell mkdir -p tmp; cd tmp; curl -s --time-cond "$(INSTALLER)" -o "$(INSTALLER)" -L "$(URL)")
-VERSION:=$(shell peres -v tmp/$(INSTALLER) 2> /dev/null | grep '^Product Version' | awk '{print $$3}')
+VERSION:=$(shell peres -v tmp/$(INSTALLER) 2> /dev/null 2> /dev/null | grep '^Product Version' | awk '{print $$3}')
 REVISION:=1
 
 EXE:=Xmind-for-Windows-x64bit-$(VERSION).exe
@@ -69,7 +69,7 @@ tmp/pkg/Xmind.exe: tmp/$(EXE)
 check-exe: tmp/$(EXE) tmp/pkg/Xmind.exe
 	@(cd tmp ; \
 		file $(EXE) | grep -q 'PE32 executable' || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 12; } ; \
-		which peres >/dev/null && { peres -v $(EXE) | grep -q "^Product Version:[[:space:]]*$(VERSION)" || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 12; } ; } ; \
+		which peres >/dev/null && { peres -v $(EXE) 2> /dev/null | grep -q "^Product Version:[[:space:]]*$(VERSION)" || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 12; } ; } ; \
 		)
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE)

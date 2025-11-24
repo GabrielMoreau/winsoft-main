@@ -56,7 +56,7 @@ tmp/$(EXE):
 		rm -f *.exe *.msi 2>/dev/null ; \
 		curl -# -o "$(EXE)" -L "$(URL)" ; \
 		#file $(EXE) | grep -q "Subject: Arduino IDE, Author: Arduino SA" || echo "Error: bad format for binary $(EXE)" ; \
-		# which peres >/dev/null && { peres -v $(EXE) | grep -q "^Product Version:[[:space:]]*$(VERSION)" || echo "Error: bad version for binary $(EXE)" ; } ; \
+		# which peres >/dev/null && { peres -v $(EXE) 2> /dev/null | grep -q "^Product Version:[[:space:]]*$(VERSION)" || echo "Error: bad version for binary $(EXE)" ; } ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
 
@@ -77,7 +77,7 @@ tmp/Arduino.cer:
 check-exe: tmp/$(EXE) tmp/Adafruit.cer tmp/Arduino.cer
 	@(cd tmp ; \
 		file $(EXE) | grep -q "Subject: Arduino IDE, Author: Arduino SA" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 12; } ; \
-		#which peres >/dev/null && { peres -v $(EXE) | grep -q "^Product Version:[[:space:]]*$(VERSION)" || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 12; }; } ; \
+		#which peres >/dev/null && { peres -v $(EXE) 2> /dev/null | grep -q "^Product Version:[[:space:]]*$(VERSION)" || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 12; }; } ; \
 		file "Adafruit.cer" | grep -q "Certificate, Version=3" || echo "Error: bad format for certificate Adafruit.cer" ; \
 		file "Arduino.cer"  | grep -q "Certificate, Version=3" || echo "Error: bad format for certificate Arduino.cer" ; \
 		)

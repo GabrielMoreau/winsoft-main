@@ -160,7 +160,7 @@ to retrieve the product version number.
 Example (same result with the three command)
 ```bash
 7z l tmp/Windows11InstallationAssistant.exe | grep '^ProductVersion:' | cut -f 2 -d ' '
-peres -v tmp/Windows11InstallationAssistant.exe | grep '^Product Version:' | awk '{print $3}'
+peres -v tmp/Windows11InstallationAssistant.exe 2> /dev/null | grep '^Product Version:' | awk '{print $3}'
 exiftool -ProductVersion tmp/Windows11InstallationAssistant.exe | awk '{print $4}'
 ```
 

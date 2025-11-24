@@ -6,7 +6,7 @@
 SOFT:=Update-OSBIOS
 URL11:=$(shell curl -s -L --connect-timeout 10 'https://www.microsoft.com/software-download/windows11' | grep 'windows11-upgrade-now' | sed -e 's/"/\n/g;' | grep '^https://go.microsoft.com/fwlink/' | head -1)
 $(shell mkdir -p tmp; cd tmp; curl -s --time-cond 'Windows11InstallationAssistant.exe' -o 'Windows11InstallationAssistant.exe' -L "$(URL11)")
-VERSION11:=$(shell peres -v 'tmp/Windows11InstallationAssistant.exe' | grep '^Product Version:' | awk '{print $$3}' | head -1)
+VERSION11:=$(shell peres -v 'tmp/Windows11InstallationAssistant.exe' 2> /dev/null | grep '^Product Version:' | awk '{print $$3}' | head -1)
 VERSION:=$(VERSION11)
 REVISION:=1
 
@@ -56,14 +56,14 @@ tmp/$(EXE):
 		ln -f Windows11InstallationAssistant.exe "$(EXE)" ; \
 		printf '#%.0s' $$(seq 1 $$(( $$(tput cols) - 33 ))); echo ' 100.0%' ; \
 		#file $(EXE) | grep -q "PE32 executable" || echo "Error: bad format for binary $(EXE)" ; \
-		# which peres >/dev/null && { peres -v $(EXE) | grep -q "^Product Version:[[:space:]]*$(VERSION)" || echo "Error: bad version for binary $(EXE)" ; } ; \
+		# which peres >/dev/null && { peres -v $(EXE) 2> /dev/null | grep -q "^Product Version:[[:space:]]*$(VERSION)" || echo "Error: bad version for binary $(EXE)" ; } ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
 
 check-exe: tmp/$(EXE)
 	@(cd tmp ; \
 		file $(EXE) | grep -q 'PE32 executable' || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 12; } ; \
-		# which peres >/dev/null && { peres -v $(EXE) | grep -q "^Product Version:[[:space:]]*$(VERSION)" || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 12; } ; } ;\
+		# which peres >/dev/null && { peres -v $(EXE) 2> /dev/null | grep -q "^Product Version:[[:space:]]*$(VERSION)" || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 12; } ; } ;\
 		)
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE)

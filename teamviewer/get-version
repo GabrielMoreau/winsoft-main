@@ -29,7 +29,7 @@ mkdir -p tmp
 if [ -s "tmp/${EXE}" ]
 then
   #VERSION=$(file "tmp/${EXE}" | sed -e 's/.*Comments:\s\([[:digit:]][[:digit:]\.]*\).*/\1/; s/[[:space:]:].*//;')
-  VERSION=$(peres -v "tmp/${EXE}" | grep 'Product Version:' | awk '{print $3}')
+  VERSION=$(peres -v "tmp/${EXE}" 2> /dev/null | grep 'Product Version:' | awk '{print $3}')
   if echo "${VERSION}" | grep -q '^[[:digit:]][[:digit:]\.]*'
   then
     echo "${VERSION}"

@@ -65,14 +65,14 @@ tmp/$(EXE):
 		rm -f R-*.exe 2>/dev/null ; \
 		curl -# -o "$(EXE)" -L "$(URL)" ; \
 		#file $(EXE) | grep -q "PE32 executable" || echo "Error: bad format for binary $(EXE)" ; \
-		#which peres >/dev/null && { peres -v $(EXE) | sed -s 's/\.//g;' | grep -q "^Product Version:[[:space:]]*$(CONCATVERSION)" || echo "Error: bad version for binary $(EXE)" ; } ; \
+		#which peres >/dev/null && { peres -v $(EXE) 2> /dev/null | sed -s 's/\.//g;' | grep -q "^Product Version:[[:space:]]*$(CONCATVERSION)" || echo "Error: bad version for binary $(EXE)" ; } ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
 
 check-exe: tmp/$(EXE)
 	@(cd tmp ; \
 		file $(EXE) | grep -q "PE32 executable"  || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 12; } ; \
-		which peres >/dev/null && { peres -v $(EXE) | sed -s 's/\.//g;' | grep -q "^Product Version:[[:space:]]*$(CONCATVERSION)" || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 12; } ; } ;\
+		which peres >/dev/null && { peres -v $(EXE) 2> /dev/null | sed -s 's/\.//g;' | grep -q "^Product Version:[[:space:]]*$(CONCATVERSION)" || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 12; } ; } ;\
 		)
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE)

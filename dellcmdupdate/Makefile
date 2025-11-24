@@ -57,7 +57,7 @@ checksum: check-version
 		)
 	@if [ $$(( $$(date '+%s') - $$(stat -c '%Y' checksum.txt) )) -lt 60 ]; then tail -6 checksum.txt; fi
 	@(cd tmp ; \
-		grep -q "^$(VERSION8)[[:space:]]" ../version.txt || { (echo -n '$(VERSION8) ' ; peres -v $(EXE8) | grep '^Product Version' | awk '{print $$3}') >> ../version.txt ; } ; \
+		grep -q "^$(VERSION8)[[:space:]]" ../version.txt || { (echo -n '$(VERSION8) ' ; peres -v $(EXE8) 2> /dev/null | grep '^Product Version' | awk '{print $$3}') >> ../version.txt ; } ; \
 		)
 	@if [ $$(( $$(date '+%s') - $$(stat -c '%Y' version.txt) )) -lt 60 ]; then tail -6 version.txt; fi
 
@@ -74,7 +74,7 @@ tmp/$(EXE):
 		curl -# -o "$(EXE)" -L "$(URL)" --user-agent "$(USERAGENT)" ; \
 		#wget -q --show-progress -O "$(EXE)" "$(URL)" ; \
 		# file $(EXE) | grep -q "PE32 executable" || echo "Error: bad format for binary $(EXE)" ; \
-		# which peres >/dev/null && { peres -v $(EXE) | grep -q "^Product Version:[[:space:]]*$(VERSION)" || echo "Error: bad version for binary $(EXE)" ; } ; \
+		# which peres >/dev/null && { peres -v $(EXE) 2> /dev/null | grep -q "^Product Version:[[:space:]]*$(VERSION)" || echo "Error: bad version for binary $(EXE)" ; } ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
 
@@ -89,11 +89,11 @@ tmp/$(EXE8):
 check-exe: tmp/$(EXE) tmp/$(EXE8)
 	@(cd tmp ; \
 		file $(EXE) | grep -Eq "PE32.? executable" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 12; } ; \
-		#which peres >/dev/null && { peres -v $(EXE) | grep -q "^Product Version:[[:space:]]*$(VERSION)" || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 12; } ; } ; \
+		#which peres >/dev/null && { peres -v $(EXE) 2> /dev/null | grep -q "^Product Version:[[:space:]]*$(VERSION)" || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 12; } ; } ; \
 		)
 	@(cd tmp ; \
 		file $(EXE8) | grep -q "PE32 executable" || { echo "Error: bad format for binary $(EXE8)" 1>&2 ; exit 12; } ; \
-		which peres >/dev/null && { peres -v $(EXE8) | grep -q "^Product Version:[[:space:]]*$(VERSION8)" || { echo "Error: bad version for binary $(EXE8)" 1>&2 ; exit 12; } ; } ;\
+		which peres >/dev/null && { peres -v $(EXE8) 2> /dev/null | grep -q "^Product Version:[[:space:]]*$(VERSION8)" || { echo "Error: bad version for binary $(EXE8)" 1>&2 ; exit 12; } ; } ;\
 		)
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE)

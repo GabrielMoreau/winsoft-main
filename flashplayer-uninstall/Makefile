@@ -5,7 +5,7 @@
 
 SOFT:=FlashPlayer-Uninstall
 INSTALLER:=uninstall_flash_player.exe
-VERSION:=$(shell peres -v tmp/$(INSTALLER) 2> /dev/null | grep '^Product Version' | awk '{print $$3}')
+VERSION:=$(shell peres -v tmp/$(INSTALLER) 2> /dev/null 2> /dev/null | grep '^Product Version' | awk '{print $$3}')
 REVISION:=1
 URL:=https://fpdownload.macromedia.com/get/flashplayer/current/support/uninstall_flash_player.exe
 
@@ -57,7 +57,7 @@ tmp/$(EXE):
 		find ./ -name '*.exe' -a -not -name "$(INSTALLER)" -a -not -name "$(EXE)" -delete ; \
 		cmp $(INSTALLER) $(EXE) > /dev/null 2>&1 || cp -f $(INSTALLER) $(EXE) ; \
 		file $(EXE) | grep -q "PE32 executable" || echo "Error: bad format for binary $(EXE)" ; \
-		which peres >/dev/null && { peres -v $(EXE) | grep -q "^Product Version:[[:space:]]*$(VERSION)" || echo "Error: bad version for binary $(EXE)" ; } ; \
+		which peres >/dev/null && { peres -v $(EXE) 2> /dev/null | grep -q "^Product Version:[[:space:]]*$(VERSION)" || echo "Error: bad version for binary $(EXE)" ; } ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
 

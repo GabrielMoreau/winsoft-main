@@ -26,7 +26,7 @@ Version 2015-2019 is now replaced by version 2015-2022.
 Have the version of an executable with `sigcheck.exe` or `peres` (natif):
 ```
 Sysinternals\sigcheck.exe -a -h .\vcredist_ia64.exe
-peres -v .\vcredist_ia64.exe | grep '^Product Version:'
+peres -v .\vcredist_ia64.exe 2> /dev/null | grep '^Product Version:'
 ```
 
 Under GNU/Linux amd64
@@ -38,11 +38,11 @@ wine ~/Sysinternals/sigcheck.exe -a -h .\vcredist_ia64.exe
 It's possible to automate
 ```bash
 find tmp/ -name '*.exe' | xargs -r -n 1 wine ~/Sysinternals/sigcheck.exe -a -h | egrep '(Product|Prod version):' | cut -f 2 -d ':'
-find tmp/ -name '*.exe' | xargs -r -n 1 peres -v | grep '^Product Version:' | awk '{print $3}'
+find tmp/ -name '*.exe' | xargs -r -n 1 peres -v | 2> /dev/null grep '^Product Version:' | awk '{print $3}'
 
 find tmp/ -name '*.exe' | xargs -r  -I {} echo " \
     echo -n ' * '\$(echo {} | cut -f 2,3 -d '/' | sed -e \"s#/vc_*redist[_\.]#-#; s/.exe//;\")' ' ;
-    echo \$(peres -v {} | grep '^Product Version:' | awk '{print \$3}')
+    echo \$(peres -v {} 2> /dev/null | grep '^Product Version:' | awk '{print \$3}')
     " \
   | bash
 ```

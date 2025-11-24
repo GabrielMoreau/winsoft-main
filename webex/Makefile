@@ -67,7 +67,7 @@ tmp/$(EXE):
 check-exe: tmp/$(EXE)
 	@(cd tmp ; \
 		file $(EXE) | grep -q "Subject: Webex Teams" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 12; } ; \
-		# which peres >/dev/null && { peres -v $(EXE) | grep -q "^Product Version:[[:space:]]*$(VERSION)" || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 12; } ; } ;\
+		# which peres >/dev/null && { peres -v $(EXE) 2> /dev/null | grep -q "^Product Version:[[:space:]]*$(VERSION)" || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 12; } ; } ;\
 		if grep $$(shasum -a 256 "$(EXE)" | cut -f 1 -d ' ') ../checksum.txt | grep -qv "$(EXE)"; then echo "Error: two binary Webex-XXXX.msi version exists with same checksum" 1>&2 ; exit 14; fi; \
 		if grep "$(EXE)" ../checksum.txt | grep -qv "$$(shasum -a 256 "$(EXE)" | cut -f 1 -d ' ')"; then echo "Error: two binary $(EXE) exists with same version and different checksum" 1>&2 ; exit 15; fi; \
 		)

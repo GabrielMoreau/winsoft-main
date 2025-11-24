@@ -75,11 +75,11 @@ tmp/$(EXE2):
 check-exe: tmp/$(EXE1) tmp/$(EXE2)
 	@(cd tmp ; \
 		file $(EXE1) | grep -q "Nullsoft Installer self-extracting archive" || { echo "Error: bad format for binary $(EXE1)" 1>&2 ; exit 12; } ; \
-		which peres >/dev/null && { peres -v $(EXE1) | grep -q "^Product Version:[[:space:]]*$(VERSION1)" || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 12; } ; } ;\
+		which peres >/dev/null && { peres -v $(EXE1) 2> /dev/null | grep -q "^Product Version:[[:space:]]*$(VERSION1)" || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 12; } ; } ;\
 		)
 	@(cd tmp ; \
 		file $(EXE2) | grep -q "MSI Installer.*Subject: Win10Pcap" || { echo "Error: bad format for binary $(EXE2)" 1>&2 ; exit 12; } ; \
-		#which peres >/dev/null && { peres -v $(EXE1) | grep -q "^Product Version:[[:space:]]*$(VERSION1)" || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 12; } ; } ;\
+		#which peres >/dev/null && { peres -v $(EXE1) 2> /dev/null | grep -q "^Product Version:[[:space:]]*$(VERSION1)" || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 12; } ; } ;\
 		)
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE1) tmp/$(EXE2)

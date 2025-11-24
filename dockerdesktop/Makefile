@@ -13,7 +13,7 @@ $(shell ./get-version --url '$(URL)' --shape 'DockerDesktopInstaller-%v.exe' --e
 #    https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe
 #URL:=https://desktop.docker.com/win/main/amd64/$(VSUM)/Docker%20Desktop%20Installer.exe
 #$(shell mkdir -p tmp; cd tmp; curl $(CURLFLAGS) -s --time-cond "$(INSTALLER)" -o "$(INSTALLER)" -L "$(URL)")
-VERSION:=$(shell peres -v tmp/$(INSTALLER) 2> /dev/null | grep '^Product Version' | awk '{print $$3}')
+VERSION:=$(shell peres -v tmp/$(INSTALLER) 2> /dev/null 2> /dev/null | grep '^Product Version' | awk '{print $$3}')
 REVISION:=1
 # https://desktop.docker.com/win/main/amd64/181591/Docker%20Desktop%20Installer.exe
 
@@ -75,7 +75,7 @@ tmp/$(EXE):
 check-exe: tmp/$(EXE)
 	@(cd tmp ; \
 		file $(EXE) | grep -q "PE32. executable.*x86-64," || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 12; } ; \
-		which peres >/dev/null && { peres -v $(EXE) | grep -q "^Product Version:[[:space:]]*$(VERSION)" || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 12; } ; } ;\
+		which peres >/dev/null && { peres -v $(EXE) 2> /dev/null | grep -q "^Product Version:[[:space:]]*$(VERSION)" || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 12; } ; } ;\
 		if grep $$(shasum -a 256 "$(EXE)" | cut -f 1 -d ' ') ../checksum.txt | grep -qv "$(EXE)"; then echo "Error: two binary DockerDesktop-XXXX.exe version exists with same checksum" 1>&2 ; exit 14; fi; \
 		if grep "$(EXE)" ../checksum.txt | grep -qv "$$(shasum -a 256 "$(EXE)" | cut -f 1 -d ' ')"; then echo "Error: two binary $(EXE) exists with same version and different checksum" 1>&2 ; exit 15; fi; \
 		)

@@ -84,7 +84,7 @@ tmp/$(EXE2):
 check-exe: tmp/$(EXE) tmp/$(EXE2)
 	@(cd tmp ; \
 		file $(EXE) | grep -q "PE32. executable" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 12; } ; \
-		which peres >/dev/null && { peres -v $(EXE) | grep '^Product Version:[[:space:]]' | sed -e 's/[\.0[:space:]]//g;' | cut -f 2 -d ':' | grep -q "^$(VERSIONSHORT)$$" || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 12; }; } ; \
+		which peres >/dev/null && { peres -v $(EXE) 2> /dev/null | grep '^Product Version:[[:space:]]' | sed -e 's/[\.0[:space:]]//g;' | cut -f 2 -d ':' | grep -q "^$(VERSIONSHORT)$$" || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 12; }; } ; \
 		file $(EXE2) | grep -q "Composite Document File V2 Document" || { echo "Error: bad format for binary $(EXE2)" 1>&2 ; exit 12; } ; \
 		file $(EXE2) | grep -q "Author: Adobe.*$(VERSION);" || { echo "Error: bad version for binary $(EXE2)" 1>&2 ; exit 12; } ; \
 		)

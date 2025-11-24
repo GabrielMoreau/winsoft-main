@@ -62,13 +62,13 @@ tmp/Telegram/Telegram.exe: tmp/$(EXE)
 	@(cd tmp ; \
 		rm -rf Telegram 2>/dev/null ; \
 		unzip -q $(EXE) ; \
-		#which peres >/dev/null && { peres -v 'Telegram/Telegram.exe' | grep -q "^Product Version:[[:space:]]*$(VERSION)" || echo "Error: bad version for binary $(EXE)" ; } ; \
+		#which peres >/dev/null && { peres -v 'Telegram/Telegram.exe' 2> /dev/null | grep -q "^Product Version:[[:space:]]*$(VERSION)" || echo "Error: bad version for binary $(EXE)" ; } ; \
 		)
 
 check-exe: tmp/Telegram/Telegram.exe tmp/$(EXE)
 	@(cd tmp ; \
 		file $(EXE) | grep -q "Zip archive data" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 12; } ; \
-		which peres >/dev/null && { peres -v 'Telegram/Telegram.exe' | grep -q "^Product Version:[[:space:]]*$(VERSION)" || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 12; } ; } ;\
+		which peres >/dev/null && { peres -v 'Telegram/Telegram.exe' 2> /dev/null | grep -q "^Product Version:[[:space:]]*$(VERSION)" || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 12; } ; } ;\
 		)
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE)

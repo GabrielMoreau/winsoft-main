@@ -6,7 +6,7 @@
 SOFT:=Action-Windows11FullUpgrade
 URL:=$(shell curl -s -L --connect-timeout 10 'https://www.microsoft.com/software-download/windows11' | sed -e 's/"/\n/g;' | grep '^https://go.microsoft.com/fwlink/' | sed -e 's/&#61;/=/;' | head -1)
 $(shell mkdir -p tmp; cd tmp; curl -s --time-cond 'Windows11InstallationAssistant.exe' -o 'Windows11InstallationAssistant.exe' -L "$(URL)")
-VERSION:=$(shell peres -v tmp/Windows11InstallationAssistant.exe  | grep '^Product Version:' | awk '{print $$3}' | head -1)
+VERSION:=$(shell peres -v tmp/Windows11InstallationAssistant.exe 2> /dev/null  | grep '^Product Version:' | awk '{print $$3}' | head -1)
 REVISION:=1
 
 EXE:=Windows11InstallationAssistant-$(VERSION).exe
@@ -63,7 +63,7 @@ tmp/$(EXE):
 check-exe: tmp/$(EXE)
 	@(cd tmp ; \
 		file $(EXE) | grep -q "PE32 executable" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 12; } ; \
-		which peres >/dev/null && { peres -v $(EXE) | grep -q "^Product Version:[[:space:]]*$(VERSION)" || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 12; } ; } ;\
+		which peres >/dev/null && { peres -v $(EXE) 2> /dev/null | grep -q "^Product Version:[[:space:]]*$(VERSION)" || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 12; } ; } ;\
 		)
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE)
