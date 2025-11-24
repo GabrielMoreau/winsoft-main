@@ -4,7 +4,7 @@
 #
 
 SOFT:=Update-OSBIOS
-URL11:=$(shell curl -s -L --connect-timeout 10 'https://www.microsoft.com/software-download/windows11' | grep 'windows11-upgrade-now' | sed -e 's/"/\n/g;' | grep '^https://go.microsoft.com/fwlink/' | head -1)
+URL11:=$(shell curl -s -L --connect-timeout 10 'https://www.microsoft.com/software-download/windows11' | grep 'Bouton Télécharger l’Assistant d’installation' | sed -e 's/"/\n/g;' | grep '^https://go.microsoft.com/fwlink/' | sed -e 's/&#61;/=/;' | head -1)
 $(shell mkdir -p tmp; cd tmp; curl -s --time-cond 'Windows11InstallationAssistant.exe' -o 'Windows11InstallationAssistant.exe' -L "$(URL11)")
 VERSION11:=$(shell peres -v 'tmp/Windows11InstallationAssistant.exe' 2> /dev/null | grep '^Product Version:' | awk '{print $$3}' | head -1)
 VERSION:=$(VERSION11)
