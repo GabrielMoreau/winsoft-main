@@ -21,6 +21,9 @@ all: check-version check-exe $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
 
 sinclude ../_common/conf.mk
 
+# OCS configuration
+OCS_SEARCH:=X2Go Client
+
 check-version:
 	@echo $(VERSION) | grep -qE -- '^[[:digit:]][\.[:digit:]-]*$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 11)
 
