@@ -1,10 +1,10 @@
 
 REM
-REM   Filezilla
+REM   Optgeo
 REM
 
 REM Name
-SET softname=Optgeo-Client
+SET softname=Optgeo
 
 SET logdir=__LOGDIR__
 IF NOT EXIST "%logdir%" (
