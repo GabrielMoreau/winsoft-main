@@ -178,7 +178,7 @@ Please devops, put always the version number clearly in the comment...
 apt install make curl wget pev msitools p7zip-full libimage-exiftool-perl
 ```
 
-## List of 131 packages
+## List of 132 packages
 
  |   | Software | Detail | &#127968; |   |
  | - | -------- | ------ | --------- | - |
@@ -243,50 +243,51 @@ apt install make curl wget pev msitools p7zip-full libimage-exiftool-perl
  | 060 | [OnlyOffice](onlyoffice/README.md) | Desktop offline office suite version | [&#127968;](https://www.onlyoffice.com/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
  | 061 | [OpenShot](openshot/README.md) | Open-source video editor | [&#127968;](https://www.openshot.org/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
  | 062 | [OpenVPN Connect](openvpn/README.md) | Virtual Private Network (VPN) SSL Client | [&#127968;](https://openvpn.net/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
- | 063 | [ParaView](paraview/README.md) | Vector graphics editor | [&#127968;](https://www.paraview.org/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
- | 064 | [PDFCreator](pdfcreator/README.md) | Create PDF file | [&#127968;](https://www.pdfforge.org/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
- | 065 | [PDFsam Basic](pdfsam/README.md) | Split, merge, extract PDF files | [&#127968;](https://pdfsam.org/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
- | 066 | [Picocrypt](picocrypt/README.md) | Secure encryption tool (Crypt files) | [&#127968;](https://github.com/HACKERALERT/Picocrypt) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
- | 067 | [Proton Mail Bridge](protonmailbridge/README.md) | Secure messaging client | [&#127968;](https://proton.me/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
- | 068 | [Prusa Slicer](prusaslicer/README.md) | Slicer and converts 3D models (STL, OBJ, AMF) into G-code instructions for FFF printers | [&#127968;](https://www.prusa3d.com) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
- | 069 | [Pulsar-Edit](pulsar/README.md) | text editor | [&#127968;](https://pulsar-edit.dev) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
- | 070 | [PuTTY](putty/README.md) | SSH Client | [&#127968;](https://www.chiark.greenend.org.uk/~sgtatham/putty/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
- | 071 | [Raise3D ideaMaker](ideamaker/README.md) | Slicer Software (3D printing) | [&#127968;](https://www.raise3d.eu/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
- | 072 | [Recuva](recuva/README.md) | Recovers files on Windows computer | [&#127968;](https://www.ccleaner.com/recuva) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
- | 073 | [RocketChat](rocketchat/README.md) | Chat desktop client for RocketChat servers | [&#127968;](https://www.rocket.chat/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
- | 074 | [RStudio](rstudio/README.md) | Integrated development environment for R (include R) | [&#127968;](https://github.com/rstudio/rstudio,) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
- | 075 | [RTools](rtools/README.md) | Extend R language from source packages | [&#127968;](https://cran.r-project.org/bin/windows/Rtools/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
- | 079 | [Signal-Desktop](signal-desktop/README.md) | Encrypted instant messaging, voice, and video calls | [&#127968;](https://signal-desktop.org/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
- | 080 | [SimpleTruss](simpletruss/README.md) | Drawing and calculating simple lattices | [&#127968;](http://www.apartmina.cz/simpletruss/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
- | 081 | [Speccy](speccy/README.md) | Display hardware computer information | [&#127968;](https://www.ccleaner.com/speccy) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
- | 082 | [SSHFS-Win](sshfs-win/README.md) | Connect network drive on an SSH/SFTP server | [&#127968;](https://github.com/billziss-gh/sshfs-win) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
- | 083 | [SumatraPDF](sumatrapdf/README.md) | Free and open-source document viewer (PDF, DjVu, EPUB...) | [&#127968;](https://www.sumatrapdfreader.org/free-pdf-reader) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
- | 084 | [Sysinternals Suite](sysinternals/README.md) | Technical resources and utilities to manage, diagnose and monitor a Windows environment | [&#127968;](http://technet.microsoft.com/sysinternals) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
- | 085 | [Tabby](tabby/README.md) | Modern terminal for local shells, SSH, etc | [&#127968;](https://tabby.sh/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
- | 086 | [TeamViewer](teamviewer/README.md) | Remote access and remote control | [&#127968;](https://www.teamviewer.com) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
- | 087 | [Telegram Messenger](telegram/README.md) | Desktop Instant messaging application | [&#127968;](https://telegram.org/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
- | 088 | [TexMaker](texmaker/README.md) | Free cross-platform LaTeX editor | [&#127968;](https://www.xm1math.net/texmaker/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
- | 089 | [TeXnicCenter](texniccenter/README.md) | IDE for the LaTeX typesetting language | [&#127968;](https://www.texniccenter.org/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
- | 090 | [TortoiseSVN](tortoisesvn/README.md) | Subversion Client | [&#127968;](https://tortoisesvn.net/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
- | 091 | [UltiMaker Cura](ultimakercura/README.md) | 3D printing software | [&#127968;](https://ultimaker.com) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
- | 092 | [Ultracopier](ultracopier/README.md) | File-copying software | [&#127968;](https://ultracopier.herman-brule.com/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
- | 096 | [VeraCrypt](veracrypt/README.md) | Crypt disk and volume (USK key) | [&#127968;](https://veracrypt.fr/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
- | 097 | [VirtualBox7](virtualbox/README.md) | Oracle Hypervisor for virtual machines | [&#127968;](https://www.virtualbox.org/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
- | 098 | [VisIt](visit/README.md) | Interactive, scalable, visualization, animation and analysis tool | [&#127968;](https://visit-dav.github.io/visit-website/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
- | 099 | [VLC](vlc/README.md) | VideoLAN media player Client | [&#127968;](https://www.videolan.org/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
- | 100 | [VMware Workstation Player](vmwareplayer/README.md) | Virtualization software for computers | [&#127968;](https://www.vmware.com/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
- | 101 | [VOSviewer](vosviewer/README.md) | Constructing and visualizing bibliometric networks | [&#127968;](https://www.vosviewer.com) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
- | 102 | [Webex](webex/README.md) | Cisco Web conferencing and videoconferencing Client | [&#127968;](https://www.webex.com/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
- | 103 | [WinDirStat](windirstat/README.md) | Disk usage viewer and cleanup tool | [&#127968;](https://windirstat.net/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
- | 105 | [WinMerge](winmerge/README.md) | Diff between two or three files | [&#127968;](https://winmerge.org/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
- | 106 | [WinSCP](winscp/README.md) | SCP and SFTP file transfert | [&#127968;](https://winscp.net/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
- | 107 | [Wireshark](wireshark/README.md) | Network Packet Analyser | [&#127968;](https://wireshark.org/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
- | 108 | [X2GoClient](x2goclient/README.md) | Client Windows for X2GO (NX) Linux remote desktop | [&#127968;](https://wiki.x2go.org/doku.php/start) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
- | 109 | [XMind](xmind/README.md) | Mind mapping and collaboration application | [&#127968;](https://xmind.com/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
- | 110 | [XnViewMP](xnviewmp/README.md) | Image viewer, browser and converter | [&#127968;](https://www.xnview.com) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
- | 111 | [Xournal++](xournalpp/README.md) | PDF annotate and hand note-taking software | [&#127968;](https://github.com/xournalpp/xournalpp) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
- | 112 | [Zoom](zoom/README.md) | Web Conference Client | [&#127968;](https://zoom.us/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
- | 113 | [Zotero](zotero/README.md) | Manage bibliographic data | [&#127968;](https://www.zotero.org/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
+ | 063 | [Optgeo](optgeo/README.md) | Simulating two-dimensional geometric optics | [&#127968;](http://jeanmarie.biansan.free.fr/optgeo.html) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
+ | 064 | [ParaView](paraview/README.md) | Vector graphics editor | [&#127968;](https://www.paraview.org/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
+ | 065 | [PDFCreator](pdfcreator/README.md) | Create PDF file | [&#127968;](https://www.pdfforge.org/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
+ | 066 | [PDFsam Basic](pdfsam/README.md) | Split, merge, extract PDF files | [&#127968;](https://pdfsam.org/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
+ | 067 | [Picocrypt](picocrypt/README.md) | Secure encryption tool (Crypt files) | [&#127968;](https://github.com/HACKERALERT/Picocrypt) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
+ | 068 | [Proton Mail Bridge](protonmailbridge/README.md) | Secure messaging client | [&#127968;](https://proton.me/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
+ | 069 | [Prusa Slicer](prusaslicer/README.md) | Slicer and converts 3D models (STL, OBJ, AMF) into G-code instructions for FFF printers | [&#127968;](https://www.prusa3d.com) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
+ | 070 | [Pulsar-Edit](pulsar/README.md) | text editor | [&#127968;](https://pulsar-edit.dev) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
+ | 071 | [PuTTY](putty/README.md) | SSH Client | [&#127968;](https://www.chiark.greenend.org.uk/~sgtatham/putty/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
+ | 072 | [Raise3D ideaMaker](ideamaker/README.md) | Slicer Software (3D printing) | [&#127968;](https://www.raise3d.eu/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
+ | 073 | [Recuva](recuva/README.md) | Recovers files on Windows computer | [&#127968;](https://www.ccleaner.com/recuva) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
+ | 074 | [RocketChat](rocketchat/README.md) | Chat desktop client for RocketChat servers | [&#127968;](https://www.rocket.chat/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
+ | 075 | [RStudio](rstudio/README.md) | Integrated development environment for R (include R) | [&#127968;](https://github.com/rstudio/rstudio,) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
+ | 076 | [RTools](rtools/README.md) | Extend R language from source packages | [&#127968;](https://cran.r-project.org/bin/windows/Rtools/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
+ | 080 | [Signal-Desktop](signal-desktop/README.md) | Encrypted instant messaging, voice, and video calls | [&#127968;](https://signal-desktop.org/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
+ | 081 | [SimpleTruss](simpletruss/README.md) | Drawing and calculating simple lattices | [&#127968;](http://www.apartmina.cz/simpletruss/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
+ | 082 | [Speccy](speccy/README.md) | Display hardware computer information | [&#127968;](https://www.ccleaner.com/speccy) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
+ | 083 | [SSHFS-Win](sshfs-win/README.md) | Connect network drive on an SSH/SFTP server | [&#127968;](https://github.com/billziss-gh/sshfs-win) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
+ | 084 | [SumatraPDF](sumatrapdf/README.md) | Free and open-source document viewer (PDF, DjVu, EPUB...) | [&#127968;](https://www.sumatrapdfreader.org/free-pdf-reader) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
+ | 085 | [Sysinternals Suite](sysinternals/README.md) | Technical resources and utilities to manage, diagnose and monitor a Windows environment | [&#127968;](http://technet.microsoft.com/sysinternals) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
+ | 086 | [Tabby](tabby/README.md) | Modern terminal for local shells, SSH, etc | [&#127968;](https://tabby.sh/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
+ | 087 | [TeamViewer](teamviewer/README.md) | Remote access and remote control | [&#127968;](https://www.teamviewer.com) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
+ | 088 | [Telegram Messenger](telegram/README.md) | Desktop Instant messaging application | [&#127968;](https://telegram.org/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
+ | 089 | [TexMaker](texmaker/README.md) | Free cross-platform LaTeX editor | [&#127968;](https://www.xm1math.net/texmaker/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
+ | 090 | [TeXnicCenter](texniccenter/README.md) | IDE for the LaTeX typesetting language | [&#127968;](https://www.texniccenter.org/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
+ | 091 | [TortoiseSVN](tortoisesvn/README.md) | Subversion Client | [&#127968;](https://tortoisesvn.net/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
+ | 092 | [UltiMaker Cura](ultimakercura/README.md) | 3D printing software | [&#127968;](https://ultimaker.com) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
+ | 093 | [Ultracopier](ultracopier/README.md) | File-copying software | [&#127968;](https://ultracopier.herman-brule.com/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
+ | 097 | [VeraCrypt](veracrypt/README.md) | Crypt disk and volume (USK key) | [&#127968;](https://veracrypt.fr/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
+ | 098 | [VirtualBox7](virtualbox/README.md) | Oracle Hypervisor for virtual machines | [&#127968;](https://www.virtualbox.org/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
+ | 099 | [VisIt](visit/README.md) | Interactive, scalable, visualization, animation and analysis tool | [&#127968;](https://visit-dav.github.io/visit-website/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
+ | 100 | [VLC](vlc/README.md) | VideoLAN media player Client | [&#127968;](https://www.videolan.org/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
+ | 101 | [VMware Workstation Player](vmwareplayer/README.md) | Virtualization software for computers | [&#127968;](https://www.vmware.com/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
+ | 102 | [VOSviewer](vosviewer/README.md) | Constructing and visualizing bibliometric networks | [&#127968;](https://www.vosviewer.com) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
+ | 103 | [Webex](webex/README.md) | Cisco Web conferencing and videoconferencing Client | [&#127968;](https://www.webex.com/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
+ | 104 | [WinDirStat](windirstat/README.md) | Disk usage viewer and cleanup tool | [&#127968;](https://windirstat.net/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
+ | 106 | [WinMerge](winmerge/README.md) | Diff between two or three files | [&#127968;](https://winmerge.org/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
+ | 107 | [WinSCP](winscp/README.md) | SCP and SFTP file transfert | [&#127968;](https://winscp.net/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
+ | 108 | [Wireshark](wireshark/README.md) | Network Packet Analyser | [&#127968;](https://wireshark.org/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
+ | 109 | [X2GoClient](x2goclient/README.md) | Client Windows for X2GO (NX) Linux remote desktop | [&#127968;](https://wiki.x2go.org/doku.php/start) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
+ | 110 | [XMind](xmind/README.md) | Mind mapping and collaboration application | [&#127968;](https://xmind.com/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
+ | 111 | [XnViewMP](xnviewmp/README.md) | Image viewer, browser and converter | [&#127968;](https://www.xnview.com) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
+ | 112 | [Xournal++](xournalpp/README.md) | PDF annotate and hand note-taking software | [&#127968;](https://github.com/xournalpp/xournalpp) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
+ | 113 | [Zoom](zoom/README.md) | Web Conference Client | [&#127968;](https://zoom.us/) | [©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software") |
+ | 114 | [Zotero](zotero/README.md) | Manage bibliographic data | [&#127968;](https://www.zotero.org/) | [🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software") |
 
 ### Uninstall packages
 
