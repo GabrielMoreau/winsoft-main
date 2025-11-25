@@ -17,3 +17,12 @@ unins000.exe /VERYSILENT /NORESTART
 ```
 
 With SYSTEM account, the software is installed under `C:\WINDOWS\SysWOW64\config\systemprofile\AppData\Local\Programs\Picocrypt`
+
+
+## Register Key
+
+Example :
+
+ | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
+ |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
+ | HKLM | Picocrypt | Evan Su | 1.33 | `EvanSu.Picocrypt_is1` | `C:\Program Files\Picocrypt\uninstall.bat` |
