@@ -13,6 +13,7 @@ ideaMaker put an uninstall register key in hive `HKU` and not `HKLM`.
 A script `uninstall.bat` has been added for a register key in `HKLM`.
 Last version seems to put an uninstall key in `HKLM`.
 
+
 ## Register Key
 
 Example :
