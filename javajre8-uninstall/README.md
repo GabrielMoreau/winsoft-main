@@ -16,3 +16,15 @@ libraries and other resources that a specific Java program needs to run.
   https://silentinstallhq.com/java-8-update-341-silent-install-how-to-guide/,
   https://docs.oracle.com/javase/8/docs/technotes/guides/install/windows_installer_options.html,
   https://docs.oracle.com/javase/8/docs/technotes/guides/install/config.html#table_config_file_options.
+
+
+## Register Key
+
+Example :
+
+ | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
+ |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
+ | HKLM | Java 8 Update 321 (64-bit) | Oracle Corporation | 8.0.3210.7  | | |
+ | HKLM | Java 8 Update 411 (64-bit) | Oracle Corporation | 8.0.4110.9  | | |
+ | HKLM | Java 8 Update 431          | Oracle Corporation | 8.0.4310.10 | | |
+ | HKLM | Java 8 Update 441 (64-bit) | Oracle Corporation | 8.0.4410.7  | | |
