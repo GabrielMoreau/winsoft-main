@@ -19,3 +19,4 @@ Example :
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
  | HKLM | Ultracopier 2.2.7.1 | Ultracopier | 2.2.7.1 | `Ultracopier` | `C:\Program Files\Ultracopier\uninst.exe` |
  | HKLM | Ultracopier 3.0.0.0 | Ultracopier | 3.0.0.0 | `Ultracopier` | `C:\Program Files\Ultracopier\uninst.exe` |
+ | HKLM | Ultracopier 3.0.1.4 | Ultracopier | 3.0.1.4 | `Ultracopier` | `C:\Program Files\Ultracopier\uninst.exe` |
