@@ -25,6 +25,9 @@ all:
 
 sinclude ../_common/conf.mk
 
+# OCS configuration
+OCS_SEARCH:=Adobe Flash Player
+
 check-version:
 	@echo $(VERSION) | grep -Eq '^[[:digit:]][\.[:digit:]]+[[:digit:]]$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 11)
 
