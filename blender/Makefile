@@ -69,7 +69,7 @@ tmp/CM_FP_Blender.blender_launcher.exe: tmp/$(EXE)
 
 check-exe: tmp/$(EXE) tmp/CM_FP_Blender.blender_launcher.exe
 	@cd tmp; file $(EXE) | grep -q 'Subject: Blender, Author: Blender Foundation' || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 12; }
-	@cd tmp; file 'CM_FP_Blender.blender_launcher.exe' | grep -q 'PE32. executable (GUI) x86-64, for MS Windows' || { echo "Error: bad format for binary CM_FP_Blender.blender_launcher.exe" 1>&2 ; exit 12; }
+	@cd tmp; file 'CM_FP_Blender.blender_launcher.exe' | grep -Eq 'PE32\+ executable for MS Windows.*x86-64' || { echo "Error: bad format for binary CM_FP_Blender.blender_launcher.exe" 1>&2 ; exit 12; }
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
