@@ -1,0 +1,1 @@
+4.1.2.2-2020.02.13 https://code.x2go.org/releases/binary-win32/x2goclient/releases/4.1.2.2-2020.02.13/x2goclient-4.1.2.2-2020.02.13-setup.exe

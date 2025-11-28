@@ -4,7 +4,7 @@
 #
 
 SOFT:=X2GoClient
-VERSION:=$(shell curl -s -L --connect-timeout 10 'https://code.x2go.org/releases/binary-win32/x2goclient/releases/' | sed -e 's#[</>]#\n#g;' | grep 'a href="[[:digit:]]' | tail -1 | cut -f 2 -d '"')
+VERSION:=$(shell (grep '^[[:digit:]]' url.txt | sort --version-sort -k 1 | tail -1 | awk '{print $$1}' ; curl -s -L --connect-timeout 10 'https://code.x2go.org/releases/binary-win32/x2goclient/releases/' | sed -e 's#[</>]#\n#g;' | grep 'a href="[[:digit:]]' | tail -1 | cut -f 2 -d '"') | tail -1)
 VERSION_SHORT:=$(shell echo $(VERSION) | cut -f 1 -d '-')
 REVISION:=1
 
@@ -42,9 +42,16 @@ version:
 checksum: check-version
 	@mkdir -p tmp
 	@(cd tmp ; \
-		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt && exit ; \
-		shasum -a 256 "$(EXE)" | sed -e 's#tmp/##;' >> ../checksum.txt ; \
-		tail -3 ../checksum.txt ; \
+		if ! grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt && exit ; \
+		then \
+			shasum -a 256 "$(EXE)" | sed -e 's#tmp/##;' >> ../checksum.txt ; \
+			tail -3 ../checksum.txt ; \
+		fi ; \
+		if ! grep -q "^$(VERSION)[[:space:]]" ../url.txt && exit; \
+		then \
+			echo "$(VERSION) $(URL)" >> ../url.txt; \
+			tail -3 ../url.txt ; \
+		fi ; \
 		)
 
 wget: tmp/$(EXE)
