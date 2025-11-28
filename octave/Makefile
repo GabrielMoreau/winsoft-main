@@ -3,8 +3,11 @@
 # Octave
 #
 
+sinclude ../_common/flag.mk
+
 SOFT:=Octave
-URL:=$(shell curl -s -L --connect-timeout 10 'https://octave.org/download' | sed -e 's/"/\n/g;' | grep '^https://.*/octave-.*-w64-installer.exe$$' | head -1)
+#URL:=$(shell curl $(CURLFLAGS) -s -L --connect-timeout 10 'https://octave.org/download' | sed -e 's/"/\n/g;' | grep '^https://.*/octave-.*-w64-installer.exe$$' | head -1)
+URL:=https://ftp.snt.utwente.nl/pub/software/gnu/octave/windows/$(shell curl -s -L --connect-timeout 10 'https://ftp.snt.utwente.nl/pub/software/gnu/octave/windows/' | sed -e 's/"/\n/g;' | grep '^octave-.*-w64-installer\.exe$$' | sort -V | tail -1)
 REVISION:=1
 VERSION:=$(shell echo "$(URL)" | xargs -r basename | cut -f 2 -d '-')
 
