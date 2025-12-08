@@ -8,3 +8,4 @@ d03e87c2e34996f6a3f07bb34b477d5d8269b353cf70207a9d147f0c5a526539  xournalpp-1.2.
 971cdda4c39ac4498daf21138ed05a4f5ea4dafddb18a5615818ec1ebe5c94eb  xournalpp-1.2.6-windows-setup-x86_64.exe
 dc431832a7bc243992475f4dfe31b04d9216040e9395e74ec9e002a041001d98  xournalpp-1.2.7-windows-setup-x86_64.exe
 610278bf2f7f3a1da071c91825168a8240bdd5e2afb04851f38359bbf14278c9  xournalpp-1.2.8-windows-setup-amd64.exe
+ae65eaec4222d1cdc333201a15a8726e8ff0a128c74bb0790fc815d05c07b854  xournalpp-1.2.10-windows-setup-amd64.exe
