@@ -67,7 +67,7 @@ checksum-all: ## make all package checksum files except if `.no-auto-update` fil
 	done
 	exit 0
 
-last-checksum: ## make package checksum file if version have changed
+last-checksum: ## make package checksum file if version have changed (TIMEWINDOW var)
 	@
 	while read -r pkgfolder
 	do
@@ -170,7 +170,7 @@ list-md: ## list all package in markdown format
 	done | sort | grep -Ev '\([[:alpha:]][[:alpha:]]*\)\]\('
 	exit 0
 
-space: ## clean (remove) old package to get disk space
+space: ## clean (remove) old package to get disk space (KEEP var)
 	@
 	for pkgfolder in $(PKGDIR)
 	do
@@ -196,7 +196,7 @@ version: ## get all package version except if `.no-auto-update` file
 	done
 	exit 0
 
-ocs-push: ## push last packages (see target last-checksum) on your OCS server except if `.no-ocs-pkgpush` file
+ocs-push: ## push last packages (see target last-checksum) on your OCS server except if `.no-ocs-pkgpush` file (TIMEWINDOW var)
 	@
 	while read -r pkgfolder
 	do
