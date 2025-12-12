@@ -25,3 +25,4 @@ b11b3a96639d78ed295ca8a426da628dea951a965bfbce170708de5d4a93a75d  audacity-win-3
 6572d9c35997805a596cbdf745700f0e29f56781b7edefcb23525fea53ba6b1e  audacity-win-3.7.4-x64.exe
 dc93003f1f84f327026e31a49829a3e2ca3beb0b24dbe0ec19adf2074fd6be5d  audacity-win-3.7.5-x64.exe
 8f88e52fe75e67e4cf74446e5dbb3b0db00f2e6894df819a180afe56e8f57b04  audacity-win-3.7.6-x64.exe
+a96f41f21efcdfec1d2f7f332544f8a8fb00a6c411e3bee2aa0031b691dd91a7  audacity-win-3.7.7-x64.exe
