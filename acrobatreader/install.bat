@@ -59,13 +59,13 @@ IF EXIST "AcroRdrDCx64%softversion%_MUI.exe" (
 )
 
 ECHO Check if installed
-IF EXIST "%ProgramFiles%\Adobe\Acrobat DC\Acrobat\Acrobat.exe"" (
+IF EXIST "%ProgramFiles%\Adobe\Acrobat DC\Acrobat\Acrobat.exe" (
   GOTO POSTINSTALL
 ) ELSE (
   IF "%MAX_RETRY%"=="0" (
     ECHO Error: MAX_RETRY installation done and no %softname%
-    ECHO END %date%-%time%
-    EXIT /B 1
+    SET RETURNCODE=140
+    GOTO END
   ) ELSE (
     ECHO Warning: try installation again
     SET /A MAX_RETRY-=1
@@ -77,6 +77,7 @@ IF EXIST "%ProgramFiles%\Adobe\Acrobat DC\Acrobat\Acrobat.exe"" (
 :POSTINSTALL
 ECHO Execute post-install script
 %pwrsh% -File ".\post-install.ps1" 1>> "%logdir%\%softname%-PS1.log" 2>&1
+SET RETURNCODE=%ERRORLEVEL%
 
 
 ECHO Remove AdobeCollabSync
@@ -92,5 +93,6 @@ IF EXIST "%PUBLIC%\Desktop\Adobe*Acrobat.lnk"           DEL /F /Q "%PUBLIC%\Desk
 IF EXIST "%ALLUSERSPROFILE%\Desktop\Adobe*Acrobat.lnk"  DEL /F /Q "%ALLUSERSPROFILE%\Desktop\Adobe*Acrobat.lnk"
 
 
+:END
 ECHO END %date%-%time%
-EXIT
+EXIT %RETURNCODE%
