@@ -3,15 +3,13 @@
 # AnyDesk
 #
 
+USERAGENT:=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36
 SOFT:=AnyDesk
-VERSION:=$(shell curl -s -L --connect-timeout 10 'https://anydesk.com/en-au/downloads/windows' | sed -e 's/[>[:space:]]/\n/g;' | grep -E '^v[[:digit:]][[:digit:]\.]+$$' | sed -e 's/^v//;' | head -1)
+VERSION:=$(shell chromium --headless --dump-dom 'https://anydesk.com/en-au/downloads/windows' --user-agent="$(USERAGENT)" 2> /dev/null | sed -e 's/[>[:space:]]/\n/g;' | grep -E '^v[[:digit:]][[:digit:]\.]+$$' | sed -e 's/^v//;' | head -1)
 REVISION:=1
 URL:=https://download.anydesk.com/AnyDesk.exe
-#URL:=https://download.anydesk.com/AnyDesk.msi
 
 EXE:=AnyDesk-$(VERSION).exe
-#EXE:=AnyDesk-$(VERSION).msi
-#EXE2:=Program Files/AnyDeskMSI/AnyDeskMSI.exe
 
 IT_TEAM:=IT Support
 LOGDIR:=%WINDIR%\\Logs
@@ -55,16 +53,13 @@ tmp/$(EXE):
 	@(cd tmp ; \
 		rm -f *.exe *.msi 2>/dev/null ; \
 		curl -# -o "$(EXE)" -L "$(URL)" ; \
-		#which msiextract >/dev/null && { rm -rf 'Program File'; msiextract $(EXE) ; } ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
 
 check-exe: tmp/$(EXE)
 	@(cd tmp ; \
 		file $(EXE) | grep -q "PE32 executable" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 12; } ; \
-		which peres >/dev/null && { peres -v '$(EXE)' 2> /dev/null | grep -q "^Product Version:[[:space:]]*$(VERSION)" || { echo "Error: bad version for binary $(EXE2)" 1>&2 ; exit 12; } ; } ;\
-		#file $(EXE) | grep -q "Subject: AnyDesk MSI" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 12; } ; \
-		#which peres >/dev/null && { peres -v '$(EXE2)' 2> /dev/null | grep -q "^Product Version:[[:space:]]*$(VERSION)" || { echo "Error: bad version for binary $(EXE2)" 1>&2 ; exit 12; } ; } ;\
+		which peres >/dev/null && { peres -v '$(EXE)' 2> /dev/null | grep -q "^Product Version:[[:space:]]*$(VERSION)" || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 12; } ; } ;\
 		)
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE)
