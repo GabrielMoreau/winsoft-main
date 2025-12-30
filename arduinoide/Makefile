@@ -7,7 +7,7 @@
 # https://downloads.arduino.cc/arduino-ide/arduino-ide_2.3.6_Windows_64bit.msi
 SOFT:=ArduinoIDE
 # URL:=$(shell curl -s -L --connect-timeout 10 'https://www.arduino.cc/en/software' | sed -e 's/>/\n/g;' | sed -e 's/>/\n/g;' | grep 'Windows MSI installer' | cut -f 6 -d '"')
-URL:=https:/$(shell curl -s -L --connect-timeout 10 'https://github.com/arduino/arduino-ide/releases' | sed -e 's/"/\n/g;' | grep '^/arduino/arduino-ide/.*/arduino-ide_.*_Windows_64bit.msi' | head -1)
+URL:=https://github.com$(shell curl -s -L --connect-timeout 10 'https://github.com/arduino/arduino-ide/releases' | sed -e 's/"/\n/g;' | grep '^/arduino/arduino-ide/.*/arduino-ide_.*_Windows_64bit.msi' | head -1)
 VERSION:=$(shell basename '$(URL)' 2> /dev/null | cut -f 2 -d '_')
 REVISION:=1
 
@@ -79,10 +79,9 @@ tmp/Arduino.cer:
 
 check-exe: tmp/$(EXE) tmp/Adafruit.cer tmp/Arduino.cer
 	@(cd tmp ; \
-		file $(EXE) | grep -q "Subject: Arduino IDE, Author: Arduino SA" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 12; } ; \
-		#which peres >/dev/null && { peres -v $(EXE) 2> /dev/null | grep -q "^Product Version:[[:space:]]*$(VERSION)" || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 12; }; } ; \
-		file "Adafruit.cer" | grep -q "Certificate, Version=3" || echo "Error: bad format for certificate Adafruit.cer" ; \
-		file "Arduino.cer"  | grep -q "Certificate, Version=3" || echo "Error: bad format for certificate Arduino.cer" ; \
+		file $(EXE) | grep -q "Subject: Arduino IDE, Author: Arduino SA" || { echo "Error: bad format for binary $(EXE)"  1>&2 ; exit 12; } ; \
+		file "Adafruit.cer" | grep -q "Certificate, Version=3" || { echo "Error: bad format for certificate Adafruit.cer" 1>&2 ; exit 12; } ; \
+		file "Arduino.cer"  | grep -q "Certificate, Version=3" || { echo "Error: bad format for certificate Arduino.cer"  1>&2 ; exit 12; } ; \
 		)
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE)
