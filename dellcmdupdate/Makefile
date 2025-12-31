@@ -47,11 +47,6 @@ version:
 checksum: check-version
 	@mkdir -p tmp
 	@(cd tmp ; \
-		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt && exit ; \
-		shasum -a 256 "$(EXE)" | sed -e 's#tmp/##;' >> ../checksum.txt ; \
-		tail -3 ../checksum.txt ; \
-		)
-	@(cd tmp ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$"  ../checksum.txt || { shasum -a 256 "$(EXE)"  | sed -e 's#tmp/##;' >> ../checksum.txt ; } ; \
 		grep -q "^$$(shasum -a 256 $(EXE8))$$" ../checksum.txt || { shasum -a 256 "$(EXE8)" | sed -e 's#tmp/##;' >> ../checksum.txt ; } ; \
 		)
@@ -59,7 +54,7 @@ checksum: check-version
 	@(cd tmp ; \
 		grep -q "^$(VERSION8)[[:space:]]" ../version.txt || { (echo -n '$(VERSION8) ' ; peres -v $(EXE8) 2> /dev/null | grep '^Product Version' | awk '{print $$3}') >> ../version.txt ; } ; \
 		)
-	@if [ $$(( $$(date '+%s') - $$(stat -c '%Y' version.txt) )) -lt 60 ]; then tail -6 version.txt; fi
+	@if [ $$(( $$(date '+%s') - $$(stat -c '%Y' version.txt) )) -lt 60 ]; then tail -3 version.txt; fi
 
 
 wget: tmp/$(EXE)
@@ -70,11 +65,8 @@ check-update:
 tmp/$(EXE):
 	@mkdir -p tmp
 	@(cd tmp ; \
-		rm -f *.exe *.msi 2>/dev/null ; \
+		rm -f Dell-Command-*.EXE 2>/dev/null ; \
 		curl -# -o "$(EXE)" -L "$(URL)" --user-agent "$(USERAGENT)" ; \
-		#wget -q --show-progress -O "$(EXE)" "$(URL)" ; \
-		# file $(EXE) | grep -q "PE32 executable" || echo "Error: bad format for binary $(EXE)" ; \
-		# which peres >/dev/null && { peres -v $(EXE) 2> /dev/null | grep -q "^Product Version:[[:space:]]*$(VERSION)" || echo "Error: bad version for binary $(EXE)" ; } ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
 
