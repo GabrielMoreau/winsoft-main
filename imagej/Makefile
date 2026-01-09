@@ -59,23 +59,30 @@ checksum: check-version
 tmp/$(EXE):
 	@mkdir -p tmp
 	@(cd tmp ; \
-		rm -rf Fiji Fiji.app-* ANKAphase.zip "$(ZIP)" "$(EXE)" 2>/dev/null ; \
+		rm -rf Fiji Fiji.app-* "$(ZIP)" "$(EXE)" 2>/dev/null ; \
 		curl -# -o "$(ZIP)" -L "$(URL)" ; \
 		unzip -q "$(ZIP)" ; \
 		[ ! -e Fiji/fiji-windows-x64.exe ] || mv Fiji/fiji-windows-x64.exe Fiji/ImageJ-win64.exe ; \
 		mv Fiji "Fiji.app-$(VERSION)" ; \
-		curl -# -o "$(ZIP2)" -L "$(URL2)" ; \
-		unzip -q "$(ZIP2)" 'ANKAphase*/ANKAphase_*.jar' ; \
-		mv ANKAphase*/ANKAphase_*.jar "Fiji.app-$(VERSION)/plugins/" ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		rm -f "$(ZIP)" ; \
 		touch "$(EXE)" \
 		)
 
-check-exe: tmp/$(EXE)
+tmp/$(ZIP2): tmp/$(EXE)
+	@mkdir -p tmp
 	@(cd tmp ; \
-		file $(EXE) | grep -q "x86-64, for MS Windows" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 12; } ; \
-		file $(ZIP2) | grep -q "Zip archive data" || { echo "Error: bad format for binary $(ZIP2)" 1>&2 ; exit 12; } ; \
+		rm -rf ANKAphase.zip  2>/dev/null ; \
+		curl -# -o "$(ZIP2)" -L "$(URL2)" ; \
+		unzip -q "$(ZIP2)" 'ANKAphase*/ANKAphase_*.jar' || rm -f "$(ZIP2)"; \
+		mv ANKAphase*/ANKAphase_*.jar "Fiji.app-$(VERSION)/plugins/" ; \
+		)
+
+check-exe: tmp/$(EXE) tmp/$(ZIP2)
+	@(cd tmp ; \
+		file $(EXE) | grep -q "PE32. executable for MS Windows" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 12; } ; \
+		[ -e "Fiji.app-$(VERSION)/jars/commons-io-$(VERSION).jar" ] || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 12; } ; \
+		file $(ZIP2) | grep -q "Zip archive data" || { echo "Error: bad format for archive $(ZIP2)" 1>&2 ; exit 12; } ; \
 		# which peres >/dev/null && { peres -v $(EXE) 2> /dev/null | grep -q "^Product Version:[[:space:]]*$(VERSION)" || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 12; } ; } ;\
 		)
 
@@ -83,7 +90,7 @@ tmp/winsoft-config.ini: winsoft-config.ini Makefile tmp/$(EXE)
 	@mkdir -p tmp
 	@sed -e 's/__VERSION__/$(VERSION)/;' $< > $@
 
-%.zip: Makefile tmp/$(EXE) install.bat post-install.ps1 tmp/winsoft-config.ini
+%.zip: Makefile tmp/$(EXE) tmp/$(ZIP2) install.bat post-install.ps1 tmp/winsoft-config.ini
 	@mkdir -p tmp
 	@IVERSION=$$(zgrep 'plugin update-site.*filename="jars/ij-[[:digit:]]' tmp/$(SUBFOLDER)/db.xml.gz  | cut -f 4 -d '"' | cut -f 2 -d '-' | sed -e 's/.jar$$//;') ; \
 	NVERSION=$$(echo $${IVERSION} | sed -e 's/\w$$//;') ; \
