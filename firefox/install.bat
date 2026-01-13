@@ -1,3 +1,4 @@
+
 REM
 REM   Firefox
 REM
@@ -21,11 +22,7 @@ SET process=firefox.exe
 
 
 ECHO Kill the current process
-VER | FIND /I "10.0" > NUL
-IF %ERRORLEVEL%==0 TASKKILL /T /F /IM %process%
-
-VER | FIND /I "6.1" > NUL
-IF %ERRORLEVEL%==0 TASKKILL /T /F /IM %process%
+TASKKILL /T /F /IM %process%
 
 
 ECHO Search PowerShell
@@ -45,6 +42,7 @@ ECHO Execute pre-install script (clean register policies)
 
 ECHO Silent install %softname%
 ScriptRunner.exe -appvscript MsiExec.exe /i "Firefox-Setup-%softversion%-esr.msi" INSTALL_MAINTENANCE_SERVICE=false /q /norestart /L*v "%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=300
+SET RETURNCODE=%ERRORLEVEL%
 
 
 REM voir https://github.com/mozilla/policy-templates/blob/master/README.md
@@ -54,9 +52,12 @@ IF EXIST "%ProgramFiles%\Mozilla Firefox" (
   IF EXIST "%ProgramFiles%\Mozilla Firefox\distribution" COPY /y policies.json "%ProgramFiles%\Mozilla Firefox\distribution\policies.json" > NUL
 )
 
+:POSTINSTALL
 ECHO Execute post-install script
 %pwrsh% -File ".\post-install.ps1" 1>> "%logdir%\%softname%-PS1.log" 2>&1
+IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
 
 
+:END
 ECHO END %date%-%time%
-EXIT
+EXIT %RETURNCODE%
