@@ -77,7 +77,7 @@ IF EXIST "%ProgramFiles%\Adobe\Acrobat DC\Acrobat\Acrobat.exe" (
 :POSTINSTALL
 ECHO Execute post-install script
 %pwrsh% -File ".\post-install.ps1" 1>> "%logdir%\%softname%-PS1.log" 2>&1
-SET RETURNCODE=%ERRORLEVEL%
+IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
 
 
 ECHO Remove AdobeCollabSync
