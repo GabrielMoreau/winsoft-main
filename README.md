@@ -107,7 +107,7 @@ To find out which parameters you can adapt to your site, the `_common`
 folder, whose main file is `conf.mk`, lists these parameters with
 default values (which don't always work).
 
-## Package error code
+## Package build error code
 
 Here are some error exit code used in `Makefile`:
 
@@ -128,6 +128,19 @@ Error code in `Makefile` specific to OCS Inventory targets:
 
 * Error 50: Zip archive does not exist
 * Error 51: Package already uploaded
+
+## Package deploy error code
+
+Not all packages currently handle return codes correctly.
+When handled correctly, if the installer returns an error code, it is returned at the end of the installation.
+At the same time, the installation script can handle the following error codes itself:
+
+* Error 140: The software has been attempted to be installed MAX_RETRY times and unfortunately, it is still not installed.
+* Error 141: The version on the workstation is higher than the version deployed after the installation procedure.
+* Error 142: The version on the workstation is lower than the version deployed after the installation procedure.
+* Error 143: There is no trace of the software on the workstation after the installation procedure.
+* Error 146: The software is already installed in a version equal to or higher than the one before starting the installation procedure.
+* Error 147: The software is already installed in a lower version before starting the installation procedure. Normally, the installation script then launches the update.
 
 ## Extend
 
