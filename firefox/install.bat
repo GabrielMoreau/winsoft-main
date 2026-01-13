@@ -32,7 +32,7 @@ IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET pwrsh=%W
 ECHO Add rights
 %pwrsh% Set-ExecutionPolicy RemoteSigned -Force -Scope LocalMachine
 
-ECHO unblock
+ECHO Unblock PowerShell Script
 %pwrsh% "Unblock-File -Path .\*.ps1"
 
 
@@ -51,6 +51,7 @@ IF EXIST "%ProgramFiles%\Mozilla Firefox" (
   IF NOT EXIST "%ProgramFiles%\Mozilla Firefox\distribution" MKDIR "%ProgramFiles%\Mozilla Firefox\distribution"
   IF EXIST "%ProgramFiles%\Mozilla Firefox\distribution" COPY /y policies.json "%ProgramFiles%\Mozilla Firefox\distribution\policies.json" > NUL
 )
+
 
 :POSTINSTALL
 ECHO Execute post-install script
