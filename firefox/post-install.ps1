@@ -41,10 +41,11 @@ $UninstallKeys = @(
 # Get Config: Version
 $Config = GetConfig -FilePath 'winsoft-config.ini'
 $RefVersion = ToVersion $Config.Version
-$RefUninstallString = ''
 $RefName = 'Firefox'
 Write-Output "Config: Version $RefVersion"
 
+# Clean old duplicate key with Firefox in the name (same uninstall string)
+$RefUninstallString = ''
 ForEach ($Key in Get-ChildItem -Recurse $UninstallKeys) {
 	$App = Get-ItemProperty -Path $Key.PSPath
 	$DisplayName = $App.DisplayName
@@ -60,7 +61,6 @@ ForEach ($Key in Get-ChildItem -Recurse $UninstallKeys) {
 	}
 }
 
-# Clean old duplicate key with Firefox in the name (same uninstall string)
 If ($RefUninstallString -ne '') {
 	ForEach ($Key in Get-ChildItem -Recurse $UninstallKeys) {
 		$App = Get-ItemProperty -Path $Key.PSPath
@@ -74,7 +74,7 @@ If ($RefUninstallString -ne '') {
 			Write-Output "Remove Key: $DisplayName / $DisplayVersion / $Exe / $KeyPath"
 			Remove-Item -Path "$KeyPath" -Force -Recurse -ErrorAction SilentlyContinue
 		} Else {
-			Write-Output "Keep Key: $DisplayName / $DisplayVersion / $Exe / $KeyPath / $(ToVersion($DisplayVersion))"
+			Write-Output "Keep Key: $DisplayName / $DisplayVersion / $Exe / $KeyPath / $DisplayVersion"
 		}
 	}
 }
