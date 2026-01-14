@@ -41,7 +41,7 @@ $UninstallKeys = @(
 # Get Config: Version
 $Config = GetConfig -FilePath 'winsoft-config.ini'
 $RefVersion = ToVersion $Config.Version
-$RefName = 'Zotero'
+$RefName = 'Tabby'
 Write-Output "Config: Version $RefVersion"
 
 # View
