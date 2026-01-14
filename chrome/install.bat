@@ -20,8 +20,26 @@ ECHO BEGIN %date%-%time%
 SET softversion=__VERSION__
 
 
+ECHO Search PowerShell
+SET pwrsh=%WINDIR%\System32\WindowsPowerShell\V1.0\powershell.exe
+IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET pwrsh=%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe
+
+ECHO Add rights
+%pwrsh% Set-ExecutionPolicy RemoteSigned -Force -Scope LocalMachine
+
+ECHO unblock
+%pwrsh% "Unblock-File -Path .\*.ps1"
+
+
 ECHO Silent install %softname%
 ScriptRunner.exe -appvscript MsiExec.exe /i "googlechromestandaloneenterprise64-%softversion%.msi" /qn /L*V "%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=300
+SET RETURNCODE=%ERRORLEVEL%
+
+
+:POSTINSTALL
+ECHO Execute post-install script
+%pwrsh% -File ".\post-install.ps1" 1>> "%logdir%\%softname%-PS1.log" 2>&1
+IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
 
 
 ECHO Disable auto update
@@ -42,5 +60,6 @@ IF EXIST "%PUBLIC%\Desktop\Google*Chrome.lnk"          DEL /F /Q "%PUBLIC%\Deskt
 IF EXIST "%ALLUSERSPROFILE%\Desktop\Google*Chrome.lnk" DEL /F /Q "%ALLUSERSPROFILE%\Desktop\Google*Chrome.lnk"
 
 
+:END
 ECHO END %date%-%time%
-EXIT
+EXIT %RETURNCODE%

@@ -68,14 +68,18 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
 	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#;' $< > $@
 
+tmp/winsoft-config.ini: winsoft-config.ini Makefile tmp/$(EXE)
+	@mkdir -p tmp
+	@sed -e 's/__VERSION__/$(VERSION)/;' $< > $@
+
 tmp/uninstall.bat: uninstall.bat Makefile
 	@mkdir -p tmp
 	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#;' $< > $@
 
-%.zip: Makefile tmp/install.bat tmp/$(EXE) chrome-parameters.reg master_preferences.json
+%.zip: Makefile tmp/install.bat tmp/$(EXE) post-install.ps1 chrome-parameters.reg master_preferences.json tmp/winsoft-config.ini
 	@rm -f $@
-	@zip -r $@ chrome-parameters.reg master_preferences.json
-	@(cd tmp; zip -r ../$@ install.bat $(EXE))
+	@zip -r $@ post-install.ps1 chrome-parameters.reg master_preferences.json
+	@(cd tmp; zip -r ../$@ install.bat winsoft-config.ini $(EXE))
 	@chmod ugo+rw $@
 
 Uninstall-$(SOFT)_$(VERSION)-$(REVISION)_x64.zip: Makefile pre-remove.ps1 tmp/uninstall.bat
