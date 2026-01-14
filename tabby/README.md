@@ -17,4 +17,8 @@ Example :
 
  | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
- | HKLM | Tabby 1.0.216 | Eugene Pankov | 1.0.216 | `71445fac-d6ef-5436-9da7-5a323762d7f5` | `"C:\Program Files\Tabby\Uninstall Tabby.exe" /allusers` |
+ | HKLM | Tabby 1.0.216 | Eugene Pankov    | 1.0.216 | `71445fac-d6ef-5436-9da7-5a323762d7f5` | `"C:\Program Files\Tabby\Uninstall Tabby.exe" /allusers` |
+ | HKLM | Tabby 1.0.223 | Eugene Pankov    | 1.0.223 | `71445fac-d6ef-5436-9da7-5a323762d7f5` | `"C:\Program Files\Tabby\Uninstall Tabby.exe" /allusers` |
+ | HKLM | Tabby 1.0.227 | Tabby Developers | 1.0.227 | `71445fac-d6ef-5436-9da7-5a323762d7f5` | `"C:\Program Files\Tabby\Uninstall Tabby.exe" /allusers` |
+ | HKLM | Tabby 1.0.229 | Tabby Developers | 1.0.229 | `71445fac-d6ef-5436-9da7-5a323762d7f5` | `"C:\Program Files\Tabby\Uninstall Tabby.exe" /allusers` |
+ | HKLM | Tabby 1.0.230 | Tabby Developers | 1.0.230 | `71445fac-d6ef-5436-9da7-5a323762d7f5` | `"C:\Program Files\Tabby\Uninstall Tabby.exe" /allusers` |
