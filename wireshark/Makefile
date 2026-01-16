@@ -86,9 +86,14 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE1) tmp/$(EXE2)
 	@mkdir -p tmp
 	@sed -e 's/__VERSION1__/$(VERSION1)/; s/__VERSION2__/$(VERSION2)/; s#__LOGDIR__#$(LOGDIR)#;' $< > $@
 
-%.zip: Makefile tmp/install.bat tmp/$(EXE1) tmp/$(EXE2)
+tmp/winsoft-config.ini: winsoft-config.ini Makefile tmp/$(EXE)
+	@mkdir -p tmp
+	@sed -e 's/__VERSION__/$(VERSION)/;' $< > $@
+
+%.zip: Makefile tmp/install.bat post-install.ps1 tmp/winsoft-config.ini tmp/$(EXE1) tmp/$(EXE2)
 	@rm -f $@
-	@(cd tmp; zip -r ../$@ install.bat $(EXE1) $(EXE2))
+	@zip -r ./$@ post-install.ps1
+	@(cd tmp; zip -r ../$@ install.bat winsoft-config.ini $(EXE1) $(EXE2))
 	@chmod ugo+rw $@
 
 # 7z l nmap-7.12-setup.exe  | grep winpcap | awk '{print $5}'
