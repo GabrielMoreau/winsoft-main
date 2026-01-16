@@ -55,5 +55,6 @@ ECHO Execute post-install script
 IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
 
 
+:END
 ECHO END %date%-%time%
 EXIT %RETURNCODE%
