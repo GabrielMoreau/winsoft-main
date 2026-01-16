@@ -76,7 +76,7 @@ tmp/uninstall.bat: uninstall.bat Makefile
 
 %.zip: Makefile tmp/install.bat post-install.ps1 tmp/winsoft-config.ini tmp/$(EXE)
 	@rm -f $@
-	@zip -r ./$@ post-install.ps1
+	@zip -Xr ./$@ post-install.ps1
 	@(cd tmp; zip -Xr ../$@ install.bat winsoft-config.ini $(EXE))
 	@chmod ugo+rw $@
 

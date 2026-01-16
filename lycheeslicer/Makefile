@@ -73,6 +73,6 @@ tmp/winsoft-config.psd1: winsoft-config.psd1 Makefile tmp/$(EXE)
 
 %.zip: Makefile tmp/install.bat pre-install.ps1 tmp/winsoft-config.psd1 tmp/$(EXE)
 	@rm -f $@
-	@zip -r ./$@ pre-install.ps1
-	@(cd tmp; zip -r ../$@ install.bat winsoft-config.psd1 $(EXE))
+	@zip -Xr ./$@ pre-install.ps1
+	@(cd tmp; zip -Xr ../$@ install.bat winsoft-config.psd1 $(EXE))
 	@chmod ugo+rw $@

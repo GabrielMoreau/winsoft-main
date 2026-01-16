@@ -76,8 +76,8 @@ tmp/winsoft-config.ini: winsoft-config.ini Makefile tmp/$(EXE) ../update-visualr
 
 %.zip: Makefile global.ini tmp/install.bat pre-install.ps1 tmp/winsoft-config.ini tmp/$(EXE) $(VCREDIST)
 	@rm -f $@
-	@zip -r ./$@ global.ini pre-install.ps1
-	@(cd tmp; zip -r ../$@ install.bat winsoft-config.ini $(EXE) 2015-2022)
+	@zip -Xr ./$@ global.ini pre-install.ps1
+	@(cd tmp; zip -Xr ../$@ install.bat winsoft-config.ini $(EXE) 2015-2022)
 	@chmod ugo+rw $@
 
 

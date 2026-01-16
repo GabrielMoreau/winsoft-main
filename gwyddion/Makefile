@@ -73,12 +73,12 @@ tmp/uninstall.bat: uninstall.bat Makefile
 
 %.zip: Makefile tmp/install.bat tmp/$(EXE)
 	@rm -f $@
-	@(cd tmp; zip -r ../$@ install.bat $(EXE))
+	@(cd tmp; zip -Xr ../$@ install.bat $(EXE))
 	@chmod ugo+rw $@
 
 Uninstall-$(SOFT)_$(VERSION)-$(REVISION)_x64.zip: Makefile tmp/uninstall.bat uninstall.ps1
 	@rm -f $@
-	@zip -r ./$@ uninstall.ps1
-	@(cd tmp; zip -r ../$@ uninstall.bat)
+	@zip -Xr ./$@ uninstall.ps1
+	@(cd tmp; zip -Xr ../$@ uninstall.bat)
 	@printf "@ uninstall.bat\n@=install.bat\n" | zipnote -w ./$@
 	@chmod ugo+rw $@

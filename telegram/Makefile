@@ -77,6 +77,6 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 
 %.zip: Makefile uninstall.bat tmp/install.bat tmp/$(EXE) tmp/Telegram/Telegram.exe
 	@rm -f $@
-	@zip -r $@ uninstall.bat
-	@(cd tmp; zip -r ../$@ install.bat Telegram)
+	@zip -Xr $@ uninstall.bat
+	@(cd tmp; zip -Xr ../$@ install.bat Telegram)
 	@chmod ugo+rw $@

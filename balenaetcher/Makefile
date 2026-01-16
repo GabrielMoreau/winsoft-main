@@ -83,7 +83,7 @@ tmp/winsoft-config.ini: winsoft-config.ini Makefile tmp/$(EXE)
 
 %.zip: Makefile tmp/install.bat pre-install.ps1 tmp/winsoft-config.ini tmp/$(EXE) uninstall.bat tmp/BalenaEtcher/balenaEtcher.exe
 	@rm -f $@
-	@zip -r $@ uninstall.bat pre-install.ps1
+	@zip -Xr $@ uninstall.bat pre-install.ps1
 	@(cd tmp; zip --quiet -r ../$@ install.bat winsoft-config.ini BalenaEtcher)
 	@chmod ugo+rw $@
 	@echo -n '  Zip / Number of files: '; unzip -t $@ | grep 'OK' | wc -l

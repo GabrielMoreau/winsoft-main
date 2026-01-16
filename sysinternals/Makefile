@@ -70,7 +70,7 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 
 %.zip: Makefile tmp/install.bat uninstall.bat tmp/$(EXE)
 	@rm -f $@
-	@zip -r ./$@ uninstall.bat
+	@zip -Xr ./$@ uninstall.bat
 	@(cd tmp; zip --quiet -r ../$@ install.bat SysinternalsSuite)
 	@echo -n '  Zip / Number of files: '; unzip -t $@ | grep 'OK' | wc -l
 	@chmod ugo+rw $@

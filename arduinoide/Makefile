@@ -90,5 +90,5 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 
 %.zip: Makefile tmp/install.bat tmp/$(EXE) tmp/Adafruit.cer tmp/Arduino.cer
 	@rm -f $@
-	@(cd tmp; zip -r ../$@ install.bat $(EXE) Adafruit.cer Arduino.cer)
+	@(cd tmp; zip -Xr ../$@ install.bat $(EXE) Adafruit.cer Arduino.cer)
 	@chmod ugo+rw $@

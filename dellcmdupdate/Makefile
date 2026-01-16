@@ -102,5 +102,5 @@ tmp/winsoft-config.ini: winsoft-config.ini Makefile tmp/$(EXE)
 
 %.zip: Makefile tmp/install.bat pre-install.ps1 tmp/pre-install.ps1 tmp/winsoft-config.ini tmp/$(EXE) tmp/$(EXE8)
 	@rm -f $@
-	@(cd tmp; zip -r ../$@ install.bat pre-install.ps1 winsoft-config.ini $(EXE) $(EXE8))
+	@(cd tmp; zip -Xr ../$@ install.bat pre-install.ps1 winsoft-config.ini $(EXE) $(EXE8))
 	@chmod ugo+rw $@

@@ -53,6 +53,6 @@ tmp/install.bat: install.bat Makefile $(EXE)
 
 %.zip: Makefile tmp/install.bat $(EXE)
 	@rm -f $@
-	@zip -r ./$@ $(EXE)
-	@(cd tmp; zip -r ../$@ install.bat)
+	@zip -Xr ./$@ $(EXE)
+	@(cd tmp; zip -Xr ../$@ install.bat)
 	@chmod ugo+rw $@

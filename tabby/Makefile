@@ -77,12 +77,12 @@ tmp/uninstall.bat: uninstall.bat Makefile tmp/$(EXE)
 
 %.zip: Makefile tmp/install.bat post-install.ps1 tmp/$(EXE) tmp/winsoft-config.ini
 	@rm -f $@
-	@zip -r ./$@ post-install.ps1
-	@(cd tmp; zip -r ../$@ install.bat winsoft-config.ini $(EXE))
+	@zip -Xr ./$@ post-install.ps1
+	@(cd tmp; zip -Xr ../$@ install.bat winsoft-config.ini $(EXE))
 	@chmod ugo+rw $@
 
 Uninstall-$(SOFT)_$(VERSION)-$(REVISION)_x64.zip: Makefile tmp/uninstall.bat
 	@rm -f $@
-	@(cd tmp; zip -r ../$@ uninstall.bat)
+	@(cd tmp; zip -Xr ../$@ uninstall.bat)
 	@printf "@ uninstall.bat\n@=install.bat\n" | zipnote -w ./$@
 	@chmod ugo+rw $@

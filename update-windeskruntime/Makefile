@@ -141,5 +141,5 @@ tmp/post-install.ps1: post-install.ps1 Makefile tmp/$(EXE5) tmp/$(EXE6) tmp/$(EX
 
 %.zip: Makefile tmp/install.bat tmp/post-install.ps1 tmp/$(EXE5) tmp/$(EXE6) tmp/$(EXE7) tmp/$(EXE8)
 	@rm -f $@
-	@(cd tmp; zip -r ../$@ install.bat post-install.ps1 $(EXE5) $(EXE6) $(EXE7) $(EXE8))
+	@(cd tmp; zip -Xr ../$@ install.bat post-install.ps1 $(EXE5) $(EXE6) $(EXE7) $(EXE8))
 	@chmod ugo+rw $@

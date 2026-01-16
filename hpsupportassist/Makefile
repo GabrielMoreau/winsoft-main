@@ -82,7 +82,7 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 
 %.zip: Makefile tmp/install.bat tmp/$(EXE) tmp/setup/InstallHPSA.exe
 	@rm -f $@
-	@(cd tmp; zip -r ../$@ install.bat)
+	@(cd tmp; zip -Xr ../$@ install.bat)
 	@(cd tmp/setup; zip --quiet -r ../../$@ *)
 	@chmod ugo+rw $@
 	@echo -n '  Zip / Number of files: '; unzip -t $@ | grep 'OK' | wc -l

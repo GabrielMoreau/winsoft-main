@@ -77,5 +77,5 @@ tmp/winsoft-config.psd1: winsoft-config.psd1 Makefile tmp/$(EXE)
 
 %.zip: Makefile tmp/install.bat tmp/$(EXE)
 	@rm -f $@
-	@(cd tmp; zip -r ../$@ install.bat $(EXE))
+	@(cd tmp; zip -Xr ../$@ install.bat $(EXE))
 	@chmod ugo+rw $@

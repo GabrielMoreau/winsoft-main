@@ -95,8 +95,8 @@ tmp/winsoft-config.ini: winsoft-config.ini Makefile tmp/$(EXE) ../update-visualr
 
 %.zip: Makefile tmp/install.bat pre-install.ps1 tmp/winsoft-config.ini tmp/$(EXE1) tmp/$(EXE2) $(VCREDIST)
 	@rm -f $@
-	@zip -r ./$@ pre-install.ps1
-	@(cd tmp; zip -r ../$@ install.bat winsoft-config.ini $(EXE1) $(EXE2) 2015-2022)
+	@zip -Xr ./$@ pre-install.ps1
+	@(cd tmp; zip -Xr ../$@ install.bat winsoft-config.ini $(EXE1) $(EXE2) 2015-2022)
 	@chmod ugo+rw $@
 
 tmp/2015-2022/vc_redist.x64.exe: ../update-visualredist/version.txt ../update-visualredist/checksum.txt

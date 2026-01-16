@@ -58,5 +58,5 @@ tmp/install.bat: install.bat Makefile
 	@rm -f $@
 	@if [ -e 'aes-kaspersky.key' ]; then cp 'aes-kaspersky.key' ./tmp/; elif [ -e "$(KesAESKey)" ]; then cp "$(KesAESKey)" ./tmp/; fi
 	@sed -e "s/XXXXXXXXX/$(KesSecureString)/;" Custom-VarAutodel.psm1 > ./tmp/Custom-VarAutodel.psm1
-	@(cd tmp; zip -r ../$@ install.bat *.psm1 *.ps1 aes-kaspersky.key README.md LICENSE.md)
+	@(cd tmp; zip -Xr ../$@ install.bat *.psm1 *.ps1 aes-kaspersky.key README.md LICENSE.md)
 	@chmod ugo+rw $@

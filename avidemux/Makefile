@@ -75,6 +75,6 @@ tmp/uninstall.bat: uninstall.bat Makefile tmp/$(EXE)
 
 %.zip: Makefile avidemux.qs tmp/install.bat tmp/uninstall.bat tmp/$(EXE)
 	@rm -f $@
-	@zip -r $@ avidemux.qs
-	@(cd tmp; zip -r ../$@ install.bat uninstall.bat $(EXE))
+	@zip -Xr $@ avidemux.qs
+	@(cd tmp; zip -Xr ../$@ install.bat uninstall.bat $(EXE))
 	@chmod ugo+rw $@

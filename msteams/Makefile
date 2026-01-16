@@ -74,6 +74,6 @@ tmp/pre-install.ps1: pre-install.ps1 Makefile tmp/$(EXE)
 
 %.zip: Makefile post-install.ps1 tmp/install.bat tmp/pre-install.ps1 tmp/$(EXE)
 	@rm -f $@
-	@zip -r $@ post-install.ps1
-	@(cd tmp; zip -r ../$@ install.bat pre-install.ps1 $(EXE))
+	@zip -Xr $@ post-install.ps1
+	@(cd tmp; zip -Xr ../$@ install.bat pre-install.ps1 $(EXE))
 	@chmod ugo+rw $@

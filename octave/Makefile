@@ -70,6 +70,6 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 
 %.zip: Makefile tmp/install.bat octave-gui.ini pre-install.ps1 tmp/$(EXE)
 	@rm -f $@
-	@zip -r ./$@ octave-gui.ini pre-install.ps1
-	@(cd tmp; zip -r ../$@ install.bat $(EXE))
+	@zip -Xr ./$@ octave-gui.ini pre-install.ps1
+	@(cd tmp; zip -Xr ../$@ install.bat $(EXE))
 	@chmod ugo+rw $@

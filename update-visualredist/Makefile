@@ -161,8 +161,8 @@ tmp/post-install.ps1: post-install.ps1 tmp/version-replace.txt Makefile
 
 %.zip: Makefile tmp/install.bat tmp/post-install.ps1 view.ps1 $(VCREDIST) tmp/version.txt
 	@rm -f $@
-	@zip -r $@ view.ps1
-	@(cd tmp; zip -r ../$@ install.bat post-install.ps1 2005 2008 2010 2012 2013 2015-2022) # 2015-2019
+	@zip -Xr $@ view.ps1
+	@(cd tmp; zip -Xr ../$@ install.bat post-install.ps1 2005 2008 2010 2012 2013 2015-2022) # 2015-2019
 	@chmod ugo+rw $@
 
 

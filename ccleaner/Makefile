@@ -76,12 +76,12 @@ tmp/uninstall.bat: uninstall.bat Makefile
 
 %.zip: Makefile tmp/install.bat ccleaner.ini tmp/post-install.ps1 tmp/$(EXE)
 	@rm -f $@
-	@zip -r ./$@ ccleaner.ini post-install.ps1
-	@(cd tmp; zip -r ../$@ install.bat post-install.ps1 $(EXE))
+	@zip -Xr ./$@ ccleaner.ini post-install.ps1
+	@(cd tmp; zip -Xr ../$@ install.bat post-install.ps1 $(EXE))
 	@chmod ugo+rw $@
 
 Uninstall-$(SOFT)_$(VERSION)-$(REVISION)_x64.zip: Makefile tmp/uninstall.bat
 	@rm -f $@
-	@(cd tmp; zip -r ../$@ uninstall.bat)
+	@(cd tmp; zip -Xr ../$@ uninstall.bat)
 	@printf "@ uninstall.bat\n@=install.bat\n" | zipnote -w ./$@
 	@chmod ugo+rw $@

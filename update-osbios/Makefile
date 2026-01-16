@@ -72,6 +72,6 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 
 %.zip: Makefile tmp/install.bat post-install.ps1 tmp/$(EXE)
 	@rm -f $@
-	@zip -r ./$@ post-install.ps1
-	@(cd tmp; zip -r ../$@ install.bat $(EXE))
+	@zip -Xr ./$@ post-install.ps1
+	@(cd tmp; zip -Xr ../$@ install.bat $(EXE))
 	@chmod ugo+rw $@

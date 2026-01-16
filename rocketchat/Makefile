@@ -74,6 +74,6 @@ tmp/servers.json: servers.json Makefile tmp/$(EXE)
 
 %.zip: Makefile pre-install.ps1 tmp/install.bat tmp/servers.json tmp/$(EXE)
 	@rm -f $@
-	@zip -r $@ pre-install.ps1
-	@(cd tmp; zip -r ../$@ install.bat servers.json $(EXE))
+	@zip -Xr $@ pre-install.ps1
+	@(cd tmp; zip -Xr ../$@ install.bat servers.json $(EXE))
 	@chmod ugo+rw $@

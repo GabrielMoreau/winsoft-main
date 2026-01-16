@@ -43,5 +43,5 @@ tmp/install.bat: install.bat Makefile
 %.zip: Makefile tmp/install.bat pre-install.ps1
 	@rm -f $@@
 	zip -r ./$@ pre-install.ps1
-	@(cd tmp; zip -r ../$@ install.bat)
+	@(cd tmp; zip -Xr ../$@ install.bat)
 	@chmod ugo+rw $@

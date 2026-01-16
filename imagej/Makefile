@@ -96,8 +96,8 @@ tmp/winsoft-config.ini: winsoft-config.ini Makefile tmp/$(EXE)
 	NVERSION=$$(echo $${IVERSION} | sed -e 's/\w$$//;') ; \
 	sed -e "s/__VERSION__/$(VERSION)/; s/__REVISION__/$(REVISION)/; s/__IVERSION__/$${IVERSION}/; s/__NVERSION__/$${NVERSION}/;" install.bat | sed -e 's#__LOGDIR__#$(LOGDIR)#;' > tmp/install.bat
 	@rm -f $@
-	@zip -r ./$@ uninstall.bat post-install.ps1
-	@(cd tmp; zip -r ../$@ install.bat winsoft-config.ini)
-	@(cd tmp/$(SUBFOLDER); zip -r ../../$@ db.xml.gz ImageJ-win64.exe README.md WELCOME.md)
+	@zip -Xr ./$@ uninstall.bat post-install.ps1
+	@(cd tmp; zip -Xr ../$@ install.bat winsoft-config.ini)
+	@(cd tmp/$(SUBFOLDER); zip -Xr ../../$@ db.xml.gz ImageJ-win64.exe README.md WELCOME.md)
 	(cd tmp/$(SUBFOLDER); zip --quiet -r ../../$@ Contents images jars java lib licenses luts macros plugins retro scripts)
 	@chmod ugo+rw $@

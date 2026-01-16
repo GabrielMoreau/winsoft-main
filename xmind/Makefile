@@ -82,14 +82,14 @@ tmp/uninstall.bat: uninstall.bat Makefile tmp/$(EXE)
 
 %.zip: Makefile pre-install.bat tmp/install.bat tmp/uninstall.bat tmp/$(EXE) tmp/pkg/Xmind.exe
 	@rm -f $@
-	@zip -r $@ pre-install.bat
+	@zip -Xr $@ pre-install.bat
 	@(cd tmp; zip --quiet -r ../$@ install.bat uninstall.bat pkg)
 	@chmod ugo+rw $@
 	@echo -n '  Zip / Number of files: '; unzip -t $@ | grep 'OK' | wc -l
 
 Uninstall-$(SOFT)_$(VERSION)-$(REVISION)_x64.zip: Makefile pre-install.bat tmp/uninstall.bat
 	@rm -f $@
-	@zip -r $@ pre-install.bat
-	@(cd tmp; zip -r ../$@ uninstall.bat)
+	@zip -Xr $@ pre-install.bat
+	@(cd tmp; zip -Xr ../$@ uninstall.bat)
 	@printf "@ uninstall.bat\n@=install.bat\n" | zipnote -w ./$@
 	@chmod ugo+rw $@

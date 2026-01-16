@@ -93,5 +93,5 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE1) tmp/$(EXE2)
 
 %.zip: Makefile tmp/install.bat tmp/$(EXE1) tmp/$(EXE2)
 	@rm -f $@
-	@(cd tmp; zip -r ../$@ install.bat $(EXE1) $(EXE2))
+	@(cd tmp; zip -Xr ../$@ install.bat $(EXE1) $(EXE2))
 	@chmod ugo+rw $@

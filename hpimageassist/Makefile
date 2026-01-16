@@ -67,6 +67,6 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 
 %.zip: Makefile tmp/install.bat tmp/$(EXE) uninstall.bat
 	@rm -f $@
-	@zip -r ./$@ uninstall.bat
-	@(cd tmp; zip -r ../$@ install.bat $(EXE))
+	@zip -Xr ./$@ uninstall.bat
+	@(cd tmp; zip -Xr ../$@ install.bat $(EXE))
 	@chmod ugo+rw $@

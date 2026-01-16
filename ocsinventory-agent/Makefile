@@ -78,6 +78,6 @@ tmp/install-outofservice.bat: install-outofservice.bat Makefile tmp/$(EXE)
 
 %.zip: Makefile post-install.ps1 tmp/install.bat tmp/install-outofservice.bat tmp/$(EXE)
 	@rm -f $@
-	@zip -r $@ post-install.ps1
-	@(cd tmp; zip -r ../$@ install.bat install-outofservice.bat $(EXE))
+	@zip -Xr $@ post-install.ps1
+	@(cd tmp; zip -Xr ../$@ install.bat install-outofservice.bat $(EXE))
 	@chmod ugo+rw $@

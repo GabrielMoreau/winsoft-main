@@ -65,6 +65,6 @@ tmp/Profile_VPN_Default.xml: Profile_VPN_Default.xml Makefile
 
 %.zip: Makefile tmp/install.bat $(EXE) tmp/Profile_VPN_Default.xml
 	@rm -f $@
-	@zip -r $@ $(EXE)
-	@(cd tmp; zip -r ../$@ install.bat $(EXE) Profile_VPN_Default.xml)
+	@zip -Xr $@ $(EXE)
+	@(cd tmp; zip -Xr ../$@ install.bat $(EXE) Profile_VPN_Default.xml)
 	@chmod ugo+rw $@

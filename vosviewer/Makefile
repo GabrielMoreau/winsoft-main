@@ -107,14 +107,14 @@ tmp/uninstall.bat: uninstall.bat Makefile tmp/$(EXE)
 
 %.zip: Makefile pre-install.bat tmp/install.bat tmp/uninstall.bat tmp/$(SOFT).ico tmp/VOSviewer.license tmp/jdk-$(VERSION2)/bin/javaw.exe tmp/$(EXE)
 	@rm -f $@
-	@zip -r $@ pre-install.bat
+	@zip -Xr $@ pre-install.bat
 	@(cd tmp; zip --quiet -r ../$@ install.bat uninstall.bat $(SOFT).ico VOSviewer.license jdk-$(VERSION2) $(EXE))
 	@echo -n '  Zip / Number of files: '; unzip -t $@ | grep 'OK' | wc -l
 	@chmod ugo+rw $@
 
 Uninstall-$(SOFT)_$(VERSION)-$(REVISION)_x64.zip: Makefile pre-install.bat tmp/uninstall.bat
 	@rm -f $@
-	@zip -r $@ pre-install.bat
-	@(cd tmp; zip -r ../$@ uninstall.bat)
+	@zip -Xr $@ pre-install.bat
+	@(cd tmp; zip -Xr ../$@ uninstall.bat)
 	@printf "@ uninstall.bat\n@=install.bat\n" | zipnote -w ./$@
 	@chmod ugo+rw $@

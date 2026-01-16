@@ -82,5 +82,5 @@ tmp/install.bat: install.bat Makefile tmp/$(WINFSP_EXE) tmp/$(SSHFS_EXE)
 
 %.zip: ../../winsoft-conf/sshfs-win/conf.yml tmp/install.bat pre-install.ps1 post-install.ps1 sshfs-win-connect.ps1 tmp/sshfs-win-connect.ini sshfs-win.ico README.md tmp/winfsp-$(WINFSP_VERSION).msi tmp/sshfs-win-$(SSHFS_VERSION)-x64.msi
 	@mkdir -p tmp
-	@zip -r $@ pre-install.ps1 post-install.ps1 sshfs-win.ico README.md sshfs-win-connect.ps1
-	@(cd tmp; zip -r ../$@ install.bat sshfs-win-connect.ini winfsp-$(WINFSP_VERSION).msi sshfs-win-$(SSHFS_VERSION)-x64.msi)
+	@zip -Xr $@ pre-install.ps1 post-install.ps1 sshfs-win.ico README.md sshfs-win-connect.ps1
+	@(cd tmp; zip -Xr ../$@ install.bat sshfs-win-connect.ini winfsp-$(WINFSP_VERSION).msi sshfs-win-$(SSHFS_VERSION)-x64.msi)

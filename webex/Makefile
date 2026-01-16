@@ -86,12 +86,12 @@ tmp/pre-remove.ps1: pre-install.ps1 Makefile tmp/$(EXE)
 
 %.zip: Makefile tmp/install.bat pre-install.ps1 post-install.ps1 tmp/$(EXE)
 	@rm -f $@
-	@zip -r $@ pre-install.ps1 post-install.ps1
-	@(cd tmp; zip -r ../$@ install.bat $(EXE))
+	@zip -Xr $@ pre-install.ps1 post-install.ps1
+	@(cd tmp; zip -Xr ../$@ install.bat $(EXE))
 	@chmod ugo+rw $@
 
 Uninstall-$(SOFT)_$(VERSION)-$(REVISION)_x64.zip: Makefile tmp/pre-remove.ps1 tmp/uninstall.bat
 	@rm -f $@
-	@(cd tmp; zip -r ../$@ uninstall.bat pre-remove.ps1)
+	@(cd tmp; zip -Xr ../$@ uninstall.bat pre-remove.ps1)
 	@printf "@ uninstall.bat\n@=install.bat\n" | zipnote -w ./$@
 	@chmod ugo+rw $@

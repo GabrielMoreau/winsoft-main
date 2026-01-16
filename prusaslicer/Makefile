@@ -82,7 +82,7 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 
 %.zip: Makefile uninstall.bat tmp/install.bat tmp/$(EXE) tmp/PrusaSlicer/prusa-slicer.exe
 	@rm -f $@
-	@zip -r ./$@ uninstall.bat
+	@zip -Xr ./$@ uninstall.bat
 	@(cd tmp; zip --quiet -r ../$@ install.bat PrusaSlicer)
 	@chmod ugo+rw $@
 	@echo -n '  Zip / Number of files: '; unzip -t $@ | grep 'OK' | wc -l

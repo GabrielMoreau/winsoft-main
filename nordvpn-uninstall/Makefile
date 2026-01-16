@@ -49,5 +49,5 @@ tmp/install.bat: install.bat Makefile
 
 %.zip: Makefile tmp/install.bat
 	@rm -f $@
-	@(cd tmp; zip -r ../$@ install.bat)
+	@(cd tmp; zip -Xr ../$@ install.bat)
 	@chmod ugo+rw $@
