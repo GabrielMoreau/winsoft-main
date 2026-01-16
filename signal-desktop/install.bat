@@ -22,17 +22,24 @@ SET regkey=7d96caee-06e6-597c-9f2f-c7bb2e0948b4
 SET shortcut=%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\Signal-Desktop.lnk
 
 
+ECHO Search PowerShell
+SET pwrsh=%WINDIR%\System32\WindowsPowerShell\V1.0\powershell.exe
+IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET pwrsh=%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe
+
+ECHO Add rights
+%pwrsh% Set-ExecutionPolicy RemoteSigned -Force -Scope LocalMachine
+
+ECHO unblock
+%pwrsh% "Unblock-File -Path .\*.ps1"
+
+
 ECHO Silent install %softname%
 ScriptRunner.exe -appvscript signal-desktop-win-x64-%softversion%.exe /S /D=%ProgramData%\signal-desktop -appvscriptrunnerparameters -wait -timeout=300
-
+SET RETURNCODE=%ERRORLEVEL%
 
 ECHO Copy uninstall script
 COPY /A /Y "uninstall.bat" "%ProgramData%\signal-desktop\uninstall.bat"
 
-
-ECHO Search PowerShell
-SET pwrsh=%WINDIR%\System32\WindowsPowerShell\V1.0\powershell.exe
-IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET pwrsh=%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe
 
 REM ECHO Create shortcut
 REM IF EXIST "%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs" (
