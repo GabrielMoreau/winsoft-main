@@ -36,10 +36,11 @@ ECHO unblock
 
 ECHO Silent install NPcap or Win10Pcap
 REM npcap-%softversion2%.exe /S;
+SET RETURNCODE=0
 IF NOT EXIST "%ProgramFiles%\Npcap\npcap.cat" (
   ECHO Silent install Win10Pcap
   ScriptRunner.exe -appvscript MsiExec.exe /i Win10Pcap-v%softversion2%.msi ALLUSERS=1 /qn /L*v "%logdir%\%softname%-MSI2.log" -appvscriptrunnerparameters -wait -timeout=300 2>&1
-  SET RETURNCODE=%ERRORLEVEL%
+  IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
 )
 
 
