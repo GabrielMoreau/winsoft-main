@@ -41,7 +41,7 @@ $UninstallKeys = @(
 # Get Config: Version
 $Config = GetConfig -FilePath 'winsoft-config.ini'
 $RefVersion = ToVersion $Config.Version
-$RefName = 'Signal [[:digit:]]\.'
+$RefName = 'Signal\s\d\.'
 Write-Output "Config: Version $RefVersion"
 
 # View
