@@ -65,19 +65,23 @@ regedit.exe /S "tmp_install.reg"
 REM HKU	Signal 6.43.2	Signal Messenger, LLC	6.43.2	7d96caee-06e6-597c-9f2f-c7bb2e0948b4	"C:\ProgramData\signal-desktop\Uninstall Signal.exe" /currentuser
 ECHO Clean reg uninstall key in HKU
 REG QUERY "HKEY_USERS\.DEFAULT\Software\Microsoft\Windows\CurrentVersion\Uninstall\%regkey%"
-IF %ERRORLEVEL% NEQ 0 GOTO Next
+IF %ERRORLEVEL% NEQ 0 GOTO NEXT
 REG QUERY "HKEY_USERS\.DEFAULT\Software\Microsoft\Windows\CurrentVersion\Uninstall\%regkey%" /v "UninstallString" | FIND /N "%SystemDrive%\ProgramData\signal-desktop" > NUL && (
   ECHO REG DELETE HKU
   REG DELETE "HKEY_USERS\.DEFAULT\Software\Microsoft\Windows\CurrentVersion\Uninstall\%regkey%" /F
-  GOTO End
+  GOTO POSTINSTALL
   )
 
-:Next
+:NEXT
 ECHO Nice: no reg uninstall key in HKU
-ECHO END %date%-%time%
-EXIT 0
 
 
-:End
+:POSTINSTALL
+ECHO Execute post-install script
+%pwrsh% -File ".\post-install.ps1" 1>> "%logdir%\%softname%-PS1.log" 2>&1
+IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
+
+
+:END
 ECHO END %date%-%time%
-EXIT
+EXIT %RETURNCODE%
