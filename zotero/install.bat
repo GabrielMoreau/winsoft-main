@@ -32,6 +32,11 @@ ECHO Unblock PowerShell Script
 SET RETURNCODE=0
 
 
+ECHO Execute pre-install script
+IF EXIST ".\pre-install.ps1" %pwrsh% -File ".\pre-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
+IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
+
+
 ECHO Silent install %softname%
 ScriptRunner.exe -appvscript Zotero-%softversion%_x64_setup.exe /S -appvscriptrunnerparameters -wait -timeout=300
 IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
