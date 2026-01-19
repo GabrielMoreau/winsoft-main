@@ -27,8 +27,9 @@ IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET pwrsh=%W
 ECHO Add rights
 %pwrsh% Set-ExecutionPolicy RemoteSigned -Force -Scope LocalMachine
 
-ECHO unblock
+ECHO Unblock PowerShell Script
 %pwrsh% "Unblock-File -Path .\*.ps1"
+SET RETURNCODE=0
 
 %pwrsh% -File ".\pre-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
 ECHO Preinstall ErrorLevel Return: %ERRORLEVEL%

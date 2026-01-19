@@ -27,13 +27,14 @@ IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET pwrsh=%W
 ECHO Add rights
 %pwrsh% Set-ExecutionPolicy RemoteSigned -Force -Scope LocalMachine
 
-ECHO unblock
+ECHO Unblock PowerShell Script
 %pwrsh% "Unblock-File -Path .\*.ps1"
+SET RETURNCODE=0
 
 
 ECHO Silent install %softname%
 ScriptRunner.exe -appvscript Zotero-%softversion%_x64_setup.exe /S -appvscriptrunnerparameters -wait -timeout=300
-SET RETURNCODE=%ERRORLEVEL%
+IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
 
 
 :POSTINSTALL
