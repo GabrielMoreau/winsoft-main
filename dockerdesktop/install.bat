@@ -33,11 +33,23 @@ SET RETURNCODE=0
 
 
 ECHO Execute pre-install script
-%pwrsh% -File ".\pre-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
+IF EXIST ".\pre-install.ps1" %pwrsh% -File ".\pre-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
+IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
 
 
 ECHO Silent install %softname%
 ScriptRunner.exe -appvscript "DockerDesktopInstaller-%softversion%.exe" install --quiet --accept-license -appvscriptrunnerparameters -wait -timeout=300
+IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
+
+
+:POSTINSTALL
+ECHO Execute post-install script
+IF EXIST ".\pre-install.ps1" (
+  IF EXIST ".\post-install.ps1" %pwrsh% -File ".\post-install.ps1" 1>> "%logdir%\%softname%-PS1.log" 2>&1
+) ELSE (
+  IF EXIST ".\post-install.ps1" %pwrsh% -File ".\post-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
+)
+IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
 
 
 ECHO Remove desktop shortcut
@@ -45,5 +57,6 @@ REM IF EXIST "%PUBLIC%\Desktop\DockerDesktop.lnk"          DEL /F /Q "%PUBLIC%\D
 REM IF EXIST "%ALLUSERSPROFILE%\Desktop\DockerDesktop.lnk" DEL /F /Q "%ALLUSERSPROFILE%\Desktop\DockerDesktop.lnk"
 
 
+:END
 ECHO END %date%-%time%
-EXIT
+EXIT %RETURNCODE%
