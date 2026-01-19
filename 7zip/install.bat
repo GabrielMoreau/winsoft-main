@@ -47,7 +47,11 @@ REM ScriptRunner.exe -appvscript 7z%softversionshort%-x64.exe /S -appvscriptrunn
 
 
 ECHO Execute post-install script
-%pwrsh% -File ".\post-install.ps1" 1>> "%logdir%\%softname%-PS1.log" 2>&1
+IF EXIST ".\pre-install.ps1" (
+  IF EXIST ".\post-install.ps1" %pwrsh% -File ".\post-install.ps1" 1>> "%logdir%\%softname%-PS1.log" 2>&1
+) ELSE (
+  IF EXIST ".\post-install.ps1" %pwrsh% -File ".\post-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
+)
 
 
 ECHO END %date%-%time%

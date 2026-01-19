@@ -35,6 +35,7 @@ ECHO Add rights
 
 ECHO unblock
 %pwrsh% "Unblock-File -Path .\*.ps1"
+SET RETURNCODE=0
 
 
 ECHO Execute pre-install script
@@ -76,7 +77,11 @@ IF EXIST "%ProgramFiles%\Adobe\Acrobat DC\Acrobat\Acrobat.exe" (
 
 :POSTINSTALL
 ECHO Execute post-install script
-%pwrsh% -File ".\post-install.ps1" 1>> "%logdir%\%softname%-PS1.log" 2>&1
+IF EXIST ".\pre-install.ps1" (
+  IF EXIST ".\post-install.ps1" %pwrsh% -File ".\post-install.ps1" 1>> "%logdir%\%softname%-PS1.log" 2>&1
+) ELSE (
+  IF EXIST ".\post-install.ps1" %pwrsh% -File ".\post-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
+)
 IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
 
 
