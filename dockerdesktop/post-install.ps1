@@ -37,12 +37,13 @@ $UninstallKeys = @(
 
 ########################################################################
 
-
 # Get Config: Version
 $Config = GetConfig -FilePath 'winsoft-config.ini'
 $RefVersion = ToVersion $Config.Version
 $RefName = $Config.RegexSearch
-Write-Output "Config: Version $RefVersion"
+Write-Output "Config:`n * Version: $RefVersion`n * RegexSearch: $RefName"
+
+########################################################################
 
 # View
 $ReturnCode = 143
