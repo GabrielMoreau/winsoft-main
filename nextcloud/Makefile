@@ -77,7 +77,9 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 
 tmp/winsoft-config.ini: winsoft-config.ini Makefile tmp/$(EXE)
 	@mkdir -p tmp
-	export VERSIONLONG=$$( (echo "$(VERSION)" ; (file "tmp/$(EXE)" | cut -f 2 -d '}' | cut -f 1 -d ';' | grep '^[[:digit:]][[:digit:]\.]*$$')) | tail -1); sed -e "s/__VERSION__/$${VERSIONLONG}/; s/__REG_SEARCH__/$(REG_SEARCH)/;" $< > $@
+	@export VERSIONLONG=$$( (echo "$(VERSION)" ; (file "tmp/$(EXE)" | cut -f 2 -d '}' | cut -f 1 -d ';' | grep '^[[:digit:]][[:digit:]\.]*$$')) | tail -1); \
+		echo " VERSIONLONG=$${VERSIONLONG}"; \
+		sed -e "s/__VERSION__/$${VERSIONLONG}/; s/__REG_SEARCH__/$(REG_SEARCH)/;" $< > $@
 
 %.zip: Makefile tmp/install.bat pre-install.ps1 post-install.ps1 tmp/winsoft-config.ini tmp/$(EXE)
 	@rm -f $@
