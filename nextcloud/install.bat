@@ -20,9 +20,38 @@ ECHO BEGIN %date%-%time%
 SET softversion=__VERSION__
 
 
+ECHO Search PowerShell
+SET pwrsh=%WINDIR%\System32\WindowsPowerShell\V1.0\powershell.exe
+IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET pwrsh=%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe
+
+ECHO Add rights
+%pwrsh% Set-ExecutionPolicy RemoteSigned -Force -Scope LocalMachine
+
+ECHO Unblock PowerShell Script
+%pwrsh% "Unblock-File -Path .\*.ps1"
+SET RETURNCODE=0
+
+
+ECHO Execute pre-install script
+IF EXIST ".\pre-install.ps1" %pwrsh% -File ".\pre-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
+IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
+
+
 ECHO Silent install %softname%
 ScriptRunner.exe -appvscript MsiExec.exe /i Nextcloud-%softversion%-x64.msi REBOOT=ReallySuppress /qn -appvscriptrunnerparameters -wait -timeout=300
+IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
 
 
+:POSTINSTALL
+ECHO Execute post-install script
+IF EXIST ".\pre-install.ps1" (
+  IF EXIST ".\post-install.ps1" %pwrsh% -File ".\post-install.ps1" 1>> "%logdir%\%softname%-PS1.log" 2>&1
+) ELSE (
+  IF EXIST ".\post-install.ps1" %pwrsh% -File ".\post-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
+)
+IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
+
+
+:END
 ECHO END %date%-%time%
-EXIT
+EXIT %RETURNCODE%

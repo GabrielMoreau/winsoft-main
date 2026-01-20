@@ -16,6 +16,7 @@ REVISION:=1
 # URL:=https://download.nextcloud.com/desktop/releases/Windows/Nextcloud-$(VERSION)-x64.msi
 
 EXE:=Nextcloud-$(VERSION)-x64.msi
+REG_SEARCH:=$(SOFT)
 
 IT_TEAM:=IT Support
 LOGDIR:=%WINDIR%\\Logs
@@ -74,7 +75,12 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
 	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#;' $< > $@
 
-%.zip: Makefile tmp/install.bat tmp/$(EXE)
+tmp/winsoft-config.ini: winsoft-config.ini Makefile tmp/$(EXE)
+	@mkdir -p tmp
+	export VERSIONLONG=$$( (echo "$(VERSION)" ; (file "tmp/$(EXE)" | cut -f 2 -d '}' | cut -f 1 -d ';' | grep '^[[:digit:]][[:digit:]\.]*$$')) | tail -1); sed -e "s/__VERSION__/$${VERSIONLONG}/; s/__REG_SEARCH__/$(REG_SEARCH)/;" $< > $@
+
+%.zip: Makefile tmp/install.bat pre-install.ps1 post-install.ps1 tmp/winsoft-config.ini tmp/$(EXE)
 	@rm -f $@
-	@(cd tmp; zip -Xr ../$@ install.bat $(EXE))
+	@zip -Xr ./$@ pre-install.ps1 post-install.ps1
+	@(cd tmp; zip -Xr ../$@ install.bat winsoft-config.ini $(EXE))
 	@chmod ugo+rw $@
