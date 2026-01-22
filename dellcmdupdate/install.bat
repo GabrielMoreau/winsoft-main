@@ -33,17 +33,31 @@ ECHO Unblock PowerShell Script
 %pwrsh% "Unblock-File -Path .\*.ps1"
 SET RETURNCODE=0
 
+
 ECHO Execute pre-install script
-%pwrsh% -File ".\pre-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
+IF EXIST ".\pre-install.ps1" %pwrsh% -File ".\pre-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
+IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
 
 
 ECHO Silent install %softname%
 ScriptRunner.exe -appvscript %softexe% /passthrough /S /v/qn -appvscriptrunnerparameters -wait -timeout=300
+IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
 
 
 ECHO Wait 2 minutes
 ping 127.0.0.1 -n 120 > NUL
 
 
+:POSTINSTALL
+ECHO Execute post-install script
+IF EXIST ".\pre-install.ps1" (
+  IF EXIST ".\post-install.ps1" %pwrsh% -File ".\post-install.ps1" 1>> "%logdir%\%softname%-PS1.log" 2>&1
+) ELSE (
+  IF EXIST ".\post-install.ps1" %pwrsh% -File ".\post-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
+)
+IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
+
+
+:END
 ECHO END %date%-%time%
-EXIT
+EXIT %RETURNCODE%

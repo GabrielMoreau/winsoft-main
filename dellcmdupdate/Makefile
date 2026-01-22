@@ -11,6 +11,7 @@ VERSION_LOW:=$(shell echo "$(VERSION)" | sed -e 's/\./_/g;')
 USERAGENT:=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:122.0) Gecko/20100101 Firefox/122.0
 
 EXE:=$(shell basename '$(URL)' 2> /dev/null)
+REG_SEARCH:=Dell\\sCommand\\s.\\sUpdate
 
 URL8:=$(shell curl -s -L https://dotnet.microsoft.com/$(shell curl -s -L --connect-timeout 10 'https://dotnet.microsoft.com/en-us/download/dotnet/8.0' | sed -e 's/"/\n/g;' | grep 'thank-you/runtime-desktop.*windows-x64-installer'  | head -1) | sed -e 's/"/\n/g;' | grep '^https.*windowsdesktop-runtime-.*-win-x64.exe' | head -1)
 VERSION8:=8.$(shell basename '$(URL8)' 2>/dev/null | cut -f 3 -d '-' | cut -f 2- -d '.')
@@ -98,9 +99,10 @@ tmp/pre-install.ps1: pre-install.ps1 Makefile tmp/$(EXE8)
 
 tmp/winsoft-config.ini: winsoft-config.ini Makefile tmp/$(EXE)
 	@mkdir -p tmp
-	@sed -e 's/__VERSION__/$(VERSION)/;' $< > $@
+	@sed -e 's/__VERSION__/$(VERSION)/; s/__REG_SEARCH__/$(REG_SEARCH)/;' $< > $@
 
-%.zip: Makefile tmp/install.bat pre-install.ps1 tmp/pre-install.ps1 tmp/winsoft-config.ini tmp/$(EXE) tmp/$(EXE8)
+%.zip: Makefile tmp/install.bat post-install.ps1 tmp/pre-install.ps1 tmp/winsoft-config.ini tmp/$(EXE) tmp/$(EXE8)
 	@rm -f $@
+	@zip -Xr ./$@ post-install.ps1
 	@(cd tmp; zip -Xr ../$@ install.bat pre-install.ps1 winsoft-config.ini $(EXE) $(EXE8))
 	@chmod ugo+rw $@
