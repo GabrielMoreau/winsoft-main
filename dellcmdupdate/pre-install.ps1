@@ -55,6 +55,13 @@ Function Run-Exec {
 
 ########################################################################
 
+$UninstallKeys = @(
+	'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall'
+	'HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall'
+)
+
+########################################################################
+
 # Get Config: Version
 $Config = GetConfig -FilePath 'winsoft-config.ini'
 $RefVersion = ToVersion $Config.Version
@@ -129,7 +136,7 @@ ForEach ($Key in Get-ChildItem -Recurse $UninstallKeys) {
 	}
 }
 
-If ($WindowsDesktopRuntime == $True) {
+If ($WindowsDesktopRuntime -eq $True) {
 	$Exe = 'windowsdesktop-runtime-__VERSION8__-win-x64.exe'
 	$Args = '/install /quiet /norestart'
 	If (Test-Path -Path "$Exe") {
