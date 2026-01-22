@@ -34,18 +34,18 @@ ECHO Unblock PowerShell Script
 SET RETURNCODE=0
 
 
+ECHO Execute pre-install script
+IF EXIST ".\pre-install.ps1" %pwrsh% -File ".\pre-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
+IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
+
+
 ECHO Silent install %softname%
 ScriptRunner.exe -appvscript signal-desktop-win-x64-%softversion%.exe /S /D=%ProgramData%\signal-desktop -appvscriptrunnerparameters -wait -timeout=300
-SET RETURNCODE=%ERRORLEVEL%
+IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
 
 ECHO Copy uninstall script
 COPY /A /Y "uninstall.bat" "%ProgramData%\signal-desktop\uninstall.bat"
 
-
-REM ECHO Create shortcut
-REM IF EXIST "%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs" (
-REM  %pwrsh% -Command "$WS = New-Object -ComObject WScript.Shell; $SC = $WS.CreateShortcut('%shortcut%'); $SC.TargetPath = '%ProgramData%\signal-desktop\Signal.exe'; $SC.Save();" -ExecutionPolicy Bypass -NoLogo -NonInteractive -NoProfile
-REM  )
 
 ECHO Remove desktop shortcut
 IF EXIST "%PUBLIC%\Desktop\Signal.lnk"          DEL /F /Q "%PUBLIC%\Desktop\Signal.lnk"

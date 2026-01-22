@@ -9,6 +9,7 @@ REVISION:=1
 URL:=https://updates.signal.org/desktop/signal-desktop-win-x64-$(VERSION).exe
 
 EXE:=signal-desktop-win-x64-$(VERSION).exe
+REG_SEARCH:=Signal\\s\\d\\.
 
 IT_TEAM:=IT Support
 LOGDIR:=%WINDIR%\\Logs
@@ -67,10 +68,10 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 
 tmp/winsoft-config.ini: winsoft-config.ini Makefile tmp/$(EXE)
 	@mkdir -p tmp
-	@sed -e 's/__VERSION__/$(VERSION)/;' $< > $@
+	@sed -e 's/__VERSION__/$(VERSION)/; s/__REG_SEARCH__/$(REG_SEARCH)/;' $< > $@
 
-%.zip: Makefile uninstall.bat tmp/install.bat post-install.ps1 tmp/winsoft-config.ini tmp/$(EXE)
+%.zip: Makefile uninstall.bat tmp/install.bat pre-install.ps1 post-install.ps1 tmp/winsoft-config.ini tmp/$(EXE)
 	@rm -f $@
-	@zip -Xr $@ uninstall.bat  post-install.ps1
+	@zip -Xr $@ uninstall.bat pre-install.ps1 post-install.ps1
 	@(cd tmp; zip -Xr ../$@ install.bat winsoft-config.ini $(EXE))
 	@chmod ugo+rw $@
