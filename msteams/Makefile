@@ -9,6 +9,7 @@ REVISION:=1
 
 EXE:=teams-$(VERSION)-x64.msix
 XML:=AppxManifest.xml
+REG_SEARCH:=(Microsoft Teams Meeting Add-in for Microsoft Office|Teams Machine-Wide Installer)
 
 IT_TEAM:=IT Support
 LOGDIR:=%WINDIR%\\Logs
@@ -68,12 +69,12 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
 	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#;' $< > $@
 
-tmp/pre-install.ps1: pre-install.ps1 Makefile tmp/$(EXE)
+tmp/winsoft-config.ini: winsoft-config.ini Makefile tmp/$(EXE)
 	@mkdir -p tmp
-	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#; s/%ProgramData%/$${Env:ProgramData}/;' $< > $@
+	@sed -e 's/__VERSION__/$(VERSION)/; s/__REG_SEARCH__/$(REG_SEARCH)/; s#__LOGDIR__#$(LOGDIR)#;' $< > $@
 
-%.zip: Makefile post-install.ps1 tmp/install.bat tmp/pre-install.ps1 tmp/$(EXE)
+%.zip: Makefile post-install.ps1 tmp/install.bat pre-install.ps1 tmp/winsoft-config.ini tmp/$(EXE)
 	@rm -f $@
-	@zip -Xr $@ post-install.ps1
-	@(cd tmp; zip -Xr ../$@ install.bat pre-install.ps1 $(EXE))
+	@zip -Xr $@ pre-install.ps1 post-install.ps1
+	@(cd tmp; zip -Xr ../$@ install.bat winsoft-config.ini $(EXE))
 	@chmod ugo+rw $@

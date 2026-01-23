@@ -17,10 +17,10 @@ EXIT /B
 
 ECHO BEGIN %date%-%time%
 
-
 SET softversion=__VERSION__
 
-ECHO Fix PowerShell
+
+ECHO Search PowerShell
 SET pwrsh=%WINDIR%\System32\WindowsPowerShell\V1.0\powershell.exe
 IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET pwrsh=%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe
 
@@ -29,33 +29,36 @@ ECHO Add rights
 
 ECHO Unblock PowerShell Script
 %pwrsh% "Unblock-File -Path .\*.ps1"
+SET RETURNCODE=0
+
 
 ECHO Execute pre-install script
-%pwrsh% -File ".\pre-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
-
-
-REM ECHO Prepare install %softname%
-REM ScriptRunner.exe -appvscript "teamsbootstrapper.exe" -p -o "teams-%softversion%-x64.msix" -appvscriptrunnerparameters -wait -timeout=300
+IF EXIST ".\pre-install.ps1" %pwrsh% -File ".\pre-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
+IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
 
 
 IF %ERRORLEVEL% NEQ 0 (
     ECHO Silent install %softname%
     ScriptRunner.exe -appvscript DISM /Online /Add-ProvisionedAppxPackage /PackagePath:"teams-%softversion%-x64.msix" /SkipLicense -appvscriptrunnerparameters -wait -timeout=300
 )
+IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
 
 
+:POSTINSTALL
 ECHO Execute post-install script
 IF EXIST ".\pre-install.ps1" (
   IF EXIST ".\post-install.ps1" %pwrsh% -File ".\post-install.ps1" 1>> "%logdir%\%softname%-PS1.log" 2>&1
 ) ELSE (
   IF EXIST ".\post-install.ps1" %pwrsh% -File ".\post-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
 )
+IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
 
 
+:END
 ECHO END %date%-%time%
-IF %ERRORLEVEL% EQU 0 (
+IF %RETURNCODE% EQU 0 (
     ECHO %softname% is installed
 ) ELSE (
     ECHO %softname% is not installed!
 )
-EXIT %ERRORLEVEL%
+EXIT %RETURNCODE%
