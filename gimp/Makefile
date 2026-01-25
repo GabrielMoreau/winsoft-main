@@ -10,6 +10,7 @@ REVISION:=1
 URL:=https:$(shell curl -s -L --connect-timeout 10 'https://www.gimp.org/downloads/' | egrep 'gimp-.*-setup.*.exe"' | cut -f 2 -d '"')
 
 EXE:=gimp-$(VERSION)-setup.exe
+REG_SEARCH:=GIMP\\s
 
 IT_TEAM:=IT Support
 LOGDIR:=%WINDIR%\\Logs
@@ -67,12 +68,12 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
 	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#;' $< > $@
 
-tmp/winsoft-config.psd1: winsoft-config.psd1 Makefile tmp/$(EXE)
+tmp/winsoft-config.ini: winsoft-config.ini Makefile tmp/$(EXE)
 	@mkdir -p tmp
-	@sed -e 's/__VERSION__/$(VERSION)/;' $< > $@
+	@sed -e 's/__VERSION__/$(VERSION)/; s/__REG_SEARCH__/$(REG_SEARCH)/;' $< > $@
 
-%.zip: Makefile tmp/install.bat pre-install.ps1 tmp/winsoft-config.psd1 tmp/$(EXE)
+%.zip: Makefile tmp/install.bat pre-install.ps1 post-install.ps1 tmp/winsoft-config.ini tmp/$(EXE)
 	@rm -f $@
-	@zip -Xr ./$@ pre-install.ps1
-	@(cd tmp; zip -Xr ../$@ install.bat winsoft-config.psd1 $(EXE))
+	@zip -Xr ./$@ pre-install.ps1 post-install.ps1
+	@(cd tmp; zip -Xr ../$@ install.bat winsoft-config.ini $(EXE))
 	@chmod ugo+rw $@
