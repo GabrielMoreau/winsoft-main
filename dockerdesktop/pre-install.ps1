@@ -69,6 +69,7 @@ $RefName = $Config.RegexSearch
 Write-Output "Config:`n * Version: $RefVersion`n * RegexSearch: $RefName"
 
 ########################################################################
+# Put your specific code here
 
 # Remove old version
 ForEach ($Key in Get-ChildItem -Recurse $UninstallKeys) {
@@ -95,6 +96,7 @@ ForEach ($Key in Get-ChildItem -Recurse $UninstallKeys) {
 	Run-Exec -FilePath "$Exe" -ArgumentList "$Args" -Name "$RefName"
 }
 
+########################################################################
 
 # View
 $ReturnCode = 0
