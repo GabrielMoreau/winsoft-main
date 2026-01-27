@@ -13,6 +13,7 @@ REVISION:=1
 
 EXE:=VOSviewer-$(VERSION).jar
 EXE2:=openjdk-$(VERSION2)_windows-x64_bin.zip
+REG_SEARCH:=$(SOFT)
 
 IT_TEAM:=IT Support
 LOGDIR:=%WINDIR%\\Logs
@@ -101,14 +102,18 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
 	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#; s/__JDKVERSION__/$(VERSION2)/g;' $< > $@
 
+tmp/winsoft-config.ini: winsoft-config.ini Makefile tmp/$(EXE)
+	@mkdir -p tmp
+	@sed -e 's/__VERSION__/$(VERSION)/; s/__REG_SEARCH__/$(REG_SEARCH)/;' $< > $@
+
 tmp/uninstall.bat: uninstall.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
 	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#;' $< > $@
 
-%.zip: Makefile pre-install.bat tmp/install.bat tmp/uninstall.bat tmp/$(SOFT).ico tmp/VOSviewer.license tmp/jdk-$(VERSION2)/bin/javaw.exe tmp/$(EXE)
+%.zip: Makefile tmp/install.bat pre-install.bat pre-install.ps1 post-install.ps1 tmp/uninstall.bat tmp/$(SOFT).ico tmp/VOSviewer.license tmp/jdk-$(VERSION2)/bin/javaw.exe tmp/winsoft-config.ini tmp/$(EXE)
 	@rm -f $@
-	@zip -Xr $@ pre-install.bat
-	@(cd tmp; zip --quiet -r ../$@ install.bat uninstall.bat $(SOFT).ico VOSviewer.license jdk-$(VERSION2) $(EXE))
+	@zip -Xr $@ pre-install.bat pre-install.ps1 post-install.ps1
+	@(cd tmp; zip --quiet -r ../$@ install.bat uninstall.bat $(SOFT).ico VOSviewer.license jdk-$(VERSION2) winsoft-config.ini $(EXE))
 	@echo -n '  Zip / Number of files: '; unzip -t $@ | grep 'OK' | wc -l
 	@chmod ugo+rw $@
 

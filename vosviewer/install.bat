@@ -27,6 +27,23 @@ SET "sc_args=-jar .\VOSviewer-%softversion%.jar"
 SET "sc_icon=%ProgramFiles%\%installfolder%\VOSviewer.ico"
 
 
+@ECHO [INFO] Search PowerShell
+SET pwrsh=%WINDIR%\System32\WindowsPowerShell\V1.0\powershell.exe
+IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET pwrsh=%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe
+
+@ECHO [INFO] Add rights
+%pwrsh% Set-ExecutionPolicy RemoteSigned -Force -Scope LocalMachine
+
+@ECHO [INFO] Unblock PowerShell Script
+%pwrsh% "Unblock-File -Path .\*.ps1"
+SET RETURNCODE=0
+
+
+@ECHO [INFO] Execute pre-install script
+IF EXIST ".\pre-install.ps1" %pwrsh% -File ".\pre-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
+IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
+
+
 @ECHO [INFO] Clean old version before install
 CALL .\pre-install.bat
 IF EXIST "%ProgramFiles%\%installfolder%" RMDIR /S /Q "%ProgramFiles%\%installfolder%"
@@ -65,6 +82,16 @@ IF EXIST "%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs" (
 )
 
 
+:POSTINSTALL
+@ECHO [INFO] Execute post-install script
+IF EXIST ".\pre-install.ps1" (
+  IF EXIST ".\post-install.ps1" %pwrsh% -File ".\post-install.ps1" 1>> "%logdir%\%softname%-PS1.log" 2>&1
+) ELSE (
+  IF EXIST ".\post-install.ps1" %pwrsh% -File ".\post-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
+)
+IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
+
+
 @ECHO [INFO] Reg uninstall key
  > tmp_install.reg ECHO Windows Registry Editor Version 5.00
 >> tmp_install.reg ECHO.
@@ -86,8 +113,7 @@ GOTO END
 
 :FAILED
 @ECHO [INFO] Failed to install %softname%
-@ECHO [END] %date%-%time%
-EXIT 44
+IF %RETURNCODE% EQU 0 SET RETURNCODE=140
 
 
 :END
