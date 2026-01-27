@@ -15,14 +15,14 @@ EXIT /B
 
 :INSTALL
 
-ECHO BEGIN %date%-%time%
+@ECHO [BEGIN] %date%-%time%
 
 SET softversion=__VERSIONLONG__
 
 
-ECHO Silent install %softname%
+@ECHO [INFO] Silent install %softname%
 ScriptRunner.exe -appvscript Omnissa-Horizon-Client-%softversion%.exe /silent /install /norestart /log "%logdir%\%softname%-MSI.log" DESKTOP_SHORTCUT=0 -appvscriptrunnerparameters -wait -timeout=300
 
 
-ECHO END %date%-%time%
+@ECHO [END] %date%-%time%
 EXIT

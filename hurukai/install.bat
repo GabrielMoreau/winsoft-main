@@ -15,13 +15,13 @@ EXIT /B
 
 :INSTALL
 
-ECHO BEGIN %date%-%time%
+@ECHO [BEGIN] %date%-%time%
 
 SET softversion=__VERSION__
 
 
-ECHO Silent install %softname%
+@ECHO [INFO] Silent install %softname%
 ScriptRunner.exe -appvscript MsiExec.exe /i "agent-%softversion%_x64.msi" HOST=__HURUKAI_SERVER__ PORT=443 PROTO=https SRV_SIG_PUB=__HURUKAI_SIG__ ENROLLMENT_TOKEN=__HURUKAI_TOKEN__ /qn /L*v "%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=300
 
-ECHO END %date%-%time%
+@ECHO [END] %date%-%time%
 EXIT

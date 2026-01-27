@@ -16,7 +16,7 @@ EXIT /B
 
 :INSTALL
 
-ECHO BEGIN %date%-%time%
+@ECHO [BEGIN] %date%-%time%
 
 REM Version parameter (auto update by Makefile)
 SET softversion=__VERSION__
@@ -27,7 +27,7 @@ SET ocsssl=__OCS_SSL__
 REM Stop OCS service
 SET servicename=OCS Inventory Service
 SC QUERYEX "%servicename%" | FIND "STATE" | FIND "RUNNING" >NUL && (
-  ECHO %servicename% is running, stop it
+  ECHO [INFO] Service %servicename% is running, stop it
   NET STOP  "OCS Inventory Service"
 )
 SC QUERYEX "%servicename%" | FIND "STATE"
@@ -48,5 +48,5 @@ REM Start service
 REM NET START  "OCS Inventory Service"
 
 
-ECHO END %date%-%time%
+@ECHO [END] %date%-%time%
 EXIT

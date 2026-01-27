@@ -15,7 +15,7 @@ EXIT /B
 
 :INSTALL
 
-ECHO BEGIN %date%-%time%
+@ECHO [BEGIN] %date%-%time%
 
 SET softversion=__VERSION__
 SET regkey=balena-etcher
@@ -23,43 +23,43 @@ SET shortcut=%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\%softname%.
 SET process=balenaEtcher.exe
 
 
-ECHO Search PowerShell
+@ECHO [INFO] Search PowerShell
 SET pwrsh=%WINDIR%\System32\WindowsPowerShell\V1.0\powershell.exe
 IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET pwrsh=%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe
 
-ECHO Add rights
+@ECHO [INFO] Add rights
 %pwrsh% Set-ExecutionPolicy RemoteSigned -Force -Scope LocalMachine
 
-ECHO Unblock PowerShell Script
+@ECHO [INFO] Unblock PowerShell Script
 %pwrsh% "Unblock-File -Path .\*.ps1"
 SET RETURNCODE=0
 
 
-ECHO Kill running process
+@ECHO [INFO] Kill running process
 TASKKILL /T /F /IM %process%
 
 
-ECHO Clean old version before install
+@ECHO [INFO] Clean old version before install
 CALL .\uninstall.bat
 
-ECHO Execute pre-install script to remove HKU version
+@ECHO [INFO] Execute pre-install script to remove HKU version
 %pwrsh% -File ".\pre-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
 
 
-ECHO Silent install %softname%
+@ECHO [INFO] Silent install %softname%
 MOVE "BalenaEtcher" "%ProgramFiles%\%regkey%"
 
-ECHO Copy uninstall script
+@ECHO [INFO] Copy uninstall script
 COPY /A /Y "uninstall.bat" "%ProgramFiles%\%regkey%\uninstall.bat"
 
 
-ECHO Create shortcut
+@ECHO [INFO] Create shortcut
 IF EXIST "%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs" (
   %pwrsh% -Command "$WS = New-Object -ComObject WScript.Shell; $SC = $WS.CreateShortcut('%shortcut%'); $SC.TargetPath = '%ProgramFiles%\%regkey%\balenaEtcher.exe'; $SC.Save();" -ExecutionPolicy Bypass -NoLogo -NonInteractive -NoProfile
 )
 
 
-ECHO Better reg uninstall key
+@ECHO [INFO] Better reg uninstall key
  > tmp_install.reg ECHO Windows Registry Editor Version 5.00
 >> tmp_install.reg ECHO.
 >> tmp_install.reg ECHO [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\%regkey%]
@@ -76,5 +76,5 @@ ECHO Better reg uninstall key
 regedit.exe /S "tmp_install.reg"
 
 
-ECHO END %date%-%time%
+@ECHO [END] %date%-%time%
 EXIT

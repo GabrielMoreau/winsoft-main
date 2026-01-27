@@ -15,15 +15,15 @@ EXIT /B
 
 :INSTALL
 
-ECHO BEGIN %date%-%time%
+@ECHO [BEGIN] %date%-%time%
 
 SET softversion=__VERSION__
 
 
-ECHO Silent uninstall %softname%
+@ECHO [INFO] Silent uninstall %softname%
 ScriptRunner.exe -appvscript WMIC product where "Name LIKE 'Java 8%%'" call uninstall /nointeractive -appvscriptrunnerparameters -wait -timeout=300
 ScriptRunner.exe -appvscript WMIC product where "Name LIKE 'Java 7%%'" call uninstall /nointeractive -appvscriptrunnerparameters -wait -timeout=300
 
 
-ECHO END %date%-%time%
+@ECHO [END] %date%-%time%
 EXIT

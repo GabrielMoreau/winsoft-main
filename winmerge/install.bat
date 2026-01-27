@@ -15,7 +15,7 @@ EXIT /B
 
 :INSTALL
 
-@ECHO [INFO] BEGIN %date%-%time%
+@ECHO [BEGIN] %date%-%time%
 
 SET softversion=__VERSION__
 
@@ -64,5 +64,5 @@ IF %RETURNCODE% EQU 259 (
 )
 
 :END
-@ECHO [INFO] END %date%-%time%
+@ECHO [END] %date%-%time%
 EXIT %RETURNCODE%

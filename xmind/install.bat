@@ -15,7 +15,7 @@ EXIT /B
 
 :INSTALL
 
-ECHO BEGIN %date%-%time%
+@ECHO [BEGIN] %date%-%time%
 
 SET "softversion=__VERSION__"
 SET "installfolder=Xmind"
@@ -25,35 +25,35 @@ SET "sc_target=%ProgramFiles%\%installfolder%\Xmind.exe"
 SET "process=Xmind.exe"
 
 
-ECHO Clean old version before install
+@ECHO [INFO] Clean old version before install
 CALL .\pre-install.bat
 IF EXIST "%ProgramFiles%\%installfolder%" RMDIR /S /Q "%ProgramFiles%\%installfolder%"
 
 
-ECHO Silent install %softname%
+@ECHO [INFO] Silent install %softname%
 MOVE pkg "%ProgramFiles%\%installfolder%"
 IF NOT EXIST "%sc_target%" GOTO FAILED
 
 
-ECHO Copy uninstall script
+@ECHO [INFO] Copy uninstall script
 COPY /A /Y "pre-install.bat" "%ProgramFiles%\%installfolder%\pre-install.bat"
 COPY /A /Y "uninstall.bat"   "%ProgramFiles%\%installfolder%\uninstall.bat"
 
-ECHO Proper right to files
+@ECHO [INFO] Proper right to files
 ICACLS "%ProgramFiles%\%installfolder%" /grant *S-1-1-0:(OI)(CI)(RX)
 
 
-ECHO Search PowerShell
+@ECHO [INFO] Search PowerShell
 SET pwrsh=%WINDIR%\System32\WindowsPowerShell\V1.0\powershell.exe
 IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET pwrsh=%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe
 
-ECHO Create shortcut
+@ECHO [INFO] Create shortcut
 IF EXIST "%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs" (
   %pwrsh% -Command "$WS = New-Object -ComObject WScript.Shell; $SC = $WS.CreateShortcut('%shortcut%'); $SC.TargetPath = '%sc_target%'; $SC.Save();" -NoLogo -NonInteractive -NoProfile
 )
 
 
-ECHO Reg uninstall key
+@ECHO [INFO] Reg uninstall key
  > tmp_install.reg ECHO Windows Registry Editor Version 5.00
 >> tmp_install.reg ECHO.
 >> tmp_install.reg ECHO [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\%regkey%]
@@ -73,11 +73,11 @@ GOTO END
 
 
 :FAILED
-ECHO Failed to install %softname%
-ECHO END %date%-%time%
+@ECHO [INFO] Failed to install %softname%
+@ECHO [END] %date%-%time%
 EXIT 44
 
 
 :END
-ECHO END %date%-%time%
+@ECHO [END] %date%-%time%
 EXIT

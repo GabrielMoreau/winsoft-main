@@ -15,31 +15,31 @@ EXIT /B
 
 :INSTALL
 
-ECHO BEGIN %date%-%time%
+@ECHO [BEGIN] %date%-%time%
 
 SET softversion=__VERSION__
 
 
-ECHO Search PowerShell
+@ECHO [INFO] Search PowerShell
 SET pwrsh=%WINDIR%\System32\WindowsPowerShell\V1.0\powershell.exe
 IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET pwrsh=%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe
 
-ECHO Add rights
+@ECHO [INFO] Add rights
 %pwrsh% Set-ExecutionPolicy RemoteSigned -Force -Scope LocalMachine
 
-ECHO Unblock PS1
+@ECHO [INFO] Unblock PS1
 %pwrsh% "Unblock-File -Path .\*.ps1"
 
 
-ECHO Execute pre-install script
+@ECHO [INFO] Execute pre-install script
 %pwrsh% -File ".\pre-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
 
 
-ECHO Silent install %softname%
+@ECHO [INFO] Silent install %softname%
 ScriptRunner.exe -appvscript BvSshClient-Inst-%softversion%.exe -acceptEULA -noDesktopIcon=y -autoUpdates=0 -appvscriptrunnerparameters -wait -timeout=300
 
 
-ECHO END %date%-%time%
+@ECHO [END] %date%-%time%
 
 IF %ERRORLEVEL% EQU 1 (
   REM 0 or 1 are good exit code for this installer!

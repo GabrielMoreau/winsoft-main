@@ -15,7 +15,7 @@ EXIT /B
 
 :INSTALL
 
-ECHO BEGIN %date%-%time%
+@ECHO [BEGIN] %date%-%time%
 
 SET softversion=__VERSION__
 
@@ -33,5 +33,5 @@ REM execute
 %pwrsh% -File ".\post-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
 
 
-ECHO END %date%-%time%
+@ECHO [END] %date%-%time%
 EXIT

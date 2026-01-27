@@ -15,19 +15,19 @@ EXIT /B
 
 :INSTALL
 
-ECHO BEGIN %date%-%time%
+@ECHO [BEGIN] %date%-%time%
 
 SET softversion=__VERSION__
 
 
-ECHO Silent install %softname%
+@ECHO [INFO] Silent install %softname%
 ScriptRunner.exe -appvscript Windows.Pulsar.Setup.%softversion%.exe /S /ALLUSERS -appvscriptrunnerparameters -wait -timeout=300
 
 
-ECHO Remove desktop shortcut
+@ECHO [INFO] Remove desktop shortcut
 IF EXIST "%PUBLIC%\Desktop\Pulsar.lnk"          DEL /F /Q "%PUBLIC%\Desktop\Pulsar.lnk"
 IF EXIST "%ALLUSERSPROFILE%\Desktop\Pulsar.lnk" DEL /F /Q "%ALLUSERSPROFILE%\Desktop\Pulsar.lnk"
 
 
-ECHO END %date%-%time%
+@ECHO [END] %date%-%time%
 EXIT

@@ -15,11 +15,11 @@ EXIT /B
 
 :INSTALL
 
-ECHO BEGIN %date%-%time%
+@ECHO [BEGIN] %date%-%time%
 
 
 shutdown /s /t 300 /c "Force Shutdown by __IT_TEAM__"
 
 
-ECHO END %date%-%time%
+@ECHO [END] %date%-%time%
 EXIT

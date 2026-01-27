@@ -15,11 +15,11 @@ EXIT /B
 
 :INSTALL
 
-ECHO BEGIN %date%-%time%
+@ECHO [BEGIN] %date%-%time%
 
 
 shutdown /r /t 300 /c "Force Reboot by __IT_TEAM__"
 
 
-ECHO END %date%-%time%
+@ECHO [END] %date%-%time%
 EXIT

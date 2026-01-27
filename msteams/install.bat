@@ -15,37 +15,37 @@ EXIT /B
 
 :INSTALL
 
-ECHO BEGIN %date%-%time%
+@ECHO [BEGIN] %date%-%time%
 
 SET softversion=__VERSION__
 
 
-ECHO Search PowerShell
+@ECHO [INFO] Search PowerShell
 SET pwrsh=%WINDIR%\System32\WindowsPowerShell\V1.0\powershell.exe
 IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET pwrsh=%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe
 
-ECHO Add rights
+@ECHO [INFO] Add rights
 %pwrsh% Set-ExecutionPolicy RemoteSigned -Force -Scope LocalMachine
 
-ECHO Unblock PowerShell Script
+@ECHO [INFO] Unblock PowerShell Script
 %pwrsh% "Unblock-File -Path .\*.ps1"
 SET RETURNCODE=0
 
 
-ECHO Execute pre-install script
+@ECHO [INFO] Execute pre-install script
 IF EXIST ".\pre-install.ps1" %pwrsh% -File ".\pre-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
 IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
 
 
 IF %ERRORLEVEL% NEQ 0 (
-    ECHO Silent install %softname%
+    @ECHO [INFO] Silent install %softname%
     ScriptRunner.exe -appvscript DISM /Online /Add-ProvisionedAppxPackage /PackagePath:"teams-%softversion%-x64.msix" /SkipLicense -appvscriptrunnerparameters -wait -timeout=300
 )
 IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
 
 
 :POSTINSTALL
-ECHO Execute post-install script
+@ECHO [INFO] Execute post-install script
 IF EXIST ".\pre-install.ps1" (
   IF EXIST ".\post-install.ps1" %pwrsh% -File ".\post-install.ps1" 1>> "%logdir%\%softname%-PS1.log" 2>&1
 ) ELSE (
@@ -55,10 +55,10 @@ IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
 
 
 :END
-ECHO END %date%-%time%
+@ECHO [END] %date%-%time%
 IF %RETURNCODE% EQU 0 (
-    ECHO %softname% is installed
+    @ECHO [INFO] %softname% is installed
 ) ELSE (
-    ECHO %softname% is not installed!
+    @ECHO [WARN] %softname% is not installed!
 )
 EXIT %RETURNCODE%

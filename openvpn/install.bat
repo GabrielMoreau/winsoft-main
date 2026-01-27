@@ -15,20 +15,20 @@ EXIT /B
 
 :INSTALL
 
-ECHO BEGIN %date%-%time%
+@ECHO [BEGIN] %date%-%time%
 
 SET softversion=__VERSION__
 
 
-ECHO Silent install %softname%
+@ECHO [INFO] Silent install %softname%
 REM Only for version 2.6: ADDLOCAL=OpenVPN.GUI,OpenVPN,OpenVPN.GUI.OnLogon,Drivers.TAPWindows6,Drivers
 ScriptRunner.exe -appvscript MsiExec.exe /i "openvpn-connect-%softversion%_signed.msi" /qn /norestart /L*v "%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=300
 
 
-ECHO Remove desktop shortcut
+@ECHO [INFO] Remove desktop shortcut
 IF EXIST "%PUBLIC%\Desktop\OpenVPN Connect.lnk"          DEL /F /Q "%PUBLIC%\Desktop\OpenVPN Connect.lnk"
 IF EXIST "%ALLUSERSPROFILE%\Desktop\OpenVPN Connect.lnk" DEL /F /Q "%ALLUSERSPROFILE%\Desktop\OpenVPN Connect.lnk"
 
 
-ECHO END %date%-%time%
+@ECHO [END] %date%-%time%
 EXIT

@@ -15,12 +15,12 @@ EXIT /B
 
 :INSTALL
 
-ECHO BEGIN %date%-%time%
+@ECHO [BEGIN] %date%-%time%
 
 SET softversion=__VERSION__
 
 
-ECHO Remove old version (not clean but work's with /S flag)
+@ECHO [INFO] Remove old version (not clean but work's with /S flag)
 IF EXIST "%ProgramFiles%\Ultracopier" (
   RMDIR /S /Q "%ProgramFiles%\Ultracopier"
 )
@@ -37,9 +37,9 @@ IF %ERRORLEVEL% EQU 0 (
 )
 
 
-ECHO Silent install %softname%
+@ECHO [INFO] Silent install %softname%
 ScriptRunner.exe -appvscript ultracopier-windows-x86_64-%softversion%-setup.exe /S -appvscriptrunnerparameters -wait -timeout=300
 
 
-ECHO END %date%-%time%
+@ECHO [END] %date%-%time%
 EXIT

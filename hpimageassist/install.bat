@@ -15,34 +15,34 @@ EXIT /B
 
 :INSTALL
 
-ECHO BEGIN %date%-%time%
+@ECHO [BEGIN] %date%-%time%
 
 SET softversion=__VERSION__
 SET regkey=%softname%
 SET shortcut=%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\HP Image Assistant.lnk
 
 
-ECHO Silent install %softname%
+@ECHO [INFO] Silent install %softname%
 ScriptRunner.exe -appvscript hp-hpia-%softversion%.exe /s /e /f "%ProgramFiles%\HP\HPIA" -appvscriptrunnerparameters -wait -timeout=300
 
 
-ECHO Wait 15 s
+@ECHO [INFO] Wait 15 s
 ping 127.0.0.1 -n 15 > NUL
 
-ECHO Search PowerShell
+@ECHO [INFO] Search PowerShell
 SET pwrsh=%WINDIR%\System32\WindowsPowerShell\V1.0\powershell.exe
 IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET pwrsh=%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe
 
 IF EXIST "%ProgramFiles%\HP\HPIA\HPImageAssistant.exe" (
-  ECHO Copy uninstall script
+  @ECHO [INFO] Copy uninstall script
   COPY /A /Y "uninstall.bat" "%ProgramFiles%\HP\HPIA\uninstall.bat"
 
-  ECHO Create shortcut
+  @ECHO [INFO] Create shortcut
   IF EXIST "%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs" (
     %pwrsh% -Command "$WS = New-Object -ComObject WScript.Shell; $SC = $WS.CreateShortcut('%shortcut%'); $SC.TargetPath = '%ProgramFiles%\HP\HPIA\HPImageAssistant.exe'; $SC.Save();" -ExecutionPolicy Bypass -NoLogo -NonInteractive -NoProfile
   )
 
-  ECHO Better reg uninstall key
+  @ECHO [INFO] Better reg uninstall key
  > tmp_install.reg ECHO Windows Registry Editor Version 5.00
 >> tmp_install.reg ECHO.
 >> tmp_install.reg ECHO [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\%regkey%]
@@ -60,5 +60,5 @@ IF EXIST "%ProgramFiles%\HP\HPIA\HPImageAssistant.exe" (
 )
 
 
-ECHO END %date%-%time%
+@ECHO [END] %date%-%time%
 EXIT

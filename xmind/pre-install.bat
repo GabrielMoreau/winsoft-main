@@ -1,7 +1,7 @@
 SETLOCAL
 
 SET softname=Xmind
-ECHO Begin pre-install script for %softname%
+@ECHO [INFO] Begin pre-install script for %softname%
 
 SET "installfolder=Xmind"
 SET "regkey=Xmind_is1"
@@ -9,16 +9,16 @@ SET "shortcut=%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\Xmind.lnk"
 SET "process=Xmind.exe"
 
 
-ECHO Kill running process
+@ECHO [INFO] Kill running process
 TASKKILL /T /F /IM %process%
 
 
-ECHO Silent uninstall previous version
+@ECHO [INFO] Silent uninstall previous version
 IF EXIST "%ProgramFiles%\%installfolder%\Uninstall Xmind.exe" (
   ScriptRunner.exe -appvscript "%ProgramFiles%\%installfolder%\Uninstall Xmind.exe" /S -appvscriptrunnerparameters -wait -timeout=300
 )
 
-ECHO Clean reg uninstall key
+@ECHO [INFO] Clean reg uninstall key
 REG QUERY "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\%regkey%"
 IF %ERRORLEVEL% EQU 0 (
   REG DELETE "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\%regkey%" /F
@@ -29,6 +29,6 @@ IF %ERRORLEVEL% EQU 0 (
 )
 
 
-ECHO Remove Shortcut
+@ECHO [INFO] Remove Shortcut
 IF EXIST "%shortcut%" DEL /F /Q "%shortcut%"
 ENDLOCAL

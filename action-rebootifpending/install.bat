@@ -15,43 +15,43 @@ EXIT /B
 
 :INSTALL
 
-ECHO BEGIN %date%-%time%
+@ECHO [BEGIN] %date%-%time%
 
 
-ECHO Search PowerShell
+@ECHO [INFO] Search PowerShell
 SET pwrsh=%WINDIR%\System32\WindowsPowerShell\V1.0\powershell.exe
 IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET pwrsh=%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe
 
-ECHO Add rights
+@ECHO [INFO] Add rights
 %pwrsh% Set-ExecutionPolicy RemoteSigned -Force -Scope LocalMachine
 
-ECHO Unblock PowerShell Script
+@ECHO [INFO] Unblock PowerShell Script
 %pwrsh% "Unblock-File -Path .\*.ps1"
 SET RETURNCODE=0
 
 
 REM https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/manage-bde-status
-ECHO Bitlocker state
+@ECHO [INFO] Bitlocker state
 manage-bde -status %SystemDrive%
 
 
-ECHO Execute pre-install script
+@ECHO [INFO] Execute pre-install script
 %pwrsh% -File ".\pre-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
 SET PreInstallCode=%ERRORLEVEL%
 
 IF %PreInstallCode% NEQ 0 (
   REM https://techwiser.com/ways-to-disable-and-suspend-bitlocker-on-windows-10-11/
   REM https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/manage-bde-protectors
-  ECHO Suspend bitlocker
+  @ECHO [INFO] Suspend bitlocker
   manage-bde -protectors -disable %SystemDrive%
 
-  ECHO Force Reboot Computer
+  @ECHO [INFO] Force Reboot Computer
   shutdown /r /t 300 /c "Force Reboot in 5 min by __IT_TEAM__"
 
-  ECHO Bitlocker state after sending reboot trigger
+  @ECHO [INFO] Bitlocker state after sending reboot trigger
   manage-bde -status %SystemDrive%
 )
 
 
-ECHO END %date%-%time%
+@ECHO [END] %date%-%time%
 EXIT %PreInstallCode%

@@ -15,35 +15,35 @@ EXIT /B
 
 :INSTALL
 
-ECHO BEGIN %date%-%time%
+@ECHO [BEGIN] %date%-%time%
 
 SET softversion=__VERSION__
 
 
-ECHO Search PowerShell
+@ECHO [INFO] Search PowerShell
 SET pwrsh=%WINDIR%\System32\WindowsPowerShell\V1.0\powershell.exe
 IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET pwrsh=%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe
 
-ECHO Add rights
+@ECHO [INFO] Add rights
 %pwrsh% Set-ExecutionPolicy RemoteSigned -Force -Scope LocalMachine
 
-ECHO Unblock PowerShell Script
+@ECHO [INFO] Unblock PowerShell Script
 %pwrsh% "Unblock-File -Path .\*.ps1"
 SET RETURNCODE=0
 
 
-ECHO Execute pre-install script
+@ECHO [INFO] Execute pre-install script
 %pwrsh% -File ".\pre-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
 
 
-ECHO Silent install %softname%
+@ECHO [INFO] Silent install %softname%
 ScriptRunner.exe -appvscript MsiExec.exe /i "arduino-ide_%softversion%_Windows_64bit.msi" ALLUSERS=1 /qn /L*v "%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=300
 
 
-ECHO Remove desktop shortcut
+@ECHO [INFO] Remove desktop shortcut
 IF EXIST "%PUBLIC%\Desktop\Arduino*IDE.lnk"          DEL /F /Q "%PUBLIC%\Desktop\Arduino*IDE.lnk"
 IF EXIST "%ALLUSERSPROFILE%\Desktop\Arduino*IDE.lnk" DEL /F /Q "%ALLUSERSPROFILE%\Desktop\Arduino*IDE.lnk"
 
 
-ECHO END %date%-%time%
+@ECHO [END] %date%-%time%
 EXIT

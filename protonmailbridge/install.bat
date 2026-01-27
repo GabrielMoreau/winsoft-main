@@ -15,20 +15,20 @@ EXIT /B
 
 :INSTALL
 
-ECHO BEGIN %date%-%time%
+@ECHO [BEGIN] %date%-%time%
 
 
 SET softversion=__VERSION__
 
 
-ECHO Silent install %softname%
+@ECHO [INFO] Silent install %softname%
 ScriptRunner.exe -appvscript Bridge-Installer-%softversion%.exe /qn /norestart /L*v "%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=300
 
 
-ECHO Remove desktop shortcut
+@ECHO [INFO] Remove desktop shortcut
 IF EXIST "%PUBLIC%\Desktop\Proton Mail Bridge.lnk"          DEL /F /Q "%PUBLIC%\Desktop\Proton Mail Bridge.lnk"
 IF EXIST "%ALLUSERSPROFILE%\Desktop\Proton Mail Bridge.lnk" DEL /F /Q "%ALLUSERSPROFILE%\Desktop\Proton Mail Bridge.lnk"
 
 
-ECHO END %date%-%time%
+@ECHO [END] %date%-%time%
 EXIT

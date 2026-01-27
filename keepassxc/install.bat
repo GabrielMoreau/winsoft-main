@@ -15,7 +15,7 @@ EXIT /B
 
 :INSTALL
 
-ECHO BEGIN %date%-%time%
+@ECHO [BEGIN] %date%-%time%
 
 SET softversion=__VERSION__
 SET process=KeepassXC.exe
@@ -29,10 +29,10 @@ VER | FIND /I "6.1" > NUL
 IF %ERRORLEVEL%==0 TASKKILL /T /F /IM %process%
 
 
-ECHO Silent install %softname%
+@ECHO [INFO] Silent install %softname%
 REM https://keepassxc.org/docs/KeePassXC_GettingStarted.html
 ScriptRunner.exe -appvscript MsiExec.exe /q /i "KeePassXC-%softversion%-Win64.msi" AUTOSTARTPROGRAM=0 LAUNCHAPPONEXIT=0 -appvscriptrunnerparameters -wait -timeout=300
 
 
-ECHO END %date%-%time%
+@ECHO [END] %date%-%time%
 EXIT

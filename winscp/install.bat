@@ -15,13 +15,13 @@ EXIT /B
 
 :INSTALL
 
-ECHO BEGIN %date%-%time%
+@ECHO [BEGIN] %date%-%time%
 
 
 SET softversion=__VERSION__
 
 
-ECHO Silent install %softname%
+@ECHO [INFO] Silent install %softname%
 ScriptRunner.exe -appvscript WinSCP-%softversion%-Setup.exe /VERYSILENT /NORESTART /ALLUSERS /MERGETASKS=!desktopicon /LOG="%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=300
 
 
@@ -35,5 +35,5 @@ REM Disable WinSCP Collection of Anonymous Usage Statistics
 REM REG ADD "HKCU\SOFTWARE\Martin Prikryl\WinSCP 2\Configuration\Interface" /v "CollectUsage" /t REG_DWORD /d "00000000" /f
 
 
-ECHO END %date%-%time%
+@ECHO [END] %date%-%time%
 EXIT

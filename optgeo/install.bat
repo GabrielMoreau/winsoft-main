@@ -15,16 +15,16 @@ EXIT /B
 
 :INSTALL
 
-ECHO BEGIN %date%-%time%
+@ECHO [BEGIN] %date%-%time%
 
 REM Version parameter (auto update by Makefile)
 SET softversion=__VERSION__
 SET softexe=installateuroptgeo_%softversion%.exe
 
 
-ECHO Silent install
+@ECHO [INFO] Silent install
 ScriptRunner.exe -appvscript "%softexe%" /VERYSILENT /NORESTART -appvscriptrunnerparameters -wait -timeout=300
 
 
-ECHO END %date%-%time%
+@ECHO [END] %date%-%time%
 EXIT

@@ -15,60 +15,60 @@ EXIT /B
 
 :INSTALL
 
-ECHO BEGIN %date%-%time%
+@ECHO [BEGIN] %date%-%time%
 
 
 SET softversion=__VERSION__
 SET MAX_RETRY=1
 
 
-ECHO Kill running process
+@ECHO [INFO] Kill running process
 TASKKILL /T /F /IM Acrobat.exe /IM AcroCEF.exe /IM AdobeCollabSync.exe
 
 
-ECHO Search PowerShell
+@ECHO [INFO] Search PowerShell
 SET pwrsh=%WINDIR%\System32\WindowsPowerShell\V1.0\powershell.exe
 IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET pwrsh=%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe
 
-ECHO Add rights
+@ECHO [INFO] Add rights
 %pwrsh% Set-ExecutionPolicy RemoteSigned -Force -Scope LocalMachine
 
-ECHO unblock
+@ECHO [INFO] Unblock PowerShell Script
 %pwrsh% "Unblock-File -Path .\*.ps1"
 SET RETURNCODE=0
 
 
-ECHO Execute pre-install script
+@ECHO [INFO] Execute pre-install script
 %pwrsh% -File ".\pre-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
 IF %ERRORLEVEL% EQU 147 (
-  ECHO Silent Update %softname%
+  @ECHO [INFO] Silent Update %softname%
   ScriptRunner.exe -appvscript MsiExec.exe /update AcroRdrDCx64Upd%softversion%.msp /norestart /quiet ALLUSERS=1 EULA_ACCEPT=YES DISABLEDESKTOPSHORTCUT=1 DISABLE_ARM_SERVICE_INSTALL=1 /L*V "%logdir%\%softname%-MSP.log" -appvscriptrunnerparameters -wait -timeout=600
   GOTO POSTINSTALL
 ) ELSE (
   IF %ERRORLEVEL% EQU 146 (
-    ECHO Already installed %softname% at same or newer version
+    @ECHO [INFO] Already installed %softname% at same or newer version
     GOTO POSTINSTALL
   )
 )
 
 :REINSTALL
-ECHO Silent Install %softname%
+@ECHO [INFO] Silent Install %softname%
 IF EXIST "AcroRdrDCx64%softversion%_MUI.exe" (
   ScriptRunner.exe -appvscript AcroRdrDCx64%softversion%_MUI.exe /sAll /rs /msi /norestart /quiet ALLUSERS=1 EULA_ACCEPT=YES DISABLEDESKTOPSHORTCUT=1 DISABLE_ARM_SERVICE_INSTALL=1 /L*V "%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=600
 ) ELSE (
-    ECHO Error: installer is not in the archive!
+    @ECHO [ERROR] Installer is not in the archive!
 )
 
-ECHO Check if installed
+@ECHO [INFO] Check if installed
 IF EXIST "%ProgramFiles%\Adobe\Acrobat DC\Acrobat\Acrobat.exe" (
   GOTO POSTINSTALL
 ) ELSE (
   IF "%MAX_RETRY%"=="0" (
-    ECHO Error: MAX_RETRY installation done and no %softname%
+    @ECHO [ERROR] MAX_RETRY installation done and no %softname%
     SET RETURNCODE=140
     GOTO END
   ) ELSE (
-    ECHO Warning: try installation again
+    @ECHO [WARN] Try installation again
     SET /A MAX_RETRY-=1
     GOTO REINSTALL
   )
@@ -76,7 +76,7 @@ IF EXIST "%ProgramFiles%\Adobe\Acrobat DC\Acrobat\Acrobat.exe" (
 
 
 :POSTINSTALL
-ECHO Execute post-install script
+@ECHO [INFO] Execute post-install script
 IF EXIST ".\pre-install.ps1" (
   IF EXIST ".\post-install.ps1" %pwrsh% -File ".\post-install.ps1" 1>> "%logdir%\%softname%-PS1.log" 2>&1
 ) ELSE (
@@ -85,13 +85,13 @@ IF EXIST ".\pre-install.ps1" (
 IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
 
 
-ECHO Remove AdobeCollabSync
+@ECHO [INFO] Remove AdobeCollabSync
 IF EXIST "%ProgramFiles%\Adobe\Acrobat DC\Acrobat\AdobeCollabSync.exe" (
   IF EXIST "%ProgramFiles%\Adobe\Acrobat DC\Acrobat\AdobeCollabSync.exe.org" DEL /F /Q "%ProgramFiles%\Adobe\Acrobat DC\Acrobat\AdobeCollabSync.exe.org"
   RENAME "%ProgramFiles%\Adobe\Acrobat DC\Acrobat\AdobeCollabSync.exe" "AdobeCollabSync.exe.org"
 )
 
-ECHO Remove desktop shortcut
+@ECHO [INFO] Remove desktop shortcut
 IF EXIST "%PUBLIC%\Desktop\Adobe*Reader*.lnk"          DEL /F /Q "%PUBLIC%\Desktop\Adobe*Reader*.lnk"
 IF EXIST "%ALLUSERSPROFILE%\Desktop\Adobe*Reader*.lnk" DEL /F /Q "%ALLUSERSPROFILE%\Desktop\Adobe*Reader*.lnk"
 IF EXIST "%PUBLIC%\Desktop\Adobe*Acrobat.lnk"           DEL /F /Q "%PUBLIC%\Desktop\Adobe*Acrobat.lnk"
@@ -99,5 +99,5 @@ IF EXIST "%ALLUSERSPROFILE%\Desktop\Adobe*Acrobat.lnk"  DEL /F /Q "%ALLUSERSPROF
 
 
 :END
-ECHO END %date%-%time%
+@ECHO [END] %date%-%time%
 EXIT %RETURNCODE%

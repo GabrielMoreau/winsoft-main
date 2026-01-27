@@ -15,47 +15,47 @@ EXIT /B
 
 :INSTALL
 
-ECHO BEGIN %date%-%time%
+@ECHO [BEGIN] %date%-%time%
 
 SET softversion=__VERSION__
 SET process=Rocket.Chat.exe
 
 
-ECHO Kill the current process
+@ECHO [INFO] Kill the current process
 TASKKILL /T /F /IM %process%
 
 
-ECHO Search PowerShell
+@ECHO [INFO] Search PowerShell
 SET pwrsh=%WINDIR%\System32\WindowsPowerShell\V1.0\powershell.exe
 IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET pwrsh=%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe
 
-ECHO Add rights
+@ECHO [INFO] Add rights
 %pwrsh% Set-ExecutionPolicy RemoteSigned -Force -Scope LocalMachine
 
-ECHO Unblock PowerShell Script
+@ECHO [INFO] Unblock PowerShell Script
 %pwrsh% "Unblock-File -Path .\*.ps1"
 SET RETURNCODE=0
 
 
-ECHO Execute pre-install script
+@ECHO [INFO] Execute pre-install script
 %pwrsh% -File ".\pre-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
 
 
-ECHO Silent install %softname%
+@ECHO [INFO] Silent install %softname%
 ScriptRunner.exe -appvscript MsiExec.exe /q /i "rocketchat-%softversion%-win-x64.msi" ALLUSERS=1 /l*v "%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=300
 
 
-ECHO Push policies
+@ECHO [INFO] Push policies
 IF EXIST "C:\Program Files\rocketchat\" (
   IF NOT EXIST "%ProgramFiles%\rocketchat\resources" MKDIR "%ProgramFiles%\rocketchat\resources"
   IF EXIST     "%ProgramFiles%\rocketchat\resources" COPY /A /Y servers.json "%ProgramFiles%\rocketchat\resources\servers.json"
 )
 
 
-ECHO Remove desktop shortcut
+@ECHO [INFO] Remove desktop shortcut
 IF EXIST "%PUBLIC%\Desktop\Rocket.Chat.lnk"          DEL /F /Q "%PUBLIC%\Desktop\Rocket.Chat.lnk"
 IF EXIST "%ALLUSERSPROFILE%\Desktop\Rocket.Chat.lnk" DEL /F /Q "%ALLUSERSPROFILE%\Desktop\Rocket.Chat.lnk"
 
 
-ECHO END %date%-%time%
+@ECHO [END] %date%-%time%
 EXIT

@@ -15,24 +15,24 @@ EXIT /B
 
 :INSTALL
 
-ECHO BEGIN %date%-%time%
+@ECHO [BEGIN] %date%-%time%
 
 SET softversion=__VERSION__
 
 
-REM ECHO Silent uninstall previous version
+REM @ECHO [INFO] Silent uninstall previous version
 REM IF EXIST "%ProgramFiles%\BleachBit\uninstall.exe"      "%ProgramFiles%\BleachBit\uninstall.exe" /allusers /S
 REM IF EXIST "%ProgramFiles(x86)%\BleachBit\uninstall.exe" "%ProgramFiles(x86)%\BleachBit\uninstall.exe" /allusers /S
 
 
-ECHO Silent install %softname%
+@ECHO [INFO] Silent install %softname%
 ScriptRunner.exe -appvscript BleachBit-%softversion%-setup.exe /allusers /S -appvscriptrunnerparameters -wait -timeout=300
 
 
-ECHO Remove desktop shortcut
+@ECHO [INFO] Remove desktop shortcut
 IF EXIST "%PUBLIC%\Desktop\BleachBit.lnk"          DEL /F /Q "%PUBLIC%\Desktop\BleachBit.lnk"
 IF EXIST "%ALLUSERSPROFILE%\Desktop\BleachBit.lnk" DEL /F /Q "%ALLUSERSPROFILE%\Desktop\BleachBit.lnk"
 
 
-ECHO END %date%-%time%
+@ECHO [END] %date%-%time%
 EXIT

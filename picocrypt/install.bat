@@ -15,31 +15,31 @@ EXIT /B
 
 :INSTALL
 
-ECHO BEGIN %date%-%time%
+@ECHO [BEGIN] %date%-%time%
 
 SET softversion=__VERSION__
 SET regkey=EvanSu.Picocrypt_is1
 SET shortcut=%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\%softname%.lnk
 
 
-ECHO Silent install %softname%
+@ECHO [INFO] Silent install %softname%
 ScriptRunner.exe -appvscript Picocrypt-Installer-%softversion%.exe /VERYSILENT /NORESTART /DIR="%ProgramFiles%\Picocrypt" /LOG="%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=300
 
 
-ECHO Search PowerShell
+@ECHO [INFO] Search PowerShell
 SET pwrsh=%WINDIR%\System32\WindowsPowerShell\V1.0\powershell.exe
 IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET pwrsh=%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe
 
-ECHO Create shortcut
+@ECHO [INFO] Create shortcut
 IF EXIST "%ProgramFiles%\Picocrypt\Picocrypt.exe" (
   %pwrsh% -Command "$WS = New-Object -ComObject WScript.Shell; $SC = $WS.CreateShortcut('%shortcut%'); $SC.TargetPath = '%ProgramFiles%\Picocrypt\Picocrypt.exe'; $SC.Save();" -ExecutionPolicy Bypass -NoLogo -NonInteractive -NoProfile
 )
 
 IF EXIST "%ProgramFiles%\Picocrypt\unins000.exe" (
-  ECHO Copy uninstall script
+  @ECHO [INFO] Copy uninstall script
   COPY /A /Y "uninstall.bat" "%ProgramFiles%\Picocrypt\uninstall.bat"
 
-  ECHO Better reg uninstall key
+  @ECHO [INFO] Better reg uninstall key
    > tmp_install.reg ECHO Windows Registry Editor Version 5.00
   >> tmp_install.reg ECHO.
   >> tmp_install.reg ECHO [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\%regkey%]
@@ -57,5 +57,5 @@ IF EXIST "%ProgramFiles%\Picocrypt\unins000.exe" (
 )
 
 
-ECHO END %date%-%time%
+@ECHO [END] %date%-%time%
 EXIT

@@ -15,35 +15,35 @@ EXIT /B
 
 :INSTALL
 
-ECHO BEGIN %date%-%time%
+@ECHO [BEGIN] %date%-%time%
 
 
 SET softversion=__VERSION__
 SET process=ccleaner.exe
 
 
-ECHO Kill running process
+@ECHO [INFO] Kill running process
 TASKKILL /T /F /IM %process%
 
 
-ECHO Silent install %softname%
+@ECHO [INFO] Silent install %softname%
 ScriptRunner.exe -appvscript ccsetup-%softversion%.exe /S /L=1036 -appvscriptrunnerparameters -wait -timeout=300
 
 
 SET pwrsh=%WINDIR%\System32\WindowsPowerShell\V1.0\powershell.exe
 IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET pwrsh=%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe
 
-ECHO Add rights
+@ECHO [INFO] Add rights
 %pwrsh% Set-ExecutionPolicy RemoteSigned -Force -Scope LocalMachine
 
-ECHO Unblock PowerShell Script
+@ECHO [INFO] Unblock PowerShell Script
 %pwrsh% "Unblock-File -Path .\*.ps1"
 SET RETURNCODE=0
 
 
-ECHO Execute post-install script
+@ECHO [INFO] Execute post-install script
 %pwrsh% -File ".\post-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
 
 
-ECHO END %date%-%time%
+@ECHO [END] %date%-%time%
 EXIT

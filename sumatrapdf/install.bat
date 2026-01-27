@@ -15,35 +15,35 @@ EXIT /B
 
 :INSTALL
 
-ECHO BEGIN %date%-%time%
+@ECHO [BEGIN] %date%-%time%
 
 SET softversion=__VERSION__
 
 
-ECHO Silent install %softname%
+@ECHO [INFO] Silent install %softname%
 ScriptRunner.exe -appvscript SumatraPDF-%softversion%-64-install.exe -s -all-users -with-filter -appvscriptrunnerparameters -wait -timeout=300
 
 
-ECHO Remove desktop link
+@ECHO [INFO] Remove desktop link
 IF EXIST "%ALLUSERSPROFILE%\Desktop\SumatraPDF.lnk" DEL /F /Q "%ALLUSERSPROFILE%\Desktop\SumatraPDF.lnk"
 IF EXIST "%ALLUSERSPROFILE%\Bureau\SumatraPDF.lnk"  DEL /F /Q "%ALLUSERSPROFILE%\Bureau\SumatraPDF.lnk"
 IF EXIST "%PUBLIC%\Desktop\SumatraPDF.lnk"          DEL /F /Q "%PUBLIC%\Desktop\SumatraPDF.lnk"
 
 
-ECHO Search PowerShell
+@ECHO [INFO] Search PowerShell
 SET pwrsh=%WINDIR%\System32\WindowsPowerShell\V1.0\powershell.exe
 IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET pwrsh=%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe
 
-ECHO Add rights
+@ECHO [INFO] Add rights
 %pwrsh% Set-ExecutionPolicy RemoteSigned -Force -Scope LocalMachine
 
-ECHO Unblock PowerShell Script
+@ECHO [INFO] Unblock PowerShell Script
 %pwrsh% "Unblock-File -Path .\*.ps1"
 SET RETURNCODE=0
 
-ECHO Execute post-install script
+@ECHO [INFO] Execute post-install script
 %pwrsh% -File ".\post-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
 
 
-ECHO END %date%-%time%
+@ECHO [END] %date%-%time%
 EXIT

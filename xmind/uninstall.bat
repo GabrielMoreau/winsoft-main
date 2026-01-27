@@ -16,17 +16,17 @@ EXIT /B
 
 :INSTALL
 
-ECHO BEGIN %date%-%time%
+@ECHO [BEGIN] %date%-%time%
 
 SET "softversion=__VERSION__"
 SET "installfolder=Xmind"
 
 
-ECHO Silent uninstall %softname%
+@ECHO [INFO] Silent uninstall %softname%
 CALL .\pre-install.bat
 
 
-ECHO Auto Remove (last line)
-ECHO END %date%-%time%
+@ECHO [INFO] Auto Remove (last line)
+@ECHO [END] %date%-%time%
 IF EXIST "%ProgramFiles%\%installfolder%" RMDIR /S /Q "%ProgramFiles%\%installfolder%"
 ENDLOCAL

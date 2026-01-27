@@ -15,20 +15,20 @@ EXIT /B
 
 :INSTALL
 
-ECHO BEGIN %date%-%time%
+@ECHO [BEGIN] %date%-%time%
 
 
 SET softversion=__VERSION__
 
 
-ECHO Silent install %softname%
+@ECHO [INFO] Silent install %softname%
 ScriptRunner.exe -appvscript dfsetup%softversion%.exe /S -appvscriptrunnerparameters -wait -timeout=300
 
 
-ECHO Remove desktop shortcut
+@ECHO [INFO] Remove desktop shortcut
 IF EXIST "%PUBLIC%\Desktop\Defraggler.lnk"          DEL /F /Q "%PUBLIC%\Desktop\Defraggler.lnk"
 IF EXIST "%ALLUSERSPROFILE%\Desktop\Defraggler.lnk" DEL /F /Q "%ALLUSERSPROFILE%\Desktop\Defraggler.lnk"
 
 
-ECHO END %date%-%time%
+@ECHO [END] %date%-%time%
 EXIT

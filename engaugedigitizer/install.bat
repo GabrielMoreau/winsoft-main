@@ -15,18 +15,18 @@ EXIT /B
 
 :INSTALL
 
-ECHO BEGIN %date%-%time%
+@ECHO [BEGIN] %date%-%time%
 
 SET softversion=__VERSION__
 
 
-ECHO Silent install %softname%
+@ECHO [INFO] Silent install %softname%
 ScriptRunner.exe -appvscript MsiExec.exe /i "digit-exe-windows10-64-bit-installer-%softversion%.msi" /qn /norestart /L*v "%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=300
 
-ECHO Remove desktop shortcut
+@ECHO [INFO] Remove desktop shortcut
 IF EXIST "%PUBLIC%\Desktop\Engauge Digitizer.lnk"          DEL /F /Q "%PUBLIC%\Desktop\Engauge Digitizer.lnk"
 IF EXIST "%ALLUSERSPROFILE%\Desktop\Engauge Digitizer.lnk" DEL /F /Q "%ALLUSERSPROFILE%\Desktop\Engauge Digitizer.lnk"
 
 
-ECHO END %date%-%time%
+@ECHO [END] %date%-%time%
 EXIT

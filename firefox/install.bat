@@ -15,38 +15,38 @@ EXIT /B
 
 :INSTALL
 
-ECHO BEGIN %date%-%time%
+@ECHO [BEGIN] %date%-%time%
 
 SET softversion=__VERSION__
 SET process=firefox.exe
 
 
-ECHO Kill the current process
+@ECHO [INFO] Kill the current process
 TASKKILL /T /F /IM %process%
 
 
-ECHO Search PowerShell
+@ECHO [INFO] Search PowerShell
 SET pwrsh=%WINDIR%\System32\WindowsPowerShell\V1.0\powershell.exe
 IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET pwrsh=%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe
 
-ECHO Add rights
+@ECHO [INFO] Add rights
 %pwrsh% Set-ExecutionPolicy RemoteSigned -Force -Scope LocalMachine
 
-ECHO Unblock PowerShell Script
+@ECHO [INFO] Unblock PowerShell Script
 %pwrsh% "Unblock-File -Path .\*.ps1"
 
 
-ECHO Execute pre-install script (clean register policies)
+@ECHO [INFO] Execute pre-install script (clean register policies)
 %pwrsh% -File ".\pre-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
 
 
-ECHO Silent install %softname%
+@ECHO [INFO] Silent install %softname%
 ScriptRunner.exe -appvscript MsiExec.exe /i "Firefox-Setup-%softversion%-esr.msi" INSTALL_MAINTENANCE_SERVICE=false /q /norestart /L*v "%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=300
 SET RETURNCODE=%ERRORLEVEL%
 
 
 REM voir https://github.com/mozilla/policy-templates/blob/master/README.md
-ECHO Push policies
+@ECHO [INFO] Push policies
 IF EXIST "%ProgramFiles%\Mozilla Firefox" (
   IF NOT EXIST "%ProgramFiles%\Mozilla Firefox\distribution" MKDIR "%ProgramFiles%\Mozilla Firefox\distribution"
   IF EXIST "%ProgramFiles%\Mozilla Firefox\distribution" COPY /y policies.json "%ProgramFiles%\Mozilla Firefox\distribution\policies.json" > NUL
@@ -54,7 +54,7 @@ IF EXIST "%ProgramFiles%\Mozilla Firefox" (
 
 
 :POSTINSTALL
-ECHO Execute post-install script
+@ECHO [INFO] Execute post-install script
 IF EXIST ".\pre-install.ps1" (
   IF EXIST ".\post-install.ps1" %pwrsh% -File ".\post-install.ps1" 1>> "%logdir%\%softname%-PS1.log" 2>&1
 ) ELSE (
@@ -64,5 +64,5 @@ IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
 
 
 :END
-ECHO END %date%-%time%
+@ECHO [END] %date%-%time%
 EXIT %RETURNCODE%

@@ -15,24 +15,24 @@ EXIT /B
 
 :INSTALL
 
-ECHO BEGIN %date%-%time%
+@ECHO [BEGIN] %date%-%time%
 
 SET softversion=__VERSION__
 SET regkey=Sysinternals
 
 
-ECHO Clean old version before install
+@ECHO [INFO] Clean old version before install
 CALL .\uninstall.bat
 
 
-ECHO Silent install %softname%
+@ECHO [INFO] Silent install %softname%
 MOVE "SysinternalsSuite" "%ProgramFiles%\%regkey%"
 
-ECHO Copy uninstall script
+@ECHO [INFO] Copy uninstall script
 COPY /A /Y "uninstall.bat" "%ProgramFiles%\%regkey%\uninstall.bat"
 
 
-ECHO Better reg uninstall key
+@ECHO [INFO] Better reg uninstall key
  > tmp_install.reg ECHO Windows Registry Editor Version 5.00
 >> tmp_install.reg ECHO.
 >> tmp_install.reg ECHO [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\%regkey%]
@@ -50,5 +50,5 @@ regedit.exe /S "tmp_install.reg"
 
 
 :End
-ECHO END %date%-%time%
+@ECHO [END] %date%-%time%
 EXIT

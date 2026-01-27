@@ -15,14 +15,14 @@ EXIT /B
 
 :INSTALL
 
-ECHO BEGIN %date%-%time%
+@ECHO [BEGIN] %date%-%time%
 
 SET softversion=__VERSION1__
 SET softruntimever=__VERSION2__
 SET process=LightBulb.exe
 
 
-ECHO Kill the current process
+@ECHO [INFO] Kill the current process
 TASKKILL /T /F /IM LightBulb.exe /IM %process%
 
 
@@ -30,9 +30,9 @@ Echo Silent install WindowsDesktop-Runtime
 ScriptRunner.exe -appvscript windowsdesktop-runtime-%softruntimever%-win-x64.exe /install /quiet /norestart -appvscriptrunnerparameters -wait -timeout=300
 
 
-ECHO Silent install %softname%
+@ECHO [INFO] Silent install %softname%
 ScriptRunner.exe -appvscript LightBulb-Installer-%softversion%-x64.exe /VERYSILENT /LOG="%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=300
 
 
-ECHO END %date%-%time%
+@ECHO [END] %date%-%time%
 EXIT

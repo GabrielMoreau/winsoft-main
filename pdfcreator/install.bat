@@ -15,7 +15,7 @@ EXIT /B
 
 :INSTALL
 
-ECHO BEGIN %date%-%time%
+@ECHO [BEGIN] %date%-%time%
 
 
 SET softversion=__VERSION__
@@ -25,9 +25,9 @@ REM https://docs.pdfforge.org/pdfcreator/en/pdfcreator/installing-pdfcreator/set
 REM No Architect Component
 
 
-ECHO Silent install %softname%
+@ECHO [INFO] Silent install %softname%
 ScriptRunner.exe -appvscript "PDFCreator-%softversion%-setup.exe" /VerySilent /NoRestart /NoIcons /COMPONENTS="none" /sp- -appvscriptrunnerparameters -wait -timeout=300
 
 
-ECHO END %date%-%time%
+@ECHO [END] %date%-%time%
 EXIT

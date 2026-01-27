@@ -15,25 +15,25 @@ EXIT /B
 
 :INSTALL
 
-ECHO BEGIN %date%-%time%
+@ECHO [BEGIN] %date%-%time%
 
 
 SET softversion=__VERSION__
 
 
-ECHO Download
+@ECHO [INFO] Download
 miktexsetup-standalone-%softversion%.exe --verbose --local-package-repository=%SystemDrive%\Temp\MiKTeX --package-set=basic download
 
-ECHO Silent install
+@ECHO [INFO] Silent install
 miktexsetup-standalone-%softversion%.exe --verbose --local-package-repository=%SystemDrive%\Temp\MiKTeX --shared=yes --user-config="<APPDATA>\MiKTeX" --user-data="<LOCALAPPDATA>\MiKTeX" --user-install="<APPDATA>\MiKTeX" --package-set=basic install
 
 
-ECHO Wait before Remove
+@ECHO [INFO] Wait before Remove
 ping -n 41 127.0.0.1 -w 1000 > nul
 
-ECHO Remove localdownload
+@ECHO [INFO] Remove localdownload
 RMDIR /S /Q "%SystemDrive%\Temp\MiKTeX"
 
 
-ECHO END %date%-%time%
+@ECHO [END] %date%-%time%
 EXIT

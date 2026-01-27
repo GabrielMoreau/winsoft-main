@@ -14,19 +14,19 @@ EXIT /B
 
 :INSTALL
 
-ECHO BEGIN %date%-%time%
+@ECHO [BEGIN] %date%-%time%
 
 SET softversion=__VERSION__
 
 
-ECHO Silent install %softname%
+@ECHO [INFO] Silent install %softname%
 ScriptRunner.exe -appvscript kicad-%softversion%-x86_64.exe /S /allusers -appvscriptrunnerparameters -wait -timeout=900
 
 
-ECHO Remove desktop shortcut
+@ECHO [INFO] Remove desktop shortcut
 IF EXIST "%PUBLIC%\Desktop\KiCad *.lnk"          DEL /F /Q "%PUBLIC%\Desktop\KiCad *.lnk"
 IF EXIST "%ALLUSERSPROFILE%\Desktop\KiCad *.lnk" DEL /F /Q "%ALLUSERSPROFILE%\Desktop\KiCad *.lnk"
 
 
-ECHO END %date%-%time%
+@ECHO [END] %date%-%time%
 EXIT

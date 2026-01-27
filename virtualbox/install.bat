@@ -15,7 +15,7 @@ EXIT /B
 
 :INSTALL
 
-ECHO BEGIN %date%-%time%
+@ECHO [BEGIN] %date%-%time%
 
 SET softversion=__VERSION__
 SET softextpack=__PACKEXT__
@@ -34,7 +34,7 @@ REM Execute
 %pwrsh% -File ".\pre-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
 
 
-ECHO Silent install %softname%
+@ECHO [INFO] Silent install %softname%
 ScriptRunner.exe -appvscript VirtualBox-%softversion%-Win.exe --silent --extract --path .\ -appvscriptrunnerparameters -wait -timeout=300
 FOR %%m IN (*.msi) DO (ScriptRunner.exe -appvscript MsiExec.exe /i "%%m" /qn /norestart /L*v "%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=300)
 
@@ -47,10 +47,10 @@ IF EXIST "%ProgramFiles%\Oracle\VirtualBox\VBoxManage.exe" (
   echo y | "%ProgramFiles%\Oracle\VirtualBox\VBoxManage.exe" extpack install --replace ".\%softextpack%"
 ) ELSE (
   REM VirtualBox not well installed
-  ECHO VBoxManage is not installed, reinstall VirtualBox...
+  @ECHO [INFO] VBoxManage is not installed, reinstall VirtualBox...
   EXIT 44
 )
 
 
-ECHO END %date%-%time%
+@ECHO [END] %date%-%time%
 EXIT

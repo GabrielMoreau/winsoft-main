@@ -15,12 +15,12 @@ EXIT /B
 
 :INSTALL
 
-ECHO BEGIN %date%-%time%
+@ECHO [BEGIN] %date%-%time%
 
 SET softversion=__VERSION__
 
 
-ECHO Silent install %softname%
+@ECHO [INFO] Silent install %softname%
 "TXCSetup_%softversion%Stable_x64.exe" /VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-
 
 REM IF EXIST "%ProgramFiles%\TeXnicCenter\Language" COPY /Y fr_FR.aff "%ProgramFiles%\TeXnicCenter\Language"
@@ -44,5 +44,5 @@ REM >> tmp_install.reg ECHO.
 REM regedit.exe /S "tmp_install.reg"
 
 
-ECHO END %date%-%time%
+@ECHO [END] %date%-%time%
 EXIT

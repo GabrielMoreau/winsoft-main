@@ -15,16 +15,16 @@ EXIT /B
 
 :INSTALL
 
-ECHO BEGIN %date%-%time%
+@ECHO [BEGIN] %date%-%time%
 
 SET softversion=__VERSION__
 
 
-ECHO Silent install %softname%
+@ECHO [INFO] Silent install %softname%
 IF EXIST "C:\Program Files\NordVPN\unins000.exe" (
 ScriptRunner.exe -appvscript "C:\Program Files\NordVPN\unins000.exe" /VERYSILENT /NORESTART -appvscriptrunnerparameters -wait -timeout=300
 )
 
 
-ECHO END %date%-%time%
+@ECHO [END] %date%-%time%
 EXIT

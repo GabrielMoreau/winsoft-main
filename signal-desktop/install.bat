@@ -15,46 +15,46 @@ EXIT /B
 
 :INSTALL
 
-ECHO BEGIN %date%-%time%
+@ECHO [BEGIN] %date%-%time%
 
 SET softversion=__VERSION__
 SET regkey=7d96caee-06e6-597c-9f2f-c7bb2e0948b4
 SET shortcut=%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\Signal-Desktop.lnk
 
 
-ECHO Search PowerShell
+@ECHO [INFO] Search PowerShell
 SET pwrsh=%WINDIR%\System32\WindowsPowerShell\V1.0\powershell.exe
 IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET pwrsh=%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe
 
-ECHO Add rights
+@ECHO [INFO] Add rights
 %pwrsh% Set-ExecutionPolicy RemoteSigned -Force -Scope LocalMachine
 
-ECHO Unblock PowerShell Script
+@ECHO [INFO] Unblock PowerShell Script
 %pwrsh% "Unblock-File -Path .\*.ps1"
 SET RETURNCODE=0
 
 
-ECHO Execute pre-install script
+@ECHO [INFO] Execute pre-install script
 IF EXIST ".\pre-install.ps1" %pwrsh% -File ".\pre-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
 IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
 
 
-ECHO Silent install %softname%
+@ECHO [INFO] Silent install %softname%
 ScriptRunner.exe -appvscript signal-desktop-win-x64-%softversion%.exe /S /D=%ProgramData%\signal-desktop -appvscriptrunnerparameters -wait -timeout=300
 IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
 
-ECHO Copy uninstall script
+@ECHO [INFO] Copy uninstall script
 COPY /A /Y "uninstall.bat" "%ProgramData%\signal-desktop\uninstall.bat"
 
 
-ECHO Remove desktop shortcut
+@ECHO [INFO] Remove desktop shortcut
 IF EXIST "%PUBLIC%\Desktop\Signal.lnk"          DEL /F /Q "%PUBLIC%\Desktop\Signal.lnk"
 IF EXIST "%ALLUSERSPROFILE%\Desktop\Signal.lnk" DEL /F /Q "%ALLUSERSPROFILE%\Desktop\Signal.lnk"
 IF EXIST "%USERPROFILE%\Desktop\Signal.lnk"     DEL /F /Q "%USERPROFILE%\Desktop\Signal.lnk"
 IF EXIST "%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\Signal-Desktop.lnk" DEL /F /Q "%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\Signal-Desktop.lnk"
 
 
-ECHO Better reg uninstall key
+@ECHO [INFO] Better reg uninstall key
  > tmp_install.reg ECHO Windows Registry Editor Version 5.00
 >> tmp_install.reg ECHO.
 >> tmp_install.reg ECHO [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\%regkey%]
@@ -71,21 +71,21 @@ ECHO Better reg uninstall key
 regedit.exe /S "tmp_install.reg"
 
 REM HKU	Signal 6.43.2	Signal Messenger, LLC	6.43.2	7d96caee-06e6-597c-9f2f-c7bb2e0948b4	"C:\ProgramData\signal-desktop\Uninstall Signal.exe" /currentuser
-ECHO Clean reg uninstall key in HKU
+@ECHO [INFO] Clean reg uninstall key in HKU
 REG QUERY "HKEY_USERS\.DEFAULT\Software\Microsoft\Windows\CurrentVersion\Uninstall\%regkey%"
 IF %ERRORLEVEL% NEQ 0 GOTO NEXT
 REG QUERY "HKEY_USERS\.DEFAULT\Software\Microsoft\Windows\CurrentVersion\Uninstall\%regkey%" /v "UninstallString" | FIND /N "%SystemDrive%\ProgramData\signal-desktop" > NUL && (
-  ECHO REG DELETE HKU
+  @ECHO [INFO] REG DELETE HKU
   REG DELETE "HKEY_USERS\.DEFAULT\Software\Microsoft\Windows\CurrentVersion\Uninstall\%regkey%" /F
   GOTO POSTINSTALL
   )
 
 :NEXT
-ECHO Nice: no reg uninstall key in HKU
+@ECHO [INFO] Nice: no reg uninstall key in HKU
 
 
 :POSTINSTALL
-ECHO Execute post-install script
+@ECHO [INFO] Execute post-install script
 IF EXIST ".\pre-install.ps1" (
   IF EXIST ".\post-install.ps1" %pwrsh% -File ".\post-install.ps1" 1>> "%logdir%\%softname%-PS1.log" 2>&1
 ) ELSE (
@@ -95,5 +95,5 @@ IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
 
 
 :END
-ECHO END %date%-%time%
+@ECHO [END] %date%-%time%
 EXIT %RETURNCODE%
