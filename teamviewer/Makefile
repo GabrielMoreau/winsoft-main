@@ -9,6 +9,7 @@ VERSION:=$(shell ./get-version "$(URL)")
 REVISION:=1
 
 EXE:=TeamViewer-$(VERSION)-Setup-x64.exe
+REG_SEARCH:=$(SOFT)
 
 IT_TEAM:=IT Support
 LOGDIR:=%WINDIR%\\Logs
@@ -66,13 +67,18 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
 	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#;' $< > $@
 
+tmp/winsoft-config.ini: winsoft-config.ini Makefile tmp/$(EXE)
+	@mkdir -p tmp
+	@sed -e 's/__VERSION__/$(VERSION)/; s/__REG_SEARCH__/$(REG_SEARCH)/;' $< > $@
+
 tmp/uninstall.bat: uninstall.bat Makefile
 	@mkdir -p tmp
 	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#;' $< > $@
 
-%.zip: Makefile tmp/install.bat tmp/$(EXE)
+%.zip: Makefile tmp/install.bat pre-install.ps1 post-install.ps1 tmp/winsoft-config.ini tmp/$(EXE)
 	@rm -f $@
-	@(cd tmp; zip -Xr ../$@ install.bat $(EXE))
+	@zip -Xr ./$@ pre-install.ps1 post-install.ps1
+	@(cd tmp; zip -Xr ../$@ install.bat winsoft-config.ini $(EXE))
 	@chmod ugo+rw $@
 
 Uninstall-$(SOFT)_$(VERSION)-$(REVISION)_x64.zip: Makefile pre-remove.ps1 tmp/uninstall.bat
