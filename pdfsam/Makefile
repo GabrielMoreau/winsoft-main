@@ -10,7 +10,7 @@ URL:=https://github.com/torakiki/pdfsam/releases/download/v$(VERSION)/pdfsam-bas
 # https://github.com/torakiki/pdfsam/releases/download/v5.3.0/pdfsam-basic-5.3.0-windows-x64.msi
 
 EXE:=pdfsam-$(VERSION).msi
-REG_SEARCH:=PDFsam
+REG_SEARCH:=PDFsam\\sBasic
 
 IT_TEAM:=IT Support
 LOGDIR:=%WINDIR%\\Logs
@@ -23,7 +23,7 @@ all: check-version check-exe $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
 sinclude ../_common/conf.mk
 
 # OCS configuration
-OCS_SEARCH:=PDFsam Basicss
+OCS_SEARCH:=PDFsam Basic
 
 check-version:
 	@echo $(VERSION) | grep -Eq '^[[:digit:]][\.[:digit:]]+[[:digit:]]$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 11)
