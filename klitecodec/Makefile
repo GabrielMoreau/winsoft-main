@@ -11,6 +11,7 @@ URL:=$(shell curl $(CURLFLAGS) -s -L 'https://codecguide.com/download_k-lite_cod
 REVISION:=1
 
 EXE:=K-Lite_Codec_Pack_$(VERSION)_Standard.exe
+REG_SEARCH:=K-Lite\\sCodec\\sPack
 
 IT_TEAM:=IT Support
 LOGDIR:=%WINDIR%\\Logs
@@ -68,7 +69,12 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
 	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#;' $< > $@
 
-%.zip: Makefile tmp/install.bat tmp/$(EXE)
+tmp/winsoft-config.ini: winsoft-config.ini Makefile tmp/$(EXE)
+	@mkdir -p tmp
+	@sed -e 's/__VERSION__/$(VERSION)/; s/__REG_SEARCH__/$(REG_SEARCH)/;' $< > $@
+
+%.zip: Makefile tmp/install.bat pre-install.ps1 post-install.ps1 tmp/winsoft-config.ini tmp/$(EXE)
 	@rm -f $@
-	@(cd tmp; zip -Xr ../$@ install.bat $(EXE))
+	@zip -Xr ./$@ pre-install.ps1 post-install.ps1
+	@(cd tmp; zip -Xr ../$@ install.bat winsoft-config.ini $(EXE))
 	@chmod ugo+rw $@
