@@ -1,4 +1,4 @@
-# CrystalDiskInfo - HDD/SSD utility software which supports a part of USB, RAID and NVMe. 
+# CrystalDiskInfo - HDD/SSD utility software which supports a part of USB, RAID and NVMe
 
 CrystalDiskInfo is free and open-source software (MIT license) designed to monitor the status of hard drives and SSDs.
 It uses S.M.A.R.T. data to detect wear, errors, and failure risks.
