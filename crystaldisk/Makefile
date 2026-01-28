@@ -19,7 +19,7 @@ LOGDIR:=%WINDIR%\\Logs
 
 .PHONY: all check-version check-unrealized check-exe clean control next version wget checksum
 
-all: check-version check-exe $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
+all: check-version check-exe Uninstall-$(SOFT)_$(VERSION)-$(REVISION)_x64.zip $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
 
 sinclude ../_common/conf.mk
 
@@ -72,8 +72,19 @@ tmp/winsoft-config.ini: winsoft-config.ini Makefile tmp/$(EXE)
 	@mkdir -p tmp
 	@sed -e 's/__VERSION__/$(VERSION)/; s/__REG_SEARCH__/$(REG_SEARCH)/;' $< > $@
 
+tmp/uninstall.bat: uninstall.bat Makefile
+	@mkdir -p tmp
+	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#;' $< > $@
+
 %.zip: Makefile tmp/install.bat pre-install.ps1 post-install.ps1 tmp/winsoft-config.ini tmp/$(EXE)
 	@rm -f $@
 	@zip -Xr ./$@ pre-install.ps1 post-install.ps1
 	@(cd tmp; zip -Xr ../$@ install.bat winsoft-config.ini $(EXE))
+	@chmod ugo+rw $@
+
+Uninstall-$(SOFT)_$(VERSION)-$(REVISION)_x64.zip: Makefile pre-remove.ps1 tmp/uninstall.bat
+	@rm -f $@
+	@zip -Xr ./$@ pre-remove.ps1
+	@(cd tmp; zip -Xr ../$@ uninstall.bat)
+	@printf "@ uninstall.bat\n@=install.bat\n" | zipnote -w ./$@
 	@chmod ugo+rw $@
