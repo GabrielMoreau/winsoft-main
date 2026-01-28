@@ -11,6 +11,7 @@ VERSION:=$(shell ./get-version --url "$(URL)" --exe "googlechromestandaloneenter
 REVISION:=1
 EXE:=googlechromestandaloneenterprise64-$(VERSION).msi
 REG_SEARCH:=Google\\sChrome
+REG_SEARCH_REMOVE:=(Google\\sChrome|Google\\sUpdate\\sHelper)
 
 IT_TEAM:=IT Support
 LOGDIR:=%WINDIR%\\Logs
@@ -71,7 +72,7 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 
 tmp/winsoft-config.ini: winsoft-config.ini Makefile tmp/$(EXE)
 	@mkdir -p tmp
-	@sed -e 's/__VERSION__/$(VERSION)/; s/__REG_SEARCH__/$(REG_SEARCH)/;' $< > $@
+	@sed -e 's/__VERSION__/$(VERSION)/; s/__REG_SEARCH__/$(REG_SEARCH)/; s/__REG_SEARCH_REMOVE__/$(REG_SEARCH_REMOVE)/;' $< > $@
 
 tmp/uninstall.bat: uninstall.bat Makefile
 	@mkdir -p tmp
@@ -83,9 +84,9 @@ tmp/uninstall.bat: uninstall.bat Makefile
 	@(cd tmp; zip -Xr ../$@ install.bat winsoft-config.ini $(EXE))
 	@chmod ugo+rw $@
 
-Uninstall-$(SOFT)_$(VERSION)-$(REVISION)_x64.zip: Makefile pre-remove.ps1 tmp/uninstall.bat
+Uninstall-$(SOFT)_$(VERSION)-$(REVISION)_x64.zip: Makefile pre-remove.ps1 tmp/uninstall.bat tmp/winsoft-config.ini
 	@rm -f $@
 	@zip -Xr ./$@ pre-remove.ps1
-	@(cd tmp; zip -Xr ../$@ uninstall.bat)
+	@(cd tmp; zip -Xr ../$@ uninstall.bat winsoft-config.ini)
 	@printf "@ uninstall.bat\n@=install.bat\n" | zipnote -w ./$@
 	@chmod ugo+rw $@
