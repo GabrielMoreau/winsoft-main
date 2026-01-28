@@ -32,7 +32,9 @@ SET RETURNCODE=0
 
 @ECHO [INFO] Execute pre-remove script
 %pwrsh% -File ".\pre-remove.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
+IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
 
 
+:END
 @ECHO [END] %date%-%time%
-EXIT
+EXIT %RETURNCODE%
