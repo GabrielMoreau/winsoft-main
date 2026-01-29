@@ -20,31 +20,38 @@ EXIT /B
 SET softversion=__VERSION__
 SET softextpack=__PACKEXT__
 
-REM PowerShell
+
+@ECHO [INFO] Search PowerShell
 SET pwrsh=%WINDIR%\System32\WindowsPowerShell\V1.0\powershell.exe
 IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET pwrsh=%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe
 
-REM Add rights
+@ECHO [INFO] Add rights
 %pwrsh% Set-ExecutionPolicy RemoteSigned -Force -Scope LocalMachine
 
-REM Unblock
+@ECHO [INFO] Unblock PowerShell Script
 %pwrsh% "Unblock-File -Path .\*.ps1"
+SET RETURNCODE=0
 
-REM Execute
-%pwrsh% -File ".\pre-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
+
+@ECHO [INFO] Execute pre-install script
+IF EXIST ".\pre-install.ps1" %pwrsh% -File ".\pre-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
+IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
 
 
 @ECHO [INFO] Silent install %softname%
 ScriptRunner.exe -appvscript VirtualBox-%softversion%-Win.exe --silent --extract --path .\ -appvscriptrunnerparameters -wait -timeout=300
 FOR %%m IN (*.msi) DO (ScriptRunner.exe -appvscript MsiExec.exe /i "%%m" /qn /norestart /L*v "%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=300)
+IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
 
 
 IF EXIST "%ProgramFiles%\Oracle\VirtualBox\VBoxManage.exe" (
-  REM Disable VirtualBox Update
+  @ECHO [INFO] Disable VirtualBox Update
   "%ProgramFiles%\Oracle\VirtualBox\VBoxManage.exe" setextradata global GUI/UpdateDate "never"
+  IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
 
-  REM Install Extension Pack
+  @ECHO [INFO] Install Extension Pack
   echo y | "%ProgramFiles%\Oracle\VirtualBox\VBoxManage.exe" extpack install --replace ".\%softextpack%"
+  IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
 ) ELSE (
   REM VirtualBox not well installed
   @ECHO [INFO] VBoxManage is not installed, reinstall VirtualBox...
@@ -52,5 +59,16 @@ IF EXIST "%ProgramFiles%\Oracle\VirtualBox\VBoxManage.exe" (
 )
 
 
+:POSTINSTALL
+@ECHO [INFO] Execute post-install script
+IF EXIST ".\pre-install.ps1" (
+  IF EXIST ".\post-install.ps1" %pwrsh% -File ".\post-install.ps1" 1>> "%logdir%\%softname%-PS1.log" 2>&1
+) ELSE (
+  IF EXIST ".\post-install.ps1" %pwrsh% -File ".\post-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
+)
+IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
+
+
+:END
 @ECHO [END] %date%-%time%
-EXIT
+EXIT %RETURNCODE%

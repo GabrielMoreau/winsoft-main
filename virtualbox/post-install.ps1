@@ -1,6 +1,6 @@
 
 $TimeStamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
-Write-Output ("Begin Pre-Install [$TimeStamp]`n" + "=" * 39 + "`n")
+Write-Output ("`nBegin Post-Install [$TimeStamp]`n" + "=" * 40 + "`n")
 
 ########################################################################
 
@@ -71,49 +71,10 @@ Write-Output "Config:`n * Version: $RefVersion`n * RegexSearch: $RefName"
 ########################################################################
 # Put your specific code here
 
-$VCR20152022x64 = ToVersion $Config.VCR20152022x64
-Write-Output " * VCR: $VCR20152022x64"
-
-$ToDo = 'unknown'
-
-ForEach ($Key in Get-ChildItem -Recurse $UninstallKeys) {
-	$App = Get-ItemProperty -Path $Key.PSPath
-	If ($App.DisplayName -notmatch $RefName) { Continue }
-
-	$DisplayVersion = ToVersion $App.DisplayVersion
-	$KeyProduct     = $Key.PSChildName
-
-	If ($App.DisplayName -match '2015-2022.*x64') {
-		If ($DisplayVersion -lt $VCR20152022x64) {
-			If ($ToDo -eq 'unknown') {
-				Write-Output "Warning: Microsoft Visual C++ 2015-2022 (x64) Redistributable already installed but too old"
-				$ToDo = 'install-2022'
-			}
-		} Else {
-			Write-Output "Info: Microsoft Visual C++ 2015-2022 (x64) Redistributable already setup $DisplayVersion"
-			$ToDo = 'already-setup'
-		}
-	}
-}
-
-If ($ToDo -eq 'unknown') {
-	Write-Output "Warning: Microsoft Visual C++ 2015-2022 (x64) Redistributable not pre-installed"
-	$ToDo = 'install-2022'
-}
-
-If ($ToDo -eq 'install-2022') {
-	$Exe = '2015-2022\vc_redist.x64.exe'
-	$Args = '/install /quiet /norestart'
-	If (Test-Path -Path "$Exe") {
-		Write-Output "Info: Update (or install) Microsoft Visual C++ 2015-2022 (x64) Redistributable"
-		Run-Exec -FilePath "$Exe" -ArgumentList "$Args" -Name "VCR 2015-2022 x64"
-	}
-}
-
 ########################################################################
 
 # View
-$ReturnCode = 0
+$ReturnCode = 143
 ForEach ($Key in Get-ChildItem -Recurse $UninstallKeys) {
 	$App = Get-ItemProperty -Path $Key.PSPath
 	If ($App.DisplayName -notmatch $RefName) { Continue }
@@ -121,6 +82,14 @@ ForEach ($Key in Get-ChildItem -Recurse $UninstallKeys) {
 	$DisplayVersion = ToVersion $App.DisplayVersion
 	$KeyProduct     = $Key.PSChildName
 	Write-Output "Installed: $($App.DisplayName) / $DisplayVersion / $KeyProduct / $($App.UninstallString)"
+
+	If ($DisplayVersion -gt $RefVersion) {
+		$ReturnCode = [Math]::Min($ReturnCode, 141)
+	} ElseIf ($DisplayVersion -eq $RefVersion) {
+		$ReturnCode = 0
+	} Else {
+		$ReturnCode = [Math]::Min($ReturnCode, 142)
+	}
 }
 Write-Output "ReturnCode: $ReturnCode"
 Exit $ReturnCode
