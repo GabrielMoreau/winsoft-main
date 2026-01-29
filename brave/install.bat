@@ -55,6 +55,10 @@ IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
 @ECHO [INFO] Add extensions
 IF EXIST ".\brave-parameters.reg" regedit.exe /S ".\brave-parameters.reg"
 
+@ECHO [INFO] Remove desktop shortcut
+IF EXIST "%PUBLIC%\Desktop\%softname%.lnk"          DEL /F /Q "%PUBLIC%\Desktop\%softname%.lnk"
+IF EXIST "%ALLUSERSPROFILE%\Desktop\%softname%.lnk" DEL /F /Q "%ALLUSERSPROFILE%\Desktop\%softname%.lnk"
+
 
 :END
 @ECHO [END] %date%-%time%
