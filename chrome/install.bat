@@ -68,6 +68,8 @@ IF EXIST "C:\Program Files\Google\Chrome\Application\" (
 @ECHO [INFO] Remove desktop shortcut
 IF EXIST "%PUBLIC%\Desktop\Google*Chrome.lnk"          DEL /F /Q "%PUBLIC%\Desktop\Google*Chrome.lnk"
 IF EXIST "%ALLUSERSPROFILE%\Desktop\Google*Chrome.lnk" DEL /F /Q "%ALLUSERSPROFILE%\Desktop\Google*Chrome.lnk"
+IF EXIST "%PUBLIC%\Desktop\Google*Updater.lnk"          DEL /F /Q "%PUBLIC%\Desktop\Google*Updater.lnk"
+IF EXIST "%ALLUSERSPROFILE%\Desktop\Google*Updater.lnk" DEL /F /Q "%ALLUSERSPROFILE%\Desktop\Google*Updater.lnk"
 
 
 :END
