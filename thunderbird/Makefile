@@ -16,6 +16,7 @@ URL:=https://download.mozilla.org/?product=thunderbird-$(VERSION)-msi-SSL&os=win
 # curl -s -L --connect-timeout 10 'https://www.thunderbird.net/en-US/thunderbird/all/' | grep -E 'https://.*/.product=thunderbird.*msi-SSL.os=win64.lang=fr' | cut -f 2 -d '"' | head -1
 
 EXE:=Thunderbird-Setup-$(VERSION).msi
+REG_SEARCH:=Mozilla\\sThunderbird
 
 IT_TEAM:=IT Support
 LOGDIR:=%WINDIR%\\Logs
@@ -84,9 +85,9 @@ tmp/uninstall.bat: uninstall.bat Makefile
 	@mkdir -p tmp
 	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#;' $< > $@
 
-%.zip: Makefile tmp/install.bat post-install.ps1 policies.json tmp/winsoft-config.ini tmp/$(EXE)
+%.zip: Makefile tmp/install.bat pre-install.ps1 post-install.ps1 policies.json tmp/winsoft-config.ini tmp/$(EXE)
 	@rm -f $@
-	@zip -Xr $@ policies.json post-install.ps1
+	@zip -Xr $@ policies.json pre-install.ps1 post-install.ps1
 	@(cd tmp; zip -Xr ../$@ install.bat winsoft-config.ini $(EXE))
 	@chmod ugo+rw $@
 

@@ -37,10 +37,15 @@ IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET pwrsh=%W
 SET RETURNCODE=0
 
 
+@ECHO [INFO] Execute pre-install script
+IF EXIST ".\pre-install.ps1" %pwrsh% -File ".\pre-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
+IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
+
+
 @ECHO [INFO] Silent install %softname%
-REM TASKBAR_SHORTCUT=false DESKTOP_SHORTCUT=false INSTALL_MAINTENANCE_SERVICE=false
 ScriptRunner.exe -appvscript MsiExec.exe /i "Thunderbird-Setup-%softversion%.msi" INSTALL_MAINTENANCE_SERVICE=false DESKTOP_SHORTCUT=true /q /norestart /L*v "%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=300
 IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
+
 
 @ECHO [INFO] Wait and remove unused service
 ping 127.0.0.1 -n 2 > NUL
@@ -59,7 +64,11 @@ IF EXIST "%ProgramFiles%\Mozilla Thunderbird" (
 
 :POSTINSTALL
 @ECHO [INFO] Execute post-install script
-%pwrsh% -File ".\post-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
+IF EXIST ".\pre-install.ps1" (
+  IF EXIST ".\post-install.ps1" %pwrsh% -File ".\post-install.ps1" 1>> "%logdir%\%softname%-PS1.log" 2>&1
+) ELSE (
+  IF EXIST ".\post-install.ps1" %pwrsh% -File ".\post-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
+)
 IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
 
 
