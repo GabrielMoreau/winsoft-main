@@ -19,3 +19,4 @@ Example :
  | HKLM | Oracle VM VirtualBox 7.0.20 | Oracle and/or its affiliates | 7.0.20 | `{A6646BFE-4583-48FF-9029-FF9D1B3C3B53}` | `MsiExec.exe /I{A6646BFE-4583-48FF-9029-FF9D1B3C3B53}` |
  | HKLM | Oracle VirtualBox 7.1.0 | Oracle and/or its affiliates | 7.1.0 | `{2CAFE685-9B3A-4653-97B9-43836698B0D6}` | `MsiExec.exe /I{2CAFE685-9B3A-4653-97B9-43836698B0D6}` |
  | HKLM | Oracle VirtualBox 7.2.2 | Oracle and/or its affiliates | 7.2.2 | `{FA95801F-57C6-40C6-8D4D-B0461E6823A3}` | `MsiExec.exe /I{FA95801F-57C6-40C6-8D4D-B0461E6823A3}` |
+ | HKLM | Oracle VirtualBox 7.2.6 | Oracle and/or its affiliates | 7.2.6 | `{216C2158-A196-4684-BFC8-F5CF1B7E59A5}` | `MsiExec.exe /I{216C2158-A196-4684-BFC8-F5CF1B7E59A5}` |
