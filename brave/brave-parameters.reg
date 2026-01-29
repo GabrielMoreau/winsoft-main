@@ -1,0 +1,24 @@
+Windows Registry Editor Version 5.00
+
+; ----------------------------------
+; Chrome extensions
+
+; Ublock Origin https://chrome.google.com/webstore/detail/ublock-origin/cjpalhdlnbpafiamejdnhcphjbkeiagm
+[HKEY_LOCAL_MACHINE\Software\Wow6432Node\Google\Chrome\Extensions\cjpalhdlnbpafiamejdnhcphjbkeiagm]
+"update_url"="https://clients2.google.com/service/update2/crx"
+
+; Cookie AutoDelete https://chrome.google.com/webstore/detail/cookie-autodelete/fhcgjolkccmbidfldomjliifgaodjagh
+[HKEY_LOCAL_MACHINE\Software\Wow6432Node\Google\Chrome\Extensions\fhcgjolkccmbidfldomjliifgaodjagh]
+"update_url"="https://clients2.google.com/service/update2/crx"
+
+; KeePassXC-Browser https://chrome.google.com/webstore/detail/keepassxc-browser/oboonakemofpalcgghocfoadofidjkkk
+[HKEY_LOCAL_MACHINE\Software\Wow6432Node\Google\Chrome\Extensions\oboonakemofpalcgghocfoadofidjkkk]
+"update_url"="https://clients2.google.com/service/update2/crx"
+
+; Decentraleyes https://chrome.google.com/webstore/detail/decentraleyes/ldpochfccmkkmhdbclfhpagapcfdljkj
+[HKEY_LOCAL_MACHINE\Software\Wow6432Node\Google\Chrome\Extensions\ldpochfccmkkmhdbclfhpagapcfdljkj]
+"update_url"="https://clients2.google.com/service/update2/crx"
+
+; ClearURLs https://chrome.google.com/webstore/detail/clearurls/lckanjgmijmafbedllaakclkaicjfmnk
+[HKEY_LOCAL_MACHINE\Software\Wow6432Node\Google\Chrome\Extensions\lckanjgmijmafbedllaakclkaicjfmnk]
+"update_url"="https://clients2.google.com/service/update2/crx"
