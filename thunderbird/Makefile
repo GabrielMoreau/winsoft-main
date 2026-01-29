@@ -56,7 +56,7 @@ checksum: check-version
 		tail -3 ../checksum.txt ; \
 		)
 
-wget: $(EXE)
+wget: tmp/$(EXE)
 
 tmp/$(EXE):
 	@mkdir -p tmp
@@ -79,7 +79,7 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 
 tmp/winsoft-config.ini: winsoft-config.ini Makefile tmp/$(EXE)
 	@mkdir -p tmp
-	@sed -e 's/__VERSION__/$(VERSION)/;' $< > $@
+	@sed -e 's/__VERSION__/$(VERSION)/; s/__REG_SEARCH__/$(REG_SEARCH)/;' $< > $@
 
 tmp/uninstall.bat: uninstall.bat Makefile
 	@mkdir -p tmp
