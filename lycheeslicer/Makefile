@@ -11,6 +11,7 @@ REVISION:=1
 VERSION:=$(shell curl -s -L --connect-timeout 10 'https://mango3d.io/downloads/' | sed -e 's/[<>]/\n/g;' | grep 'Lychee Slicer [[:digit:]][[:digit:]\.]*$$' | awk '{print $$3}' | head -1)
 URL:=https://mango-lychee.nyc3.digitaloceanspaces.com/LycheeSlicer-$(VERSION).exe
 EXE:=LycheeSlicer-$(VERSION).exe
+REG_SEARCH:=$(SOFT)
 
 IT_TEAM:=IT Support
 LOGDIR:=%WINDIR%\\Logs
@@ -67,12 +68,12 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
 	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#;' $< > $@
 
-tmp/winsoft-config.psd1: winsoft-config.psd1 Makefile tmp/$(EXE)
+tmp/winsoft-config.ini: winsoft-config.ini Makefile tmp/$(EXE)
 	@mkdir -p tmp
-	@sed -e 's/__VERSION__/$(VERSION)/;' $< > $@
+	@sed -e 's/__VERSION__/$(VERSION)/; s/__REG_SEARCH__/$(REG_SEARCH)/;' $< > $@
 
-%.zip: Makefile tmp/install.bat pre-install.ps1 tmp/winsoft-config.psd1 tmp/$(EXE)
+%.zip: Makefile tmp/install.bat pre-install.ps1 post-install.ps1 tmp/winsoft-config.ini tmp/$(EXE)
 	@rm -f $@
-	@zip -Xr ./$@ pre-install.ps1
-	@(cd tmp; zip -Xr ../$@ install.bat winsoft-config.psd1 $(EXE))
+	@zip -Xr ./$@ pre-install.ps1 post-install.ps1
+	@(cd tmp; zip -Xr ../$@ install.bat winsoft-config.ini $(EXE))
 	@chmod ugo+rw $@
