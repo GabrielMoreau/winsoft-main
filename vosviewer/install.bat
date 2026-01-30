@@ -82,16 +82,6 @@ IF EXIST "%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs" (
 )
 
 
-:POSTINSTALL
-@ECHO [INFO] Execute post-install script
-IF EXIST ".\pre-install.ps1" (
-  IF EXIST ".\post-install.ps1" %pwrsh% -File ".\post-install.ps1" 1>> "%logdir%\%softname%-PS1.log" 2>&1
-) ELSE (
-  IF EXIST ".\post-install.ps1" %pwrsh% -File ".\post-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
-)
-IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
-
-
 @ECHO [INFO] Reg uninstall key
  > tmp_install.reg ECHO Windows Registry Editor Version 5.00
 >> tmp_install.reg ECHO.
@@ -108,14 +98,24 @@ IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
 >> tmp_install.reg ECHO.
 regedit.exe /S "tmp_install.reg"
 
+
+:POSTINSTALL
+@ECHO [INFO] Execute post-install script
+IF EXIST ".\pre-install.ps1" (
+  IF EXIST ".\post-install.ps1" %pwrsh% -File ".\post-install.ps1" 1>> "%logdir%\%softname%-PS1.log" 2>&1
+) ELSE (
+  IF EXIST ".\post-install.ps1" %pwrsh% -File ".\post-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
+)
+IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
+
+
 GOTO END
 
 
 :FAILED
 @ECHO [INFO] Failed to install %softname%
-IF %RETURNCODE% EQU 0 SET RETURNCODE=140
 
 
 :END
 @ECHO [END] %date%-%time%
-EXIT
+EXIT %RETURNCODE%
