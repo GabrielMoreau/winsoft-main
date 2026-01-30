@@ -9,6 +9,7 @@ VERSION:=$(shell echo $(URL) | cut -f 8 -d '/' | sed -s 's/^v//;')
 REVISION:=1
 
 EXE:=tportable-x64.$(VERSION).zip
+REG_SEARCH:=$(SOFT)
 
 IT_TEAM:=IT Support
 LOGDIR:=%WINDIR%\\Logs
@@ -75,8 +76,12 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
 	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#;' $< > $@
 
-%.zip: Makefile uninstall.bat tmp/install.bat tmp/$(EXE) tmp/Telegram/Telegram.exe
+tmp/winsoft-config.ini: winsoft-config.ini Makefile tmp/$(EXE)
+	@mkdir -p tmp
+	@sed -e 's/__VERSION__/$(VERSION)/; s/__REG_SEARCH__/$(REG_SEARCH)/;' $< > $@
+
+%.zip: Makefile uninstall.bat tmp/install.bat pre-install.ps1 post-install.ps1 tmp/winsoft-config.ini tmp/$(EXE) tmp/Telegram/Telegram.exe
 	@rm -f $@
-	@zip -Xr $@ uninstall.bat
-	@(cd tmp; zip -Xr ../$@ install.bat Telegram)
+	@zip -Xr $@ uninstall.bat pre-install.ps1 post-install.ps1
+	@(cd tmp; zip -Xr ../$@ install.bat winsoft-config.ini Telegram)
 	@chmod ugo+rw $@

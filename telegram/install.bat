@@ -27,6 +27,23 @@ SET process=Telegram.exe
 TASKKILL /T /F /IM %process%
 
 
+@ECHO [INFO] Search PowerShell
+SET pwrsh=%WINDIR%\System32\WindowsPowerShell\V1.0\powershell.exe
+IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET pwrsh=%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe
+
+@ECHO [INFO] Add rights
+%pwrsh% Set-ExecutionPolicy RemoteSigned -Force -Scope LocalMachine
+
+@ECHO [INFO] Unblock PowerShell Script
+%pwrsh% "Unblock-File -Path .\*.ps1"
+SET RETURNCODE=0
+
+
+@ECHO [INFO] Execute pre-install script
+IF EXIST ".\pre-install.ps1" %pwrsh% -File ".\pre-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
+IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
+
+
 @ECHO [INFO] Clean old version before install
 CALL .\uninstall.bat
 
@@ -37,10 +54,6 @@ MOVE "Telegram" "%ProgramFiles%\%regkey%"
 @ECHO [INFO] Copy uninstall script
 COPY /A /Y "uninstall.bat" "%ProgramFiles%\%regkey%\uninstall.bat"
 
-
-@ECHO [INFO] Search PowerShell
-SET pwrsh=%WINDIR%\System32\WindowsPowerShell\V1.0\powershell.exe
-IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET pwrsh=%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe
 
 @ECHO [INFO] Create shortcut
 IF EXIST "%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs" (
@@ -64,22 +77,31 @@ IF EXIST "%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs" (
 >> tmp_install.reg ECHO.
 regedit.exe /S "tmp_install.reg"
 
+
+:POSTINSTALL
+@ECHO [INFO] Execute post-install script
+IF EXIST ".\pre-install.ps1" (
+  IF EXIST ".\post-install.ps1" %pwrsh% -File ".\post-install.ps1" 1>> "%logdir%\%softname%-PS1.log" 2>&1
+) ELSE (
+  IF EXIST ".\post-install.ps1" %pwrsh% -File ".\post-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
+)
+IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
+
+
 REM HKU	Telegram Desktop	Telegram FZ-LLC	4.8.3	{53F49750-6209-4FBF-9CA8-7A333C87D1ED}_is1	"C:\Program Files\Telegram Desktop\unins000.exe"
 @ECHO [INFO] Clean reg uninstall key in HKU
 REG QUERY "HKEY_USERS\.DEFAULT\Software\Microsoft\Windows\CurrentVersion\Uninstall\{53F49750-6209-4FBF-9CA8-7A333C87D1ED}_is1"
-IF %ERRORLEVEL% NEQ 0 GOTO Next
+IF %ERRORLEVEL% NEQ 0 GOTO GOOD
 REG QUERY "HKEY_USERS\.DEFAULT\Software\Microsoft\Windows\CurrentVersion\Uninstall\{53F49750-6209-4FBF-9CA8-7A333C87D1ED}_is1" /v "UninstallString" | FIND /N "%SystemDrive%\Program Files\Telegram Desktop\unins000.ex" > NUL && (
   @ECHO [INFO] REG DELETE HKU
   REG DELETE "HKEY_USERS\.DEFAULT\Software\Microsoft\Windows\CurrentVersion\Uninstall\{53F49750-6209-4FBF-9CA8-7A333C87D1ED}_is1" /F
-  GOTO End
+  GOTO END
   )
 
-:Next
+:GOOD
 @ECHO [INFO] Nice: no reg uninstall key in HKU
-@ECHO [END] %date%-%time%
-EXIT 0
 
 
-:End
+:END
 @ECHO [END] %date%-%time%
-EXIT
+EXIT %RETURNCODE%
