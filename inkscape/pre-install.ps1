@@ -69,12 +69,12 @@ $RefName = $Config.RegexSearch
 Write-Output "Config:`n * Version: $RefVersion`n * RegexSearch: $RefName"
 
 ########################################################################
+# Put your specific code here
 
 # Remove old version
 ForEach ($Key in Get-ChildItem -Recurse $UninstallKeys) {
 	$App = Get-ItemProperty -Path $Key.PSPath
-	$DisplayName  = $App.DisplayName
-	If (!($DisplayName -match $RefName)) { Continue }
+	If (!($App.DisplayName -match $RefName)) { Continue }
 
 	$DisplayVersion = ToVersion $App.DisplayVersion
 	$KeyProduct = $Key | Split-Path -Leaf
@@ -84,17 +84,18 @@ ForEach ($Key in Get-ChildItem -Recurse $UninstallKeys) {
 	If ($($App.UninstallString) -match 'MsiExec.exe') {
 		$Exe = 'MsiExec.exe'
 		$Args = '/x "' + $KeyProduct + '" /qn'
-		Write-Output "Remove MSI: $DisplayName / $DisplayVersion / $KeyProduct / $Exe $Args"
+		Write-Output "Remove MSI: $($App.DisplayName) / $DisplayVersion / $KeyProduct / $Exe $Args"
 	} Else {
 		$UninstallSplit = ($App.UninstallString -Split "exe")[0] -Replace '"', ''
 		$Exe = $UninstallSplit + 'exe'
-		$Args = '/S'
-		Write-Output "Remove EXE: $DisplayName / $DisplayVersion / $($App.UninstallString) / $Exe $Args"
+		$Args = '/S /allusers'
+		Write-Output "Remove EXE: $($App.DisplayName) / $DisplayVersion / $($App.UninstallString) / $Exe $Args"
 	}
 
 	Run-Exec -FilePath "$Exe" -ArgumentList "$Args" -Name "$RefName"
 }
 
+########################################################################
 
 # View
 $ReturnCode = 0
