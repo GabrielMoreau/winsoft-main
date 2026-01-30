@@ -28,6 +28,31 @@ Function ToVersion {
 	Return [version]$Version
 }
 
+# Run MSI or EXE with timeout control
+Function Run-Exec {
+	Param (
+		[Parameter(Mandatory = $True)] [string]$Name,
+		[Parameter(Mandatory = $True)] [string]$FilePath,
+		[Parameter(Mandatory = $True)] [string]$ArgumentList,
+		[Parameter(Mandatory = $False)] [int]$Timeout = 300
+	)
+
+	$Proc = Start-Process -FilePath "$FilePath" -ArgumentList "$ArgumentList" -WindowStyle 'Hidden' -ErrorAction 'SilentlyContinue' -PassThru
+
+	$Timeouted = $Null # Reset any previously set timeout
+	# Wait up to 180 seconds for normal termination
+	$Proc | Wait-Process -Timeout $Timeout -ErrorAction SilentlyContinue -ErrorVariable Timeouted
+	If ($Timeouted) {
+		# Terminate the process
+		$Proc | Kill
+		Write-Output "Error: kill $Name uninstall exe"
+		Return
+	} ElseIf ($Proc.ExitCode -ne 0) {
+		Write-Output "Error: $Name uninstall return code $($Proc.ExitCode)"
+		Return
+	}
+}
+
 ########################################################################
 
 $UninstallKeys = @(
@@ -37,12 +62,16 @@ $UninstallKeys = @(
 
 ########################################################################
 
-
 # Get Config: Version
 $Config = GetConfig -FilePath 'winsoft-config.ini'
 $RefVersion = ToVersion $Config.Version
-$RefName = 'Microsoft Edge'
-Write-Output "Config: Version $RefVersion"
+$RefName = $Config.RegexSearch
+Write-Output "Config:`n * Version: $RefVersion`n * RegexSearch: $RefName"
+
+########################################################################
+# Put your specific code here
+
+########################################################################
 
 # View
 $ReturnCode = 143

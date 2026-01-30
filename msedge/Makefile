@@ -15,6 +15,7 @@ URL:=$(shell     echo '$(WLINES)' | sed -e 's/,/\n/g;' | grep      '/MicrosoftEd
 REVISION:=1
 UUID:=$(shell dirname "$(URL)" | xargs -r basename)
 EXE:=MicrosoftEdgeEnterpriseX64-$(VERSION).msi
+REG_SEARCH:=Microsoft\\sEdge
 
 IT_TEAM:=IT Support
 LOGDIR:=%WINDIR%\\Logs
@@ -78,7 +79,7 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 
 tmp/winsoft-config.ini: winsoft-config.ini Makefile tmp/$(EXE)
 	@mkdir -p tmp
-	@sed -e 's/__VERSION__/$(VERSION)/;' $< > $@
+	@sed -e 's/__VERSION__/$(VERSION)/; s/__REG_SEARCH__/$(REG_SEARCH)/;' $< > $@
 
 %.zip: Makefile tmp/install.bat pre-install.ps1 post-install.ps1 tmp/winsoft-config.ini tmp/$(EXE)
 	@rm -f $@
