@@ -18,3 +18,4 @@ Example :
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
  | HKLM | TeamViewer | TeamViewer | 15.52.4 | `TeamViewer` | `"C:\Program Files\TeamViewer\uninstall.exe"` |
  | HKLM | TeamViewer | TeamViewer | 15.74.3 | `TeamViewer` | `"C:\Program Files\TeamViewer\uninstall.exe"` |
+ | HKLM | TeamViewer | TeamViewer | 15.74.4 | `TeamViewer` | `"C:\Program Files\TeamViewer\uninstall.exe"` |
