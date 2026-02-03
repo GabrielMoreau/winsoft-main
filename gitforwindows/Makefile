@@ -9,6 +9,7 @@ REVISION:=1
 URL:=https://github.com$(shell curl -s -L --connect-timeout 10 'https://github.com/git-for-windows/git/releases' | sed -e 's/"/\n/g;' | egrep -- '^/.*/Git-.*-64-bit.exe' | grep -v -- '-rc' | head -1)
 
 EXE:=Git-$(VERSION)-64-bit.exe
+REG_SEARCH:=^git$$
 
 IT_TEAM:=IT Support
 LOGDIR:=%WINDIR%\\Logs
@@ -66,7 +67,12 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
 	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#;' $< > $@
 
-%.zip: Makefile tmp/install.bat tmp/$(EXE)
+tmp/winsoft-config.ini: winsoft-config.ini Makefile tmp/$(EXE)
+	@mkdir -p tmp
+	@sed -e 's/__VERSION__/$(VERSION)/; s/__REG_SEARCH__/$(REG_SEARCH)/;' $< > $@
+
+%.zip: Makefile tmp/install.bat pre-install.ps1 post-install.ps1 tmp/winsoft-config.ini tmp/$(EXE)
 	@rm -f $@
-	@(cd tmp; zip -Xr ../$@ install.bat $(EXE))
+	@zip -Xr ./$@ pre-install.ps1 post-install.ps1
+	@(cd tmp; zip -Xr ../$@ install.bat winsoft-config.ini $(EXE))
 	@chmod ugo+rw $@
