@@ -22,5 +22,8 @@ Example :
  | HKLM | Bitvise SSH Client - FlowSshNet (x86) | Bitvise Limited | 9.33.0.0 | `{4F563585-E84E-4E62-A428-D936F9A6E900}` | `MsiExec.exe /X{4F563585-E84E-4E62-A428-D936F9A6E900}` |
  | HKLM | Bitvise SSH Client 9.33 (remove only) | Bitvise Limited | 9.33     | `BvSshClient`                            | `"C:\Program Files (x86)\Bitvise SSH Client\uninst.exe" "BvSshClient"` |
  | HKLM | Bitvise SSH Client - FlowSshNet (x64) | Bitvise Limited | 9.37.0.0 | `{AAC0BCAE-BE7D-4BAF-85FB-AB62A4B7E2A9}` | `MsiExec.exe /X{AAC0BCAE-BE7D-4BAF-85FB-AB62A4B7E2A9}` |
- | HKLM | Bitvise SSH Client 9.37 (remove only) | Bitvise Limited | 9.37     | `BvSshClient`                            | `"C:\Program Files (x86)\Bitvise SSH Client\uninst.exe" "BvSshClient"` |
  | HKLM | Bitvise SSH Client - FlowSshNet (x86) | Bitvise Limited | 9.37.0.0 | `{DC84E003-35CA-41DA-940B-B6003B8595ED}` | `MsiExec.exe /X{DC84E003-35CA-41DA-940B-B6003B8595ED}` |
+ | HKLM | Bitvise SSH Client 9.37 (remove only) | Bitvise Limited | 9.37     | `BvSshClient`                            | `"C:\Program Files (x86)\Bitvise SSH Client\uninst.exe" "BvSshClient"` |
+ | HKLM | Bitvise SSH Client - FlowSshNet (x64) | Bitvise Limited | 9.57.0.0 | `{CB9454DD-8BFE-4AC8-B991-2DC64A1A2454}` | `MsiExec.exe /X{CB9454DD-8BFE-4AC8-B991-2DC64A1A2454}` |
+ | HKLM | Bitvise SSH Client - FlowSshNet (x86) | Bitvise Limited | 9.57.0.0 | `{1ED145C3-6087-4671-9A69-A7EAA39C31AB}` | `MsiExec.exe /X{1ED145C3-6087-4671-9A69-A7EAA39C31AB}` |
+ | HKLM | Bitvise SSH Client 9.57 (remove only) | Bitvise Limited | 9.57     | `BvSshClient`                            | `"C:\Program Files (x86)\Bitvise SSH Client\uninst.exe" "BvSshClient"` |
