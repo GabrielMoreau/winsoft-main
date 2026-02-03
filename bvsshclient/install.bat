@@ -27,22 +27,35 @@ IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET pwrsh=%W
 @ECHO [INFO] Add rights
 %pwrsh% Set-ExecutionPolicy RemoteSigned -Force -Scope LocalMachine
 
-@ECHO [INFO] Unblock PS1
+@ECHO [INFO] Unblock PowerShell Script
 %pwrsh% "Unblock-File -Path .\*.ps1"
+SET RETURNCODE=0
 
 
 @ECHO [INFO] Execute pre-install script
-%pwrsh% -File ".\pre-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
+IF EXIST ".\pre-install.ps1" %pwrsh% -File ".\pre-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
+IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
 
 
 @ECHO [INFO] Silent install %softname%
 ScriptRunner.exe -appvscript BvSshClient-Inst-%softversion%.exe -acceptEULA -noDesktopIcon=y -autoUpdates=0 -appvscriptrunnerparameters -wait -timeout=300
-
-
-@ECHO [END] %date%-%time%
-
-IF %ERRORLEVEL% EQU 1 (
-  REM 0 or 1 are good exit code for this installer!
-  EXIT 0
+IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
+IF %RETURNCODE% EQU 1 (
+  @ECHO [INFO] 0 or 1 are good exit code for this installer!
+  SET RETURNCODE=0
 )
-EXIT
+
+:POSTINSTALL
+@ECHO [INFO] Execute post-install script
+IF EXIST ".\pre-install.ps1" (
+  IF EXIST ".\post-install.ps1" %pwrsh% -File ".\post-install.ps1" 1>> "%logdir%\%softname%-PS1.log" 2>&1
+) ELSE (
+  IF EXIST ".\post-install.ps1" %pwrsh% -File ".\post-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
+)
+IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
+
+
+
+:END
+@ECHO [END] %date%-%time%
+EXIT %RETURNCODE%
