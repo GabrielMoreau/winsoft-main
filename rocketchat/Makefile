@@ -10,6 +10,7 @@ URL:=$(shell curl -s -L --connect-timeout 10 'https://api.github.com/repos/Rocke
 VERSION:=$(shell dirname "$(URL)" | xargs -r basename)
 
 EXE:=rocketchat-$(VERSION)-win-x64.msi
+REG_SEARCH:=Rocket\\.Chat
 
 IT_TEAM:=IT Support
 LOGDIR:=%WINDIR%\\Logs
@@ -48,7 +49,7 @@ checksum: check-version
 		tail -3 ../checksum.txt ; \
 		)
 
-wget: $(EXE)
+wget: tmp/$(EXE)
 
 tmp/$(EXE):
 	@mkdir -p tmp
@@ -68,12 +69,16 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
 	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#;' $< > $@
 
+tmp/winsoft-config.ini: winsoft-config.ini Makefile tmp/$(EXE)
+	@mkdir -p tmp
+	@sed -e 's/__VERSION__/$(VERSION)/; s/__REG_SEARCH__/$(REG_SEARCH)/;' $< > $@
+
 tmp/servers.json: servers.json Makefile tmp/$(EXE)
 	@mkdir -p tmp
 	@if [ -e ../../winsoft-conf/rocketchat/servers.json ]; then cp -f ../../winsoft-conf/rocketchat/servers.json tmp/; else cp -f servers.json tmp/; fi
 
-%.zip: Makefile pre-install.ps1 tmp/install.bat tmp/servers.json tmp/$(EXE)
+%.zip: Makefile tmp/install.bat pre-install.ps1 post-install.ps1 tmp/servers.json tmp/winsoft-config.ini tmp/$(EXE)
 	@rm -f $@
-	@zip -Xr $@ pre-install.ps1
-	@(cd tmp; zip -Xr ../$@ install.bat servers.json $(EXE))
+	@zip -Xr ./$@ pre-install.ps1 post-install.ps1
+	@(cd tmp; zip -Xr ../$@ install.bat servers.json winsoft-config.ini $(EXE))
 	@chmod ugo+rw $@

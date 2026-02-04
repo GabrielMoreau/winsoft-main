@@ -1,6 +1,6 @@
 
 $TimeStamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
-Write-Output ("Begin Pre-Install [$TimeStamp]`n" + "=" * 39 + "`n")
+Write-Output ("`nBegin Post-Install [$TimeStamp]`n" + "=" * 40 + "`n")
 
 ########################################################################
 
@@ -71,26 +71,10 @@ Write-Output "Config:`n * Version: $RefVersion`n * RegexSearch: $RefName"
 ########################################################################
 # Put your specific code here
 
-# Remove old Rocket.Chat
-ForEach ($Key in Get-ChildItem -Recurse $UninstallKeys) {
-	$App = Get-ItemProperty -Path $Key.PSPath
-	If ($App.DisplayName -notmatch $RefName) { Continue }
-
-	$DisplayVersion = ToVersion $App.DisplayVersion
-	$KeyProduct     = $Key.PSChildName
-
-	$UninstallSplit = $App.UninstallString -Split "/I"
-	$Exe = 'MsiExec.exe'
-	$Args = '/x "' + $UninstallSplit[1].Trim() + '" /qn'
-	Write-Output "Remove MSI: $($App.DisplayName) / $DisplayVersion / $KeyProduct / $Exe $Args"
-
-	Run-Exec -FilePath "$Exe" -ArgumentList "$Args" -Name "$RefName"
-}
-
 ########################################################################
 
 # View
-$ReturnCode = 0
+$ReturnCode = 143
 ForEach ($Key in Get-ChildItem -Recurse $UninstallKeys) {
 	$App = Get-ItemProperty -Path $Key.PSPath
 	If ($App.DisplayName -notmatch $RefName) { Continue }
@@ -98,6 +82,14 @@ ForEach ($Key in Get-ChildItem -Recurse $UninstallKeys) {
 	$DisplayVersion = ToVersion $App.DisplayVersion
 	$KeyProduct     = $Key.PSChildName
 	Write-Output "Installed: $($App.DisplayName) / $DisplayVersion / $KeyProduct / $($App.UninstallString)"
+
+	If ($DisplayVersion -gt $RefVersion) {
+		$ReturnCode = [Math]::Min($ReturnCode, 141)
+	} ElseIf ($DisplayVersion -eq $RefVersion) {
+		$ReturnCode = 0
+	} Else {
+		$ReturnCode = [Math]::Min($ReturnCode, 142)
+	}
 }
 Write-Output "ReturnCode: $ReturnCode"
 Exit $ReturnCode
