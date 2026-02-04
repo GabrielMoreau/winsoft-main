@@ -26,7 +26,8 @@ Example :
 
  | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
- | HKU | Xournal++ | The Xournal++ Team | 1.2.3 | `Xournal++` | `"C:\Program Files\Xournal++\Uninstall.exe"` |
- | HKU | Xournal++ | The Xournal++ Team | 1.2.4 | `Xournal++` | `"C:\Program Files\Xournal++\Uninstall.exe"` |
+ | HKU  | Xournal++ | The Xournal++ Team | 1.2.3 | `Xournal++` | `"C:\Program Files\Xournal++\Uninstall.exe"` |
+ | HKU  | Xournal++ | The Xournal++ Team | 1.2.4 | `Xournal++` | `"C:\Program Files\Xournal++\Uninstall.exe"` |
  | HKLM | Xournal++ | The Xournal++ Team | 1.2.5 | `Xournal++` | `"C:\Program Files\Xournal++\Uninstall.exe"` |
  | HKLM | Xournal++ | The Xournal++ Team | 1.2.6 | `Xournal++` | `"C:\Program Files\Xournal++\Uninstall.exe"` |
+ | HKLM | Xournal++ | The Xournal++ Team | 1.3.2 | `Xournal++` | `"C:\Program Files\Xournal++\Uninstall.exe"` |
