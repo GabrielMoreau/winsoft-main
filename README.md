@@ -141,6 +141,7 @@ At the same time, the installation script can handle the following error codes i
 * Error 143: There is no trace of the software on the workstation after the installation procedure.
 * Error 146: The software is already installed in a version equal to or higher than the one before starting the installation procedure.
 * Error 147: The software is already installed in a lower version before starting the installation procedure. Normally, the installation script then launches the update.
+* Error 149: The installation program is not in the archive to be deployed!
 
 ## Extend
 
