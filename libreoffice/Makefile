@@ -11,6 +11,7 @@ REVISION:=1
 
 EXE1:=LibreOffice_$(VERSION)_Win_x86-64.msi
 EXE2:=LibreOffice_$(VERSION)_Win_x86-64_helppack_fr.msi
+REG_SEARCH:=$(SOFT)
 
 URL1:=$(shell curl -s -L --connect-timeout 10 "https://download.documentfoundation.org/libreoffice/stable/$(VERSION)/win/x86_64/$(EXE1).mirrorlist" | grep 'prio 100' | sed -e 's/"/\n/g;' | grep "^https://.*/$(EXE1)$$" | head -3 | sort -R | head -1)
 
@@ -87,10 +88,10 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE1)
 
 tmp/winsoft-config.ini: winsoft-config.ini Makefile tmp/$(EXE1)
 	@mkdir -p tmp
-	@sed -e 's/__VERSION__/$(VERSION)/;' $< > $@
+	@sed -e 's/__VERSION__/$(VERSION)/; s/__REG_SEARCH__/$(REG_SEARCH)/;' $< > $@
 
-%.zip: Makefile tmp/install.bat post-install.ps1 tmp/winsoft-config.ini tmp/$(EXE1) tmp/$(EXE2)
+%.zip: Makefile tmp/install.bat pre-install.ps1 post-install.ps1 tmp/winsoft-config.ini tmp/$(EXE1) tmp/$(EXE2)
 	@rm -f $@
-	@zip -Xr ./$@ post-install.ps1
+	@zip -Xr ./$@ pre-install.ps1 post-install.ps1
 	@(cd tmp; zip -Xr ../$@ install.bat winsoft-config.ini $(EXE1) $(EXE2))
 	@chmod ugo+rw $@

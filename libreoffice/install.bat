@@ -35,13 +35,20 @@ IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET pwrsh=%W
 SET RETURNCODE=0
 
 
+@ECHO [INFO] Execute pre-install script
+IF EXIST ".\pre-install.ps1" %pwrsh% -File ".\pre-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
+IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
+
+
 :REINSTALL
 @ECHO [INFO] Silent Install %softname%
 REM https://wiki.documentfoundation.org/Deployment_and_Migration
 IF EXIST "LibreOffice_%softversion%_Win_x86-64.msi" (
   ScriptRunner.exe -appvscript MsiExec.exe /i "LibreOffice_%softversion%_Win_x86-64.msi" /qn /norestart /l "%logdir%\%softname%-MSI.log" CREATEDESKTOPLINK=0 RebootYesNo=No ISCHECKFORPRODUCTUPDATES=0 REGISTER_NO_MSO_TYPES=1 REMOVE=gm_o_Onlineupdate SELECT_WORD=0 SELECT_EXCEL=0 SELECT_POWERPOINT=0 USERNAME="LEGI" ADDLOCAL=ALL -appvscriptrunnerparameters -wait -timeout=450
+  IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
 ) ELSE (
     @ECHO [ERROR] Installer is not in the archive!
+    IF %RETURNCODE% EQU 0 SET RETURNCODE=149
 )
 
 @ECHO [INFO] Check if installed
@@ -50,7 +57,7 @@ IF EXIST "%ProgramFiles%\LibreOffice\program\soffice.exe" (
 ) ELSE (
   IF "%MAX_RETRY%"=="0" (
     @ECHO [ERROR] MAX_RETRY installation done and no %softname%
-    SET RETURNCODE=140
+    IF %RETURNCODE% EQU 0 SET RETURNCODE=140
     GOTO END
   ) ELSE (
     @ECHO [WARN] Try installation again
@@ -60,6 +67,12 @@ IF EXIST "%ProgramFiles%\LibreOffice\program\soffice.exe" (
 )
 
 
+:HELP
+@ECHO [INFO] Silent help install
+ScriptRunner.exe -appvscript MsiExec.exe /i "LibreOffice_%softversion%_Win_x86-64_helppack_fr.msi" /qn /norestart /l "%logdir%\%softname%-HELP.log" -appvscriptrunnerparameters -wait -timeout=300
+IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
+
+
 :POSTINSTALL
 @ECHO [INFO] Execute post-install script
 IF EXIST ".\pre-install.ps1" (
@@ -67,12 +80,6 @@ IF EXIST ".\pre-install.ps1" (
 ) ELSE (
   IF EXIST ".\post-install.ps1" %pwrsh% -File ".\post-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
 )
-IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
-
-
-:HELP
-@ECHO [INFO] Silent help install
-ScriptRunner.exe -appvscript MsiExec.exe /i "LibreOffice_%softversion%_Win_x86-64_helppack_fr.msi" /qn /norestart /l "%logdir%\%softname%-HELP.log" -appvscriptrunnerparameters -wait -timeout=300
 IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
 
 
