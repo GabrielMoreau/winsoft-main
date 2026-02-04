@@ -12,6 +12,7 @@ URL:=https://github.com/xournalpp/xournalpp/releases/download/v$(VERSION)/xourna
 
 #ZIP:=xournalpp-$(VERSION)-windows.zip
 EXE:=xournalpp-$(VERSION)-windows-setup-amd64.exe
+REG_SEARCH:=Xournal\\+\\+
 
 IT_TEAM:=IT Support
 LOGDIR:=%WINDIR%\\Logs
@@ -53,10 +54,8 @@ wget: tmp/$(EXE)
 tmp/$(EXE):
 	@mkdir -p tmp
 	@(cd tmp ; \
-		rm -f *.exe *.msi "$(ZIP)" 2>/dev/null ; \
+		rm -f *.exe *.msi 2>/dev/null ; \
 		curl -# -o "$(EXE)" -L "$(URL)" ; \
-		#unzip -q "$(ZIP)" ; \
-		#rm -f "$(ZIP)" ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
 
@@ -70,8 +69,12 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
 	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#;' $< > $@
 
-%.zip: Makefile uninstall.bat tmp/install.bat tmp/$(EXE)
+tmp/winsoft-config.ini: winsoft-config.ini Makefile tmp/$(EXE)
+	@mkdir -p tmp
+	@sed -e 's/__VERSION__/$(VERSION)/; s/__REG_SEARCH__/$(REG_SEARCH)/;' $< > $@
+
+%.zip: Makefile uninstall.bat tmp/install.bat pre-install.ps1 post-install.ps1 tmp/winsoft-config.ini tmp/$(EXE)
 	@rm -f $@
-	@zip -Xr $@ uninstall.bat
-	@(cd tmp; zip -Xr ../$@ install.bat $(EXE))
+	@zip -Xr ./$@ uninstall.bat pre-install.ps1 post-install.ps1
+	@(cd tmp; zip -Xr ../$@ install.bat winsoft-config.ini $(EXE))
 	@chmod ugo+rw $@
