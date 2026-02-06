@@ -11,6 +11,7 @@ VERSION:=$(shell ./get-version "$(URL)")
 REVISION:=1
 
 EXE:=SysinternalsSuite-$(VERSION).zip
+REG_SEARCH:=Sysinternals
 
 IT_TEAM:=IT Support
 LOGDIR:=%WINDIR%\\Logs
@@ -68,9 +69,13 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
 	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#;' $< > $@
 
-%.zip: Makefile tmp/install.bat uninstall.bat tmp/$(EXE)
+tmp/winsoft-config.ini: winsoft-config.ini Makefile tmp/$(EXE)
+	@mkdir -p tmp
+	@sed -e 's/__VERSION__/$(VERSION)/; s/__REG_SEARCH__/$(REG_SEARCH)/;' $< > $@
+
+%.zip: Makefile tmp/install.bat pre-install.ps1 post-install.ps1 tmp/winsoft-config.ini uninstall.bat tmp/$(EXE)
 	@rm -f $@
-	@zip -Xr ./$@ uninstall.bat
-	@(cd tmp; zip --quiet -r ../$@ install.bat SysinternalsSuite)
+	@zip -Xr ./$@ pre-install.ps1 post-install.ps1 uninstall.bat
+	@(cd tmp; zip --quiet -Xr ../$@ install.bat winsoft-config.ini SysinternalsSuite)
 	@echo -n '  Zip / Number of files: '; unzip -t $@ | grep 'OK' | wc -l
 	@chmod ugo+rw $@
