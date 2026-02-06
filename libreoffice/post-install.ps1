@@ -92,9 +92,9 @@ ForEach ($Key in Get-ChildItem -Recurse $UninstallKeys) {
 	$KeyProduct     = $Key.PSChildName
 	Write-Output "Installed: $($App.DisplayName) / $DisplayVersion / $KeyProduct / $($App.UninstallString)"
 
-	If (VersionReduce $DisplayVersion -gt VersionReduce $RefVersion) {
+	If ((VersionReduce -Version $DisplayVersion) -gt (VersionReduce -Version $RefVersion)) {
 		$ReturnCode = [Math]::Min($ReturnCode, 141)
-	} ElseIf (VersionReduce($DisplayVersion) -eq VersionReduce($RefVersion)) {
+	} ElseIf ((VersionReduce -Version $DisplayVersion) -eq (VersionReduce -Version $RefVersion)) {
 		$ReturnCode = 0
 	} Else {
 		$ReturnCode = [Math]::Min($ReturnCode, 142)
