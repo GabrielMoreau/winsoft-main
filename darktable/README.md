@@ -20,3 +20,4 @@ Example :
  | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
  | HKLM | darktable | the darktable project | 5.0.0 | `darktable` | `C:\Program Files\darktable\Uninstall.exe` |
+ | HKLM | darktable | the darktable project | 5.4.1 | `darktable` | `C:\Program Files\darktable\Uninstall.exe` |

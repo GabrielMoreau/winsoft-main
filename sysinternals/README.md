@@ -19,3 +19,4 @@ Example :
  | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
  | HKLM | Microsoft Sysinternals Suite 25.11.17.2147 | Microsoft Corporation | 25.11.17.2147 | `Sysinternals` | `C:\Program Files\Sysinternals\uninstall.bat` |
+ | HKLM | Microsoft Sysinternals Suite 26.02.04.1903 | Microsoft Corporation | 26.02.04.1903 | `Sysinternals` | `C:\Program Files\Sysinternals\uninstall.bat` |
