@@ -53,12 +53,12 @@ IF EXIST "LibreOffice_%softversion%_Win_x86-64.msi" (
 
 @ECHO [INFO] Check if installed
 IF EXIST "%ProgramFiles%\LibreOffice\program\soffice.exe" (
-  GOTO POSTINSTALL
+  GOTO INSTALLHELP
 ) ELSE (
   IF "%MAX_RETRY%"=="0" (
     @ECHO [ERROR] MAX_RETRY installation done and no %softname%
     IF %RETURNCODE% EQU 0 SET RETURNCODE=140
-    GOTO END
+    GOTO POSTINSTALL
   ) ELSE (
     @ECHO [WARN] Try installation again
     SET /A MAX_RETRY-=1
@@ -67,7 +67,7 @@ IF EXIST "%ProgramFiles%\LibreOffice\program\soffice.exe" (
 )
 
 
-:HELP
+:INSTALLHELP
 @ECHO [INFO] Silent help install
 ScriptRunner.exe -appvscript MsiExec.exe /i "LibreOffice_%softversion%_Win_x86-64_helppack_fr.msi" /qn /norestart /l "%logdir%\%softname%-HELP.log" -appvscriptrunnerparameters -wait -timeout=300
 IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
