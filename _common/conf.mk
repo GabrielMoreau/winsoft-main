@@ -46,14 +46,20 @@ ocs:
 	@echo "Name:     $(OCS_NAME)"
 	@[ ! -s "Uninstall-$(OCS_NAME).zip" ] || echo "Name:     Uninstall-$(OCS_NAME)"
 	@[ "$(OCS_PRIORITY)" -eq 5 ] || echo "Priority: *$(OCS_PRIORITY)*"
-	@echo "Launch:   install.bat"
-	@echo "Notify:   $(OCS_NOTIFY)"
-	@echo "Duration: $(OCS_DURATION)"
-	@echo "Cancel:   $(OCS_CANCEL)"
-	@echo "Report:   $(OCS_REPORT)"
-	@[ -z "$(OCS_SEARCH_OP)" ] || echo "SearchOp: $(OCS_SEARCH_OP)"
-	@[ -z "$(OCS_SEARCH)" ]    || echo "Search:   $(OCS_SEARCH)"
-	@echo "Message:  $(OCS_MESSAGE)"
+	@if [ -e install.bat ]; \
+	then \
+		echo "Launch:   install.bat"; \
+		echo "Notify:   $(OCS_NOTIFY)"; \
+		echo "Duration: $(OCS_DURATION)"; \
+		echo "Cancel:   $(OCS_CANCEL)"; \
+		echo "Report:   $(OCS_REPORT)"; \
+		[ -z "$(OCS_SEARCH_OP)" ] || echo "SearchOp: $(OCS_SEARCH_OP)"; \
+		[ -z "$(OCS_SEARCH)" ]    || echo "Search:   $(OCS_SEARCH)"; \
+		echo "Message:  $(OCS_MESSAGE)"; \
+	elif [ -e install.ps1 ]; \
+	then \
+		echo "Script:   install.ps1"; \
+	fi
 	@echo ""
 
 ocs-push:
