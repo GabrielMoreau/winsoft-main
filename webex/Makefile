@@ -14,6 +14,7 @@ VERSION:=$(shell curl -s -L --connect-timeout 10 'https://help.webex.com/article
 REVISION:=1
 
 EXE:=Webex-$(VERSION).msi
+REG_SEARCH:=$(SOFT)
 
 IT_TEAM:=IT Support
 LOGDIR:=%WINDIR%\\Logs
@@ -76,6 +77,10 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
 	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#;' $< > $@
 
+tmp/winsoft-config.ini: winsoft-config.ini Makefile tmp/$(EXE)
+	@mkdir -p tmp
+	@sed -e 's/__VERSION__/$(VERSION)/; s/__REG_SEARCH__/$(REG_SEARCH)/;' $< > $@
+
 tmp/uninstall.bat: uninstall.bat Makefile
 	@mkdir -p tmp
 	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#;' $< > $@
@@ -84,14 +89,14 @@ tmp/pre-remove.ps1: pre-install.ps1 Makefile tmp/$(EXE)
 	@mkdir -p tmp
 	@sed -e 's/Begin Pre-Install/Begin Pre-Remove/;' $< > $@
 
-%.zip: Makefile tmp/install.bat pre-install.ps1 post-install.ps1 tmp/$(EXE)
+%.zip: Makefile tmp/install.bat pre-install.ps1 post-install.ps1 tmp/winsoft-config.ini tmp/$(EXE)
 	@rm -f $@
-	@zip -Xr $@ pre-install.ps1 post-install.ps1
-	@(cd tmp; zip -Xr ../$@ install.bat $(EXE))
+	@zip -Xr ./$@ pre-install.ps1 post-install.ps1
+	@(cd tmp; zip -Xr ../$@ install.bat winsoft-config.ini $(EXE))
 	@chmod ugo+rw $@
 
-Uninstall-$(SOFT)_$(VERSION)-$(REVISION)_x64.zip: Makefile tmp/pre-remove.ps1 tmp/uninstall.bat
+Uninstall-$(SOFT)_$(VERSION)-$(REVISION)_x64.zip: Makefile tmp/pre-remove.ps1 tmp/winsoft-config.ini tmp/uninstall.bat
 	@rm -f $@
-	@(cd tmp; zip -Xr ../$@ uninstall.bat pre-remove.ps1)
+	@(cd tmp; zip -Xr ../$@ uninstall.bat pre-remove.ps1 winsoft-config.ini)
 	@printf "@ uninstall.bat\n@=install.bat\n" | zipnote -w ./$@
 	@chmod ugo+rw $@
