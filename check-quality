@@ -19,7 +19,7 @@ function pipe_if_not_empty {
 }
 
 echo "Check Windows files with UNIX line terminators"
-find ./ _obsolete/ _experimental/ -maxdepth 2 \( -name '*.ps1' -o -name '*.bat' -o -name '*.reg' \) -exec file {} \+ | grep 'ASCII text' | grep -v 'CRLF' | pipe_if_not_empty "" cat | sed 's/^/ /;'
+find ./ _obsolete/ _experimental/ -maxdepth 2 \( -name '*.ps1' -o -name '*.bat' -o -name '*.reg' \) -exec file {} \+ 2> /dev/null | grep 'ASCII text' | grep -v 'CRLF' | pipe_if_not_empty "" cat | sed 's/^/ /;'
 
 echo "Check unique name in checksum"
 for f in $(awk '{print $2}' ./*/checksum.txt | sort | uniq -c  | grep -v '^      1 ' | awk '{print $2}')
@@ -48,15 +48,15 @@ done | pipe_if_not_empty "" cat | sed 's/^/ /;'
 
 
 echo "Check for unnecessary spaces at the end of lines for UNIX files"
-ack -l --no-recurse --ignore-dir=tmp --ignore-dir=resources --ignore-file=ext:bat --ignore-file=ext:reg --ignore-file=ext:ini --ignore-file=ext:json --ignore-file=ext:ps1 --ignore-file=ext:psm1 --ignore-file=ext:psd1 --ignore-file=ext:log --ignore-file=ext:xml  '\s+$' ./ ./*/ | pipe_if_not_empty "" cat | sed 's/^/ /;'
+ack -l --no-recurse --ignore-dir=tmp --ignore-dir=resources --ignore-file=ext:bat --ignore-file=ext:reg --ignore-file=ext:ini --ignore-file=ext:json --ignore-file=ext:ps1 --ignore-file=ext:psm1 --ignore-file=ext:psd1 --ignore-file=ext:vbs --ignore-file=ext:dat --ignore-file=ext:log --ignore-file=ext:xml --ignore-file=is:securestring.txt '\s+$' ./ ./*/ | pipe_if_not_empty "" cat | sed 's/^/ /;'
 echo "Check for unnecessary spaces at the end of lines for Windows files"
 ack -l --ignore-dir=tmp --ignore-dir=resources '\s+\r$' ./ ./*/ | pipe_if_not_empty "" cat | sed 's/^/ /;'
 
 echo "Check PowerShell script syntax"
-find ./ _obsolete/ _experimental/ -maxdepth 2 -name '*.ps1' -print0 | xargs -r -0 timeout -k 2s 13 ./analyze-ps | grep -v '^✅ OK:'
+find ./ _obsolete/ _experimental/ -maxdepth 2 -name '*.ps1' -print0 2> /dev/null | xargs -r -0 timeout -k 2s 13 ./analyze-ps | grep -v '^✅ OK:'
 
 echo "Check Bash script quality"
-find ./ _obsolete/ _experimental/ -maxdepth 2  -perm /0100 -type f -print0 | xargs -r -0 -I {} bash -c "file {} | grep -q 'shell scrip' && shellcheck -e SC2012,SC2016,SC2001 {}"
+find ./ _obsolete/ _experimental/ -maxdepth 2  -perm /0100 -type f -print0 2> /dev/null | xargs -r -0 -I {} bash -c "file {} | grep -q 'shell scrip' && shellcheck -e SC2012,SC2016,SC2001 {}"
 
 echo "Check HKLM register key in README files"
 FOLDER_NOGIT=$(
