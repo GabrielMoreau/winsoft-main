@@ -10,7 +10,7 @@ TIMEWINDOW:=1.25
 
 sinclude ../winsoft-conf/_common/main.mk
 
-.PHONY: help build-all clean-all checksum-all last-checksum unrealized-updates list-pkg list-version list-md space version ocs-asifpushed
+.PHONY: help build-all clean-all checksum-all last-checksum unrealized-updates list-pkg list-version list-md quality space version ocs-asifpushed
 .ONESHELL:
 
 help: ## show this help
@@ -169,6 +169,9 @@ list-md: ## list all package in markdown format
 		head -1 $${pkg}/README.md | perl -p -e "s{^#\s(.*)\s-\s(.*)}{ | $${sindex} | [\\1]($${pkg}/README.md) | \\2 | $${obsolete} |};"
 	done | sort | grep -Ev '\([[:alpha:]][[:alpha:]]*\)\]\('
 	exit 0
+
+quality: ## check code quality
+	[ -x ./check-quality ] && ./check-quality
 
 space: ## clean (remove) old package to get disk space (KEEP var)
 	@
