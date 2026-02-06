@@ -171,7 +171,7 @@ list-md: ## list all package in markdown format
 	exit 0
 
 quality: ## check code quality
-	[ -x ./check-quality ] && ./check-quality
+	@[ -x ./check-quality ] && ./check-quality
 
 space: ## clean (remove) old package to get disk space (KEEP var)
 	@
