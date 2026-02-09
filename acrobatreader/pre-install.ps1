@@ -65,9 +65,11 @@ $UninstallKeys = @(
 # Get Config: Version
 $Config = GetConfig -FilePath 'winsoft-config.ini'
 $RefVersion = ToVersion $Config.Version
-$RefName = 'Adobe Acrobat .64-bit'
-Write-Output "Config: Version $RefVersion"
-$ReturnCode = 0
+$RefName = $Config.RegexSearch
+Write-Output "Config:`n * Version: $RefVersion`n * RegexSearch: $RefName"
+
+########################################################################
+# Put your specific code here
 
 # Detect old version
 ForEach ($Key in Get-ChildItem -Recurse $UninstallKeys) {
@@ -100,7 +102,10 @@ ForEach ($Key in Get-ChildItem -Recurse $UninstallKeys) {
 #	Run-Exec -FilePath "$Exe" -ArgumentList "$Args" -Name "$RefName"
 }
 
+########################################################################
+
 # View
+$ReturnCode = 0
 ForEach ($Key in Get-ChildItem -Recurse $UninstallKeys) {
 	$App = Get-ItemProperty -Path $Key.PSPath
 	If ($App.DisplayName -notmatch $RefName) { Continue }
@@ -109,6 +114,5 @@ ForEach ($Key in Get-ChildItem -Recurse $UninstallKeys) {
 	$KeyProduct     = $Key.PSChildName
 	Write-Output "Installed: $($App.DisplayName) / $DisplayVersion / $KeyProduct / $($App.UninstallString)"
 }
-
 Write-Output "ReturnCode: $ReturnCode"
 Exit $ReturnCode

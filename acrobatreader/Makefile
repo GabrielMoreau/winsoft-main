@@ -19,6 +19,7 @@ URL2:=https://ardownload$(NBSERVER).adobe.com/pub/adobe/acrobat/win/AcrobatDC/$(
 
 EXE:=AcroRdrDCx64$(VERSIONCOLLAPSE)_MUI.exe
 EXE2:=AcroRdrDCx64Upd$(VERSIONCOLLAPSE).msp
+REG_SEARCH:=Adobe\\sAcrobat\\s\\(64-bit
 
 IT_TEAM:=IT Support
 LOGDIR:=%WINDIR%\\Logs
@@ -96,7 +97,7 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 
 tmp/winsoft-config.ini: winsoft-config.ini Makefile tmp/$(EXE)
 	@mkdir -p tmp
-	@sed -e 's/__VERSION__/$(VERSION)/;' $< > $@
+	@sed -e 's/__VERSION__/$(VERSION)/; s/__REG_SEARCH__/$(REG_SEARCH)/;' $< > $@
 
 tmp/uninstall.bat: uninstall.bat Makefile
 	@mkdir -p tmp
