@@ -16,6 +16,7 @@ EXE:=rtools$(LONGVERSION).exe
 
 REVISION:=1
 VERSION:=$(shell echo -n $(DOTVERSION) ; echo $(LONGVERSION) | sed -e 's/^[[:digit:]]*//; s/-/./g;')
+REG_SEARCH:=RTools\\s
 
 
 IT_TEAM:=IT Support
@@ -81,10 +82,10 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 
 tmp/winsoft-config.ini: winsoft-config.ini Makefile tmp/$(EXE)
 	@mkdir -p tmp
-	@sed -e 's/__VERSION__/$(VERSION)/;' $< > $@
+	@sed -e 's/__VERSION__/$(VERSION)/; s/__REG_SEARCH__/$(REG_SEARCH)/;' $< > $@
 
-%.zip: Makefile tmp/install.bat pre-install.ps1 tmp/winsoft-config.ini tmp/$(EXE)
+%.zip: Makefile tmp/install.bat pre-install.ps1 post-install.ps1 tmp/winsoft-config.ini tmp/$(EXE)
 	@rm -f $@
-	@zip -Xr ./$@ pre-install.ps1
+	@zip -Xr ./$@ pre-install.ps1 post-install.ps1
 	@(cd tmp; zip -Xr ../$@ install.bat winsoft-config.ini $(EXE))
 	@chmod ugo+rw $@
