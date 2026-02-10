@@ -22,3 +22,4 @@ Example :
  | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
  | HKLM | Zoom Workplace (64-bit) | Zoom | 6.1.43316 | `{6FC53F6B-CC58-43A0-B23E-84B95825CBFE}` | `MsiExec.exe /X{6FC53F6B-CC58-43A0-B23E-84B95825CBFE}` |
+ | HKLM | Zoom Workplace (64-bit) | Zoom | 6.7.30439 | `{442E6574-0136-4DA6-BFCB-07D667F6B3B0}` | `MsiExec.exe /X{442E6574-0136-4DA6-BFCB-07D667F6B3B0}` |
