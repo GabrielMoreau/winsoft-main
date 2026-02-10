@@ -1,6 +1,6 @@
 
 $TimeStamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
-Write-Output ("Begin Pre-Remove [$TimeStamp]`n" + "=" * 39 + "`n")
+Write-Output ("`nBegin Post-Install [$TimeStamp]`n" + "=" * 40 + "`n")
 
 ########################################################################
 
@@ -71,44 +71,10 @@ Write-Output "Config:`n * Version: $RefVersion`n * RegexSearch: $RefName"
 ########################################################################
 # Put your specific code here
 
-$RefName = 'Zoom Rooms'
-# Remove only Zoom Rooms
-ForEach ($Key in Get-ChildItem -Recurse $UninstallKeys) {
-	$App = Get-ItemProperty -Path $Key.PSPath
-	If ($App.DisplayName -notmatch $RefName) { Continue }
-
-	$DisplayVersion = ToVersion $App.DisplayVersion
-	$KeyProduct     = $Key.PSChildName
-
-	If ($($App.UninstallString) -match 'MsiExec.exe') {
-		$Exe = 'MsiExec.exe'
-		$Args = '/x "' + $KeyProduct + '" /quiet Silent=true AcceptGDPR=true'
-		Write-Output "Remove MSI: $($App.DisplayName) / $DisplayVersion / $KeyProduct / $Exe $Args"
-		Run-Exec -FilePath "$Exe" -ArgumentList "$Args" -Name "$RefName"
-	}
-}
-
-$RefName = $Config.RegexSearch
-# Remove all version
-ForEach ($Key in Get-ChildItem -Recurse $UninstallKeys) {
-	$App = Get-ItemProperty -Path $Key.PSPath
-	If ($App.DisplayName -notmatch $RefName) { Continue }
-
-	$DisplayVersion = ToVersion $App.DisplayVersion
-	$KeyProduct     = $Key.PSChildName
-
-	If ($($App.UninstallString) -match 'MsiExec.exe') {
-		$Exe = 'MsiExec.exe'
-		$Args = '/x "' + $KeyProduct + '" /qn /norestart'
-		Write-Output "Remove MSI: $($App.DisplayName) / $DisplayVersion / $KeyProduct / $Exe $Args"
-		Run-Exec -FilePath "$Exe" -ArgumentList "$Args" -Name "$RefName"
-	}
-}
-
 ########################################################################
 
 # View
-$ReturnCode = 0
+$ReturnCode = 143
 ForEach ($Key in Get-ChildItem -Recurse $UninstallKeys) {
 	$App = Get-ItemProperty -Path $Key.PSPath
 	If ($App.DisplayName -notmatch $RefName) { Continue }
@@ -116,7 +82,14 @@ ForEach ($Key in Get-ChildItem -Recurse $UninstallKeys) {
 	$DisplayVersion = ToVersion $App.DisplayVersion
 	$KeyProduct     = $Key.PSChildName
 	Write-Output "Installed: $($App.DisplayName) / $DisplayVersion / $KeyProduct / $($App.UninstallString)"
-	$ReturnCode = 150
+
+	If ($DisplayVersion -gt $RefVersion) {
+		$ReturnCode = [Math]::Min($ReturnCode, 141)
+	} ElseIf ($DisplayVersion -eq $RefVersion) {
+		$ReturnCode = 0
+	} Else {
+		$ReturnCode = [Math]::Min($ReturnCode, 142)
+	}
 }
 Write-Output "ReturnCode: $ReturnCode"
 Exit $ReturnCode
