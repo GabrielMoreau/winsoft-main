@@ -5,14 +5,15 @@
 
 SOFT:=Zoom
 VERSIONLONG:=$(shell curl -s -L --connect-timeout 10 'https://www.zoom.us/rest/download?os=win' | sed -e 's/[,{}]/\n/g;' | grep -A 5 '^"zoomX64"' | grep '^"version"' | cut -f 4 -d '"' | cut -f 1 -d ' ' | head -1)
-VERSION:=$(shell echo $(VERSIONLONG) | cut -f 1-3 -d '.')
+VERSIONCHECK:=$(shell echo $(VERSIONLONG) | cut -f 1-3 -d '.')
+VERSION:=$(shell echo $(VERSIONLONG) | cut -f 1-2,4 -d '.')
 REVISION:=1
 URL:=https://cdn.zoom.us/prod/$(VERSIONLONG)/x64/ZoomInstallerFull.msi
 
 ZSSOHOST:=$(shell grep -h '^ZSSOHOST' conf.yml ../../winsoft-conf/zoom/conf.yml 2>/dev/null | cut -f 2 -d ':' | sed -e 's/[[:space:]]//g;' | head -1)
 
 EXE:=ZoomInstallerFull-$(VERSION).msi
-REG_SEARCH:=$(SOFT)
+REG_SEARCH:=Zoom\\sWorkplace
 
 IT_TEAM:=IT Support
 LOGDIR:=%WINDIR%\\Logs
@@ -38,6 +39,8 @@ clean:
 
 version:
 	@echo "VERSION: $(VERSION)"
+	@echo "VERSIONLONG: $(VERSIONLONG)"
+	@echo "VERSIONCHECK: $(VERSIONCHECK)"
 	@echo "URL: $(URL)"
 	@echo "EXE: $(EXE)"
 
@@ -61,8 +64,8 @@ tmp/$(EXE):
 check-exe: tmp/$(EXE)
 	@(cd tmp ; \
 		file $(EXE) | grep -q 'Little Endian, Os: Windows, Version 10.0, MSI Installer' || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 12; } ; \
-		file $(EXE) | grep -q 'Subject: Zoom Meetings.*Comments: $(VERSION)' || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 12; } ; \
-		which peres >/dev/null && { peres -v 'CustomAction.dll' 2> /dev/null | grep -q "^Product Version:[[:space:]]*$(VERSION)" || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 12; } ; } ;\
+		file $(EXE) | grep -q 'Subject: Zoom Meetings.*Comments: $(VERSIONCHECK)' || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 12; } ; \
+		which peres >/dev/null && { peres -v 'CustomAction.dll' 2> /dev/null | grep -q "^Product Version:[[:space:]]*$(VERSIONCHECK)" || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 12; } ; } ;\
 		)
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE)
