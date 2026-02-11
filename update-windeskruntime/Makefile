@@ -138,15 +138,10 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE5) tmp/$(EXE6) tmp/$(EXE7) tmp/$(
 
 tmp/winsoft-config.ini: winsoft-config.ini Makefile tmp/$(EXE)
 	@mkdir -p tmp
-	@sed -e 's/__VERSION__/$(VERSION)/; s/__REG_SEARCH__/$(REG_SEARCH)/;' $< > $@
-    
+	@sed -e 's/__VERSION__/$(VERSION)/; s/__REG_SEARCH__/$(REG_SEARCH)/; s/__VERSION5__/$(VERSION5)/; s/__VERSION6__/$(VERSION6)/; s/__VERSION7__/$(VERSION7)/; s/__VERSION8__/$(VERSION8)/;' $< > $@
 
-tmp/post-install.ps1: post-install.ps1 Makefile tmp/$(EXE5) tmp/$(EXE6) tmp/$(EXE7) tmp/$(EXE8)
-	@mkdir -p tmp
-	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#; s/__VERSION5__/$(VERSION5)/; s/__VERSION6__/$(VERSION6)/; s/__VERSION7__/$(VERSION7)/; s/__VERSION8__/$(VERSION8)/;' $< > $@
-
-%.zip: Makefile tmp/install.bat pre-install.ps1 tmp/post-install.ps1 tmp/winsoft-config.ini tmp/$(EXE5) tmp/$(EXE6) tmp/$(EXE7) tmp/$(EXE8)
+%.zip: Makefile tmp/install.bat pre-install.ps1 post-install.ps1 tmp/winsoft-config.ini tmp/$(EXE5) tmp/$(EXE6) tmp/$(EXE7) tmp/$(EXE8)
 	@rm -f $@
 	@zip -Xr ./$@ pre-install.ps1 post-install.ps1
-	@(cd tmp; zip -Xr ../$@ install.bat post-install.ps1 winsoft-config.ini $(EXE5) $(EXE6) $(EXE7) $(EXE8))
+	@(cd tmp; zip -Xr ../$@ install.bat winsoft-config.ini $(EXE5) $(EXE6) $(EXE7) $(EXE8))
 	@chmod ugo+rw $@

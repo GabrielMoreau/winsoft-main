@@ -75,13 +75,15 @@ Write-Output "Config:`n * Version: $RefVersion`n * RegexSearch: $RefName"
 
 # View
 $ReturnCode = 0
+$OutPuts = @()
 ForEach ($Key in Get-ChildItem -Recurse $UninstallKeys) {
 	$App = Get-ItemProperty -Path $Key.PSPath
 	If ($App.DisplayName -notmatch $RefName) { Continue }
 
 	$DisplayVersion = ToVersion $App.DisplayVersion
 	$KeyProduct     = $Key.PSChildName
-	Write-Output "Installed: $($App.DisplayName) / $DisplayVersion / $KeyProduct / $($App.UninstallString)"
+	$OutPuts += "Installed: {0,-56} / {1,-14} / {2} / {3}" -F $App.DisplayName, $DisplayVersion, $KeyProduct, $App.UninstallString
 }
+$OutPuts | Sort-Object
 Write-Output "ReturnCode: $ReturnCode"
 Exit $ReturnCode

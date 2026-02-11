@@ -1,7 +1,17 @@
 
-Write-Output "Begin Post-Install"
+$TimeStamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+Write-Output ("`nBegin Post-Install [$TimeStamp]`n" + "=" * 40 + "`n")
 
-$RefName = 'Microsoft Windows Desktop Runtime'
+########################################################################
+
+# Get Config from file
+Function GetConfig {
+	Param (
+		[Parameter(Mandatory = $True)] [string]$FilePath
+	)
+
+	Return Get-Content "$FilePath" | Where-Object { $_ -Match '=' } | ForEach-Object { $_ -Replace "#.*", "" } | ForEach-Object { $_ -Replace "\\", "\\" } | ConvertFrom-StringData
+}
 
 # Transform string to a version object
 Function ToVersion {
@@ -18,88 +28,135 @@ Function ToVersion {
 	Return [version]$Version
 }
 
+# Run MSI or EXE with timeout control
+Function Run-Exec {
+	Param (
+		[Parameter(Mandatory = $True)] [string]$Name,
+		[Parameter(Mandatory = $True)] [string]$FilePath,
+		[Parameter(Mandatory = $True)] [string]$ArgumentList,
+		[Parameter(Mandatory = $False)] [int]$Timeout = 300
+	)
+
+	$Proc = Start-Process -FilePath "$FilePath" -ArgumentList "$ArgumentList" -WindowStyle 'Hidden' -ErrorAction 'SilentlyContinue' -PassThru
+
+	$Timeouted = $Null # Reset any previously set timeout
+	# Wait up to 180 seconds for normal termination
+	$Proc | Wait-Process -Timeout $Timeout -ErrorAction SilentlyContinue -ErrorVariable Timeouted
+	If ($Timeouted) {
+		# Terminate the process
+		$Proc | Kill
+		Write-Output "Error: kill $Name uninstall exe"
+		Return
+	} ElseIf ($Proc.ExitCode -ne 0) {
+		Write-Output "Error: $Name uninstall return code $($Proc.ExitCode)"
+		Return
+	}
+}
+
+########################################################################
+
+$UninstallKeys = @(
+	'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall'
+	'HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall'
+)
+
+########################################################################
+
+# Get Config: Version
+$Config = GetConfig -FilePath 'winsoft-config.ini'
+$RefVersion = ToVersion $Config.Version
+$RefName = $Config.RegexSearch
+Write-Output "Config:`n * Version: $RefVersion`n * RegexSearch: $RefName"
+
+########################################################################
+# Put your specific code here
+
+$Version5 = $Config.Version5
+$Version6 = $Config.Version6
+$Version7 = $Config.Version7
+$Version8 = $Config.Version8
+
 # Install last version
-@(Get-ChildItem -Recurse 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall';
-  Get-ChildItem -Recurse "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall") |
-	ForEach {
-		$Key = $_
-		$App = (Get-ItemProperty -Path $Key.PSPath)
-		$DisplayName  = $App.DisplayName
-		If (!($DisplayName -match $RefName)) { Return }
+ForEach ($Key in Get-ChildItem -Recurse $UninstallKeys) {
+	$App = Get-ItemProperty -Path $Key.PSPath
+	If ($App.DisplayName -notmatch $RefName) { Continue }
 
-		$DisplayVersion = $App.DisplayVersion
-		$KeyProduct = $Key | Split-Path -Leaf
-		$Uninstall = $App.UninstallString
-		Write-Output "Info: $DisplayName / $DisplayVersion / $KeyProduct / $Uninstall"
+	$DisplayVersion = ToVersion $App.DisplayVersion
+	$KeyProduct     = $Key.PSChildName
 
-		# Only register Key with nice version number
-		If ($Uninstall -match '^MsiExec.exe') { Return }
+	$DisplayName = $App.DisplayName
+	$Uninstall = $App.UninstallString
+	Write-Output "Info: $DisplayName / $DisplayVersion / $KeyProduct / $Uninstall"
 
-		If ($DisplayName -match 'Runtime - 5\..*x64') {
-			If ((ToVersion($DisplayVersion)) -lt (ToVersion('__VERSION5__'))) {
-				$Exe = 'windowsdesktop-runtime-__VERSION5__-win-x64.exe'
-				$Args = '/install /quiet /norestart'
-				If (Test-Path -Path "$Exe") {
-					Write-Output "Warn: Update $RefName $DisplayVersion to version __VERSION5__"
-					Start-Process -FilePath "$Exe" -ArgumentList "$Args" -WindowStyle 'Hidden' -ErrorAction 'SilentlyContinue'
-				}
-			} Else {
-				Write-Output "Note: $RefName already at version $DisplayVersion (>= __VERSION5__)"
+	# Only register Key with nice version number
+	If ($Uninstall -match '^MsiExec.exe') { Continue }
+
+	If ($DisplayName -match 'Runtime - 5\..*x64') {
+		If ($DisplayVersion -lt (ToVersion($Version5))) {
+			$Exe = 'windowsdesktop-runtime-$Version5-win-x64.exe'
+			$Args = '/install /quiet /norestart'
+			If (Test-Path -Path "$Exe") {
+				Write-Output "Warn: Update $RefName $DisplayVersion to version $Version5"
+				Run-Exec -FilePath "$Exe" -ArgumentList "$Args" -Name "$RefName $Version5"
 			}
-		}
-		ElseIf ($DisplayName -match 'Runtime - 6\..*x64') {
-			If ((ToVersion($DisplayVersion)) -lt (ToVersion('__VERSION6__'))) {
-				$Exe = 'windowsdesktop-runtime-__VERSION6__-win-x64.exe'
-				$Args = '/install /quiet /norestart'
-				If (Test-Path -Path "$Exe") {
-					Write-Output "Warn: Update $RefName $DisplayVersion to version __VERSION6__"
-					Start-Process -FilePath "$Exe" -ArgumentList "$Args" -WindowStyle 'Hidden' -ErrorAction 'SilentlyContinue'
-				}
-			} Else {
-				Write-Output "Note: $RefName already at version $DisplayVersion (>= __VERSION6__)"
-			}
-		}
-		ElseIf ($DisplayName -match 'Runtime - 7\..*x64') {
-			If ((ToVersion($DisplayVersion)) -lt (ToVersion('__VERSION7__'))) {
-				$Exe = 'windowsdesktop-runtime-__VERSION7__-win-x64.exe'
-				$Args = '/install /quiet /norestart'
-				If (Test-Path -Path "$Exe") {
-					Write-Output "Warn: Update $RefName $DisplayVersion to version __VERSION7__"
-					Start-Process -FilePath "$Exe" -ArgumentList "$Args" -WindowStyle 'Hidden' -ErrorAction 'SilentlyContinue'
-				}
-			} Else {
-				Write-Output "Note: $RefName already at version $DisplayVersion (>= __VERSION7__)"
-			}
-		}
-		ElseIf ($DisplayName -match 'Runtime - 8\..*x64') {
-			If ((ToVersion($DisplayVersion)) -lt (ToVersion('__VERSION8__'))) {
-				$Exe = 'windowsdesktop-runtime-__VERSION8__-win-x64.exe'
-				$Args = '/install /quiet /norestart'
-				If (Test-Path -Path "$Exe") {
-					Write-Output "Warn: Update $RefName $DisplayVersion to version __VERSION8__"
-					Start-Process -FilePath "$Exe" -ArgumentList "$Args" -WindowStyle 'Hidden' -ErrorAction 'SilentlyContinue'
-				}
-			} Else {
-				Write-Output "Note: $RefName already at version $DisplayVersion (>= __VERSION8__)"
-			}
+		} Else {
+			Write-Output "Note: $RefName already at version $DisplayVersion (>= $Version5)"
 		}
 	}
+	ElseIf ($DisplayName -match 'Runtime - 6\..*x64') {
+		If ($DisplayVersion -lt (ToVersion($Version6))) {
+			$Exe = 'windowsdesktop-runtime-$Version6-win-x64.exe'
+			$Args = '/install /quiet /norestart'
+			If (Test-Path -Path "$Exe") {
+				Write-Output "Warn: Update $RefName $DisplayVersion to version $Version6"
+				Run-Exec -FilePath "$Exe" -ArgumentList "$Args" -Name "$RefName $Version6"
+			}
+		} Else {
+			Write-Output "Note: $RefName already at version $DisplayVersion (>= $Version6)"
+		}
+	}
+	ElseIf ($DisplayName -match 'Runtime - 7\..*x64') {
+		If ($DisplayVersion -lt (ToVersion($Version7))) {
+			$Exe = 'windowsdesktop-runtime-$Version7-win-x64.exe'
+			$Args = '/install /quiet /norestart'
+			If (Test-Path -Path "$Exe") {
+				Write-Output "Warn: Update $RefName $DisplayVersion to version $Version7"
+				Run-Exec -FilePath "$Exe" -ArgumentList "$Args" -Name "$RefName $Version7"
+			}
+		} Else {
+			Write-Output "Note: $RefName already at version $DisplayVersion (>= $Version7)"
+		}
+	}
+	ElseIf ($DisplayName -match 'Runtime - 8\..*x64') {
+		If ($DisplayVersion -lt (ToVersion($Version8))) {
+			$Exe = 'windowsdesktop-runtime-$Version8-win-x64.exe'
+			$Args = '/install /quiet /norestart'
+			If (Test-Path -Path "$Exe") {
+				Write-Output "Warn: Update $RefName $DisplayVersion to version $Version8"
+				Run-Exec -FilePath "$Exe" -ArgumentList "$Args" -Name "$RefName $Version8"
+			}
+		} Else {
+			Write-Output "Note: $RefName already at version $DisplayVersion (>= $Version8)"
+		}
+	}
+}
 
-# View all version
-@(Get-ChildItem -Recurse 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall';
-  Get-ChildItem -Recurse "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall") |
-	ForEach {
-		$Key = $_
-		$App = (Get-ItemProperty -Path $Key.PSPath)
-		$DisplayName  = $App.DisplayName
-		If (!($DisplayName -match $RefName)) { Return }
+########################################################################
 
-		$DisplayVersion = $App.DisplayVersion
-		$KeyProduct = $Key | Split-Path -Leaf
-		$Exe = $App.UninstallString
-		"View: {0,-56} / {1,-14} / {2} / {3}" -F $DisplayName, $DisplayVersion, $KeyProduct, $Exe
-	} | Sort-Object
+# View
+$ReturnCode = 0
+$OutPuts = @()
+ForEach ($Key in Get-ChildItem -Recurse $UninstallKeys) {
+	$App = Get-ItemProperty -Path $Key.PSPath
+	If ($App.DisplayName -notmatch $RefName) { Continue }
 
+	$DisplayVersion = ToVersion $App.DisplayVersion
+	$KeyProduct     = $Key.PSChildName
+	$OutPuts += "Installed: {0,-56} / {1,-14} / {2} / {3}" -F $App.DisplayName, $DisplayVersion, $KeyProduct, $App.UninstallString
+}
+$OutPuts | Sort-Object
+Write-Output "ReturnCode: $ReturnCode"
+Exit $ReturnCode
 
 # Microsoft Windows Desktop Runtime - 6.0.29 (x64)                   / 48.116.12057   / {A0DA3EDD-9C41-491F-A77E-5F90AFDB64B2} / MsiExec.exe /X{A0DA3EDD-9C41-491F-A77E-5F90AFDB64B2}
 # Microsoft Windows Desktop Runtime - 6.0.29 (x64)                   / 6.0.29.33521   / {54679abd-8ed9-4bd3-8400-7684dd7c6f03} / "C:\ProgramData\Package Cache\{54679abd-8ed9-4bd3-8400-7684dd7c6f03}\windowsdesktop-runtime-6.0.29-win-x64.exe"  /uninstall
