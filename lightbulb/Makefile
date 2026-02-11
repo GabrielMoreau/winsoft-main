@@ -15,6 +15,7 @@ EXE1:=LightBulb-Installer-$(VERSION1)-x64.exe
 EXE2:=windowsdesktop-runtime-$(VERSION2)-win-x64.exe
 
 VERSION:=$(shell echo "$(VERSION1).0.0" | cut -f 1,2,3 -d '.').$(shell echo $(VERSION2) | sed 's/\.//g;')
+REG_SEARCH:=($(SOFT)|Microsoft\\sWindows\\sDesktop\\sRuntime\\s-\\s8\\.)
 
 IT_TEAM:=IT Support
 LOGDIR:=%WINDIR%\\Logs
@@ -90,7 +91,12 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE1)
 	@mkdir -p tmp
 	@sed -e 's/__VERSION1__/$(VERSION1)/; s/__VERSION2__/$(VERSION2)/; s#__LOGDIR__#$(LOGDIR)#;' $< > $@
 
-%.zip: Makefile tmp/install.bat tmp/$(EXE1) tmp/$(EXE2)
+tmp/winsoft-config.ini: winsoft-config.ini Makefile tmp/$(EXE)
+	@mkdir -p tmp
+	@sed -e 's/__VERSION__/$(VERSION)/; s/__REG_SEARCH__/$(REG_SEARCH)/;' $< > $@
+
+%.zip: Makefile tmp/install.bat pre-install.ps1 post-install.ps1 tmp/winsoft-config.ini tmp/$(EXE1) tmp/$(EXE2)
 	@rm -f $@
-	@(cd tmp; zip -Xr ../$@ install.bat $(EXE1) $(EXE2))
+	@zip -Xr ./$@ pre-install.ps1 post-install.ps1
+	@(cd tmp; zip -Xr ../$@ install.bat winsoft-config.ini $(EXE1) $(EXE2))
 	@chmod ugo+rw $@
