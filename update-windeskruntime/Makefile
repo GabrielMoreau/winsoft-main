@@ -23,6 +23,7 @@ VERSION8:=8.$(shell basename '$(URL8)' 2>/dev/null | cut -f 3 -d '-' | cut -f 2-
 EXE8:=windowsdesktop-runtime-$(VERSION8)-win-x64.exe
 
 VERSION:=$(shell ./sum-versions $(VERSION5) $(VERSION6) $(VERSION7) $(VERSION8))
+REG_SEARCH:=Microsoft\\sWindows\\sDesktop\\sRuntime
 
 IT_TEAM:=IT Support
 LOGDIR:=%WINDIR%\\Logs
@@ -135,11 +136,17 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE5) tmp/$(EXE6) tmp/$(EXE7) tmp/$(
 	@mkdir -p tmp
 	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#; s/__VERSION5__/$(VERSION5)/; s/__VERSION6__/$(VERSION6)/; s/__VERSION7__/$(VERSION7)/; s/__VERSION8__/$(VERSION8)/;' $< > $@
 
+tmp/winsoft-config.ini: winsoft-config.ini Makefile tmp/$(EXE)
+	@mkdir -p tmp
+	@sed -e 's/__VERSION__/$(VERSION)/; s/__REG_SEARCH__/$(REG_SEARCH)/;' $< > $@
+    
+
 tmp/post-install.ps1: post-install.ps1 Makefile tmp/$(EXE5) tmp/$(EXE6) tmp/$(EXE7) tmp/$(EXE8)
 	@mkdir -p tmp
 	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#; s/__VERSION5__/$(VERSION5)/; s/__VERSION6__/$(VERSION6)/; s/__VERSION7__/$(VERSION7)/; s/__VERSION8__/$(VERSION8)/;' $< > $@
 
-%.zip: Makefile tmp/install.bat tmp/post-install.ps1 tmp/$(EXE5) tmp/$(EXE6) tmp/$(EXE7) tmp/$(EXE8)
+%.zip: Makefile tmp/install.bat pre-install.ps1 tmp/post-install.ps1 tmp/winsoft-config.ini tmp/$(EXE5) tmp/$(EXE6) tmp/$(EXE7) tmp/$(EXE8)
 	@rm -f $@
-	@(cd tmp; zip -Xr ../$@ install.bat post-install.ps1 $(EXE5) $(EXE6) $(EXE7) $(EXE8))
+	@zip -Xr ./$@ pre-install.ps1 post-install.ps1
+	@(cd tmp; zip -Xr ../$@ install.bat post-install.ps1 winsoft-config.ini $(EXE5) $(EXE6) $(EXE7) $(EXE8))
 	@chmod ugo+rw $@
