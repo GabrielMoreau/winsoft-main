@@ -14,6 +14,7 @@ VERSION:=$(shell echo "$(URL)" | cut -f 2 -d '_')
 REVISION:=1
 
 EXE:=FileZilla_$(VERSION)_win64-setup.exe
+REG_SEARCH:=$(SOFT)
 
 IT_TEAM:=IT Support
 LOGDIR:=%WINDIR%\\Logs
@@ -59,8 +60,6 @@ tmp/$(EXE):
 	@(cd tmp ; \
 		rm -f *.exe *.msi 2>/dev/null ; \
 		curl -# -o "$(EXE)" -L "$(URL)" ; \
-		#file $(EXE) | grep -q 'PE32 executable' || echo "Error: bad format for binary $(EXE)" ; \
-		#which peres >/dev/null && { peres -v $(EXE) 2> /dev/null | grep -q "^Product Version:[[:space:]]*$(VERSION)" || echo "Error: bad version for binary $(EXE)" ; } ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
 
@@ -76,10 +75,10 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 
 tmp/winsoft-config.ini: winsoft-config.ini Makefile tmp/$(EXE)
 	@mkdir -p tmp
-	@sed -e 's/__VERSION__/$(VERSION)/;' $< > $@
+	@sed -e 's/__VERSION__/$(VERSION)/; s/__REG_SEARCH__/$(REG_SEARCH)/;' $< > $@
 
-%.zip: Makefile tmp/install.bat post-install.ps1 fzdefaults.xml tmp/winsoft-config.ini tmp/$(EXE)
+%.zip: Makefile tmp/install.bat pre-install.ps1 post-install.ps1 fzdefaults.xml tmp/winsoft-config.ini tmp/$(EXE)
 	@rm -f $@
-	@zip -Xr $@ post-install.ps1 fzdefaults.xml
+	@zip -Xr $@ pre-install.ps1 post-install.ps1 fzdefaults.xml
 	@(cd tmp; zip -Xr ../$@ install.bat winsoft-config.ini $(EXE))
 	@chmod ugo+rw $@
