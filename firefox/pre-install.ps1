@@ -28,6 +28,31 @@ Function ToVersion {
 	Return [version]$Version
 }
 
+# Run MSI or EXE with timeout control
+Function Run-Exec {
+	Param (
+		[Parameter(Mandatory = $True)] [string]$Name,
+		[Parameter(Mandatory = $True)] [string]$FilePath,
+		[Parameter(Mandatory = $True)] [string]$ArgumentList,
+		[Parameter(Mandatory = $False)] [int]$Timeout = 300
+	)
+
+	$Proc = Start-Process -FilePath "$FilePath" -ArgumentList "$ArgumentList" -WindowStyle 'Hidden' -ErrorAction 'SilentlyContinue' -PassThru
+
+	$Timeouted = $Null # Reset any previously set timeout
+	# Wait up to 180 seconds for normal termination
+	$Proc | Wait-Process -Timeout $Timeout -ErrorAction SilentlyContinue -ErrorVariable Timeouted
+	If ($Timeouted) {
+		# Terminate the process
+		$Proc | Kill
+		Write-Output "Error: kill $Name uninstall exe"
+		Return
+	} ElseIf ($Proc.ExitCode -ne 0) {
+		Write-Output "Error: $Name uninstall return code $($Proc.ExitCode)"
+		Return
+	}
+}
+
 ########################################################################
 
 $UninstallKeys = @(
@@ -36,6 +61,15 @@ $UninstallKeys = @(
 )
 
 ########################################################################
+
+# Get Config: Version
+$Config = GetConfig -FilePath 'winsoft-config.ini'
+$RefVersion = ToVersion $Config.Version
+$RefName = $Config.RegexSearch
+Write-Output "Config:`n * Version: $RefVersion`n * RegexSearch: $RefName"
+
+########################################################################
+# Put your specific code here
 
 
 # Remove Policies by register key, only by policies.json
@@ -46,12 +80,7 @@ If (Test-Path 'HKLM:\SOFTWARE\Policies\Mozilla\Firefox\') {
 	Remove-Item -Path 'HKLM:\SOFTWARE\Policies\Mozilla' -Force -Recurse -ErrorAction SilentlyContinue
 }
 
-# Get Config: Version
-$Config = GetConfig -FilePath 'winsoft-config.ini'
-$RefVersion = ToVersion $Config.Version
-$RefName = 'Firefox'
-Write-Output "Config: Version $RefVersion"
-
+########################################################################
 
 # View
 $ReturnCode = 0
@@ -63,6 +92,5 @@ ForEach ($Key in Get-ChildItem -Recurse $UninstallKeys) {
 	$KeyProduct     = $Key.PSChildName
 	Write-Output "Installed: $($App.DisplayName) / $DisplayVersion / $KeyProduct / $($App.UninstallString)"
 }
-
 Write-Output "ReturnCode: $ReturnCode"
 Exit $ReturnCode

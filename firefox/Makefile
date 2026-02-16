@@ -9,6 +9,7 @@ URL:=https://download.mozilla.org/?product=firefox-esr-msi-latest-ssl&os=win64&l
 REVISION:=1
 
 EXE:=Firefox-Setup-$(VERSION)-esr.msi
+REG_SEARCH:=Firefox
 
 IT_TEAM:=IT Support
 LOGDIR:=%WINDIR%\\Logs
@@ -47,7 +48,7 @@ checksum: check-version
 		tail -3 ../checksum.txt ; \
 		)
 
-wget: $(EXE)
+wget: tmp/$(EXE)
 
 tmp/$(EXE):
 	@mkdir -p tmp
@@ -70,9 +71,9 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 
 tmp/winsoft-config.ini: winsoft-config.ini Makefile tmp/$(EXE)
 	@mkdir -p tmp
-	@sed -e 's/__VERSION__/$(VERSION)/;' $< > $@
+	@sed -e 's/__VERSION__/$(VERSION)/; s/__REG_SEARCH__/$(REG_SEARCH)/;' $< > $@
 
-%.zip: Makefile tmp/install.bat tmp/winsoft-config.ini post-install.ps1 policies.json pre-install.ps1 tmp/$(EXE)
+%.zip: Makefile tmp/install.bat pre-install.ps1 post-install.ps1 policies.json tmp/winsoft-config.ini tmp/$(EXE)
 	@rm -f $@
 	@zip -Xr $@ policies.json pre-install.ps1 post-install.ps1
 	@(cd tmp; zip -Xr ../$@ install.bat winsoft-config.ini $(EXE))
