@@ -12,6 +12,7 @@ EXE:=7z$(VERSIONSHORT)-x64.msi
 EXE2:=7z$(VERSIONSHORT)-x64.exe
 URL:=https://www.7-zip.org/a/$(EXE)
 URL2:=https://www.7-zip.org/a/$(EXE2)
+REG_SEARCH:=7-Zip
 
 IT_TEAM:=IT Support
 LOGDIR:=%WINDIR%\\Logs
@@ -52,7 +53,7 @@ checksum: check-version
 		)
 	@if [ $$(( $$(date '+%s') - $$(stat -c '%Y' checksum.txt) )) -lt 60 ]; then tail -6 checksum.txt; fi
 
-wget: $(EXE)
+wget: tmp/$(EXE)
 
 tmp/$(EXE):
 	@mkdir -p tmp
@@ -88,10 +89,10 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE) tmp/$(EXE2)
 
 tmp/winsoft-config.ini: winsoft-config.ini Makefile tmp/$(EXE)
 	@mkdir -p tmp
-	@sed -e 's/__VERSION__/$(VERSION)/; s/__VERSIONSHORT__/$(VERSIONSHORT)/;' $< > $@
+	@sed -e 's/__VERSION__/$(VERSION)/; s/__REG_SEARCH__/$(REG_SEARCH)/; s/__VERSIONSHORT__/$(VERSIONSHORT)/;' $< > $@
 
-%.zip: Makefile tmp/install.bat post-install.ps1 pre-install.ps1 tmp/winsoft-config.ini tmp/$(EXE) tmp/$(EXE2)
+%.zip: Makefile tmp/install.bat pre-install.ps1 post-install.ps1 tmp/winsoft-config.ini tmp/$(EXE) tmp/$(EXE2)
 	@rm -f $@
-	@zip -Xr $@ pre-install.ps1 post-install.ps1
+	@zip -Xr ./$@ pre-install.ps1 post-install.ps1
 	@(cd tmp; zip -Xr ../$@ install.bat winsoft-config.ini $(EXE) $(EXE2))
 	@chmod ugo+rw $@
