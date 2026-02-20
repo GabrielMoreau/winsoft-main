@@ -17,7 +17,6 @@ EXIT /B
 
 @ECHO [BEGIN] %date%-%time%
 
-
 SET softversion=__VERSION__
 
 
@@ -31,6 +30,11 @@ IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET pwrsh=%W
 @ECHO [INFO] Unblock PowerShell Script
 %pwrsh% "Unblock-File -Path .\*.ps1"
 SET RETURNCODE=0
+
+
+@ECHO [INFO] Execute pre-install script
+IF EXIST ".\pre-install.ps1" %pwrsh% -File ".\pre-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
+IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
 
 
 @ECHO [INFO] Silent install %softname%
