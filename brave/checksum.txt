@@ -2,3 +2,4 @@
 fef410d98eb0eaa466e2047f7315fb3b80526216cdbed99a843ddaecf55977e6  BraveBrowserSetup_144.1.86.148.exe
 e6f17db5ec1cf8f3df41ccc7afd2d155d9722e3e374360ae57d9e56d3489b448  BraveBrowserSetup_145.1.87.186.exe
 bf2ac8532389040f4d53f7572a924e6c4568deeade4b909697dfff69ffbc8d48  BraveBrowserSetup_145.1.87.188.exe
+2512598718fb4e27cff5e5b67483dad16e1613e83e74b9e7bd8c5be2efa6c7b1  BraveBrowserSetup_145.1.87.190.exe
