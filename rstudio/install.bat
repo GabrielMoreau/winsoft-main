@@ -28,20 +28,34 @@ IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET pwrsh=%W
 @ECHO [INFO] Add rights
 %pwrsh% Set-ExecutionPolicy RemoteSigned -Force -Scope LocalMachine
 
-@ECHO [INFO] Unblock
+@ECHO [INFO] Unblock PowerShell Script
 %pwrsh% "Unblock-File -Path .\*.ps1"
+SET RETURNCODE=0
 
 
 @ECHO [INFO] Execute pre-install script
-%pwrsh% -File ".\pre-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
+IF EXIST ".\pre-install.ps1" %pwrsh% -File ".\pre-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
+IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
 
 
 @ECHO [INFO] Silent install R
 ScriptRunner.exe -appvscript R-%softversion2%-win.exe /VERYSILENT /NORESTART -appvscriptrunnerparameters -wait -timeout=600
+IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
 
 
 @ECHO [INFO] Silent install %softname%
 ScriptRunner.exe -appvscript RStudio-%softversion1%.exe /S -appvscriptrunnerparameters -wait -timeout=600
+IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
+
+
+:POSTINSTALL
+@ECHO [INFO] Execute post-install script
+IF EXIST ".\pre-install.ps1" (
+  IF EXIST ".\post-install.ps1" %pwrsh% -File ".\post-install.ps1" 1>> "%logdir%\%softname%-PS1.log" 2>&1
+) ELSE (
+  IF EXIST ".\post-install.ps1" %pwrsh% -File ".\post-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
+)
+IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
 
 
 @ECHO [INFO] Remove desktop shortcut for R
@@ -49,5 +63,6 @@ IF EXIST "%PUBLIC%\Desktop\R*%softversion2%.lnk"          DEL /F /Q "%PUBLIC%\De
 IF EXIST "%ALLUSERSPROFILE%\Desktop\R*%softversion2%.lnk" DEL /F /Q "%ALLUSERSPROFILE%\Desktop\R*%softversion2%.lnk"
 
 
+:END
 @ECHO [END] %date%-%time%
-EXIT
+EXIT %RETURNCODE%

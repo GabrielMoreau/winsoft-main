@@ -15,6 +15,7 @@ VERSION:=$(shell echo $(VERSION1)-$(VERSION2) | sed -e 's/-/./g;')
 
 EXE:=RStudio-$(VERSION1).exe
 EXE2:=R-$(VERSION2)-win.exe
+REG_SEARCH:=$(SOFT)
 
 IT_TEAM:=IT Support
 LOGDIR:=%WINDIR%\\Logs
@@ -97,10 +98,10 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE) tmp/$(EXE2)
 
 tmp/winsoft-config.ini: winsoft-config.ini Makefile tmp/$(EXE)
 	@mkdir -p tmp
-	@sed -e 's/__VERSION1__/$(VERSION1)/; s/__VERSION2__/$(VERSION2)/;' $< > $@
+	@sed -e 's/__VERSION__/$(VERSION1)/; s/__VERSION_R__/$(VERSION2)/; s/__REG_SEARCH__/$(REG_SEARCH)/;' $< > $@
 
-%.zip: Makefile tmp/install.bat pre-install.ps1 tmp/winsoft-config.ini tmp/$(EXE) tmp/$(EXE2)
+%.zip: Makefile tmp/install.bat pre-install.ps1 post-install.ps1 tmp/winsoft-config.ini tmp/$(EXE) tmp/$(EXE2)
 	@rm -f $@
-	@zip -Xr ./$@ pre-install.ps1
+	@zip -Xr ./$@ pre-install.ps1 post-install.ps1
 	@(cd tmp; zip -Xr ../$@ install.bat winsoft-config.ini $(EXE) $(EXE2))
 	@chmod ugo+rw $@
