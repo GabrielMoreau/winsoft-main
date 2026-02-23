@@ -28,3 +28,4 @@ Example :
  | HKLM | Octave 9.3.0  | GNU Octave | 9.3.0  | `Octave-9.3.0`  | `"C:\Program Files\GNU Octave\Octave-9.3.0\uninstall.exe" /AllUsers`  |
  | HKLM | Octave 9.4.0  | GNU Octave | 9.4.0  | `Octave-9.4.0`  | `"C:\Program Files\GNU Octave\Octave-9.4.0\uninstall.exe" /AllUsers`  |
  | HKLM | Octave 10.3.0 | GNU Octave | 10.3.0 | `Octave-10.3.0` | `"C:\Program Files\GNU Octave\Octave-10.3.0\uninstall.exe" /AllUsers` |
+ | HKLM | Octave 11.1.0 | GNU Octave | 11.1.0 | `Octave-11.1.0` | `"C:\Program Files\GNU Octave\Octave-11.1.0\uninstall.exe" /AllUsers` |
