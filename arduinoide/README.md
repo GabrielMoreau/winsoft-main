@@ -21,3 +21,4 @@ Example :
  | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
  | HKLM | Arduino IDE | Arduino SA | 2.3.6.0 | `{E99ACD8F-B19E-42F7-8045-524D4650CF31}` | `MsiExec.exe /I{E99ACD8F-B19E-42F7-8045-524D4650CF31}` |
+ | HKLM | Arduino IDE | Arduino SA | 2.3.8.0 | `{B9D6271D-934B-43E1-AB10-37EC6E4BEC71}` | `MsiExec.exe /I{B9D6271D-934B-43E1-AB10-37EC6E4BEC71}` |
