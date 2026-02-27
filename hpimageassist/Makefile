@@ -9,6 +9,7 @@ VERSION:=$(shell basename '$(URL)' 2> /dev/null | cut -f 3 -d '-' | sed -e 's/\.
 REVISION:=1
 
 EXE:=hp-hpia-$(VERSION).exe
+REG_SEARCH:=HP\\sImage\\sAssistant
 
 IT_TEAM:=IT Support
 LOGDIR:=%WINDIR%\\Logs
@@ -65,8 +66,12 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
 	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#;' $< > $@
 
-%.zip: Makefile tmp/install.bat tmp/$(EXE) uninstall.bat
+tmp/winsoft-config.ini: winsoft-config.ini Makefile tmp/$(EXE)
+	@mkdir -p tmp
+	@sed -e 's/__VERSION__/$(VERSION)/; s/__REG_SEARCH__/$(REG_SEARCH)/;' $< > $@
+
+%.zip: Makefile tmp/install.bat pre-install.ps1 post-install.ps1 tmp/winsoft-config.ini tmp/$(EXE) uninstall.bat
 	@rm -f $@
-	@zip -Xr ./$@ uninstall.bat
+	@zip -Xr ./$@ pre-install.ps1 post-install.ps1 uninstall.bat
 	@(cd tmp; zip -Xr ../$@ install.bat $(EXE))
 	@chmod ugo+rw $@
