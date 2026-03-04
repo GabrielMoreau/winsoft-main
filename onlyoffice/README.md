@@ -31,3 +31,5 @@ Example :
  | HKLM | ONLYOFFICE 9.1.0 (x64) | Ascensio System SIA | 9.1.0.168 | `ONLYOFFICE Desktop Editors`             | `msiexec.exe /x {7EBFDA61-D416-6417-6AEC-4D91EBD2D080} AI_UNINSTALLER_CTP=1` |
  | HKLM | ONLYOFFICE             | Ascensio System SIA | 9.2.0.100 | `{0C18A02D-58F1-2AC4-D846-04F1F44686C6}` | `MsiExec.exe /X{0C18A02D-58F1-2AC4-D846-04F1F44686C6}` |
  | HKLM | ONLYOFFICE 9.2.0 (x64) | Ascensio System SIA | 9.2.0.100 | `ONLYOFFICE Desktop Editors`             | `msiexec.exe /x {0C18A02D-58F1-2AC4-D846-04F1F44686C6} AI_UNINSTALLER_CTP=1` |
+ | HKLM | ONLYOFFICE             | Ascensio System SIA | 9.3.1.8   | `{3AA714B2-CD54-0456-29C2-E67A0D51CCB8}` | `MsiExec.exe /X{3AA714B2-CD54-0456-29C2-E67A0D51CCB8}` |
+ | HKLM | ONLYOFFICE 9.3.1 (x64) | Ascensio System SIA | 9.3.1.8   | `ONLYOFFICE Desktop Editors`             | `msiexec.exe /x {3AA714B2-CD54-0456-29C2-E67A0D51CCB8} AI_UNINSTALLER_CTP=1` |
