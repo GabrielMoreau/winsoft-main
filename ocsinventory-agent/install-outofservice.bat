@@ -32,12 +32,8 @@ SC QUERYEX "%servicename%" | FIND "STATE" | FIND "RUNNING" >NUL && (
 )
 SC QUERYEX "%servicename%" | FIND "STATE"
 
-REM Kill process
-TASKKILL /T /F /IM OcsSystray.exe
-TASKKILL /T /F /IM OcsService.exe
-TASKKILL /T /F /IM OcsInventory.exe
-TASKKILL /T /F /IM download.exe
-TASKKILL /T /F /IM inst32.exe
+@ECHO [INFO] Kill running process
+TASKKILL /T /F /IM OcsSystray.exe /IM OcsService.exe /IM OcsInventory.exe /IM download.exe /IM inst32.exe || VER >NUL
 
 
 REM Install again

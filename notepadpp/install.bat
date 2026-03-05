@@ -24,7 +24,7 @@ SET regkey=Notepad++
 
 
 @ECHO [INFO] Kill running process
-TASKKILL /T /F /IM notepad++.exe
+TASKKILL /T /F /IM notepad++.exe || VER >NUL
 
 
 @ECHO [INFO] Search PowerShell

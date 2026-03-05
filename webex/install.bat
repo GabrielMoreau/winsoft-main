@@ -22,7 +22,7 @@ SET process=CiscoCollabHost.exe
 
 
 @ECHO [INFO] Kill running process
-TASKKILL /T /F /IM %process%
+TASKKILL /T /F /IM %process% || VER >NUL
 
 
 @ECHO [INFO] Search PowerShell

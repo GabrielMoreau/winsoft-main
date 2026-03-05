@@ -23,7 +23,7 @@ SET MAX_RETRY=1
 
 
 @ECHO [INFO] Kill running process
-TASKKILL /T /F /IM Acrobat.exe /IM AcroCEF.exe /IM AdobeCollabSync.exe
+TASKKILL /T /F /IM Acrobat.exe /IM AcroCEF.exe /IM AdobeCollabSync.exe  || VER >NUL
 
 
 @ECHO [INFO] Search PowerShell

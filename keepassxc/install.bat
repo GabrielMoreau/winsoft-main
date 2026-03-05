@@ -22,11 +22,7 @@ SET process=KeepassXC.exe
 
 
 REM Kill the current process
-VER | FIND /I "10.0" > NUL
-IF %ERRORLEVEL%==0 TASKKILL /T /F /IM %process%
-
-VER | FIND /I "6.1" > NUL
-IF %ERRORLEVEL%==0 TASKKILL /T /F /IM %process%
+TASKKILL /T /F /IM %process% || VER >NUL
 
 
 @ECHO [INFO] Silent install %softname%

@@ -22,7 +22,7 @@ SET process=Rocket.Chat.exe
 
 
 @ECHO [INFO] Kill the current process
-TASKKILL /T /F /IM %process%
+TASKKILL /T /F /IM %process% || VER >NUL
 
 
 @ECHO [INFO] Search PowerShell

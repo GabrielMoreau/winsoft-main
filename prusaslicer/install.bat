@@ -37,7 +37,7 @@ SET RETURNCODE=0
 
 
 @ECHO [INFO] Kill running process
-TASKKILL /T /F /IM %process%
+TASKKILL /T /F /IM %process% || VER >NUL
 
 @ECHO [INFO] Clean old version before install
 CALL .\uninstall.bat 1> "%logdir%\%softname%-DEL.log" 2>&1

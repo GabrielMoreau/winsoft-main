@@ -23,7 +23,7 @@ SET process=LightBulb.exe
 
 
 @ECHO [INFO] Kill the current process
-TASKKILL /T /F /IM LightBulb.exe /IM %process%
+TASKKILL /T /F /IM LightBulb.exe /IM %process% || VER >NUL
 
 
 @ECHO [INFO] Search PowerShell

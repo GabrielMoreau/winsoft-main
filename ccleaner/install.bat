@@ -23,7 +23,7 @@ SET process=ccleaner.exe
 
 
 @ECHO [INFO] Kill running process
-TASKKILL /T /F /IM %process%
+TASKKILL /T /F /IM %process% || VER >NUL
 
 
 @ECHO [INFO] Silent install %softname%
