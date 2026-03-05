@@ -42,7 +42,7 @@ IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
 
 :REINSTALL
 @ECHO [INFO] Kill running process
-TASKKILL /T /F /IM soffice.bin /IM soffice.exe /IM swriter.exe /IM scalc.exe /IM simpress.exe /IM sdraw.exe /IM smath.exe /IM sbase.exe
+TASKKILL /T /F /IM soffice.bin /IM soffice.exe /IM swriter.exe /IM scalc.exe /IM simpress.exe /IM sdraw.exe /IM smath.exe /IM sbase.exe || VER >NUL
 
 @ECHO [INFO] Silent Install %softname%
 REM https://wiki.documentfoundation.org/Deployment_and_Migration
