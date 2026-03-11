@@ -55,7 +55,7 @@ IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
 @ECHO [INFO] Disable auto update
 REG ADD "HKLM\SOFTWARE\WOW6432Node\TeamViewer" /v AutoUpdateMode /t REG_DWORD /d 3 /f
 REG ADD "HKLM\SOFTWARE\WOW6432Node\TeamViewer" /v UpdateCheckInterval /t REG_DWORD /d 2 /f
-cmd /c "net stop "TeamViewer" && net start "TeamViewer""
+cmd /c "net stop TeamViewer && net start TeamViewer"
 
 
 @ECHO [INFO] Remove desktop shortcut
