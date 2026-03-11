@@ -11,6 +11,7 @@ REVISION:=1
 URL:=$(shell grep '^$(VERSION)[[:space:]]' url.txt | awk '{print $$2}')
 
 EXE:=hp-support-assist-$(VERSION).exe
+REG_SEARCH:=HP\\sSupport\\sAssistant
 
 IT_TEAM:=IT Support
 LOGDIR:=%WINDIR%\\Logs
@@ -21,6 +22,9 @@ LOGDIR:=%WINDIR%\\Logs
 all:  check-update check-version check-exe $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
 
 sinclude ../_common/conf.mk
+
+# OCS configuration
+OCS_SEARCH:=HP Support Assistant
 
 check-version:
 	@echo $(VERSION) | grep -Eq '^[[:digit:]][\.[:digit:]]+[[:digit:]]$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 11)
@@ -80,9 +84,14 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
 	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#;' $< > $@
 
-%.zip: Makefile tmp/install.bat tmp/$(EXE) tmp/setup/InstallHPSA.exe
+tmp/winsoft-config.ini: winsoft-config.ini Makefile tmp/$(EXE)
+	@mkdir -p tmp
+	@sed -e 's/__VERSION__/$(VERSION)/; s/__REG_SEARCH__/$(REG_SEARCH)/;' $< > $@
+
+%.zip: Makefile tmp/install.bat tmp/$(EXE) pre-install.ps1 post-install.ps1 tmp/winsoft-config.ini tmp/setup/InstallHPSA.exe
 	@rm -f $@
-	@(cd tmp; zip -Xr ../$@ install.bat)
+	@zip -Xr ./$@ pre-install.ps1 post-install.ps1
+	@(cd tmp; zip -Xr ../$@ install.bat winsoft-config.ini)
 	@(cd tmp/setup; zip --quiet -r ../../$@ *)
 	@chmod ugo+rw $@
 	@echo -n '  Zip / Number of files: '; unzip -t $@ | grep 'OK' | wc -l
