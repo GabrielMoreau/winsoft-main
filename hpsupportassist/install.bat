@@ -44,7 +44,7 @@ REG ADD "HKLM\SOFTWARE\WOW6432Node\Hewlett-Packard\HPActiveSupport\HPHC" /v Inst
 
 
 @ECHO [INFO] Silent install %softname%
-ScriptRunner.exe -appvscript InstallHPSA.exe /S /v/qn -appvscriptrunnerparameters -wait -timeout=1200
+ScriptRunner.exe -appvscript InstallHPSA.exe /S /v"/qn REBOOT=ReallySuppress /L*v ^"%logdir%\%softname%-MSI.log^"" -appvscriptrunnerparameters -wait -timeout=1200
 IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
 
 
