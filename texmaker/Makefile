@@ -10,6 +10,7 @@ VERSION:=$(shell basename "$(URL)" | cut -f 2 -d '_')
 REVISION:=1
 
 EXE:=Texmaker_$(VERSION)_Win_x64.msi
+REG_SEARCH:=Texmaker
 
 IT_TEAM:=IT Support
 LOGDIR:=%WINDIR%\\Logs
@@ -33,7 +34,7 @@ check-unrealized: check-version
 	@if grep -q '[[:space:]]$(EXE)$$' checksum.txt; then echo 'Ok'; else echo 'Warning: Updates not performed for $(SOFT) version $(VERSION)'; fi
 
 clean:
-	rm -rf $(SOFT)_$(VERSION)-$(REVISION)_x64.zip tmp
+	rm -rf $(SOFT)_$(VERSION)-$(REVISION)_x64.zip tmp resources
 
 version:
 	@echo "VERSION: $(VERSION)"
@@ -48,7 +49,7 @@ checksum: check-version
 		tail -3 ../checksum.txt ; \
 		)
 
-wget: $(EXE)
+wget: tmp/$(EXE)
 
 tmp/$(EXE):
 	@mkdir -p tmp
@@ -60,7 +61,7 @@ tmp/$(EXE):
 
 check-exe: tmp/$(EXE)
 	@(cd tmp ; \
-		file $(EXE) | grep -q "Composite Document File" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 12; } ; \
+		file $(EXE) | grep -q 'Composite Document File' || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 12; } ; \
 		file $(EXE) | grep -q "Texmaker $(VERSION)" || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 12; } ; \
 		)
 
@@ -68,12 +69,12 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
 	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#;' $< > $@
 
-tmp/winsoft-config.psd1: winsoft-config.psd1 Makefile tmp/$(EXE)
+tmp/winsoft-config.ini: winsoft-config.ini Makefile tmp/$(EXE)
 	@mkdir -p tmp
-	@sed -e 's/__VERSION__/$(VERSION)/;' $< > $@
+	@sed -e 's/__VERSION__/$(VERSION)/; s/__REG_SEARCH__/$(REG_SEARCH)/;' $< > $@
 
-%.zip: Makefile tmp/install.bat pre-install.ps1 tmp/winsoft-config.psd1 tmp/$(EXE)
+%.zip: Makefile tmp/install.bat pre-install.ps1 post-install.ps1 tmp/winsoft-config.ini tmp/$(EXE)
 	@rm -f $@
-	@zip -Xr ./$@ pre-install.ps1
-	@(cd tmp; zip -Xr ../$@ install.bat winsoft-config.psd1 $(EXE))
+	@zip -Xr ./$@ pre-install.ps1 post-install.ps1
+	@(cd tmp; zip -Xr ../$@ install.bat winsoft-config.ini $(EXE))
 	@chmod ugo+rw $@
