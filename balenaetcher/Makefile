@@ -10,6 +10,7 @@ REVISION:=1
 URL:=https://github.com/balena-io/etcher/releases/download/v$(VERSION)/balenaEtcher-win32-x64-$(VERSION).zip
 
 EXE:=balenaEtcher-win32-x64-$(VERSION).zip
+REG_SEARCH:=balenaEtcher
 
 IT_TEAM:=IT Support
 LOGDIR:=%WINDIR%\\Logs
@@ -79,11 +80,11 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 
 tmp/winsoft-config.ini: winsoft-config.ini Makefile tmp/$(EXE)
 	@mkdir -p tmp
-	@sed -e 's/__VERSION__/$(VERSION)/;' $< > $@
+	@sed -e 's/__VERSION__/$(VERSION)/; s/__REG_SEARCH__/$(REG_SEARCH)/;' $< > $@
 
-%.zip: Makefile tmp/install.bat pre-install.ps1 tmp/winsoft-config.ini tmp/$(EXE) uninstall.bat tmp/BalenaEtcher/balenaEtcher.exe
+%.zip: Makefile tmp/install.bat pre-install.ps1 post-install.ps1 tmp/winsoft-config.ini tmp/$(EXE) uninstall.bat tmp/BalenaEtcher/balenaEtcher.exe
 	@rm -f $@
-	@zip -Xr $@ uninstall.bat pre-install.ps1
+	@zip -Xr $@ uninstall.bat pre-install.ps1 post-install.ps1
 	@(cd tmp; zip --quiet -r ../$@ install.bat winsoft-config.ini BalenaEtcher)
 	@chmod ugo+rw $@
 	@echo -n '  Zip / Number of files: '; unzip -t $@ | grep 'OK' | wc -l
