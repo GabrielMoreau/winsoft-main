@@ -1,6 +1,6 @@
 
 $TimeStamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
-Write-Output ("Begin Pre-Install [$TimeStamp]`n" + "=" * 39 + "`n")
+Write-Output ("`nBegin Post-Install [$TimeStamp]`n" + "=" * 40 + "`n")
 
 ########################################################################
 
@@ -71,43 +71,10 @@ Write-Output "Config:`n * Version: $RefVersion`n * RegexSearch: $RefName"
 ########################################################################
 # Put your specific code here
 
-$RefName = 'ParaView'
-
-# Remove old ParaView
-@(Get-ChildItem -Recurse 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall';
-  Get-ChildItem -Recurse "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall") |
-	ForEach {
-		$Key = $_
-		$App = (Get-ItemProperty -Path $Key.PSPath)
-		$DisplayName  = $App.DisplayName
-		If (!($DisplayName -match $RefName)) { Return }
-
-		$DisplayVersion = $App.DisplayVersion
-		$KeyProduct = $Key | Split-Path -Leaf
-
-		$Args = '/x "' + $KeyProduct + '" /qn'
-		Write-Output "Remove: $DisplayName / $DisplayVersion / $KeyProduct / $($App.UninstallString)"
-
-		$Proc = Start-Process -FilePath "MsiExec.exe" -ArgumentList "$Args" -WindowStyle 'Hidden' -ErrorAction 'SilentlyContinue' -PassThru
-
-		$Timeouted = $Null # Reset any previously set timeout
-		# Wait up to 180 seconds for normal termination
-		$Proc | Wait-Process -Timeout 300 -ErrorAction SilentlyContinue -ErrorVariable Timeouted
-		If ($Timeouted) {
-			# Terminate the process
-			$Proc | Kill
-			Write-Output "Error: kill $RefName uninstall exe"
-			Return
-		} ElseIf ($Proc.ExitCode -ne 0) {
-			Write-Output "Error: $RefName uninstall return code $($Proc.ExitCode)"
-			Return
-		}
-	}
-
 ########################################################################
 
 # View
-$ReturnCode = 0
+$ReturnCode = 143
 ForEach ($Key in Get-ChildItem -Recurse $UninstallKeys) {
 	$App = Get-ItemProperty -Path $Key.PSPath
 	If ($App.DisplayName -notmatch $RefName) { Continue }
@@ -115,6 +82,14 @@ ForEach ($Key in Get-ChildItem -Recurse $UninstallKeys) {
 	$DisplayVersion = ToVersion $App.DisplayVersion
 	$KeyProduct     = $Key.PSChildName
 	Write-Output "Installed: $($App.DisplayName) / $DisplayVersion / $KeyProduct / $($App.UninstallString)"
+
+	If ($DisplayVersion -gt $RefVersion) {
+		$ReturnCode = [Math]::Min($ReturnCode, 141)
+	} ElseIf ($DisplayVersion -eq $RefVersion) {
+		$ReturnCode = 0
+	} Else {
+		$ReturnCode = [Math]::Min($ReturnCode, 142)
+	}
 }
 Write-Output "ReturnCode: $ReturnCode"
 Exit $ReturnCode
