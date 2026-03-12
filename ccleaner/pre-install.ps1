@@ -1,6 +1,6 @@
 
 $TimeStamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
-Write-Output ("`nBegin Post-Install [$TimeStamp]`n" + "=" * 40 + "`n")
+Write-Output ("Begin Pre-Install [$TimeStamp]`n" + "=" * 39 + "`n")
 
 ########################################################################
 
@@ -71,33 +71,10 @@ Write-Output "Config:`n * Version: $RefVersion`n * RegexSearch: $RefName"
 ########################################################################
 # Put your specific code here
 
-# Copy ini file and fix right for all user
-ForEach ($ProgramPath in "${Env:ProgramFiles}\CCleaner", "${Env:ProgramFiles(x86)}\CCleaner") {
-	If (Test-Path "$ProgramPath") {
-		Write-Output "Copy config file"
-		#Copy-Item "ccleaner-all.ini" -destination "$ProgramPath\CCleaner-all.ini"
-		#Copy-Item "ccleaner-user.ini" -destination  "$ProgramPath\CCleaner-user.ini"
-		Copy-Item "ccleaner.ini" -Destination  "$ProgramPath\CCleaner.ini"
-
-		ICACLS $ProgramPath /grant utilisateurs:m /t /c /q
-	}
-}
-
-# Remove desktop shortcuts
-If (Test-Path "${Env:USERPROFILE}\Desktop\CCleaner.lnk" -PathType leaf) {
-	Write-Output "Remove desktop shortcuts in USERPROFILE"
-	Remove-Item -Path "${Env:USERPROFILE}\Desktop\CCleaner.lnk"
-}
-
-If (Test-Path "C:\Users\Public\Desktop\CCleaner.lnk" -PathType leaf) {
-	Write-Output "Remove desktop shortcuts in Users/Public"
-	Remove-Item -Path "C:\Users\Public\Desktop\CCleaner.lnk"
-}
-
 ########################################################################
 
 # View
-$ReturnCode = 143
+$ReturnCode = 0
 ForEach ($Key in Get-ChildItem -Recurse $UninstallKeys) {
 	$App = Get-ItemProperty -Path $Key.PSPath
 	If ($App.DisplayName -notmatch $RefName) { Continue }
@@ -105,14 +82,6 @@ ForEach ($Key in Get-ChildItem -Recurse $UninstallKeys) {
 	$DisplayVersion = ToVersion $App.DisplayVersion
 	$KeyProduct     = $Key.PSChildName
 	Write-Output "Installed: $($App.DisplayName) / $DisplayVersion / $KeyProduct / $($App.UninstallString)"
-
-	If ($DisplayVersion -gt $RefVersion) {
-		$ReturnCode = [Math]::Min($ReturnCode, 141)
-	} ElseIf ($DisplayVersion -eq $RefVersion) {
-		$ReturnCode = 0
-	} Else {
-		$ReturnCode = [Math]::Min($ReturnCode, 142)
-	}
 }
 Write-Output "ReturnCode: $ReturnCode"
 Exit $ReturnCode
