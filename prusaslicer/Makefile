@@ -14,6 +14,7 @@ REVISION:=1
 VERSION:=$(shell curl -s -L --connect-timeout 10 'https://github.com/prusa3d/PrusaSlicer/releases/latest' | sed 's/</\n/g;' | grep '^meta property.*og:title'  | cut -f 5 -d ' ')
 URL:=https://github.com$(shell curl -s -L --connect-timeout 10 'https://github.com/prusa3d/PrusaSlicer/releases/expanded_assets/version_$(VERSION)' | sed 's/"/\n/g;' | grep '^/.*/PrusaSlicer-$(VERSION).zip')
 EXE:=PrusaSlicer-$(VERSION).zip
+REG_SEARCH:=$(SOFT)
 
 IT_TEAM:=IT Support
 LOGDIR:=%WINDIR%\\Logs
@@ -71,7 +72,7 @@ tmp/PrusaSlicer/prusa-slicer.exe: tmp/$(EXE)
 
 check-exe: tmp/$(EXE) tmp/PrusaSlicer/prusa-slicer.exe
 	@(cd tmp ; \
-		file PrusaSlicer/prusa-slicer.exe | grep -q "PE32+ executable" || { echo "Error: bad format for binary prusa-slicer.exe" 1>&2 ; exit 12; } ; \
+		file PrusaSlicer/prusa-slicer.exe | grep -q 'PE32+ executable' || { echo "Error: bad format for binary prusa-slicer.exe" 1>&2 ; exit 12; } ; \
 		which peres >/dev/null && { peres -v PrusaSlicer/prusa-slicer.exe 2> /dev/null | grep -q "^Product Version:[[:space:]]*$(VERSION)" || { echo "Error: bad version for binary prusa-slicer.exe" 1>&2 ; exit 12; } ; } ;\
 		)
 
@@ -79,10 +80,13 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
 	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#;' $< > $@
 
+tmp/winsoft-config.ini: winsoft-config.ini Makefile tmp/$(EXE)
+	@mkdir -p tmp
+	@sed -e 's/__VERSION__/$(VERSION)/; s/__REG_SEARCH__/$(REG_SEARCH)/;' $< > $@
 
-%.zip: Makefile uninstall.bat tmp/install.bat tmp/$(EXE) tmp/PrusaSlicer/prusa-slicer.exe
+%.zip: Makefile uninstall.bat tmp/install.bat pre-install.ps1 post-install.ps1 tmp/winsoft-config.ini tmp/$(EXE) tmp/PrusaSlicer/prusa-slicer.exe
 	@rm -f $@
-	@zip -Xr ./$@ uninstall.bat
-	@(cd tmp; zip --quiet -r ../$@ install.bat PrusaSlicer)
+	@zip -Xr ./$@ uninstall.bat pre-install.ps1 post-install.ps1
+	@(cd tmp; zip --quiet -r ../$@ install.bat winsoft-config.ini PrusaSlicer)
 	@chmod ugo+rw $@
 	@echo -n '  Zip / Number of files: '; unzip -t $@ | grep 'OK' | wc -l

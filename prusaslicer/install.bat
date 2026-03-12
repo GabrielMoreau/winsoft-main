@@ -36,6 +36,11 @@ IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET pwrsh=%W
 SET RETURNCODE=0
 
 
+@ECHO [INFO] Execute pre-install script
+IF EXIST ".\pre-install.ps1" %pwrsh% -File ".\pre-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
+IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
+
+
 @ECHO [INFO] Kill running process
 TASKKILL /T /F /IM %process% || VER >NUL
 
@@ -50,6 +55,7 @@ IF EXIST "%ProgramFiles%\Prusa3D" (
   MD "%ProgramFiles%\Prusa3D"
 )
 MOVE "%softname%" "%ProgramFiles%\Prusa3D\%softname%"
+IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
 
 @ECHO [INFO] Copy uninstall script
 COPY /A /Y "uninstall.bat" "%ProgramFiles%\Prusa3D\%softname%\uninstall.bat"
@@ -79,5 +85,16 @@ REM HKLM	PrusaSlicer version 2.7.1	Prusa Research s.r.o.	2.7.1	PrusaSlicer_is1	"
 regedit.exe /S "tmp_install.reg"
 
 
+:POSTINSTALL
+@ECHO [INFO] Execute post-install script
+IF EXIST ".\pre-install.ps1" (
+  IF EXIST ".\post-install.ps1" %pwrsh% -File ".\post-install.ps1" 1>> "%logdir%\%softname%-PS1.log" 2>&1
+) ELSE (
+  IF EXIST ".\post-install.ps1" %pwrsh% -File ".\post-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
+)
+IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
+
+
+:END
 @ECHO [END] %date%-%time%
-EXIT
+EXIT %RETURNCODE%
