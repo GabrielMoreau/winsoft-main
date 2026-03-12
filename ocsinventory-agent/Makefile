@@ -12,6 +12,7 @@ REVISION:=1
 URL:=https://github.com/OCSInventory-NG/WindowsAgent/releases/download/$(VERSION)/OCS-Windows-Agent-$(VERSION)_x64.zip
 FOLDER:=OCS-Windows-Agent-$(VERSION)_x64
 EXE:=OCS-Windows-Agent-Setup-$(VERSION)-x64.exe
+REG_SEARCH:=OC\\sInventory\\sNG\\sAgent
 
 IT_TEAM:=IT Support
 LOGDIR:=%WINDIR%\\Logs
@@ -34,7 +35,7 @@ check-unrealized: check-version
 	@if grep -q '[[:space:]]$(EXE)$$' checksum.txt; then echo 'Ok'; else echo 'Warning: Updates not performed for $(SOFT) version $(VERSION)'; fi
 
 clean:
-	rm -rf $(SOFT)_$(VERSION)-$(REVISION)_x64.zip tmp
+	rm -rf $(SOFT)_$(VERSION)-$(REVISION)_x64.zip tmp resources
 
 version:
 	@echo "VERSION: $(VERSION)"
@@ -72,12 +73,16 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
 	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#; s#__OCS_SERVER__#$(OCS_SERVER)#; s/__OCS_SSL__/$(OCS_SSL)/;' $< > $@
 
+tmp/winsoft-config.ini: winsoft-config.ini Makefile tmp/$(EXE)
+	@mkdir -p tmp
+	@sed -e 's/__VERSION__/$(VERSION)/; s/__REG_SEARCH__/$(REG_SEARCH)/;' $< > $@
+
 tmp/install-outofservice.bat: install-outofservice.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
 	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#; s#__OCS_SERVER__#$(OCS_SERVER)#; s/__OCS_SSL__/$(OCS_SSL)/;' $< > $@
 
-%.zip: Makefile post-install.ps1 tmp/install.bat tmp/install-outofservice.bat tmp/$(EXE)
+%.zip: Makefile tmp/install.bat pre-install.ps1 post-install.ps1 tmp/winsoft-config.ini tmp/install-outofservice.bat tmp/$(EXE)
 	@rm -f $@
-	@zip -Xr $@ post-install.ps1
-	@(cd tmp; zip -Xr ../$@ install.bat install-outofservice.bat $(EXE))
+	@zip -Xr ./$@ pre-install.ps1 post-install.ps1
+	@(cd tmp; zip -Xr ../$@ install.bat winsoft-config.ini install-outofservice.bat $(EXE))
 	@chmod ugo+rw $@
