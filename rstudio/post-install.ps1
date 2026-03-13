@@ -71,6 +71,19 @@ Write-Output "Config:`n * Version: $RefVersion`n * RegexSearch: $RefName"
 ########################################################################
 # Put your specific code here
 
+$RefVersion = ToVersion $Config.Version_R
+$RefName = 'R for Windows'
+ForEach ($Key in Get-ChildItem -Recurse $UninstallKeys) {
+	$App = Get-ItemProperty -Path $Key.PSPath
+	If ($App.DisplayName -notmatch $RefName) { Continue }
+
+	$DisplayVersion = ToVersion $App.DisplayVersion
+	$KeyProduct     = $Key.PSChildName
+	Write-Output "Installed: $($App.DisplayName) / $DisplayVersion / $KeyProduct / $($App.UninstallString)"
+}
+
+$RefName = $Config.RegexSearch
+
 ########################################################################
 
 # View
