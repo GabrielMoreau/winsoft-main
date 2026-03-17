@@ -19,3 +19,4 @@ d04e4a735d7a1000685d81a1be02c8298e16aa7173ad81f6ebe7755dec57ea33  OBS-Studio-31.
 71b938e77e1bf48b3e46d17e7faff596f03c4a964213b2919211ec5ac0f8952b  OBS-Studio-32.0.1-Installer.exe
 da31c224edcb9520afa6a0df89c0cc32eac07b5d8e8bc2816c3e55764738a117  OBS-Studio-32.0.2-Installer.exe
 46a18bce8e2ff662b700c91d340a519376e712fe0af0d335536e4f9fd253f10a  OBS-Studio-32.0.4-Installer.exe
+0e3d75eb83951d3fe100cdc7a97fd870f16781bbdcf544fbe101d9b89f9c6231  OBS-Studio-32.1.0-Installer.exe
