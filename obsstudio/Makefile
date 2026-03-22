@@ -11,6 +11,7 @@ VERSION:=$(shell basename $(URL) 2> /dev/null | cut -f 3 -d '-')
 REVISION:=1
 
 EXE:=OBS-Studio-$(VERSION)-Installer.exe
+REG_SEARCH:=OBS\\sStudio
 
 VCREDIST:=
 VCREDIST+=tmp/2015-2022/vc_redist.x64.exe
@@ -72,11 +73,11 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 
 tmp/winsoft-config.ini: winsoft-config.ini Makefile tmp/$(EXE) ../update-visualredist/version.txt
 	@mkdir -p tmp
-	@sed -e "s/__VERSION__/$(VERSION)/; s/__2015-2022-x64__/$$(grep ' 2015-2022-x64 ' ../update-visualredist/version.txt | cut -f 4 -d ' ')/;" $< > $@
+	@sed -e "s/__VERSION__/$(VERSION)/; s/__REG_SEARCH__/$(REG_SEARCH)/; s/__2015-2022-x64__/$$(grep ' 2015-2022-x64 ' ../update-visualredist/version.txt | cut -f 4 -d ' ')/;" $< > $@
 
-%.zip: Makefile global.ini tmp/install.bat pre-install.ps1 tmp/winsoft-config.ini tmp/$(EXE) $(VCREDIST)
+%.zip: Makefile global.ini tmp/install.bat pre-install.ps1 post-install.ps1 tmp/winsoft-config.ini tmp/$(EXE) $(VCREDIST)
 	@rm -f $@
-	@zip -Xr ./$@ global.ini pre-install.ps1
+	@zip -Xr ./$@ global.ini pre-install.ps1 post-install.ps1
 	@(cd tmp; zip -Xr ../$@ install.bat winsoft-config.ini $(EXE) 2015-2022)
 	@chmod ugo+rw $@
 
