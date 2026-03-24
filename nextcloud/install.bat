@@ -18,7 +18,7 @@ EXIT /B
 @ECHO [BEGIN] %date%-%time%
 
 SET softversion=__VERSION__
-
+SET process=nextcloud.exe
 
 @ECHO [INFO] Search PowerShell
 SET pwrsh=%WINDIR%\System32\WindowsPowerShell\V1.0\powershell.exe
@@ -35,6 +35,10 @@ SET RETURNCODE=0
 @ECHO [INFO] Execute pre-install script
 IF EXIST ".\pre-install.ps1" %pwrsh% -File ".\pre-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
 IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
+
+
+@ECHO [INFO] Kill running process
+TASKKILL /T /F /IM %process% || VER >NUL
 
 
 @ECHO [INFO] Silent install %softname%
