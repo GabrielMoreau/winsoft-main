@@ -50,8 +50,18 @@ IF EXIST "LibreOffice_%softversion%_Win_x86-64.msi" (
   ScriptRunner.exe -appvscript MsiExec.exe /i "LibreOffice_%softversion%_Win_x86-64.msi" /qn /norestart /l "%logdir%\%softname%-MSI.log" CREATEDESKTOPLINK=0 RebootYesNo=No ISCHECKFORPRODUCTUPDATES=0 REGISTER_NO_MSO_TYPES=1 REMOVE=gm_o_Onlineupdate SELECT_WORD=0 SELECT_EXCEL=0 SELECT_POWERPOINT=0 USERNAME="LEGI" ADDLOCAL=ALL -appvscriptrunnerparameters -wait -timeout=450
   IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
 ) ELSE (
-    @ECHO [ERROR] Installer is not in the archive!
-    IF %RETURNCODE% EQU 0 SET RETURNCODE=149
+  @ECHO [ERROR] Installer is not in the archive!
+  IF %RETURNCODE% EQU 0 SET RETURNCODE=149
+)
+
+@ECHO [INFO] Check RETURNCODE
+IF %RETURNCODE% NE 0 (
+  IF %MAX_RETRY% NE 0 (
+    @ECHO [WARN] Try installation again
+    SET /A MAX_RETRY-=1
+    SET RETURNCODE=0
+    GOTO REINSTALL
+  )
 )
 
 @ECHO [INFO] Check if installed
