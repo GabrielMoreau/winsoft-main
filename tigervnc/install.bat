@@ -18,7 +18,7 @@ EXIT /B
 @ECHO [BEGIN] %date%-%time%
 
 SET softversion=__VERSION__
-
+SET qexeadmin=__QEXEADMIN__
 
 @ECHO [INFO] Search PowerShell
 SET pwrsh=%WINDIR%\System32\WindowsPowerShell\V1.0\powershell.exe
@@ -55,6 +55,12 @@ IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
 @ECHO [INFO] Remove desktop shortcut
 IF EXIST "%PUBLIC%\Desktop\%softname%.lnk"          DEL /F /Q "%PUBLIC%\Desktop\%softname%.lnk"
 IF EXIST "%ALLUSERSPROFILE%\Desktop\%softname%.lnk" DEL /F /Q "%ALLUSERSPROFILE%\Desktop\%softname%.lnk"
+
+
+:QEXEADMIN
+IF "%qexeadmin%"=="false" (
+  icacls "%ProgramFiles%\TigerVNC\vncviewer.exe" /deny *S-1-5-32-544:(RX)  
+)
 
 
 :END
