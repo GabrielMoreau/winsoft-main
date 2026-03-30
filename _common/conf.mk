@@ -9,6 +9,9 @@ IT_TEAM:=IT Team
 # Log Folder (protect backslash)
 LOGDIR:=%WINDIR%\\Logs
 
+# Admins group could run (true) or not the main executable (false) - true by default
+QEXEADMIN:=true
+
 # OCS Inventory Agent (ocsinventory-agent package)
 OCS_URL:=https://ocs-server.example.com
 OCS_SERVER:=https://ocs-server.example.com/ocsinventory
