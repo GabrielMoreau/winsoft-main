@@ -92,7 +92,7 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE1) tmp/$(EXE2)
 
 tmp/winsoft-config.ini: winsoft-config.ini Makefile tmp/$(EXE) ../update-visualredist/version.txt
 	@mkdir -p tmp
-	@sed -e "s/__VERSION__/$(VERSION)/; s/__REG_SEARCH__/$(REG_SEARCH)/; s/__2015-2022-x64__/$$(grep ' 2015-2022-x64 ' ../update-visualredist/version.txt | cut -f 4 -d ' ')/;" $< > $@
+	@sed -e 's/__VERSION__/$(VERSION)/; s/__REG_SEARCH__/$(REG_SEARCH)/; '"s/__2015-2022-x64__/$$(grep ' 2015-2022-x64 ' ../update-visualredist/version.txt | cut -f 4 -d ' ')/;" $< > $@
 
 %.zip: Makefile tmp/install.bat pre-install.ps1 post-install.ps1 tmp/winsoft-config.ini tmp/$(EXE1) tmp/$(EXE2) $(VCREDIST)
 	@rm -f $@
