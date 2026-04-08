@@ -1,7 +1,9 @@
-# LibreOffice Previous Version (ESR) - Libre Office suite based on the OpenDocument standard
+# LibreOffice Previous Version ESR - Libre Office suite based on the OpenDocument standard
 
 LibreOffice is a free and open-source office productivity software suite.
 LibreOffice uses the OpenDocument standard as its native file format.
+
+This version is the previous stable release, which has been supported for several months (ESR).
 
 * Website : https://www.libreoffice.org/
 * Wikipedia : https://en.wikipedia.org/wiki/LibreOffice
