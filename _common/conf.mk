@@ -40,6 +40,10 @@ SELF_MAKEDIR:=$(dir $(lastword $(MAKEFILE_LIST)))
 sinclude $(SELF_MAKEDIR)../../winsoft-conf/_common/conf.mk
 #sinclude ../../winsoft-conf/_common/conf.mk
 
+# Takes into account software-induced overload
+# Soft K-Lite-CodecPackStandard -> Var QEXEADMIN_KLITECODECPACKSTANDARD
+SOFT_UPPER := $(shell echo "$(SOFT)" | tr '[:lower:]' '[:upper:]' | tr -d '_-')
+QEXEADMIN := $(if $(QEXEADMIN_$(SOFT_UPPER)),$(QEXEADMIN_$(SOFT_UPPER)),$(QEXEADMIN))
 
 # OCS part
 .PHONY: ocs ocs-push
