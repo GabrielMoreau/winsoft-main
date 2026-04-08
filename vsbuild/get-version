@@ -1,0 +1,157 @@
+#!/bin/bash
+#
+# get-version
+#
+# 2024/12/05 Gabriel Moreau <Gabriel.Moreau@univ-grenoble-alpes.fr>
+
+export LANG=C
+
+################################################################
+
+function usage() {
+   cat <<END_USAGE
+get-version - download and get software version
+
+  -e|--exe EXE                 executable to download (mandatory)
+  -u|--url URL                 URL (mandatory)
+  -c|--choco CHOCO-URL         chocolatey URL (mandatory)
+  -s|--shape SoftShape-%v.exe  soft shape in checksum file (mandatory)
+  -h|--help                    help
+END_USAGE
+}
+
+################################################################
+
+function get_choco_version () {
+  local choco_url=$1
+  local soft_shape=$2
+
+  while read -r version hash
+  do
+    if [ -s 'checksum.txt' ] && grep -q "^${hash}" 'checksum.txt'
+    then
+      return
+    fi
+
+    # 131.0.6778.86 9fcf15cb2390b84887b94e8e2f41d01eff325eccdac405e4f9a156dbc209689d
+    # 9fcf15cb2390b84887b94e8e2f41d01eff325eccdac405e4f9a156dbc209689d  googlechromestandaloneenterprise64-131.0.6778.86.msi
+    echo "${hash}  ${soft_shape/%v/${version}}.msi" >> 'checksum.txt'
+  done < <(curl -s -L "${choco_url}" | grep -E '^(\$version|\s\schecksum64)' | cut -f 2 -d ';' | cut -f 1 -d '&' | paste -sd ' ')
+}
+
+################################################################
+################################################################
+
+# Command line
+#action=$1; shift
+OPT_SHORT=e:u:c:s:h
+OPT_LONG=exe:,url:,choco:,shape:,help
+OPT_PARSED=$(getopt --options $OPT_SHORT --longoptions $OPT_LONG --name "$0" -- "$@")
+eval set -- "${OPT_PARSED}"
+
+# get options
+while true
+do
+  case "$1" in
+    -e|--exe)
+      if [ -n "$2" ]
+      then
+        export EXE="$2"
+        shift 2
+      else
+        usage
+        exit 21
+      fi
+      ;;
+    -u|--url)
+      if [ -n "$2" ]
+      then
+        export URL="$2"
+        shift 2
+      else
+        usage
+        exit 22
+      fi
+      ;;
+    -c|--choco)
+      if [ -n "$2" ]
+      then
+        export CHOCO="$2"
+        shift 2
+      else
+        usage
+        exit 23
+      fi
+      ;;
+    -s|--shape)
+      if [ -n "$2" ]
+      then
+        export SHAPE="$2"
+        shift 2
+      else
+        usage
+        exit 24
+      fi
+      ;;
+    -h|--help)
+      usage
+      exit
+      ;;
+    --)
+      shift
+      break
+      ;;
+  esac
+done
+shift $((OPTIND -1))
+
+################################################################
+
+[ -z "${EXE}" ]   && { usage; exit 31; }
+[ -z "${URL}" ]   && { usage; exit 32; }
+#[ -z "${CHOCO}" ] && { usage; exit 33; }
+[ -z "${SHAPE}" ] && { usage; exit 34; }
+
+
+################################################################
+
+# Download
+mkdir -p tmp
+(cd tmp || exit 40;
+  [ -e "timestamp.sig" ] \
+    || touch -t "$(date +%Y)01010000" timestamp.sig
+
+  curl -s --time-cond "${EXE}" -o "${EXE}" -L "${URL}"
+
+  newsha=$(shasum -a 256 "${EXE}" | cut -f 1 -d ' ')
+  if [ -s "../checksum.txt" ] && grep -q "^${newsha}[[:space:]]" ../checksum.txt
+  then
+    touch --reference timestamp.sig "${EXE}"
+  else
+    touch --reference "${EXE}" timestamp.sig
+  fi
+  )
+
+# Verify
+if [ -s "tmp/${EXE}" ]
+then
+  VERSION=$(cd tmp || echo ''; peres -v  "${EXE}" | grep '^Product Version:' | awk '{print $3}')
+  if echo "${VERSION}" | grep -q '^[[:digit:]][[:digit:]\.]*'
+  then
+    echo "${VERSION}"
+  else
+    HASHEXE=$(cd tmp || exit 40; shasum -a 256 "${EXE}" | cut -f 1 -d ' ')
+    # get new version from chocolatey
+    [ -n "${CHOCO}" ] && { grep -q "^${HASHEXE}" 'checksum.txt' || get_choco_version "${CHOCO}" "${SHAPE}"; }
+
+    VERSION=$(grep "^${HASHEXE}" 'checksum.txt' | cut -f 2 -d '-' | sed -e 's/\.\(msi\|exe\|zip\)$//;')
+    if echo "${VERSION}" | grep -q '^[[:digit:]][[:digit:]\.]*'
+    then
+      echo "${VERSION}"
+    else
+      echo ''
+    fi
+  fi
+else
+  echo ''
+fi
