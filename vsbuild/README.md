@@ -40,4 +40,4 @@ Example :
 
  | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
- | HKLM | Visual Studio Build Tools 2026 | Microsoft Corporation | 18.4.3 | `2dc8badd` | `"C:\Program Files (x86)\Microsoft Visual Studio\Installer\setup.exe" uninstall --installPath "C:\Program Files (x86)\Microsoft Visual Studio\18\BuildTools"` | 
+ | HKLM | Visual Studio Build Tools 2026 | Microsoft Corporation | 18.4.3 | `2dc8badd` | `"C:\Program Files (x86)\Microsoft Visual Studio\Installer\setup.exe" uninstall --installPath "C:\Program Files (x86)\Microsoft Visual Studio\18\BuildTools"` |

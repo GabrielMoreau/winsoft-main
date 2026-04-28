@@ -2,7 +2,7 @@
 
 Python is a free and open source high-level, general-purpose programming language.
 Its design philosophy emphasizes code readability with the use of significant indentation. Python is dynamically type-checked and garbage-collected.
-It supports multiple programming paradigms, including structured (particularly procedural), object-oriented and functional programming. 
+It supports multiple programming paradigms, including structured (particularly procedural), object-oriented and functional programming.
 
 * Website : https://www.python.org/
 * Wikipedia : https://en.wikipedia.org/wiki/Python_(programming_language)
