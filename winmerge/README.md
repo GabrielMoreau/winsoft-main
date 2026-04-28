@@ -23,3 +23,4 @@ Example :
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
  | HKLM | WinMerge 2.16.46.0 x64 | Thingamahoochie Software | 2.16.46.0 | `WinMerge_is1` | `"C:\Program Files\WinMerge\unins000.exe"` |
  | HKLM | WinMerge 2.16.48.2 x64 | Thingamahoochie Software | 2.16.48.2 | `WinMerge_is1` | `"C:\Program Files\WinMerge\unins000.exe"` |
+ | HKLM | WinMerge x64           | Thingamahoochie Software | 2.16.56.0 | `WinMerge_is1` | `"C:\Program Files\WinMerge\unins000.exe"` |

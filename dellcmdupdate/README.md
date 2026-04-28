@@ -27,3 +27,4 @@ Example :
  | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
  | HKLM | Dell Command \| Update | Dell Inc. | 5.4.0 | `{AD1F63E4-F31F-48A2-BB8D-CF7B96CC46A0}` | `MsiExec.exe /X{AD1F63E4-F31F-48A2-BB8D-CF7B96CC46A0}` |
+ | HKLM | Dell Command \| Update | Dell Inc. | 5.7.0 | `{96322198-2DBD-4C30-8BAA-E61A5340C663}` | `MsiExec.exe /X{96322198-2DBD-4C30-8BAA-E61A5340C663}` |
