@@ -59,7 +59,7 @@ IF EXIST "%ALLUSERSPROFILE%\Desktop\%softname%.lnk" DEL /F /Q "%ALLUSERSPROFILE%
 
 :QEXEADMIN
 IF "%qexeadmin%"=="false" (
-  icacls "%ProgramFiles%\TigerVNC\vncviewer.exe" /deny *S-1-5-32-544:(RX)  
+  icacls "%ProgramFiles%\TigerVNC\vncviewer.exe" /deny *S-1-5-32-544:(RX)
 )
 
 
