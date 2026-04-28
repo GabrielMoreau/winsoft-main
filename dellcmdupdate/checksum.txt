@@ -19,3 +19,5 @@ ec0d3238acbf55247eb57c5dbbe294504d0e8e48631094e0ee4c90f0764d83ef  windowsdesktop
 36cb04562b6f4e93748517a0e1b417de2b5a06a5bf6e9bf7d0ec8f8bc5e4587c  windowsdesktop-runtime-8.0.23-win-x64.exe
 4a53b5af35f70641fb1cf392d0ecf5d0c6c630383500eda4f8dbb683f37dccbb  windowsdesktop-runtime-8.0.24-win-x64.exe
 2b118648b91d43a773fce18a7e934e80f9aff590ee6500c221693074310a6cfe  windowsdesktop-runtime-8.0.25-win-x64.exe
+b6d0d06edf25a7d9092208b2686502e031deda5ccb2d283ba8a434b27891f3cf  Dell-Command-Update-Application_RXT5N_WIN64_5.7.0_A00.EXE
+1c20cd6d8f04adbceddacb69ef8799aafe5d6c7e898ab5434d5fd57d53b674d5  windowsdesktop-runtime-8.0.26-win-x64.exe
