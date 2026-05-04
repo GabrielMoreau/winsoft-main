@@ -18,6 +18,7 @@ EXIT /B
 @ECHO [BEGIN] %date%-%time%
 
 SET softversion=__VERSION__
+SET qexeadmin=__QEXEADMIN__
 
 
 @ECHO [INFO] Search PowerShell
@@ -70,6 +71,14 @@ IF EXIST "%PUBLIC%\Desktop\Google*Chrome.lnk"          DEL /F /Q "%PUBLIC%\Deskt
 IF EXIST "%ALLUSERSPROFILE%\Desktop\Google*Chrome.lnk" DEL /F /Q "%ALLUSERSPROFILE%\Desktop\Google*Chrome.lnk"
 IF EXIST "%PUBLIC%\Desktop\Google*Updater.lnk"          DEL /F /Q "%PUBLIC%\Desktop\Google*Updater.lnk"
 IF EXIST "%ALLUSERSPROFILE%\Desktop\Google*Updater.lnk" DEL /F /Q "%ALLUSERSPROFILE%\Desktop\Google*Updater.lnk"
+
+
+:QEXEADMIN
+IF "%qexeadmin%"=="false" (
+  IF EXIST "%ProgramFiles%\Google\Chrome\Application\chrome.exe" (
+    icacls "%ProgramFiles%\Google\Chrome\Application\chrome.exe" /deny *S-1-5-32-544:(RX)
+  )
+)
 
 
 :END
