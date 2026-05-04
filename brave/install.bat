@@ -18,6 +18,7 @@ EXIT /B
 @ECHO [BEGIN] %date%-%time%
 
 SET softversion=__VERSION__
+SET qexeadmin=__QEXEADMIN__
 
 
 @ECHO [INFO] Search PowerShell
@@ -58,6 +59,14 @@ IF EXIST ".\brave-parameters.reg" regedit.exe /S ".\brave-parameters.reg"
 @ECHO [INFO] Remove desktop shortcut
 IF EXIST "%PUBLIC%\Desktop\%softname%.lnk"          DEL /F /Q "%PUBLIC%\Desktop\%softname%.lnk"
 IF EXIST "%ALLUSERSPROFILE%\Desktop\%softname%.lnk" DEL /F /Q "%ALLUSERSPROFILE%\Desktop\%softname%.lnk"
+
+
+:QEXEADMIN
+IF "%qexeadmin%"=="false" (
+  IF EXIST "%ProgramFiles%\BraveSoftware\Brave-Browser\Application\brave.exe" (
+    icacls "%ProgramFiles%\BraveSoftware\Brave-Browser\Application\brave.exe" /deny *S-1-5-32-544:(RX)
+  )
+)
 
 
 :END
