@@ -19,6 +19,7 @@ EXIT /B
 
 SET softversion=__VERSION__
 SET process=thunderbird.exe
+SET qexeadmin=__QEXEADMIN__
 
 
 @ECHO [INFO] Kill the current process
@@ -70,6 +71,14 @@ IF EXIST ".\pre-install.ps1" (
   IF EXIST ".\post-install.ps1" %pwrsh% -File ".\post-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
 )
 IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
+
+
+:QEXEADMIN
+IF "%qexeadmin%"=="false" (
+  IF EXIST "%ProgramFiles%\Mozilla Thunderbird\thunderbird.exe" (
+    icacls "%ProgramFiles%\Mozilla Thunderbird\thunderbird.exe" /deny *S-1-5-32-544:(RX)
+  )
+)
 
 
 :END
