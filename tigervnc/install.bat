@@ -20,6 +20,7 @@ EXIT /B
 SET softversion=__VERSION__
 SET qexeadmin=__QEXEADMIN__
 
+
 @ECHO [INFO] Search PowerShell
 SET pwrsh=%WINDIR%\System32\WindowsPowerShell\V1.0\powershell.exe
 IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET pwrsh=%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe
@@ -59,7 +60,9 @@ IF EXIST "%ALLUSERSPROFILE%\Desktop\%softname%.lnk" DEL /F /Q "%ALLUSERSPROFILE%
 
 :QEXEADMIN
 IF "%qexeadmin%"=="false" (
-  icacls "%ProgramFiles%\TigerVNC\vncviewer.exe" /deny *S-1-5-32-544:(RX)
+  IF EXIST "%ProgramFiles%\TigerVNC\vncviewer.exe" (
+    icacls "%ProgramFiles%\TigerVNC\vncviewer.exe" /deny *S-1-5-32-544:(RX)
+  )
 )
 
 
