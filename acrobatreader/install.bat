@@ -17,8 +17,8 @@ EXIT /B
 
 @ECHO [BEGIN] %date%-%time%
 
-
 SET softversion=__VERSION__
+SET qexeadmin=__QEXEADMIN__
 SET MAX_RETRY=1
 
 
@@ -96,6 +96,14 @@ IF EXIST "%PUBLIC%\Desktop\Adobe*Reader*.lnk"          DEL /F /Q "%PUBLIC%\Deskt
 IF EXIST "%ALLUSERSPROFILE%\Desktop\Adobe*Reader*.lnk" DEL /F /Q "%ALLUSERSPROFILE%\Desktop\Adobe*Reader*.lnk"
 IF EXIST "%PUBLIC%\Desktop\Adobe*Acrobat.lnk"           DEL /F /Q "%PUBLIC%\Desktop\Adobe*Acrobat.lnk"
 IF EXIST "%ALLUSERSPROFILE%\Desktop\Adobe*Acrobat.lnk"  DEL /F /Q "%ALLUSERSPROFILE%\Desktop\Adobe*Acrobat.lnk"
+
+
+:QEXEADMIN
+IF "%qexeadmin%"=="false" (
+  IF EXIST "%ProgramFiles%\Adobe\Acrobat DC\Acrobat\Acrobat.exe" (
+    icacls "%ProgramFiles%\Adobe\Acrobat DC\Acrobat\Acrobat.exe" /deny *S-1-5-32-544:(RX)
+  )
+)
 
 
 :END
