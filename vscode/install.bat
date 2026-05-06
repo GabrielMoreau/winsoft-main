@@ -18,6 +18,7 @@ EXIT /B
 @ECHO [BEGIN] %date%-%time%
 
 SET softversion=__VERSION__
+SET qexeadmin=__QEXEADMIN__
 
 
 @ECHO [INFO] Search PowerShell
@@ -50,6 +51,14 @@ IF EXIST ".\pre-install.ps1" (
   IF EXIST ".\post-install.ps1" %pwrsh% -File ".\post-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
 )
 IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
+
+
+:QEXEADMIN
+IF "%qexeadmin%"=="false" (
+  IF EXIST "%ProgramFiles%\Microsoft VS Code\Code.exe" (
+    icacls "%ProgramFiles%\Microsoft VS Code\Code.exe" /deny *S-1-5-32-544:(RX)
+  )
+)
 
 
 :END
