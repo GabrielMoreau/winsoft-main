@@ -76,7 +76,7 @@ IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
 :QEXEADMIN
 IF "%qexeadmin%"=="false" (
   IF EXIST "%ProgramFiles%\Mozilla Thunderbird\thunderbird.exe" (
-    icacls "%ProgramFiles%\Mozilla Thunderbird\thunderbird.exe" /deny *S-1-5-32-544:(RX)
+    icacls "%ProgramFiles%\Mozilla Thunderbird\thunderbird.exe" /deny "*S-1-5-32-544:(RX)"
   )
 )
 

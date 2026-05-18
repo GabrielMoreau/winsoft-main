@@ -76,7 +76,7 @@ IF EXIST "%ALLUSERSPROFILE%\Desktop\Google*Updater.lnk" DEL /F /Q "%ALLUSERSPROF
 :QEXEADMIN
 IF "%qexeadmin%"=="false" (
   IF EXIST "%ProgramFiles%\Google\Chrome\Application\chrome.exe" (
-    icacls "%ProgramFiles%\Google\Chrome\Application\chrome.exe" /deny *S-1-5-32-544:(RX)
+    icacls "%ProgramFiles%\Google\Chrome\Application\chrome.exe" /deny "*S-1-5-32-544:(RX)"
   )
 )
 
