@@ -20,6 +20,7 @@ EXIT /B
 REM https://support.zoom.us/hc/fr/articles/201362163-Installation-et-configuration-de-masse-pour-Windows
 
 SET softversion=__VERSION__
+SET qexeadmin=__QEXEADMIN__
 
 
 @ECHO [INFO] Search PowerShell
@@ -52,6 +53,14 @@ IF EXIST ".\pre-install.ps1" (
   IF EXIST ".\post-install.ps1" %pwrsh% -File ".\post-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
 )
 IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
+
+
+:QEXEADMIN
+IF "%qexeadmin%"=="false" (
+  IF EXIST "%ProgramFiles%\Zoom\bin\Zoom.exe" (
+    icacls "%ProgramFiles%\Zoom\bin\Zoom.exe" /deny "*S-1-5-32-544:(RX)"
+  )
+)
 
 
 :END
