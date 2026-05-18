@@ -33,6 +33,14 @@ IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET pwrsh=%W
 SET RETURNCODE=0
 
 
+:QEXEADMRESET
+IF "%qexeadmin%"=="false" (
+  IF EXIST "%ProgramFiles%\Microsoft VS Code\Code.exe" (
+    icacls "%ProgramFiles%\Microsoft VS Code\Code.exe" /reset || VER >NUL
+  )
+)
+
+
 @ECHO [INFO] Execute pre-install script
 IF EXIST ".\pre-install.ps1" %pwrsh% -File ".\pre-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
 IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
