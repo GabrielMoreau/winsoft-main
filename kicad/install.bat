@@ -16,10 +16,13 @@ EXIT /B
 
 @ECHO [BEGIN] %date%-%time%
 
-SET softversion=__VERSION__
-SET qexeadmin=__QEXEADMIN__
-SET mainexe=%ProgramFiles%\KiCad\__VERSIONSHORT__\bin\kicad.exe
-SET mainexe2=%ProgramFiles%\KiCad\__VERSIONSHORT__\bin\kicad-cli.exe
+SET "softversion=__VERSION__"
+SET "qexeadmin=__QEXEADMIN__"
+SET "mainexe=^
+%ProgramFiles%\KiCad\__VERSIONSHORT__\bin\kicad.exe;^
+%ProgramFiles%\KiCad\__VERSIONSHORT__\bin\kicad-cli.exe^
+%ProgramFiles%\KiCad\__VERSIONSHORT__\bin\gerbview.exe^
+"
 
 
 @ECHO [INFO] Search PowerShell
@@ -36,13 +39,13 @@ SET RETURNCODE=0
 
 :QEXEADMRESET
 IF "%qexeadmin%"=="false" (
-  IF EXIST "%mainexe%" (
-    @ECHO [INFO] Reset ACL on the user software
-    icacls "%mainexe%" /reset || VER >NUL
-    icacls "%mainexe2%" /reset || VER >NUL
+  FOR %%F in ("%mainexe:;=" "%") do (
+    IF EXIST "%%~F" (
+      @ECHO [INFO] Reset ACL on %%~F
+      icacls "%%~F" /reset || VER >NUL
+    )
   )
 )
-
 
 @ECHO [INFO] Execute pre-install script
 IF EXIST ".\pre-install.ps1" %pwrsh% -File ".\pre-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
@@ -71,10 +74,11 @@ IF EXIST "%ALLUSERSPROFILE%\Desktop\KiCad *.lnk" DEL /F /Q "%ALLUSERSPROFILE%\De
 
 :QEXEADMIN
 IF "%qexeadmin%"=="false" (
-  IF EXIST "%mainexe%" (
-    @ECHO [INFO] Restrict ACL on the user software for admin
-    icacls "%mainexe%" /deny "*S-1-5-32-544:(RX)" || VER >NUL
-    icacls "%mainexe2%" /deny "*S-1-5-32-544:(RX)" || VER >NUL
+  FOR %%F in ("%mainexe:;=" "%") do (
+    IF EXIST "%%~F" (
+      @ECHO [INFO] Restrict ACL for admin on %%~F
+      icacls "%%~F" /deny "*S-1-5-32-544:(RX)" || VER >NUL
+    )
   )
 )
 
