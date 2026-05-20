@@ -7,6 +7,7 @@ SOFT:=KiCad
 #URL:=$(shell curl -s -L --connect-timeout 10 'https://www.kicad.org/download/windows/' | sed -e 's/"/\n/g;' | grep '^https://github.com/.*/kicad-.*-x86_64.exe' | head -1)
 URL:=$(shell curl -s -L --connect-timeout 10 'https://api.github.com/repos/KiCad/kicad-source-mirror/releases/latest' | grep 'browser_download_url.*x86_64.exe' | cut -f 4 -d '"' | head -1)
 VERSION:=$(shell basename '$(URL)' 2> /dev/null | cut -f 2 -d '-')
+VERSIONSHORT:=$(shell echo '$(VERSION)' 2> /dev/null | cut -f 1,2 -d '.')
 REVISION:=1
 EXE:=kicad-$(VERSION)-x86_64.exe
 REG_SEARCH:=$(SOFT)
@@ -35,6 +36,7 @@ clean:
 
 version:
 	@echo "VERSION: $(VERSION)"
+	@echo "VERSIONSHORT: $(VERSIONSHORT)"
 	@echo "URL: $(URL)"
 	@echo "EXE: $(EXE)"
 
@@ -64,7 +66,7 @@ check-exe: tmp/$(EXE)
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
-	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#;' $< > $@
+	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#; s/__QEXEADMIN__/$(QEXEADMIN)/; s/__VERSIONSHORT__/$(VERSIONSHORT)/;' $< > $@
 
 tmp/winsoft-config.ini: winsoft-config.ini Makefile tmp/$(EXE)
 	@mkdir -p tmp

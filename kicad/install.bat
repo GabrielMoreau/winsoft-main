@@ -17,6 +17,9 @@ EXIT /B
 @ECHO [BEGIN] %date%-%time%
 
 SET softversion=__VERSION__
+SET qexeadmin=__QEXEADMIN__
+SET mainexe=%ProgramFiles%\KiCad\__VERSIONSHORT__\bin\kicad.exe
+SET mainexe2=%ProgramFiles%\KiCad\__VERSIONSHORT__\bin\kicad-cli.exe
 
 
 @ECHO [INFO] Search PowerShell
@@ -29,6 +32,16 @@ IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET pwrsh=%W
 @ECHO [INFO] Unblock PowerShell Script
 %pwrsh% "Unblock-File -Path .\*.ps1"
 SET RETURNCODE=0
+
+
+:QEXEADMRESET
+IF "%qexeadmin%"=="false" (
+  IF EXIST "%mainexe%" (
+    @ECHO [INFO] Reset ACL on the user software
+    icacls "%mainexe%" /reset || VER >NUL
+    icacls "%mainexe2%" /reset || VER >NUL
+  )
+)
 
 
 @ECHO [INFO] Execute pre-install script
@@ -54,6 +67,16 @@ IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
 @ECHO [INFO] Remove desktop shortcut
 IF EXIST "%PUBLIC%\Desktop\KiCad *.lnk"          DEL /F /Q "%PUBLIC%\Desktop\KiCad *.lnk"
 IF EXIST "%ALLUSERSPROFILE%\Desktop\KiCad *.lnk" DEL /F /Q "%ALLUSERSPROFILE%\Desktop\KiCad *.lnk"
+
+
+:QEXEADMIN
+IF "%qexeadmin%"=="false" (
+  IF EXIST "%mainexe%" (
+    @ECHO [INFO] Restrict ACL on the user software for admin
+    icacls "%mainexe%" /deny "*S-1-5-32-544:(RX)" || VER >NUL
+    icacls "%mainexe2%" /deny "*S-1-5-32-544:(RX)" || VER >NUL
+  )
+)
 
 
 :END
