@@ -20,8 +20,9 @@ EXIT /B
 SET softversion=__VERSION__
 SET regkey=PrusaSlicer_is1
 SET shortcut=%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\PrusaSlicer.lnk
-SET mainexe=%ProgramFiles%\Prusa3D\%softname%\prusa-slicer.exe
 SET process=prusa-slicer.exe
+SET qexeadmin=__QEXEADMIN__
+SET mainexe=%ProgramFiles%\Prusa3D\%softname%\prusa-slicer.exe
 
 
 @ECHO [INFO] Search PowerShell
@@ -34,6 +35,15 @@ IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET pwrsh=%W
 @ECHO [INFO] Unblock PowerShell Script
 %pwrsh% "Unblock-File -Path .\*.ps1"
 SET RETURNCODE=0
+
+
+:QEXEADMRESET
+IF "%qexeadmin%"=="false" (
+  IF EXIST "%mainexe%" (
+    @ECHO [INFO] Reset ACL on the user software
+    icacls "%mainexe%" /reset || VER >NUL
+  )
+)
 
 
 @ECHO [INFO] Execute pre-install script
@@ -93,6 +103,15 @@ IF EXIST ".\pre-install.ps1" (
   IF EXIST ".\post-install.ps1" %pwrsh% -File ".\post-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
 )
 IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
+
+
+:QEXEADMIN
+IF "%qexeadmin%"=="false" (
+  IF EXIST "%mainexe%" (
+    @ECHO [INFO] Restrict ACL on the user software for admin
+    icacls "%mainexe%" /deny "*S-1-5-32-544:(RX)" || VER >NUL
+  )
+)
 
 
 :END
