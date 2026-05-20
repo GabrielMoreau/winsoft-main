@@ -83,6 +83,15 @@ ForEach ($Key in Get-ChildItem -Recurse $UninstallKeys) {
 
 	If ($DisplayVersion -ge $RefVersion) { Continue }
 
+	If ($App.DisplayVersion -like '9.0.*') {
+		Write-Output "Remove Manual: $($App.DisplayName) / $DisplayVersion / $($App.UninstallString) - bug in silent uninstall"
+		& icacls "$Env:ProgramFiles\KiCad\9.0" /reset /T /C
+		Remove-Item "$Env:ProgramFiles\KiCad\9.0" -Recurse -Force -ErrorAction SilentlyContinue
+		Remove-Item "$Env:ProgramData\Microsoft\Windows\Start Menu\Programs\KiCad 9.0" -Recurse -Force -ErrorAction SilentlyContinue
+		Remove-Item $Key.PSPath -Recurse -Force -ErrorAction SilentlyContinue
+		Continue
+	}
+
 	If ($($App.UninstallString) -match 'uninstall.exe') { 
 		$UninstallSplit = ($App.UninstallString -Split "exe")[0] -Replace '"', ''
 		$Exe = $UninstallSplit + 'exe'
