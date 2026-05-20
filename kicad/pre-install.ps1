@@ -71,6 +71,27 @@ Write-Output "Config:`n * Version: $RefVersion`n * RegexSearch: $RefName"
 ########################################################################
 # Put your specific code here
 
+$RefVersion = ToVersion $Config.VersionShort
+
+# Remove old version
+ForEach ($Key in Get-ChildItem -Recurse $UninstallKeys) {
+	$App = Get-ItemProperty -Path $Key.PSPath
+	If ($App.DisplayName -notmatch $RefName) { Continue }
+
+	$DisplayVersion = ToVersion $App.DisplayVersion
+	$KeyProduct     = $Key.PSChildName
+
+	If ($DisplayVersion -ge $RefVersion) { Continue }
+
+	If ($($App.UninstallString) -match 'uninstall.exe') { 
+		$UninstallSplit = ($App.UninstallString -Split "exe")[0] -Replace '"', ''
+		$Exe = $UninstallSplit + 'exe'
+		$Args = '/allusers /S'
+		Write-Output "Remove EXE: $($App.DisplayName) / $DisplayVersion / $($App.UninstallString) / $Exe $Args"
+		Run-Exec -FilePath "$Exe" -ArgumentList "$Args" -Name "$RefName"
+	}
+}
+
 ########################################################################
 
 # View

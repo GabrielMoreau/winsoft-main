@@ -70,7 +70,7 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE)
 
 tmp/winsoft-config.ini: winsoft-config.ini Makefile tmp/$(EXE)
 	@mkdir -p tmp
-	@sed -e 's/__VERSION__/$(VERSION)/; s/__REG_SEARCH__/$(REG_SEARCH)/;' $< > $@
+	@sed -e 's/__VERSION__/$(VERSION)/; s/__REG_SEARCH__/$(REG_SEARCH)/; s/__VERSIONSHORT__/$(VERSIONSHORT)/;' $< > $@
 
 %.zip: Makefile tmp/install.bat pre-install.ps1 post-install.ps1 tmp/winsoft-config.ini tmp/$(EXE)
 	@rm -f $@
