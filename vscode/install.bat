@@ -19,6 +19,7 @@ EXIT /B
 
 SET softversion=__VERSION__
 SET qexeadmin=__QEXEADMIN__
+SET mainexe=%ProgramFiles%\Microsoft VS Code\Code.exe
 
 
 @ECHO [INFO] Search PowerShell
@@ -35,8 +36,8 @@ SET RETURNCODE=0
 
 :QEXEADMRESET
 IF "%qexeadmin%"=="false" (
-  IF EXIST "%ProgramFiles%\Microsoft VS Code\Code.exe" (
-    icacls "%ProgramFiles%\Microsoft VS Code\Code.exe" /reset || VER >NUL
+  IF EXIST "%mainexe%" (
+    icacls "%mainexe%" /reset || VER >NUL
   )
 )
 
@@ -63,8 +64,8 @@ IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
 
 :QEXEADMIN
 IF "%qexeadmin%"=="false" (
-  IF EXIST "%ProgramFiles%\Microsoft VS Code\Code.exe" (
-    icacls "%ProgramFiles%\Microsoft VS Code\Code.exe" /deny "*S-1-5-32-544:(RX)"
+  IF EXIST "%mainexe%" (
+    icacls "%mainexe%" /deny "*S-1-5-32-544:(RX)"
   )
 )
 
