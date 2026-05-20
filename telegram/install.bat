@@ -17,12 +17,15 @@ EXIT /B
 
 @ECHO [BEGIN] %date%-%time%
 
-SET softversion=__VERSION__
-SET regkey=Telegram Desktop
-SET shortcut=%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\Telegram.lnk
-SET process=Telegram.exe
-SET qexeadmin=__QEXEADMIN__
-SET mainexe=%ProgramFiles%\%regkey%\Telegram.exe
+SET "softversion=__VERSION__"
+SET "regkey=Telegram Desktop"
+SET "shortcut=%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\Telegram.lnk"
+SET "process=Telegram.exe"
+SET "qexeadmin=__QEXEADMIN__"
+SET "mainexe=%ProgramFiles%\%regkey%\Telegram.exe"
+
+FOR /f "tokens=1 delims=;" %%F IN ("%mainexe%") DO SET "sc_target=%%F"
+
 
 @ECHO [INFO] Kill running process
 TASKKILL /T /F /IM %process% || VER >NUL
@@ -42,9 +45,11 @@ SET RETURNCODE=0
 
 :QEXEADMRESET
 IF "%qexeadmin%"=="false" (
-  IF EXIST "%mainexe%" (
-    @ECHO [INFO] Reset ACL on the user software
-    icacls "%mainexe%" /reset || VER >NUL
+  FOR %%F in ("%mainexe:;=" "%") do (
+    IF EXIST "%%~F" (
+      @ECHO [INFO] Reset ACL on %%~F
+      icacls "%%~F" /reset || VER >NUL
+    )
   )
 )
 
@@ -67,7 +72,7 @@ COPY /A /Y "uninstall.bat" "%ProgramFiles%\%regkey%\uninstall.bat"
 
 @ECHO [INFO] Create shortcut
 IF EXIST "%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs" (
-  %pwrsh% -Command "$WS = New-Object -ComObject WScript.Shell; $SC = $WS.CreateShortcut('%shortcut%'); $SC.TargetPath = '%mainexe%'; $SC.Save();" -ExecutionPolicy Bypass -NoLogo -NonInteractive -NoProfile
+  %pwrsh% -Command "$WS = New-Object -ComObject WScript.Shell; $SC = $WS.CreateShortcut('%shortcut%'); $SC.TargetPath = '%sc_target%'; $SC.Save();" -ExecutionPolicy Bypass -NoLogo -NonInteractive -NoProfile
 )
 
 
@@ -114,9 +119,11 @@ REG QUERY "HKEY_USERS\.DEFAULT\Software\Microsoft\Windows\CurrentVersion\Uninsta
 
 :QEXEADMIN
 IF "%qexeadmin%"=="false" (
-  IF EXIST "%mainexe%" (
-    @ECHO [INFO] Restrict ACL on the user software for admin
-    icacls "%mainexe%" /deny "*S-1-5-32-544:(RX)" || VER >NUL
+  FOR %%F in ("%mainexe:;=" "%") do (
+    IF EXIST "%%~F" (
+      @ECHO [INFO] Restrict ACL for admin on %%~F
+      icacls "%%~F" /deny "*S-1-5-32-544:(RX)" || VER >NUL
+    )
   )
 )
 
