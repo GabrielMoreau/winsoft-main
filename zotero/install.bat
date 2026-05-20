@@ -18,6 +18,8 @@ EXIT /B
 @ECHO [BEGIN] %date%-%time%
 
 SET softversion=__VERSION__
+SET qexeadmin=__QEXEADMIN__
+SET softadminexe=%ProgramFiles%\Zotero\zotero.exe
 
 
 @ECHO [INFO] Search PowerShell
@@ -30,6 +32,15 @@ IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET pwrsh=%W
 @ECHO [INFO] Unblock PowerShell Script
 %pwrsh% "Unblock-File -Path .\*.ps1"
 SET RETURNCODE=0
+
+
+:QEXEADMRESET
+IF "%qexeadmin%"=="false" (
+  IF EXIST "%softadminexe%" (
+    @ECHO [INFO] Reset ACL on the user software
+    icacls "%softadminexe%" /reset || VER >NUL
+  )
+)
 
 
 @ECHO [INFO] Execute pre-install script
@@ -55,6 +66,15 @@ IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
 @ECHO [INFO] Remove desktop shortcut
 IF EXIST "%PUBLIC%\Desktop\%softname%.lnk"          DEL /F /Q "%PUBLIC%\Desktop\%softname%.lnk"
 IF EXIST "%ALLUSERSPROFILE%\Desktop\%softname%.lnk" DEL /F /Q "%ALLUSERSPROFILE%\Desktop\%softname%.lnk"
+
+
+:QEXEADMIN
+IF "%qexeadmin%"=="false" (
+  IF EXIST "%softadminexe%" (
+    @ECHO [INFO] Restrict ACL on the user software for admin
+    icacls "%softadminexe%" /deny "*S-1-5-32-544:(RX)" || VER >NUL
+  )
+)
 
 
 :END
