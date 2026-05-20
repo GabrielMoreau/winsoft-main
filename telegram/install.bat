@@ -21,7 +21,8 @@ SET softversion=__VERSION__
 SET regkey=Telegram Desktop
 SET shortcut=%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\Telegram.lnk
 SET process=Telegram.exe
-
+SET qexeadmin=__QEXEADMIN__
+SET softadminexe=%ProgramFiles%\%regkey%\Telegram.exe
 
 @ECHO [INFO] Kill running process
 TASKKILL /T /F /IM %process% || VER >NUL
@@ -37,6 +38,15 @@ IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET pwrsh=%W
 @ECHO [INFO] Unblock PowerShell Script
 %pwrsh% "Unblock-File -Path .\*.ps1"
 SET RETURNCODE=0
+
+
+:QEXEADMRESET
+IF "%qexeadmin%"=="false" (
+  IF EXIST "%softadminexe%" (
+    @ECHO [INFO] Reset ACL on the user software
+    icacls "%softadminexe%" /reset || VER >NUL
+  )
+)
 
 
 @ECHO [INFO] Execute pre-install script
@@ -95,11 +105,20 @@ IF %ERRORLEVEL% NEQ 0 GOTO GOOD
 REG QUERY "HKEY_USERS\.DEFAULT\Software\Microsoft\Windows\CurrentVersion\Uninstall\{53F49750-6209-4FBF-9CA8-7A333C87D1ED}_is1" /v "UninstallString" | FIND /N "%SystemDrive%\Program Files\Telegram Desktop\unins000.ex" > NUL && (
   @ECHO [INFO] REG DELETE HKU
   REG DELETE "HKEY_USERS\.DEFAULT\Software\Microsoft\Windows\CurrentVersion\Uninstall\{53F49750-6209-4FBF-9CA8-7A333C87D1ED}_is1" /F
-  GOTO END
+  GOTO QEXEADMIN
   )
 
 :GOOD
 @ECHO [INFO] Nice: no reg uninstall key in HKU
+
+
+:QEXEADMIN
+IF "%qexeadmin%"=="false" (
+  IF EXIST "%softadminexe%" (
+    @ECHO [INFO] Restrict ACL on the user software for admin
+    icacls "%softadminexe%" /deny "*S-1-5-32-544:(RX)" || VER >NUL
+  )
+)
 
 
 :END
