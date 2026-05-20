@@ -18,11 +18,33 @@ EXIT /B
 @ECHO [BEGIN] %date%-%time%
 
 SET "softversion=__VERSION__"
+SET "qexeadmin=__QEXEADMIN__"
 SET "installfolder=Xmind"
 SET "regkey=Xmind_is1"
 SET "shortcut=%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\Xmind.lnk"
-SET "sc_target=%ProgramFiles%\%installfolder%\Xmind.exe"
 SET "process=Xmind.exe"
+SET "mainexe=%ProgramFiles%\%installfolder%\Xmind.exe"
+
+
+@ECHO [INFO] Search PowerShell
+SET pwrsh=%WINDIR%\System32\WindowsPowerShell\V1.0\powershell.exe
+IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET pwrsh=%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe
+
+@ECHO [INFO] Add rights
+%pwrsh% Set-ExecutionPolicy RemoteSigned -Force -Scope LocalMachine
+
+@ECHO [INFO] Unblock PowerShell Script
+%pwrsh% "Unblock-File -Path .\*.ps1"
+SET RETURNCODE=0
+
+
+:QEXEADMRESET
+IF "%qexeadmin%"=="false" (
+  IF EXIST "%mainexe%" (
+    @ECHO [INFO] Reset ACL on the user software
+    icacls "%mainexe%" /reset || VER >NUL
+  )
+)
 
 
 @ECHO [INFO] Clean old version before install
@@ -32,7 +54,7 @@ IF EXIST "%ProgramFiles%\%installfolder%" RMDIR /S /Q "%ProgramFiles%\%installfo
 
 @ECHO [INFO] Silent install %softname%
 MOVE pkg "%ProgramFiles%\%installfolder%"
-IF NOT EXIST "%sc_target%" GOTO FAILED
+IF NOT EXIST "%mainexe%" GOTO FAILED
 
 
 @ECHO [INFO] Copy uninstall script
@@ -43,13 +65,9 @@ COPY /A /Y "uninstall.bat"   "%ProgramFiles%\%installfolder%\uninstall.bat"
 ICACLS "%ProgramFiles%\%installfolder%" /grant *S-1-1-0:(OI)(CI)(RX)
 
 
-@ECHO [INFO] Search PowerShell
-SET pwrsh=%WINDIR%\System32\WindowsPowerShell\V1.0\powershell.exe
-IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET pwrsh=%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe
-
 @ECHO [INFO] Create shortcut
 IF EXIST "%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs" (
-  %pwrsh% -Command "$WS = New-Object -ComObject WScript.Shell; $SC = $WS.CreateShortcut('%shortcut%'); $SC.TargetPath = '%sc_target%'; $SC.Save();" -NoLogo -NonInteractive -NoProfile
+  %pwrsh% -Command "$WS = New-Object -ComObject WScript.Shell; $SC = $WS.CreateShortcut('%shortcut%'); $SC.TargetPath = '%mainexe%'; $SC.Save();" -NoLogo -NonInteractive -NoProfile
 )
 
 
@@ -68,6 +86,15 @@ IF EXIST "%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs" (
 >> tmp_install.reg ECHO "Publisher"="XMIND LTD."
 >> tmp_install.reg ECHO.
 regedit.exe /S "tmp_install.reg"
+
+
+:QEXEADMIN
+IF "%qexeadmin%"=="false" (
+  IF EXIST "%mainexe%" (
+    @ECHO [INFO] Restrict ACL on the user software for admin
+    icacls "%mainexe%" /deny "*S-1-5-32-544:(RX)" || VER >NUL
+  )
+)
 
 GOTO END
 
