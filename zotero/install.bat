@@ -19,7 +19,7 @@ EXIT /B
 
 SET softversion=__VERSION__
 SET qexeadmin=__QEXEADMIN__
-SET softadminexe=%ProgramFiles%\Zotero\zotero.exe
+SET mainexe=%ProgramFiles%\Zotero\zotero.exe
 
 
 @ECHO [INFO] Search PowerShell
@@ -36,9 +36,9 @@ SET RETURNCODE=0
 
 :QEXEADMRESET
 IF "%qexeadmin%"=="false" (
-  IF EXIST "%softadminexe%" (
+  IF EXIST "%mainexe%" (
     @ECHO [INFO] Reset ACL on the user software
-    icacls "%softadminexe%" /reset || VER >NUL
+    icacls "%mainexe%" /reset || VER >NUL
   )
 )
 
@@ -70,9 +70,9 @@ IF EXIST "%ALLUSERSPROFILE%\Desktop\%softname%.lnk" DEL /F /Q "%ALLUSERSPROFILE%
 
 :QEXEADMIN
 IF "%qexeadmin%"=="false" (
-  IF EXIST "%softadminexe%" (
+  IF EXIST "%mainexe%" (
     @ECHO [INFO] Restrict ACL on the user software for admin
-    icacls "%softadminexe%" /deny "*S-1-5-32-544:(RX)" || VER >NUL
+    icacls "%mainexe%" /deny "*S-1-5-32-544:(RX)" || VER >NUL
   )
 )
 

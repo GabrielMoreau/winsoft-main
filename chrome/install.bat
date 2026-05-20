@@ -19,6 +19,7 @@ EXIT /B
 
 SET softversion=__VERSION__
 SET qexeadmin=__QEXEADMIN__
+SET mainexe=%ProgramFiles%\Google\Chrome\Application\chrome.exe
 
 
 @ECHO [INFO] Search PowerShell
@@ -35,8 +36,9 @@ SET RETURNCODE=0
 
 :QEXEADMRESET
 IF "%qexeadmin%"=="false" (
-  IF EXIST "%ProgramFiles%\Google\Chrome\Application\chrome.exe" (
-    icacls "%ProgramFiles%\Google\Chrome\Application\chrome.exe" /reset || VER >NUL
+  IF EXIST "%mainexe%" (
+    @ECHO [INFO] Reset ACL on the user software
+    icacls "%mainexe%" /reset || VER >NUL
   )
 )
 
@@ -83,8 +85,9 @@ IF EXIST "%ALLUSERSPROFILE%\Desktop\Google*Updater.lnk" DEL /F /Q "%ALLUSERSPROF
 
 :QEXEADMIN
 IF "%qexeadmin%"=="false" (
-  IF EXIST "%ProgramFiles%\Google\Chrome\Application\chrome.exe" (
-    icacls "%ProgramFiles%\Google\Chrome\Application\chrome.exe" /deny "*S-1-5-32-544:(RX)"
+  IF EXIST "%mainexe%" (
+    @ECHO [INFO] Restrict ACL on the user software for admin
+    icacls "%mainexe%" /deny "*S-1-5-32-544:(RX)" || VER >NUL
   )
 )
 

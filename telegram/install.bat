@@ -22,7 +22,7 @@ SET regkey=Telegram Desktop
 SET shortcut=%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\Telegram.lnk
 SET process=Telegram.exe
 SET qexeadmin=__QEXEADMIN__
-SET softadminexe=%ProgramFiles%\%regkey%\Telegram.exe
+SET mainexe=%ProgramFiles%\%regkey%\Telegram.exe
 
 @ECHO [INFO] Kill running process
 TASKKILL /T /F /IM %process% || VER >NUL
@@ -42,9 +42,9 @@ SET RETURNCODE=0
 
 :QEXEADMRESET
 IF "%qexeadmin%"=="false" (
-  IF EXIST "%softadminexe%" (
+  IF EXIST "%mainexe%" (
     @ECHO [INFO] Reset ACL on the user software
-    icacls "%softadminexe%" /reset || VER >NUL
+    icacls "%mainexe%" /reset || VER >NUL
   )
 )
 
@@ -114,9 +114,9 @@ REG QUERY "HKEY_USERS\.DEFAULT\Software\Microsoft\Windows\CurrentVersion\Uninsta
 
 :QEXEADMIN
 IF "%qexeadmin%"=="false" (
-  IF EXIST "%softadminexe%" (
+  IF EXIST "%mainexe%" (
     @ECHO [INFO] Restrict ACL on the user software for admin
-    icacls "%softadminexe%" /deny "*S-1-5-32-544:(RX)" || VER >NUL
+    icacls "%mainexe%" /deny "*S-1-5-32-544:(RX)" || VER >NUL
   )
 )
 
