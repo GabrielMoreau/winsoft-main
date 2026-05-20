@@ -18,11 +18,9 @@ EXIT /B
 
 SET "softversion=__VERSION__"
 SET "qexeadmin=__QEXEADMIN__"
-SET "mainexe=^
-%ProgramFiles%\KiCad\__VERSIONSHORT__\bin\kicad.exe;^
-%ProgramFiles%\KiCad\__VERSIONSHORT__\bin\kicad-cli.exe^
-%ProgramFiles%\KiCad\__VERSIONSHORT__\bin\gerbview.exe^
-"
+SET "mainexe=%ProgramFiles%\KiCad\__VERSIONSHORT__\bin\kicad.exe"
+SET "mainexe=%mainexe%;%ProgramFiles%\KiCad\__VERSIONSHORT__\bin\kicad-cli.exe"
+SET "mainexe=%mainexe%;%ProgramFiles%\KiCad\__VERSIONSHORT__\bin\gerbview.exe"
 
 
 @ECHO [INFO] Search PowerShell
