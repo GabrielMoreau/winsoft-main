@@ -210,7 +210,7 @@ ocs-push: ## push last packages (see target last-checksum) on your OCS server ex
 		fi
 		printf "#=== %-$(PKGLEN)s ===#\n" $${pkgfolder}
 		(cd $${pkgfolder}; make ocs-push)
-	done < <(LANG=C find . -maxdepth 2 -name '*.zip' -a -mtime -$(TIMEWINDOW) -not -path '*/tmp/*' -printf '%s %p\n' | sort -n | cut -f 2 -d ' ' | xargs -r dirname | xargs -r -n 1 basename)
+	done < <(LANG=C find . -maxdepth 2 -name '*.zip' -a -mtime -$(TIMEWINDOW) -not -path '*/tmp/*' -printf '%s %p\n' | sort -n | cut -f 2 -d ' ' | xargs -r dirname | xargs -r -n 1 basename | awk '!seen[$$0]++')
 	exit 0
 
 ocs-push-all: ## push all packages that have not yet been pushed, unless the `.no-ocs-pkgpush` file exists.
