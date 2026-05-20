@@ -10,8 +10,8 @@ It features an integrated environment for schematic capture, PCB layout, manufac
 * Version API : https://api.github.com/repos/KiCad/kicad-source-mirror/releases/latest
 
 * Download : https://www.kicad.org/download/windows/
-* Silent install : https://silentinstallhq.com/kicad-silent-install-how-to-guide/
-
+* Silent install : https://silentinstallhq.com/kicad-silent-install-how-to-guide/,
+  https://silentinstallhq.com/kicad-silent-uninstall-powershell/
 
 ## Register Key
 
@@ -19,7 +19,9 @@ Example :
 
  | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
- | HKLM | KiCad 9.0 | KiCad | 9.0.0 | `KiCad 9.0` | `"C:\Program Files\KiCad\9.0\uninstall.exe" /allusers` |
- | HKLM | KiCad 9.0 | KiCad | 9.0.1 | `KiCad 9.0` | `"C:\Program Files\KiCad\9.0\uninstall.exe" /allusers` |
- | HKLM | KiCad 9.0 | KiCad | 9.0.2 | `KiCad 9.0` | `"C:\Program Files\KiCad\9.0\uninstall.exe" /allusers` |
- | HKLM | KiCad 9.0 | KiCad | 9.0.5 | `KiCad 9.0` | `"C:\Program Files\KiCad\9.0\uninstall.exe" /allusers` |
+ | HKLM | KiCad 9.0  | KiCad |  9.0.0 | `KiCad 9.0`  | `"C:\Program Files\KiCad\9.0\uninstall.exe" /allusers`  |
+ | HKLM | KiCad 9.0  | KiCad |  9.0.1 | `KiCad 9.0`  | `"C:\Program Files\KiCad\9.0\uninstall.exe" /allusers`  |
+ | HKLM | KiCad 9.0  | KiCad |  9.0.2 | `KiCad 9.0`  | `"C:\Program Files\KiCad\9.0\uninstall.exe" /allusers`  |
+ | HKLM | KiCad 9.0  | KiCad |  9.0.5 | `KiCad 9.0`  | `"C:\Program Files\KiCad\9.0\uninstall.exe" /allusers`  |
+ | HKLM | KiCad 9.0  | KiCad |  9.0.8 | `KiCad 9.0`  | `"C:\Program Files\KiCad\9.0\uninstall.exe" /allusers`  |
+ | HKLM | KiCad 10.0 | KiCad | 10.0.2 | `KiCad 10.0` | `"C:\Program Files\KiCad\10.0\uninstall.exe" /allusers` |
