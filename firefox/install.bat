@@ -19,7 +19,9 @@ EXIT /B
 
 SET softversion=__VERSION__
 SET process=firefox.exe
-
+SET qexeadmin=__QEXEADMIN__
+SET mainexe=%ProgramFiles%\Mozilla Firefox\firefox.exe
+SET mainexe2=%ProgramFiles%\Mozilla Firefox\private_browsing.exe
 
 @ECHO [INFO] Kill the current process
 TASKKILL /T /F /IM %process% || VER >NUL
@@ -34,15 +36,27 @@ IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET pwrsh=%W
 
 @ECHO [INFO] Unblock PowerShell Script
 %pwrsh% "Unblock-File -Path .\*.ps1"
+SET RETURNCODE=0
 
 
-@ECHO [INFO] Execute pre-install script (clean register policies)
-%pwrsh% -File ".\pre-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
+:QEXEADMRESET
+IF "%qexeadmin%"=="false" (
+  IF EXIST "%mainexe%" (
+    @ECHO [INFO] Reset ACL on the user software
+    icacls "%mainexe%" /reset || VER >NUL
+    icacls "%mainexe2%" /reset || VER >NUL
+  )
+)
+
+
+@ECHO [INFO] Execute pre-install script
+IF EXIST ".\pre-install.ps1" %pwrsh% -File ".\pre-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
+IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
 
 
 @ECHO [INFO] Silent install %softname%
 ScriptRunner.exe -appvscript MsiExec.exe /i "Firefox-Setup-%softversion%-esr.msi" INSTALL_MAINTENANCE_SERVICE=false /q /norestart /L*v "%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=300
-SET RETURNCODE=%ERRORLEVEL%
+IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
 
 
 REM voir https://github.com/mozilla/policy-templates/blob/master/README.md
@@ -61,6 +75,16 @@ IF EXIST ".\pre-install.ps1" (
   IF EXIST ".\post-install.ps1" %pwrsh% -File ".\post-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
 )
 IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
+
+
+:QEXEADMIN
+IF "%qexeadmin%"=="false" (
+  IF EXIST "%mainexe%" (
+    @ECHO [INFO] Restrict ACL on the user software for admin
+    icacls "%mainexe%" /deny "*S-1-5-32-544:(RX)" || VER >NUL
+    icacls "%mainexe2%" /deny "*S-1-5-32-544:(RX)" || VER >NUL
+  )
+)
 
 
 :END
