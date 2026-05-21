@@ -70,7 +70,7 @@ IF EXIST "%PUBLIC%\Desktop\%softname%.lnk"          DEL /F /Q "%PUBLIC%\Desktop\
 IF EXIST "%ALLUSERSPROFILE%\Desktop\%softname%.lnk" DEL /F /Q "%ALLUSERSPROFILE%\Desktop\%softname%.lnk"
 
 
-:QEXEADMIN
+:QEXEADMDENY
 IF "%qexeadmin%"=="false" (
   FOR %%F in ("%mainexe:;=" "%") do (
     IF EXIST "%%~F" (

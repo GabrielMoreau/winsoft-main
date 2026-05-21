@@ -101,7 +101,7 @@ IF EXIST "%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs" (
 regedit.exe /S "tmp_install.reg"
 
 
-:QEXEADMIN
+:QEXEADMDENY
 IF "%qexeadmin%"=="false" (
   FOR %%F in ("%mainexe:;=" "%") do (
     IF EXIST "%%~F" (

@@ -77,7 +77,7 @@ IF EXIST ".\pre-install.ps1" (
 IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
 
 
-:QEXEADMIN
+:QEXEADMDENY
 IF "%qexeadmin%"=="false" (
   IF EXIST "%mainexe%" (
     @ECHO [INFO] Restrict ACL on the user software for admin

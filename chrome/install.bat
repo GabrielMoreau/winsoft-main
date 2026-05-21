@@ -85,7 +85,7 @@ IF EXIST "%PUBLIC%\Desktop\Google*Updater.lnk"          DEL /F /Q "%PUBLIC%\Desk
 IF EXIST "%ALLUSERSPROFILE%\Desktop\Google*Updater.lnk" DEL /F /Q "%ALLUSERSPROFILE%\Desktop\Google*Updater.lnk"
 
 
-:QEXEADMIN
+:QEXEADMDENY
 IF "%qexeadmin%"=="false" (
   FOR %%F in ("%mainexe:;=" "%") do (
     IF EXIST "%%~F" (

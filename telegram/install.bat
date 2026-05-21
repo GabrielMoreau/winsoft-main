@@ -110,14 +110,14 @@ IF %ERRORLEVEL% NEQ 0 GOTO GOOD
 REG QUERY "HKEY_USERS\.DEFAULT\Software\Microsoft\Windows\CurrentVersion\Uninstall\{53F49750-6209-4FBF-9CA8-7A333C87D1ED}_is1" /v "UninstallString" | FIND /N "%SystemDrive%\Program Files\Telegram Desktop\unins000.ex" > NUL && (
   @ECHO [INFO] REG DELETE HKU
   REG DELETE "HKEY_USERS\.DEFAULT\Software\Microsoft\Windows\CurrentVersion\Uninstall\{53F49750-6209-4FBF-9CA8-7A333C87D1ED}_is1" /F
-  GOTO QEXEADMIN
+  GOTO QEXEADMDENY
   )
 
 :GOOD
 @ECHO [INFO] Nice: no reg uninstall key in HKU
 
 
-:QEXEADMIN
+:QEXEADMDENY
 IF "%qexeadmin%"=="false" (
   FOR %%F in ("%mainexe:;=" "%") do (
     IF EXIST "%%~F" (

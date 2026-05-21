@@ -63,7 +63,7 @@ IF EXIST ".\pre-install.ps1" (
 IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
 
 
-:QEXEADMIN
+:QEXEADMDENY
 IF "%qexeadmin%"=="false" (
   IF EXIST "%ProgramFiles%\Zoom\bin\Zoom.exe" (
     icacls "%ProgramFiles%\Zoom\bin\Zoom.exe" /deny "*S-1-5-32-544:(X)"

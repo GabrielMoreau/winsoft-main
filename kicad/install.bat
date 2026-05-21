@@ -71,7 +71,7 @@ IF EXIST "%PUBLIC%\Desktop\KiCad *.lnk"          DEL /F /Q "%PUBLIC%\Desktop\KiC
 IF EXIST "%ALLUSERSPROFILE%\Desktop\KiCad *.lnk" DEL /F /Q "%ALLUSERSPROFILE%\Desktop\KiCad *.lnk"
 
 
-:QEXEADMIN
+:QEXEADMDENY
 IF "%qexeadmin%"=="false" (
   FOR %%F in ("%mainexe:;=" "%") do (
     IF EXIST "%%~F" (
