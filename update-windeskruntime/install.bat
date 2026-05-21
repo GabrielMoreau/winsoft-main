@@ -6,7 +6,7 @@ REM
 REM Name
 SET softname=Update-WindowsDesktopRuntime
 
-SET logdir=__LOGDIR__
+SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (
   MKDIR "%logdir%"
 )

@@ -6,7 +6,7 @@ REM
 REM Name
 SET softname=RocketChat
 
-SET logdir=__LOGDIR__
+SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (
   MKDIR "%logdir%"
 )

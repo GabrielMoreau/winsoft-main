@@ -6,7 +6,7 @@ REM
 REM Name
 SET softname=Skype
 
-SET logdir=__LOGDIR__
+SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (
   MKDIR "%logdir%"
 )

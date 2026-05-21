@@ -7,7 +7,7 @@ REM
 REM Name
 SET softname=OCSInventory-Agent
 
-SET logdir=__LOGDIR__
+SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (
   MKDIR "%logdir%"
 )

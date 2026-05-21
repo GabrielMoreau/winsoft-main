@@ -6,7 +6,7 @@ REM
 REM Name
 SET softname=Gwyddion
 
-SET logdir=__LOGDIR__
+SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (
   MKDIR "%logdir%"
 )
