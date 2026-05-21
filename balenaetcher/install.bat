@@ -17,7 +17,7 @@ EXIT /B
 
 @ECHO [BEGIN] %date%-%time%
 
-SET softversion=__VERSION__
+SET "softversion=__VERSION__"
 SET regkey=balena-etcher
 SET shortcut=%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\%softname%.lnk
 SET process=balenaEtcher.exe

@@ -4,7 +4,7 @@ REM   Skype
 REM
 
 REM Name
-SET softname=Skype
+SET "softname=Skype"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (
@@ -18,7 +18,7 @@ EXIT /B
 ECHO BEGIN %date%-%time%
 
 
-SET softversion=__VERSION__
+SET "softversion=__VERSION__"
 
 
 ECHO Silent install %softname%

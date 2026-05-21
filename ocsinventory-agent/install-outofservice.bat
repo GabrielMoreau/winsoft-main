@@ -19,7 +19,7 @@ EXIT /B
 @ECHO [BEGIN] %date%-%time%
 
 REM Version parameter (auto update by Makefile)
-SET softversion=__VERSION__
+SET "softversion=__VERSION__"
 SET ocsserver=__OCS_SERVER__
 SET ocsssl=__OCS_SSL__
 

@@ -19,7 +19,7 @@ EXIT /B
 
 REM https://nrc.canada.ca/fr/recherche-developpement/produits-services/logiciels-applications/blue-kenuetm-logiciel-modelisateurs-hydrauliques
 
-SET softversion=__VERSION__
+SET "softversion=__VERSION__"
 
 
 @ECHO [INFO] Silent install %softname%

@@ -18,7 +18,7 @@ EXIT /B
 @ECHO [BEGIN] %date%-%time%
 
 REM Version parameter (auto update by Makefile)
-SET softversion=__VERSION__
+SET "softversion=__VERSION__"
 SET softexe=FileZilla_%softversion%_win64-setup.exe
 
 

@@ -4,7 +4,7 @@ REM   Uninstall-Skype
 REM
 
 REM Name
-SET softname=Uninstall-Skype
+SET "softname=Uninstall-Skype"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

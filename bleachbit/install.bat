@@ -17,7 +17,7 @@ EXIT /B
 
 @ECHO [BEGIN] %date%-%time%
 
-SET softversion=__VERSION__
+SET "softversion=__VERSION__"
 
 
 REM @ECHO [INFO] Silent uninstall previous version

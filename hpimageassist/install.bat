@@ -17,7 +17,7 @@ EXIT /B
 
 @ECHO [BEGIN] %date%-%time%
 
-SET softversion=__VERSION__
+SET "softversion=__VERSION__"
 SET regkey=%softname%
 SET shortcut=%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\HP Image Assistant.lnk
 

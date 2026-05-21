@@ -18,7 +18,7 @@ EXIT /B
 @ECHO [BEGIN] %date%-%time%
 
 
-SET softversion=__VERSION__
+SET "softversion=__VERSION__"
 SET process=ccleaner.exe
 
 

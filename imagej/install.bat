@@ -12,7 +12,7 @@ EXIT /B
 
 @ECHO [BEGIN] %date%-%time%
 
-SET softversion=__VERSION__
+SET "softversion=__VERSION__"
 SET softrevision=__REVISION__
 SET regkey=ImageJ
 SET softpublisher=The ImageJ Fiji Team

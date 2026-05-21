@@ -18,7 +18,7 @@ EXIT /B
 @ECHO [BEGIN] %date%-%time%
 
 REM Version parameter (auto update by Makefile)
-SET softversion=__VERSION__
+SET "softversion=__VERSION__"
 SET softexe=installateuroptgeo_%softversion%.exe
 
 
