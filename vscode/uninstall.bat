@@ -4,7 +4,7 @@ REM   Uninstall-VSCode
 REM
 
 REM Name
-SET softname=Uninstall-VSCode
+SET "softname=Uninstall-VSCode"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

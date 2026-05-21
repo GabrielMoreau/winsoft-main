@@ -4,7 +4,7 @@ REM   MSEdge
 REM
 
 REM Name
-SET softname=MSEdge
+SET "softname=MSEdge"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

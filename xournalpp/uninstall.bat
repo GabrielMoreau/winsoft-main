@@ -1,8 +1,8 @@
 @ECHO OFF
 
-SET softname=XournalPP
-SET regkey=Xournal++
-SET shortcut=%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\Xournal++.lnk
+SET "softname=XournalPP"
+SET "regkey=Xournal++"
+SET "shortcut=%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\Xournal++.lnk"
 
 
 REM Clean reg uninstall key

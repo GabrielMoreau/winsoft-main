@@ -4,7 +4,7 @@ REM   Optgeo
 REM
 
 REM Name
-SET softname=Optgeo
+SET "softname=Optgeo"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (
@@ -19,7 +19,7 @@ EXIT /B
 
 REM Version parameter (auto update by Makefile)
 SET "softversion=__VERSION__"
-SET softexe=installateuroptgeo_%softversion%.exe
+SET "softexe=installateuroptgeo_%softversion%.exe"
 
 
 @ECHO [INFO] Silent install

@@ -4,7 +4,7 @@ REM   DellCmdUpdate
 REM
 
 REM Name
-SET softname=DellCmdUpdate
+SET "softname=DellCmdUpdate"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (
@@ -18,8 +18,8 @@ EXIT /B
 @ECHO [BEGIN] %date%-%time%
 
 SET "softversion=__VERSION__"
-SET softexe=__EXE__
-SET softversionlow=__VERSION_LOW__
+SET "softexe=__EXE__"
+SET "softversionlow=__VERSION_LOW__"
 
 
 @ECHO [INFO] Search PowerShell

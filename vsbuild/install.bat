@@ -4,7 +4,7 @@ REM   VSBuildTools
 REM
 
 REM Name
-SET softname=VSBuildTools
+SET "softname=VSBuildTools"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

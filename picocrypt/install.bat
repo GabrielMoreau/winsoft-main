@@ -4,7 +4,7 @@ REM   Picocrypt
 REM
 
 REM Name
-SET softname=Picocrypt
+SET "softname=Picocrypt"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (
@@ -18,8 +18,8 @@ EXIT /B
 @ECHO [BEGIN] %date%-%time%
 
 SET "softversion=__VERSION__"
-SET regkey=EvanSu.Picocrypt_is1
-SET shortcut=%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\%softname%.lnk
+SET "regkey=EvanSu.Picocrypt_is1"
+SET "shortcut=%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\%softname%.lnk"
 
 
 @ECHO [INFO] Silent install %softname%

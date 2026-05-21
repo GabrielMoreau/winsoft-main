@@ -4,7 +4,7 @@ REM   VisIt
 REM
 
 REM Name
-SET softname=VisIt
+SET "softname=VisIt"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

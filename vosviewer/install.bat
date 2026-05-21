@@ -4,7 +4,7 @@ REM   VOSviewer
 REM
 
 REM Name
-SET softname=VOSviewer
+SET "softname=VOSviewer"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

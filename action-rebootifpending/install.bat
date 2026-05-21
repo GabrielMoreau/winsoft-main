@@ -4,7 +4,7 @@ REM   Action-RebootIfPending
 REM
 
 REM Name
-SET softname=Action-RebootIfPending
+SET "softname=Action-RebootIfPending"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (
@@ -37,7 +37,7 @@ manage-bde -status %SystemDrive%
 
 @ECHO [INFO] Execute pre-install script
 %pwrsh% -File ".\pre-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
-SET PreInstallCode=%ERRORLEVEL%
+SET "PreInstallCode=%ERRORLEVEL%"
 
 IF %PreInstallCode% NEQ 0 (
   REM https://techwiser.com/ways-to-disable-and-suspend-bitlocker-on-windows-10-11/

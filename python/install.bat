@@ -4,7 +4,7 @@ REM   Python
 REM
 
 REM Name
-SET softname=Python
+SET "softname=Python"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (
@@ -18,14 +18,14 @@ EXIT /B
 @ECHO [BEGIN] %date%-%time%
 
 SET "softversion=__VERSION__"
-SET shortversion=__VERSIONSHORT__
+SET "shortversion=__VERSIONSHORT__"
 
 
 :INSTALLED
-SET INSTALLED=0
+SET "INSTALLED=0"
 @ECHO [INFO] Test HKLM (computer)
 reg query "HKLM\SOFTWARE\Python\PythonCore\%shortversion%\InstallPath" >nul 2>&1
-IF "%ERRORLEVEL%"=="0" SET INSTALLED=1
+IF "%ERRORLEVEL%"=="0" SET "INSTALLED=1"
 VER >NUL
 
 

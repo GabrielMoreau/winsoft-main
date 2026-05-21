@@ -4,7 +4,7 @@ REM   X2GoClient
 REM
 
 REM Name
-SET softname=X2GoClient
+SET "softname=X2GoClient"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

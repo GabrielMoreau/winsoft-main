@@ -4,7 +4,7 @@ REM   RocketChat
 REM
 
 REM Name
-SET softname=RocketChat
+SET "softname=RocketChat"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (
@@ -18,7 +18,7 @@ EXIT /B
 @ECHO [BEGIN] %date%-%time%
 
 SET "softversion=__VERSION__"
-SET process=Rocket.Chat.exe
+SET "process=Rocket.Chat.exe"
 
 
 @ECHO [INFO] Kill the current process

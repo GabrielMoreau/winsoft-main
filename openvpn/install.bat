@@ -4,7 +4,7 @@ REM   OpenVPN
 REM
 
 REM Name
-SET softname=OpenVPN
+SET "softname=OpenVPN"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

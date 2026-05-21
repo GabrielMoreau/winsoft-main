@@ -4,7 +4,7 @@ REM   VMwarePlayer
 REM
 
 REM Name
-SET softname=VMwarePlayer
+SET "softname=VMwarePlayer"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (
@@ -17,7 +17,7 @@ EXIT /B
 
 @ECHO [BEGIN] %date%-%time%
 
-SET softversion=__VERSIONLONG__
+SET "softversion=__VERSIONLONG__"
 
 
 @ECHO [INFO] Silent install %softname%

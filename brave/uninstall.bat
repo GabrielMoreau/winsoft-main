@@ -4,7 +4,7 @@ REM   Uninstall-Brave
 REM
 
 REM Name
-SET softname=Uninstall-Brave
+SET "softname=Uninstall-Brave"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

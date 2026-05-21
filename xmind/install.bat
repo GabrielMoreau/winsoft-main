@@ -4,7 +4,7 @@ REM   XMind
 REM
 
 REM Name
-SET softname=XMind
+SET "softname=XMind"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

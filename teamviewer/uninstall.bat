@@ -4,7 +4,7 @@ REM   Uninstall-TeamViewer
 REM
 
 REM Name
-SET softname=Uninstall-TeamViewer
+SET "softname=Uninstall-TeamViewer"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

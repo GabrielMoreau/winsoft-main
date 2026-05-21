@@ -1,7 +1,7 @@
 @ECHO OFF
 
-SET softname=SysinternalsSuite
-SET regkey=Sysinternals
+SET "softname=SysinternalsSuite"
+SET "regkey=Sysinternals"
 
 
 REM Clean reg uninstall key

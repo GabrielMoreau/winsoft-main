@@ -4,7 +4,7 @@ REM   Darktable
 REM
 
 REM Name
-SET softname=Darktable
+SET "softname=Darktable"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

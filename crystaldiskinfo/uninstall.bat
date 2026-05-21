@@ -4,7 +4,7 @@ REM   Uninstall-CrystalDiskInfo
 REM
 
 REM Name
-SET softname=Uninstall-CrystalDiskInfo
+SET "softname=Uninstall-CrystalDiskInfo"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

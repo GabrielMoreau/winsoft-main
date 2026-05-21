@@ -1,7 +1,7 @@
 @ECHO OFF
 
-SET softname=Picocrypt
-SET regkey=EvanSu.Picocrypt_is1
+SET "softname=Picocrypt"
+SET "regkey=EvanSu.Picocrypt_is1"
 
 REM Clean reg uninstall key
 reg query "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\%regkey%"

@@ -4,7 +4,7 @@ REM   SysinternalsSuite
 REM
 
 REM Name
-SET softname=SysinternalsSuite
+SET "softname=SysinternalsSuite"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (
@@ -18,7 +18,7 @@ EXIT /B
 @ECHO [BEGIN] %date%-%time%
 
 SET "softversion=__VERSION__"
-SET regkey=Sysinternals
+SET "regkey=Sysinternals"
 
 
 @ECHO [INFO] Search PowerShell

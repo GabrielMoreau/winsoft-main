@@ -4,7 +4,7 @@ REM   Chrome
 REM
 
 REM Name
-SET softname=Chrome
+SET "softname=Chrome"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

@@ -1,6 +1,6 @@
 @ECHO OFF
 
-SET regkey=ImageJ
+SET "regkey=ImageJ"
 
 REM Clean registry
 reg delete HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\%regkey% /f

@@ -4,7 +4,7 @@ REM   VirtualBox
 REM
 
 REM Name
-SET softname=VirtualBox
+SET "softname=VirtualBox"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (
@@ -18,7 +18,7 @@ EXIT /B
 @ECHO [BEGIN] %date%-%time%
 
 SET "softversion=__VERSION__"
-SET softextpack=__PACKEXT__
+SET "softextpack=__PACKEXT__"
 
 
 @ECHO [INFO] Search PowerShell

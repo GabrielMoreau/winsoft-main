@@ -4,7 +4,7 @@ REM   LycheeSlicer
 REM
 
 REM Name
-SET softname=LycheeSlicer
+SET "softname=LycheeSlicer"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

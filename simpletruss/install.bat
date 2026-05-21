@@ -4,7 +4,7 @@ REM   SimpleTruss
 REM
 
 REM Name
-SET softname=SimpleTruss
+SET "softname=SimpleTruss"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

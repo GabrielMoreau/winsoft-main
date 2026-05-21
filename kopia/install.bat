@@ -4,7 +4,7 @@ REM   Kopia
 REM
 
 REM Name
-SET softname=Kopia
+SET "softname=Kopia"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

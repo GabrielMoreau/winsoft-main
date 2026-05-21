@@ -4,7 +4,7 @@ REM   Uninstall-JavaJRE8
 REM
 
 REM Name
-SET softname=Uninstall-JavaJRE8
+SET "softname=Uninstall-JavaJRE8"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

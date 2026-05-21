@@ -4,7 +4,7 @@ REM   TexMaker
 REM
 
 REM Name
-SET softname=TexMaker
+SET "softname=TexMaker"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (
@@ -18,7 +18,7 @@ EXIT /B
 @ECHO [BEGIN] %date%-%time%
 
 SET "softversion=__VERSION__"
-SET process=Texmaker.exe
+SET "process=Texmaker.exe"
 
 
 @ECHO [INFO] Search PowerShell

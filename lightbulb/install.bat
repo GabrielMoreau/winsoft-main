@@ -4,7 +4,7 @@ REM   LightBulb
 REM
 
 REM Name
-SET softname=LightBulb
+SET "softname=LightBulb"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (
@@ -17,9 +17,9 @@ EXIT /B
 
 @ECHO [BEGIN] %date%-%time%
 
-SET softversion=__VERSION1__
-SET softruntimever=__VERSION2__
-SET process=LightBulb.exe
+SET "softversion=__VERSION1__"
+SET "softruntimever=__VERSION2__"
+SET "process=LightBulb.exe"
 
 
 @ECHO [INFO] Kill the current process

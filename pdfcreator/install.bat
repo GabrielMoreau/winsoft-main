@@ -4,7 +4,7 @@ REM   PDFCreator
 REM
 
 REM Name
-SET softname=PDFCreator
+SET "softname=PDFCreator"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

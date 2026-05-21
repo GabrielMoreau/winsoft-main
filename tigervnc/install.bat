@@ -4,7 +4,7 @@ REM   TigerVNC
 REM
 
 REM Name
-SET softname=TigerVNC
+SET "softname=TigerVNC"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

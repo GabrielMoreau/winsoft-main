@@ -4,7 +4,7 @@ REM   Brave
 REM
 
 REM Name
-SET softname=Brave
+SET "softname=Brave"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

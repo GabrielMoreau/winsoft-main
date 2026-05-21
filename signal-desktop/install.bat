@@ -4,7 +4,7 @@ REM   Signal-Desktop
 REM
 
 REM Name
-SET softname=Signal-Desktop
+SET "softname=Signal-Desktop"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (
@@ -18,8 +18,8 @@ EXIT /B
 @ECHO [BEGIN] %date%-%time%
 
 SET "softversion=__VERSION__"
-SET regkey=7d96caee-06e6-597c-9f2f-c7bb2e0948b4
-SET shortcut=%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\Signal-Desktop.lnk
+SET "regkey=7d96caee-06e6-597c-9f2f-c7bb2e0948b4"
+SET "shortcut=%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\Signal-Desktop.lnk"
 
 
 @ECHO [INFO] Search PowerShell

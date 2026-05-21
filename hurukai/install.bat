@@ -4,7 +4,7 @@ REM   Hurukai-Agent
 REM
 
 REM Name
-SET softname=Hurukai-Agent
+SET "softname=Hurukai-Agent"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

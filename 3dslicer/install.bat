@@ -4,7 +4,7 @@ REM   3DSlicer
 REM
 
 REM Name
-SET softname=3DSlicer
+SET "softname=3DSlicer"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

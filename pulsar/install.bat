@@ -4,7 +4,7 @@ REM   Pulsar-Edit
 REM
 
 REM Name
-SET softname=Pulsar-Edit
+SET "softname=Pulsar-Edit"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

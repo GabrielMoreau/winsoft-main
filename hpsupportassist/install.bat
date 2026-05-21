@@ -4,7 +4,7 @@ REM   HPSupportAssist
 REM
 
 REM Name
-SET softname=HPSupportAssist
+SET "softname=HPSupportAssist"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

@@ -4,7 +4,7 @@ REM   Digikam
 REM
 
 REM Name
-SET softname=Digikam
+SET "softname=Digikam"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

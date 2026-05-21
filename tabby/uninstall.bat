@@ -4,7 +4,7 @@ REM   Uninstall-Tabby
 REM
 
 REM Name
-SET softname=Uninstall-Tabby
+SET "softname=Uninstall-Tabby"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

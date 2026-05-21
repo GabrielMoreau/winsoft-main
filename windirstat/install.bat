@@ -4,7 +4,7 @@ REM   WinDirStat
 REM
 
 REM Name
-SET softname=WinDirStat
+SET "softname=WinDirStat"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (
@@ -18,9 +18,9 @@ EXIT /B
 @ECHO [BEGIN] %date%-%time%
 
 SET "softversion=__VERSION__"
-REM SET regkey=windirstat
-REM SET softexec=windirstat%softversion%_setup.exe
-REM SET shortcut=%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\%softname%.lnk
+REM SET "regkey=windirstat"
+REM SET "softexec=windirstat%softversion%_setup.exe"
+REM SET "shortcut=%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\%softname%.lnk"
 
 
 @ECHO [INFO] Search PowerShell

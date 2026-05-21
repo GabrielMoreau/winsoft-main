@@ -4,7 +4,7 @@ REM   TortoiseSVN
 REM
 
 REM Name
-SET softname=TortoiseSVN
+SET "softname=TortoiseSVN"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

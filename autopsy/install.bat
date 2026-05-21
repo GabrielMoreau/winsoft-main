@@ -4,7 +4,7 @@ REM   Autopsy
 REM
 
 REM Name
-SET softname=Autopsy
+SET "softname=Autopsy"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

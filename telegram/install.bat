@@ -4,7 +4,7 @@ REM   Telegram
 REM
 
 REM Name
-SET softname=Telegram
+SET "softname=Telegram"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

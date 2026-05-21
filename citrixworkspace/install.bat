@@ -4,7 +4,7 @@ REM   CitrixWorkspace
 REM
 
 REM Name
-SET softname=CitrixWorkspace
+SET "softname=CitrixWorkspace"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

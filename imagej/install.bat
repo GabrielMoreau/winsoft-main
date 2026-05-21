@@ -1,5 +1,5 @@
 
-SET softname=ImageJ
+SET "softname=ImageJ"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (
@@ -13,11 +13,11 @@ EXIT /B
 @ECHO [BEGIN] %date%-%time%
 
 SET "softversion=__VERSION__"
-SET softrevision=__REVISION__
-SET regkey=ImageJ
-SET softpublisher=The ImageJ Fiji Team
-SET softiversion=__IVERSION__
-SET softnversion=__NVERSION__
+SET "softrevision=__REVISION__"
+SET "regkey=ImageJ"
+SET "softpublisher=The ImageJ Fiji Team"
+SET "softiversion=__IVERSION__"
+SET "softnversion=__NVERSION__"
 
 SET "pwrsh=%WINDIR%\System32\WindowsPowerShell\V1.0\powershell.exe"
 IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET "pwrsh=%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe"

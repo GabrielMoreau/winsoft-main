@@ -4,7 +4,7 @@ REM   Microsoft Teams
 REM
 
 REM Name
-SET softname=MSTeams
+SET "softname=MSTeams"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

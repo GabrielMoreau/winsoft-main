@@ -4,7 +4,7 @@ REM   Check-WithSecureHotfixes
 REM
 
 REM Name
-SET softname=WithSecureHotfixes
+SET "softname=WithSecureHotfixes"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

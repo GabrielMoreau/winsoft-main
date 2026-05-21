@@ -4,7 +4,7 @@ REM   Notepad++
 REM
 
 REM Name
-SET softname=Notepad++
+SET "softname=Notepad++"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (
@@ -19,8 +19,8 @@ EXIT /B
 
 @ECHO [INFO] Version parameter (auto update by Makefile)
 SET "softversion=__VERSION__"
-SET softexe=npp.%softversion%.Installer.x64.exe
-SET regkey=Notepad++
+SET "softexe=npp.%softversion%.Installer.x64.exe"
+SET "regkey=Notepad++"
 
 
 @ECHO [INFO] Kill running process

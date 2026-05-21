@@ -1,8 +1,8 @@
 @ECHO OFF
 
-SET softname=HPImageAssist
-SET regkey=%softname%
-SET shortcut=%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\HP Image Assistant.lnk
+SET "softname=HPImageAssist"
+SET "regkey=%softname%"
+SET "shortcut=%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\HP Image Assistant.lnk"
 
 
 REM Clean reg uninstall key

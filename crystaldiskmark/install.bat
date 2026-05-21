@@ -4,7 +4,7 @@ REM   CrystalDiskMark
 REM
 
 REM Name
-SET softname=CrystalDiskMark
+SET "softname=CrystalDiskMark"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

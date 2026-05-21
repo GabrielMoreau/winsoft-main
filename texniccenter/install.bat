@@ -4,7 +4,7 @@ REM   TeXnicCenter
 REM
 
 REM Name
-SET softname=TeXnicCenter
+SET "softname=TeXnicCenter"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

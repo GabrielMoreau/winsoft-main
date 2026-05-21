@@ -3,7 +3,7 @@ REM
 REM   KiCad
 REM
 
-SET softname=KiCad
+SET "softname=KiCad"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

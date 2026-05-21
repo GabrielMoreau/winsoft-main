@@ -1,8 +1,8 @@
 @ECHO OFF
 
-SET softname=Signal-Desktop
-SET regkey=7d96caee-06e6-597c-9f2f-c7bb2e0948b4
-SET shortcut=%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\Signal-Desktop.lnk
+SET "softname=Signal-Desktop"
+SET "regkey=7d96caee-06e6-597c-9f2f-c7bb2e0948b4"
+SET "shortcut=%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\Signal-Desktop.lnk"
 
 
 REM Clean reg uninstall key

@@ -4,7 +4,7 @@ REM   BalenaEtcher
 REM
 
 REM Name
-SET softname=BalenaEtcher
+SET "softname=BalenaEtcher"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (
@@ -18,9 +18,9 @@ EXIT /B
 @ECHO [BEGIN] %date%-%time%
 
 SET "softversion=__VERSION__"
-SET regkey=balena-etcher
-SET shortcut=%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\%softname%.lnk
-SET process=balenaEtcher.exe
+SET "regkey=balena-etcher"
+SET "shortcut=%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\%softname%.lnk"
+SET "process=balenaEtcher.exe"
 
 
 @ECHO [INFO] Search PowerShell

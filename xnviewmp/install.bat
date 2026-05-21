@@ -4,7 +4,7 @@ REM   XnViewMP
 REM
 
 REM Name
-SET softname=XnViewMP
+SET "softname=XnViewMP"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

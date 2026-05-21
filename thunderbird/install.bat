@@ -4,7 +4,7 @@ REM   Thunderbird
 REM
 
 REM Name
-SET softname=Mozilla-Thunderbird
+SET "softname=Mozilla-Thunderbird"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

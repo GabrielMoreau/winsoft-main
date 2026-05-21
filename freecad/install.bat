@@ -4,7 +4,7 @@ REM   FreeCAD
 REM
 
 REM Name
-SET softname=FreeCAD
+SET "softname=FreeCAD"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

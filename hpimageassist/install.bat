@@ -4,7 +4,7 @@ REM   HPImageAssist
 REM
 
 REM Name
-SET softname=HPImageAssist
+SET "softname=HPImageAssist"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (
@@ -18,8 +18,8 @@ EXIT /B
 @ECHO [BEGIN] %date%-%time%
 
 SET "softversion=__VERSION__"
-SET regkey=%softname%
-SET shortcut=%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\HP Image Assistant.lnk
+SET "regkey=%softname%"
+SET "shortcut=%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\HP Image Assistant.lnk"
 
 
 @ECHO [INFO] Search PowerShell

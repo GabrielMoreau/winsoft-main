@@ -4,7 +4,7 @@ REM   Gimp
 REM
 
 REM Name
-SET softname=Gimp
+SET "softname=Gimp"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

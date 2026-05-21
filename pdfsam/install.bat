@@ -4,7 +4,7 @@ REM   PDFsam Basic
 REM
 
 REM Name
-SET softname=PDFsamBasic
+SET "softname=PDFsamBasic"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

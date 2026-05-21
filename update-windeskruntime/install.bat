@@ -4,7 +4,7 @@ REM   Update-WindowsDesktopRuntime
 REM
 
 REM Name
-SET softname=Update-WindowsDesktopRuntime
+SET "softname=Update-WindowsDesktopRuntime"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

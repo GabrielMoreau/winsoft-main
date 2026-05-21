@@ -5,9 +5,9 @@ REM
 REM   Uninstall-VOSviewer
 REM
 
-SET softname="Uninstall-VOSviewer"
+SET "softname="Uninstall-VOSviewer""
 
-SET logdir=%ProgramData%\OCS Inventory NG\Agent\DeployLog
+SET "logdir=%ProgramData%\OCS Inventory NG\Agent\DeployLog"
 IF NOT EXIST "%logdir%" (
   MKDIR "%logdir%"
 )

@@ -4,7 +4,7 @@ REM   AcrobatReader
 REM
 
 REM Name
-SET softname=AcrobatReader
+SET "softname=AcrobatReader"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

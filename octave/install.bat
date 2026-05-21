@@ -4,7 +4,7 @@ REM   Octave
 REM
 
 REM Name
-SET softname=Octave
+SET "softname=Octave"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

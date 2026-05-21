@@ -4,7 +4,7 @@ REM   RTools
 REM
 
 REM Name
-SET softname=RTools
+SET "softname=RTools"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (
@@ -17,8 +17,8 @@ EXIT /B
 
 @ECHO [BEGIN] %date%-%time%
 
-SET SoftVersionS=__VERSION_S__
-SET SoftVersionL=__VERSION_L__
+SET "SoftVersionS=__VERSION_S__"
+SET "SoftVersionL=__VERSION_L__"
 
 
 @ECHO [INFO] Search PowerShell

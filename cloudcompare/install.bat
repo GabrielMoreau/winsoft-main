@@ -4,7 +4,7 @@ REM   CloudCompare
 REM
 
 REM Name
-SET softname=CloudCompare
+SET "softname=CloudCompare"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

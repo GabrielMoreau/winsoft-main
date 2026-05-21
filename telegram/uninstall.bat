@@ -1,8 +1,8 @@
 @ECHO OFF
 
-SET softname=Telegram
-SET regkey=Telegram Desktop
-SET shortcut=%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\Telegram.lnk
+SET "softname=Telegram"
+SET "regkey=Telegram Desktop"
+SET "shortcut=%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\Telegram.lnk"
 
 
 REM Clean reg uninstall key

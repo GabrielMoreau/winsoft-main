@@ -4,7 +4,7 @@ REM   Firefox
 REM
 
 REM Name
-SET softname=Mozilla-Firefox
+SET "softname=Mozilla-Firefox"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

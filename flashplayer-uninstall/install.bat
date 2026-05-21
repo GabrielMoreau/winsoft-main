@@ -4,7 +4,7 @@ REM   FlashPlayer-Uninstall
 REM
 
 REM Name
-SET softname=FlashPlayer-Uninstall
+SET "softname=FlashPlayer-Uninstall"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

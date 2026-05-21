@@ -4,7 +4,7 @@ REM   Filezilla
 REM
 
 REM Name
-SET softname=FileZilla-Client
+SET "softname=FileZilla-Client"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (
@@ -19,7 +19,7 @@ EXIT /B
 
 REM Version parameter (auto update by Makefile)
 SET "softversion=__VERSION__"
-SET softexe=FileZilla_%softversion%_win64-setup.exe
+SET "softexe=FileZilla_%softversion%_win64-setup.exe"
 
 
 @ECHO [INFO] Search PowerShell

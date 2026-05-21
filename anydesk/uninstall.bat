@@ -4,7 +4,7 @@ REM   Uninstall-AnyDesk
 REM
 
 REM Name
-SET softname=Uninstall-AnyDesk
+SET "softname=Uninstall-AnyDesk"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

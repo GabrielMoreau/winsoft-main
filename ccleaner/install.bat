@@ -4,7 +4,7 @@ REM   CCleaner
 REM
 
 REM Name
-SET softname=CCleaner
+SET "softname=CCleaner"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (
@@ -19,7 +19,7 @@ EXIT /B
 
 
 SET "softversion=__VERSION__"
-SET process=ccleaner.exe
+SET "process=ccleaner.exe"
 
 
 @ECHO [INFO] Kill running process

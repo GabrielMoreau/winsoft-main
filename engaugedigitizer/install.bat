@@ -4,7 +4,7 @@ REM   EngaugeDigitizer
 REM
 
 REM Name
-SET softname=EngaugeDigitizer
+SET "softname=EngaugeDigitizer"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

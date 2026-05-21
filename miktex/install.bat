@@ -4,7 +4,7 @@ REM   MiKTeX
 REM
 
 REM Name
-SET softname=MiKTeX
+SET "softname=MiKTeX"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

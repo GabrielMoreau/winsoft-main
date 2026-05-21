@@ -4,7 +4,7 @@ REM   Update-OSBIOS
 REM
 
 REM Name
-SET softname=Update-OSBIOS
+SET "softname=Update-OSBIOS"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

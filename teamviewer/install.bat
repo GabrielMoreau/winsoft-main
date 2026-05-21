@@ -4,7 +4,7 @@ REM   TeamViewer
 REM
 
 REM Name
-SET softname=TeamViewer
+SET "softname=TeamViewer"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

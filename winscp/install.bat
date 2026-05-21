@@ -4,7 +4,7 @@ REM   WinSCP
 REM
 
 REM Name
-SET softname=WinSCP
+SET "softname=WinSCP"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

@@ -4,7 +4,7 @@ REM   Uninstall-Zoom
 REM
 
 REM Name
-SET softname=Uninstall-Zoom
+SET "softname=Uninstall-Zoom"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

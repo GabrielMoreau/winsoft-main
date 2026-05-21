@@ -1,9 +1,9 @@
 @ECHO OFF
 
-SET softname=Avidemux
-SET softversionshort=__VERSIONSHORT__
-SET regkey={0694d9fc-951c-4992-85e9-23eb6d1a8082}
-SET shortcut=%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\Avidemux.lnk
+SET "softname=Avidemux"
+SET "softversionshort=__VERSIONSHORT__"
+SET "regkey={0694d9fc-951c-4992-85e9-23eb6d1a8082}"
+SET "shortcut=%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\Avidemux.lnk"
 
 
 REM Clean reg uninstall key

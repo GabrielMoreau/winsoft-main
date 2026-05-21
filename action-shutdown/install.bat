@@ -4,7 +4,7 @@ REM   Action-Shutdown
 REM
 
 REM Name
-SET softname=Action-Shutdown
+SET "softname=Action-Shutdown"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

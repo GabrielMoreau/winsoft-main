@@ -4,7 +4,7 @@ REM   Bandicut
 REM
 
 REM Name
-SET softname=Bandicut
+SET "softname=Bandicut"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

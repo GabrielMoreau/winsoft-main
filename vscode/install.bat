@@ -4,7 +4,7 @@ REM   VSCode
 REM
 
 REM Name
-SET softname=VSCode
+SET "softname=VSCode"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

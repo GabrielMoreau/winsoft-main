@@ -4,7 +4,7 @@ REM   Gwyddion
 REM
 
 REM Name
-SET softname=Gwyddion
+SET "softname=Gwyddion"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

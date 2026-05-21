@@ -4,7 +4,7 @@ REM   Zoom
 REM
 
 REM Name
-SET softname=Zoom
+SET "softname=Zoom"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

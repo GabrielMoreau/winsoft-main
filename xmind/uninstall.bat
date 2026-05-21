@@ -5,9 +5,9 @@ REM
 REM   Uninstall-Xmind
 REM
 
-SET softname=Uninstall-Xmind
+SET "softname=Uninstall-Xmind"
 
-SET logdir=%ProgramData%\OCS Inventory NG\Agent\DeployLog
+SET "logdir=%ProgramData%\OCS Inventory NG\Agent\DeployLog"
 IF NOT EXIST "%logdir%" (
   MKDIR "%logdir%"
 )

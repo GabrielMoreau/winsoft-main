@@ -4,7 +4,7 @@ REM   PuTTY
 REM
 
 REM Name
-SET softname=PuTTY
+SET "softname=PuTTY"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

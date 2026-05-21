@@ -4,7 +4,7 @@ REM   Ultracopier
 REM
 
 REM Name
-SET softname=Ultracopier
+SET "softname=Ultracopier"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

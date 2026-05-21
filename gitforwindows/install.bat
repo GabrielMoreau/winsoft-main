@@ -4,7 +4,7 @@ REM   GitForWindows
 REM
 
 REM Name
-SET softname=GitForWindows
+SET "softname=GitForWindows"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

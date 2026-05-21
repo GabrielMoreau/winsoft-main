@@ -4,7 +4,7 @@ REM   Uninstall-NordVPN
 REM
 
 REM Name
-SET softname=Uninstall-NordVPN
+SET "softname=Uninstall-NordVPN"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

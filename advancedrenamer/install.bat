@@ -4,7 +4,7 @@ REM   Advanced-Renamer
 REM
 
 REM Name
-SET softname=Advanced-Renamer
+SET "softname=Advanced-Renamer"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

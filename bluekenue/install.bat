@@ -4,7 +4,7 @@ REM   BlueKenue
 REM
 
 REM Name
-SET softname=BlueKenue
+SET "softname=BlueKenue"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

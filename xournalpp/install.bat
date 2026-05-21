@@ -4,7 +4,7 @@ REM   XournalPP
 REM
 
 REM Name
-SET softname=XournalPP
+SET "softname=XournalPP"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

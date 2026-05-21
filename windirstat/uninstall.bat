@@ -1,7 +1,7 @@
 @ECHO OFF
 
-SET softname=WinDirStat
-SET regkey=windirstat
+SET "softname=WinDirStat"
+SET "regkey=windirstat"
 
 REM Uninstall
 IF EXIST "%ProgramFiles(x86)%\WinDirStat\Uninstall.exe" (

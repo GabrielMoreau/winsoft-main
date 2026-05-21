@@ -4,7 +4,7 @@ REM   Uninstall-Thunderbird
 REM
 
 REM Name
-SET softname=Uninstall-Thunderbird
+SET "softname=Uninstall-Thunderbird"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

@@ -4,7 +4,7 @@ REM   HandBrake
 REM
 
 REM Name
-SET softname=HandBrake
+SET "softname=HandBrake"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (
@@ -17,8 +17,8 @@ EXIT /B
 
 @ECHO [BEGIN] %date%-%time%
 
-SET softversion=__VERSION1__
-SET softruntimever=__VERSION2__
+SET "softversion=__VERSION1__"
+SET "softruntimever=__VERSION2__"
 
 @ECHO [INFO] Search PowerShell
 SET "pwrsh=%WINDIR%\System32\WindowsPowerShell\V1.0\powershell.exe"

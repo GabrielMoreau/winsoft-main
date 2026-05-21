@@ -1,7 +1,7 @@
 @ECHO OFF
 
-SET softname=IdeaMaker
-SET regkey=ideaMaker
+SET "softname=IdeaMaker"
+SET "regkey=ideaMaker"
 
 
 REM Clean reg uninstall key

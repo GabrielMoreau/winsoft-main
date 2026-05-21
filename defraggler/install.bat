@@ -4,7 +4,7 @@ REM   Defraggler
 REM
 
 REM Name
-SET softname=Defraggler
+SET "softname=Defraggler"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

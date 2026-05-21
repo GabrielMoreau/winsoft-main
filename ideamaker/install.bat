@@ -4,7 +4,7 @@ REM   IdeaMaker
 REM
 
 REM Name
-SET softname=IdeaMaker
+SET "softname=IdeaMaker"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (
@@ -18,7 +18,7 @@ EXIT /B
 @ECHO [BEGIN] %date%-%time%
 
 SET "softversion=__VERSION__"
-SET regkey=ideaMaker
+SET "regkey=ideaMaker"
 
 
 REM Clean reg old uninstall key we push in early version

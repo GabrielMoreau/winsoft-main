@@ -4,7 +4,7 @@ REM   OnlyOffice
 REM
 
 REM Name
-SET softname=OnlyOffice
+SET "softname=OnlyOffice"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

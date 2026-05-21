@@ -4,7 +4,7 @@ REM   ParaView
 REM
 
 REM Name
-SET softname=ParaView
+SET "softname=ParaView"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (
@@ -18,8 +18,8 @@ EXIT /B
 @ECHO [BEGIN] %date%-%time%
 
 SET "softversion=__VERSION__"
-SET softexe=__EXE__
-SET process=paraview.exe
+SET "softexe=__EXE__"
+SET "process=paraview.exe"
 
 
 @ECHO [INFO] Search PowerShell

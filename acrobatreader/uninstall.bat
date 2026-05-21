@@ -4,7 +4,7 @@ REM   Uninstall-AcrobatReader
 REM
 
 REM Name
-SET softname=Uninstall-AcrobatReader
+SET "softname=Uninstall-AcrobatReader"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

@@ -4,7 +4,7 @@ REM   RStudio
 REM
 
 REM Name
-SET softname=RStudio
+SET "softname=RStudio"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (
@@ -17,8 +17,8 @@ EXIT /B
 
 @ECHO [BEGIN] %date%-%time%
 
-SET softversion1=__VERSION1__
-SET softversion2=__VERSION2__
+SET "softversion1=__VERSION1__"
+SET "softversion2=__VERSION2__"
 
 
 @ECHO [INFO] Search PowerShell

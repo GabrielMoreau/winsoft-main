@@ -4,7 +4,7 @@ REM   VLC
 REM
 
 REM Name
-SET softname=VideoLAN-VLC-Media-Player
+SET "softname=VideoLAN-VLC-Media-Player"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

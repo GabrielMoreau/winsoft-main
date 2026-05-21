@@ -1,7 +1,7 @@
 
-SET softname=PrusaSlicer
-SET regkey=PrusaSlicer_is1
-SET shortcut=%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\PrusaSlicer.lnk
+SET "softname=PrusaSlicer"
+SET "regkey=PrusaSlicer_is1"
+SET "shortcut=%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\PrusaSlicer.lnk"
 
 
 REM HKLM	PrusaSlicer version 2.7.1	Prusa Research s.r.o.	2.7.1	PrusaSlicer_is1	"C:\Program Files\Prusa3D\PrusaSlicer\unins000.exe"

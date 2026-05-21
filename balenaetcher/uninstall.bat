@@ -1,8 +1,8 @@
 @ECHO OFF
 
-SET softname=BalenaEtcher
-SET regkey=balena-etcher
-SET shortcut=%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\%softname%.lnk
+SET "softname=BalenaEtcher"
+SET "regkey=balena-etcher"
+SET "shortcut=%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\%softname%.lnk"
 
 
 REM Clean reg uninstall key

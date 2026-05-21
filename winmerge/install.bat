@@ -4,7 +4,7 @@ REM   WinMerge
 REM
 
 REM Name
-SET softname=WinMerge
+SET "softname=WinMerge"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

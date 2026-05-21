@@ -4,7 +4,7 @@ REM   Blender
 REM
 
 REM Name
-SET softname=Blender
+SET "softname=Blender"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

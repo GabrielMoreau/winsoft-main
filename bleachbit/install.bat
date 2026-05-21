@@ -4,7 +4,7 @@ REM   BleachBit
 REM
 
 REM Name
-SET softname=BleachBit
+SET "softname=BleachBit"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

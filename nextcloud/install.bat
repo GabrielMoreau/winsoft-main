@@ -4,7 +4,7 @@ REM   Nextcloud
 REM
 
 REM Name
-SET softname=Nextcloud
+SET "softname=Nextcloud"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (
@@ -18,7 +18,7 @@ EXIT /B
 @ECHO [BEGIN] %date%-%time%
 
 SET "softversion=__VERSION__"
-SET process=nextcloud.exe
+SET "process=nextcloud.exe"
 
 @ECHO [INFO] Search PowerShell
 SET "pwrsh=%WINDIR%\System32\WindowsPowerShell\V1.0\powershell.exe"

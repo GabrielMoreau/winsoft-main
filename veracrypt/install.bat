@@ -4,7 +4,7 @@ REM   VeraCrypt
 REM
 
 REM Name
-SET softname=VeraCrypt
+SET "softname=VeraCrypt"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

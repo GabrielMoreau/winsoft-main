@@ -4,7 +4,7 @@ REM   ProtonMailBridge
 REM
 
 REM Name
-SET softname=ProtonMailBridge
+SET "softname=ProtonMailBridge"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

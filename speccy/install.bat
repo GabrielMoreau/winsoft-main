@@ -4,7 +4,7 @@ REM   Speccy
 REM
 
 REM Name
-SET softname=Speccy
+SET "softname=Speccy"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

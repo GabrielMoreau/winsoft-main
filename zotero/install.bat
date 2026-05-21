@@ -4,7 +4,7 @@ REM   Zotero
 REM
 
 REM Name
-SET softname=Zotero
+SET "softname=Zotero"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

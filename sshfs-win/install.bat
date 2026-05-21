@@ -4,7 +4,7 @@ REM   SSHFS-Win
 REM
 
 REM Name
-SET softname=SSHFS-Win
+SET "softname=SSHFS-Win"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (
@@ -17,8 +17,8 @@ EXIT /B
 
 @ECHO [BEGIN] %date%-%time%
 
-SET WinfspVersion=__WINFSP_VERSION__
-SET SshfsVersion=__SSHFS_VERSION__
+SET "WinfspVersion=__WINFSP_VERSION__"
+SET "SshfsVersion=__SSHFS_VERSION__"
 
 
 @ECHO [INFO] Search PowerShell

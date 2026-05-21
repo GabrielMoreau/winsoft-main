@@ -4,7 +4,7 @@ REM   Inkscape
 REM
 
 REM Name
-SET softname=Inkscape
+SET "softname=Inkscape"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

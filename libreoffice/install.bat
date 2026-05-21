@@ -4,7 +4,7 @@ REM   LibreOffice
 REM
 
 REM Name
-SET softname=LibreOffice
+SET "softname=LibreOffice"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (
@@ -19,8 +19,8 @@ EXIT /B
 
 
 SET "softversion=__VERSION__"
-SET process=soffice.bin
-SET MAX_RETRY=1
+SET "process=soffice.bin"
+SET "MAX_RETRY=1"
 
 
 @ECHO [INFO] Search PowerShell

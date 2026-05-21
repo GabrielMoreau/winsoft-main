@@ -4,7 +4,7 @@ REM   PrusaSlicer
 REM
 
 REM Name
-SET softname=PrusaSlicer
+SET "softname=PrusaSlicer"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

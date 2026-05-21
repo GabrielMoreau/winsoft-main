@@ -4,7 +4,7 @@ REM   DockerDesktop
 REM
 
 REM Name
-SET softname=DockerDesktop
+SET "softname=DockerDesktop"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

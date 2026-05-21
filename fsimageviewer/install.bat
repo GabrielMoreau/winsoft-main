@@ -4,7 +4,7 @@ REM   FastStoneImageViewer
 REM
 
 REM Name
-SET softname=FastStoneImageViewer
+SET "softname=FastStoneImageViewer"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

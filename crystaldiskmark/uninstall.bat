@@ -4,7 +4,7 @@ REM   Uninstall-CrystalDiskMark
 REM
 
 REM Name
-SET softname=Uninstall-CrystalDiskMark
+SET "softname=Uninstall-CrystalDiskMark"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

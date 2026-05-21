@@ -4,7 +4,7 @@ REM   KeepassXC
 REM
 
 REM Name
-SET softname=KeepassXC
+SET "softname=KeepassXC"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (
@@ -18,7 +18,7 @@ EXIT /B
 @ECHO [BEGIN] %date%-%time%
 
 SET "softversion=__VERSION__"
-SET process=KeepassXC.exe
+SET "process=KeepassXC.exe"
 
 
 @ECHO [INFO] Search PowerShell

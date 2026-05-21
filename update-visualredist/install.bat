@@ -4,7 +4,7 @@ REM   Update-VisualCPPRedistributable
 REM
 
 REM Name
-SET softname=Update-VisualCPPRedistributable
+SET "softname=Update-VisualCPPRedistributable"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

@@ -4,7 +4,7 @@ REM   SumatraPDF
 REM
 
 REM Name
-SET softname=SumatraPDF
+SET "softname=SumatraPDF"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

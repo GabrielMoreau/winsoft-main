@@ -4,7 +4,7 @@ REM   Uninstall-DellBiosUtil
 REM
 
 REM Name
-SET softname=Uninstall-DellBiosUtil
+SET "softname=Uninstall-DellBiosUtil"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

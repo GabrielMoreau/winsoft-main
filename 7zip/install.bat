@@ -4,7 +4,7 @@ REM   7-Zip
 REM
 
 REM Name
-SET softname=7-Zip
+SET "softname=7-Zip"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (
@@ -18,8 +18,8 @@ EXIT /B
 @ECHO [BEGIN] %date%-%time%
 
 SET "softversion=__VERSION__"
-SET softversionshort=__VERSIONSHORT__
-SET process=7z.exe
+SET "softversionshort=__VERSIONSHORT__"
+SET "process=7z.exe"
 
 
 @ECHO [INFO] Kill running process

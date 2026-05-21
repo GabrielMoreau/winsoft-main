@@ -4,7 +4,7 @@ REM   CiscoAnyConnect
 REM
 
 REM Name
-SET softname=CiscoAnyConnect
+SET "softname=CiscoAnyConnect"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

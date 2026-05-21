@@ -4,7 +4,7 @@ REM   UltiMaker Cura
 REM
 
 REM Name
-SET softname=UltiMakerCura
+SET "softname=UltiMakerCura"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

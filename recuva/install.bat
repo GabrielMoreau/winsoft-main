@@ -4,7 +4,7 @@ REM   Recuva
 REM
 
 REM Name
-SET softname=Recuva
+SET "softname=Recuva"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

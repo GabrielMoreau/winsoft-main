@@ -4,7 +4,7 @@ REM   ArduinoIDE
 REM
 
 REM Name
-SET softname=ArduinoIDE
+SET "softname=ArduinoIDE"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

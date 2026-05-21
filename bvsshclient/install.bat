@@ -4,7 +4,7 @@ REM   BvSshClient
 REM
 
 REM Name
-SET softname=BvSshClient
+SET "softname=BvSshClient"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

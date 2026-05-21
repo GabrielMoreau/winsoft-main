@@ -4,7 +4,7 @@ REM   Webex
 REM
 
 REM Name
-SET softname=Webex
+SET "softname=Webex"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (
@@ -18,7 +18,7 @@ EXIT /B
 @ECHO [BEGIN] %date%-%time%
 
 SET "softversion=__VERSION__"
-SET process=CiscoCollabHost.exe
+SET "process=CiscoCollabHost.exe"
 
 
 @ECHO [INFO] Kill running process

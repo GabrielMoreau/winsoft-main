@@ -4,7 +4,7 @@ REM   Tabby
 REM
 
 REM Name
-SET softname=Tabby
+SET "softname=Tabby"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

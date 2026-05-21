@@ -4,7 +4,7 @@ REM   Uninstall-Chrome
 REM
 
 REM Name
-SET softname=Uninstall-Chrome
+SET "softname=Uninstall-Chrome"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

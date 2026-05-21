@@ -4,7 +4,7 @@ REM   OpenShot
 REM
 
 REM Name
-SET softname=OpenShot
+SET "softname=OpenShot"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (

@@ -4,7 +4,7 @@ REM   Uninstall-Webex
 REM
 
 REM Name
-SET softname=Uninstall-Webex
+SET "softname=Uninstall-Webex"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (
@@ -17,7 +17,7 @@ EXIT /B
 
 @ECHO [BEGIN] %date%-%time%
 
-SET process=CiscoCollabHost.exe
+SET "process=CiscoCollabHost.exe"
 
 
 @ECHO [INFO] Kill running process

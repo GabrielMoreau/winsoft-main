@@ -4,7 +4,7 @@ REM   Wireshark
 REM
 
 REM Name
-SET softname=Wireshark
+SET "softname=Wireshark"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (
@@ -17,10 +17,10 @@ EXIT /B
 
 @ECHO [BEGIN] %date%-%time%
 
-SET softversion=__VERSION1__
+SET "softversion=__VERSION1__"
 
 REM NPCAP or Win10Pcap
-SET softversion2=__VERSION2__
+SET "softversion2=__VERSION2__"
 
 
 @ECHO [INFO] Search PowerShell
