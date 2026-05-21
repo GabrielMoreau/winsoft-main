@@ -20,7 +20,8 @@ EXIT /B
 SET "softversion=__VERSION__"
 SET "process=firefox.exe"
 SET "qexeadmin=__QEXEADMIN__"
-SET "mainexe=%ProgramFiles%\Mozilla Firefox\firefox.exe;%ProgramFiles%\Mozilla Firefox\private_browsing.exe"
+SET "mainexe=%ProgramFiles%\Mozilla Firefox\firefox.exe"
+SET "mainexe=%mainexe%;%ProgramFiles%\Mozilla Firefox\private_browsing.exe"
 
 @ECHO [INFO] Kill the current process
 TASKKILL /T /F /IM %process% || VER >NUL

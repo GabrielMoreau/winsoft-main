@@ -17,9 +17,9 @@ EXIT /B
 
 @ECHO [BEGIN] %date%-%time%
 
-SET softversion=__VERSION__
-SET qexeadmin=__QEXEADMIN__
-SET mainexe=%ProgramFiles%\BraveSoftware\Brave-Browser\Application\brave.exe
+SET "softversion=__VERSION__"
+SET "qexeadmin=__QEXEADMIN__"
+SET "mainexe=%ProgramFiles%\BraveSoftware\Brave-Browser\Application\brave.exe"
 
 
 @ECHO [INFO] Search PowerShell
