@@ -19,8 +19,9 @@ EXIT /B
 
 REM https://support.zoom.us/hc/fr/articles/201362163-Installation-et-configuration-de-masse-pour-Windows
 
-SET softversion=__VERSION__
-SET qexeadmin=__QEXEADMIN__
+SET "softversion=__VERSION__"
+SET "qexeadmin=__QEXEADMIN__"
+SET "mainexe=%ProgramFiles%\Zoom\bin\Zoom.exe"
 
 
 @ECHO [INFO] Search PowerShell
@@ -37,8 +38,11 @@ SET RETURNCODE=0
 
 :QEXEADMRESET
 IF "%qexeadmin%"=="false" (
-  IF EXIST "%ProgramFiles%\Zoom\bin\Zoom.exe" (
-    icacls "%ProgramFiles%\Zoom\bin\Zoom.exe" /reset || VER >NUL
+  FOR %%F in ("%mainexe:;=" "%") do (
+    IF EXIST "%%~F" (
+      @ECHO [INFO] Reset ACL on %%~F
+      icacls "%%~F" /reset || VER >NUL
+    )
   )
 )
 
@@ -65,8 +69,11 @@ IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
 
 :QEXEADMDENY
 IF "%qexeadmin%"=="false" (
-  IF EXIST "%ProgramFiles%\Zoom\bin\Zoom.exe" (
-    icacls "%ProgramFiles%\Zoom\bin\Zoom.exe" /deny "*S-1-5-32-544:(X)"
+  FOR %%F in ("%mainexe:;=" "%") do (
+    IF EXIST "%%~F" (
+      @ECHO [INFO] Restrict ACL for admin on %%~F
+      icacls "%%~F" /deny "*S-1-5-32-544:(X)" || VER >NUL
+    )
   )
 )
 
