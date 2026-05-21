@@ -17,8 +17,9 @@ EXIT /B
 
 @ECHO [BEGIN] %date%-%time%
 
-SET softversion=__VERSION__
-SET qexeadmin=__QEXEADMIN__
+SET "softversion=__VERSION__"
+SET "qexeadmin=__QEXEADMIN__"
+SET "mainexe=%ProgramFiles%\TigerVNC\vncviewer.exe"
 
 
 @ECHO [INFO] Search PowerShell
@@ -35,8 +36,11 @@ SET RETURNCODE=0
 
 :QEXEADMRESET
 IF "%qexeadmin%"=="false" (
-  IF EXIST "%ProgramFiles%\TigerVNC\vncviewer.exe" (
-    icacls "%ProgramFiles%\TigerVNC\vncviewer.exe" /reset || VER >NUL
+  FOR %%F in ("%mainexe:;=" "%") do (
+    IF EXIST "%%~F" (
+      @ECHO [INFO] Reset ACL on %%~F
+      icacls "%%~F" /reset || VER >NUL
+    )
   )
 )
 
@@ -68,8 +72,11 @@ IF EXIST "%ALLUSERSPROFILE%\Desktop\%softname%.lnk" DEL /F /Q "%ALLUSERSPROFILE%
 
 :QEXEADMDENY
 IF "%qexeadmin%"=="false" (
-  IF EXIST "%ProgramFiles%\TigerVNC\vncviewer.exe" (
-    icacls "%ProgramFiles%\TigerVNC\vncviewer.exe" /deny "*S-1-5-32-544:(X)"
+  FOR %%F in ("%mainexe:;=" "%") do (
+    IF EXIST "%%~F" (
+      @ECHO [INFO] Restrict ACL for admin on %%~F
+      icacls "%%~F" /deny "*S-1-5-32-544:(X)" || VER >NUL
+    )
   )
 )
 
