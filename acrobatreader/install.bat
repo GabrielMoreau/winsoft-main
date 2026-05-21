@@ -109,7 +109,7 @@ IF EXIST "%ALLUSERSPROFILE%\Desktop\Adobe*Acrobat.lnk"  DEL /F /Q "%ALLUSERSPROF
 :QEXEADMIN
 IF "%qexeadmin%"=="false" (
   IF EXIST "%ProgramFiles%\Adobe\Acrobat DC\Acrobat\Acrobat.exe" (
-    icacls "%ProgramFiles%\Adobe\Acrobat DC\Acrobat\Acrobat.exe" /deny "*S-1-5-32-544:(RX)"
+    icacls "%ProgramFiles%\Adobe\Acrobat DC\Acrobat\Acrobat.exe" /deny "*S-1-5-32-544:(X)"
   )
 )
 

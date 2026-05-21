@@ -76,7 +76,7 @@ IF "%qexeadmin%"=="false" (
   FOR %%F in ("%mainexe:;=" "%") do (
     IF EXIST "%%~F" (
       @ECHO [INFO] Restrict ACL for admin on %%~F
-      icacls "%%~F" /deny "*S-1-5-32-544:(RX)" || VER >NUL
+      icacls "%%~F" /deny "*S-1-5-32-544:(X)" || VER >NUL
     )
   )
 )

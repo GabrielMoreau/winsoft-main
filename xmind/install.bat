@@ -92,7 +92,7 @@ regedit.exe /S "tmp_install.reg"
 IF "%qexeadmin%"=="false" (
   IF EXIST "%mainexe%" (
     @ECHO [INFO] Restrict ACL on the user software for admin
-    icacls "%mainexe%" /deny "*S-1-5-32-544:(RX)" || VER >NUL
+    icacls "%mainexe%" /deny "*S-1-5-32-544:(X)" || VER >NUL
   )
 )
 
