@@ -27,8 +27,8 @@ ScriptRunner.exe -appvscript Picocrypt-Installer-%softversion%.exe /VERYSILENT /
 
 
 @ECHO [INFO] Search PowerShell
-SET pwrsh=%WINDIR%\System32\WindowsPowerShell\V1.0\powershell.exe
-IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET pwrsh=%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe
+SET "pwrsh=%WINDIR%\System32\WindowsPowerShell\V1.0\powershell.exe"
+IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET "pwrsh=%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe"
 
 @ECHO [INFO] Create shortcut
 IF EXIST "%ProgramFiles%\Picocrypt\Picocrypt.exe" (

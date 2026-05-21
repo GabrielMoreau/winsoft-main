@@ -23,8 +23,8 @@ SET "mainexe=%ProgramFiles%\Google\Chrome\Application\chrome.exe"
 
 
 @ECHO [INFO] Search PowerShell
-SET pwrsh=%WINDIR%\System32\WindowsPowerShell\V1.0\powershell.exe
-IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET pwrsh=%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe
+SET "pwrsh=%WINDIR%\System32\WindowsPowerShell\V1.0\powershell.exe"
+IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET "pwrsh=%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe"
 
 @ECHO [INFO] Add rights
 %pwrsh% Set-ExecutionPolicy RemoteSigned -Force -Scope LocalMachine

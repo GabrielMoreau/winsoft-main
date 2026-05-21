@@ -28,8 +28,8 @@ SET "sc_icon=%ProgramFiles%\%installfolder%\VOSviewer.ico"
 
 
 @ECHO [INFO] Search PowerShell
-SET pwrsh=%WINDIR%\System32\WindowsPowerShell\V1.0\powershell.exe
-IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET pwrsh=%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe
+SET "pwrsh=%WINDIR%\System32\WindowsPowerShell\V1.0\powershell.exe"
+IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET "pwrsh=%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe"
 
 @ECHO [INFO] Add rights
 %pwrsh% Set-ExecutionPolicy RemoteSigned -Force -Scope LocalMachine
@@ -68,8 +68,8 @@ ICACLS "%ProgramFiles%\%installfolder%" /grant *S-1-1-0:(OI)(CI)(RX)
 
 
 @ECHO [INFO] Search PowerShell
-SET pwrsh=%WINDIR%\System32\WindowsPowerShell\V1.0\powershell.exe
-IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET pwrsh=%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe
+SET "pwrsh=%WINDIR%\System32\WindowsPowerShell\V1.0\powershell.exe"
+IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET "pwrsh=%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe"
 
 @ECHO [INFO] Create shortcut in install folder
 IF EXIST "%ProgramFiles%\%installfolder%" (

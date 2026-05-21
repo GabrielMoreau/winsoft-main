@@ -19,8 +19,8 @@ SET softpublisher=The ImageJ Fiji Team
 SET softiversion=__IVERSION__
 SET softnversion=__NVERSION__
 
-SET pwrsh=%WINDIR%\System32\WindowsPowerShell\V1.0\powershell.exe
-IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET pwrsh=%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe
+SET "pwrsh=%WINDIR%\System32\WindowsPowerShell\V1.0\powershell.exe"
+IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET "pwrsh=%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe"
 
 @ECHO [INFO] Adds the rights to run powershell scripts
 %pwrsh% Set-ExecutionPolicy RemoteSigned -Force -Scope LocalMachine

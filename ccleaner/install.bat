@@ -30,8 +30,8 @@ TASKKILL /T /F /IM %process% || VER >NUL
 ScriptRunner.exe -appvscript ccsetup-%softversion%.exe /S /L=1036 -appvscriptrunnerparameters -wait -timeout=300
 
 
-SET pwrsh=%WINDIR%\System32\WindowsPowerShell\V1.0\powershell.exe
-IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET pwrsh=%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe
+SET "pwrsh=%WINDIR%\System32\WindowsPowerShell\V1.0\powershell.exe"
+IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET "pwrsh=%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe"
 
 @ECHO [INFO] Add rights
 %pwrsh% Set-ExecutionPolicy RemoteSigned -Force -Scope LocalMachine
