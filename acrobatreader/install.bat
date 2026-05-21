@@ -17,9 +17,10 @@ EXIT /B
 
 @ECHO [BEGIN] %date%-%time%
 
-SET softversion=__VERSION__
-SET qexeadmin=__QEXEADMIN__
-SET MAX_RETRY=1
+SET "softversion=__VERSION__"
+SET "qexeadmin=__QEXEADMIN__"
+SET "MAX_RETRY=1"
+SET "mainexe=%ProgramFiles%\Adobe\Acrobat DC\Acrobat\Acrobat.exe.exe"
 
 
 @ECHO [INFO] Kill running process
@@ -40,8 +41,11 @@ SET RETURNCODE=0
 
 :QEXEADMRESET
 IF "%qexeadmin%"=="false" (
-  IF EXIST "%ProgramFiles%\Adobe\Acrobat DC\Acrobat\Acrobat.exe" (
-    icacls "%ProgramFiles%\Adobe\Acrobat DC\Acrobat\Acrobat.exe" /reset || VER >NUL
+  FOR %%F in ("%mainexe:;=" "%") do (
+    IF EXIST "%%~F" (
+      @ECHO [INFO] Reset ACL on %%~F
+      icacls "%%~F" /reset || VER >NUL
+    )
   )
 )
 
@@ -108,8 +112,11 @@ IF EXIST "%ALLUSERSPROFILE%\Desktop\Adobe*Acrobat.lnk"  DEL /F /Q "%ALLUSERSPROF
 
 :QEXEADMDENY
 IF "%qexeadmin%"=="false" (
-  IF EXIST "%ProgramFiles%\Adobe\Acrobat DC\Acrobat\Acrobat.exe" (
-    icacls "%ProgramFiles%\Adobe\Acrobat DC\Acrobat\Acrobat.exe" /deny "*S-1-5-32-544:(X)"
+  FOR %%F in ("%mainexe:;=" "%") do (
+    IF EXIST "%%~F" (
+      @ECHO [INFO] Restrict ACL for admin on %%~F
+      icacls "%%~F" /deny "*S-1-5-32-544:(X)" || VER >NUL
+    )
   )
 )
 
