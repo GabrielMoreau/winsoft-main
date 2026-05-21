@@ -25,6 +25,12 @@ SET "shortcut=%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\Xmind.lnk"
 SET "process=Xmind.exe"
 SET "mainexe=%ProgramFiles%\%installfolder%\Xmind.exe"
 
+FOR /f "tokens=1 delims=;" %%F IN ("%mainexe%") DO SET "sc_target=%%F"
+
+
+@ECHO [INFO] Kill running process
+TASKKILL /T /F /IM %process% || VER >NUL
+
 
 @ECHO [INFO] Search PowerShell
 SET pwrsh=%WINDIR%\System32\WindowsPowerShell\V1.0\powershell.exe
@@ -40,11 +46,18 @@ SET RETURNCODE=0
 
 :QEXEADMRESET
 IF "%qexeadmin%"=="false" (
-  IF EXIST "%mainexe%" (
-    @ECHO [INFO] Reset ACL on the user software
-    icacls "%mainexe%" /reset || VER >NUL
+  FOR %%F in ("%mainexe:;=" "%") do (
+    IF EXIST "%%~F" (
+      @ECHO [INFO] Reset ACL on %%~F
+      icacls "%%~F" /reset || VER >NUL
+    )
   )
 )
+
+
+@ECHO [INFO] Execute pre-install script
+IF EXIST ".\pre-install.ps1" %pwrsh% -File ".\pre-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
+IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
 
 
 @ECHO [INFO] Clean old version before install
@@ -54,7 +67,7 @@ IF EXIST "%ProgramFiles%\%installfolder%" RMDIR /S /Q "%ProgramFiles%\%installfo
 
 @ECHO [INFO] Silent install %softname%
 MOVE pkg "%ProgramFiles%\%installfolder%"
-IF NOT EXIST "%mainexe%" GOTO FAILED
+IF NOT EXIST "%sc_target%" GOTO FAILED
 
 
 @ECHO [INFO] Copy uninstall script
@@ -67,7 +80,7 @@ ICACLS "%ProgramFiles%\%installfolder%" /grant *S-1-1-0:(OI)(CI)(RX)
 
 @ECHO [INFO] Create shortcut
 IF EXIST "%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs" (
-  %pwrsh% -Command "$WS = New-Object -ComObject WScript.Shell; $SC = $WS.CreateShortcut('%shortcut%'); $SC.TargetPath = '%mainexe%'; $SC.Save();" -NoLogo -NonInteractive -NoProfile
+  %pwrsh% -Command "$WS = New-Object -ComObject WScript.Shell; $SC = $WS.CreateShortcut('%shortcut%'); $SC.TargetPath = '%sc_target%'; $SC.Save();" -NoLogo -NonInteractive -NoProfile
 )
 
 
@@ -90,9 +103,11 @@ regedit.exe /S "tmp_install.reg"
 
 :QEXEADMIN
 IF "%qexeadmin%"=="false" (
-  IF EXIST "%mainexe%" (
-    @ECHO [INFO] Restrict ACL on the user software for admin
-    icacls "%mainexe%" /deny "*S-1-5-32-544:(X)" || VER >NUL
+  FOR %%F in ("%mainexe:;=" "%") do (
+    IF EXIST "%%~F" (
+      @ECHO [INFO] Restrict ACL for admin on %%~F
+      icacls "%%~F" /deny "*S-1-5-32-544:(X)" || VER >NUL
+    )
   )
 )
 

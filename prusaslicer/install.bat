@@ -17,12 +17,18 @@ EXIT /B
 
 @ECHO [BEGIN] %date%-%time%
 
-SET softversion=__VERSION__
-SET regkey=PrusaSlicer_is1
-SET shortcut=%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\PrusaSlicer.lnk
-SET process=prusa-slicer.exe
-SET qexeadmin=__QEXEADMIN__
-SET mainexe=%ProgramFiles%\Prusa3D\%softname%\prusa-slicer.exe
+SET "softversion=__VERSION__"
+SET "regkey=PrusaSlicer_is1"
+SET "shortcut=%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\PrusaSlicer.lnk"
+SET "process=prusa-slicer.exe"
+SET "qexeadmin=__QEXEADMIN__"
+SET "mainexe=%ProgramFiles%\Prusa3D\%softname%\prusa-slicer.exe"
+
+FOR /f "tokens=1 delims=;" %%F IN ("%mainexe%") DO SET "sc_target=%%F"
+
+
+@ECHO [INFO] Kill running process
+TASKKILL /T /F /IM %process% || VER >NUL
 
 
 @ECHO [INFO] Search PowerShell
@@ -39,9 +45,11 @@ SET RETURNCODE=0
 
 :QEXEADMRESET
 IF "%qexeadmin%"=="false" (
-  IF EXIST "%mainexe%" (
-    @ECHO [INFO] Reset ACL on the user software
-    icacls "%mainexe%" /reset || VER >NUL
+  FOR %%F in ("%mainexe:;=" "%") do (
+    IF EXIST "%%~F" (
+      @ECHO [INFO] Reset ACL on %%~F
+      icacls "%%~F" /reset || VER >NUL
+    )
   )
 )
 
@@ -50,9 +58,6 @@ IF "%qexeadmin%"=="false" (
 IF EXIST ".\pre-install.ps1" %pwrsh% -File ".\pre-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
 IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
 
-
-@ECHO [INFO] Kill running process
-TASKKILL /T /F /IM %process% || VER >NUL
 
 @ECHO [INFO] Clean old version before install
 CALL .\uninstall.bat 1> "%logdir%\%softname%-DEL.log" 2>&1
@@ -73,7 +78,7 @@ COPY /A /Y "uninstall.bat" "%ProgramFiles%\Prusa3D\%softname%\uninstall.bat"
 
 @ECHO [INFO] Create shortcut
 IF EXIST "%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs" (
-  %pwrsh% -Command "$WS = New-Object -ComObject WScript.Shell; $SC = $WS.CreateShortcut('%shortcut%'); $SC.TargetPath = '%mainexe%'; $SC.Save();" -ExecutionPolicy Bypass -NoLogo -NonInteractive -NoProfile
+  %pwrsh% -Command "$WS = New-Object -ComObject WScript.Shell; $SC = $WS.CreateShortcut('%shortcut%'); $SC.TargetPath = '%sc_target%'; $SC.Save();" -ExecutionPolicy Bypass -NoLogo -NonInteractive -NoProfile
 )
 
 
@@ -107,9 +112,11 @@ IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
 
 :QEXEADMIN
 IF "%qexeadmin%"=="false" (
-  IF EXIST "%mainexe%" (
-    @ECHO [INFO] Restrict ACL on the user software for admin
-    icacls "%mainexe%" /deny "*S-1-5-32-544:(X)" || VER >NUL
+  FOR %%F in ("%mainexe:;=" "%") do (
+    IF EXIST "%%~F" (
+      @ECHO [INFO] Restrict ACL for admin on %%~F
+      icacls "%%~F" /deny "*S-1-5-32-544:(X)" || VER >NUL
+    )
   )
 )
 
