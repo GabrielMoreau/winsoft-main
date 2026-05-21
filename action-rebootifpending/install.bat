@@ -27,7 +27,7 @@ IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET "pwrsh=%
 
 @ECHO [INFO] Unblock PowerShell Script
 %pwrsh% "Unblock-File -Path .\*.ps1"
-SET RETURNCODE=0
+SET "RETURNCODE=0"
 
 
 REM https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/manage-bde-status

@@ -27,7 +27,7 @@ IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET "pwrsh=%
 
 @ECHO [INFO] Unblock PowerShell Script
 %pwrsh% "Unblock-File -Path .\*.ps1"
-SET RETURNCODE=0
+SET "RETURNCODE=0"
 
 
 @ECHO [INFO] Execute uninstall script

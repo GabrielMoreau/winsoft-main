@@ -36,12 +36,12 @@ IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET "pwrsh=%
 
 @ECHO [INFO] Unblock PowerShell Script
 %pwrsh% "Unblock-File -Path .\*.ps1"
-SET RETURNCODE=0
+SET "RETURNCODE=0"
 
 
 @ECHO [INFO] Execute pre-install script
 IF EXIST ".\pre-install.ps1" %pwrsh% -File ".\pre-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
-IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
+IF %RETURNCODE% EQU 0 SET "RETURNCODE=%ERRORLEVEL%"
 
 
 @ECHO [INFO] Uninstall previous version
@@ -69,7 +69,7 @@ ping 127.0.0.1 -n 3 > NUL
 
 @ECHO [INFO] Silent install %softname%
 ScriptRunner.exe -appvscript "%softexe%" /S -appvscriptrunnerparameters -wait -timeout=300
-IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
+IF %RETURNCODE% EQU 0 SET "RETURNCODE=%ERRORLEVEL%"
 
 
 :POSTINSTALL
@@ -79,7 +79,7 @@ IF EXIST ".\pre-install.ps1" (
 ) ELSE (
   IF EXIST ".\post-install.ps1" %pwrsh% -File ".\post-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
 )
-IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
+IF %RETURNCODE% EQU 0 SET "RETURNCODE=%ERRORLEVEL%"
 
 
 @ECHO [INFO] Disable auto update
