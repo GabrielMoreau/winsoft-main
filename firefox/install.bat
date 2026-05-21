@@ -17,11 +17,10 @@ EXIT /B
 
 @ECHO [BEGIN] %date%-%time%
 
-SET softversion=__VERSION__
-SET process=firefox.exe
-SET qexeadmin=__QEXEADMIN__
-SET mainexe=%ProgramFiles%\Mozilla Firefox\firefox.exe
-SET mainexe2=%ProgramFiles%\Mozilla Firefox\private_browsing.exe
+SET "softversion=__VERSION__"
+SET "process=firefox.exe"
+SET "qexeadmin=__QEXEADMIN__"
+SET "mainexe=%ProgramFiles%\Mozilla Firefox\firefox.exe;%ProgramFiles%\Mozilla Firefox\private_browsing.exe"
 
 @ECHO [INFO] Kill the current process
 TASKKILL /T /F /IM %process% || VER >NUL
@@ -41,10 +40,11 @@ SET RETURNCODE=0
 
 :QEXEADMRESET
 IF "%qexeadmin%"=="false" (
-  IF EXIST "%mainexe%" (
-    @ECHO [INFO] Reset ACL on the user software
-    icacls "%mainexe%" /reset || VER >NUL
-    icacls "%mainexe2%" /reset || VER >NUL
+  FOR %%F in ("%mainexe:;=" "%") do (
+    IF EXIST "%%~F" (
+      @ECHO [INFO] Reset ACL on %%~F
+      icacls "%%~F" /reset || VER >NUL
+    )
   )
 )
 
@@ -79,10 +79,11 @@ IF %RETURNCODE% EQU 0 SET RETURNCODE=%ERRORLEVEL%
 
 :QEXEADMDENY
 IF "%qexeadmin%"=="false" (
-  IF EXIST "%mainexe%" (
-    @ECHO [INFO] Restrict ACL on the user software for admin
-    icacls "%mainexe%" /deny "*S-1-5-32-544:(X)" || VER >NUL
-    icacls "%mainexe2%" /deny "*S-1-5-32-544:(X)" || VER >NUL
+  FOR %%F in ("%mainexe:;=" "%") do (
+    IF EXIST "%%~F" (
+      @ECHO [INFO] Restrict ACL for admin on %%~F
+      icacls "%%~F" /deny "*S-1-5-32-544:(X)" || VER >NUL
+    )
   )
 )
 
