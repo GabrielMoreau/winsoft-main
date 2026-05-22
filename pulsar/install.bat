@@ -18,6 +18,8 @@ EXIT /B
 @ECHO [BEGIN] %date%-%time%
 
 SET "softversion=__VERSION__"
+SET "qexeadmin=__QEXEADMIN__"
+SET "mainexe=%ProgramFiles%\Pulsar\pulsar.exe"
 
 
 @ECHO [INFO] Search PowerShell
@@ -30,6 +32,17 @@ IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET "pwrsh=%
 @ECHO [INFO] Unblock PowerShell Script
 %pwrsh% "Unblock-File -Path .\*.ps1"
 SET "RETURNCODE=0"
+
+
+:QEXEADMRESET
+IF "%qexeadmin%"=="false" (
+  FOR %%F in ("%mainexe:;=" "%") do (
+    IF EXIST "%%~F" (
+      @ECHO [INFO] Reset ACL on %%~F
+      icacls "%%~F" /reset || VER >NUL
+    )
+  )
+)
 
 
 @ECHO [INFO] Execute pre-install script
@@ -55,6 +68,17 @@ IF %RETURNCODE% EQU 0 SET "RETURNCODE=%ERRORLEVEL%"
 @ECHO [INFO] Remove desktop shortcut
 IF EXIST "%PUBLIC%\Desktop\Pulsar.lnk"          DEL /F /Q "%PUBLIC%\Desktop\Pulsar.lnk"
 IF EXIST "%ALLUSERSPROFILE%\Desktop\Pulsar.lnk" DEL /F /Q "%ALLUSERSPROFILE%\Desktop\Pulsar.lnk"
+
+
+:QEXEADMDENY
+IF "%qexeadmin%"=="false" (
+  FOR %%F in ("%mainexe:;=" "%") do (
+    IF EXIST "%%~F" (
+      @ECHO [INFO] Restrict ACL for admin on %%~F
+      icacls "%%~F" /deny "*S-1-5-32-544:(X)" || VER >NUL
+    )
+  )
+)
 
 
 :END
