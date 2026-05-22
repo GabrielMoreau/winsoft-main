@@ -13,13 +13,15 @@ built on a Chromium-based.
 * Policies : https://learn.microsoft.com/en-us/deployedge/microsoft-edge-policies
 
 
-Some browser extensions are preinstalled, most of which are
-security-related:
+Some browser extensions are preinstalled, most of which are security-related:
+
 * Ublock Origin
 * Cookie AutoDelete
 * KeePassXC-Browser
 * Decentraleyes
 * ClearURLs
+* Country Flag +
+* Click and Read CNRS
 
 Is there a link to get the latest Microsoft Edge version number?
 See https://stackoverflow.com/questions/71620168/is-there-a-link-to-get-the-latest-microsoft-edge-version-number/71644819#71644819
