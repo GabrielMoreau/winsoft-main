@@ -34,6 +34,18 @@
       "French-GC@grammalecte.net": {
         "installation_mode": "force_installed",
         "install_url": "https://addons.mozilla.org/firefox/downloads/latest/grammalecte-fr/latest.xpi"
+      },
+      "jid1-BoFifL9Vbdl2zQ@jetpack": {
+        "installation_mode": "normal_installed",
+        "install_url": "https://addons.mozilla.org/firefox/downloads/latest/decentraleyes/latest.xpi"
+      },
+      "inist.users@gmail.com": {
+        "installation_mode": "normal_installed",
+        "install_url": "https://addons.mozilla.org/firefox/downloads/latest/click-and-read/latest.xpi"
+      },
+      "{1018e4d6-728f-4b20-ad56-37578a4de76b}": {
+        "installation_mode": "force_installed",
+        "install_url": "https://addons.mozilla.org/firefox/downloads/latest/flagfox/latest.xpi"
       }
     },
     "SearchEngines": {
