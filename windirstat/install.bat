@@ -35,6 +35,11 @@ IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET "pwrsh=%
 SET "RETURNCODE=0"
 
 
+@ECHO [INFO] Execute pre-install script
+IF EXIST ".\pre-install.ps1" %pwrsh% -File ".\pre-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
+IF %RETURNCODE% EQU 0 SET "RETURNCODE=%ERRORLEVEL%"
+
+
 REM Uninstall old version 1
 IF EXIST "%ProgramFiles(x86)%\WinDirStat\Uninstall.exe" (
   "%ProgramFiles(x86)%\WinDirStat\Uninstall.exe"
