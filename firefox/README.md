@@ -45,12 +45,30 @@ You can see the deployed policies by using the URL about:policies
 
 ## Extensions
 
-Some browser extensions are preinstalled, most of which are
-security-related:
-* Ublock Origin
-* Cookie AutoDelete
-* KeePassXC-Browser
-* Grammalecte
+Some browser extensions are preinstalled, most of which are security-related:
+
+* Ublock Origin - https://addons.mozilla.org/fr/firefox/addon/ublock-origin/
+* Cookie AutoDelete - https://addons.mozilla.org/fr/firefox/addon/cookie-autodelete/
+* KeePassXC-Browser - https://addons.mozilla.org/fr/firefox/addon/keepassxc-browser/
+* Decentraleyes - https://addons.mozilla.org/fr/firefox/addon/decentraleyes/
+* Flagfox - https://addons.mozilla.org/fr/firefox/addon/flagfox/
+* Grammalecte - https://addons.mozilla.org/fr/firefox/addon/grammalecte-fr/
+* Click and Read - https://addons.mozilla.org/fr/firefox/addon/click-and-read/
+
+We can choose `force_installed` to force the extension to be enabled for all users,
+`normal_installed` to let the user choose whether or not to enable the extension (by default, it will be disabled),
+or `blocked` to prevent its installation.
+
+```
+for e in ublock-origin cookie-autodelete keepassxc-browser decentraleyes flagfox grammalecte-fr click-and-read
+do
+  echo "### ${e}"
+  url="https://addons.mozilla.org/firefox/downloads/latest/${e}/latest.xpi"
+  wget  -q "${url}"
+  unzip -p latest.xpi manifest.json | grep '"id":' | sed 's/"//g; s/,$//;'; rm latest.xpi
+  echo "     url: ${url}"
+done
+```
 
 
 ## Extension F-secure
@@ -88,7 +106,3 @@ Attention, ces conditions ne sont pas compatibles a priori avec le secret indust
 > des résultats de recherche. Pour plus d'informations sur les données
 > que nous collectons et leur usage, consultez notre Politique de
 > confidentialité.
-
-Nous pouvons choisir `normal_installed` pour laisser l'utilisateur
-choisir ou non d'accepter l'extension ou `blocked` pour empêcher son
-installation.
