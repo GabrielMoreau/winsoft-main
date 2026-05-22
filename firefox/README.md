@@ -53,7 +53,7 @@ Some browser extensions are preinstalled, most of which are security-related:
 * Decentraleyes - https://addons.mozilla.org/fr/firefox/addon/decentraleyes/
 * Flagfox - https://addons.mozilla.org/fr/firefox/addon/flagfox/
 * Grammalecte - https://addons.mozilla.org/fr/firefox/addon/grammalecte-fr/
-* Click and Read - https://addons.mozilla.org/fr/firefox/addon/click-and-read/
+* Click and Read CNRS - https://addons.mozilla.org/fr/firefox/addon/click-and-read/
 
 We can choose `force_installed` to force the extension to be enabled for all users,
 `normal_installed` to let the user choose whether or not to enable the extension (by default, it will be disabled),
