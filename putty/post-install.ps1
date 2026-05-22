@@ -1,7 +1,8 @@
 
-Write-Output "Begin Post-Install"
+$TimeStamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+Write-Output ("`nBegin Post-Install [$TimeStamp]`n" + "=" * 40 + "`n")
 
-# Clean old duplicate key with PuTTY in the name (same uninstall string)
+########################################################################
 
 # Get Config from file
 Function GetConfig {
@@ -27,62 +28,107 @@ Function ToVersion {
 	Return [version]$Version
 }
 
+# Run MSI or EXE with timeout control
+Function Run-Exec {
+	Param (
+		[Parameter(Mandatory = $True)] [string]$Name,
+		[Parameter(Mandatory = $True)] [string]$FilePath,
+		[Parameter(Mandatory = $True)] [string]$ArgumentList,
+		[Parameter(Mandatory = $False)] [int]$Timeout = 300
+	)
+
+	$Proc = Start-Process -FilePath "$FilePath" -ArgumentList "$ArgumentList" -WindowStyle 'Hidden' -ErrorAction 'SilentlyContinue' -PassThru
+
+	$Timeouted = $Null # Reset any previously set timeout
+	# Wait up to 180 seconds for normal termination
+	$Proc | Wait-Process -Timeout $Timeout -ErrorAction SilentlyContinue -ErrorVariable Timeouted
+	If ($Timeouted) {
+		# Terminate the process
+		$Proc | Kill
+		Write-Output "Error: kill $Name uninstall exe"
+		Return
+	} ElseIf ($Proc.ExitCode -ne 0) {
+		Write-Output "Error: $Name uninstall return code $($Proc.ExitCode)"
+		Return
+	}
+}
+
+########################################################################
+
+$UninstallKeys = @(
+	'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall'
+	'HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall'
+)
+
+########################################################################
+
 # Get Config: Version
 $Config = GetConfig -FilePath 'winsoft-config.ini'
-$RefVersion = $Config.Version
-$RefUninstallString = ''
-$RefName = '^PuTTY '
-Write-Output "Config: Version $RefVersion"
+$RefVersion = ToVersion $Config.Version
+$RefName = $Config.RegexSearch
+Write-Output "Config:`n * Version: $RefVersion`n * RegexSearch: $RefName"
+
+########################################################################
+# Put your specific code here
 
 # Find last install
-@(Get-ChildItem -Recurse 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall';
-  Get-ChildItem -Recurse "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall") |
-	ForEach {
-		$App = (Get-ItemProperty -Path $_.PSPath)
-		$DisplayName = $App.DisplayName
-		If (!($DisplayName -match $RefName)) { Return }
-		$DisplayVersion = $App.DisplayVersion
-		$Exe = $App.UninstallString
-		$KeyPath = $App.PSPath
-		If ((ToVersion($DisplayVersion)) -eq (ToVersion($RefVersion))) {
-			$RefUninstallString = $Exe
-			Write-Output "Ref Key: $DisplayName / $DisplayVersion / $Exe / $KeyPath"
-		} Else {
-			Write-Output "Other Key: $DisplayName / $DisplayVersion / $Exe / $KeyPath"
-		}
+ForEach ($Key in Get-ChildItem -Recurse $UninstallKeys) {
+	$App = Get-ItemProperty -Path $Key.PSPath
+	If ($App.DisplayName -notmatch $RefName) { Continue }
+
+	$DisplayVersion = ToVersion $App.DisplayVersion
+	$KeyProduct     = $Key.PSChildName
+
+	$Exe = $App.UninstallString
+	$KeyPath = $App.PSPath
+	If ($DisplayVersion -eq $RefVersion) {
+		$RefUninstallString = $Exe
+		Write-Output "Ref Key: $($App.DisplayName) / $DisplayVersion / $Exe / $KeyPath"
+	} Else {
+		Write-Output "Other Key: $($App.DisplayName) / $DisplayVersion / $Exe / $KeyPath"
 	}
+}
 
 # Remove empty key and old same key
 If ($RefUninstallString -ne '') {
-	@(Get-ChildItem -Recurse 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall';
-	  Get-ChildItem -Recurse "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall") |
-		ForEach {
-			$App = (Get-ItemProperty -Path $_.PSPath)
-			$DisplayName = $App.DisplayName
-			If (!($DisplayName -match $RefName)) { Return }
-			$DisplayVersion = $App.DisplayVersion
-			$Exe = $App.UninstallString
-			$KeyPath = $App.PSPath
-			# Echo "Check Key $DisplayName : $DisplayVersion < $RefVersion ?"
-			If ((($Exe -eq $RefUninstallString) -Or ($Exe -eq $Null)) -And ((ToVersion($DisplayVersion)) -lt (ToVersion($RefVersion)))) {
-				Write-Output "Remove Key: $DisplayName / $DisplayVersion / $Exe / $KeyPath"
-				Remove-Item -Path "$KeyPath" -Force -Recurse -ErrorAction SilentlyContinue
-			} Else {
-				Write-Output "Keep Key: $DisplayName / $DisplayVersion / $Exe / $KeyPath / $(ToVersion($DisplayVersion))"
-			}
+	ForEach ($Key in Get-ChildItem -Recurse $UninstallKeys) {
+		$App = Get-ItemProperty -Path $Key.PSPath
+		If ($App.DisplayName -notmatch $RefName) { Continue }
+
+		$DisplayVersion = ToVersion $App.DisplayVersion
+		$KeyProduct     = $Key.PSChildName
+
+		$Exe = $App.UninstallString
+		$KeyPath = $App.PSPath
+		# Echo "Check Key $($App.DisplayName) : $DisplayVersion < $RefVersion ?"
+		If ((($Exe -eq $RefUninstallString) -Or ($Exe -eq $Null)) -And ($DisplayVersion -lt $RefVersion)) {
+			Write-Output "Remove Key: $($App.DisplayName) / $DisplayVersion / $Exe / $KeyPath"
+			Remove-Item -Path "$KeyPath" -Force -Recurse -ErrorAction SilentlyContinue
+		} Else {
+			Write-Output "Keep Key: $($App.DisplayName) / $DisplayVersion / $Exe / $KeyPath / $(ToVersion($DisplayVersion))"
 		}
+	}
 }
 
-# View
-@(Get-ChildItem -Recurse 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall';
-  Get-ChildItem -Recurse "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall") |
-	ForEach {
-		$Key = $_
-		$App = (Get-ItemProperty -Path $Key.PSPath)
-		$DisplayName  = $App.DisplayName
-		If (!($DisplayName -match $RefName)) { Return }
+########################################################################
 
-		$DisplayVersion = $App.DisplayVersion
-		$KeyProduct = $Key | Split-Path -Leaf
-		Write-Output "Installed: $DisplayName / $DisplayVersion / $KeyProduct / $($App.UninstallString)"
+# View
+$ReturnCode = 143
+ForEach ($Key in Get-ChildItem -Recurse $UninstallKeys) {
+	$App = Get-ItemProperty -Path $Key.PSPath
+	If ($App.DisplayName -notmatch $RefName) { Continue }
+
+	$DisplayVersion = ToVersion $App.DisplayVersion
+	$KeyProduct     = $Key.PSChildName
+	Write-Output "Installed: $($App.DisplayName) / $DisplayVersion / $KeyProduct / $($App.UninstallString)"
+
+	If ($DisplayVersion -gt $RefVersion) {
+		$ReturnCode = [Math]::Min($ReturnCode, 141)
+	} ElseIf ($DisplayVersion -eq $RefVersion) {
+		$ReturnCode = 0
+	} Else {
+		$ReturnCode = [Math]::Min($ReturnCode, 142)
 	}
+}
+Write-Output "ReturnCode: $ReturnCode"
+Exit $ReturnCode
