@@ -1,1 +1,2 @@
 88c5d86a70d0fe13ae87125e56a79322c4ba253962dafce37441b2ea34472684  CrystalDiskMark9.0.2Ads.exe
+33605aee6cffb9f3596c15f75ec7f99ec925f096b5ebe3d6b2a1fed48c14f9ca  CrystalDiskMark9.0.3Ads.exe
