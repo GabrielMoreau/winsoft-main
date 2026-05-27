@@ -53,7 +53,7 @@ IF EXIST "%ProgramFiles%\HP\HPIA\HPImageAssistant.exe" (
 
   @ECHO [INFO] Create shortcut
   IF EXIST "%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs" (
-    %pwrsh% -Command "$WS = New-Object -ComObject WScript.Shell; $SC = $WS.CreateShortcut('%shortcut%'); $SC.TargetPath = '%ProgramFiles%\HP\HPIA\HPImageAssistant.exe'; $SC.Save();" -ExecutionPolicy Bypass -NoLogo -NonInteractive -NoProfile
+    %pwrsh% -Command "$WS = New-Object -ComObject WScript.Shell; $SC = $WS.CreateShortcut('%shortcut%'); $SC.TargetPath = '%ProgramFiles%\HP\HPIA\HPImageAssistant.exe'; $SC.Save();" -NoLogo -NonInteractive -NoProfile
   )
 
   @ECHO [INFO] Better reg uninstall key
