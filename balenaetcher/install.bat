@@ -62,7 +62,7 @@ IF %RETURNCODE% EQU 0 SET "RETURNCODE=%ERRORLEVEL%"
 
 @ECHO [INFO] Create shortcut
 IF EXIST "%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs" (
-  %pwrsh% -Command "$WS = New-Object -ComObject WScript.Shell; $SC = $WS.CreateShortcut('%shortcut%'); $SC.TargetPath = '%ProgramFiles%\%regkey%\balenaEtcher.exe'; $SC.Save();" -NoLogo -NonInteractive -NoProfile
+  %pwrsh% -Command "$WS = New-Object -ComObject WScript.Shell; $SC = $WS.CreateShortcut('%shortcut%'); $SC.TargetPath = '%ProgramFiles%\%regkey%\balenaEtcher.exe'; $SC.Save();" -NonInteractive -NoProfile
 )
 
 

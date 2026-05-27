@@ -72,7 +72,7 @@ COPY /A /Y "uninstall.bat" "%ProgramFiles%\%regkey%\uninstall.bat"
 
 @ECHO [INFO] Create shortcut
 IF EXIST "%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs" (
-  %pwrsh% -Command "$WS = New-Object -ComObject WScript.Shell; $SC = $WS.CreateShortcut('%shortcut%'); $SC.TargetPath = '%sc_target%'; $SC.Save();" -NoLogo -NonInteractive -NoProfile
+  %pwrsh% -Command "$WS = New-Object -ComObject WScript.Shell; $SC = $WS.CreateShortcut('%shortcut%'); $SC.TargetPath = '%sc_target%'; $SC.Save();" -NonInteractive -NoProfile
 )
 
 

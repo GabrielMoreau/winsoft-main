@@ -32,7 +32,7 @@ IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET "pwrsh=%
 
 @ECHO [INFO] Create shortcut
 IF EXIST "%ProgramFiles%\Picocrypt\Picocrypt.exe" (
-  %pwrsh% -Command "$WS = New-Object -ComObject WScript.Shell; $SC = $WS.CreateShortcut('%shortcut%'); $SC.TargetPath = '%ProgramFiles%\Picocrypt\Picocrypt.exe'; $SC.Save();" -NoLogo -NonInteractive -NoProfile
+  %pwrsh% -Command "$WS = New-Object -ComObject WScript.Shell; $SC = $WS.CreateShortcut('%shortcut%'); $SC.TargetPath = '%ProgramFiles%\Picocrypt\Picocrypt.exe'; $SC.Save();" -NonInteractive -NoProfile
 )
 
 IF EXIST "%ProgramFiles%\Picocrypt\unins000.exe" (
