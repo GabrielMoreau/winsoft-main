@@ -7,6 +7,7 @@ SOFT:=FreeCAD
 # https://github.com/FreeCAD/FreeCAD/releases/download/1.0.0/FreeCAD_1.0.0-conda-Windows-x86_64-installer-1.exe
 URL:=$(shell curl -s -L --connect-timeout 10 'https://api.github.com/repos/FreeCAD/FreeCAD/releases/latest' | grep 'browser_download_url.*x86_64.*exe"' | cut -f 4 -d '"' | head -1)
 VERSION:=$(shell basename "$(URL)" | cut -f 2 -d '_' | cut -f 1 -d '-')
+VERSIONSHORT:=$(shell echo "$(VERSION)" 2> /dev/null | cut -f 1,2 -d '.')
 REVISION:=1
 
 EXE:=FreeCAD_$(VERSION)-conda-Windows-x86_64-installer.exe
@@ -36,6 +37,7 @@ clean:
 
 version:
 	@echo "VERSION: $(VERSION)"
+	@echo "VERSIONSHORT: $(VERSIONSHORT)"
 	@echo "URL: $(URL)"
 	@echo "EXE: $(EXE)"
 
@@ -65,7 +67,7 @@ check-exe: tmp/$(EXE)
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
-	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#;' $< > $@
+	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#; s/__QEXEADMIN__/$(QEXEADMIN)/; s/__VERSIONSHORT__/$(VERSIONSHORT)/;' $< > $@
 
 tmp/winsoft-config.ini: winsoft-config.ini Makefile tmp/$(EXE)
 	@mkdir -p tmp
