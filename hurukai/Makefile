@@ -4,10 +4,10 @@
 #
 
 SOFT:=Hurukai-Agent
-VERSION:=$(shell ls -1 agent-*_x64.msi 2> /dev/null | cut -f 2 -d '-' | cut -f 1 -d '_' | sort -V | tail -1)
+VERSION:=$(shell ls -1 hurukai-*_x64.msi 2> /dev/null | cut -f 2 -d '-' | cut -f 1 -d '_' | sort -V | tail -1)
 REVISION:=1
 
-EXE:=agent-$(VERSION)_x64.msi
+EXE:=hurukai-$(VERSION)_x64.msi
 
 IT_TEAM:=IT Support
 LOGDIR:=%WINDIR%\\Logs
