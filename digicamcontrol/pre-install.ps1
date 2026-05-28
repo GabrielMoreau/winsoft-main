@@ -71,36 +71,6 @@ Write-Output "Config:`n * Version: $RefVersion`n * RegexSearch: $RefName"
 ########################################################################
 # Put your specific code here
 
-$RefVersion = ToVersion $Config.VersionShort
-
-# Remove old version
-ForEach ($Key in Get-ChildItem -Recurse $UninstallKeys) {
-	$App = Get-ItemProperty -Path $Key.PSPath
-	If ($App.DisplayName -notmatch $RefName) { Continue }
-
-	$DisplayVersion = ToVersion $App.DisplayVersion
-	$KeyProduct     = $Key.PSChildName
-
-	If ($DisplayVersion -ge $RefVersion) { Continue }
-
-	If ($App.DisplayVersion -like '9.0.*') {
-		Write-Output "Remove Manual: $($App.DisplayName) / $DisplayVersion / $($App.UninstallString) - bug in silent uninstall"
-		& icacls "$Env:ProgramFiles\KiCad\9.0" /reset /T /C
-		Remove-Item "$Env:ProgramFiles\KiCad\9.0" -Recurse -Force -ErrorAction SilentlyContinue
-		Remove-Item "$Env:ProgramData\Microsoft\Windows\Start Menu\Programs\KiCad 9.0" -Recurse -Force -ErrorAction SilentlyContinue
-		Remove-Item $Key.PSPath -Recurse -Force -ErrorAction SilentlyContinue
-		Continue
-	}
-
-	If ($($App.UninstallString) -match 'uninstall.exe') {
-		$UninstallSplit = ($App.UninstallString -Split "exe")[0] -Replace '"', ''
-		$Exe = $UninstallSplit + 'exe'
-		$Args = '/allusers /S'
-		Write-Output "Remove EXE: $($App.DisplayName) / $DisplayVersion / $($App.UninstallString) / $Exe $Args"
-		Run-Exec -FilePath "$Exe" -ArgumentList "$Args" -Name "$RefName"
-	}
-}
-
 ########################################################################
 
 # View
