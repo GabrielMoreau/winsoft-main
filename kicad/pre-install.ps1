@@ -92,7 +92,7 @@ ForEach ($Key in Get-ChildItem -Recurse $UninstallKeys) {
 		Continue
 	}
 
-	If ($($App.UninstallString) -match 'uninstall.exe') { 
+	If ($($App.UninstallString) -match 'uninstall.exe') {
 		$UninstallSplit = ($App.UninstallString -Split "exe")[0] -Replace '"', ''
 		$Exe = $UninstallSplit + 'exe'
 		$Args = '/allusers /S'
