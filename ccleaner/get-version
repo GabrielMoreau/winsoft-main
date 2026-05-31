@@ -20,13 +20,13 @@ function update_version () {
     # 131.0.6778.86 9fcf15cb2390b84887b94e8e2f41d01eff325eccdac405e4f9a156dbc209689d
     # 9fcf15cb2390b84887b94e8e2f41d01eff325eccdac405e4f9a156dbc209689d  googlechromestandaloneenterprise64-131.0.6778.86.msi
     echo "${hash}  googlechromestandaloneenterprise64-${version}.msi" >> 'checksum.txt'
-  done < <(curl -s -L "${choco_url}" | grep -E '^(\$version|\s\schecksum64)' | cut -f 2 -d ';' | cut -f 1 -d '&' | paste -sd ' ')
+  done < <(curl -s -L --connect-timeout 10 "${choco_url}" | grep -E '^(\$version|\s\schecksum64)' | cut -f 2 -d ';' | cut -f 1 -d '&' | paste -sd ' ')
 }
 
 mkdir -p tmp
 (cd tmp || exit;
-  # echo curl --time-cond "${EXE}" -o "${EXE}" -L "${url}" 1>&2;
-  curl -s --time-cond "${EXE}" -o "${EXE}" -L "${url}")
+  # echo curl -L --connect-timeout 10 --time-cond "${EXE}" -o "${EXE}" "${url}" 1>&2;
+  curl -s -L --connect-timeout 10 --time-cond "${EXE}" -o "${EXE}" "${url}")
 
 if [ -s "tmp/${EXE}" ]
 then

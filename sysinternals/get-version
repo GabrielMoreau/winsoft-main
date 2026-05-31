@@ -7,7 +7,7 @@ url=$1
 mkdir -p tmp/SysinternalsSuite
 
 (cd tmp || exit
-	curl -s --time-cond 'SysinternalsSuite.zip' -o 'SysinternalsSuite.zip' -L "${url}"
+	curl -s -L --connect-timeout 10 --time-cond 'SysinternalsSuite.zip' -o 'SysinternalsSuite.zip' "${url}"
 	)
 
 if [ $(( $(date '+%s') - $(stat -c '%Y' tmp/SysinternalsSuite.zip) )) -lt 60 ] || [ ! -s "tmp/SysinternalsSuite/PsExec.exe" ]

@@ -121,7 +121,7 @@ mkdir -p tmp
   [ -e "timestamp.sig" ] \
     || touch -t "$(date +%Y)01010000" timestamp.sig
 
-  curl -s --connect-timeout 10 --time-cond "${EXE}" -o "${EXE}" -L "${URL}"
+  curl -s -L --connect-timeout 10 --time-cond "${EXE}" -o "${EXE}" "${URL}"
 
   newsha=$(shasum -a 256 "${EXE}" | cut -f 1 -d ' ')
   if [ -s "../checksum.txt" ] && grep -q "^${newsha}[[:space:]]" ../checksum.txt

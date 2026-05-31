@@ -18,10 +18,10 @@ rm -f "${TMP}/teamsbootstrapper.exe"
 # URL MSIX
 MSIX_URL="https://statics.teams.cdn.office.net/production-windows-${ARCH}/enterprise/webview2/lkg/MSTeams-${ARCH}.msix"
 MSIX_FILE="teams-${ARCH}.msix"
-if curl --head --fail --silent "${MSIX_URL}" >/dev/null
+if curl --head --fail --silent --connect-timeout 10 "${MSIX_URL}" >/dev/null
 then
 	(cd "${TMP}" || exit
-		curl -sSL "${MSIX_URL}" -o "${MSIX_FILE}" --time-cond "${MSIX_FILE}" >/dev/null 2>&1
+		curl -sSL --connect-timeout 10 --time-cond "${MSIX_FILE}" -o "${MSIX_FILE}" "${MSIX_URL}" >/dev/null 2>&1
 		rm -f 'AppxManifest.xml'
 		unzip "${MSIX_FILE}" 'AppxManifest.xml' >/dev/null
 		if [ -s 'AppxManifest.xml' ]

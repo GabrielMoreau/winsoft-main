@@ -18,13 +18,13 @@ function update_version () {
     fi
 
     echo "${hash}  TeamViewer-${version}-Setup-x64.exe" >> 'checksum.txt'
-  done < <(curl -s -L "${choco_url}" | grep -E '^(\$version|\s\schecksum64)' | cut -f 2 -d ';' | cut -f 1 -d '&' | paste -sd ' ')
+  done < <(curl -s -L --connect-timeout 10 "${choco_url}" | grep -E '^(\$version|\s\schecksum64)' | cut -f 2 -d ';' | cut -f 1 -d '&' | paste -sd ' ')
 }
 
 mkdir -p tmp
 (cd tmp || exit;
-  # echo curl --time-cond "${EXE}" -o "${EXE}" -L "${url}" 1>&2;
-  curl -s --time-cond "${EXE}" -o "${EXE}" -L "${url}")
+  # echo curl -L --connect-timeout 10 --time-cond "${EXE}" -o "${EXE}" "${url}" 1>&2;
+  curl -s -L --connect-timeout 10 --time-cond "${EXE}" -o "${EXE}" "${url}")
 
 if [ -s "tmp/${EXE}" ]
 then

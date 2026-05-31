@@ -36,7 +36,7 @@ function get_choco_version () {
     # 131.0.6778.86 9fcf15cb2390b84887b94e8e2f41d01eff325eccdac405e4f9a156dbc209689d
     # 9fcf15cb2390b84887b94e8e2f41d01eff325eccdac405e4f9a156dbc209689d  googlechromestandaloneenterprise64-131.0.6778.86.msi
     echo "${hash}  ${soft_shape/%v/${version}}.msi" >> 'checksum.txt'
-  done < <(curl -s -L "${choco_url}" | grep -E '^(\$version|\s\schecksum64)' | cut -f 2 -d ';' | cut -f 1 -d '&' | paste -sd ' ')
+  done < <(curl -s -L --connect-timeout 10 "${choco_url}" | grep -E '^(\$version|\s\schecksum64)' | cut -f 2 -d ';' | cut -f 1 -d '&' | paste -sd ' ')
 }
 
 ################################################################
@@ -121,7 +121,7 @@ mkdir -p tmp
   [ -e "timestamp.sig" ] \
     || touch -t "$(date +%Y)01010000" timestamp.sig
 
-  curl -s --time-cond "${EXE}" -o "${EXE}" -L "${URL}"
+  curl -s -L --connect-timeout 10 --time-cond "${EXE}" -o "${EXE}" "${URL}"
 
   newsha=$(shasum -a 256 "${EXE}" | cut -f 1 -d ' ')
   if [ -s "../checksum.txt" ] && grep -q "^${newsha}[[:space:]]" ../checksum.txt
