@@ -56,7 +56,7 @@ tmp/$(EXE):
 	@mkdir -p tmp
 	@(cd tmp ; \
 		rm -f *.exe *.msi 2>/dev/null ; \
-		curl -# -o "$(EXE)" -L "$(URL)" ; \
+		curl -# -L --connect-timeout 10 -o "$(EXE)" "$(URL)" ; \
 		which msiextract >/dev/null && { rm -rf Program*File* CustomAction.dll; msiextract $(EXE) >/dev/null ; rm -rf Program*File*; } ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)

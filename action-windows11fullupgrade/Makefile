@@ -53,7 +53,7 @@ tmp/$(EXE):
 	@mkdir -p tmp
 	@(cd tmp ; \
 		#rm -f *.exe *.msi 2>/dev/null ; \
-		#curl -# -o "$(EXE)" -L "$(URL)" ; \
+		#curl -# -L --connect-timeout 10 -o "$(EXE)" "$(URL)" ; \
 		rm -f Windows11InstallationAssistant-*.exe 2>/dev/null ; \
 		ln -f Windows11InstallationAssistant.exe "$(EXE)" ; \
 		printf '#%.0s' $$(seq 1 $$(( $$(tput cols) - 33 ))); echo ' 100.0%' ; \

@@ -61,7 +61,7 @@ tmp/$(EXE):
 	@mkdir -p tmp
 	@(cd tmp ; \
 		rm -f *.jar 2>/dev/null ; \
-		curl -# -o "$(EXE)" -L "$(URL)" ; \
+		curl -# -L --connect-timeout 10 -o "$(EXE)" "$(URL)" ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
 
@@ -69,7 +69,7 @@ tmp/$(EXE2):
 	@mkdir -p tmp
 	@(cd tmp ; \
 		rm -f *.zip 2>/dev/null ; \
-		curl -# -o "$(EXE2)" -L "$(URL2)" ; \
+		curl -# -L --connect-timeout 10 -o "$(EXE2)" "$(URL2)" ; \
 		grep -q "^$$(shasum -a 256 $(EXE2))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE2)" ; \
 		)
 

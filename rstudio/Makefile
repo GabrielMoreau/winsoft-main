@@ -62,7 +62,7 @@ tmp/$(EXE):
 	@mkdir -p tmp
 	@(cd tmp ; \
 		rm -f RStudio-*.exe 2>/dev/null ; \
-		curl -# -o "$(EXE)" -L "$(URL)" ; \
+		curl -# -L --connect-timeout 10 -o "$(EXE)" "$(URL)" ; \
 		# file $(EXE) | grep -q "PE32 executable" || echo "Error: bad format for binary $(EXE)" ; \
 		# which peres >/dev/null && { peres -v $(EXE) 2> /dev/null | grep -q "^Product Version:[[:space:]]*$(VERSION1)" || echo "Error: bad version for binary $(EXE)" ; } ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
@@ -80,7 +80,7 @@ tmp/$(EXE2):
 	@mkdir -p tmp
 	@(cd tmp ; \
 		rm -f R-*.exe 2>/dev/null ; \
-		curl -# -o "$(EXE2)" -L "$(URL2)" ; \
+		curl -# -L --connect-timeout 10 -o "$(EXE2)" "$(URL2)" ; \
 		#file $(EXE2) | grep -q "PE32 executable" || echo "Error: bad format for binary $(EXE2)" ; \
 		#which peres >/dev/null && { peres -v $(EXE2) 2> /dev/null | grep -q "^Product Version:[[:space:]]*$(VERSION2)" || echo "Error: bad version for binary $(EXE2)" ; } ; \
 		grep -q "^$$(shasum -a 256 $(EXE2))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE2)" ; \

@@ -60,7 +60,7 @@ tmp/$(EXE1):
 	@mkdir -p tmp
 	@(cd tmp ; \
 		rm -f Wireshark*.exe ; \
-		curl -# -o "$(EXE1)" -L "$(URL1)" ; \
+		curl -# -L --connect-timeout 10 -o "$(EXE1)" "$(URL1)" ; \
 		grep -q "^$$(shasum -a 256 $(EXE1))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE1)" ; \
 		)
 
@@ -68,7 +68,7 @@ tmp/$(EXE2):
 	@mkdir -p tmp
 	@(cd tmp ; \
 		rm -f Win10Pcap*.msi ; \
-		curl -# -o "$(EXE2)" -L "$(URL2)" ; \
+		curl -# -L --connect-timeout 10 -o "$(EXE2)" "$(URL2)" ; \
 		grep -q "^$$(shasum -a 256 $(EXE2))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE2)" ; \
 		)
 

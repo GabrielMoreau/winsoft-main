@@ -67,7 +67,7 @@ tmp/$(EXE):
 	@mkdir -p tmp
 	@(cd tmp ; \
 		rm -f Dell-Command-*.EXE 2>/dev/null ; \
-		curl -# -o "$(EXE)" -L "$(URL)" --user-agent "$(USERAGENT)" ; \
+		curl -# -L --connect-timeout 10 -o "$(EXE)" "$(URL)" --user-agent "$(USERAGENT)" ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
 

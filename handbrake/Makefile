@@ -62,7 +62,7 @@ tmp/$(EXE1):
 	@mkdir -p tmp
 	@(cd tmp ; \
 		rm -f HandBrake-*.exe 2>/dev/null ; \
-		curl -# -o "$(EXE1)" -L "$(URL1)" ; \
+		curl -# -L --connect-timeout 10 -o "$(EXE1)" "$(URL1)" ; \
 		#file $(EXE1) | grep -q "PE32 executable.*Nullsoft Installer" || echo "Error: bad format for binary $(EXE1)" ; \
 		# which peres >/dev/null && { peres -v $(EXE1) 2> /dev/null | grep -q "^Product Version:[[:space:]]*$(VERSION1)" || echo "Error: bad version for binary $(EXE1)" ; } ; \
 		grep -q "^$$(shasum -a 256 $(EXE1))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE1)" ; \
@@ -72,7 +72,7 @@ tmp/$(EXE2):
 	@mkdir -p tmp
 	@(cd tmp ; \
 		rm -f windowsdesktop-runtime*.exe 2>/dev/null ; \
-		curl -# -o "$(EXE2)" -L "$(URL2)" ; \
+		curl -# -L --connect-timeout 10 -o "$(EXE2)" "$(URL2)" ; \
 		file $(EXE2) | grep -q "PE32 executable" || echo "Error: bad format for binary $(EXE2)" ; \
 		which peres >/dev/null && { peres -v $(EXE2) 2> /dev/null | grep -q "^Product Version:[[:space:]]*$(VERSION2)" || echo "Error: bad version for binary $(EXE2)" ; } ; \
 		grep -q "^$$(shasum -a 256 $(EXE2))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE2)" ; \
