@@ -1,10 +1,10 @@
 
 REM
-REM   Picocrypt
+REM   Picocrypt-NG
 REM
 
 REM Name
-SET "softname=Picocrypt"
+SET "softname=Picocrypt-NG"
 
 SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (
@@ -18,44 +18,74 @@ EXIT /B
 @ECHO [BEGIN] %date%-%time%
 
 SET "softversion=__VERSION__"
-SET "regkey=EvanSu.Picocrypt_is1"
-SET "shortcut=%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\%softname%.lnk"
-
-
-@ECHO [INFO] Silent install %softname%
-ScriptRunner.exe -appvscript Picocrypt-Installer-%softversion%.exe /VERYSILENT /NORESTART /DIR="%ProgramFiles%\Picocrypt" /LOG="%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=300
+SET "qexeadmin=__QEXEADMIN__"
+REM SET "mainexe=%ProgramFiles%\Picocrypt-NG\Picocrypt-NG.exe"
+REM SET "mainexe=%mainexe%;%ProgramFiles%\Picocrypt-NG\Picocrypt-NG-cli.exe"
 
 
 @ECHO [INFO] Search PowerShell
 SET "pwrsh=%WINDIR%\System32\WindowsPowerShell\V1.0\powershell.exe"
 IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET "pwrsh=%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe"
 
-@ECHO [INFO] Create shortcut
-IF EXIST "%ProgramFiles%\Picocrypt\Picocrypt.exe" (
-  %pwrsh% -Command "$WS = New-Object -ComObject WScript.Shell; $SC = $WS.CreateShortcut('%shortcut%'); $SC.TargetPath = '%ProgramFiles%\Picocrypt\Picocrypt.exe'; $SC.Save();" -NonInteractive -NoProfile
-)
+@ECHO [INFO] Add rights
+%pwrsh% Set-ExecutionPolicy RemoteSigned -Force -Scope LocalMachine
 
-IF EXIST "%ProgramFiles%\Picocrypt\unins000.exe" (
-  @ECHO [INFO] Copy uninstall script
-  COPY /A /Y "uninstall.bat" "%ProgramFiles%\Picocrypt\uninstall.bat"
+@ECHO [INFO] Unblock PowerShell Script
+%pwrsh% "Unblock-File -Path .\*.ps1"
+SET "RETURNCODE=0"
 
-  @ECHO [INFO] Better reg uninstall key
-   > tmp_install.reg ECHO Windows Registry Editor Version 5.00
-  >> tmp_install.reg ECHO.
-  >> tmp_install.reg ECHO [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\%regkey%]
-  >> tmp_install.reg ECHO "DisplayVersion"="%softversion%"
-  >> tmp_install.reg ECHO "Comments"="%softname%  (%DATE:~-4%/%DATE:~-7,-5%/%DATE:~-10,-8%)"
-  >> tmp_install.reg ECHO "DisplayName"="Picocrypt"
-  >> tmp_install.reg ECHO "UninstallString"="%SystemDrive%\\Program Files\\Picocrypt\\uninstall.bat"
-  >> tmp_install.reg ECHO "InstallLocation"="%SystemDrive%\\Program Files\\Picocrypt"
-  >> tmp_install.reg ECHO "InstallFolder"="%SystemDrive%\\Program Files\\Picocrypt"
-  >> tmp_install.reg ECHO "DisplayIcon"="%SystemDrive%\\Program Files\\Picocrypt\\Picocrypt.exe,0"
-  >> tmp_install.reg ECHO "URLInfoAbout"="https://www.raise3d.eu/"
-  >> tmp_install.reg ECHO "Publisher"="Evan Su"
-  >> tmp_install.reg ECHO.
-  regedit.exe /S "tmp_install.reg"
+
+:QEXEADMRESET
+IF "%qexeadmin%"=="false" (
+  IF DEFINED mainexe (
+    FOR %%F in ("%mainexe:;=" "%") do (
+      IF EXIST "%%~F" (
+        @ECHO [INFO] Reset ACL on %%~F
+        icacls "%%~F" /reset || VER >NUL
+      )
+    )
+  )
 )
 
 
+@ECHO [INFO] Execute pre-install script
+IF EXIST ".\pre-install.ps1" %pwrsh% -File ".\pre-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
+IF %RETURNCODE% EQU 0 SET "RETURNCODE=%ERRORLEVEL%"
+
+
+@ECHO [INFO] Silent install %softname%
+ScriptRunner.exe -appvscript Picocrypt-NG-Setup-%softversion%.exe /S -appvscriptrunnerparameters -wait -timeout=300
+IF %RETURNCODE% EQU 0 SET "RETURNCODE=%ERRORLEVEL%"
+
+
+:POSTINSTALL
+@ECHO [INFO] Execute post-install script
+IF EXIST ".\pre-install.ps1" (
+  IF EXIST ".\post-install.ps1" %pwrsh% -File ".\post-install.ps1" 1>> "%logdir%\%softname%-PS1.log" 2>&1
+) ELSE (
+  IF EXIST ".\post-install.ps1" %pwrsh% -File ".\post-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
+)
+IF %RETURNCODE% EQU 0 SET "RETURNCODE=%ERRORLEVEL%"
+
+
+@ECHO [INFO] Remove desktop shortcut
+IF EXIST "%PUBLIC%\Desktop\%softname%.lnk"          DEL /F /Q "%PUBLIC%\Desktop\%softname%.lnk"
+IF EXIST "%ALLUSERSPROFILE%\Desktop\%softname%.lnk" DEL /F /Q "%ALLUSERSPROFILE%\Desktop\%softname%.lnk"
+
+
+:QEXEADMDENY
+IF "%qexeadmin%"=="false" (
+  IF DEFINED mainexe (
+    FOR %%F in ("%mainexe:;=" "%") do (
+      IF EXIST "%%~F" (
+        @ECHO [INFO] Restrict ACL for admin on %%~F
+        icacls "%%~F" /deny "*S-1-5-32-544:(X)" || VER >NUL
+      )
+    )
+  )
+)
+
+
+:END
 @ECHO [END] %date%-%time%
-EXIT
+EXIT %RETURNCODE%
