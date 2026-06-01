@@ -1,1 +1,2 @@
 0136ebc04f544b52036c87200d10c5d274ac6e22cbd72bc835e7e7c59a2bfc3f  Picocrypt-Installer-1.33.exe
+c4c5d152b95e52aab438f03d792f98639f7db53e5f829ad293f151e1bdf7e057  Picocrypt-NG-Setup-2.09.exe
