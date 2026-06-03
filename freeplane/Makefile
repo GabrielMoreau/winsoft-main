@@ -6,7 +6,7 @@
 sinclude ../_common/flag.mk
 
 SOFT:=Freeplane
-URL:=$(shell curl $(CURLFLAGS) -s -L 'https://sourceforge.net/projects/freeplane/files/freeplane%20stable/' | sed -e 's/"/\n/g;' | grep '^https://.*stable/Freeplane-Setup-[[:digit:]].*.exe' | head -1)
+URL:=$(shell curl -s -L --connect-timeout 10 'https://sourceforge.net/projects/freeplane/files/freeplane%20stable/' | sed -e 's/"/\n/g;' | grep '^https://.*stable/Freeplane-Setup-[[:digit:]].*.exe' | head -1)
 VERSION:=$(shell dirname "$(URL)" | xargs -r basename | cut -f 3 -d '-' | sed -e 's/\.exe//;')
 REVISION:=1
 
