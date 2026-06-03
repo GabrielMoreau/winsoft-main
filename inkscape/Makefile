@@ -8,8 +8,8 @@ sinclude ../_common/flag.mk
 SOFT:=Inkscape
 VERSION:=$(shell curl -s -L --connect-timeout 10 'https://inkscape.org/en/release/' | sed -e 's/"/\n/g;' | grep '^http.*/release/inkscape-' | cut -f 2 -d '-' | cut -f 1 -d '/' | grep '^[[:digit:]]' | head -1)
 REVISION:=1
-#URL:=https://inkscape.org/$(shell curl -s -L --connect-timeout 10 'https://inkscape.org/release/inkscape-$(VERSION)/windows/64-bit/msi/dl' |  sed -e 's/\s/\n/g; s/"/=/g;' | grep '^url=' | cut -f 2 -d '=')
-URL:=https://media.inkscape.org/dl/resources/file/inkscape-$(VERSION).msi
+URL:=https://media.inkscape.org/dl/resources/file/$(shell curl -s -L --connect-timeout 10 'https://inkscape.org/release/inkscape-$(VERSION)/windows/64-bit/msi/dl' | sed -e 's/\s/\n/g; s/"/=/g;' | grep '^url=' | head -1 | cut -f 2 -d '=' | xargs -r basename)
+#URL:=https://media.inkscape.org/dl/resources/file/inkscape-$(VERSION).msi
 
 EXE:=inkscape-$(VERSION)-x64.msi
 REG_SEARCH:=$(SOFT)
@@ -56,7 +56,7 @@ tmp/$(EXE):
 	@mkdir -p tmp
 	@(cd tmp ; \
 		rm -f *.exe *.msi 2>/dev/null ; \
-		curl $(CURLFLAGS) -# -o "$(EXE)" -L "$(URL)" ; \
+		curl $(CURLFLAGS) -# -L -o "$(EXE)" "$(URL)" ; \
 		# file $(EXE) | grep -q "Subject: Inkscape" || echo "Error: bad format for binary $(EXE)" ; \
 		# which peres >/dev/null && { peres -v $(EXE) 2> /dev/null | grep -q "^Product Version:[[:space:]]*$(VERSION)" || echo "Error: bad version for binary $(EXE)" ; } ; \
 		which 7z >/dev/null && { rm -f 'CM_FP_inkscape.bin.inkscape.exe'; 7z x -y "$(EXE)" 'CM_FP_inkscape.bin.inkscape.exe' | grep 'Extracting'; } ; \
