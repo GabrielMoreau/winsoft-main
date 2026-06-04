@@ -6,19 +6,19 @@
 SOFT:=Update-WindowsDesktopRuntime
 REVISION:=1
 
-URL5:=$(shell curl -s -L https://dotnet.microsoft.com/$(shell curl -s -L --connect-timeout 10 'https://dotnet.microsoft.com/en-us/download/dotnet/5.0' | sed -e 's/"/\n/g;' | grep 'thank-you/runtime-desktop.*windows-x64-installer'  | head -1) | sed -e 's/"/\n/g;' | grep '^https.*windowsdesktop-runtime-.*-win-x64.exe' | head -1)
+URL5:=$(shell curl -s -L --connect-timeout 10 https://dotnet.microsoft.com/$(shell curl -s -L --connect-timeout 10 'https://dotnet.microsoft.com/en-us/download/dotnet/5.0' | sed -e 's/"/\n/g;' | grep 'thank-you/runtime-desktop.*windows-x64-installer'  | head -1) | sed -e 's/"/\n/g;' | grep '^https.*windowsdesktop-runtime-.*-win-x64.exe' | head -1)
 VERSION5:=5.$(shell basename '$(URL5)' 2>/dev/null | cut -f 3 -d '-' | cut -f 2- -d '.')
 EXE5:=windowsdesktop-runtime-$(VERSION5)-win-x64.exe
 
-URL6:=$(shell curl -s -L https://dotnet.microsoft.com/$(shell curl -s -L --connect-timeout 10 'https://dotnet.microsoft.com/en-us/download/dotnet/6.0' | sed -e 's/"/\n/g;' | grep 'thank-you/runtime-desktop.*windows-x64-installer'  | head -1) | sed -e 's/"/\n/g;' | grep '^https.*windowsdesktop-runtime-.*-win-x64.exe' | head -1)
+URL6:=$(shell curl -s -L --connect-timeout 10 https://dotnet.microsoft.com/$(shell curl -s -L --connect-timeout 10 'https://dotnet.microsoft.com/en-us/download/dotnet/6.0' | sed -e 's/"/\n/g;' | grep 'thank-you/runtime-desktop.*windows-x64-installer'  | head -1) | sed -e 's/"/\n/g;' | grep '^https.*windowsdesktop-runtime-.*-win-x64.exe' | head -1)
 VERSION6:=6.$(shell basename '$(URL6)' 2>/dev/null | cut -f 3 -d '-' | cut -f 2- -d '.')
 EXE6:=windowsdesktop-runtime-$(VERSION6)-win-x64.exe
 
-URL7:=$(shell curl -s -L https://dotnet.microsoft.com/$(shell curl -s -L --connect-timeout 10 'https://dotnet.microsoft.com/en-us/download/dotnet/7.0' | sed -e 's/"/\n/g;' | grep 'thank-you/runtime-desktop.*windows-x64-installer'  | head -1) | sed -e 's/"/\n/g;' | grep '^https.*windowsdesktop-runtime-.*-win-x64.exe' | head -1)
+URL7:=$(shell curl -s -L --connect-timeout 10 https://dotnet.microsoft.com/$(shell curl -s -L --connect-timeout 10 'https://dotnet.microsoft.com/en-us/download/dotnet/7.0' | sed -e 's/"/\n/g;' | grep 'thank-you/runtime-desktop.*windows-x64-installer'  | head -1) | sed -e 's/"/\n/g;' | grep '^https.*windowsdesktop-runtime-.*-win-x64.exe' | head -1)
 VERSION7:=7.$(shell basename '$(URL7)' 2>/dev/null | cut -f 3 -d '-' | cut -f 2- -d '.')
 EXE7:=windowsdesktop-runtime-$(VERSION7)-win-x64.exe
 
-URL8:=$(shell curl -s -L https://dotnet.microsoft.com/$(shell curl -s -L --connect-timeout 10 'https://dotnet.microsoft.com/en-us/download/dotnet/8.0' | sed -e 's/"/\n/g;' | grep 'thank-you/runtime-desktop.*windows-x64-installer'  | head -1) | sed -e 's/"/\n/g;' | grep '^https.*windowsdesktop-runtime-.*-win-x64.exe' | head -1)
+URL8:=$(shell curl -s -L --connect-timeout 10 https://dotnet.microsoft.com/$(shell curl -s -L --connect-timeout 10 'https://dotnet.microsoft.com/en-us/download/dotnet/8.0' | sed -e 's/"/\n/g;' | grep 'thank-you/runtime-desktop.*windows-x64-installer'  | head -1) | sed -e 's/"/\n/g;' | grep '^https.*windowsdesktop-runtime-.*-win-x64.exe' | head -1)
 VERSION8:=8.$(shell basename '$(URL8)' 2>/dev/null | cut -f 3 -d '-' | cut -f 2- -d '.')
 EXE8:=windowsdesktop-runtime-$(VERSION8)-win-x64.exe
 
@@ -86,7 +86,7 @@ tmp/$(EXE5):
 	@mkdir -p tmp
 	@(cd tmp ; \
 		rm -f windowsdesktop-runtime-5.*.exe 2>/dev/null ; \
-		curl -# -o "$(EXE5)" -L "$(URL5)" ; \
+		curl -# -L --connect-timeout 10 -o "$(EXE5)" "$(URL5)" ; \
 		grep -q "^$$(shasum -a 256 $(EXE5))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE5)" ; \
 		)
 
@@ -94,7 +94,7 @@ tmp/$(EXE6):
 	@mkdir -p tmp
 	@(cd tmp ; \
 		rm -f windowsdesktop-runtime-6.*.exe 2>/dev/null ; \
-		curl -# -o "$(EXE6)" -L "$(URL6)" ; \
+		curl -# -L --connect-timeout 10 -o "$(EXE6)" "$(URL6)" ; \
 		grep -q "^$$(shasum -a 256 $(EXE6))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE6)" ; \
 		)
 
@@ -102,7 +102,7 @@ tmp/$(EXE7):
 	@mkdir -p tmp
 	@(cd tmp ; \
 		rm -f windowsdesktop-runtime-7.*.exe 2>/dev/null ; \
-		curl -# -o "$(EXE7)" -L "$(URL7)" ; \
+		curl -# -L --connect-timeout 10 -o "$(EXE7)" "$(URL7)" ; \
 		grep -q "^$$(shasum -a 256 $(EXE7))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE7)" ; \
 		)
 
@@ -110,7 +110,7 @@ tmp/$(EXE8):
 	@mkdir -p tmp
 	@(cd tmp ; \
 		rm -f windowsdesktop-runtime-8.*.exe 2>/dev/null ; \
-		curl -# -o "$(EXE8)" -L "$(URL8)" ; \
+		curl -# -L --connect-timeout 10 -o "$(EXE8)" "$(URL8)" ; \
 		grep -q "^$$(shasum -a 256 $(EXE8))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE8)" ; \
 		)
 

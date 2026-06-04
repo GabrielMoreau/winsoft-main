@@ -102,6 +102,6 @@ tmp/winsoft-config.ini: winsoft-config.ini Makefile tmp/$(EXE) ../update-visualr
 
 tmp/2015-2022/vc_redist.x64.exe: ../update-visualredist/version.txt ../update-visualredist/checksum.txt
 	@mkdir -p tmp/2015-2022
-	@curl $(CURLFLAGS) -# -o $@ -L https://aka.ms/vs/17/release/vc_redist.x64.exe
-	@file $@ | grep -q "PE32 executable" || echo "Error: bad format for binary $@"
+	@curl $(CURLFLAGS) -# -L -o "$@" 'https://aka.ms/vs/17/release/vc_redist.x64.exe'
+	@file "$@" | grep -q "PE32 executable" || echo "Error: bad format for binary $@"
 	@grep -q "^$$(shasum -a 256 $@)$$" ../update-visualredist/checksum.txt || echo "Error: bad checksum for binary $@"

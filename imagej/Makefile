@@ -60,7 +60,7 @@ tmp/$(EXE):
 	@mkdir -p tmp
 	@(cd tmp ; \
 		rm -rf Fiji Fiji.app-* "$(ZIP)" "$(EXE)" 2>/dev/null ; \
-		curl -# -o "$(ZIP)" -L "$(URL)" ; \
+		curl -# -L --connect-timeout 10 -o "$(ZIP)" "$(URL)" ; \
 		unzip -q "$(ZIP)" ; \
 		[ ! -e Fiji/fiji-windows-x64.exe ] || mv Fiji/fiji-windows-x64.exe Fiji/ImageJ-win64.exe ; \
 		mv Fiji "Fiji.app-$(VERSION)" ; \
@@ -73,7 +73,7 @@ tmp/$(ZIP2): tmp/$(EXE)
 	@mkdir -p tmp
 	@(cd tmp ; \
 		rm -rf ANKAphase.zip  2>/dev/null ; \
-		curl -# -o "$(ZIP2)" -L "$(URL2)" ; \
+		curl -# -L --connect-timeout 10 -o "$(ZIP2)" "$(URL2)" ; \
 		unzip -q "$(ZIP2)" 'ANKAphase*/ANKAphase_*.jar' || rm -f "$(ZIP2)"; \
 		mv ANKAphase*/ANKAphase_*.jar "Fiji.app-$(VERSION)/plugins/" ; \
 		)

@@ -7,7 +7,7 @@ SOFT:=XMind
 INSTALLER:=Xmind4WindowsX64bit.exe
 URL:=https://xmind.app/zen/download/win64/
 # https://dl3.xmind.app/Xmind-for-Windows-x64bit-26.01.03145-202510162012.exe
-$(shell mkdir -p tmp; cd tmp; curl -s --time-cond "$(INSTALLER)" -o "$(INSTALLER)" -L "$(URL)")
+$(shell mkdir -p tmp; cd tmp; curl -s -L --connect-timeout 10 --time-cond "$(INSTALLER)" -o "$(INSTALLER)" "$(URL)")
 VERSION:=$(shell peres -v tmp/$(INSTALLER) 2> /dev/null 2> /dev/null | grep '^Product Version' | awk '{print $$3}')
 REVISION:=1
 

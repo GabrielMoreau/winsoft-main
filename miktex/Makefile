@@ -59,7 +59,7 @@ tmp/$(ZIP):
 	@mkdir -p tmp
 	@(cd tmp ; \
 		rm -f *.zip 2>/dev/null ; \
-		curl -# -o "$(ZIP)" -L "$(URL)" ; \
+		curl -# -L --connect-timeout 10 -o "$(ZIP)" "$(URL)" ; \
 		)
 
 check-exe2: tmp/$(ZIP)

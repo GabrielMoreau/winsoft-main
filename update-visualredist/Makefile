@@ -9,61 +9,61 @@ REVISION:=1
 DIR05:=2005
 URL05_64:=$(shell grep '^$(DIR05)-x64' url.txt | cut -f 2 -d ' ')
 EXE05_64:=$(shell grep '^$(DIR05)-x64' url.txt | cut -f 2 -d ' ' | xargs -r basename)
-$(shell mkdir -p tmp/$(DIR05); cd tmp/$(DIR05); curl -s --time-cond '$(EXE05_64)' -o '$(EXE05_64)' -L "$(URL05_64)")
+$(shell mkdir -p tmp/$(DIR05); cd tmp/$(DIR05); curl -s -L --connect-timeout 10 --time-cond '$(EXE05_64)' -o '$(EXE05_64)' "$(URL05_64)")
 VER05_64:=$(shell peres -v 'tmp/$(DIR05)/$(EXE05_64)' 2> /dev/null | grep 'Product Version:' | awk '{print $$3}')
 URL05_86:=$(shell grep '^$(DIR05)-x86' url.txt | cut -f 2 -d ' ')
 EXE05_86:=$(shell grep '^$(DIR05)-x86' url.txt | cut -f 2 -d ' ' | xargs -r basename)
-$(shell mkdir -p tmp/$(DIR05); cd tmp/$(DIR05); curl -s --time-cond '$(EXE05_86)' -o '$(EXE05_86)' -L "$(URL05_86)")
+$(shell mkdir -p tmp/$(DIR05); cd tmp/$(DIR05); curl -s -L --connect-timeout 10 --time-cond '$(EXE05_86)' -o '$(EXE05_86)' "$(URL05_86)")
 VER05_86:=$(shell peres -v 'tmp/$(DIR05)/$(EXE05_86)' 2> /dev/null | grep 'Product Version:' | awk '{print $$3}')
 
 DIR08:=2008
 URL08_64:=$(shell grep '^$(DIR08)-x64' url.txt | cut -f 2 -d ' ')
 EXE08_64:=$(shell grep '^$(DIR08)-x64' url.txt | cut -f 2 -d ' ' | xargs -r basename)
-$(shell mkdir -p tmp/$(DIR08); cd tmp/$(DIR08); curl -s --time-cond '$(EXE08_64)' -o '$(EXE08_64)' -L "$(URL08_64)")
+$(shell mkdir -p tmp/$(DIR08); cd tmp/$(DIR08); curl -s -L --connect-timeout 10 --time-cond '$(EXE08_64)' -o '$(EXE08_64)' "$(URL08_64)")
 VER08_64:=$(shell peres -v 'tmp/$(DIR08)/$(EXE08_64)' 2> /dev/null | grep 'Product Version:' | awk '{print $$3}')
 URL08_86:=$(shell grep '^$(DIR08)-x86' url.txt | cut -f 2 -d ' ')
 EXE08_86:=$(shell grep '^$(DIR08)-x86' url.txt | cut -f 2 -d ' ' | xargs -r basename)
-$(shell mkdir -p tmp/$(DIR08); cd tmp/$(DIR08); curl -s --time-cond '$(EXE08_86)' -o '$(EXE08_86)' -L "$(URL08_86)")
+$(shell mkdir -p tmp/$(DIR08); cd tmp/$(DIR08); curl -s -L --connect-timeout 10 --time-cond '$(EXE08_86)' -o '$(EXE08_86)' "$(URL08_86)")
 VER08_86:=$(shell peres -v 'tmp/$(DIR08)/$(EXE08_86)' 2> /dev/null | grep 'Product Version:' | awk '{print $$3}')
 
 DIR10:=2010
 URL10_64:=$(shell grep '^$(DIR10)-x64' url.txt | cut -f 2 -d ' ')
 EXE10_64:=$(shell grep '^$(DIR10)-x64' url.txt | cut -f 2 -d ' ' | xargs -r basename)
-$(shell mkdir -p tmp/$(DIR10); cd tmp/$(DIR10); curl -s --time-cond '$(EXE10_64)' -o '$(EXE10_64)' -L "$(URL10_64)")
+$(shell mkdir -p tmp/$(DIR10); cd tmp/$(DIR10); curl -s -L --connect-timeout 10 --time-cond '$(EXE10_64)' -o '$(EXE10_64)' "$(URL10_64)")
 VER10_64:=$(shell peres -v 'tmp/$(DIR10)/$(EXE10_64)' 2> /dev/null | grep 'Product Version:' | awk '{print $$3}')
 URL10_86:=$(shell grep '^$(DIR10)-x86' url.txt | cut -f 2 -d ' ')
 EXE10_86:=$(shell grep '^$(DIR10)-x86' url.txt | cut -f 2 -d ' ' | xargs -r basename)
-$(shell mkdir -p tmp/$(DIR10); cd tmp/$(DIR10); curl -s --time-cond '$(EXE10_86)' -o '$(EXE10_86)' -L "$(URL10_86)")
+$(shell mkdir -p tmp/$(DIR10); cd tmp/$(DIR10); curl -s -L --connect-timeout 10 --time-cond '$(EXE10_86)' -o '$(EXE10_86)' "$(URL10_86)")
 VER10_86:=$(shell peres -v 'tmp/$(DIR10)/$(EXE10_86)' 2> /dev/null | grep 'Product Version:' | awk '{print $$3}')
 
 DIR12:=2012
 URL12_64:=$(shell grep '^$(DIR12)-x64' url.txt | cut -f 2 -d ' ')
 EXE12_64:=$(shell grep '^$(DIR12)-x64' url.txt | cut -f 2 -d ' ' | xargs -r basename)
-$(shell mkdir -p tmp/$(DIR12); cd tmp/$(DIR12); curl -s --time-cond '$(EXE12_64)' -o '$(EXE12_64)' -L "$(URL12_64)")
+$(shell mkdir -p tmp/$(DIR12); cd tmp/$(DIR12); curl -s -L --connect-timeout 10 --time-cond '$(EXE12_64)' -o '$(EXE12_64)' "$(URL12_64)")
 VER12_64:=$(shell peres -v 'tmp/$(DIR12)/$(EXE12_64)' 2> /dev/null | grep 'Product Version:' | awk '{print $$3}')
 URL12_86:=$(shell grep '^$(DIR12)-x86' url.txt | cut -f 2 -d ' ')
 EXE12_86:=$(shell grep '^$(DIR12)-x86' url.txt | cut -f 2 -d ' ' | xargs -r basename)
-$(shell mkdir -p tmp/$(DIR12); cd tmp/$(DIR12); curl -s --time-cond '$(EXE12_86)' -o '$(EXE12_86)' -L "$(URL12_86)")
+$(shell mkdir -p tmp/$(DIR12); cd tmp/$(DIR12); curl -s -L --connect-timeout 10 --time-cond '$(EXE12_86)' -o '$(EXE12_86)' "$(URL12_86)")
 VER12_86:=$(shell peres -v 'tmp/$(DIR12)/$(EXE12_86)' 2> /dev/null | grep 'Product Version:' | awk '{print $$3}')
 
 DIR13:=2013
 URL13_64:=$(shell grep '^$(DIR13)-x64' url.txt | cut -f 2 -d ' ')
 EXE13_64:=$(shell grep '^$(DIR13)-x64' url.txt | cut -f 2 -d ' ' | xargs -r basename)
-$(shell mkdir -p tmp/$(DIR13); cd tmp/$(DIR13); curl -s --time-cond '$(EXE13_64)' -o '$(EXE13_64)' -L "$(URL13_64)")
+$(shell mkdir -p tmp/$(DIR13); cd tmp/$(DIR13); curl -s -L --connect-timeout 10 --time-cond '$(EXE13_64)' -o '$(EXE13_64)' "$(URL13_64)")
 VER13_64:=$(shell peres -v 'tmp/$(DIR13)/$(EXE13_64)' 2> /dev/null | grep 'Product Version:' | awk '{print $$3}')
 URL13_86:=$(shell grep '^$(DIR13)-x86' url.txt | cut -f 2 -d ' ')
 EXE13_86:=$(shell grep '^$(DIR13)-x86' url.txt | cut -f 2 -d ' ' | xargs -r basename)
-$(shell mkdir -p tmp/$(DIR13); cd tmp/$(DIR13); curl -s --time-cond '$(EXE13_86)' -o '$(EXE13_86)' -L "$(URL13_86)")
+$(shell mkdir -p tmp/$(DIR13); cd tmp/$(DIR13); curl -s -L --connect-timeout 10 --time-cond '$(EXE13_86)' -o '$(EXE13_86)' "$(URL13_86)")
 VER13_86:=$(shell peres -v 'tmp/$(DIR13)/$(EXE13_86)' 2> /dev/null | grep 'Product Version:' | awk '{print $$3}')
 
 DIR15:=2015-2022
 URL15_64:=$(shell grep '^$(DIR15)-x64' url.txt | cut -f 2 -d ' ')
 EXE15_64:=$(shell grep '^$(DIR15)-x64' url.txt | cut -f 2 -d ' ' | xargs -r basename)
-$(shell mkdir -p tmp/$(DIR15); cd tmp/$(DIR15); curl -s --time-cond '$(EXE15_64)' -o '$(EXE15_64)' -L "$(URL15_64)")
+$(shell mkdir -p tmp/$(DIR15); cd tmp/$(DIR15); curl -s -L --connect-timeout 10 --time-cond '$(EXE15_64)' -o '$(EXE15_64)' "$(URL15_64)")
 VER15_64:=$(shell peres -v 'tmp/$(DIR15)/$(EXE15_64)' 2> /dev/null | grep 'Product Version:' | awk '{print $$3}')
 URL15_86:=$(shell grep '^$(DIR15)-x86' url.txt | cut -f 2 -d ' ')
 EXE15_86:=$(shell grep '^$(DIR15)-x86' url.txt | cut -f 2 -d ' ' | xargs -r basename)
-$(shell mkdir -p tmp/$(DIR15); cd tmp/$(DIR15); curl -s --time-cond '$(EXE15_86)' -o '$(EXE15_86)' -L "$(URL15_86)")
+$(shell mkdir -p tmp/$(DIR15); cd tmp/$(DIR15); curl -s -L --connect-timeout 10 --time-cond '$(EXE15_86)' -o '$(EXE15_86)' "$(URL15_86)")
 VER15_86:=$(shell peres -v 'tmp/$(DIR15)/$(EXE15_86)' 2> /dev/null | grep 'Product Version:' | awk '{print $$3}')
 
 VERSION:=$(shell ./sum-versions $(VER05_64) $(VER05_86) $(VER08_64) $(VER08_86) $(VER10_64) $(VER10_86) $(VER12_64) $(VER12_86) $(VER13_64) $(VER13_86) $(VER15_64) $(VER15_86))
@@ -168,14 +168,14 @@ tmp/post-install.ps1: post-install.ps1 tmp/version-replace.txt Makefile
 
 tmp/2005/vcredist_x64.EXE: url.txt
 	@mkdir -p tmp/2005
-	@curl -# -o $@ -L $$(grep '^2005-x64' url.txt | cut -f 2 -d ' ')
+	@curl -# -L --connect-timeout 10 -o "$@" $$(grep '^2005-x64' url.txt | cut -f 2 -d ' ')
 	@file $@ | grep -q "PE32 executable" || echo "Error: bad format for binary $@"
 	@grep -q "^$$(shasum -a 256 $@)$$" checksum.txt || echo "Error: bad checksum for binary $@"
 	@grep -q "[[:space:]]$$(peres -v $@ 2> /dev/null | egrep 'Product Version:' | awk '{print $$3}')$$" version.txt || echo "Error: bad version for binary $@"
 
 tmp/2005/vcredist_x86.EXE: url.txt
 	@mkdir -p tmp/2005
-	@curl -# -o $@ -L $$(grep '^2005-x86' url.txt | cut -f 2 -d ' ')
+	@curl -# -L --connect-timeout 10 -o "$@" $$(grep '^2005-x86' url.txt | cut -f 2 -d ' ')
 	@file $@ | grep -q "PE32 executable" || echo "Error: bad format for binary $@"
 	@grep -q "^$$(shasum -a 256 $@)$$" checksum.txt || echo "Error: bad checksum for binary $@"
 	@grep -q "[[:space:]]$$(peres -v $@ 2> /dev/null | egrep 'Product Version:' | awk '{print $$3}')$$" version.txt || echo "Error: bad version for binary $@"
@@ -183,14 +183,14 @@ tmp/2005/vcredist_x86.EXE: url.txt
 
 tmp/2008/vcredist_x64.exe: url.txt
 	@mkdir -p tmp/2008
-	@curl -# -o $@ -L $$(grep '^2008-x64' url.txt | cut -f 2 -d ' ')
+	@curl -# -L --connect-timeout 10 -o "$@" $$(grep '^2008-x64' url.txt | cut -f 2 -d ' ')
 	@file $@ | grep -q "PE32 executable" || echo "Error: bad format for binary $@"
 	@grep -q "^$$(shasum -a 256 $@)$$" checksum.txt || echo "Error: bad checksum for binary $@"
 	@grep -q "[[:space:]]$$(peres -v $@ 2> /dev/null | egrep 'Product Version:' | awk '{print $$3}')$$" version.txt || echo "Error: bad version for binary $@"
 
 tmp/2008/vcredist_x86.exe: url.txt
 	@mkdir -p tmp/2008
-	@curl -# -o $@ -L $$(grep '^2008-x86' url.txt | cut -f 2 -d ' ')
+	@curl -# -L --connect-timeout 10 -o "$@" $$(grep '^2008-x86' url.txt | cut -f 2 -d ' ')
 	@file $@ | grep -q "PE32 executable" || echo "Error: bad format for binary $@"
 	@grep -q "^$$(shasum -a 256 $@)$$" checksum.txt || echo "Error: bad checksum for binary $@"
 	@grep -q "[[:space:]]$$(peres -v $@ 2> /dev/null | egrep 'Product Version:' | awk '{print $$3}')$$" version.txt || echo "Error: bad version for binary $@"
@@ -198,14 +198,14 @@ tmp/2008/vcredist_x86.exe: url.txt
 
 tmp/2010/vcredist_x64.exe: url.txt
 	@mkdir -p tmp/2010
-	@curl -# -o $@ -L $$(grep '^2010-x64' url.txt | cut -f 2 -d ' ')
+	@curl -# -L --connect-timeout 10 -o "$@" $$(grep '^2010-x64' url.txt | cut -f 2 -d ' ')
 	@file $@ | grep -q "PE32 executable" || echo "Error: bad format for binary $@"
 	@grep -q "^$$(shasum -a 256 $@)$$" checksum.txt || echo "Error: bad checksum for binary $@"
 	@grep -q "[[:space:]]$$(peres -v $@ 2> /dev/null | egrep 'Product Version:' | awk '{print $$3}')$$" version.txt || echo "Error: bad version for binary $@"
 
 tmp/2010/vcredist_x86.exe: url.txt
 	@mkdir -p tmp/2010
-	@curl -# -o $@ -L $$(grep '^2010-x86' url.txt | cut -f 2 -d ' ')
+	@curl -# -L --connect-timeout 10 -o "$@" $$(grep '^2010-x86' url.txt | cut -f 2 -d ' ')
 	@file $@ | grep -q "PE32 executable" || echo "Error: bad format for binary $@"
 	@grep -q "^$$(shasum -a 256 $@)$$" checksum.txt || echo "Error: bad checksum for binary $@"
 	@grep -q "[[:space:]]$$(peres -v $@ 2> /dev/null | egrep 'Product Version:' | awk '{print $$3}')$$" version.txt || echo "Error: bad version for binary $@"
@@ -213,14 +213,14 @@ tmp/2010/vcredist_x86.exe: url.txt
 
 tmp/2012/vcredist_x64.exe: url.txt
 	@mkdir -p tmp/2012
-	@curl -# -o $@ -L $$(grep '^2012-x64' url.txt | cut -f 2 -d ' ')
+	@curl -# -L --connect-timeout 10 -o "$@" $$(grep '^2012-x64' url.txt | cut -f 2 -d ' ')
 	@file $@ | grep -q "PE32 executable" || echo "Error: bad format for binary $@"
 	@grep -q "^$$(shasum -a 256 $@)$$" checksum.txt || echo "Error: bad checksum for binary $@"
 	@grep -q "[[:space:]]$$(peres -v $@ 2> /dev/null | egrep 'Product Version:' | awk '{print $$3}')$$" version.txt || echo "Error: bad version for binary $@"
 
 tmp/2012/vcredist_x86.exe: url.txt
 	@mkdir -p tmp/2012
-	@curl -# -o $@ -L $$(grep '^2012-x86' url.txt | cut -f 2 -d ' ')
+	@curl -# -L --connect-timeout 10 -o "$@" $$(grep '^2012-x86' url.txt | cut -f 2 -d ' ')
 	@file $@ | grep -q "PE32 executable" || echo "Error: bad format for binary $@"
 	@grep -q "^$$(shasum -a 256 $@)$$" checksum.txt || echo "Error: bad checksum for binary $@"
 	@grep -q "[[:space:]]$$(peres -v $@ 2> /dev/null | egrep 'Product Version:' | awk '{print $$3}')$$" version.txt || echo "Error: bad version for binary $@"
@@ -228,14 +228,14 @@ tmp/2012/vcredist_x86.exe: url.txt
 
 tmp/2013/vcredist_x64.exe: url.txt
 	@mkdir -p tmp/2013
-	@curl -# -o $@ -L $$(grep '^2013-x64' url.txt | cut -f 2 -d ' ')
+	@curl -# -L --connect-timeout 10 -o "$@" $$(grep '^2013-x64' url.txt | cut -f 2 -d ' ')
 	@file $@ | grep -q "PE32 executable" || echo "Error: bad format for binary $@"
 	@grep -q "^$$(shasum -a 256 $@)$$" checksum.txt || echo "Error: bad checksum for binary $@"
 	@grep -q "[[:space:]]$$(peres -v $@ 2> /dev/null | egrep 'Product Version:' | awk '{print $$3}')$$" version.txt || echo "Error: bad version for binary $@"
 
 tmp/2013/vcredist_x86.exe: url.txt
 	@mkdir -p tmp/2013
-	@curl -# -o $@ -L $$(grep '^2013-x86' url.txt | cut -f 2 -d ' ')
+	@curl -# -L --connect-timeout 10 -o "$@" $$(grep '^2013-x86' url.txt | cut -f 2 -d ' ')
 	@file $@ | grep -q "PE32 executable" || echo "Error: bad format for binary $@"
 	@grep -q "^$$(shasum -a 256 $@)$$" checksum.txt || echo "Error: bad checksum for binary $@"
 	@grep -q "[[:space:]]$$(peres -v $@ 2> /dev/null | egrep 'Product Version:' | awk '{print $$3}')$$" version.txt || echo "Error: bad version for binary $@"
@@ -243,14 +243,14 @@ tmp/2013/vcredist_x86.exe: url.txt
 
 tmp/2015-2022/vc_redist.x64.exe: url.txt
 	@mkdir -p tmp/2015-2022
-	@curl -# -o $@ -L $$(grep '^2015-2022-x64' url.txt | cut -f 2 -d ' ')
+	@curl -# -L --connect-timeout 10 -o "$@" $$(grep '^2015-2022-x64' url.txt | cut -f 2 -d ' ')
 	@file $@ | grep -q "PE32 executable" || echo "Error: bad format for binary $@"
 	@grep -q "^$$(shasum -a 256 $@)$$" checksum.txt || echo "Error: bad checksum for binary $@"
 	@grep -q "[[:space:]]$$(peres -v $@ 2> /dev/null | egrep 'Product Version:' | awk '{print $$3}')$$" version.txt || echo "Error: bad version for binary $@"
 
 tmp/2015-2022/vc_redist.x86.exe: url.txt
 	@mkdir -p tmp/2015-2022
-	@curl -# -o $@ -L $$(grep '^2015-2022-x86' url.txt | cut -f 2 -d ' ')
+	@curl -# -L --connect-timeout 10 -o "$@" $$(grep '^2015-2022-x86' url.txt | cut -f 2 -d ' ')
 	@file $@ | grep -q "PE32 executable" || echo "Error: bad format for binary $@"
 	@grep -q "^$$(shasum -a 256 $@)$$" checksum.txt || echo "Error: bad checksum for binary $@"
 	@grep -q "[[:space:]]$$(peres -v $@ 2> /dev/null | egrep 'Product Version:' | awk '{print $$3}')$$" version.txt || echo "Error: bad version for binary $@"
