@@ -54,9 +54,9 @@ IF EXIST "LibreOffice_%softversion%_Win_x86-64.msi" (
   IF %RETURNCODE% EQU 0 SET "RETURNCODE=149"
 )
 
-@ECHO [INFO] Check RETURNCODE
-IF %RETURNCODE% NE 0 (
-  IF %MAX_RETRY% NE 0 (
+@ECHO [INFO] Check RETURNCODE [%RETURNCODE%] / [%MAX_RETRY%]
+IF NOT "%RETURNCODE%"=="0" (
+  IF NOT "%MAX_RETRY%"=="0" (
     @ECHO [WARN] Try installation again
     SET /A MAX_RETRY-=1
     SET "RETURNCODE=0"
