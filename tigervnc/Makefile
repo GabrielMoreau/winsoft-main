@@ -4,7 +4,7 @@
 #
 
 SOFT:=TigerVNC
-VERSION:=$(shell curl -s 'https://api.github.com/repos/TigerVNC/tigervnc/releases/latest' | grep '"tag_name"' | sed -E 's/.*"v([^"]+)".*/\1/' | head -1)
+VERSION:=$(shell curl -s -L --connect-timeout 10 'https://api.github.com/repos/TigerVNC/tigervnc/releases/latest' | grep '"tag_name"' | sed -E 's/.*"v([^"]+)".*/\1/' | head -1)
 REVISION:=1
 URL:=https://sourceforge.net/projects/tigervnc/files/stable/$(VERSION)/tigervnc64-$(VERSION).exe/download
 

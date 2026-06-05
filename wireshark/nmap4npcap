@@ -10,7 +10,7 @@ if [ ! -e "${NMAP_EXE}" ]
 then
   rm -f nmap-7.93-setup.exe npcap-*.exe
 
-  curl -s -L "${URL}" -o "${NMAP_EXE}"
+  curl -s -L --connect-timeout 10 -o "${NMAP_EXE}" "${URL}"
 fi
 
 if [ "$(ls -1 npcap-*.exe 2> /dev/null | wc -l)" -lt 1 ]

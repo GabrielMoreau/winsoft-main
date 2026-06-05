@@ -38,8 +38,8 @@ check-version:
 
 check-unrealized: check-version
 	@( grep -q '[[:space:]]$(EXE)$$' checksum.txt || { echo 'Warning: Updates not performed for $(SOFT) version $(VERSION)' ; exit ; } ; \
-		lasturl=$$(curl -s -l 'https://docs.docker.com/desktop/release-notes/' | sed -e 's/[<=>]/\n/g;' | grep '^https://desktop.docker.com/win/main/amd64/.*/checksums.txt' | head -1) ; \
-		lastsum=$$(curl -s -l "$${lasturl}" | awk '{print $$1}') ; \
+		lasturl=$$(curl -s -L --connect-timeout 10 --list-only 'https://docs.docker.com/desktop/release-notes/' | sed -e 's/[<=>]/\n/g;' | grep '^https://desktop.docker.com/win/main/amd64/.*/checksums.txt' | head -1) ; \
+		lastsum=$$(curl -s -L --connect-timeout 10 --list-only "$${lasturl}" | awk '{print $$1}') ; \
 		grep -q "^$${lastsum}[[:space:]]" checksum.txt || { echo 'Warning: new version upstream' ; exit ; }  ; \
 		echo 'Ok' ; \
 		)

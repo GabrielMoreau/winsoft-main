@@ -6,7 +6,7 @@
 #sinclude ../_common/flag.mk
 
 SOFT:=CrystalDiskMark
-URL:=$(shell curl -s -L 'https://crystalmark.info/redirect.php?product=CrystalDiskMarkInstallerAds' | sed -e 's/"/\n/g;' | grep 'https:.*CrystalDiskMark.*Ads.exe/download' | head -1)
+URL:=$(shell curl -s -L --connect-timeout 10 'https://crystalmark.info/redirect.php?product=CrystalDiskMarkInstallerAds' | sed -e 's/"/\n/g;' | grep 'https:.*CrystalDiskMark.*Ads.exe/download' | head -1)
 VERSION:=$(shell echo "$(URL)" | cut -f 7 -d '/' | head -1)
 REVISION:=1
 
