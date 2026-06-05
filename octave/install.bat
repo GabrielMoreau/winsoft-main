@@ -18,6 +18,9 @@ EXIT /B
 @ECHO [BEGIN] %date%-%time%
 
 SET "softversion=__VERSION__"
+SET "qexeadmin=__QEXEADMIN__"
+SET "mainexe=%ProgramFiles%\GNU Octave\Octave-__VERSION__\octave-launch.exe"
+SET "mainexe=%mainexe%;%ProgramFiles%\GNU Octave\Octave-__VERSION__\octave-launch-firsttime.exe
 
 
 @ECHO [INFO] Search PowerShell
@@ -30,6 +33,17 @@ IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET "pwrsh=%
 @ECHO [INFO] Unblock PowerShell Script
 %pwrsh% "Unblock-File -Path .\*.ps1"
 SET "RETURNCODE=0"
+
+
+:QEXEADMRESET
+IF "%qexeadmin%"=="false" (
+  FOR %%F in ("%mainexe:;=" "%") do (
+    IF EXIST "%%~F" (
+      @ECHO [INFO] Reset ACL on %%~F
+      icacls "%%~F" /reset || VER >NUL
+    )
+  )
+)
 
 
 @ECHO [INFO] Execute pre-install script
@@ -52,6 +66,7 @@ IF EXIST ".\pre-install.ps1" (
 IF %RETURNCODE% EQU 0 SET "RETURNCODE=%ERRORLEVEL%"
 
 
+@ECHO [INFO] Copy Configuration
 IF EXIST "%AppData%\octave\" COPY /A /Y "octave-gui.ini" "%AppData%\octave\octave-gui.ini"
 
 
@@ -60,6 +75,17 @@ IF EXIST "%PUBLIC%\Desktop\GNU Octave (CLI).lnk"          DEL /F /Q "%PUBLIC%\De
 IF EXIST "%PUBLIC%\Desktop\GNU Octave (GUI).lnk"          DEL /F /Q "%PUBLIC%\Desktop\GNU Octave (GUI).lnk"
 IF EXIST "%ALLUSERSPROFILE%\Desktop\GNU Octave (CLI).lnk" DEL /F /Q "%ALLUSERSPROFILE%\Desktop\GNU Octave (CLI).lnk"
 IF EXIST "%ALLUSERSPROFILE%\Desktop\GNU Octave (GUI).lnk" DEL /F /Q "%ALLUSERSPROFILE%\Desktop\GNU Octave (GUI).lnk"
+
+
+:QEXEADMDENY
+IF "%qexeadmin%"=="false" (
+  FOR %%F in ("%mainexe:;=" "%") do (
+    IF EXIST "%%~F" (
+      @ECHO [INFO] Restrict ACL for admin on %%~F
+      icacls "%%~F" /deny "*S-1-5-32-544:(X)" || VER >NUL
+    )
+  )
+)
 
 
 :END
