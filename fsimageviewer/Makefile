@@ -4,7 +4,7 @@
 #
 
 SOFT:=FastStoneImageViewer
-VERSION:=$(shell curl -s -L --connect-timeout 10 'https://www.faststone.org/index.htm' | grep 'Image Viewer [[:digit:]]' |awk '{print $$3}')
+VERSION:=$(shell curl -s -L --connect-timeout 10 'https://www.faststone.org/index.htm' | grep -oP '(?<=FastStone Image Viewer )\d+(?:\.\d+)+' | sort -u | head -1)
 REVISION:=1
 URL:=$(shell curl -s -L --connect-timeout 10 'https://www.faststone.org/FSIVDownload.htm' | sed -e 's/"/\n/g;' | grep 'https://.*/FSViewerSetup.*.exe' | head -1)
 
