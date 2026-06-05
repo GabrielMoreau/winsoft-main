@@ -34,12 +34,12 @@ SET "RETURNCODE=0"
 
 @ECHO [INFO] Execute pre-install script
 IF EXIST ".\pre-install.ps1" %pwrsh% -File ".\pre-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
-IF %RETURNCODE% EQU 0 SET "RETURNCODE=%ERRORLEVEL%"
+IF "%RETURNCODE%"=="0" SET "RETURNCODE=%ERRORLEVEL%"
 
 
 @ECHO [INFO] Silent install %softname%
 ScriptRunner.exe -appvscript WinMerge-%softversion%-x64-Setup.exe /VERYSILENT /SP- /NORESTART /SUPPRESSMSGBOXES /FORCECLOSEAPPLICATIONS /NOCANCEL /LOG="%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=300 > "%logdir%\%softname%-SR.log" 2>&1
-IF %RETURNCODE% EQU 0 set RETURNCODE=%ERRORLEVEL%
+IF "%RETURNCODE%"=="0" SET RETURNCODE=%ERRORLEVEL%
 
 FINDSTR /C:"Terminating process on timeout." "%logdir%\%softname%-SR.log" > NUL
 IF %ERRORLEVEL% EQU 0 (
@@ -55,10 +55,10 @@ IF EXIST ".\pre-install.ps1" (
 ) ELSE (
   IF EXIST ".\post-install.ps1" %pwrsh% -File ".\post-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
 )
-IF %RETURNCODE% EQU 0 SET "RETURNCODE=%ERRORLEVEL%"
+IF "%RETURNCODE%"=="0" SET "RETURNCODE=%ERRORLEVEL%"
 
 
-IF %RETURNCODE% EQU 259 (
+IF "%RETURNCODE%"=="259" (
   @ECHO [INFO] 0 or 259 are good exit code for %softname% installer!
   set RETURNCODE=0
 )

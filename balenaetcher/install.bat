@@ -37,7 +37,7 @@ SET "RETURNCODE=0"
 
 @ECHO [INFO] Execute pre-install script
 IF EXIST ".\pre-install.ps1" %pwrsh% -File ".\pre-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
-IF %RETURNCODE% EQU 0 SET "RETURNCODE=%ERRORLEVEL%"
+IF "%RETURNCODE%"=="0" SET "RETURNCODE=%ERRORLEVEL%"
 
 
 @ECHO [INFO] Kill running process
@@ -53,11 +53,11 @@ CALL .\uninstall.bat
 
 @ECHO [INFO] Silent install %softname%
 MOVE "BalenaEtcher" "%ProgramFiles%\%regkey%"
-IF %RETURNCODE% EQU 0 SET "RETURNCODE=%ERRORLEVEL%"
+IF "%RETURNCODE%"=="0" SET "RETURNCODE=%ERRORLEVEL%"
 
 @ECHO [INFO] Copy uninstall script
 COPY /A /Y "uninstall.bat" "%ProgramFiles%\%regkey%\uninstall.bat"
-IF %RETURNCODE% EQU 0 SET "RETURNCODE=%ERRORLEVEL%"
+IF "%RETURNCODE%"=="0" SET "RETURNCODE=%ERRORLEVEL%"
 
 
 @ECHO [INFO] Create shortcut
@@ -90,7 +90,7 @@ IF EXIST ".\pre-install.ps1" (
 ) ELSE (
   IF EXIST ".\post-install.ps1" %pwrsh% -File ".\post-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
 )
-IF %RETURNCODE% EQU 0 SET "RETURNCODE=%ERRORLEVEL%"
+IF "%RETURNCODE%"=="0" SET "RETURNCODE=%ERRORLEVEL%"
 
 :END
 @ECHO [END] %date%-%time%

@@ -35,23 +35,23 @@ SET "RETURNCODE=0"
 
 @ECHO [INFO] Execute pre-install script
 IF EXIST ".\pre-install.ps1" %pwrsh% -File ".\pre-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
-IF %RETURNCODE% EQU 0 SET "RETURNCODE=%ERRORLEVEL%"
+IF "%RETURNCODE%"=="0" SET "RETURNCODE=%ERRORLEVEL%"
 
 
 @ECHO [INFO] Silent install %softname%
 ScriptRunner.exe -appvscript VirtualBox-%softversion%-Win.exe --silent --extract --path .\ -appvscriptrunnerparameters -wait -timeout=300
 FOR %%m IN (*.msi) DO (ScriptRunner.exe -appvscript MsiExec.exe /i "%%m" /qn /norestart /L*v "%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=300)
-IF %RETURNCODE% EQU 0 SET "RETURNCODE=%ERRORLEVEL%"
+IF "%RETURNCODE%"=="0" SET "RETURNCODE=%ERRORLEVEL%"
 
 
 IF EXIST "%ProgramFiles%\Oracle\VirtualBox\VBoxManage.exe" (
   @ECHO [INFO] Disable VirtualBox Update
   "%ProgramFiles%\Oracle\VirtualBox\VBoxManage.exe" setextradata global GUI/UpdateDate "never"
-  IF %RETURNCODE% EQU 0 SET "RETURNCODE=%ERRORLEVEL%"
+  IF "%RETURNCODE%"=="0" SET "RETURNCODE=%ERRORLEVEL%"
 
   @ECHO [INFO] Install Extension Pack
   echo y | "%ProgramFiles%\Oracle\VirtualBox\VBoxManage.exe" extpack install --replace ".\%softextpack%"
-  IF %RETURNCODE% EQU 0 SET "RETURNCODE=%ERRORLEVEL%"
+  IF "%RETURNCODE%"=="0" SET "RETURNCODE=%ERRORLEVEL%"
 ) ELSE (
   REM VirtualBox not well installed
   @ECHO [INFO] VBoxManage is not installed, reinstall VirtualBox...
@@ -66,7 +66,7 @@ IF EXIST ".\pre-install.ps1" (
 ) ELSE (
   IF EXIST ".\post-install.ps1" %pwrsh% -File ".\post-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
 )
-IF %RETURNCODE% EQU 0 SET "RETURNCODE=%ERRORLEVEL%"
+IF "%RETURNCODE%"=="0" SET "RETURNCODE=%ERRORLEVEL%"
 
 
 :END

@@ -35,7 +35,7 @@ SET "RETURNCODE=0"
 
 @ECHO [INFO] Execute pre-install script
 IF EXIST ".\pre-install.ps1" %pwrsh% -File ".\pre-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
-IF %RETURNCODE% EQU 0 SET "RETURNCODE=%ERRORLEVEL%"
+IF "%RETURNCODE%"=="0" SET "RETURNCODE=%ERRORLEVEL%"
 
 
 REM Kill the current process
@@ -45,7 +45,7 @@ TASKKILL /T /F /IM %process% || VER >NUL
 @ECHO [INFO] Silent install %softname%
 REM https://keepassxc.org/docs/KeePassXC_GettingStarted.html
 ScriptRunner.exe -appvscript MsiExec.exe /q /i "KeePassXC-%softversion%-Win64.msi" AUTOSTARTPROGRAM=0 LAUNCHAPPONEXIT=0 /l*v "%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=300
-IF %RETURNCODE% EQU 0 SET "RETURNCODE=%ERRORLEVEL%"
+IF "%RETURNCODE%"=="0" SET "RETURNCODE=%ERRORLEVEL%"
 
 
 :POSTINSTALL
@@ -55,7 +55,7 @@ IF EXIST ".\pre-install.ps1" (
 ) ELSE (
   IF EXIST ".\post-install.ps1" %pwrsh% -File ".\post-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
 )
-IF %RETURNCODE% EQU 0 SET "RETURNCODE=%ERRORLEVEL%"
+IF "%RETURNCODE%"=="0" SET "RETURNCODE=%ERRORLEVEL%"
 
 
 :END

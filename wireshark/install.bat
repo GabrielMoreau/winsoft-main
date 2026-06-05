@@ -41,13 +41,13 @@ SET "RETURNCODE=0"
 IF NOT EXIST "%ProgramFiles%\Npcap\npcap.cat" (
   @ECHO [INFO] Silent install Win10Pcap
   ScriptRunner.exe -appvscript MsiExec.exe /i Win10Pcap-v%softversion2%.msi ALLUSERS=1 /qn /L*v "%logdir%\%softname%-MSI2.log" -appvscriptrunnerparameters -wait -timeout=300 2>&1
-  IF %RETURNCODE% EQU 0 SET "RETURNCODE=%ERRORLEVEL%"
+  IF "%RETURNCODE%"=="0" SET "RETURNCODE=%ERRORLEVEL%"
 )
 
 
 @ECHO [INFO] Silent install %softname%
 ScriptRunner.exe -appvscript Wireshark-%softversion%-x64.exe /S -appvscriptrunnerparameters -wait -timeout=300
-IF %RETURNCODE% EQU 0 SET "RETURNCODE=%ERRORLEVEL%"
+IF "%RETURNCODE%"=="0" SET "RETURNCODE=%ERRORLEVEL%"
 
 
 :POSTINSTALL
@@ -57,7 +57,7 @@ IF EXIST ".\pre-install.ps1" (
 ) ELSE (
   IF EXIST ".\post-install.ps1" %pwrsh% -File ".\post-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
 )
-IF %RETURNCODE% EQU 0 SET "RETURNCODE=%ERRORLEVEL%"
+IF "%RETURNCODE%"=="0" SET "RETURNCODE=%ERRORLEVEL%"
 
 
 :END

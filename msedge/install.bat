@@ -34,13 +34,13 @@ SET "RETURNCODE=0"
 
 @ECHO [INFO] Execute pre-install script
 IF EXIST ".\pre-install.ps1" %pwrsh% -File ".\pre-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
-IF %RETURNCODE% EQU 0 SET "RETURNCODE=%ERRORLEVEL%"
+IF "%RETURNCODE%"=="0" SET "RETURNCODE=%ERRORLEVEL%"
 
 
 @ECHO [INFO] Silent install %softname%
 ScriptRunner.exe -appvscript MsiExec.exe /i MicrosoftEdgeEnterpriseX64-%softversion%.msi DONOTCREATEDESKTOPSHORTCUT=true DONOTCREATETASKBARSHORTCUT=true /qn /L*v "%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=300
-IF %RETURNCODE% EQU 0 SET "RETURNCODE=%ERRORLEVEL%"
-IF %RETURNCODE% EQU 1603 (
+IF "%RETURNCODE%"=="0" SET "RETURNCODE=%ERRORLEVEL%"
+IF "%RETURNCODE%"=="1603" (
   @ECHO [INFO] 0 or 1603 are good exit code for %softname% installer!
   SET "RETURNCODE=0"
 )
@@ -53,7 +53,7 @@ IF EXIST ".\pre-install.ps1" (
 ) ELSE (
   IF EXIST ".\post-install.ps1" %pwrsh% -File ".\post-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
 )
-IF %RETURNCODE% EQU 0 SET "RETURNCODE=%ERRORLEVEL%"
+IF "%RETURNCODE%"=="0" SET "RETURNCODE=%ERRORLEVEL%"
 
 
 
