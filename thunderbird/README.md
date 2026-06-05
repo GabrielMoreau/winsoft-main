@@ -22,7 +22,7 @@ See also: https://github.com/mozilla/policy-templates
 For extension, you need to know the ID.
 On method for example is to do
 ```bash
-curl -# -L 'https://addons.thunderbird.net/thunderbird/downloads/latest/grammalecte-fr-thunderbird/latest.xpi' -o grammalecte-fr-thunderbird-latest.xpi
+curl -# -L --connect-timeout 10 -o grammalecte-fr-thunderbird-latest.xpi 'https://addons.thunderbird.net/thunderbird/downloads/latest/grammalecte-fr-thunderbird/latest.xpi'
 unzip -p grammalecte-fr-thunderbird-latest.xpi manifest.json | grep 'id.:' ; rm grammalecte-fr-thunderbird-latest.xpi
 ```
 It's possible to validate the `policies.json` file with
