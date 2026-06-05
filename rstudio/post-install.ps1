@@ -82,6 +82,7 @@ ForEach ($Key in Get-ChildItem -Recurse $UninstallKeys) {
 	Write-Output "Installed: $($App.DisplayName) / $DisplayVersion / $KeyProduct / $($App.UninstallString)"
 }
 
+$RefVersion = ToVersion $Config.Version
 $RefName = $Config.RegexSearch
 
 ########################################################################
