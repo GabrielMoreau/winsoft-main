@@ -8,7 +8,7 @@
 SOFT:=MSEdge
 #VERSION:=$(shell curl -s -L --connect-timeout 10 'https://edgeupdates.microsoft.com/api/products?view=enterprise' | sed -e 's/,/\n/g;' | grep -A 500 '"Product":"Stable"' | grep -B 3 '/MicrosoftEdgeEnterpriseX64.msi"' | grep '"ProductVersion":"' | cut -f 4 -d '"' | head -1)
 #URL:=$(shell curl -s -L --connect-timeout 10 'https://edgeupdates.microsoft.com/api/products?view=enterprise' | sed -e 's/,/\n/g;' | grep -A 500 '"Product":"Stable"' | grep      '/MicrosoftEdgeEnterpriseX64.msi"' | cut -f 4 -d '"' | head -1)
-WLINES:=$(shell curl -s -L --connect-timeout 10 'https://edgeupdates.microsoft.com/api/products?view=enterprise' | sed -e 's/,/\n/g;' | grep -A 500 '"Product":"Stable"' | paste -sd ',')
+WLINES:=$(shell curl -s -L --connect-timeout 10 'https://edgeupdates.microsoft.com/api/products?view=enterprise' | sed -e 's/,/\n/g;' | grep -Ev -- '^"(CVE|Hash|Artifacts|Published|Expected)' | grep -A 100 '"Product":"Stable"' | paste -sd ',')
 VERSION:=$(shell echo '$(WLINES)' | sed -e 's/,/\n/g;' | grep -B 3 '/MicrosoftEdgeEnterpriseX64.msi"' | grep '"ProductVersion":"' | cut -f 4 -d '"' | head -1)
 URL:=$(shell     echo '$(WLINES)' | sed -e 's/,/\n/g;' | grep      '/MicrosoftEdgeEnterpriseX64.msi"' | cut -f 4 -d '"' | head -1)
 
