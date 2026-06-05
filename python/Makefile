@@ -4,7 +4,7 @@
 #
 
 SOFT:=Python
-VERSION:=$(shell curl -s -L --connect-timeout 10 'https://www.python.org/downloads/windows/' | sed 's/"/\n/g;'| grep '^https:.*/python-[[:digit:]][[:digit:]\.]*-amd64.exe' | cut -f 6 -d '/' | sort -V | tail -1)
+VERSION:=$(shell curl -s -L --connect-timeout 10 --compressed 'https://www.python.org/downloads/windows/' | sed 's/"/\n/g;'| grep '^https:.*/python-[[:digit:]][[:digit:]\.]*-amd64.exe' | cut -f 6 -d '/' | sort -V | tail -1)
 VERSIONSHORT:=$(shell echo '$(VERSION)' | cut -f 1,2 -d '.')
 REVISION:=1
 URL:=https://www.python.org/ftp/python/$(VERSION)/python-$(VERSION)-amd64.exe
