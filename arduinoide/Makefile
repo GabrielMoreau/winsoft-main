@@ -65,14 +65,14 @@ tmp/$(EXE):
 tmp/Adafruit.cer:
 	@(cd tmp ; \
 		rm -f Adafruit.cer ; \
-		curl -# -o "Adafruit.cer" -L "$(Adafruit)" ; \
+		curl -# -L --connect-timeout 10 -o "Adafruit.cer" "$(Adafruit)" ; \
 		#file "Adafruit.cer" | grep -q "Certificate, Version=3" || echo "Error: bad format for certificate Adafruit.cer" ; \
 		)
 
 tmp/Arduino.cer:
 	@(cd tmp ; \
 		rm -f Arduino.cer ; \
-		curl -# -o "Arduino.cer" -L "$(Arduino)" ; \
+		curl -# -L --connect-timeout 10 -o "Arduino.cer" "$(Arduino)" ; \
 		#file "Arduino.cer" | grep -q "Certificate, Version=3" || echo "Error: bad format for certificate Arduino.cer" ; \
 		)
 

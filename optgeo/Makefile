@@ -4,7 +4,7 @@
 #
 
 SOFT:=Optgeo
-URL:=http://jeanmarie.biansan.free.fr/$(shell curl -s -L 'http://jeanmarie.biansan.free.fr/optgeo.html' | sed -e 's/"/\n/g;' | grep '^telechargement/.*/installateuroptgeo_.*\.exe$$' | head -1)
+URL:=http://jeanmarie.biansan.free.fr/$(shell curl -s -L --connect-timeout 10 'http://jeanmarie.biansan.free.fr/optgeo.html' | sed -e 's/"/\n/g;' | grep '^telechargement/.*/installateuroptgeo_.*\.exe$$' | head -1)
 VERSION:=$(shell basename "$(URL)" '.exe' | cut -f 2 -d '_')
 REVISION:=1
 

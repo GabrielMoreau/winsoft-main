@@ -8,8 +8,8 @@
 SOFT:=Brave
 #INSTALLER:=BraveBrowserSetup.exe
 URL:=https://laptop-updates.brave.com/latest/win64
-#$(shell mkdir -p tmp; curl -s -L -o 'tmp/$(INSTALLER)' '$(URL)' > /dev/null)
-VERSION:=$(shell curl -s -L 'https://github.com/brave/brave-browser/releases/latest' | grep '<title>Release' | awk '{print $$5"."$$3}' | cut -f 1,5,6,7 -d '.' | sed -e 's/v//;' | head -1)
+#$(shell mkdir -p tmp; curl -s -L --connect-timeout 10 -o 'tmp/$(INSTALLER)' '$(URL)' > /dev/null)
+VERSION:=$(shell curl -s -L --connect-timeout 10 'https://github.com/brave/brave-browser/releases/latest' | grep '<title>Release' | awk '{print $$5"."$$3}' | cut -f 1,5,6,7 -d '.' | sed -e 's/v//;' | head -1)
 REVISION:=1
 
 EXE:=BraveBrowserSetup_$(VERSION).exe

@@ -75,7 +75,7 @@ tmp/$(EXE8):
 	@mkdir -p tmp
 	@(cd tmp ; \
 		rm -f windowsdesktop-runtime-8.*.exe 2>/dev/null ; \
-		curl -# -o "$(EXE8)" -L "$(URL8)" ; \
+		curl -# -L --connect-timeout 10 -o "$(EXE8)" "$(URL8)" ; \
 		grep -q "^$$(shasum -a 256 $(EXE8))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE8)" ; \
 		)
 

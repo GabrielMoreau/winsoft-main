@@ -44,7 +44,7 @@ tmp/$(ZIP):
 	@mkdir -p tmp
 	@(cd tmp ; \
 		rm -f Kasperky-Uninstall-*.zip ; \
-		curl -# --insecure -o "$(ZIP)" -L "$(URL)"; \
+		curl -# -L --connect-timeout 10 --insecure -o "$(ZIP)" "$(URL)"; \
 		file "$(ZIP)" | grep -q 'Zip archive data' || echo "Error: bad format for archive $(ZIP)" ; \
 		grep -q "^$$(shasum -a 256 $(ZIP))$$" ../checksum.txt || echo "Error: bad checksum for archive $(ZIP)" ; \
 		)

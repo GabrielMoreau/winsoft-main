@@ -5,8 +5,8 @@
 
 # https://github.com/nextcloud-releases/desktop/releases/download/v3.17.3/Nextcloud-3.17.3-x64.msi
 # https://github.com/nextcloud-releases/desktop/releases/download/v4.0.0/Nextcloud-4.0.0-x64.msi
-# curl -sL 'https://github.com/nextcloud-releases/desktop/releases' | sed -e 's/"/\n/g;' | grep '.*/nextcloud.*/Nextcloud-.*msi$'
-# curl -sL 'https://github.com/nextcloud-releases/desktop/releases' | sed -e 's/"/\n/g;' | grep '/nextcloud-releases/desktop/releases/tag/'  | grep -Ev -- '-(rc|alpha|beta)' | cut -f 6 -d '/' | cut -f 2 -d 'v' | grep . | head -1
+# curl -s -L --connect-timeout 10 'https://github.com/nextcloud-releases/desktop/releases' | sed -e 's/"/\n/g;' | grep '.*/nextcloud.*/Nextcloud-.*msi$'
+# curl -s -L --connect-timeout 10 'https://github.com/nextcloud-releases/desktop/releases' | sed -e 's/"/\n/g;' | grep '/nextcloud-releases/desktop/releases/tag/'  | grep -Ev -- '-(rc|alpha|beta)' | cut -f 6 -d '/' | cut -f 2 -d 'v' | grep . | head -1
 
 SOFT:=Nextcloud
 VERSION:=$(shell curl -s -L --connect-timeout 10 'https://github.com/nextcloud-releases/desktop/releases' | sed -e 's/"/\n/g;' | grep '/nextcloud-releases/desktop/releases/tag/'  | grep -Ev -- '-(rc|alpha|beta)' | cut -f 6 -d '/' | cut -f 2 -d 'v' | grep . | head -1)
