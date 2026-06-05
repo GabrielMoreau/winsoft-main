@@ -42,9 +42,9 @@ ScriptRunner.exe -appvscript WinMerge-%softversion%-x64-Setup.exe /VERYSILENT /S
 IF "%RETURNCODE%"=="0" SET RETURNCODE=%ERRORLEVEL%
 
 FINDSTR /C:"Terminating process on timeout." "%logdir%\%softname%-SR.log" > NUL
-IF %ERRORLEVEL% EQU 0 (
+IF "%ERRORLEVEL%"=="0" (
   @ECHO [ERROR] Timeout detected while running ScriptRunner
-  set RETURNCODE=140
+  SET "RETURNCODE=140"
 )
 
 
@@ -60,7 +60,7 @@ IF "%RETURNCODE%"=="0" SET "RETURNCODE=%ERRORLEVEL%"
 
 IF "%RETURNCODE%"=="259" (
   @ECHO [INFO] 0 or 259 are good exit code for %softname% installer!
-  set RETURNCODE=0
+  SET "RETURNCODE=0"
 )
 
 :END

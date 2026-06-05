@@ -39,7 +39,7 @@ manage-bde -status %SystemDrive%
 %pwrsh% -File ".\pre-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
 SET "PreInstallCode=%ERRORLEVEL%"
 
-IF %PreInstallCode% NEQ 0 (
+IF NOT "%PreInstallCode%"=="0" (
   REM https://techwiser.com/ways-to-disable-and-suspend-bitlocker-on-windows-10-11/
   REM https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/manage-bde-protectors
   @ECHO [INFO] Suspend bitlocker

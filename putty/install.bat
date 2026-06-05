@@ -51,7 +51,7 @@ IF EXIST ".\pre-install.ps1" (
 
 @ECHO [END] %date%-%time%
 
-REM IF %ERRORLEVEL% EQU 1603 (
+REM IF "%ERRORLEVEL%"=="1603" (
 REM   REM 0 or 1603 are good exit code for PuTTY MSI installer!
 REM   EXIT 0
 REM )

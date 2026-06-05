@@ -8,7 +8,7 @@ REM HKLM	PrusaSlicer version 2.7.1	Prusa Research s.r.o.	2.7.1	PrusaSlicer_is1	"
 
 REM Clean reg uninstall key
 reg query "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\%regkey%"
-IF %ERRORLEVEL% EQU 0 (
+IF "%ERRORLEVEL%"=="0" (
   REG DELETE "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\%regkey%" /F
 )
 

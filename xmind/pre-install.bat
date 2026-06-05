@@ -20,11 +20,11 @@ IF EXIST "%ProgramFiles%\%installfolder%\Uninstall Xmind.exe" (
 
 @ECHO [INFO] Clean reg uninstall key
 REG QUERY "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\%regkey%"
-IF %ERRORLEVEL% EQU 0 (
+IF "%ERRORLEVEL%"=="0" (
   REG DELETE "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\%regkey%" /F
 )
 REG QUERY "HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\%regkey%"
-IF %ERRORLEVEL% EQU 0 (
+IF "%ERRORLEVEL%"=="0" (
   REG DELETE "HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\%regkey%" /F
 )
 

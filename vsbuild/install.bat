@@ -45,7 +45,7 @@ SET /A ELAPSED=0
 timeout /t 5 /nobreak >nul
 SET /A ELAPSED+=5
 TASKLIST /fi "imagename eq vs_BuildTools-%softversion%.exe" | find /i "vs_BuildTools-%softversion%.exe" >NUL
-IF %ERRORLEVEL%==0 (
+IF "%ERRORLEVEL%"=="0" (
   IF %ELAPSED% GEQ 600 (
     TASKKILL /T /F /IM vs_BuildTools-%softversion%.exe || VER >NUL
     SET "RETURNCODE=140"

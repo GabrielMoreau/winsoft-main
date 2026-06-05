@@ -26,7 +26,7 @@ ScriptRunner.exe -appvscript MsiExec.exe /i VeraCrypt-Setup-x64-%softversion%.ms
 
 @ECHO [END] %date%-%time%
 
-IF %ERRORLEVEL% EQU 1603 (
+IF "%ERRORLEVEL%"=="1603" (
   @ECHO [INFO] 0 or 1603 are good exit code for %softname% installer!
   EXIT 0
 )

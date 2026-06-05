@@ -24,7 +24,7 @@ SET "regkey=ideaMaker"
 REM Clean reg old uninstall key we push in early version
 REM Now, software use register key ideaMaker-App
 reg query "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\ideaMaker"
-IF %ERRORLEVEL% EQU 0 (
+IF "%ERRORLEVEL%"=="0" (
   REG DELETE "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\ideaMaker" /F
 )
 

@@ -10,7 +10,7 @@ IF EXIST "%ProgramFiles(x86)%\WinDirStat\Uninstall.exe" (
 
 REM Clean reg uninstall key
 reg query "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\%regkey%"
-IF %ERRORLEVEL% EQU 0 (
+IF "%ERRORLEVEL%"=="0" (
   REG DELETE "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\%regkey%" /F
 )
 

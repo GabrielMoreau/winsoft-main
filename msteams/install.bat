@@ -37,7 +37,7 @@ IF EXIST ".\pre-install.ps1" %pwrsh% -File ".\pre-install.ps1" 1> "%logdir%\%sof
 IF "%RETURNCODE%"=="0" SET "RETURNCODE=%ERRORLEVEL%"
 
 
-IF %ERRORLEVEL% NEQ 0 (
+IF NOT "%ERRORLEVEL%"=="0" (
     @ECHO [INFO] Silent install %softname%
     ScriptRunner.exe -appvscript DISM /Online /Add-ProvisionedAppxPackage /PackagePath:"teams-%softversion%-x64.msix" /SkipLicense -appvscriptrunnerparameters -wait -timeout=300
 )

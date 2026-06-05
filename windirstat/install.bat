@@ -46,7 +46,7 @@ IF EXIST "%ProgramFiles(x86)%\WinDirStat\Uninstall.exe" (
 )
 REM Clean old reg uninstall key
 reg query "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\windirstat"
-IF %ERRORLEVEL% EQU 0 (
+IF "%ERRORLEVEL%"=="0" (
   REG DELETE "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\windirstat" /F
 )
 REM Clean old x86 folder

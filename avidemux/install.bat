@@ -65,7 +65,7 @@ regedit.exe /S "tmp_install.reg"
 REM HKU	Avidemux VC++ 64bits	Mean	2.8.1	{0694d9fc-951c-4992-85e9-23eb6d1a8082}	C:\Program Files\Avidemux 2.8 VC++ 64bits\Uninstall Avidemux VC++ 64bits.exe
 @ECHO [INFO] Clean reg uninstall key in HKU
 REG QUERY "HKEY_USERS\.DEFAULT\Software\Microsoft\Windows\CurrentVersion\Uninstall\%regkey%"
-IF %ERRORLEVEL% NEQ 0 GOTO Next
+IF NOT "%ERRORLEVEL%"=="0" GOTO Next
 REG QUERY "HKEY_USERS\.DEFAULT\Software\Microsoft\Windows\CurrentVersion\Uninstall\%regkey%" /v "UninstallString" | FIND /N "%SystemDrive%\\Program Files\\Avidemux %softversionshort% VC++ 64bits" > NUL && (
   @ECHO [INFO] REG DELETE HKU
   REG DELETE "HKEY_USERS\.DEFAULT\Software\Microsoft\Windows\CurrentVersion\Uninstall\%regkey%" /F
@@ -80,7 +80,7 @@ EXIT 0
 
 :End
 @ECHO [END] %date%-%time%
-IF %ERRORLEVEL% EQU 1223 (
+IF "%ERRORLEVEL%"=="1223" (
   @ECHO [INFO] 0 or 1223 are good exit code for %softname% installer!
   EXIT 0
 )

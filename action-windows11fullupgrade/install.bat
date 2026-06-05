@@ -35,7 +35,7 @@ SET "RETURNCODE=0"
 @ECHO [INFO] Pre-install ErrorLevel Return: %ERRORLEVEL%
 
 
-IF %ERRORLEVEL% EQU 0 (
+IF "%ERRORLEVEL%"=="0" (
   @ECHO [INFO] Silent install %softname% - No ScriptRunner
   Windows11InstallationAssistant-%softversion%.exe /QuietInstall /SkipEULA /NoRestartUI
 ) ELSE (

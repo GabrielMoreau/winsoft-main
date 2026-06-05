@@ -52,12 +52,12 @@ IF "%qexeadmin%"=="false" (
 
 @ECHO [INFO] Execute pre-install script
 %pwrsh% -File ".\pre-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
-IF %ERRORLEVEL% EQU 147 (
+IF "%ERRORLEVEL%"=="147" (
   @ECHO [INFO] Silent Update %softname%
   ScriptRunner.exe -appvscript MsiExec.exe /update AcroRdrDCx64Upd%softversion%.msp /norestart /quiet ALLUSERS=1 EULA_ACCEPT=YES DISABLEDESKTOPSHORTCUT=1 DISABLE_ARM_SERVICE_INSTALL=1 /L*V "%logdir%\%softname%-MSP.log" -appvscriptrunnerparameters -wait -timeout=600
   GOTO POSTINSTALL
 ) ELSE (
-  IF %ERRORLEVEL% EQU 146 (
+  IF "%ERRORLEVEL%"=="146" (
     @ECHO [INFO] Already installed %softname% at same or newer version
     GOTO POSTINSTALL
   )
