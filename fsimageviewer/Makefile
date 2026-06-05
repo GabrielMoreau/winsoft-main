@@ -6,7 +6,7 @@
 SOFT:=FastStoneImageViewer
 VERSION:=$(shell curl -s -L --connect-timeout 10 'https://www.faststone.org/index.htm' | grep -oP '(?<=FastStone Image Viewer )\d+(?:\.\d+)+' | sort -u | head -1)
 REVISION:=1
-URL:=$(shell curl -s -L --connect-timeout 10 'https://www.faststone.org/FSIVDownload.htm' | sed -e 's/"/\n/g;' | grep 'https://.*/FSViewerSetup.*.exe' | head -1)
+URL:=$(shell curl -s -L --connect-timeout 10 'https://www.faststone.org/FSViewerDownload.htm' | sed -e 's/"/\n/g;' | grep 'https://.*/FSViewerSetup.*.exe' | head -1)
 
 EXE:=FSViewerSetup-$(VERSION).exe
 REG_SEARCH:=FastStone\\sImage\\sViewer
@@ -59,7 +59,7 @@ tmp/$(EXE):
 check-exe: tmp/$(EXE)
 	@(cd tmp ; \
 		file $(EXE) | grep -q "PE32 executable.*Nullsoft Installer self-extracting archive" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 12; } ; \
-		#which peres >/dev/null && { peres -v $(EXE) 2> /dev/null | grep -q "^Product Version:[[:space:]]*$(VERSION)" || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 12; } ; } ;\
+		which peres >/dev/null && { peres -v $(EXE) 2> /dev/null | grep -q "^Product Version:[[:space:]]*$(VERSION)" || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 12; } ; } ;\
 		)
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE)
