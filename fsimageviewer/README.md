@@ -20,3 +20,4 @@ Example :
  | HKLM | FastStone Image Viewer 7.9 | FastStone Corporation | 7.9 | `FastStone Image Viewer` | `C:\Program Files (x86)\FastStone Image Viewer\uninst.exe` |
  | HKLM | FastStone Image Viewer 8.0 | FastStone Corporation | 8.0 | `FastStone Image Viewer` | `C:\Program Files (x86)\FastStone Image Viewer\uninst.exe` |
  | HKLM | FastStone Image Viewer 8.3 | FastStone Corporation | 8.3 | `FastStone Image Viewer` | `C:\Program Files (x86)\FastStone Image Viewer\uninst.exe` |
+ | HKLM | FastStone Image Viewer 8.4 | FastStone Corporation | 8.4 | `FastStone Image Viewer` | `C:\Program Files (x86)\FastStone Image Viewer\uninst.exe` |
