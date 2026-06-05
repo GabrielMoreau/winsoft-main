@@ -57,7 +57,7 @@ tmp/$(EXE):
 		rm -f *.exe *.msi 2>/dev/null ; \
 		URLREDIR=$$(curl $(CURLFLAGS) -s -L "$(URL)" | grep 'data-release-url' | sed -e 's/"/\n/g;' | grep '^https' | head -1) ; \
 		echo "$${URLREDIR}" ; \
-		curl $(CURLFLAGS) -# -o "$(EXE)" -L "$${URLREDIR}" ; \
+		curl $(CURLFLAGS) -# -L -o "$(EXE)" "$${URLREDIR}" ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
 
