@@ -54,7 +54,7 @@ IF "%qexeadmin%"=="false" (
 %pwrsh% -File ".\pre-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
 IF "%ERRORLEVEL%"=="147" (
   @ECHO [INFO] Silent Update %softname%
-  ScriptRunner.exe -appvscript MsiExec.exe /update AcroRdrDCx64Upd%softversion%.msp /norestart /quiet ALLUSERS=1 EULA_ACCEPT=YES DISABLEDESKTOPSHORTCUT=1 DISABLE_ARM_SERVICE_INSTALL=1 /L*V "%logdir%\%softname%-MSP.log" -appvscriptrunnerparameters -wait -timeout=600
+  ScriptRunner.exe -appvscript MsiExec.exe /update AcroRdrDCx64Upd%softversion%.msp /norestart /quiet ALLUSERS=1 EULA_ACCEPT=YES DISABLEDESKTOPSHORTCUT=1 DISABLE_ARM_SERVICE_INSTALL=1 /L*V "%logdir%\%softname%-MSP.log" -appvscriptrunnerparameters -wait -timeout=900
   GOTO POSTINSTALL
 ) ELSE (
   IF "%ERRORLEVEL%"=="146" (
@@ -66,7 +66,7 @@ IF "%ERRORLEVEL%"=="147" (
 :REINSTALL
 @ECHO [INFO] Silent Install %softname%
 IF EXIST "AcroRdrDCx64%softversion%_MUI.exe" (
-  ScriptRunner.exe -appvscript AcroRdrDCx64%softversion%_MUI.exe /sAll /rs /msi /norestart /quiet ALLUSERS=1 EULA_ACCEPT=YES DISABLEDESKTOPSHORTCUT=1 DISABLE_ARM_SERVICE_INSTALL=1 /L*V "%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=600
+  ScriptRunner.exe -appvscript AcroRdrDCx64%softversion%_MUI.exe /sAll /rs /msi /norestart /quiet ALLUSERS=1 EULA_ACCEPT=YES DISABLEDESKTOPSHORTCUT=1 DISABLE_ARM_SERVICE_INSTALL=1 /L*V "%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=900
 ) ELSE (
     @ECHO [ERROR] Installer is not in the archive!
 )
