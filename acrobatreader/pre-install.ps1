@@ -72,6 +72,7 @@ Write-Output "Config:`n * Version: $RefVersion`n * RegexSearch: $RefName"
 # Put your specific code here
 
 # Detect old version
+$ReturnCode = 0
 ForEach ($Key in Get-ChildItem -Recurse $UninstallKeys) {
 	$App = Get-ItemProperty -Path $Key.PSPath
 	If ($App.DisplayName -notmatch $RefName) { Continue }
@@ -105,7 +106,7 @@ ForEach ($Key in Get-ChildItem -Recurse $UninstallKeys) {
 ########################################################################
 
 # View
-$ReturnCode = 0
+# $ReturnCode = 0
 ForEach ($Key in Get-ChildItem -Recurse $UninstallKeys) {
 	$App = Get-ItemProperty -Path $Key.PSPath
 	If ($App.DisplayName -notmatch $RefName) { Continue }
