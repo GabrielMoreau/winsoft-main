@@ -52,7 +52,7 @@
       "Add": [
         {
           "Name": "DuckDuckGo-FR",
-          "URLTemplate": "https://duckduckgo.com/?q={searchTerms}&kl=fr-fr",
+          "URLTemplate": "https://noai.duckduckgo.com/?q={searchTerms}&kl=fr-fr",
           "Method": "GET",
           "IconURL": "https://duckduckgo.com/favicon.ico",
           "Alias": "ddg-fr",
