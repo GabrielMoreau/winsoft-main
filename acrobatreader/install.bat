@@ -20,7 +20,7 @@ EXIT /B
 SET "softversion=__VERSION__"
 SET "qexeadmin=__QEXEADMIN__"
 SET "MAX_RETRY=1"
-SET "mainexe=%ProgramFiles%\Adobe\Acrobat DC\Acrobat\Acrobat.exe.exe"
+SET "mainexe=%ProgramFiles%\Adobe\Acrobat DC\Acrobat\Acrobat.exe"
 
 
 @ECHO [INFO] Kill running process
@@ -53,23 +53,38 @@ IF "%qexeadmin%"=="false" (
 @ECHO [INFO] Execute pre-install script
 %pwrsh% -File ".\pre-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
 IF "%ERRORLEVEL%"=="147" (
-  @ECHO [INFO] Silent Update %softname%
-  ScriptRunner.exe -appvscript MsiExec.exe /update AcroRdrDCx64Upd%softversion%.msp /norestart /quiet ALLUSERS=1 EULA_ACCEPT=YES DISABLEDESKTOPSHORTCUT=1 DISABLE_ARM_SERVICE_INSTALL=1 /L*V "%logdir%\%softname%-MSP.log" -appvscriptrunnerparameters -wait -timeout=900
-  GOTO POSTINSTALL
+  GOTO UPDATE
 ) ELSE (
   IF "%ERRORLEVEL%"=="146" (
+    VER >NUL
     @ECHO [INFO] Already installed %softname% at same or newer version
     GOTO POSTINSTALL
   )
 )
+GOTO REINSTALL
+
+
+:UPDATE
+@ECHO [INFO] Silent Update %softname%
+IF NOT EXIST "AcroRdrDCx64Upd%softversion%.msp" (
+  @ECHO [ERROR] Updater is not in the archive!
+  SET "RETURNCODE=149"
+  GOTO END
+)
+ScriptRunner.exe -appvscript MsiExec.exe /update AcroRdrDCx64Upd%softversion%.msp /norestart /quiet ALLUSERS=1 EULA_ACCEPT=YES DISABLEDESKTOPSHORTCUT=1 DISABLE_ARM_SERVICE_INSTALL=1 /L*V "%logdir%\%softname%-MSP.log" -appvscriptrunnerparameters -wait -timeout=600
+IF "%RETURNCODE%"=="0" SET "RETURNCODE=%ERRORLEVEL%"
+GOTO POSTINSTALL
+
 
 :REINSTALL
 @ECHO [INFO] Silent Install %softname%
-IF EXIST "AcroRdrDCx64%softversion%_MUI.exe" (
-  ScriptRunner.exe -appvscript AcroRdrDCx64%softversion%_MUI.exe /sAll /rs /msi /norestart /quiet ALLUSERS=1 EULA_ACCEPT=YES DISABLEDESKTOPSHORTCUT=1 DISABLE_ARM_SERVICE_INSTALL=1 /L*V "%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=900
-) ELSE (
-    @ECHO [ERROR] Installer is not in the archive!
+IF NOT EXIST "AcroRdrDCx64%softversion%_MUI.exe" (
+  @ECHO [ERROR] Installer is not in the archive!
+  SET "RETURNCODE=149"
+  GOTO END
 )
+ScriptRunner.exe -appvscript AcroRdrDCx64%softversion%_MUI.exe /sAll /rs /msi /norestart /quiet ALLUSERS=1 EULA_ACCEPT=YES DISABLEDESKTOPSHORTCUT=1 DISABLE_ARM_SERVICE_INSTALL=1 /L*V "%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=900
+IF "%RETURNCODE%"=="0" SET "RETURNCODE=%ERRORLEVEL%"
 
 @ECHO [INFO] Check if installed
 IF EXIST "%ProgramFiles%\Adobe\Acrobat DC\Acrobat\Acrobat.exe" (
@@ -95,6 +110,15 @@ IF EXIST ".\pre-install.ps1" (
   IF EXIST ".\post-install.ps1" %pwrsh% -File ".\post-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
 )
 IF "%RETURNCODE%"=="0" SET "RETURNCODE=%ERRORLEVEL%"
+
+
+IF "%RETURNCODE%"=="142" (
+  IF NOT "%MAX_RETRY%"=="0" (
+    @ECHO [INFO] Try install again because Version is actually an old one
+    SET "RETURNCODE=0"
+    GOTO REINSTALL
+  )
+)
 
 
 @ECHO [INFO] Remove AdobeCollabSync
