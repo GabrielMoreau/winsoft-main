@@ -24,3 +24,4 @@ Example :
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
  | HKLM | VeraCrypt 1.26.14 | IDRIX     | 1.26.14 | `{7207FED4-7243-4657-A542-60A50F2B722F}` | `MsiExec.exe /X{7207FED4-7243-4657-A542-60A50F2B722F}` |
  | HKLM | VeraCrypt 1.26.24 | AM Crypto | 1.26.24 | `{9EBED8F8-BD2F-4561-B5A3-628A8815F51F}` | `MsiExec.exe /X{9EBED8F8-BD2F-4561-B5A3-628A8815F51F}` |
+ | HKLM | VeraCrypt 1.26.29 | AM Crypto | 1.26.29 | `{0F25FB8F-24DC-418E-8E5D-015D9CB5F4C0}` | `MsiExec.exe /X{0F25FB8F-24DC-418E-8E5D-015D9CB5F4C0}` |
