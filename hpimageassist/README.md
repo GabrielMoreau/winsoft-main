@@ -19,3 +19,4 @@ Example :
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
  | HKLM | HP Image Assistant 5.3.2 (HPIA) | HP Inc. | 5.3.2 | `HPImageAssist` | `C:\Program Files\HP\HPIA\uninstall.bat` |
  | HKLM | HP Image Assistant 5.3.3 (HPIA) | HP Inc. | 5.3.3 | `HPImageAssist` | `C:\Program Files\HP\HPIA\uninstall.bat` |
+ | HKLM | HP Image Assistant 5.3.6 (HPIA) | HP Inc. | 5.3.6 | `HPImageAssist` | `C:\Program Files\HP\HPIA\uninstall.bat` |
