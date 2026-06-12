@@ -100,7 +100,7 @@ check-exe: tmp/$(SOFT).ico tmp/jdk-$(VERSION2)/bin/javaw.exe
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
-	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#; s/__JDKVERSION__/$(VERSION2)/g;' $< > $@
+	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#; s/__QEXEADMIN__/$(QEXEADMIN)/; s/__JDKVERSION__/$(VERSION2)/g;' $< > $@
 
 tmp/winsoft-config.ini: winsoft-config.ini Makefile tmp/$(EXE)
 	@mkdir -p tmp
@@ -108,7 +108,7 @@ tmp/winsoft-config.ini: winsoft-config.ini Makefile tmp/$(EXE)
 
 tmp/uninstall.bat: uninstall.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
-	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#;' $< > $@
+	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#; s/__QEXEADMIN__/$(QEXEADMIN)/;' $< > $@
 
 %.zip: Makefile tmp/install.bat pre-install.bat pre-install.ps1 post-install.ps1 tmp/uninstall.bat tmp/$(SOFT).ico tmp/VOSviewer.license tmp/jdk-$(VERSION2)/bin/javaw.exe tmp/winsoft-config.ini tmp/$(EXE)
 	@rm -f $@
