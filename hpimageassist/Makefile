@@ -64,7 +64,7 @@ check-exe: tmp/$(EXE)
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
-	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#;' $< > $@
+	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#; s/__QEXEADMIN__/$(QEXEADMIN)/;' $< > $@
 
 tmp/winsoft-config.ini: winsoft-config.ini Makefile tmp/$(EXE)
 	@mkdir -p tmp
@@ -73,5 +73,5 @@ tmp/winsoft-config.ini: winsoft-config.ini Makefile tmp/$(EXE)
 %.zip: Makefile tmp/install.bat pre-install.ps1 post-install.ps1 tmp/winsoft-config.ini tmp/$(EXE) uninstall.bat
 	@rm -f $@
 	@zip -Xr ./$@ pre-install.ps1 post-install.ps1 uninstall.bat
-	@(cd tmp; zip -Xr ../$@ install.bat $(EXE))
+	@(cd tmp; zip -Xr ../$@ install.bat winsoft-config.ini $(EXE))
 	@chmod ugo+rw $@
