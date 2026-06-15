@@ -68,20 +68,27 @@ GOTO END
 :DELL64
 @ECHO [INFO] DELL BIOS update
 "%ProgramFiles%\Dell\CommandUpdate\dcu-cli.exe" /applyUpdates -silent -autoSuspendBitlocker=enable -reboot=disable -outputLog="%SystemDrive%\Temp\Dell-BIOS-DCU.log"
+IF "%RETURNCODE%"=="0" SET "RETURNCODE=%ERRORLEVEL%"
+IF "%RETURNCODE%"=="500" (
+  @ECHO [INFO] 500 means everything is uptodate!
+  SET "RETURNCODE=0"
+)
 GOTO END
 
 :DELL86
 @ECHO [INFO] DELL BIOS update
 "%ProgramFiles(x86)%\Dell\CommandUpdate\dcu-cli.exe" /applyUpdates -silent -autoSuspendBitlocker=enable -reboot=disable -outputLog="%SystemDrive%\Temp\Dell-BIOS-DCU.log"
+IF "%RETURNCODE%"=="0" SET "RETURNCODE=%ERRORLEVEL%"
 GOTO END
 
 :HP64
 @ECHO [INFO] HP BIOS update
 REM See https://ftp.hp.com/pub/caps-softpaq/cmit/imagepal/userguide/936944-005.pdf
 "%ProgramFiles%\HP\HPIA\HPImageAssistant.exe /Operation:Analyze /Action:Install /Category:BIOS /AutoCleanup /SoftPaqDownloadFolder:"%SystemDrive%\Temp\HPIA\download" /Debug /Silent /ReportFilePath:"%SystemDrive%\Temp\HPIA\HPIA-Report.html"
+IF "%RETURNCODE%"=="0" SET "RETURNCODE=%ERRORLEVEL%"
 GOTO END
 
 
 :END
 @ECHO [END] %date%-%time%
-EXIT
+EXIT %RETURNCODE%
