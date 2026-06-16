@@ -91,7 +91,7 @@ check-exe2: tmp/$(EXE2)
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE) tmp/$(EXE2)
 	@mkdir -p tmp
-	@sed -e 's/__VERSION1__/$(VERSION1)/; s/__VERSION2__/$(VERSION2)/; s#__LOGDIR__#$(LOGDIR)#;' $< > $@
+	@sed -e 's/__VERSION1__/$(VERSION1)/; s/__VERSION2__/$(VERSION2)/; s#__LOGDIR__#$(LOGDIR)#; s/__QEXEADMIN__/$(QEXEADMIN)/;' $< > $@
 
 tmp/winsoft-config.ini: winsoft-config.ini Makefile tmp/$(EXE)
 	@mkdir -p tmp

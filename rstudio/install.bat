@@ -19,6 +19,8 @@ EXIT /B
 
 SET "softversion1=__VERSION1__"
 SET "softversion2=__VERSION2__"
+SET "qexeadmin=__QEXEADMIN__"
+SET "mainexe=%ProgramFiles%\RStudio\rstudio.exe"
 
 
 @ECHO [INFO] Search PowerShell
@@ -31,6 +33,17 @@ IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET "pwrsh=%
 @ECHO [INFO] Unblock PowerShell Script
 %pwrsh% "Unblock-File -Path .\*.ps1"
 SET "RETURNCODE=0"
+
+
+:QEXEADMRESET
+IF "%qexeadmin%"=="false" (
+  FOR %%F in ("%mainexe:;=" "%") do (
+    IF EXIST "%%~F" (
+      @ECHO [INFO] Reset ACL on %%~F
+      icacls "%%~F" /reset || VER >NUL
+    )
+  )
+)
 
 
 @ECHO [INFO] Execute pre-install script
@@ -61,6 +74,17 @@ IF "%RETURNCODE%"=="0" SET "RETURNCODE=%ERRORLEVEL%"
 @ECHO [INFO] Remove desktop shortcut for R
 IF EXIST "%PUBLIC%\Desktop\R*%softversion2%.lnk"          DEL /F /Q "%PUBLIC%\Desktop\R*%softversion2%.lnk"
 IF EXIST "%ALLUSERSPROFILE%\Desktop\R*%softversion2%.lnk" DEL /F /Q "%ALLUSERSPROFILE%\Desktop\R*%softversion2%.lnk"
+
+
+:QEXEADMDENY
+IF "%qexeadmin%"=="false" (
+  FOR %%F in ("%mainexe:;=" "%") do (
+    IF EXIST "%%~F" (
+      @ECHO [INFO] Restrict ACL for admin on %%~F
+      icacls "%%~F" /deny "*S-1-5-32-544:(X)" || VER >NUL
+    )
+  )
+)
 
 
 :END
