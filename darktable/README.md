@@ -10,8 +10,8 @@ by facilitating the handling of large numbers of images.
 * Wikipedia : https://en.wikipedia.org/wiki/Darktable
 
 * Download : https://www.darktable.org/install/
-* Silent install : https://silentinstallhq.com/darktable-silent-install-how-to-guide/
-
+* Silent install : https://silentinstallhq.com/darktable-silent-install-how-to-guide/,
+  https://community.chocolatey.org/packages?q=darktable
 
 ## Register Key
 
@@ -19,5 +19,6 @@ Example :
 
  | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
- | HKLM | darktable | the darktable project | 5.0.0 | `darktable` | `C:\Program Files\darktable\Uninstall.exe` |
- | HKLM | darktable | the darktable project | 5.4.1 | `darktable` | `C:\Program Files\darktable\Uninstall.exe` |
+ | HKLM | darktable       | the darktable project | 5.0.0 | `darktable`     | `C:\Program Files\darktable\Uninstall.exe` |
+ | HKLM | darktable       | the darktable project | 5.4.1 | `darktable`     | `C:\Program Files\darktable\Uninstall.exe` |
+ | HKLM | darktable 5.6.0 | darktable team        | 5.6.0 | `darktable_is1` | `"C:\Program Files\darktable\unins000.exe"` |
