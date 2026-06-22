@@ -71,6 +71,38 @@ Write-Output "Config:`n * Version: $RefVersion`n * RegexSearch: $RefName"
 ########################################################################
 # Put your specific code here
 
+# Remove old version
+ForEach ($Key in Get-ChildItem -Recurse $UninstallKeys) {
+	$App = Get-ItemProperty -Path $Key.PSPath
+	If ($App.DisplayName -notmatch $RefName) { Continue }
+
+	$DisplayVersion = ToVersion $App.DisplayVersion
+	$KeyProduct     = $Key.PSChildName
+
+	If ($DisplayVersion -ge $RefVersion) { Continue }
+
+	If ($($App.UninstallString) -match 'MsiExec.exe') {
+		$Exe = 'MsiExec.exe'
+		$Args = '/x "' + $KeyProduct + '" /qn'
+		Write-Output "Remove MSI: $($App.DisplayName)/ $DisplayVersion / $KeyProduct / $Exe $Args"
+	} ElseIf ($($App.UninstallString) -match 'Uninstall.exe') {
+		$UninstallSplit = ($App.UninstallString -Split "exe")[0] -Replace '"', ''
+		$Exe = $UninstallSplit + 'exe'
+		$Args = '/S'
+		Write-Output "Remove EXE: $($App.DisplayName) / $DisplayVersion / $($App.UninstallString) / $Exe $Args"
+	} ElseIf ($($App.UninstallString) -match 'unins000.exe') {
+		$UninstallSplit = ($App.UninstallString -Split "exe")[0] -Replace '"', ''
+		$Exe = $UninstallSplit + 'exe'
+		$Args = '/ALLUSERS /VERYSILENT /NORESTART'
+		Write-Output "Remove EXE: $($App.DisplayName) / $DisplayVersion / $($App.UninstallString) / $Exe $Args"
+	} Else {
+		Write-Output "ERROR: $($App.DisplayName) / $DisplayVersion / $KeyProduct / $($App.UninstallString)"
+		Continue
+	}
+
+	Run-Exec -FilePath "$Exe" -ArgumentList "$Args" -Name "$RefName"
+}
+
 ########################################################################
 
 # View

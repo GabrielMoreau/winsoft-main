@@ -38,7 +38,7 @@ IF "%RETURNCODE%"=="0" SET "RETURNCODE=%ERRORLEVEL%"
 
 
 @ECHO [INFO] Silent install %softname%
-ScriptRunner.exe -appvscript darktable-%softversion%-win64.exe /S -appvscriptrunnerparameters -wait -timeout=300
+ScriptRunner.exe -appvscript darktable-%softversion%-win64.exe /VERYSILENT /SUPPRESSMSGBOXES /ALLUSERS /NORESTART /MERGETASKS=!desktopicon /LOG="%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=300
 IF "%RETURNCODE%"=="0" SET "RETURNCODE=%ERRORLEVEL%"
 
 
