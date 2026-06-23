@@ -22,3 +22,4 @@ Example :
  | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
  | HKLM | Speccy | Piriform | 1.33 | `Speccy` | `"C:\Program Files\Speccy\uninst.exe"` |
+ | HKLM | Speccy | Piriform | 1.34 | `Speccy` | `"C:\Program Files\Speccy\uninst.exe"` |
