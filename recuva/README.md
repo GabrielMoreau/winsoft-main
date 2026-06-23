@@ -20,3 +20,4 @@ Example :
  | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
  | HKLM | Recuva | Piriform | 1.54 | `Recuva` | `"C:\Program Files\Recuva\uninst.exe"` |
+ | HKLM | Recuva | Piriform | 1.55 | `Recuva` | `"C:\Program Files\Recuva\uninst.exe"` |
