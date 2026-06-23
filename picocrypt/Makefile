@@ -8,7 +8,7 @@ SOFT:=Picocrypt-NG
 # https://github.com/Picocrypt-NG/Picocrypt-NG/releases/latest
 #VERSION:=$(shell curl -s -L --connect-timeout 10 'https://github.com/Picocrypt-NG/Picocrypt-NG/releases/latest' | sed -e 's/>/\n/g;' | grep 'Picocrypt.*title' | cut -f 3 -d ' ' | grep '^[[:digit:]]' | head -1)
 REVISION:=1
-URL:=https://github.com/$(shell curl -s -L --connect-timeout 10 'https://github.com/Picocrypt-NG/Picocrypt-NG/releases' | sed -e 's/[">]/\n/g;' | grep '/Picocrypt-NG-Setup.exe' | sed 's#^/##;' | head -1)
+URL:=$(shell curl -s -L --connect-timeout 10 'https://github.com/Picocrypt-NG/Picocrypt-NG/releases' | sed -e 's/[">]/\n/g;' | grep '/Picocrypt-NG-Setup.exe' | sed 's#^/##;' | head -1)
 VERSION:=$(shell echo "$(URL)" | cut -f 8 -d '/')
 VERSIONSHORT:=$(shell echo "$(VERSION)" | sed 's/\.0/./g;')
 
