@@ -39,8 +39,10 @@ Example :
 
  | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
- | HKLM | Slicer 5.4.0 | slicer.org | 5.4.0 | `Slicer 5.4.0 (Win64)` | `"C:\ProgramData\Slicer.org\Uninstall.exe"` |
- | HKLM | Slicer 5.6.0 | slicer.org | 5.6.0 | `Slicer 5.6.0 (Win64)` | `"C:\ProgramData\Slicer.org\Uninstall.exe"` |
- | HKLM | Slicer 5.6.1 | slicer.org | 5.6.1 | `Slicer 5.6.1 (Win64)` | `"C:\ProgramData\Slicer.org\Uninstall.exe"` |
- | HKLM | Slicer 5.8.0 | slicer.org | 5.8.0 | `Slicer 5.8.0 (Win64)` | `"C:\ProgramData\Slicer.org\Uninstall.exe"` |
- | HKLM | Slicer 5.8.1 | slicer.org | 5.8.1 | `Slicer 5.8.1 (Win64)` | `"C:\ProgramData\Slicer.org\Uninstall.exe"` |
+ | HKLM | Slicer 5.4.0     | slicer.org | 5.4.0  | `Slicer 5.4.0 (Win64)`     | `"C:\ProgramData\Slicer.org\Uninstall.exe"` |
+ | HKLM | Slicer 5.6.0     | slicer.org | 5.6.0  | `Slicer 5.6.0 (Win64)`     | `"C:\ProgramData\Slicer.org\Uninstall.exe"` |
+ | HKLM | Slicer 5.6.1     | slicer.org | 5.6.1  | `Slicer 5.6.1 (Win64)`     | `"C:\ProgramData\Slicer.org\Uninstall.exe"` |
+ | HKLM | Slicer 5.8.0     | slicer.org | 5.8.0  | `Slicer 5.8.0 (Win64)`     | `"C:\ProgramData\Slicer.org\Uninstall.exe"` |
+ | HKLM | Slicer 5.8.1     | slicer.org | 5.8.1  | `Slicer 5.8.1 (Win64)`     | `"C:\ProgramData\Slicer.org\Uninstall.exe"` |
+ | HKLM | 3D Slicer 5.10.0 | slicer.org | 5.10.0 | `3D Slicer 5.10.0 (Win64)` | `"C:\ProgramData\Slicer.org\Uninstall.exe"` |
+ | HKLM | 3D Slicer 5.12.0 | slicer.org | 5.12.0 | `3D Slicer 5.12.0 (Win64)` | `"C:\ProgramData\Slicer.org\Uninstall.exe"` |
