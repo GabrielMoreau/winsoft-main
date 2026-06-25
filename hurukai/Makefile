@@ -8,6 +8,7 @@ VERSION:=$(shell ls -1 hurukai-*-x86_64.msi 2> /dev/null | cut -f 2 -d '-' | cut
 REVISION:=1
 
 EXE:=hurukai-$(VERSION)-x86_64.msi
+REG_SEARCH:=Hurukai\\sagent
 
 IT_TEAM:=IT Support
 LOGDIR:=%WINDIR%\\Logs
@@ -49,10 +50,14 @@ check-exe: $(EXE)
 
 tmp/install.bat: install.bat Makefile $(EXE)
 	@mkdir -p tmp
-	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#; s/__HURUKAI_SERVER__/$(HURUKAI_SERVER)/; s/__HURUKAI_SIG__/$(HURUKAI_SIG)/; s/__HURUKAI_TOKEN__/$(HURUKAI_TOKEN)/;' $< > $@
+	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#; s/__QEXEADMIN__/$(QEXEADMIN)/; s/__HURUKAI_SERVER__/$(HURUKAI_SERVER)/; s/__HURUKAI_SIG__/$(HURUKAI_SIG)/; s/__HURUKAI_TOKEN__/$(HURUKAI_TOKEN)/;' $< > $@
 
-%.zip: Makefile tmp/install.bat $(EXE)
+tmp/winsoft-config.ini: winsoft-config.ini Makefile $(EXE)
+	@mkdir -p tmp
+	@sed -e 's/__VERSION__/$(VERSION)/; s/__REG_SEARCH__/$(REG_SEARCH)/;' $< > $@
+
+%.zip: Makefile tmp/install.bat pre-install.ps1 post-install.ps1 tmp/winsoft-config.ini $(EXE)
 	@rm -f $@
-	@zip -Xr ./$@ $(EXE)
-	@(cd tmp; zip -Xr ../$@ install.bat)
+	@zip -Xr ./$@ pre-install.ps1 post-install.ps1 $(EXE)
+	@(cd tmp; zip -Xr ../$@ install.bat winsoft-config.ini)
 	@chmod ugo+rw $@
