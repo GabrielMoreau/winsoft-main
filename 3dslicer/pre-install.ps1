@@ -1,5 +1,8 @@
 
-Write-Output "Begin Pre-Install"
+$TimeStamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+Write-Output ("Begin Pre-Install [$TimeStamp]`n" + "=" * 39 + "`n")
+
+########################################################################
 
 # Get Config from file
 Function GetConfig {
@@ -50,52 +53,58 @@ Function Run-Exec {
 	}
 }
 
+########################################################################
+
+$UninstallKeys = @(
+	'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall'
+	'HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall'
+)
+
+########################################################################
+
 # Get Config: Version
 $Config = GetConfig -FilePath 'winsoft-config.ini'
-$RefVersion = $Config.Version
-$RefName = '^Slicer\s[1-9]'
-Write-Output "Config: Version $RefVersion"
+$RefVersion = ToVersion $Config.Version
+$RefName = $Config.RegexSearch
+Write-Output "Config:`n * Version: $RefVersion`n * RegexSearch: $RefName"
+
+########################################################################
+# Put your specific code here
 
 # Remove old version
-@(Get-ChildItem -Recurse 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall';
-  Get-ChildItem -Recurse "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall") |
-	ForEach {
-		$Key = $_
-		$App = (Get-ItemProperty -Path $Key.PSPath)
-		$DisplayName  = $App.DisplayName
-		If (!($DisplayName -match $RefName)) { Return }
+ForEach ($Key in Get-ChildItem -Recurse $UninstallKeys) {
+	$App = Get-ItemProperty -Path $Key.PSPath
+	If ($App.DisplayName -notmatch $RefName) { Continue }
 
-		$DisplayVersion = $App.DisplayVersion
-		$KeyProduct = $Key | Split-Path -Leaf
+	$DisplayVersion = ToVersion $App.DisplayVersion
+	$KeyProduct     = $Key.PSChildName
+	If ($DisplayVersion -ge $RefVersion) { Continue }
 
-		If ((ToVersion($DisplayVersion)) -ge (ToVersion($RefVersion))) { Return }
-
-		If ($($App.UninstallString) -match 'MsiExec.exe') {
-			$Exe = 'MsiExec.exe'
-			$Args = '/x "' + $KeyProduct + '" /qn'
-			Write-Output "Remove MSI: $DisplayName / $DisplayVersion / $KeyProduct / $Exe $Args"
-		} Else {
-			$UninstallSplit = ($App.UninstallString -Split "exe")[0] -Replace '"', ''
-			$Exe = $UninstallSplit + 'exe'
-			$Args = '/S'
-			Write-Output "Remove EXE: $DisplayName / $DisplayVersion / $($App.UninstallString) / $Exe $Args"
-		}
-
-		Run-Exec -FilePath "$Exe" -ArgumentList "$Args" -Name "Slicer"
+	If ($($App.UninstallString) -match 'MsiExec.exe') {
+		$Exe = 'MsiExec.exe'
+		$Args = '/x "' + $KeyProduct + '" /qn /norestart'
+		Write-Output "Remove MSI: $($App.DisplayName) / $DisplayVersion / $KeyProduct / $Exe $Args"
+	} Else {
+		$UninstallSplit = ($App.UninstallString -Split "exe")[0] -Replace '"', ''
+		$Exe = $UninstallSplit + 'exe'
+		$Args = '/S'
+		Write-Output "Remove EXE: $DisplayName / $DisplayVersion / $($App.UninstallString) / $Exe $Args"
 	}
+
+	Run-Exec -FilePath "$Exe" -ArgumentList "$Args" -Name "$RefName"
+}
+
+########################################################################
 
 # View
-@(Get-ChildItem -Recurse 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall';
-  Get-ChildItem -Recurse "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall") |
-	ForEach {
-		$Key = $_
-		$App = (Get-ItemProperty -Path $Key.PSPath)
-		$DisplayName  = $App.DisplayName
-		If (!($DisplayName -match $RefName)) { Return }
+$ReturnCode = 0
+ForEach ($Key in Get-ChildItem -Recurse $UninstallKeys) {
+	$App = Get-ItemProperty -Path $Key.PSPath
+	If ($App.DisplayName -notmatch $RefName) { Continue }
 
-		$DisplayVersion = $App.DisplayVersion
-		$KeyProduct = $Key | Split-Path -Leaf
-		Write-Output "Installed: $DisplayName / $DisplayVersion / $KeyProduct / $($App.UninstallString)"
-	}
-
-# View: Slicer 5.6.0 / 5.6.0 / Slicer 5.6.0 (Win64) / "C:\ProgramData\Slicer.org\Uninstall.exe"
+	$DisplayVersion = ToVersion $App.DisplayVersion
+	$KeyProduct     = $Key.PSChildName
+	Write-Output "Installed: $($App.DisplayName) / $DisplayVersion / $KeyProduct / $($App.UninstallString)"
+}
+Write-Output "ReturnCode: $ReturnCode"
+Exit $ReturnCode
