@@ -20,6 +20,8 @@ EXIT /B
 SET "softversion=__VERSION__"
 SET "softversionshort=__VERSIONSHORT__"
 SET "process=7z.exe"
+SET "qexeadmin=__QEXEADMIN__"
+SET "mainexe=%ProgramFiles%\7-Zip\7zFM.exe"
 
 
 @ECHO [INFO] Kill running process
@@ -38,22 +40,54 @@ IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET "pwrsh=%
 SET "RETURNCODE=0"
 
 
+:QEXEADMRESET
+IF "%qexeadmin%"=="false" (
+  FOR %%F in ("%mainexe:;=" "%") do (
+    IF EXIST "%%~F" (
+      @ECHO [INFO] Reset ACL on %%~F
+      icacls "%%~F" /reset || VER >NUL
+    )
+  )
+)
+
+
 @ECHO [INFO] Execute pre-install script
-%pwrsh% -File ".\pre-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
+IF EXIST ".\pre-install.ps1" %pwrsh% -File ".\pre-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
+IF "%RETURNCODE%"=="0" SET "RETURNCODE=%ERRORLEVEL%"
 
 
 @ECHO [INFO] Silent install %softname%
 ScriptRunner.exe -appvscript MsiExec.exe /i "7z%softversionshort%-x64.msi" /quiet /L*V "%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=300
 REM ScriptRunner.exe -appvscript 7z%softversionshort%-x64.exe /S -appvscriptrunnerparameters -wait -timeout=300
+IF "%RETURNCODE%"=="0" SET "RETURNCODE=%ERRORLEVEL%"
 
 
+:POSTINSTALL
 @ECHO [INFO] Execute post-install script
 IF EXIST ".\pre-install.ps1" (
   IF EXIST ".\post-install.ps1" %pwrsh% -File ".\post-install.ps1" 1>> "%logdir%\%softname%-PS1.log" 2>&1
 ) ELSE (
   IF EXIST ".\post-install.ps1" %pwrsh% -File ".\post-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
 )
+IF "%RETURNCODE%"=="0" SET "RETURNCODE=%ERRORLEVEL%"
 
 
+@ECHO [INFO] Remove desktop shortcut
+IF EXIST "%PUBLIC%\Desktop\%softname%.lnk"          DEL /F /Q "%PUBLIC%\Desktop\%softname%.lnk"
+IF EXIST "%ALLUSERSPROFILE%\Desktop\%softname%.lnk" DEL /F /Q "%ALLUSERSPROFILE%\Desktop\%softname%.lnk"
+
+
+:QEXEADMDENY
+IF "%qexeadmin%"=="false" (
+  FOR %%F in ("%mainexe:;=" "%") do (
+    IF EXIST "%%~F" (
+      @ECHO [INFO] Restrict ACL for admin on %%~F
+      icacls "%%~F" /deny "*S-1-5-32-544:(X)" || VER >NUL
+    )
+  )
+)
+
+
+:END
 @ECHO [END] %date%-%time%
-EXIT
+EXIT %RETURNCODE%
