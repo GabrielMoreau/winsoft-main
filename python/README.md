@@ -8,6 +8,66 @@ It supports multiple programming paradigms, including structured (particularly p
 * Wikipedia : https://en.wikipedia.org/wiki/Python_(programming_language)
 
 * Download : https://www.python.org/downloads/windows/
+* Silent uninstall : https://silentinstallhq.com/python-3-13-silent-uninstall-powershell/
+
+## Remove old version
+
+Script `Action-PythonKeepOnlyLast`.
+
+```ps1
+$UninstallKeys = @(
+    "HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\*",
+    "HKLM:\Software\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\*",
+    "HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\*"
+)
+
+# Get the last version
+$LatestPython = Get-ItemProperty -Path $UninstallKeys -ErrorAction SilentlyContinue |
+    Where-Object { $_.DisplayName -match '^Python\s(\d+\.\d+\.\d+)' } |
+    ForEach-Object {
+        $_ | Add-Member -NotePropertyName ParsedVersion -NotePropertyValue ([Version]$Matches[1]) -PassThru
+    } |
+    Sort-Object ParsedVersion -Descending |
+    Select-Object -First 1
+$LatestVersion = $LatestPython.ParsedVersion.ToString()
+
+# Uninstall first QuietUninstallString
+Get-ItemProperty $UninstallKeys |
+Where-Object {
+    $_.DisplayName -match "^Python\s" -and
+    $_.DisplayVersion -notlike "$LatestVersion*"
+} |
+ForEach-Object {
+    Write-Host "Detect $($_.DisplayName)"
+    If ($_.QuietUninstallString) {
+        Write-Host " +QUIET cmd /c $_.QuietUninstallString"
+        Start-Process -FilePath "cmd.exe" -ArgumentList "/c",$_.QuietUninstallString -Wait
+    }
+}
+
+# Secoind Uninstall round
+Get-ItemProperty $UninstallKeys |
+Where-Object {
+    $_.DisplayName -match "^Python\s" -and
+    $_.DisplayVersion -notlike "$LatestVersion*"
+} |
+ForEach-Object {
+    Write-Host "Detect $($_.DisplayName)"
+    If ($_.QuietUninstallString) {
+        Write-Host " +QUIET-AGAIN cmd /c $_.QuietUninstallString"
+        cmd /c $_.QuietUninstallString
+    } ElseIf ($_.UninstallString) {
+        If ($_.UninstallString -match "MsiExec.exe") {
+            $Args = ($_.UninstallString -replace "MsiExec.exe /[IX]","/X") + " REBOOT=ReallySuppress /qn /norestart /L*v `"C:\Temp\Python-Uninstall.log`""
+            Write-Host " +MSI $Args"
+            Start-Process -FilePath "MsiExec.exe" -ArgumentList $Args -Wait
+        } Else {
+            Write-Host " +CMD $_.UninstallString"
+            Start-Process -FilePath "cmd.exe" -ArgumentList "/c",$_.UninstallString,"/quiet" -Wait
+        }
+    }
+}
+```
 
 
 ## Register Key
