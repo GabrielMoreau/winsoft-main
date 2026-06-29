@@ -41,3 +41,4 @@ Example :
  | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
  | HKLM | ImageJ - 1.54p (Fiji 2.17.0-1) | The ImageJ Fiji Team | 1.54.2.17.0 | `ImageJ` | `C:\ProgramData\ImageJ\uninstall.bat` |
+ | HKLM | ImageJ - 1.54p (Fiji 2.18.0-1) | The ImageJ Fiji Team | 1.54.2.18.0 | `ImageJ` | `C:\ProgramData\ImageJ\uninstall.bat` |
