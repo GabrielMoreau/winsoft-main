@@ -1,6 +1,6 @@
 
 $TimeStamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
-Write-Output ("`nBegin Post-Install [$TimeStamp]`n" + "=" * 40 + "`n")
+Write-Output ("`nBegin Installer [$TimeStamp]`n" + "=" * 40 + "`n")
 
 ########################################################################
 
@@ -71,25 +71,42 @@ Write-Output "Config:`n * Version: $RefVersion`n * RegexSearch: $RefName"
 ########################################################################
 # Put your specific code here
 
+$ReturnCode = 0
+
+If (Test-Path "${Env:ProgramData}\ImageJ\version.txt" -PathType Leaf) {
+	$RefVersionOld = Get-Content -Path "${Env:ProgramData}\ImageJ\version.txt"
+	# $RefVersionOld_number = [float]$RefVersionOld
+}
+
+# Install files and folders
+ForEach ($File in 'install.bat', 'uninstall.bat', 'db.xml.gz', 'ImageJ-win64.exe', 'README.md', 'WELCOME.md') {
+	Copy-Item -LiteralPath "$File" -Destination "${Env:ProgramData}\ImageJ" -Force
+}
+ForEach ($Folder in 'Contents', 'images', 'jars', 'java', 'lib', 'licenses', 'luts', 'macros', 'plugins', 'retro', 'scripts') {
+	Copy-Item -LiteralPath "$Folder" -Destination "${Env:ProgramData}\ImageJ" -Recurse -Force
+}
+
+# ImageJ Script in Start Menu
+$StartMenu = "${Env:ProgramData}\Microsoft\Windows\Start Menu\Programs"
+If ((Test-Path -LiteralPath $StartMenu) -And (Test-Path -LiteralPath "${Env:ProgramData}\ImageJ\ImageJ-win64.exe")) {
+	If (Test-Path -LiteralPath "$StartMenu\ImageJ.lnk") {
+		Remove-Item "$StartMenu\ImageJ.lnk" -Force -ErrorAction SilentlyContinue
+	}
+	$WshShell = New-Object -ComObject WScript.Shell
+	$Shortcut = $WshShell.CreateShortcut("$StartMenu\ImageJ.lnk")
+	$Shortcut.TargetPath = "${Env:ProgramData}\ImageJ\ImageJ-win64.exe"
+	$ShortCut.Arguments = ""
+	$ShortCut.WorkingDirectory = "C:";
+	$ShortCut.WindowStyle = 1;
+	$ShortCut.Description = "ImageJ";
+	$Shortcut.Save()
+}
+
+# Creation of the version file with the version number
+New-Item -Path "${Env:ProgramData}\ImageJ\version.txt" -Type File -Force
+$RefVersion | Set-Content -LiteralPath "${Env:ProgramData}\ImageJ\version.txt"
+
 ########################################################################
 
-# View
-$ReturnCode = 143
-ForEach ($Key in Get-ChildItem -Recurse $UninstallKeys) {
-	$App = Get-ItemProperty -Path $Key.PSPath
-	If ($App.DisplayName -notmatch $RefName) { Continue }
-
-	$DisplayVersion = ToVersion $App.DisplayVersion
-	$KeyProduct     = $Key.PSChildName
-	Write-Output "Installed: $($App.DisplayName) / $DisplayVersion / $KeyProduct / $($App.UninstallString)"
-
-	If ($DisplayVersion -gt $RefVersion) {
-		$ReturnCode = [Math]::Min($ReturnCode, 141)
-	} ElseIf ($DisplayVersion -eq $RefVersion) {
-		$ReturnCode = 0
-	} Else {
-		$ReturnCode = [Math]::Min($ReturnCode, 142)
-	}
-}
 Write-Output "ReturnCode: $ReturnCode"
 Exit $ReturnCode

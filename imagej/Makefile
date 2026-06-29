@@ -90,15 +90,15 @@ check-exe: tmp/$(EXE) tmp/$(ZIP2)
 
 tmp/winsoft-config.ini: winsoft-config.ini Makefile tmp/$(EXE)
 	@mkdir -p tmp
-	@sed -e 's/__VERSION__/$(VERSION)/;' $< > $@
+	@sed -e 's/__VERSION__/$(VERSION)/; s/__REG_SEARCH__/$(REG_SEARCH)/;' $< > $@
 
-%.zip: Makefile tmp/$(EXE) tmp/$(ZIP2) install.bat post-install.ps1 tmp/winsoft-config.ini
+%.zip: Makefile tmp/$(EXE) tmp/$(ZIP2) install.bat pre-install.ps1 post-install.ps1 installer.ps1 tmp/winsoft-config.ini
 	@mkdir -p tmp
 	@IVERSION=$$(zgrep 'plugin update-site.*filename="jars/ij-[[:digit:]]' tmp/$(SUBFOLDER)/db.xml.gz  | cut -f 4 -d '"' | cut -f 2 -d '-' | sed -e 's/.jar$$//;') ; \
 	NVERSION=$$(echo $${IVERSION} | sed -e 's/\w$$//;') ; \
-	sed -e "s/__VERSION__/$(VERSION)/; s/__REVISION__/$(REVISION)/; s/__IVERSION__/$${IVERSION}/; s/__NVERSION__/$${NVERSION}/;" install.bat | sed -e 's#__LOGDIR__#$(LOGDIR)#;' > tmp/install.bat
+	sed -e "s/__VERSION__/$(VERSION)/; s/__REVISION__/$(REVISION)/; s/__IVERSION__/$${IVERSION}/; s/__NVERSION__/$${NVERSION}/;" install.bat | sed -e 's#__LOGDIR__#$(LOGDIR)#; s/__QEXEADMIN__/$(QEXEADMIN)/;' > tmp/install.bat
 	@rm -f $@
-	@zip -Xr ./$@ uninstall.bat post-install.ps1
+	@zip -Xr ./$@ uninstall.bat pre-install.ps1 post-install.ps1 installer.ps1
 	@(cd tmp; zip -Xr ../$@ install.bat winsoft-config.ini)
 	@(cd tmp/$(SUBFOLDER); zip -Xr ../../$@ db.xml.gz ImageJ-win64.exe README.md WELCOME.md)
 	(cd tmp/$(SUBFOLDER); zip --quiet -r ../../$@ Contents images jars java lib licenses luts macros plugins retro scripts)

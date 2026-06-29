@@ -1,6 +1,6 @@
 
 $TimeStamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
-Write-Output ("`nBegin Post-Install [$TimeStamp]`n" + "=" * 40 + "`n")
+Write-Output ("Begin Pre-Install [$TimeStamp]`n" + "=" * 39 + "`n")
 
 ########################################################################
 
@@ -74,7 +74,7 @@ Write-Output "Config:`n * Version: $RefVersion`n * RegexSearch: $RefName"
 ########################################################################
 
 # View
-$ReturnCode = 143
+$ReturnCode = 0
 ForEach ($Key in Get-ChildItem -Recurse $UninstallKeys) {
 	$App = Get-ItemProperty -Path $Key.PSPath
 	If ($App.DisplayName -notmatch $RefName) { Continue }
@@ -82,14 +82,6 @@ ForEach ($Key in Get-ChildItem -Recurse $UninstallKeys) {
 	$DisplayVersion = ToVersion $App.DisplayVersion
 	$KeyProduct     = $Key.PSChildName
 	Write-Output "Installed: $($App.DisplayName) / $DisplayVersion / $KeyProduct / $($App.UninstallString)"
-
-	If ($DisplayVersion -gt $RefVersion) {
-		$ReturnCode = [Math]::Min($ReturnCode, 141)
-	} ElseIf ($DisplayVersion -eq $RefVersion) {
-		$ReturnCode = 0
-	} Else {
-		$ReturnCode = [Math]::Min($ReturnCode, 142)
-	}
 }
 Write-Output "ReturnCode: $ReturnCode"
 Exit $ReturnCode

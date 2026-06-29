@@ -1,4 +1,9 @@
 
+REM
+REM   ImageJ
+REM
+
+REM Name
 SET "softname=ImageJ"
 
 SET "logdir=__LOGDIR__"
@@ -18,12 +23,37 @@ SET "regkey=ImageJ"
 SET "softpublisher=The ImageJ Fiji Team"
 SET "softiversion=__IVERSION__"
 SET "softnversion=__NVERSION__"
+SET "qexeadmin=__QEXEADMIN__"
+SET "mainexe=%ProgramData%\ImageJ\ImageJ-win64.exe"
 
+
+@ECHO [INFO] Search PowerShell
 SET "pwrsh=%WINDIR%\System32\WindowsPowerShell\V1.0\powershell.exe"
 IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET "pwrsh=%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe"
 
-@ECHO [INFO] Adds the rights to run powershell scripts
+@ECHO [INFO] Add rights
 %pwrsh% Set-ExecutionPolicy RemoteSigned -Force -Scope LocalMachine
+
+@ECHO [INFO] Unblock PowerShell Script
+%pwrsh% "Unblock-File -Path .\*.ps1"
+SET "RETURNCODE=0"
+
+
+:QEXEADMRESET
+IF "%qexeadmin%"=="false" (
+  FOR %%F in ("%mainexe:;=" "%") do (
+    IF EXIST "%%~F" (
+      @ECHO [INFO] Reset ACL on %%~F
+      icacls "%%~F" /reset || VER >NUL
+    )
+  )
+)
+
+
+@ECHO [INFO] Execute pre-install script
+IF EXIST ".\pre-install.ps1" %pwrsh% -File ".\pre-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
+IF "%RETURNCODE%"=="0" SET "RETURNCODE=%ERRORLEVEL%"
+
 
 @ECHO [INFO] Deletes the ImageJ directory if exist
 IF EXIST "%ProgramData%\ImageJ" RMDIR /S /Q "%ProgramData%\ImageJ"
@@ -37,8 +67,9 @@ COPY /Y post-install.ps1 "%ProgramData%\ImageJ"
 @ECHO [INFO] Execution right on script post-install.ps1
 %pwrsh% "Unblock-File -Path ${env:ProgramData}\ImageJ\post-install.ps1"
 
-@ECHO [INFO] Post-install execute
-%pwrsh% -File "%ProgramData%\ImageJ\post-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
+@ECHO [INFO] installer execute
+IF EXIST "%ProgramData%\ImageJ\installer.ps1" %pwrsh% -File "%ProgramData%\ImageJ\installer.ps1" 1>> "%logdir%\%softname%-PS1.log" 2>&1
+IF "%RETURNCODE%"=="0" SET "RETURNCODE=%ERRORLEVEL%"
 
 @ECHO [INFO] Change Add and Remove values in the register
  > tmp_install.reg ECHO Windows Registry Editor Version 5.00
@@ -56,5 +87,27 @@ COPY /Y post-install.ps1 "%ProgramData%\ImageJ"
 regedit.exe /S "tmp_install.reg"
 
 
+:POSTINSTALL
+@ECHO [INFO] Execute post-install script
+IF EXIST ".\pre-install.ps1" (
+  IF EXIST ".\post-install.ps1" %pwrsh% -File ".\post-install.ps1" 1>> "%logdir%\%softname%-PS1.log" 2>&1
+) ELSE (
+  IF EXIST ".\post-install.ps1" %pwrsh% -File ".\post-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
+)
+IF "%RETURNCODE%"=="0" SET "RETURNCODE=%ERRORLEVEL%"
+
+
+:QEXEADMDENY
+IF "%qexeadmin%"=="false" (
+  FOR %%F in ("%mainexe:;=" "%") do (
+    IF EXIST "%%~F" (
+      @ECHO [INFO] Restrict ACL for admin on %%~F
+      icacls "%%~F" /deny "*S-1-5-32-544:(X)" || VER >NUL
+    )
+  )
+)
+
+
+:END
 @ECHO [END] %date%-%time%
-EXIT
+EXIT %RETURNCODE%
