@@ -80,10 +80,20 @@ If (Test-Path "${Env:ProgramData}\ImageJ\version.txt" -PathType Leaf) {
 
 # Install files and folders
 ForEach ($File in 'install.bat', 'uninstall.bat', 'db.xml.gz', 'ImageJ-win64.exe', 'README.md', 'WELCOME.md') {
-	Copy-Item -LiteralPath "$File" -Destination "${Env:ProgramData}\ImageJ" -Force
+	If (Test-Path "$File") {
+		Write-Output "[info] File copy: $File"
+		Copy-Item -LiteralPath "$File" -Destination "${Env:ProgramData}\ImageJ" -Force
+	} Else {
+		Write-Output "[warn] File do not exists: $File"
+	}
 }
 ForEach ($Folder in 'Contents', 'images', 'jars', 'java', 'lib', 'licenses', 'luts', 'macros', 'plugins', 'retro', 'scripts') {
-	Copy-Item -LiteralPath "$Folder" -Destination "${Env:ProgramData}\ImageJ" -Recurse -Force
+	If (Test-Path "$Folder") {
+		Write-Output "[info] Folder copy: $File"
+		Copy-Item -LiteralPath "$Folder" -Destination "${Env:ProgramData}\ImageJ" -Recurse -Force
+	} Else {
+		Write-Output "[warn] Folder do not exists: $Folder"
+	}
 }
 
 # ImageJ Script in Start Menu

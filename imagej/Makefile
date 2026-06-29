@@ -14,6 +14,7 @@ ZIP:=fiji-win64.zip
 SUBFOLDER:=Fiji.app-$(VERSION)
 EXE:=$(SUBFOLDER)/ImageJ-win64.exe
 REVISION:=1
+REG_SEARCH:=$(SOFT)
 
 #URL2:=http://rsbweb.nih.gov/ij/plugins/ankaphase/ANKAphase.zip
 URL2:=https://imagej.net/ij/plugins/ankaphase/ANKAphase.zip
@@ -88,15 +89,16 @@ check-exe: tmp/$(EXE) tmp/$(ZIP2)
 		# which peres >/dev/null && { peres -v $(EXE) 2> /dev/null | grep -q "^Product Version:[[:space:]]*$(VERSION)" || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 12; } ; } ;\
 		)
 
-tmp/winsoft-config.ini: winsoft-config.ini Makefile tmp/$(EXE)
-	@mkdir -p tmp
-	@sed -e 's/__VERSION__/$(VERSION)/; s/__REG_SEARCH__/$(REG_SEARCH)/;' $< > $@
+#tmp/winsoft-config.ini: winsoft-config.ini Makefile tmp/$(EXE)
+#	@mkdir -p tmp
+#	@sed -e 's/__VERSION__/$(VERSION)/; s/__REG_SEARCH__/$(REG_SEARCH)/;' $< > $@
 
-%.zip: Makefile tmp/$(EXE) tmp/$(ZIP2) install.bat pre-install.ps1 post-install.ps1 installer.ps1 tmp/winsoft-config.ini
+%.zip: Makefile tmp/$(EXE) tmp/$(ZIP2) install.bat pre-install.ps1 post-install.ps1 installer.ps1 winsoft-config.ini
 	@mkdir -p tmp
-	@IVERSION=$$(zgrep 'plugin update-site.*filename="jars/ij-[[:digit:]]' tmp/$(SUBFOLDER)/db.xml.gz  | cut -f 4 -d '"' | cut -f 2 -d '-' | sed -e 's/.jar$$//;') ; \
+	IVERSION=$$(zgrep 'plugin update-site.*filename="jars/ij-[[:digit:]]' tmp/$(SUBFOLDER)/db.xml.gz  | cut -f 4 -d '"' | cut -f 2 -d '-' | sed -e 's/.jar$$//;') ; \
 	NVERSION=$$(echo $${IVERSION} | sed -e 's/\w$$//;') ; \
-	sed -e "s/__VERSION__/$(VERSION)/; s/__REVISION__/$(REVISION)/; s/__IVERSION__/$${IVERSION}/; s/__NVERSION__/$${NVERSION}/;" install.bat | sed -e 's#__LOGDIR__#$(LOGDIR)#; s/__QEXEADMIN__/$(QEXEADMIN)/;' > tmp/install.bat
+	sed -e "s/__VERSION__/$(VERSION)/; s/__REVISION__/$(REVISION)/; s/__IVERSION__/$${IVERSION}/; s/__NVERSION__/$${NVERSION}/;" install.bat | sed -e 's#__LOGDIR__#$(LOGDIR)#; s/__QEXEADMIN__/$(QEXEADMIN)/;' > tmp/install.bat ; \
+	sed -e "s/__VERSION__/$${NVERSION}.$(VERSION)/;" winsoft-config.ini | sed -e 's/__REG_SEARCH__/$(REG_SEARCH)/;' > tmp/winsoft-config.ini
 	@rm -f $@
 	@zip -Xr ./$@ uninstall.bat pre-install.ps1 post-install.ps1 installer.ps1
 	@(cd tmp; zip -Xr ../$@ install.bat winsoft-config.ini)
