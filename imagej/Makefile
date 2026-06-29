@@ -51,8 +51,9 @@ version:
 checksum: check-version
 	@mkdir -p tmp
 	@(cd tmp ; \
-		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt && exit ; \
-		shasum -a 256 "$(EXE)" | sed -e 's#tmp/##;' >> ../checksum.txt ; \
+		CHECKLINE=$$(tar --sort=name --mtime='UTC 1970-01-01' --owner=0 --group=0 --numeric-owner --exclude='*ANKAphase*' -cf - 'Fiji.app-$(VERSION)/' | sha256sum | sed 's/  -$$/  Fiji.app-$(VERSION).tarball/') ; \
+		grep -q "^$${CHECKLINE}$$" ../checksum.txt && exit ; \
+		echo "$${CHECKLINE}" >> ../checksum.txt ; \
 		tail -3 ../checksum.txt ; \
 		)
 
@@ -64,7 +65,8 @@ tmp/$(EXE):
 		unzip -q "$(ZIP)" ; \
 		[ ! -e Fiji/fiji-windows-x64.exe ] || mv Fiji/fiji-windows-x64.exe Fiji/ImageJ-win64.exe ; \
 		mv Fiji "Fiji.app-$(VERSION)" ; \
-		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
+		CHECKLINE=$$(tar --sort=name --mtime='UTC 1970-01-01' --owner=0 --group=0 --numeric-owner --exclude='*ANKAphase*' -cf - 'Fiji.app-$(VERSION)/' | sha256sum | sed 's/  -$$/  Fiji.app-$(VERSION).tarball/') ; \
+		grep -q "^$${CHECKLINE}$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		rm -f "$(ZIP)" ; \
 		touch "$(EXE)" \
 		)
@@ -81,7 +83,7 @@ tmp/$(ZIP2): tmp/$(EXE)
 check-exe: tmp/$(EXE) tmp/$(ZIP2)
 	@(cd tmp ; \
 		file $(EXE) | grep -q "PE32. executable for MS Windows" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 12; } ; \
-		[ -e "Fiji.app-$(VERSION)/jars/commons-io-$(VERSION).jar" ] || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 12; } ; \
+		find "Fiji.app-$(VERSION)/" -name '*-$(VERSION).*' | grep -q . || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 12; } ; \
 		file $(ZIP2) | grep -q "Zip archive data" || { echo "Error: bad format for archive $(ZIP2)" 1>&2 ; exit 12; } ; \
 		# which peres >/dev/null && { peres -v $(EXE) 2> /dev/null | grep -q "^Product Version:[[:space:]]*$(VERSION)" || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 12; } ; } ;\
 		)
