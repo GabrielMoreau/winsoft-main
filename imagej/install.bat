@@ -61,14 +61,8 @@ IF EXIST "%ProgramData%\ImageJ" RMDIR /S /Q "%ProgramData%\ImageJ"
 @ECHO [INFO] Creation of the directory
 MKDIR "%ProgramData%\ImageJ"
 
-@ECHO [INFO] Copy post-install script
-COPY /Y post-install.ps1 "%ProgramData%\ImageJ"
-
-@ECHO [INFO] Execution right on script post-install.ps1
-%pwrsh% "Unblock-File -Path ${env:ProgramData}\ImageJ\post-install.ps1"
-
 @ECHO [INFO] installer execute
-IF EXIST "%ProgramData%\ImageJ\installer.ps1" %pwrsh% -File "%ProgramData%\ImageJ\installer.ps1" 1>> "%logdir%\%softname%-PS1.log" 2>&1
+IF EXIST ".\installer.ps1" %pwrsh% -File ".\installer.ps1" 1>> "%logdir%\%softname%-PS1.log" 2>&1
 IF "%RETURNCODE%"=="0" SET "RETURNCODE=%ERRORLEVEL%"
 
 @ECHO [INFO] Change Add and Remove values in the register
