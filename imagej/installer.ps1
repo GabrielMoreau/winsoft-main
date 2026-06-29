@@ -89,7 +89,7 @@ ForEach ($File in 'install.bat', 'uninstall.bat', 'db.xml.gz', 'ImageJ-win64.exe
 }
 ForEach ($Folder in 'Contents', 'images', 'jars', 'java', 'lib', 'licenses', 'luts', 'macros', 'plugins', 'retro', 'scripts') {
 	If (Test-Path "$Folder") {
-		Write-Output "[info] Folder copy: $File"
+		Write-Output "[info] Folder copy: $Folder"
 		Copy-Item -LiteralPath "$Folder" -Destination "${Env:ProgramData}\ImageJ" -Recurse -Force
 	} Else {
 		Write-Output "[warn] Folder do not exists: $Folder"
