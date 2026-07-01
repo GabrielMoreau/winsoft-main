@@ -22,3 +22,4 @@ Example :
  | HKLM | Citrix Workspace 2508 | Citrix Systems, Inc. | 25.8.0.71   | `CitrixOnlinePluginPackWeb` | `"C:\Program Files (x86)\Citrix\Citrix Workspace 2508\bootstrapperhelper.exe" /uninstall /cleanup` |
  | HKLM | Citrix Workspace 2508 | Citrix Systems, Inc. | 25.8.10.36  | `CitrixOnlinePluginPackWeb` | `"C:\Program Files (x86)\Citrix\Citrix Workspace 2508\bootstrapperhelper.exe" /uninstall /cleanup` |
  | HKLM | Citrix Workspace 2511 | Citrix Systems, Inc. | 25.11.10.50 | `CitrixOnlinePluginPackWeb` | `"C:\Program Files (x86)\Citrix\Citrix Workspace 2511\bootstrapperhelper.exe" /uninstall /cleanup` |
+ | HKLM | Citrix Workspace 2603 | Citrix Systems, Inc. | 26.3.10.69  | `CitrixOnlinePluginPackWeb` | `"C:\Program Files (x86)\Citrix\Citrix Workspace 26.3.10.69\bootstrapperhelper.exe" /uninstall /cleanup` |
