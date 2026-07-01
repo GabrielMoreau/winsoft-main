@@ -4,8 +4,9 @@
 #
 
 SOFT:=CitrixWorkspace
-VERSION:=$(shell curl -s -L --connect-timeout 10 'https://www.citrix.com/downloads/workspace-app/windows/workspace-app-for-windows-latest.html' | sed -e 's/[<>()]/\n/g;'|  grep '^Version: [[:digit:]]' | head -1 | cut -f 2 -d ' ')
-URL:=https:$(shell curl -s -L --connect-timeout 10 'https://www.citrix.com/downloads/workspace-app/windows/workspace-app-for-windows-latest.html' | sed -e 's/"/\n/g;' | egrep 'downloads.citrix.com.*/CitrixWorkspaceApp.exe.*__gda__')
+URL_SEARCH:=$(shell curl -s -L --connect-timeout 10 'https://www.citrix.com/downloads/workspace-app/' | sed 's/"/\n/g;' | grep '/windows/workspace-app-for-windows-latest' | head -1)
+VERSION:=$(shell curl -s -L --connect-timeout 10 'https://www.citrix.com/$(URL_SEARCH)' | sed -e 's/[<>()]/\n/g;'|  grep '^Version: [[:digit:]]' | head -1 | cut -f 2 -d ' ')
+URL:=https:$(shell curl -s -L --connect-timeout 10 'https://www.citrix.com/$(URL_SEARCH)' | sed -e 's/"/\n/g;' | grep -E 'downloads.citrix.com.*/CitrixWorkspaceApp.exe.*__gda__')
 REVISION:=1
 
 EXE:=CitrixWorkspaceApp-$(VERSION).exe
@@ -36,6 +37,7 @@ clean:
 version:
 	@echo "VERSION: $(VERSION)"
 	@echo "URL: $(URL)"
+	@echo "URL_SEARCH: $(URL_SEARCH)"
 	@echo "EXE: $(EXE)"
 
 checksum: check-version
