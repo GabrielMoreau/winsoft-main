@@ -58,13 +58,13 @@ tmp/$(EXE):
 
 check-exe: tmp/$(EXE)
 	@(cd tmp ; \
-		file $(EXE) | grep -q "PE32 executable.*Nullsoft Installer self-extracting archive" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 12; } ; \
+		file $(EXE) | grep -q 'PE32 executable.*Nullsoft Installer self-extracting archive' || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 12; } ; \
 		which peres >/dev/null && { peres -v $(EXE) 2> /dev/null | grep -q "^Product Version:[[:space:]]*$(VERSION)" || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 12; } ; } ;\
 		)
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
-	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#;' $< > $@
+	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#; s/__QEXEADMIN__/$(QEXEADMIN)/;' $< > $@
 
 tmp/winsoft-config.ini: winsoft-config.ini Makefile tmp/$(EXE)
 	@mkdir -p tmp
@@ -72,6 +72,6 @@ tmp/winsoft-config.ini: winsoft-config.ini Makefile tmp/$(EXE)
 
 %.zip: Makefile uninstall.bat tmp/install.bat pre-install.ps1 post-install.ps1 tmp/winsoft-config.ini tmp/$(EXE)
 	@rm -f $@
-	@zip -Xr $@ uninstall.bat pre-install.ps1 post-install.ps1
+	@zip -Xr ./$@ uninstall.bat pre-install.ps1 post-install.ps1
 	@(cd tmp; zip -Xr ../$@ install.bat winsoft-config.ini $(EXE))
 	@chmod ugo+rw $@
