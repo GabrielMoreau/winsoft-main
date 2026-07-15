@@ -116,17 +116,20 @@ list-md: ## list all package in markdown format
 	@
 	echo '## List of '$$( (git ls-files | grep '^[[:alpha:][:digit:]-]*/README.md'; grep -l '^Uninstall-.*.zip:' */Makefile) | wc -l)' packages'
 	echo ''
+	echo '### Software packages'
+	echo ''
 	echo ' |   | Software | Detail | &#127968; |   |'
 	echo ' | - | -------- | ------ | --------- | - |'
 	index=0
-	for pkg in $$(git ls-files | grep '^[[:alpha:][:digit:]-]*/README.md' | grep -v '\\$$' | xargs -I {} sh -c "(head -1 '{}' ; dirname '{}') | paste -sd '#'"  | sort | cut -f 3 -d '#' | grep -v -- '-uninstall')
+	#for pkg in $$(  git ls-files | grep '^[[:alpha:][:digit:]-]*/README.md' | grep -v '\\$$' | xargs -I {} sh -c "(head -1 '{}' ; dirname '{}') | paste -sd '#'" | grep -Ev '\([[:alpha:]][[:alpha:]]*\)\]\(' | sort | cut -f 3 -d '#' | grep -v -- '-uninstall')
+	for pkg in $$( (git ls-files | grep '^[[:alpha:][:digit:]-]*/README.md' | xargs -r grep -l '^#[[:space:]][^\(]*[[:space:]]-' | xargs -r dirname | grep -v '/' | grep -v 'uninstall') | xargs -I {} sh -c "(head -1 '{}/README.md' ; echo '{}') | paste -sd '#'" | sort | cut -f 3 -d '#')
 	do
 		index=$$((index + 1))
 		sindex=$$(printf '%03i' $${index})
 		lic=$$(grep -q 'open-source' $${pkg}/README.md && echo '[🄯](https://en.wikipedia.org/wiki/Free_license "Free/Libre Software")' || echo '[©](https://en.wikipedia.org/wiki/Proprietary_software "Proprietary/Close Software")')
 		url=$$(grep '* Website : ' $${pkg}/README.md | cut -f 4 -d ' ')
 		head -1 $${pkg}/README.md | perl -p -e "s{^#\s(.*)\s-\s(.*)}{ | $${sindex} | [\\1]($${pkg}/README.md) | \\2 | [&#127968;]($${url}) | $${lic} |};" | sed -e 's/\[&#127968;\]()//;'
-	done | sort | grep -Ev '\([[:alpha:]][[:alpha:]]*\)\]\('
+	done | sort
 	echo ''
 	echo '### Uninstall packages'
 	echo ''
