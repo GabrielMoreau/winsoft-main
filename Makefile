@@ -121,7 +121,6 @@ list-md: ## list all package in markdown format
 	echo ' |   | Software | Detail | &#127968; |   |'
 	echo ' | - | -------- | ------ | --------- | - |'
 	index=0
-	#for pkg in $$(  git ls-files | grep '^[[:alpha:][:digit:]-]*/README.md' | grep -v '\\$$' | xargs -I {} sh -c "(head -1 '{}' ; dirname '{}') | paste -sd '#'" | grep -Ev '\([[:alpha:]][[:alpha:]]*\)\]\(' | sort | cut -f 3 -d '#' | grep -v -- '-uninstall')
 	for pkg in $$( (git ls-files | grep '^[[:alpha:][:digit:]-]*/README.md' | xargs -r grep -l '^#[[:space:]][^\(]*[[:space:]]-' | xargs -r dirname | grep -v '/' | grep -v 'uninstall') | xargs -I {} sh -c "(head -1 '{}/README.md' ; echo '{}') | paste -sd '#'" | sort | cut -f 3 -d '#')
 	do
 		index=$$((index + 1))
