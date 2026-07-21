@@ -23,3 +23,4 @@ aee5fd381bcfdef95d6dba443f2b1ae46db3f1b0fbe5cf119c55d1b14a6ed217  BvSshClient-In
 b903d4be4226ce79083b635b9ddb565932a843cfabaecaf0a1bf42afdcd855e8  BvSshClient-Inst-9.61.exe
 41575a4e6d56d468506d2303ace7125dd42ca57d3ca25c4da0eacde79df0d82d  BvSshClient-Inst-9.63.exe
 36ae53405b2c318b6d2d9f3a2cf0d4a9226044e8220b4cb9d7d0d4d0d567aa6e  BvSshClient-Inst-9.65.exe
+f4f0f97a8c55fc03995d87b21fe0e627e68b040646ad5b3da6f95ba8a528dd88  BvSshClient-Inst-9.66.exe
