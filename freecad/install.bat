@@ -20,6 +20,7 @@ EXIT /B
 SET "softversion=__VERSION__"
 SET "qexeadmin=__QEXEADMIN__"
 SET "mainexe=%ProgramFiles%\FreeCAD __VERSIONSHORT__\bin\freecad.exe"
+SET "MAX_RETRY=1"
 
 
 @ECHO [INFO] Search PowerShell
@@ -50,9 +51,20 @@ IF EXIST ".\pre-install.ps1" %pwrsh% -File ".\pre-install.ps1" 1> "%logdir%\%sof
 IF "%RETURNCODE%"=="0" SET "RETURNCODE=%ERRORLEVEL%"
 
 
+:REINSTALL
 @ECHO [INFO] Silent install %softname%
 ScriptRunner.exe -appvscript FreeCAD_%softversion%-conda-Windows-x86_64-installer.exe /S -appvscriptrunnerparameters -wait -timeout=600
 IF "%RETURNCODE%"=="0" SET "RETURNCODE=%ERRORLEVEL%"
+
+@ECHO [INFO] Check RETURNCODE [%RETURNCODE%] / [%MAX_RETRY%]
+IF NOT "%RETURNCODE%"=="0" (
+  IF NOT "%MAX_RETRY%"=="0" (
+    @ECHO [WARN] Try installation again
+    SET /A MAX_RETRY-=1
+    SET "RETURNCODE=0"
+    GOTO REINSTALL
+  )
+)
 
 
 :POSTINSTALL
