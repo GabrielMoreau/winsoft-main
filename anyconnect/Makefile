@@ -5,7 +5,7 @@
 
 SOFT:=CiscoAnyConnect
 #VERSION:=4.10.07061
-VERSION:=5.1.5.65
+VERSION:=5.1.17.3394
 REVISION:=1
 VERSIONONLINE:=$(shell curl -s -L --connect-timeout 10 'https://www.cisco.com/c/en/us/td/docs/security/vpn_client/anyconnect/Cisco-Secure-Client-5/release/notes/release-notes-cisco-secure-client-5-1.html' | sed -e 's/[<>]/\n/g;' | grep '^Cisco Secure Client [[:digit:]].* New Features' | head -1 | cut -f 4 -d ' ')
 
