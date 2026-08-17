@@ -173,3 +173,4 @@ cdc491aa41c8d5cab3949733c9697eda6bca31f70bf52406d8c559f556e61ea7  tportable-x64.
 6ddc877ca0aaf9aa87e7d50555af67d414fb94597a5ba54c9a8a8a3c400729fa  tportable-x64.7.0.5.zip
 c540b6911b663d979b0a27fdfbeaf64ad58ca3ede92ecdfb5dcb38ea47d6ac76  tportable-x64.7.0.6.zip
 65d4336679c5a1f44e2f9bbeea3acfbf356e784e38a4b63d7c8b04ecaa158f1e  tportable-x64.7.0.7.zip
+6a57003f8fbff78cff8974af3a9789ce45b25695f821bbd0f16cf3c2c6cfa984  tportable-x64.7.0.9.zip
