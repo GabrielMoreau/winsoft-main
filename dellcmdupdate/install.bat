@@ -40,8 +40,15 @@ IF "%RETURNCODE%"=="0" SET "RETURNCODE=%ERRORLEVEL%"
 
 
 @ECHO [INFO] Silent install %softname%
-ScriptRunner.exe -appvscript %softexe% /passthrough /S /v/qn -appvscriptrunnerparameters -wait -timeout=300
-IF "%RETURNCODE%"=="0" SET "RETURNCODE=%ERRORLEVEL%"
+IF "%softexe:Universal=%"=="%softexe%" (
+  @ECHO [INFO] Installation Classique
+  ScriptRunner.exe -appvscript %softexe% /passthrough /S /v/qn -appvscriptrunnerparameters -wait -timeout=300
+  IF "%RETURNCODE%"=="0" SET "RETURNCODE=%ERRORLEVEL%"
+) ELSE (
+  @ECHO [INFO] Installation UWA
+  ScriptRunner.exe -appvscript %softexe% /s /l="%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=300
+  IF "%RETURNCODE%"=="0" SET "RETURNCODE=%ERRORLEVEL%"
+)
 
 
 @ECHO [INFO] Wait 2 minutes
