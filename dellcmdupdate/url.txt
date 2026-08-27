@@ -10,3 +10,4 @@
 5.6.0	https://dl.dell.com/FOLDER13922605M/1/Dell-Command-Update-Application_5CR1Y_WIN64_5.6.0_A00.EXE
 5.7.0	https://dl.dell.com/FOLDER14424243M/1/Dell-Command-Update-Application_RXT5N_WIN64_5.7.0_A00.EXE
 #5.7.1	https://dl.dell.com/FOLDER14847280M/2/Dell-Command-Update-for-Win32_61R17_WIN64_5.7.1_A00.EXE
+5.7.1	https://dl.dell.com/FOLDER14847331M/2/Dell-Command-Update-Windows-Universal-Application_P0P70_WIN64_5.7.1_A00.EXE

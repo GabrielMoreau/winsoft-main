@@ -26,3 +26,4 @@ b6d0d06edf25a7d9092208b2686502e031deda5ccb2d283ba8a434b27891f3cf  Dell-Command-U
 c0ffa16efeb7ef3ac8100a6a9d7089d9c2904ee89f1815557a79a91be584f775  windowsdesktop-runtime-8.0.29-win-x64.exe
 1f7ae4e4a20e7005a894cf9429765e99cf197cc021303f7e105abac463114b0c  Dell-Command-Update-for-Win32_61R17_WIN64_5.7.1_A00.EXE
 8bd710afa5de396c9eb2a3b68d00279b7b9aca372a2443e9acd4f48ffdef3f2d  windowsdesktop-runtime-8.0.30-win-x64.exe
+d4abf200d97f248ced288733caddce2fb4b5bb05dd38ef35b2dd0a3a34e6f15a  Dell-Command-Update-Windows-Universal-Application_P0P70_WIN64_5.7.1_A00.EXE
