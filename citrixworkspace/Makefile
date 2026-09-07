@@ -6,7 +6,7 @@
 SOFT:=CitrixWorkspace
 URL_SEARCH:=$(shell curl -s -L --connect-timeout 10 'https://www.citrix.com/downloads/workspace-app/' | sed 's/"/\n/g;' | grep '/windows/workspace-app-for-windows-latest' | head -1)
 VERSION:=$(shell curl -s -L --connect-timeout 10 'https://www.citrix.com/$(URL_SEARCH)' | sed -e 's/[<>()]/\n/g;'|  grep '^Version: [[:digit:]]' | head -1 | cut -f 2 -d ' ')
-URL:=https:$(shell curl -s -L --connect-timeout 10 'https://www.citrix.com/$(URL_SEARCH)' | sed -e 's/"/\n/g;' | grep -E 'downloads.citrix.com.*/CitrixWorkspaceApp.exe.*__gda__')
+URL:=https:$(shell curl -s -L --connect-timeout 10 'https://www.citrix.com/$(URL_SEARCH)' | sed -e 's/"/\n/g;' | grep -E 'downloads.citrix.com.*/CitrixWorkspaceApp.exe.*__gda__' | head -1)
 REVISION:=1
 
 EXE:=CitrixWorkspaceApp-$(VERSION).exe
