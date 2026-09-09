@@ -5,3 +5,4 @@
 14ba97054fd77564bf8e050916dba44235c0e32eb60fc9c20cce3c9b844028dd  BleachBit-5.0.2-setup.exe
 d8b2a8f98a677283e13bcf7f8d91df10e6daf3870a70ac8f7479c082ed67ac39  BleachBit-6.0.0-setup.exe
 16532bc640315f87bd66e04f78b137e1ec90db2d0b7357bfcc47af8873e0076e  BleachBit-6.0.2-setup.exe
+c4cd6bb1f4b163dc28b13cef2995423de69e6776f16387f54943dcc6e7267a6d  BleachBit-6.0.4-setup.exe
