@@ -143,6 +143,13 @@ At the same time, the installation script can handle the following error codes i
 * Error 147: The software is already installed in a lower version before starting the installation procedure. Normally, the installation script then launches the update.
 * Error 149: The installation program is not in the archive to be deployed!
 
+When uninstalling a package, the script can handle the following error codes:
+
+* Error 150: A version of the software is always installed based on the registry
+* Error 151: There is one version remaining, and the version installed on the workstation is newer than the one that is uninstalled at the end of this procedure.
+* Error 152: There is still one version remaining, and the version installed on the workstation is older than the one that is uninstalled at the end of this procedure.
+* Error 153: The uninstallation process did not work, and the version mentioned above is still on the workstation.
+
 ## Extend
 
 WinSoft-Main may not contain your software.
