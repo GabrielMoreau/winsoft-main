@@ -84,11 +84,11 @@ ForEach ($Key in Get-ChildItem -Recurse $UninstallKeys) {
 	Write-Output "Installed: $($App.DisplayName) / $DisplayVersion / $KeyProduct / $($App.UninstallString)"
 
 	If ($DisplayVersion -gt $RefVersion) {
-		$ReturnCode = [Math]::Min($ReturnCode, 141)
+		$ReturnCode = [Math]::Min($ReturnCode, 151)
 	} ElseIf ($DisplayVersion -eq $RefVersion) {
-		$ReturnCode = 144
+		$ReturnCode = 153
 	} Else {
-		$ReturnCode = [Math]::Min($ReturnCode, 142)
+		$ReturnCode = [Math]::Min($ReturnCode, 152)
 	}
 }
 Write-Output "ReturnCode: $ReturnCode"
