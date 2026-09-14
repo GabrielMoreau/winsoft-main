@@ -20,6 +20,7 @@ EXIT /B
 SET "softversion=__VERSION__"
 SET "qexeadmin=__QEXEADMIN__"
 SET "mainexe=%ProgramFiles%\TeraCopy\TeraCopy.exe"
+SET "mainexe=%mainexe%;%ProgramFiles%\TeraCopy\32-bit\TeraCopy.exe"
 
 
 @ECHO [INFO] Search PowerShell
