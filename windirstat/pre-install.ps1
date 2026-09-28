@@ -89,7 +89,7 @@ ForEach ($Key in Get-ChildItem -Recurse $UninstallKeys) {
 	If ($UninstallString -match 'MsiExec.exe') {
 		$Exe = 'MsiExec.exe'
 		$UninstallSplit = $UninstallString -Split "\s+/[IX]"
-		$Args = '/x "' + $UninstallSplit[1].Trim() + '" /qn /norestart /l*v "$LogDir\$SoftName' + '-Remove-' + "$DisplayVersion" + '-MSI.log"'
+		$Args = '/x "' + $UninstallSplit[1].Trim() + '" /qn /norestart /l*v "' + "$LogDir\$SoftName" + '-Remove-' + "$DisplayVersion" + '-MSI.log"'
 		Write-Output "Remove: $($App.DisplayName) / $DisplayVersion / $KeyProduct / $Exe $Args"
 		Run-Exec -FilePath "$Exe" -ArgumentList "$Args" -Name "$SoftName"
 	}
