@@ -71,6 +71,30 @@ Write-Output "Config:`n * Version: $RefVersion`n * RegexSearch: $RefName"
 ########################################################################
 # Put your specific code here
 
+$SoftName = $Config.Name
+$LogDir = [Environment]::ExpandEnvironmentVariables($Config.LogDir)
+Write-Output "Info: Log dir $LogDir"
+
+Write-Output "Begin remove old version"
+ForEach ($Key in Get-ChildItem -Recurse $UninstallKeys) {
+	$App = Get-ItemProperty -Path $Key.PSPath
+	If ($App.DisplayName -notmatch $RefName) { Continue }
+
+	$DisplayVersion = ToVersion $App.DisplayVersion
+	$KeyProduct     = $Key.PSChildName
+	$UninstallString = $App.UninstallString
+
+	If ($DisplayVersion -gt $RefVersion) { Continue }
+
+	If ($UninstallString -match 'MsiExec.exe') {
+		$Exe = 'MsiExec.exe'
+		$UninstallSplit = $UninstallString -Split "\s+/[IX]"
+		$Args = '/x "' + $UninstallSplit[1].Trim() + '" /qn /norestart /l*v "$LogDir\$SoftName' + '-Remove-' + "$DisplayVersion" + '-MSI.log"'
+		Write-Output "Remove: $($App.DisplayName) / $DisplayVersion / $KeyProduct / $Exe $Args"
+		Run-Exec -FilePath "$Exe" -ArgumentList "$Args" -Name "$SoftName"
+	}
+}
+
 ########################################################################
 
 # View
