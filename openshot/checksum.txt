@@ -6,3 +6,4 @@ ec8bbac8a38e7ac9f1318531ec9bf3cd58be1cc9a5308cdf3fe96f469ed6b588  OpenShot-v3.4.
 6ac1c327783f84b15dce0fb82b129eec212b3d817597e531d6ba434fdba8e66d  OpenShot-v3.5.0-x86_64.exe
 f7894bbf87ec77f37ea46407fef0ae444cd8db52dfc9fd52d969b8a8bde55685  OpenShot-v3.5.1-x86_64.exe
 fcecfcfd616447797d46edcca6d8fe5ca70ea19b387ae257ec24f11811f715ef  OpenShot-v4.0.0-x86_64.exe
+70eacf59edef65cfb0c73678a1195ebd1cef3a328d202e4d915b7feeb4294416  OpenShot-v4.0.1-x86_64.exe
