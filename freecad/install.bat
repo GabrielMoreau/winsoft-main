@@ -76,6 +76,16 @@ IF EXIST ".\pre-install.ps1" (
 )
 IF "%RETURNCODE%"=="0" SET "RETURNCODE=%ERRORLEVEL%"
 
+@ECHO [INFO] Check RETURNCODE [%RETURNCODE%] / [%MAX_RETRY%]
+IF "%RETURNCODE%"=="143" (
+  IF NOT "%MAX_RETRY%"=="0" (
+    @ECHO [WARN] Try installation again
+    SET /A MAX_RETRY-=1
+    SET "RETURNCODE=0"
+    GOTO REINSTALL
+  )
+)
+
 
 @ECHO [INFO] Remove desktop shortcut
 IF EXIST "%PUBLIC%\Desktop\FreeCAD*.lnk"          DEL /F /Q "%PUBLIC%\Desktop\FreeCAD*.lnk"
