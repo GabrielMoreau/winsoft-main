@@ -96,7 +96,7 @@ TweakViewUpgradesOnUnsupportedHard
 # Invoke-WebRequest -Uri $URL -OutFile $MSU
 
 $Build = [System.Environment]::OSVersion.Version.Build
-Ff ($Build -lt 26200) {
+If ($Build -lt 26200) {
     Write-Output "Error: Windows 11 25H2 required"
     Exit 148
 }
