@@ -96,22 +96,24 @@ TweakViewUpgradesOnUnsupportedHard
 # Invoke-WebRequest -Uri $URL -OutFile $MSU
 
 $Build = [System.Environment]::OSVersion.Version.Build
+$ReturnCode = $Build
+
 If ($Build -lt 26200) {
-    Write-Output "Error: Windows 11 25H2 required"
-    Exit 148
-}
+	Write-Output "Error: Windows 11 25H2 required"
+} ElseIf ($Build -ge 26300) {
+	Write-Output "Error: Windows 11 26H2 or higher is already installed"
+} Else {
+	$MSU = "KB5121794.msu"
 
-$MSU = "KB5121794.msu"
+	$Exe = 'wusa.exe'
+	$Args = "`"$MSU`" /quiet /norestart"
+	Run-Exec -FilePath "$Exe" -ArgumentList "$Args" -Name "KB5121794" -Timeout 1200
 
-$Exe = 'wusa.exe'
-$Args = "`"$MSU`" /quiet /norestart"
-Run-Exec -FilePath "$Exe" -ArgumentList "$Args" -Name "KB5121794" -Timeout 1200
+	Get-HotFix -Id KB5121794
 
-Get-HotFix -Id KB5121794
-
-$ReturnCode = [System.Environment]::OSVersion.Version.Build
-If (dism.exe /Online /Get-Packages /Format:Table | Select-String 'KB5121794.*Installed') {
-	$ReturnCode = 0
+	If (dism.exe /Online /Get-Packages /Format:Table | Select-String 'KB5121794.*Installed') {
+		$ReturnCode = 0
+	}
 }
 
 ########################################################################
