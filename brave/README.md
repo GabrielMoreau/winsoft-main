@@ -25,3 +25,4 @@ Example :
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
  | HKLM | Brave | Auteurs de Brave | 144.1.86.142 | `BraveSoftware Brave-Browser` | `"C:\Program Files\BraveSoftware\Brave-Browser\Application\144.1.86.142\Installer\setup.exe" --uninstall --system-level` |
  | HKLM | Brave | Auteurs de Brave | 148.1.90.124 | `BraveSoftware Brave-Browser` | `"C:\Program Files\BraveSoftware\Brave-Browser\Application\148.1.90.124\Installer\setup.exe" --uninstall --system-level` |
+ | HKLM | Brave | Auteurs de Brave | 154.1.96.61  | `BraveSoftware Brave-Browser` | `"C:\Program Files\BraveSoftware\Brave-Browser\Application\154.1.96.61\Installer\setup.exe" --uninstall --system-level` |
