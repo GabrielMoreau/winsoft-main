@@ -32,16 +32,17 @@ IF EXIST "%WINDIR%\Sysnative\WindowsPowerShell\V1.0\powershell.exe" SET "pwrsh=%
 SET "RETURNCODE=0"
 
 %pwrsh% -File ".\pre-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
-@ECHO [INFO] Pre-install ErrorLevel Return: %ERRORLEVEL%
+IF "%RETURNCODE%"=="0" SET "RETURNCODE=%ERRORLEVEL%"
 
 
-IF "%ERRORLEVEL%"=="0" (
+IF "%RETURNCODE%"=="0" (
   @ECHO [INFO] Silent install %softname% - No ScriptRunner
   Windows11InstallationAssistant-%softversion%.exe /QuietInstall /SkipEULA /NoRestartUI
+  IF "%RETURNCODE%"=="0" SET "RETURNCODE=%ERRORLEVEL%"
 ) ELSE (
-  @ECHO [INFO] Hardware not compatible, %softname% will not be installed
+  @ECHO [INFO] Hardware not compatible, %softname% will not be installed (error: %RETURNCODE%)
 )
 
 
 @ECHO [END] %date%-%time%
-EXIT
+EXIT %RETURNCODE%
