@@ -23,3 +23,4 @@ Example :
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
  | HKLM | CrystalDiskInfo 9.7.2 | Crystal Dew World | 9.7.2 | `CrystalDiskInfo_is1` | `"C:\Program Files\CrystalDiskInfo\unins000.exe"` |
  | HKLM | CrystalDiskInfo 9.8.0 | Crystal Dew World | 9.8.0 | `CrystalDiskInfo_is1` | `"C:\Program Files\CrystalDiskInfo\unins000.exe"` |
+ | HKLM | CrystalDiskInfo 9.9.3 | Crystal Dew World | 9.9.3 | `CrystalDiskInfo_is1` | `"C:\Program Files\CrystalDiskInfo\unins000.exe"` |

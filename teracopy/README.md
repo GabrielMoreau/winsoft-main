@@ -24,3 +24,4 @@ Example :
  | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
  | HKLM | TeraCopy | Code Sector | 4.0.3.2 | `{573E992C-480B-4636-9966-49162BC24D42}` | `MsiExec.exe /X{573E992C-480B-4636-9966-49162BC24D42}` |
+ | HKLM | TeraCopy | Code Sector | 4.0.5   | `{D344348E-77ED-4F42-A2EE-E764715E018F}` | `MsiExec.exe /X{D344348E-77ED-4F42-A2EE-E764715E018F}` |
