@@ -47,9 +47,6 @@ TASKKILL /T /F /IM %process% || VER >NUL
 @ECHO [INFO] Clean old version before install
 CALL .\uninstall.bat
 
-@ECHO [INFO] Execute pre-install script to remove HKU version
-%pwrsh% -File ".\pre-install.ps1" 1> "%logdir%\%softname%-PS1.log" 2>&1
-
 
 @ECHO [INFO] Silent install %softname%
 MOVE "BalenaEtcher" "%ProgramFiles%\%regkey%"
