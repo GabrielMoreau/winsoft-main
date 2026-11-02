@@ -18,3 +18,4 @@ Example :
  | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
  | HKLM | OpenVPN Connect | OpenVPN Inc. | 3.4.4 | `{D31E8657-7903-46FA-A297-8D11E16D6A83}` | `MsiExec.exe /X{D31E8657-7903-46FA-A297-8D11E16D6A83}` |
+ | HKLM | OpenVPN Connect | OpenVPN Inc. | 3.8.0 | `{622C45D6-53E7-48E3-BAB6-353525A4579E}` | `MsiExec.exe /X{622C45D6-53E7-48E3-BAB6-353525A4579E}` |
