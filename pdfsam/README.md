@@ -20,3 +20,4 @@ Example :
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
  | HKLM | PDFsam Basic | Sober Lemur S.r.l. | 5.2.9.0 | `{A53AE816-622C-4141-98A7-C25C56AA1606}` | `MsiExec.exe /I{A53AE816-622C-4141-98A7-C25C56AA1606}` |
  | HKLM | PDFsam Basic | Sober Lemur S.r.l. | 5.4.0.0 | `{04E23E35-ED51-430E-B248-3350AAD7A7AD}` | `MsiExec.exe /I{04E23E35-ED51-430E-B248-3350AAD7A7AD}` |
+ | HKLM | PDFsam Basic | Sober Lemur S.r.l. | 6.0.9.0 | `{7FDD01AF-7164-47F0-8D57-334C4AF36789}` | `MsiExec.exe /I{7FDD01AF-7164-47F0-8D57-334C4AF36789}` |
