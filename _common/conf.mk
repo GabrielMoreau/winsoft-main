@@ -91,3 +91,10 @@ ocs-push:
 		--file "./Uninstall-$(OCS_NAME).zip" \
 		--notify 'NO' \
 		--headless --timeout 60
+
+ocs-cleanpush:
+	@[ ! -e tmp/ocs-pkgpush.txt ] || sed -i '/^$(OCS_NAME)\.zip$$/d' tmp/ocs-pkgpush.txt
+
+ocs-fakepush:
+	@[ -s "./$(OCS_NAME).zip" ] || (echo 'Zip archive not exists: $(OCS_NAME).zip' > /dev/stderr ; exit 50)
+	@grep -q "^$(OCS_NAME).zip$$" tmp/ocs-pkgpush.txt > /dev/null 2>&1 || { echo '$(OCS_NAME).zip' >> tmp/ocs-pkgpush.txt ; }
