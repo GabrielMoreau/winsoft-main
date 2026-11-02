@@ -22,3 +22,4 @@ Example :
  | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
  | HKLM | Gwyddion | Gwyddion developers | 2.68.win64 | `Gwyddion` | `C:\Program Files\Gwyddion\uninstall.exe` |
+ | HKLM | Gwyddion | Gwyddion developers | 2.71.win64 | `Gwyddion` | `C:\Program Files\Gwyddion\uninstall.exe` |
