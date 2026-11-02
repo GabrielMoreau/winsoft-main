@@ -25,3 +25,4 @@ Example :
  | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
  | HKLM | balenaEtcher 2.1.0 | Balena Ltd. | 2.1.0 | `balena-etcher` | `C:\Program Files\balena-etcher\uninstall.bat` |
+ | HKLM | balenaEtcher 2.1.9 | Balena Ltd. | 2.1.9 | `balena-etcher` | `C:\Program Files\balena-etcher\uninstall.bat` |
