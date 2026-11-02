@@ -18,3 +18,4 @@ Example :
  | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
  | HKLM | OpenShot Video Editor 3.3.0 | OpenShot Studios, LLC | 3.3.0 | `{4BB0DCDC-BC24-49EC-8937-72956C33A470}_is1` | `"C:\Program Files\OpenShot Video Editor\unins000.exe"` |
+ | HKLM | OpenShot Video Editor 4.0.1 | OpenShot Studios, LLC | 4.0.1 | `{4BB0DCDC-BC24-49EC-8937-72956C33A470}_is1` | `"C:\Program Files\OpenShot Video Editor\unins000.exe"` |
