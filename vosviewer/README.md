@@ -21,3 +21,4 @@ Example :
  | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
  | HKLM | VOSviewer 1.6.20 | Nees Jan van Eck and Ludo Waltman | 1.6.20 | `VOSviewer_is1` | `C:\Program Files\VOSviewer\uninstall.bat` |
+ | HKLM | VOSviewer 1.6.21 | Nees Jan van Eck and Ludo Waltman | 1.6.21 | `VOSviewer_is1` | `C:\Program Files\VOSviewer\uninstall.bat` |
