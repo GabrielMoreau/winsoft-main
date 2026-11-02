@@ -48,6 +48,7 @@ Example :
 
  | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
- | HKLM | WinDirStat 1.1.2 | The authors of WinDirStat | 1.1.2 | `windirstat` | `C:\Program Files (x86)\WinDirStat\uninstall.bat` |
- | HKU | WinDirStat 1.1.2 |  |  | `WinDirStat` | `"C:\Program Files (x86)\WinDirStat\Uninstall.exe"` |
- | HKLM | WinDirStat | WinDirStat Team | 2.0.3.832 | `{A5AEAE5C-1EDA-41FA-A90B-D62AF6B99BE1}` | `MsiExec.exe /I{A5AEAE5C-1EDA-41FA-A90B-D62AF6B99BE1}` |
+ | HKLM | WinDirStat 1.1.2 | The authors of WinDirStat | 1.1.2     | `windirstat`                             | `C:\Program Files (x86)\WinDirStat\uninstall.bat`      |
+ | HKU  | WinDirStat 1.1.2 |                           |           | `WinDirStat`                             | `"C:\Program Files (x86)\WinDirStat\Uninstall.exe"`    |
+ | HKLM | WinDirStat       | WinDirStat Team           | 2.0.3.832 | `{A5AEAE5C-1EDA-41FA-A90B-D62AF6B99BE1}` | `MsiExec.exe /I{A5AEAE5C-1EDA-41FA-A90B-D62AF6B99BE1}` |
+ | HKLM | WinDirStat 2.9.3 | WinDirStat Team           | 2.9.3     | `{30CA2173-D51B-4B78-B89C-7F384EBDB728}` | `MsiExec.exe /X{30CA2173-D51B-4B78-B89C-7F384EBDB728}` |
