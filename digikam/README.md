@@ -23,3 +23,4 @@ Example :
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
  | HKLM | digiKam 8.5.0 | The digiKam team | 8.5.0 | `digiKam` | `"C:\Program Files\digiKam\Uninstall.exe"` |
  | HKLM | digiKam 8.6.0 | The digiKam team | 8.6.0 | `digiKam` | `"C:\Program Files\digiKam\Uninstall.exe"` |
+ | HKLM | digiKam 9.1.0 | The digiKam team | 9.1.0 | `digiKam` | `"C:\Program Files\digiKam\Uninstall.exe"` |
