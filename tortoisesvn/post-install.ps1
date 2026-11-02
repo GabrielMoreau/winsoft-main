@@ -73,6 +73,15 @@ Write-Output "Config:`n * Version: $RefVersion`n * RegexSearch: $RefName"
 
 ########################################################################
 
+Function VersionReduce2 {
+	Param (
+		[Parameter(Mandatory = $True)] [version]$Version
+	)
+
+	$Build = 0
+	Return [version]::New($Version.Major, $Version.Minor)
+}
+
 # View
 $ReturnCode = 143
 ForEach ($Key in Get-ChildItem -Recurse $UninstallKeys) {
@@ -83,9 +92,9 @@ ForEach ($Key in Get-ChildItem -Recurse $UninstallKeys) {
 	$KeyProduct     = $Key.PSChildName
 	Write-Output "Installed: $($App.DisplayName) / $DisplayVersion / $KeyProduct / $($App.UninstallString)"
 
-	If ($DisplayVersion -gt $RefVersion) {
+	If ((VersionReduce2 -Version $DisplayVersion) -gt (VersionReduce2 -Version $RefVersion)) {
 		$ReturnCode = [Math]::Min($ReturnCode, 141)
-	} ElseIf ($DisplayVersion -eq $RefVersion) {
+	} ElseIf ((VersionReduce2 -Version $DisplayVersion) -eq (VersionReduce2 -Version $RefVersion)) {
 		$ReturnCode = 0
 	} Else {
 		$ReturnCode = [Math]::Min($ReturnCode, 142)
