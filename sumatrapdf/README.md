@@ -20,4 +20,5 @@ Example :
 
  | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
- | HKLM | SumatraPDF | Krzysztof Kowalczyk | 3.5.2 | `SumatraPDF` | `"C:\Program Files\SumatraPDF\SumatraPDF.exe" -uninstall` |
+ | HKLM | SumatraPDF | Krzysztof Kowalczyk | 3.5.2 | `SumatraPDF` | `"C:\Program Files\SumatraPDF\SumatraPDF.exe" -uninstall`            |
+ | HKLM | SumatraPDF | Krzysztof Kowalczyk | 3.6.1 | `SumatraPDF` | `"C:\Program Files\SumatraPDF\SumatraPDF.exe" -uninstall -all-users` |
