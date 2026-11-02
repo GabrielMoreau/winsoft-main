@@ -16,3 +16,4 @@ Example :
  | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
  | HKLM | VLC media player | VideoLAN | 3.0.21 | `VLC media player` | `"C:\Program Files\VideoLAN\VLC\uninstall.exe"` |
+ | HKLM | VLC media player | VideoLAN | 3.0.24 | `VLC media player` | `"C:\Program Files\VideoLAN\VLC\uninstall.exe"` |
