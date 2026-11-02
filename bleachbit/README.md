@@ -17,3 +17,4 @@ Example :
  | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
  | HKLM | BleachBit | BleachBit | 5.0.0.2936 | `BleachBit` | `"C:\Program Files (x86)\BleachBit\uninstall.exe" /allusers` |
+ | HKLM | BleachBit | BleachBit | 6.0.6.633  | `BleachBit` | `"C:\Program Files (x86)\BleachBit\uninstall.exe" /allusers` |
