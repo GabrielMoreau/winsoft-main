@@ -20,6 +20,7 @@ EXIT /B
 SET "softversion=__VERSION__"
 SET "qexeadmin=__QEXEADMIN__"
 SET "mainexe=%ProgramFiles%\Audacity\Audacity.exe"
+SET "mainexe=%mainexe%;%ProgramFiles%\Audacity 4\bin\Audacity4.exe"
 
 
 @ECHO [INFO] Search PowerShell
