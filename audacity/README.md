@@ -21,6 +21,7 @@ Example :
 
  | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
- | HKLM | Audacity 3.4.2 | Audacity Team | 3.4.2 | `Audacity_is1` | `"C:\Program Files\Audacity\unins000.exe"` |
- | HKLM | Audacity 3.7.0 | Audacity Team | 3.7.0 | `Audacity_is1` | `"C:\Program Files\Audacity\unins000.exe"` |
- | HKLM | Audacity 3.7.8 | Audacity Team | 3.7.8 | `Audacity_is1` | `"C:\Program Files\Audacity\unins000.exe"` |
+ | HKLM | Audacity 3.4.2 | Audacity Team | 3.4.2           | `Audacity_is1`                           | `"C:\Program Files\Audacity\unins000.exe"` |
+ | HKLM | Audacity 3.7.0 | Audacity Team | 3.7.0           | `Audacity_is1`                           | `"C:\Program Files\Audacity\unins000.exe"` |
+ | HKLM | Audacity 3.7.8 | Audacity Team | 3.7.8           | `Audacity_is1`                           | `"C:\Program Files\Audacity\unins000.exe"` |
+ | HKLM | Audacity 4.0   | Audacity      | 4.0.2.263060742 | `{6CECECEA-CC25-46AF-AACE-DD7EA6FB83D3}` | `MsiExec.exe /X{6CECECEA-CC25-46AF-AACE-DD7EA6FB83D3}` |
