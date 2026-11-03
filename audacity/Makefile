@@ -6,10 +6,10 @@
 SOFT:=Audacity
 # https://github.com/audacity/audacity/releases/download/Audacity-3.4.0/audacity-win-3.4.0-64bit.exe
 VERSION:=$(shell curl -s -L --connect-timeout 10 'https://github.com/audacity/audacity/releases/latest' | sed 's/</\n/g;' | grep '^meta property.*og:title' | cut -f 5 -d ' ')
-URL:=https://github.com/audacity/audacity/releases/download/Audacity-$(VERSION)/audacity-win-$(VERSION)-64bit.exe
+URL:=https://github.com/audacity/audacity/releases/download/Audacity-$(VERSION)/audacity-win-$(VERSION)-x86_64.msi
 REVISION:=1
 
-EXE:=audacity-win-$(VERSION)-x64.exe
+EXE:=audacity-win-$(VERSION)-x86_64.msi
 REG_SEARCH:=$(SOFT)
 
 IT_TEAM:=IT Support
@@ -54,13 +54,15 @@ tmp/$(EXE):
 	@(cd tmp ; \
 		rm -f *.exe *.msi 2>/dev/null ; \
 		curl -# -L --connect-timeout 10 -o "$(EXE)" "$(URL)" ; \
+		which 7z >/dev/null && { rm -f 'CM_FP_bin.Audacity4.exe'; 7z x -y "$(EXE)" 'CM_FP_bin.Audacity4.exe' | grep 'Extracting'; } ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
 
 check-exe: tmp/$(EXE)
 	@(cd tmp ; \
-		file $(EXE) | grep -q "PE32 executable" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 12; } ; \
-		which peres >/dev/null && { peres -v $(EXE) 2> /dev/null | grep -q "^Product Version:[[:space:]]*$(VERSION)" || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 12; }; } ; \
+		file $(EXE) | grep -q 'Subject: Audacity' || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 12; } ; \
+		which peres >/dev/null && { peres -v 'CM_FP_bin.Audacity4.exe' 2> /dev/null | grep -q "^Product Version:[[:space:]]*$(VERSION)" || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 12; } ; } ;\
+		#which peres >/dev/null && { peres -v $(EXE) 2> /dev/null | grep -q "^Product Version:[[:space:]]*$(VERSION)" || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 12; } ; } ;\
 		)
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE)
