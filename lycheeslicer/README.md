@@ -20,3 +20,4 @@ Example :
  | HKLM | LycheeSlicer - 7.1.3 | Mango 3D | 7.1.3.0 | `LycheeSlicer` | `"C:\Program Files\LycheeSlicer\uninstall.exe"` |
  | HKLM | LycheeSlicer - 7.4.4 | Mango 3D | 7.4.4.0 | `LycheeSlicer` | `"C:\Program Files\LycheeSlicer\uninstall.exe"` |
  | HKLM | LycheeSlicer - 7.5.0 | Mango 3D | 7.5.0.0 | `LycheeSlicer` | `"C:\Program Files\LycheeSlicer\uninstall.exe"` |
+ | HKLM | LycheeSlicer - 8.0.4 | Mango3D  | 8.0.4   | `LycheeSlicer` | `"C:\Program Files\Lychee\uninstall.exe"`       |
