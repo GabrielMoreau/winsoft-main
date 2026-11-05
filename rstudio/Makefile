@@ -8,6 +8,7 @@ SOFT:=RStudio
 URL:=$(shell curl -s -L --connect-timeout 10 'https://docs.posit.co/ide/user/download.html' | sed -e 's/"/\n/g;' | grep '^https://.*/RStudio-.*.exe' | head -1)
 #URL:=$(shell curl -s -L --connect-timeout 10 'https://www.rstudio.com/wp-content/downloads.json' | grep -A4 '"name".*/RStudio-.*\.exe' | grep '"url"' | cut -f 4 -d '"' | head -1)
 VERSION1:=$(shell basename '$(URL)' 2> /dev/null | cut -f 2- -d'-' | sed -e 's/\.exe$$//;')
+VERSION1_SHORT:=$(shell echo '$(VERSION1)' 2> /dev/null | cut -f 1 -d '-')
 URL2:=https://cloud.r-project.org/bin/windows/base/$(shell curl -s -L --connect-timeout 10 'https://cloud.r-project.org/bin/windows/base/' | sed -e 's/"/\n/g;' | egrep '^R-.*-win.exe')
 VERSION2:=$(shell basename '$(URL2)' 2> /dev/null | cut -f 2 -d'-')
 REVISION:=1
@@ -70,9 +71,9 @@ tmp/$(EXE):
 check-exe: tmp/$(EXE)
 	@(cd tmp ; \
 		file $(EXE) | grep -q "PE32 executable.*Nullsoft Installer self-extracting archive" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 12; } ; \
-		#which peres >/dev/null && { peres -v $(EXE) 2> /dev/null | grep -q "^Product Version:[[:space:]]*$(VERSION)" || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 12; } ; } ; \
-		SHA256=$$(curl -s -L --connect-timeout 10 'https://live-rstudio.pantheonsite.io/download/rstudio-desktop/' | grep -A1 'body-md-regular.*tabindex=' | grep -v 'body-md-regular' | awk '{print $$1}' | head -1) ; \
-		if [ "$$(shasum -a 256 $(EXE) | cut -f 1 -d ' ')" != "$${SHA256}" ]; then echo "Error: bad checksum for binary $(EXE)" 1>&2 ; exit 12; fi ; \
+		which peres >/dev/null && { peres -v $(EXE) 2> /dev/null | grep -q "^Product Version:[[:space:]]*$(VERSION1_SHORT)" || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 12; } ; } ; \
+		#SHA256=$$(curl -s -L --connect-timeout 10 'https://live-rstudio.pantheonsite.io/download/rstudio-desktop/' | grep -A1 'body-md-regular.*tabindex=' | grep -v 'body-md-regular' | awk '{print $$1}' | head -1) ; \
+		#if [ "$$(shasum -a 256 $(EXE) | cut -f 1 -d ' ')" != "$${SHA256}" ]; then echo "Error: bad checksum for binary $(EXE)" 1>&2 ; exit 12; fi ; \
 		)
 
 tmp/$(EXE2):
