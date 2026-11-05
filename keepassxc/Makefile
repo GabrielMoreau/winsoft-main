@@ -3,12 +3,13 @@
 # KeepassXC
 #
 
+# https://github.com/keepassxreboot/keepassxc/releases/download/2.8.0/KeePassXC-2.8.0-x64.msi
 SOFT:=KeepassXC
 VERSION:=$(shell curl -s -L --connect-timeout 10 'https://github.com/keepassxreboot/keepassxc/releases/latest' | sed -e 's/[[:space:]]/\n/g;' | grep 'href="/keepassxreboot/keepassxc/releases/tag/' | cut -f 6 -d '/' | cut -f 1 -d '"')
 REVISION:=1
-URL:=https://github.com/keepassxreboot/keepassxc/releases/download/$(VERSION)/KeePassXC-$(VERSION)-Win64.msi
+URL:=https://github.com/keepassxreboot/keepassxc/releases/download/$(VERSION)/KeePassXC-$(VERSION)-x64.msi
 
-EXE:=KeePassXC-$(VERSION)-Win64.msi
+EXE:=KeePassXC-$(VERSION)-x64.msi
 REG_SEARCH:=KeePassXC
 
 IT_TEAM:=IT Support
