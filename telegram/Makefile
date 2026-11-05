@@ -2,13 +2,13 @@
 #
 # Telegram
 #
-
+# https://github.com/telegramdesktop/tdesktop/releases/download/v7.3.5/td-portable-win-x64-7.3.5.zip
 SOFT:=Telegram
-URL:=https://github.com$(shell curl -s -L --connect-timeout 10 'https://github.com/telegramdesktop/tdesktop/releases' | sed 's/"/\n/g;' | grep '^https://github.com/telegramdesktop/tdesktop/releases/expanded_assets' | xargs -r -n 1 curl -s -L | sed 's/"/\n/g;' | grep '/tportable-x64.*zip' | head -1)
+URL:=https://github.com$(shell curl -s -L --connect-timeout 10 'https://github.com/telegramdesktop/tdesktop/releases' | sed 's/"/\n/g;' | grep '^https://github.com/telegramdesktop/tdesktop/releases/expanded_assets' | xargs -r -n 1 curl -s -L | sed 's/"/\n/g;' | grep '/td-portable-win-x64-.*\.zip' | grep -v 'beta' | head -1)
 VERSION:=$(shell echo $(URL) | cut -f 8 -d '/' | sed -s 's/^v//;')
 REVISION:=1
 
-EXE:=tportable-x64.$(VERSION).zip
+EXE:=td-portable-win-x64-.$(VERSION).zip
 REG_SEARCH:=$(SOFT)
 
 IT_TEAM:=IT Support
