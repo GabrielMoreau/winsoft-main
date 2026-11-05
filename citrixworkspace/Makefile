@@ -6,10 +6,10 @@
 SOFT:=CitrixWorkspace
 URL_SEARCH:=$(shell curl -s -L --connect-timeout 10 'https://www.citrix.com/downloads/workspace-app/' | sed 's/"/\n/g;' | grep '/windows/workspace-app-for-windows-latest' | head -1)
 VERSION:=$(shell curl -s -L --connect-timeout 10 'https://www.citrix.com/$(URL_SEARCH)' | sed -e 's/[<>()]/\n/g;'|  grep '^Version: [[:digit:]]' | head -1 | cut -f 2 -d ' ')
-URL:=https:$(shell curl -s -L --connect-timeout 10 'https://www.citrix.com/$(URL_SEARCH)' | sed -e 's/"/\n/g;' | grep -E 'downloads.citrix.com.*/CitrixWorkspaceApp.exe.*__gda__' | head -1)
+URL:=https:$(shell curl -s -L --connect-timeout 10 'https://www.citrix.com/$(URL_SEARCH)' | sed -e 's/"/\n/g;' | grep 'downloads\.citrix\.com.*/CitrixWorkspaceApp_x64\.exe.*__gda__' | head -1)
 REVISION:=1
 
-EXE:=CitrixWorkspaceApp-$(VERSION).exe
+EXE:=CitrixWorkspaceApp-x64-$(VERSION).exe
 REG_SEARCH:=Citrix\\sWorkspace\\s\\d
 
 IT_TEAM:=IT Support
@@ -60,7 +60,7 @@ tmp/$(EXE):
 
 check-exe: tmp/$(EXE)
 	@(cd tmp ; \
-		file $(EXE) | grep -q 'PE32 executable' || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 12; } ; \
+		file $(EXE) | grep -q 'PE32+ executable' || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 12; } ; \
 		which peres >/dev/null && { peres -v $(EXE) 2> /dev/null | grep -q "^Product Version:[[:space:]]*$(VERSION)" || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 12; } ; } ;\
 		)
 

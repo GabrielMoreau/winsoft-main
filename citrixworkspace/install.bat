@@ -51,7 +51,7 @@ IF "%RETURNCODE%"=="0" SET "RETURNCODE=%ERRORLEVEL%"
 
 
 @ECHO [INFO] Silent install %softname%
-ScriptRunner.exe -appvscript CitrixWorkspaceApp-%softversion%.exe /silent /noreboot /AutoUpdateCheck=disabled /LOG="%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=600
+ScriptRunner.exe -appvscript CitrixWorkspaceApp-x64-%softversion%.exe /silent /noreboot /AutoUpdateCheck=disabled /LOG="%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=600
 IF "%RETURNCODE%"=="0" SET "RETURNCODE=%ERRORLEVEL%"
 
 
