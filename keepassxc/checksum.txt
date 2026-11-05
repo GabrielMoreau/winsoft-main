@@ -7,3 +7,4 @@ d940da0d5f009a3f9fa9e182acaa292c239a87066fbb7d37e6dfede1aab53982  KeePassXC-2.7.
 5f00c58a5878994663e217fab74e912b5f4544357759f2c2ae4d7e9fa0c5e549  KeePassXC-2.7.10-Win64.msi
 74abea9e12282cc2b0feb51ebc6db65299eb4ef0086e89cfad8dcaafc94a6f67  KeePassXC-2.7.11-Win64.msi
 feee096c1d5d0d7bb7b36b18174818f7bac889be7668c550ff0e5ef9206ea9a5  KeePassXC-2.7.12-Win64.msi
+4f105af5ba780428718c8be5614cf95deceed5cb3b474a9bd624c5df81cec6e5  KeePassXC-2.8.0-x64.msi
