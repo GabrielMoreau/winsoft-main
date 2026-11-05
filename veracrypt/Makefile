@@ -4,8 +4,8 @@
 #
 
 SOFT:=VeraCrypt
-URL:=$(shell curl -s -L --connect-timeout 10 'https://www.veracrypt.fr/en/Downloads.html' |sed -e 's/"/\n/g;' |egrep '/VeraCrypt_Setup_x64_.*\.msi$$')
-VERSION:=$(shell echo $(URL) | cut -f 4 -d '_' | sed -e 's/\.msi//;')
+URL:=$(shell curl -s -L --connect-timeout 10 'https://www.veracrypt.fr/en/Downloads.html' |sed -e 's/"/\n/g;' | grep '/VeraCrypt_Setup_x64_.*\.msi$$')
+VERSION:=$(shell basename '$(URL)' | cut -f 4 -d '_' | sed -e 's/\.msi//;')
 REVISION:=1
 
 EXE:=VeraCrypt-Setup-x64-$(VERSION).msi
