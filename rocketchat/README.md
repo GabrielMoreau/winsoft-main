@@ -22,3 +22,4 @@ Example :
  | HKLM | Rocket.Chat | Rocket.Chat Support | 4.9.1.0  | `{AF248CF3-5021-474D-A3DC-62E3466E6312}` | `MsiExec.exe /I{AF248CF3-5021-474D-A3DC-62E3466E6312}` |
  | HKLM | Rocket.Chat | Rocket.Chat Support | 4.12.0.0 | `{191BB24E-F027-46AA-B887-303AB4B825D3}` | `MsiExec.exe /I{191BB24E-F027-46AA-B887-303AB4B825D3}` |
  | HKLM | Rocket.Chat | Rocket.Chat Support | 4.18.2.0 | `{4EF322B7-34B2-4E1E-8144-41F0308FEEFF}` | `MsiExec.exe /I{4EF322B7-34B2-4E1E-8144-41F0308FEEFF}` |
+ | HKLM | Rocket.Chat | Rocket.Chat Support | 4.19.1.0 | `{77C90433-AF2D-4CB5-8D68-5FFBF7E3716B}` | `MsiExec.exe /I{77C90433-AF2D-4CB5-8D68-5FFBF7E3716B}` |
