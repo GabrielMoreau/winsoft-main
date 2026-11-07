@@ -111,7 +111,7 @@ ForEach ($Key in Get-ChildItem -Recurse $UninstallKeys) {
 ################################################################
 
 # Microsoft Windows Desktop Runtime
-$WDRVersion8 = $Config.WDRVersion8
+$WDRVersion10 = $Config.WDRVersion10
 $RefName = 'Microsoft Windows Desktop Runtime'
 $WindowsDesktopRuntime = $True
 
@@ -127,21 +127,21 @@ ForEach ($Key in Get-ChildItem -Recurse $UninstallKeys) {
 	# Only register Key with nice version number
 	If ($Uninstall -match '^MsiExec.exe') { Continue }
 
-	If ($App.DisplayName -match 'Runtime - 8\..*x64') {
-		If ($DisplayVersion -lt (ToVersion($WDRVersion8))) {
+	If ($App.DisplayName -match 'Runtime 10\..*x64') {
+		If ($DisplayVersion -lt (ToVersion($WDRVersion10))) {
 			$WindowsDesktopRuntime = $True
 		} Else {
 			$WindowsDesktopRuntime = $False
-			Write-Output "Note: $RefName already at version $DisplayVersion (>= $WDRVersion8)"
+			Write-Output "Note: $RefName already at version $DisplayVersion (>= $WDRVersion10)"
 		}
 	}
 }
 
 If ($WindowsDesktopRuntime -eq $True) {
-	$Exe = "windowsdesktop-runtime-$WDRVersion8-win-x64.exe"
+	$Exe = "windowsdesktop-runtime-$WDRVersion10-win-x64.exe"
 	$Args = '/install /quiet /norestart'
 	If (Test-Path -Path "$Exe") {
-		Write-Output "TryInstall: $RefName at version $WDRVersion8"
+		Write-Output "TryInstall: $RefName at version $WDRVersion10"
 		Run-Exec -FilePath "$Exe" -ArgumentList "$Args" -Name "$RefName"
 	}
 }

@@ -13,9 +13,9 @@ USERAGENT:=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:122.0) Gecko/20100101 Fi
 EXE:=$(shell basename '$(URL)' 2> /dev/null)
 REG_SEARCH:=Dell\\sCommand\\s.\\sUpdate
 
-URL8:=$(shell curl -s -L https://dotnet.microsoft.com/$(shell curl -s -L --connect-timeout 10 'https://dotnet.microsoft.com/en-us/download/dotnet/8.0' | sed -e 's/"/\n/g;' | grep 'thank-you/runtime-desktop.*windows-x64-installer'  | head -1) | sed -e 's/"/\n/g;' | grep '^https.*windowsdesktop-runtime-.*-win-x64.exe' | head -1)
-VERSION8:=8.$(shell basename '$(URL8)' 2>/dev/null | cut -f 3 -d '-' | cut -f 2- -d '.')
-EXE8:=windowsdesktop-runtime-$(VERSION8)-win-x64.exe
+URL10:=$(shell curl -s -L --connect-timeout 10 https://dotnet.microsoft.com/$(shell curl -s -L --connect-timeout 10 'https://dotnet.microsoft.com/en-us/download/dotnet/10.0' | sed -e 's/"/\n/g;' | grep 'thank-you/runtime-desktop.*windows-x64-installer'  | head -1) | sed -e 's/"/\n/g;' | grep '^https.*windowsdesktop-runtime-.*-win-x64.exe' | head -1)
+VERSION10:=10.$(shell basename '$(URL10)' 2>/dev/null | cut -f 3 -d '-' | cut -f 2- -d '.')
+EXE10:=windowsdesktop-runtime-$(VERSION10)-win-x64.exe
 
 IT_TEAM:=IT Support
 LOGDIR:=%WINDIR%\\Logs
@@ -44,16 +44,19 @@ version:
 	@echo "URL: $(URL)"
 	@echo "EXE: $(EXE)"
 	@echo "VERSION_LOW: $(VERSION_LOW)"
+	@echo "VERSION10: $(VERSION10)"
+	@echo "URL10: $(URL10)"
+	@echo "EXE10: $(EXE10)"
 
 checksum: check-version
 	@mkdir -p tmp
 	@(cd tmp ; \
 		grep -q "^$$(shasum -a 256 $(EXE))$$"  ../checksum.txt || { shasum -a 256 "$(EXE)"  | sed -e 's#tmp/##;' >> ../checksum.txt ; } ; \
-		grep -q "^$$(shasum -a 256 $(EXE8))$$" ../checksum.txt || { shasum -a 256 "$(EXE8)" | sed -e 's#tmp/##;' >> ../checksum.txt ; } ; \
+		grep -q "^$$(shasum -a 256 $(EXE10))$$" ../checksum.txt || { shasum -a 256 "$(EXE10)" | sed -e 's#tmp/##;' >> ../checksum.txt ; } ; \
 		)
 	@if [ $$(( $$(date '+%s') - $$(stat -c '%Y' checksum.txt) )) -lt 60 ]; then tail -6 checksum.txt; fi
 	@(cd tmp ; \
-		grep -q "^$(VERSION8)[[:space:]]" ../version.txt || { (echo -n '$(VERSION8) ' ; peres -v $(EXE8) 2> /dev/null | grep '^Product Version' | awk '{print $$3}') >> ../version.txt ; } ; \
+		grep -q "^$(VERSION10)[[:space:]]" ../version.txt || { (echo -n '$(VERSION10) ' ; peres -v $(EXE10) 2> /dev/null | grep '^Product Version' | awk '{print $$3}') >> ../version.txt ; } ; \
 		)
 	@if [ $$(( $$(date '+%s') - $$(stat -c '%Y' version.txt) )) -lt 60 ]; then tail -3 version.txt; fi
 
@@ -71,34 +74,34 @@ tmp/$(EXE):
 		grep -q "^$$(shasum -a 256 $(EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE)" ; \
 		)
 
-tmp/$(EXE8):
+tmp/$(EXE10):
 	@mkdir -p tmp
 	@(cd tmp ; \
 		rm -f windowsdesktop-runtime-8.*.exe 2>/dev/null ; \
-		curl -# -L --connect-timeout 10 -o "$(EXE8)" "$(URL8)" ; \
-		grep -q "^$$(shasum -a 256 $(EXE8))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE8)" ; \
+		curl -# -L --connect-timeout 10 -o "$(EXE10)" "$(URL10)" ; \
+		grep -q "^$$(shasum -a 256 $(EXE10))$$" ../checksum.txt || echo "Error: bad checksum for binary $(EXE10)" ; \
 		)
 
-check-exe: tmp/$(EXE) tmp/$(EXE8)
+check-exe: tmp/$(EXE) tmp/$(EXE10)
 	@(cd tmp ; \
 		file $(EXE) | grep -Eq "PE32.? executable" || { echo "Error: bad format for binary $(EXE)" 1>&2 ; exit 12; } ; \
 		#which peres >/dev/null && { peres -v $(EXE) 2> /dev/null | grep -q "^Product Version:[[:space:]]*$(VERSION)" || { echo "Error: bad version for binary $(EXE)" 1>&2 ; exit 12; } ; } ; \
 		)
 	@(cd tmp ; \
-		file $(EXE8) | grep -q "PE32 executable" || { echo "Error: bad format for binary $(EXE8)" 1>&2 ; exit 12; } ; \
-		which peres >/dev/null && { peres -v $(EXE8) 2> /dev/null | grep -q "^Product Version:[[:space:]]*$(VERSION8)" || { echo "Error: bad version for binary $(EXE8)" 1>&2 ; exit 12; } ; } ;\
+		file $(EXE10) | grep -q "PE32 executable" || { echo "Error: bad format for binary $(EXE10)" 1>&2 ; exit 12; } ; \
+		which peres >/dev/null && { peres -v $(EXE10) 2> /dev/null | grep -q "^Product Version:[[:space:]]*$(VERSION10)" || { echo "Error: bad version for binary $(EXE10)" 1>&2 ; exit 12; } ; } ;\
 		)
 
 tmp/install.bat: install.bat Makefile tmp/$(EXE)
 	@mkdir -p tmp
-	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#; s/__EXE__/$(EXE)/; s/__VERSION_LOW__/$(VERSION_LOW)/; s/__VERSION8__/$(VERSION8)/;' $< > $@
+	@sed -e 's/__VERSION__/$(VERSION)/; s#__LOGDIR__#$(LOGDIR)#; s/__EXE__/$(EXE)/; s/__VERSION_LOW__/$(VERSION_LOW)/; s/__VERSION10__/$(VERSION10)/;' $< > $@
 
 tmp/winsoft-config.ini: winsoft-config.ini Makefile tmp/$(EXE)
 	@mkdir -p tmp
-	@sed -e 's/__VERSION__/$(VERSION)/; s/__REG_SEARCH__/$(REG_SEARCH)/; s/__VERSION8__/$(VERSION8)/;' $< > $@
+	@sed -e 's/__VERSION__/$(VERSION)/; s/__REG_SEARCH__/$(REG_SEARCH)/; s/__VERSION10__/$(VERSION10)/;' $< > $@
 
-%.zip: Makefile tmp/install.bat pre-install.ps1 post-install.ps1 tmp/winsoft-config.ini tmp/$(EXE) tmp/$(EXE8)
+%.zip: Makefile tmp/install.bat pre-install.ps1 post-install.ps1 tmp/winsoft-config.ini tmp/$(EXE) tmp/$(EXE10)
 	@rm -f $@
 	@zip -Xr ./$@ pre-install.ps1 post-install.ps1
-	@(cd tmp; zip -Xr ../$@ install.bat winsoft-config.ini $(EXE) $(EXE8))
+	@(cd tmp; zip -Xr ../$@ install.bat winsoft-config.ini $(EXE) $(EXE10))
 	@chmod ugo+rw $@

@@ -20,7 +20,7 @@ EXIT /B
 SET "softversion=__VERSION__"
 SET "softexe=__EXE__"
 SET "softversionlow=__VERSION_LOW__"
-
+SETLOCAL EnableDelayedExpansion
 
 @ECHO [INFO] Search PowerShell
 SET "pwrsh=%WINDIR%\System32\WindowsPowerShell\V1.0\powershell.exe"
@@ -43,11 +43,11 @@ IF "%RETURNCODE%"=="0" SET "RETURNCODE=%ERRORLEVEL%"
 IF "%softexe:Universal=%"=="%softexe%" (
   @ECHO [INFO] Installation Classique
   ScriptRunner.exe -appvscript %softexe% /passthrough /S /v/qn -appvscriptrunnerparameters -wait -timeout=300
-  IF "%RETURNCODE%"=="0" SET "RETURNCODE=%ERRORLEVEL%"
+  IF "%RETURNCODE%"=="0" SET "RETURNCODE=!ERRORLEVEL!"
 ) ELSE (
   @ECHO [INFO] Installation UWA
   ScriptRunner.exe -appvscript %softexe% /s /l="%logdir%\%softname%-MSI.log" -appvscriptrunnerparameters -wait -timeout=300
-  IF "%RETURNCODE%"=="0" SET "RETURNCODE=%ERRORLEVEL%"
+  IF "%RETURNCODE%"=="0" SET "RETURNCODE=!ERRORLEVEL!"
 )
 
 
