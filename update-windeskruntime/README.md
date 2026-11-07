@@ -8,7 +8,8 @@ The package scans your installation and updates only the runtimes required.
 
 * Website : https://dotnet.microsoft.com/
 
-* Direct download link : https://dotnet.microsoft.com/en-us/download/dotnet/8.0,
+* Direct download link : https://dotnet.microsoft.com/en-us/download/dotnet/10.0,
+  https://dotnet.microsoft.com/en-us/download/dotnet/8.0,
   https://dotnet.microsoft.com/en-us/download/dotnet/7.0,
   https://dotnet.microsoft.com/en-us/download/dotnet/6.0,
   https://dotnet.microsoft.com/en-us/download/dotnet/5.0,
@@ -39,3 +40,9 @@ Example :
  | HKLM | Microsoft Windows Desktop Runtime - 8.0.21 (x64) | Microsoft Corporation | 64.84.40919  | `{A32777AD-F93A-4F26-BEE6-9C5961EA71D6}` | `MsiExec.exe /X{A32777AD-F93A-4F26-BEE6-9C5961EA71D6}` |
  | HKLM | Microsoft Windows Desktop Runtime - 8.0.21 (x86) | Microsoft Corporation | 8.0.21.35325 | `{a28e660a-e516-486f-9b6b-834d8e760ac1}` | `"C:\ProgramData\Package Cache\{a28e660a-e516-486f-9b6b-834d8e760ac1}\windowsdesktop-runtime-8.0.21-win-x86.exe"  /uninstall` |
  | HKLM | Microsoft Windows Desktop Runtime - 8.0.21 (x86) | Microsoft Corporation | 64.84.40919  | `{7D7A1D84-1363-4D33-B366-21F54AC4917D}` | `MsiExec.exe /X{7D7A1D84-1363-4D33-B366-21F54AC4917D}` |
+ | HKLM | Microsoft Windows Desktop Runtime - 8.0.33 (x64) | Microsoft Corporation | 64.132.61678 | `{711FC301-B296-4A6D-8A4F-EB1F70A2FCA3}` | `MsiExec.exe /X{711FC301-B296-4A6D-8A4F-EB1F70A2FCA3}` | 
+ | HKLM | Microsoft Windows Desktop Runtime - 8.0.33 (x64) | Microsoft Corporation | 8.0.33.36622 | `{4d0027d4-962f-4f65-a01b-f8764a5f4220}` | `"C:\ProgramData\Package Cache\{4d0027d4-962f-4f65-a01b-f8764a5f4220}\windowsdesktop-runtime-8.0.33-win-x64.exe"  /uninstall` |
+ | HKLM | Microsoft Windows Desktop Runtime - 8.0.33 (x86) | Microsoft Corporation | 8.0.33.36622 | `{071a6a7c-c07e-4161-9f82-631dbce55049}` | `"C:\ProgramData\Package Cache\{071a6a7c-c07e-4161-9f82-631dbce55049}\windowsdesktop-runtime-8.0.33-win-x86.exe"  /uninstall` |
+ | HKLM | Microsoft Windows Desktop Runtime - 8.0.33 (x86) | Microsoft Corporation | 64.132.61678 | `{3B05CB49-0C0D-44E4-85E7-109BFEEEB098}` | `MsiExec.exe /X{3B05CB49-0C0D-44E4-85E7-109BFEEEB098}` |
+ | HKLM | Microsoft Windows Desktop Runtime - 10.0.14 (x64) | Microsoft Corporation | 80.56.61678 | `{64BFC674-D664-480B-AFF2-D47C5531D6D2}` | `MsiExec.exe /X{64BFC674-D664-480B-AFF2-D47C5531D6D2}` |
+ | HKLM | Microsoft Windows Desktop Runtime 10.0.14 (x64) | Microsoft Corporation | 10.0.14.50000 | `{29A18B06-B190-4463-9FFC-BC0D70D80B7C}` | `"C:\ProgramData\Package Cache\{29A18B06-B190-4463-9FFC-BC0D70D80B7C}\windowsdesktop-runtime-10.0.14-win-x64.exe"  /uninstall` |
