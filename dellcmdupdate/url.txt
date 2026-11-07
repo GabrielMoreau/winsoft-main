@@ -12,5 +12,5 @@
 #5.7.1	https://dl.dell.com/FOLDER14847280M/2/Dell-Command-Update-for-Win32_61R17_WIN64_5.7.1_A00.EXE
 5.7.1	https://dl.dell.com/FOLDER14847331M/2/Dell-Command-Update-Windows-Universal-Application_P0P70_WIN64_5.7.1_A00.EXE
 #5.7.1	https://dl.dell.com/FOLDER14847475M/2/Dell-Command-Update-Windows-Universal-Application_44XRV_WINARM64_5.7.1_A00.EXE
-#5.7.2	https://dl.dell.com/FOLDER15013620M/1/Dell-Command-Update-Windows-Universal-Application_M9H5F_WIN64_5.7.2_A00.EXE
-5.7.2	https://dl.dell.com/FOLDER15013494M/2/Dell-Command-Update-for-Win32_WYJ59_WIN64_5.7.2_A00.EXE
+5.7.2	https://dl.dell.com/FOLDER15013620M/1/Dell-Command-Update-Windows-Universal-Application_M9H5F_WIN64_5.7.2_A00.EXE
+#5.7.2	https://dl.dell.com/FOLDER15013494M/2/Dell-Command-Update-for-Win32_WYJ59_WIN64_5.7.2_A00.EXE
