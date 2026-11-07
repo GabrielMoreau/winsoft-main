@@ -75,6 +75,7 @@ $Version5 = $Config.Version5
 $Version6 = $Config.Version6
 $Version7 = $Config.Version7
 $Version8 = $Config.Version8
+$Version10 = $Config.Version10
 
 # Install last version
 ForEach ($Key in Get-ChildItem -Recurse $UninstallKeys) {
@@ -137,6 +138,18 @@ ForEach ($Key in Get-ChildItem -Recurse $UninstallKeys) {
 			}
 		} Else {
 			Write-Output "Note: $RefName already at version $DisplayVersion (>= $Version8)"
+		}
+	}
+	ElseIf ($DisplayName -match 'Desktop Runtime 10\..*x64') {
+		If ($DisplayVersion -lt (ToVersion($Version10))) {
+			$Exe = 'windowsdesktop-runtime-$Version10-win-x64.exe'
+			$Args = '/install /quiet /norestart'
+			If (Test-Path -Path "$Exe") {
+				Write-Output "Warn: Update $RefName $DisplayVersion to version $Version10"
+				Run-Exec -FilePath "$Exe" -ArgumentList "$Args" -Name "$RefName $Version10"
+			}
+		} Else {
+			Write-Output "Note: $RefName already at version $DisplayVersion (>= $Version10)"
 		}
 	}
 }
