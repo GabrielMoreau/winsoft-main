@@ -57,7 +57,7 @@ IF "%RETURNCODE%"=="0" SET "RETURNCODE=%ERRORLEVEL%"
 
 
 @ECHO [INFO] Silent install %softname%
-ScriptRunner.exe -appvscript RStudio-%softversion1%.exe /S -appvscriptrunnerparameters -wait -timeout=600
+ScriptRunner.exe -appvscript RStudio-%softversion1%.exe /allusers /S -appvscriptrunnerparameters -wait -timeout=600
 IF "%RETURNCODE%"=="0" SET "RETURNCODE=%ERRORLEVEL%"
 
 
