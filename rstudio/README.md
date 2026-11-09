@@ -29,3 +29,12 @@ Example :
  | HKLM | RStudio | Posit Software | 2026.01.1+403 | `RStudio` | `C:\Program Files\RStudio\Uninstall.exe` |
  | HKLM | RStudio | Posit Software | 2026.07.1+147 | `RStudio` | `C:\Program Files\RStudio\Uninstall.exe` |
  | HKLM | RStudio | Posit Software | 2026.10.1+239 | `RStudio` | `"C:\Program Files\RStudio\Uninstall.exe" /allusers` |
+
+
+## Specific R register key
+
+Example :
+
+ | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
+ |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
+ | HKLM | R for Windows 4.6.2 | R Core Team | 4.6.2 | `R for Windows 4.6.2_is1` | `"C:\Program Files\R\R-4.6.2\unins000.exe"` |
