@@ -11,8 +11,8 @@ version deletes older versions of R.
 * Wikipedia : https://en.wikipedia.org/wiki/RStudio
 
 * Download : https://posit.co/download/rstudio-desktop/, https://cloud.r-project.org/bin/windows/base/
+* Release notes : https://docs.posit.co/ide/news/
 * Silent install : https://silentinstallhq.com/rstudio-silent-install-how-to-guide/
-
 
 ## Register Key
 
@@ -24,3 +24,4 @@ Example :
  | HKLM | RStudio | Posit Software | 2025.09.1+401 | `RStudio` | `C:\Program Files\RStudio\Uninstall.exe` |
  | HKLM | RStudio | Posit Software | 2025.09.2+418 | `RStudio` | `C:\Program Files\RStudio\Uninstall.exe` |
  | HKLM | RStudio | Posit Software | 2026.01.1+403 | `RStudio` | `C:\Program Files\RStudio\Uninstall.exe` |
+ | HKLM | RStudio | Posit Software | 2026.07.1+147 | `RStudio` | `C:\Program Files\RStudio\Uninstall.exe` |
