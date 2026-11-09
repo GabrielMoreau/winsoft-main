@@ -14,6 +14,9 @@ version deletes older versions of R.
 * Release notes : https://docs.posit.co/ide/news/
 * Silent install : https://silentinstallhq.com/rstudio-silent-install-how-to-guide/
 
+New silent install option `/allusers` since version `2026.08.0`.
+
+
 ## Register Key
 
 Example :
@@ -25,3 +28,4 @@ Example :
  | HKLM | RStudio | Posit Software | 2025.09.2+418 | `RStudio` | `C:\Program Files\RStudio\Uninstall.exe` |
  | HKLM | RStudio | Posit Software | 2026.01.1+403 | `RStudio` | `C:\Program Files\RStudio\Uninstall.exe` |
  | HKLM | RStudio | Posit Software | 2026.07.1+147 | `RStudio` | `C:\Program Files\RStudio\Uninstall.exe` |
+ | HKLM | RStudio | Posit Software | 2026.10.1+239 | `RStudio` | `"C:\Program Files\RStudio\Uninstall.exe" /allusers` |
