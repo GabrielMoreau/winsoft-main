@@ -77,3 +77,4 @@ aef613e4bcc80150dcd77ed0a8faa00ce59d9c894b6b8bedc6c74d29e6f8178e  Firefox-Setup-
 1090caf0c902e697a6a665bac4a68f298a91628e21ea24ebd4ece774f19e6c7d  Firefox-Setup-153.5.0-esr.msi
 8a2e1a346c9d01b06807f85ffd916670a497d533b1d702aa7a7aa6855691793e  Firefox-Setup-153.5.1-esr.msi
 f65ee166ae2e217f9af5b9c9ca839fb47f3e571cc7e6efe8463823e5d916fcc7  Firefox-Setup-153.6.0-esr.msi
+22db7af7c724f2fca434e02a4c56103718314a65550d0df4be73df9f5895bb10  Firefox-Setup-153.7.0-esr.msi
