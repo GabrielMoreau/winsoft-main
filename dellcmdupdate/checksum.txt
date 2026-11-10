@@ -32,3 +32,4 @@ b405681cfe05bf61b4e129550d8d4134a1c42bb648f5c9d9fb980a1edb918ee9  Dell-Command-U
 4de14de0b327e801d7a691cb1afc8a00db5313a698ef53b979fc6f84fce631de  windowsdesktop-runtime-8.0.33-win-x64.exe
 5c20e1a352fdbc0a9759504db37c7b8c694f4024f5f5313c5130c0959be8d484  Dell-Command-Update-for-Win32_WYJ59_WIN64_5.7.2_A00.EXE
 91c2795a7b1e2480caa83fce9514dc2e2d21e277d9a297311faba6040bad7330  windowsdesktop-runtime-10.0.14-win-x64.exe
+e61b030c1673edfa3c0844502eff83198c46af9e7df70dfc6e2efc5b11ea513a  windowsdesktop-runtime-10.0.15-win-x64.exe
