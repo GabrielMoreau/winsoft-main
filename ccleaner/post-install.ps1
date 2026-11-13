@@ -96,7 +96,7 @@ If (Test-Path "C:\Users\Public\Desktop\CCleaner.lnk" -PathType leaf) {
 
 ########################################################################
 
-Function VersionReduce {
+Function VersionReduce2 {
 	Param (
 		[Parameter(Mandatory = $True)] [version]$Version
 	)
@@ -115,9 +115,9 @@ ForEach ($Key in Get-ChildItem -Recurse $UninstallKeys) {
 	$KeyProduct     = $Key.PSChildName
 	Write-Output "Installed: $($App.DisplayName) / $DisplayVersion / $KeyProduct / $($App.UninstallString)"
 
-	If ((VersionReduce -Version $DisplayVersion) -gt (VersionReduce -Version $RefVersion)) {
+	If ((VersionReduce2 -Version $DisplayVersion) -gt (VersionReduce2 -Version $RefVersion)) {
 		$ReturnCode = [Math]::Min($ReturnCode, 141)
-	} ElseIf ((VersionReduce -Version $DisplayVersion) -eq (VersionReduce -Version $RefVersion)) {
+	} ElseIf ((VersionReduce2 -Version $DisplayVersion) -eq (VersionReduce2 -Version $RefVersion)) {
 		$ReturnCode = 0
 	} Else {
 		$ReturnCode = [Math]::Min($ReturnCode, 142)
