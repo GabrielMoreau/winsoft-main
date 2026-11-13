@@ -30,7 +30,7 @@ URL10:=$(shell curl -s -L --connect-timeout 10 https://dotnet.microsoft.com/$(sh
 VERSION10:=10.$(shell basename '$(URL10)' 2>/dev/null | cut -f 3 -d '-' | cut -f 2- -d '.')
 EXE10:=windowsdesktop-runtime-$(VERSION10)-win-x64.exe
 
-VERSION:=$(shell ./sum-versions $(VERSION5) $(VERSION6) $(VERSION7) $(VERSION8) $(VERSION10))
+VERSION:=$(shell ./sum-versions $(VERSION5) $(VERSION6) $(VERSION7) $(VERSION8) $(VERSION9) $(VERSION10))
 REG_SEARCH:=Microsoft\\sWindows\\sDesktop\\sRuntime
 
 IT_TEAM:=IT Support
