@@ -84,7 +84,8 @@ Write-Output " * Log dir $LogDir"
 
 # Install last version
 ForEach ($Key in Get-ChildItem -Recurse $UninstallKeys) {
-	$App = Get-ItemProperty -Path $Key.PSPath
+	$App = Get-ItemProperty -Path $Key.PSPath -ErrorAction SilentlyContinue
+	If (-not $App.DisplayName) { Continue }
 	If ($App.DisplayName -notmatch $RefName) { Continue }
 
 	$DisplayVersion = ToVersion $App.DisplayVersion
