@@ -79,7 +79,7 @@ Function VersionReduce2 {
 	)
 
 	$Build = 0
-	Return [version]::New($Version.Major, $Version.Minor)
+	Return [version]::New($Version.Major, $Version.Minor, $Build)
 }
 
 # View
