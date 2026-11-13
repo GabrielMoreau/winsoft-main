@@ -105,12 +105,12 @@ ForEach ($Key in Get-ChildItem -Recurse $UninstallKeys) {
 			$Args = '/install /quiet /norestart'
 			If (Test-Path -Path "$Exe") {
 				Write-Output " Warn: Update $RefName $DisplayVersion to version $Version5"
-				Run-Exec -FilePath "$Exe" -ArgumentList "$Args" -Name "$RefName $Version5"
+				Run-Exec -FilePath "$Exe" -ArgumentList "$Args" -Name "$SoftName $Version5"
 			} Else {
 				Write-Output " Error: Installer not exist $Exe"
 			}
 		} Else {
-			Write-Output " Note: $RefName already at version $DisplayVersion (>= $Version5)"
+			Write-Output " Note: $SoftName already at version $DisplayVersion (>= $Version5)"
 		}
 	}
 	ElseIf ($DisplayName -match 'Runtime - 6\..*x64') {
@@ -119,12 +119,12 @@ ForEach ($Key in Get-ChildItem -Recurse $UninstallKeys) {
 			$Args = '/install /quiet /norestart'
 			If (Test-Path -Path "$Exe") {
 				Write-Output " Warn: Update $RefName $DisplayVersion to version $Version6"
-				Run-Exec -FilePath "$Exe" -ArgumentList "$Args" -Name "$RefName $Version6"
+				Run-Exec -FilePath "$Exe" -ArgumentList "$Args" -Name "$SoftName $Version6"
 			} Else {
 				Write-Output " Error: Installer not exist $Exe"
 			}
 		} Else {
-			Write-Output " Note: $RefName already at version $DisplayVersion (>= $Version6)"
+			Write-Output " Note: $SoftName already at version $DisplayVersion (>= $Version6)"
 		}
 	}
 	ElseIf ($DisplayName -match 'Runtime - 7\..*x64') {
@@ -133,12 +133,12 @@ ForEach ($Key in Get-ChildItem -Recurse $UninstallKeys) {
 			$Args = '/install /quiet /norestart'
 			If (Test-Path -Path "$Exe") {
 				Write-Output " Warn: Update $RefName $DisplayVersion to version $Version7"
-				Run-Exec -FilePath "$Exe" -ArgumentList "$Args" -Name "$RefName $Version7"
+				Run-Exec -FilePath "$Exe" -ArgumentList "$Args" -Name "$SoftName $Version7"
 			} Else {
 				Write-Output " Error: Installer not exist $Exe"
 			}
 		} Else {
-			Write-Output " Note: $RefName already at version $DisplayVersion (>= $Version7)"
+			Write-Output " Note: $SoftName already at version $DisplayVersion (>= $Version7)"
 		}
 	}
 	ElseIf ($DisplayName -match 'Runtime - 8\..*x64') {
@@ -147,12 +147,12 @@ ForEach ($Key in Get-ChildItem -Recurse $UninstallKeys) {
 			$Args = '/install /quiet /norestart /log "' + "$LogDir\$SoftName" + '-8' + '-MSI.log"'
 			If (Test-Path -Path "$Exe") {
 				Write-Output " Warn: Update $RefName $DisplayVersion to version $Version8"
-				Run-Exec -FilePath "$Exe" -ArgumentList "$Args" -Name "$RefName $Version8"
+				Run-Exec -FilePath "$Exe" -ArgumentList "$Args" -Name "$SoftName $Version8"
 			} Else {
 				Write-Output " Error: Installer not exist $Exe"
 			}
 		} Else {
-			Write-Output " Note: $RefName already at version $DisplayVersion (>= $Version8)"
+			Write-Output " Note: $SoftName already at version $DisplayVersion (>= $Version8)"
 		}
 	}
 	ElseIf ($DisplayName -match 'Runtime - 9\..*x64') {
@@ -161,12 +161,12 @@ ForEach ($Key in Get-ChildItem -Recurse $UninstallKeys) {
 			$Args = '/install /quiet /norestart /log "' + "$LogDir\$SoftName" + '-9' + '-MSI.log"'
 			If (Test-Path -Path "$Exe") {
 				Write-Output " Warn: Update $RefName $DisplayVersion to version $Version9"
-				Run-Exec -FilePath "$Exe" -ArgumentList "$Args" -Name "$RefName $Version9"
+				Run-Exec -FilePath "$Exe" -ArgumentList "$Args" -Name "$SoftName $Version9"
 			} Else {
 				Write-Output " Error: Installer not exist $Exe"
 			}
 		} Else {
-			Write-Output " Note: $RefName already at version $DisplayVersion (>= $Version9)"
+			Write-Output " Note: $SoftName already at version $DisplayVersion (>= $Version9)"
 		}
 	}
 	ElseIf ($DisplayName -match 'Desktop Runtime 10\..*x64') {
@@ -175,12 +175,12 @@ ForEach ($Key in Get-ChildItem -Recurse $UninstallKeys) {
 			$Args = '/install /quiet /norestart /log "' + "$LogDir\$SoftName" + '-8' + '-MSI.log"'
 			If (Test-Path -Path "$Exe") {
 				Write-Output " Warn: Update $RefName $DisplayVersion to version $Version10"
-				Run-Exec -FilePath "$Exe" -ArgumentList "$Args" -Name "$RefName $Version10"
+				Run-Exec -FilePath "$Exe" -ArgumentList "$Args" -Name "$SoftName $Version10"
 			} Else {
 				Write-Output " Error: Installer not exist $Exe"
 			}
 		} Else {
-			Write-Output " Note: $RefName already at version $DisplayVersion (>= $Version10)"
+			Write-Output " Note: $SoftName already at version $DisplayVersion (>= $Version10)"
 		}
 	} Else {
 		Write-Output " Warn: Unknown name $DisplayName"
