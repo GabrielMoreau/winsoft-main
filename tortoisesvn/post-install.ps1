@@ -78,8 +78,7 @@ Function VersionReduce2 {
 		[Parameter(Mandatory = $True)] [version]$Version
 	)
 
-	$Build = 0
-	Return [version]::New($Version.Major, $Version.Minor, $Build)
+	Return [version]::New($Version.Major, $Version.Minor, 0)
 }
 
 # View
