@@ -77,6 +77,11 @@ $Version7 = $Config.Version7
 $Version8 = $Config.Version8
 $Version10 = $Config.Version10
 
+$SoftName = $Config.Name
+$LogDir = [Environment]::ExpandEnvironmentVariables($Config.LogDir)
+Write-Output " * Name: $SoftName"
+Write-Output " * Log dir $LogDir"
+
 # Install last version
 ForEach ($Key in Get-ChildItem -Recurse $UninstallKeys) {
 	$App = Get-ItemProperty -Path $Key.PSPath
@@ -94,65 +99,79 @@ ForEach ($Key in Get-ChildItem -Recurse $UninstallKeys) {
 
 	If ($DisplayName -match 'Runtime - 5\..*x64') {
 		If ($DisplayVersion -lt (ToVersion($Version5))) {
-			$Exe = 'windowsdesktop-runtime-$Version5-win-x64.exe'
+			$Exe = 'windowsdesktop-runtime-' + "$Version5" + '-win-x64.exe'
 			$Args = '/install /quiet /norestart'
 			If (Test-Path -Path "$Exe") {
-				Write-Output "Warn: Update $RefName $DisplayVersion to version $Version5"
+				Write-Output " Warn: Update $RefName $DisplayVersion to version $Version5"
 				Run-Exec -FilePath "$Exe" -ArgumentList "$Args" -Name "$RefName $Version5"
+			} Else {
+				Write-Output " Error: Installer not exist $Exe"
 			}
 		} Else {
-			Write-Output "Note: $RefName already at version $DisplayVersion (>= $Version5)"
+			Write-Output " Note: $RefName already at version $DisplayVersion (>= $Version5)"
 		}
 	}
 	ElseIf ($DisplayName -match 'Runtime - 6\..*x64') {
 		If ($DisplayVersion -lt (ToVersion($Version6))) {
-			$Exe = 'windowsdesktop-runtime-$Version6-win-x64.exe'
+			$Exe = 'windowsdesktop-runtime-' + "$Version6" + '-win-x64.exe'
 			$Args = '/install /quiet /norestart'
 			If (Test-Path -Path "$Exe") {
-				Write-Output "Warn: Update $RefName $DisplayVersion to version $Version6"
+				Write-Output " Warn: Update $RefName $DisplayVersion to version $Version6"
 				Run-Exec -FilePath "$Exe" -ArgumentList "$Args" -Name "$RefName $Version6"
+			} Else {
+				Write-Output " Error: Installer not exist $Exe"
 			}
 		} Else {
-			Write-Output "Note: $RefName already at version $DisplayVersion (>= $Version6)"
+			Write-Output " Note: $RefName already at version $DisplayVersion (>= $Version6)"
 		}
 	}
 	ElseIf ($DisplayName -match 'Runtime - 7\..*x64') {
 		If ($DisplayVersion -lt (ToVersion($Version7))) {
-			$Exe = 'windowsdesktop-runtime-$Version7-win-x64.exe'
+			$Exe = 'windowsdesktop-runtime-' + "$Version7" + '-win-x64.exe'
 			$Args = '/install /quiet /norestart'
 			If (Test-Path -Path "$Exe") {
-				Write-Output "Warn: Update $RefName $DisplayVersion to version $Version7"
+				Write-Output " Warn: Update $RefName $DisplayVersion to version $Version7"
 				Run-Exec -FilePath "$Exe" -ArgumentList "$Args" -Name "$RefName $Version7"
+			} Else {
+				Write-Output " Error: Installer not exist $Exe"
 			}
 		} Else {
-			Write-Output "Note: $RefName already at version $DisplayVersion (>= $Version7)"
+			Write-Output " Note: $RefName already at version $DisplayVersion (>= $Version7)"
 		}
 	}
 	ElseIf ($DisplayName -match 'Runtime - 8\..*x64') {
 		If ($DisplayVersion -lt (ToVersion($Version8))) {
-			$Exe = 'windowsdesktop-runtime-$Version8-win-x64.exe'
-			$Args = '/install /quiet /norestart'
+			$Exe = 'windowsdesktop-runtime-' + "$Version8" + '-win-x64.exe'
+			$Args = '/install /quiet /norestart /log "' + "$LogDir\$SoftName" + '-8' + '-MSI.log"'
 			If (Test-Path -Path "$Exe") {
-				Write-Output "Warn: Update $RefName $DisplayVersion to version $Version8"
+				Write-Output " Warn: Update $RefName $DisplayVersion to version $Version8"
 				Run-Exec -FilePath "$Exe" -ArgumentList "$Args" -Name "$RefName $Version8"
+			} Else {
+				Write-Output " Error: Installer not exist $Exe"
 			}
 		} Else {
-			Write-Output "Note: $RefName already at version $DisplayVersion (>= $Version8)"
+			Write-Output " Note: $RefName already at version $DisplayVersion (>= $Version8)"
 		}
 	}
 	ElseIf ($DisplayName -match 'Desktop Runtime 10\..*x64') {
 		If ($DisplayVersion -lt (ToVersion($Version10))) {
-			$Exe = 'windowsdesktop-runtime-$Version10-win-x64.exe'
-			$Args = '/install /quiet /norestart'
+			$Exe = 'windowsdesktop-runtime-' + "$Version10" + '-win-x64.exe'
+			$Args = '/install /quiet /norestart /log "' + "$LogDir\$SoftName" + '-8' + '-MSI.log"'
 			If (Test-Path -Path "$Exe") {
-				Write-Output "Warn: Update $RefName $DisplayVersion to version $Version10"
+				Write-Output " Warn: Update $RefName $DisplayVersion to version $Version10"
 				Run-Exec -FilePath "$Exe" -ArgumentList "$Args" -Name "$RefName $Version10"
+			} Else {
+				Write-Output " Error: Installer not exist $Exe"
 			}
 		} Else {
-			Write-Output "Note: $RefName already at version $DisplayVersion (>= $Version10)"
+			Write-Output " Note: $RefName already at version $DisplayVersion (>= $Version10)"
 		}
+	} Else {
+		Write-Output " Warn: Unknown name $DisplayName"
 	}
 }
+
+Write-Output ''
 
 ########################################################################
 
@@ -177,3 +196,5 @@ Exit $ReturnCode
 # Microsoft Windows Desktop Runtime - 7.0.18 (x64)                   / 7.0.18.33520   / {9926fb6d-a007-472d-b0dc-38d7e8c475e0} / "C:\ProgramData\Package Cache\{9926fb6d-a007-472d-b0dc-38d7e8c475e0}\windowsdesktop-runtime-7.0.18-win-x64.exe"  /uninstall
 # Microsoft Windows Desktop Runtime - 8.0.4 (x64)                    / 64.16.12024    / {4B91040F-9192-4D51-B1CE-36B959846C8D} / MsiExec.exe /X{4B91040F-9192-4D51-B1CE-36B959846C8D}
 # Microsoft Windows Desktop Runtime - 8.0.4 (x64)                    / 8.0.4.33519    / {93344293-35c0-4560-8a6c-1b06afd31de4} / "C:\ProgramData\Package Cache\{93344293-35c0-4560-8a6c-1b06afd31de4}\windowsdesktop-runtime-8.0.4-win-x64.exe"  /uninstall
+# Microsoft Windows Desktop Runtime - 10.0.14 (x64)                  / 80.56.61678.0  / {64BFC674-D664-480B-AFF2-D47C5531D6D2} / MsiExec.exe /X{64BFC674-D664-480B-AFF2-D47C5531D6D2}
+# Microsoft Windows Desktop Runtime 10.0.14 (x64)                    / 10.0.14.50000  / {29A18B06-B190-4463-9FFC-BC0D70D80B7C} / "C:\ProgramData\Package Cache\{29A18B06-B190-4463-9FFC-BC0D70D80B7C}\windowsdesktop-runtime-10.0.14-win-x64.exe"  /uninstall

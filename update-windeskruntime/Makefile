@@ -160,7 +160,7 @@ tmp/install.bat: install.bat Makefile tmp/$(EXE5) tmp/$(EXE6) tmp/$(EXE7) tmp/$(
 
 tmp/winsoft-config.ini: winsoft-config.ini Makefile tmp/$(EXE5) tmp/$(EXE6) tmp/$(EXE7) tmp/$(EXE8) tmp/$(EXE10)
 	@mkdir -p tmp
-	@sed -e 's/__VERSION__/$(VERSION)/; s/__REG_SEARCH__/$(REG_SEARCH)/; s/__VERSION5__/$(VERSION5)/; s/__VERSION6__/$(VERSION6)/; s/__VERSION7__/$(VERSION7)/; s/__VERSION8__/$(VERSION8)/; s/__VERSION10__/$(VERSION10)/;' $< > $@
+	@sed -e 's/__VERSION__/$(VERSION)/; s/__REG_SEARCH__/$(REG_SEARCH)/; s/__SOFTNAME__/$(SOFT)/; s#__LOGDIR__#$(LOGDIR)#; s/__VERSION5__/$(VERSION5)/; s/__VERSION6__/$(VERSION6)/; s/__VERSION7__/$(VERSION7)/; s/__VERSION8__/$(VERSION8)/; s/__VERSION10__/$(VERSION10)/;' $< > $@
 
 %.zip: Makefile tmp/install.bat pre-install.ps1 post-install.ps1 tmp/winsoft-config.ini tmp/$(EXE5) tmp/$(EXE6) tmp/$(EXE7) tmp/$(EXE8) tmp/$(EXE10)
 	@rm -f $@
