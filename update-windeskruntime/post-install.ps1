@@ -75,6 +75,7 @@ $Version5 = $Config.Version5
 $Version6 = $Config.Version6
 $Version7 = $Config.Version7
 $Version8 = $Config.Version8
+$Version9 = $Config.Version9
 $Version10 = $Config.Version10
 
 $SoftName = $Config.Name
@@ -152,6 +153,20 @@ ForEach ($Key in Get-ChildItem -Recurse $UninstallKeys) {
 			}
 		} Else {
 			Write-Output " Note: $RefName already at version $DisplayVersion (>= $Version8)"
+		}
+	}
+	ElseIf ($DisplayName -match 'Runtime - 9\..*x64') {
+		If ($DisplayVersion -lt (ToVersion($Version9))) {
+			$Exe = 'windowsdesktop-runtime-' + "$Version9" + '-win-x64.exe'
+			$Args = '/install /quiet /norestart /log "' + "$LogDir\$SoftName" + '-9' + '-MSI.log"'
+			If (Test-Path -Path "$Exe") {
+				Write-Output " Warn: Update $RefName $DisplayVersion to version $Version9"
+				Run-Exec -FilePath "$Exe" -ArgumentList "$Args" -Name "$RefName $Version9"
+			} Else {
+				Write-Output " Error: Installer not exist $Exe"
+			}
+		} Else {
+			Write-Output " Note: $RefName already at version $DisplayVersion (>= $Version9)"
 		}
 	}
 	ElseIf ($DisplayName -match 'Desktop Runtime 10\..*x64') {
