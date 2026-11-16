@@ -4,7 +4,7 @@
 #
 
 SOFT:=PuTTY
-VERSION:=$(shell curl -s -L --connect-timeout 10 'https://www.chiark.greenend.org.uk/~sgtatham/putty/' | grep 'The latest version is' | cut -f 5 -d ' ' | cut -f 1,2 -d '.')
+VERSION:=$(shell (curl -s -L --connect-timeout 10 'https://www.chiark.greenend.org.uk/~sgtatham/putty/' | grep 'The latest version is' | cut -f 5 -d ' ' | cut -f 1,2 -d '.' ; cut -f 3 -d '-' checksum.txt 2> /dev/null ) | sort -V | tail -1)
 REVISION:=1
 URL:=https://the.earth.li/~sgtatham/putty/latest/w64/putty-64bit-$(VERSION)-installer.msi
 
