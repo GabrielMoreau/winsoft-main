@@ -22,3 +22,4 @@ Example :
  | HKLM | Advanced Renamer | Hulubulu Software | 4.11 | `Advanced Renamer_is1` | `"C:\Program Files\Advanced Renamer\unins000.exe"` |
  | HKLM | Advanced Renamer | Hulubulu Software | 4.17 | `Advanced Renamer_is1` | `"C:\Program Files\Advanced Renamer\unins000.exe"` |
  | HKLM | Advanced Renamer | Hulubulu Software | 4.27 | `Advanced Renamer_is1` | `"C:\Program Files\Advanced Renamer\unins000.exe"` |
+ | HKLM | Advanced Renamer | Hulubulu Software | 4.29 | `Advanced Renamer_is1` | `"C:\Program Files\Advanced Renamer\unins000.exe"` |
