@@ -8,8 +8,9 @@ REVISION:=1
 #URL:=$(shell curl -s -L --connect-timeout 10 'https://mango3d.io/downloads/' | sed -e 's/["\\]/\n/g;' | grep '^https://.*/LycheeSlicer-.*.exe' | head -1)
 #VERSION:=$(shell basename '$(URL)' 2> /dev/null | cut -f 2- -d '-' | sed -e 's/\.exe//;')
 #https://mango-lychee.nyc3.digitaloceanspaces.com/LycheeSlicer-7.1.1.exe
+#https://mango-lychee.nyc3.cdn.digitaloceanspaces.com/LycheeSlicer-8.0.5-windows-x86_64.exe
 VERSION:=$(shell curl -s -L --connect-timeout 10 'https://mango3d.io/downloads/' | sed -e 's/[<>]/\n/g;' | grep 'Lychee Slicer [[:digit:]][[:digit:]\.]*$$' | awk '{print $$3}' | head -1)
-URL:=https://mango-lychee.nyc3.digitaloceanspaces.com/LycheeSlicer-$(VERSION).exe
+URL:=https://mango-lychee.nyc3.digitaloceanspaces.com/LycheeSlicer-$(VERSION)-windows-x86_64.exe
 EXE:=LycheeSlicer-$(VERSION).exe
 REG_SEARCH:=$(SOFT)
 
