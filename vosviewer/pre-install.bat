@@ -1,7 +1,7 @@
 SETLOCAL
 
 SET "softname=VOSviewer"
-@ECHO [INFO] Start pre-install script for %softname%
+@ECHO [BEGIN] Pre-install script for %softname%
 
 SET "installfolder=VOSviewer"
 SET "regkey=VOSviewer_is1"
@@ -26,4 +26,7 @@ IF "%ERRORLEVEL%"=="0" (
 
 @ECHO [INFO] Remove Shortcut
 IF EXIST "%shortcut%" DEL /F /Q "%shortcut%"
+
+
+@ECHO [END] Pre-install script for %softname%
 ENDLOCAL
