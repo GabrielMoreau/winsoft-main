@@ -84,11 +84,12 @@ Function VersionReduce3 {
 	Return [version]::New($Version.Major, $Version.Minor, $Build)
 }
 
+$ReturnCode = 1
+
 # Remove old WinFsp
 $RefVersion = ToVersion $Config.VersionWinFsp
 $RefName = $Config.RegexSearchWinFsp
 $SoftName = $Config.NameWinFsp
-
 ForEach ($Key in Get-ChildItem -Recurse $UninstallKeys) {
 	$App = Get-ItemProperty -Path $Key.PSPath
 	If ($App.DisplayName -notmatch $RefName) { Continue }
@@ -98,7 +99,10 @@ ForEach ($Key in Get-ChildItem -Recurse $UninstallKeys) {
 	Write-Output "Installed: $($App.DisplayName) / $DisplayVersion / $KeyProduct / $($App.UninstallString)"
 
 	If ($App.UninstallString -notmatch 'MsiExec.exe') { Continue } # Only msi
-	If ((VersionReduce3 -Version $DisplayVersion) -ge (VersionReduce3 -Version $RefVersion)) { Continue }
+	If ((VersionReduce3 -Version $DisplayVersion) -ge (VersionReduce3 -Version $RefVersion)) {
+		$ReturnCode = $ReturnCode * 2
+		Continue
+	}
 
 	$UninstallSplit = $App.UninstallString -Split "\s+/[IX]"
 	$Exe = 'MsiExec.exe'
@@ -115,7 +119,7 @@ $SoftName = $Config.Name
 ########################################################################
 
 # View
-$ReturnCode = 0
+#$ReturnCode = 0
 ForEach ($Key in Get-ChildItem -Recurse $UninstallKeys) {
 	$App = Get-ItemProperty -Path $Key.PSPath
 	If ($App.DisplayName -notmatch $RefName) { Continue }
@@ -123,6 +127,9 @@ ForEach ($Key in Get-ChildItem -Recurse $UninstallKeys) {
 	$DisplayVersion = ToVersion $App.DisplayVersion
 	$KeyProduct     = $Key.PSChildName
 	Write-Output "Installed: $($App.DisplayName) / $DisplayVersion / $KeyProduct / $($App.UninstallString)"
+	If ((VersionReduce3 -Version $DisplayVersion) -ge (VersionReduce3 -Version $RefVersion)) {
+		$ReturnCode = $ReturnCode * 3
+	}
 }
 Write-Output "ReturnCode: $ReturnCode"
 Exit $ReturnCode
