@@ -50,5 +50,6 @@ Example :
  | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
  | HKLM | SSHFS-Win 2021 (x64) | Navimatics LLC | 3.5.20357 | `{746A1587-C9D1-4026-97DB-058CF3952711}` | `MsiExec.exe /I{746A1587-C9D1-4026-97DB-058CF3952711}` |
- | HKU | SSHFS-Win Manager | Evandro Araujo | 1.3.1 | `b80d7a5d-eddb-5e4e-8e85-79b3a698e983` | `"C:\WINDOWS\system32\config\systemprofile\AppData\Local\Programs\sshfs-win-manager\Uninstall SSHFS-Win Manager.exe" /currentuser` |
- | HKLM | WinFsp 2023 | Navimatics LLC | 2.0.23075 | `{E4C768C9-0ED1-4E8D-9B05-CC533F7D1B1A}` | `MsiExec.exe /I{E4C768C9-0ED1-4E8D-9B05-CC533F7D1B1A}` |
+ | HKU  | SSHFS-Win Manager    | Evandro Araujo | 1.3.1     | `b80d7a5d-eddb-5e4e-8e85-79b3a698e983`   | `"C:\WINDOWS\system32\config\systemprofile\AppData\Local\Programs\sshfs-win-manager\Uninstall SSHFS-Win Manager.exe" /currentuser` |
+ | HKLM | WinFsp 2023          | Navimatics LLC | 2.0.23075 | `{E4C768C9-0ED1-4E8D-9B05-CC533F7D1B1A}` | `MsiExec.exe /I{E4C768C9-0ED1-4E8D-9B05-CC533F7D1B1A}` |
+ | HKLM | WinFsp 2026          | Navimatics LLC | 2.2.26323 | `{6C5B526B-1884-4388-B46B-5349A211BDD4}` | `MsiExec.exe /I{6C5B526B-1884-4388-B46B-5349A211BDD4}` |
