@@ -2,6 +2,7 @@
 WINFSP_URL:=$(shell curl -s -L --connect-timeout 10 'https://github.com/winfsp/winfsp/releases/latest' | sed 's/"/\n/g;'| grep '^https://github.com/winfsp.*msi' | head -1)
 WINFSP_VERSION:=$(shell basename '$(WINFSP_URL)' 2> /dev/null | cut -f 2 -d '-' | sed -e 's/\.msi//;')
 WINFSP_EXE:=winfsp-$(WINFSP_VERSION).msi
+REG_SEARCH_WINFSP:=^WinFsp
 
 SSHFS_VERSION:=$(shell curl -s -L --connect-timeout 10 'https://github.com/winfsp/sshfs-win/releases/latest' | sed 's/"/\n/g;' | grep '^/winfsp/sshfs-win/releases/tag/v' | head -1 | xargs -r basename | sed -s 's/^v//;')
 SSHFS_URL:=https://github.com/billziss-gh/sshfs-win/releases/download/v$(SSHFS_VERSION)/sshfs-win-$(SSHFS_VERSION)-x64.msi
@@ -14,15 +15,15 @@ NetworkDrive:=$(shell grep -h '^NetworkDrive' conf.yml ../../winsoft-conf/sshfs-
 
 SOFT:=SSHFS-Win-Manage
 VERSION:=$(SSHFS_VERSION).$(WINFSP_VERSION)
-
+REG_SEARCH:=^SSHFS-Win
 
 IT_TEAM:=IT Support
 LOGDIR:=%WINDIR%\\Logs
 
 
-.PHONY: all check-version clean control next version wget
+.PHONY: all check-version check-unrealized check-exe clean control next version wget checksum
 
-all: check-version $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
+all: check-version check-exe $(SOFT)_$(VERSION)-$(REVISION)_x64.zip ocs
 
 sinclude ../_common/conf.mk
 
@@ -31,6 +32,10 @@ OCS_SEARCH:=SSHFS-Win
 
 check-version:
 	@echo $(VERSION) | grep -Eq '^[[:digit:]][\.[:digit:]]+[[:digit:]]$$' || (echo 'VERSION is undefined' > /dev/stderr ; exit 11)
+
+check-unrealized: check-version
+	@if grep -q '[[:space:]]$(WINFSP_EXE)$$' checksum.txt; then echo 'Ok'; else echo 'Warning: Updates not performed for $(SOFT) / winfsp version $(WINFSP_VERSION)'; fi
+	@if grep -q '[[:space:]]$(SSHFS_EXE)$$' checksum.txt; then echo 'Ok'; else echo 'Warning: Updates not performed for $(SOFT) / sshfs version $(SSHFS_VERSION)'; fi
 
 clean:
 	@rm -rf tmp sshfswin*.zip tmp
@@ -59,7 +64,7 @@ tmp/$(WINFSP_EXE):
 	@(cd tmp; \
 		rm -f winfsp-*.msi ; \
 		curl -# -L --connect-timeout 10 -o "$(WINFSP_EXE)" "$(WINFSP_URL)" ; \
-		file $(WINFSP_EXE) | grep -q "MSI Installer,.*, Subject: WinFsp - Windows File System Proxy" || echo "Error: bad format for binary $(WINFSP_EXE)" ; \
+		which 7z >/dev/null && { rm -f 'fsptool-x64.exe'; 7z x -y "$(WINFSP_EXE)" 'fsptool_x64.exe' | grep 'Extracting'; } ; \
 		grep -q "^$$(shasum -a 256 $(WINFSP_EXE))$$" ../checksum.txt || echo "Error: bad checksum for binary $(WINFSP_EXE)" ; \
 		)
 
@@ -76,11 +81,22 @@ tmp/sshfs-win-connect.ini: sshfs-win-connect.ini ../../winsoft-conf/sshfs-win/co
 	@mkdir -p tmp
 	@sed -e 's/__SERVER_SFTP__/$(ServerSFTP)/g; s/__NetworkDrive__/$(NetworkDrive)/g;' $< > $@
 
+check-exe: tmp/$(SSHFS_EXE) tmp/$(WINFSP_EXE)
+	@(cd tmp ; \
+		file $(SSHFS_EXE) | grep -q "MSI Installer,.*, Subject: SSHFS-Win" || { echo "Error: bad format for binary $(SSHFS_EXE)" 1>&2 ; exit 12; } ; \
+		file $(WINFSP_EXE) | grep -q "MSI Installer,.*, Subject: WinFsp - Windows File System Proxy" || { echo "Error: bad format for binary $(WINFSP_EXE)" 1>&2 ; exit 12; } ; \
+		which peres >/dev/null && { peres -v 'fsptool_x64.exe' 2> /dev/null | grep -q "^Product Version:[[:space:]]*$(WINFSP_VERSION)" || { echo "Error: bad version for binary $(WINFSP_EXE)" 1>&2 ; exit 12; } ; } ;\
+		)
+
 tmp/install.bat: install.bat Makefile tmp/$(WINFSP_EXE) tmp/$(SSHFS_EXE)
 	@mkdir -p tmp
 	@sed -e 's/__WINFSP_VERSION__/$(WINFSP_VERSION)/; s/__SSHFS_VERSION__/$(SSHFS_VERSION)/; s#__LOGDIR__#$(LOGDIR)#;' $< > $@
 
-%.zip: ../../winsoft-conf/sshfs-win/conf.yml tmp/install.bat pre-install.ps1 post-install.ps1 sshfs-win-connect.ps1 tmp/sshfs-win-connect.ini sshfs-win.ico README.md tmp/winfsp-$(WINFSP_VERSION).msi tmp/sshfs-win-$(SSHFS_VERSION)-x64.msi
+tmp/winsoft-config.ini: winsoft-config.ini Makefile tmp/$(EXE)
+	@mkdir -p tmp
+	@sed -e 's/__VERSION__/$(SSHFS_VERSION)/; s/__REG_SEARCH__/$(REG_SEARCH)/; s/__VERSION_WINFSP__/$(WINFSP_VERSION)/; s/__REG_SEARCH_WINFSP__/$(REG_SEARCH_WINFSP)/;' $< > $@
+
+%.zip: ../../winsoft-conf/sshfs-win/conf.yml tmp/install.bat pre-install.ps1 post-install.ps1 sshfs-win-connect.ps1 tmp/winsoft-config.ini tmp/sshfs-win-connect.ini sshfs-win.ico README.md tmp/winfsp-$(WINFSP_VERSION).msi tmp/sshfs-win-$(SSHFS_VERSION)-x64.msi
 	@mkdir -p tmp
 	@zip -Xr $@ pre-install.ps1 post-install.ps1 sshfs-win.ico README.md sshfs-win-connect.ps1
-	@(cd tmp; zip -Xr ../$@ install.bat sshfs-win-connect.ini winfsp-$(WINFSP_VERSION).msi sshfs-win-$(SSHFS_VERSION)-x64.msi)
+	@(cd tmp; zip -Xr ../$@ install.bat sshfs-win-connect.ini winsoft-config.ini winfsp-$(WINFSP_VERSION).msi sshfs-win-$(SSHFS_VERSION)-x64.msi)
