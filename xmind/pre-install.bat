@@ -1,7 +1,7 @@
 SETLOCAL
 
 SET "softname=Xmind"
-@ECHO [INFO] Begin pre-install script for %softname%
+@ECHO [INFO] Start pre-install script for %softname%
 
 SET "installfolder=Xmind"
 SET "regkey=Xmind_is1"

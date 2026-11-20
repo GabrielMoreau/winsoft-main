@@ -1,7 +1,7 @@
 SETLOCAL
 
 SET "softname=VOSviewer"
-@ECHO [INFO] Begin pre-install script for %softname%
+@ECHO [INFO] Start pre-install script for %softname%
 
 SET "installfolder=VOSviewer"
 SET "regkey=VOSviewer_is1"
