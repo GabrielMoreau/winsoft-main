@@ -3,6 +3,7 @@ WINFSP_URL:=$(shell curl -s -L --connect-timeout 10 'https://github.com/winfsp/w
 WINFSP_VERSION:=$(shell basename '$(WINFSP_URL)' 2> /dev/null | cut -f 2 -d '-' | sed -e 's/\.msi//;')
 WINFSP_EXE:=winfsp-$(WINFSP_VERSION).msi
 REG_SEARCH_WINFSP:=^WinFsp
+SOFT_WINFSP:=WinFsp
 
 SSHFS_VERSION:=$(shell curl -s -L --connect-timeout 10 'https://github.com/winfsp/sshfs-win/releases/latest' | sed 's/"/\n/g;' | grep '^/winfsp/sshfs-win/releases/tag/v' | head -1 | xargs -r basename | sed -s 's/^v//;')
 SSHFS_URL:=https://github.com/billziss-gh/sshfs-win/releases/download/v$(SSHFS_VERSION)/sshfs-win-$(SSHFS_VERSION)-x64.msi
@@ -94,7 +95,7 @@ tmp/install.bat: install.bat Makefile tmp/$(WINFSP_EXE) tmp/$(SSHFS_EXE)
 
 tmp/winsoft-config.ini: winsoft-config.ini Makefile tmp/$(EXE)
 	@mkdir -p tmp
-	@sed -e 's/__VERSION__/$(SSHFS_VERSION)/; s/__REG_SEARCH__/$(REG_SEARCH)/; s/__VERSION_WINFSP__/$(WINFSP_VERSION)/; s/__REG_SEARCH_WINFSP__/$(REG_SEARCH_WINFSP)/;' $< > $@
+	@sed -e 's/__VERSION__/$(SSHFS_VERSION)/; s/__REG_SEARCH__/$(REG_SEARCH)/; s/__SOFTNAME__/$(SOFT)/; s#__LOGDIR__#$(LOGDIR)#; s/__VERSION_WINFSP__/$(WINFSP_VERSION)/; s/__REG_SEARCH_WINFSP__/$(REG_SEARCH_WINFSP)/; s/__SOFTNAME_WINFSP__/$(SOFT_WINFSP)/;' $< > $@
 
 %.zip: ../../winsoft-conf/sshfs-win/conf.yml tmp/install.bat pre-install.ps1 post-install.ps1 sshfs-win-connect.ps1 tmp/winsoft-config.ini tmp/sshfs-win-connect.ini sshfs-win.ico README.md tmp/winfsp-$(WINFSP_VERSION).msi tmp/sshfs-win-$(SSHFS_VERSION)-x64.msi
 	@mkdir -p tmp

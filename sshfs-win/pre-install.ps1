@@ -71,33 +71,46 @@ Write-Output "Config:`n * Version: $RefVersion`n * RegexSearch: $RefName"
 ########################################################################
 # Put your specific code here
 
-$RefName = 'WinFsp'
+$SoftName = $Config.Name
+$LogDir = [Environment]::ExpandEnvironmentVariables($Config.LogDir)
+Write-Output "Info: Log dir $LogDir"
+
+Function VersionReduce3 {
+	Param (
+		[Parameter(Mandatory = $True)] [version]$Version
+	)
+
+	$Build = If ($Version.Build -ge 0) { $Version.Build } Else { 0 }
+	Return [version]::New($Version.Major, $Version.Minor, $Build)
+}
 
 # Remove old WinFsp
-@(Get-ChildItem -Recurse 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall';
-  Get-ChildItem -Recurse "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall") |
-	ForEach {
-		$Key = $_
-		$App = (Get-ItemProperty -Path $Key.PSPath)
-		$DisplayName  = $App.DisplayName
-		If (!($DisplayName -match $RefName)) { Return }
+$RefVersion = ToVersion $Config.VersionWinFsp
+$RefName = $Config.RegexSearchWinFsp
+$SoftName = $Config.NameWinFsp
 
-		If (!($App.UninstallString -match 'MsiExec.exe')) { Return } # only msi
+ForEach ($Key in Get-ChildItem -Recurse $UninstallKeys) {
+	$App = Get-ItemProperty -Path $Key.PSPath
+	If ($App.DisplayName -notmatch $RefName) { Continue }
 
-		$DisplayVersion = $App.DisplayVersion
-		$KeyProduct = $Key | Split-Path -Leaf
+	$DisplayVersion = ToVersion $App.DisplayVersion
+	$KeyProduct     = $Key.PSChildName
+	Write-Output "Installed: $($App.DisplayName) / $DisplayVersion / $KeyProduct / $($App.UninstallString)"
 
-		If ((ToVersion($DisplayVersion)) -gt (ToVersion('2.0.0'))) { Return } # only version < 2
+	If ($App.UninstallString -notmatch 'MsiExec.exe') { Continue } # Only msi
+	If ((VersionReduce3 -Version $DisplayVersion) -ge (VersionReduce3 -Version $RefVersion)) { Continue }
 
-		$UninstallSplit = $App.UninstallString -Split "/I"
-		$Exe = 'MsiExec.exe'
-		$Args = '/x "' + $UninstallSplit[1].Trim() + '" /qn /norestart'
-		Write-Output "Remove: $DisplayName / $DisplayVersion / $KeyProduct / $Args"
+	$UninstallSplit = $App.UninstallString -Split "\s+/[IX]"
+	$Exe = 'MsiExec.exe'
+	$Args = '/x "' + $UninstallSplit[1].Trim() + '" /qn /norestart /l*v "' + "$LogDir\$SoftName" + '-Remove-' + "$DisplayVersion" + '-MSI.log"'
+	Write-Output "Remove: $($App.DisplayName) / $DisplayVersion / $KeyProduct / $Args"
 
-		Run-Exec -FilePath "$Exe" -ArgumentList "$Args" -Name "$RefName"
+	Run-Exec -FilePath "$Exe" -ArgumentList "$Args" -Name "$SoftName"
 	}
 
+$RefVersion = ToVersion $Config.Version
 $RefName = $Config.RegexSearch
+$SoftName = $Config.Name
 
 ########################################################################
 
