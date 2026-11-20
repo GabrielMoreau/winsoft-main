@@ -10,10 +10,10 @@ SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (
   MKDIR "%logdir%"
 )
-CALL :INSTALL 1> "%logdir%\%softname%.log" 2>&1
+CALL :BEGIN 1> "%logdir%\%softname%.log" 2>&1
 EXIT /B
 
-:INSTALL
+:BEGIN
 
 @ECHO [BEGIN] %date%-%time%
 
@@ -80,7 +80,7 @@ IF EXIST "%ProgramFiles%\LibreOffice\program\soffice.exe" (
 )
 
 
-:INSTALLHELP
+:BEGINHELP
 @ECHO [INFO] Silent help install
 ScriptRunner.exe -appvscript MsiExec.exe /i "LibreOffice_%softversion%_Win_x86-64_helppack_fr.msi" /qn /norestart /l "%logdir%\%softname%-HELP.log" -appvscriptrunnerparameters -wait -timeout=300
 IF "%RETURNCODE%"=="0" SET "RETURNCODE=%ERRORLEVEL%"

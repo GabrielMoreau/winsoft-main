@@ -10,10 +10,10 @@ SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (
   MKDIR "%logdir%"
 )
-CALL :INSTALL 1> "%logdir%\%softname%.log" 2>&1
+CALL :BEGIN 1> "%logdir%\%softname%.log" 2>&1
 EXIT /B
 
-:INSTALL
+:BEGIN
 
 @ECHO [BEGIN] %date%-%time%
 
@@ -21,7 +21,7 @@ SET "softversion=__VERSION__"
 SET "shortversion=__VERSIONSHORT__"
 
 
-:INSTALLED
+:BEGINED
 SET "INSTALLED=0"
 @ECHO [INFO] Test HKLM (computer)
 reg query "HKLM\SOFTWARE\Python\PythonCore\%shortversion%\InstallPath" >nul 2>&1

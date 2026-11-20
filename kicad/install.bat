@@ -9,10 +9,10 @@ SET "logdir=__LOGDIR__"
 IF NOT EXIST "%logdir%" (
   MKDIR "%logdir%"
 )
-CALL :INSTALL 1> "%logdir%\%softname%.log" 2>&1
+CALL :BEGIN 1> "%logdir%\%softname%.log" 2>&1
 EXIT /B
 
-:INSTALL
+:BEGIN
 
 @ECHO [BEGIN] %date%-%time%
 
