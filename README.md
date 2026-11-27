@@ -87,7 +87,7 @@ or on the command line during execution.
 make TIMEWINDOW=2 ocs-push
 ```
 
-## Configuration
+## Configuration - WinSoft-Conf
 
 However, some packages need some parameters.
 These parameters depend on your site.
@@ -95,9 +95,10 @@ So, in addition to the `winsoft-main` folder, you should have a `winsoft-conf` f
 The `Makefile` will fetch the settings from a file in this folder.
 There is an example file in the package in which a setting is needed.
 
-To find out which parameters you can adapt to your site, the `_common`
-folder, whose main file is `conf.mk`, lists these parameters with
-default values (which don't always work).
+To find out which settings you can customize for your site, the `_common` directory contains a few files that are common to all packages.
+
+* The main file is `conf.mk`.
+  It lists the settings along with their default values (which don't always work) and is loaded at the end of the Makefile configuration, just before the first targets
 
 ## Package build error code
 
