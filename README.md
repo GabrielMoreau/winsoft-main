@@ -1,32 +1,26 @@
 # WinSoft-Main - Windows AutoBuild Silent Package Software
 
 WinSoft is the acronym for Windows Software.
-WinSoft-Main helps you create packages
-(Zip archives with a built-in silent installer)
-of the latest versions of many standard Windows software.
+`WinSoft-Main` helps you create packages (Zip archives with a built-in silent installer) of the latest versions of many standard Windows software.
 A better name could be Windows AutoBuild Silent Package Software.
-The main repository contains the most common software packages,
-and you can (and should) associate it with a conf repository containing
-the configuration related to your site.
+The main repository contains the most common software packages, and you can (and should) associate it with a conf repository containing the configuration related to your site.
 This is only useful for certain packages.
 
 The master Git repository in on the [GRICAD Gitlab](https://gricad-gitlab.univ-grenoble-alpes.fr/legi/soft/trokata/winsoft-main).
 Other Git repository are mirror or fork.
 
+`WinSoft-Main` is one of the components of the WinSoft framework.
+Two other important components are `WinSoft-Loop` and `WinSoft-Conf`.
+See https://gricad-gitlab.univ-grenoble-alpes.fr/legi/soft/trokata/winsoft-loop/-/blob/main/README.md.
+
 ## Package structure
 
-Each folder (except the common folder) contains a piece of software
-(or a coherent set of software) that is useful to users.
-In each folder there is a `Makefile` which will build the OCS Inventory
-package which is just a Zip archive.
-Inside this archive, the DOS script `install.bat` starts the
-installation process, or uninstallation if it is an obsolete software
-package with `uninstall` in its name.
-There are sometimes `pre-install.ps1` and `post-install.ps1` scripts
-written in PowerShell.
+Each folder (except the common folder) contains a piece of software (or a coherent set of software) that is useful to users.
+In each folder there is a `Makefile` which will build the OCS Inventory package which is just a Zip archive.
+Inside this archive, the DOS script `install.bat` starts the installation process, or uninstallation if it is an obsolete software package with `uninstall` in its name.
+There are sometimes `pre-install.ps1` and `post-install.ps1` scripts written in PowerShell.
 
-With a little work, it would be quite easy to transform these Zip
-archives into WAPT, or PDQ Deploy packages.
+With a little work, it would be quite easy to transform these Zip archives into WAPT, or PDQ Deploy packages.
 
 ```bash
 make
@@ -39,11 +33,9 @@ The command to run for the installation is always `install.bat`.
 ## References
 
 There are projects with a similar objective.
-This allows you to find installation parameters
-so that the installation is silent, for example.
+This allows you to find installation parameters so that the installation is silent, for example.
 
-Depending on the tool used to create the executable (EXE or MSI), there
-are a number of standard flags for silent installation.
+Depending on the tool used to create the executable (EXE or MSI), there are a number of standard flags for silent installation.
 However, in some cases, no flag will work...
 
 * The [advancedinstaller](https://www.advancedinstaller.com/silent-install-exe-msi-applications.html)
@@ -153,7 +145,7 @@ When uninstalling a package, the script can handle the following error codes:
 
 ## Extend
 
-WinSoft-Main may not contain your software.
+`WinSoft-Main` may not contain your software.
 You can make suggestions via PR (Pull Request), email, or any other means.
 However, you probably have internal software that you don't want to share publicly.
 That's perfectly natural.
