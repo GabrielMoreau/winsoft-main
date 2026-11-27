@@ -27,5 +27,6 @@ Example :
 
  | Hive | DisplayName | Publisher | DisplayVersion | KeyProduct | UninstallExe |
  |:---- |:----------- |:--------- |:-------------- |:---------- |:------------ |
- | HKLM | Picocrypt    | Evan Su                 | 1.33 | `EvanSu.Picocrypt_is1` | `C:\Program Files\Picocrypt\uninstall.bat` |
+ | HKLM | Picocrypt    | Evan Su                 | 1.33 | `EvanSu.Picocrypt_is1` | `C:\Program Files\Picocrypt\uninstall.bat`      |
  | HKLM | Picocrypt-NG | Picocrypt-NG developers | 2.09 | `Picocrypt-NG`         | `"C:\Program Files\Picocrypt-NG\Uninstall.exe"` |
+ | HKLM | Picocrypt-NG | Picocrypt-NG developers | 3.0  | `Picocrypt-NG`         | `"C:\Program Files\Picocrypt-NG\Uninstall.exe"` |
