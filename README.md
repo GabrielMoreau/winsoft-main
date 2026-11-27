@@ -101,6 +101,14 @@ To find out which settings you can customize for your site, the `_common` direct
   It lists the settings along with their default values (which don't always work) and is loaded at the end of the Makefile configuration, just before the first targets
 * The `flag.mk` file is loaded at the beginning of the Makefile and allows you, for example, to set the value of the `CURLFLAGS` variable.
   This makes it possible to add options to `curl` if needed.
+* The `main.mk` file allows you to set the values of several global variables:
+  * `KEEP`: Number of versions of the same package to keep (`KEEP:=1`)
+  * `TIMEWINDOW`: Time window for taking into account the latest changes (`TIMEWINDOW:=1.25`)
+* The `no-auto-update.conf` file lists the packages to be ignored.
+  It has the same effect as placing an empty `.no-auto-update` file in a package’s directory.
+  Both have the same effect.
+  The solution in `_common` centralizes the process, making version control easier.
+  The other method is more flexible at first.
 
 ## Package build error code
 
