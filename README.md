@@ -99,6 +99,8 @@ To find out which settings you can customize for your site, the `_common` direct
 
 * The main file is `conf.mk`.
   It lists the settings along with their default values (which don't always work) and is loaded at the end of the Makefile configuration, just before the first targets
+* The `flag.mk` file is loaded at the beginning of the Makefile and allows you, for example, to set the value of the `CURLFLAGS` variable.
+  This makes it possible to add options to `curl` if needed.
 
 ## Package build error code
 
